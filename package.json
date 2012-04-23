@@ -1,0 +1,16 @@
+{
+  "author": "Chun-hao Hu <hu.chunhao@gmail.com> (http://blog.huchunhao.com)",
+  "name": "mongo-express",
+  "description": "Web-based admin interface for MongoDB",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andzdroid/mongo-express.git"
+  },
+  "dependencies": {
+    "express": "2.5.x"
+  },
+  "engine": "node >= 0.6",
+  "license": "MIT",
+  "main": "server.js"
+}
