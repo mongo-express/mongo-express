@@ -8,9 +8,14 @@
     "url": "git://github.com/andzdroid/mongo-express.git"
   },
   "dependencies": {
-    "express": "2.5.x"
+    "express": "3.0.x",
+    "connect-mongodb": "1.1.x",
+    "swig": "0.11.x",
+    "consolidate": "0.3.x"
   },
   "engine": "node >= 0.6",
   "license": "MIT",
-  "main": "server.js"
+  "scripts": {
+    "start": "node app"
+  }
 }
