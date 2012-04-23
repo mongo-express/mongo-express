@@ -10,6 +10,7 @@
   "dependencies": {
     "express": "3.0.x",
     "connect-mongodb": "1.1.x",
+    "mongodb": "0.9.x",
     "swig": "0.11.x",
     "consolidate": "0.3.x"
   },
