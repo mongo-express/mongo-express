@@ -60,6 +60,7 @@ app.configure('development', function(){
 
 app.locals.use(function(req, res) {
   res.locals.base_href = config.site.base_url;
+  res.locals.collections = app.set('collections');
 });
 
 
@@ -70,7 +71,7 @@ db.open(function(err, db) {
     console.log('Database connected!');
 
     db.collectionNames(function(err, names) {
-      res.locals.collections = names;
+      app.set('collections', names);
     });
   } else {
     throw err;
