@@ -8,6 +8,15 @@
 
   <link href="stylesheets/bootstrap.css" rel="stylesheet">
   <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    .sidebar-nav {
+      padding: 9px 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,6 +35,25 @@
   </div>
 </div>
 
-{% block content %}{% endblock %}
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <li class="nav-header">Collections</li>
+          {% for collection in collections %}
+          <li><a href="collections/{{ collection.name }}">{{ collection.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="span9">
+      <h1>{{ title }}</h1>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
