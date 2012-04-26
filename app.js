@@ -14,9 +14,9 @@ var swig = require('swig');
 var app = express();
 
 var config = require('./config');
-var host = config.host || 'localhost';
-var port = config.port || mongodb.Connection.DEFAULT_PORT;
-var db = new mongodb.Db(config.database, new mongodb.Server(host, port, {auto_reconnect: true}));
+var host = config.mongodb.host || 'localhost';
+var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
+var db = new mongodb.Db(config.mongodb.database, new mongodb.Server(host, port, {auto_reconnect: true}));
 
 swig.init({
   root: __dirname + '/views',
@@ -55,7 +55,7 @@ app.configure('development', function(){
 });
 
 app.locals.use(function(req, res) {
-  res.locals.base_href = config.base_url;
+  res.locals.base_href = config.site.base_url;
 });
 
 //Connect to mongodb database
