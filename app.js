@@ -18,6 +18,8 @@ var host = config.mongodb.host || 'localhost';
 var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
 var db = new mongodb.Db(config.mongodb.database, new mongodb.Server(host, port, {auto_reconnect: true}));
 
+
+//Set up swig
 swig.init({
   root: __dirname + '/views',
   allowErrors: false
@@ -37,6 +39,8 @@ swig.__express = function(path, options, fn) {
   }
 };
 
+
+//App configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.engine('.html', swig.__express);
@@ -54,21 +58,27 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+app.locals.use(function(req, res) {
+  res.locals.base_href = config.site.base_url;
+});
+
+
 //Connect to mongodb database
 db.open(function(err, db) {
   if (!err) {
     app.set('db', db);
     console.log('Database connected!');
+
+    db.collectionNames(function(err, names) {
+      res.locals.collections = names;
+    });
   } else {
-    console.error(err);
+    throw err;
   }
 });
 
-app.locals.use(function(req, res) {
-  res.locals.base_href = config.site.base_url;
-  //TODO: get list of collections and add to locals
-});
 
+//Routes
 app.get('/', routes.index);
 
 http.createServer(app).listen(3000);
