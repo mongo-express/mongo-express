@@ -54,6 +54,10 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+app.locals.use(function(req, res) {
+  res.locals.base_href = config.base_url;
+});
+
 //Connect to mongodb database
 db.open(function(err, db) {
   if (!err) {
