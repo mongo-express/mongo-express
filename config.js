@@ -6,7 +6,8 @@ module.exports = {
   },
   site: {
     //base_url: the URL that mongo express will be located at
-    base_url: 'http://localhost:3000/'
+    base_url: 'http://localhost:3000/',
+    port: 3000
   },
   options: {
     //cmd_type: the type of command line you want mongo express to run

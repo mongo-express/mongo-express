@@ -81,6 +81,6 @@ db.open(function(err, db) {
 //Routes
 app.get('/', routes.index);
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(config.site.port || 80);
 
 console.log("Mongo Express server listening on port 3000");
