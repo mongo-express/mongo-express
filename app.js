@@ -54,10 +54,6 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.locals.use(function(req, res) {
-  res.locals.base_href = config.site.base_url;
-});
-
 //Connect to mongodb database
 db.open(function(err, db) {
   if (!err) {
@@ -66,6 +62,11 @@ db.open(function(err, db) {
   } else {
     console.error(err);
   }
+});
+
+app.locals.use(function(req, res) {
+  res.locals.base_href = config.site.base_url;
+  //TODO: get list of collections and add to locals
 });
 
 app.get('/', routes.index);
