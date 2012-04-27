@@ -6,7 +6,7 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
-//TODO: remove underscore.js from dependencies, what a piece of shit useless library
+//TODO: remove underscore.js from dependencies or is it more often
 _ = require('underscore');
 
 var mongodb = require('mongodb');
@@ -76,7 +76,7 @@ db.open(function(err, db) {
     app.set('db', db);
 
     db.collectionNames(function(err, names) {
-      app.set('collections', names);
+      app.set('collections', _.sortBy(names, 'name'));
     });
   } else {
     throw err;
@@ -90,7 +90,7 @@ var middleware = function(req, res, next) {
   req.database = config.mongodb.database;
 
   req.updateCollections = function(collections) {
-    app.set('collections', collections);
+    app.set('collections', _.sortBy(collections, 'name'));
   };
   next();
 };
@@ -98,7 +98,9 @@ var middleware = function(req, res, next) {
 //Routes
 app.get('/', middleware,  routes.index);
 app.post('/', middleware, routes.createCollection);
+//TODO: Use route param pre-conditions to automatically assign collection name variables to request
 app.get('/db/:collection', middleware, routes.collection);
+app.del('/db/:collection', middleware, routes.deleteCollection);
 
 
 app.listen(config.site.port || 80);
