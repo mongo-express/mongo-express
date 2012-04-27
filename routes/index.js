@@ -1,8 +1,9 @@
+//Collection routes
+var coll = require('./collection');
+exports.collection = coll.collection;
 
-/*
- * GET home page.
- */
 
+//Homepage route
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };

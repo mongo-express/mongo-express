@@ -6,11 +6,13 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
+//TODO: remove underscore.js from dependencies, what a piece of shit useless library
 _ = require('underscore');
 
 var mongodb = require('mongodb');
 //var cons = require('consolidate');
 var swig = require('swig');
+var swig_filters = require('./filters');
 var app = express();
 
 var config = require('./config');
@@ -22,7 +24,8 @@ var db = new mongodb.Db(config.mongodb.database, new mongodb.Server(host, port, 
 //Set up swig
 swig.init({
   root: __dirname + '/views',
-  allowErrors: false
+  allowErrors: false,
+  filters: swig_filters
 });
 
 /*
@@ -58,6 +61,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+//View helper, sets local variables used in templates
 app.locals.use(function(req, res) {
   res.locals.base_href = config.site.base_url;
   res.locals.collections = app.set('collections');
@@ -67,8 +71,8 @@ app.locals.use(function(req, res) {
 //Connect to mongodb database
 db.open(function(err, db) {
   if (!err) {
-    app.set('db', db);
     console.log('Database connected!');
+    app.set('db', db);
 
     db.collectionNames(function(err, names) {
       app.set('collections', names);
@@ -78,10 +82,22 @@ db.open(function(err, db) {
   }
 });
 
+//mongodb middleware
+var middleware = function(req, res, next) {
+  req.db = app.set('db');
+  req.collections = app.set('collections');
+
+  req.updateCollections = function(collections) {
+    app.set('collections', collections);
+  };
+  next();
+};
 
 //Routes
-app.get('/', routes.index);
+app.get('/', middleware,  routes.index);
+app.get('/db/:collection', middleware, routes.collection);
 
-http.createServer(app).listen(config.site.port || 80);
 
-console.log("Mongo Express server listening on port 3000");
+app.listen(config.site.port || 80);
+
+console.log("Mongo Express server listening on port " + (config.site.port || 80));

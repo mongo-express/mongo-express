@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ collection }}{% endblock %}
+
+{% block content %}
+
+{% if documents.length == 0 %}
+<p>
+No documents found.
+</p>
+{% else %}
+<table class="table">
+  {% for document in documents %}
+  <tr>
+    <td>
+      <pre class="prettyprint">{{ document|json }}</pre>
+      <!--<a href="db/{{ collection }}/{{ document._id }}">Edit</a>-->
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+{% endblock %}
