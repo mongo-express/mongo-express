@@ -51,8 +51,8 @@ exports.collection = function(req, res, next) {
 
     for (var key in names) {
       if (names[key].name == collection_name) {
-        getCollection();
         req.updateCollections(names);
+        getCollection();
         found = true;
         return;
       }

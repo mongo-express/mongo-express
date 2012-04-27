@@ -65,6 +65,7 @@ app.configure('development', function(){
 app.locals.use(function(req, res) {
   res.locals.base_href = config.site.base_url;
   res.locals.collections = app.set('collections');
+  res.locals.database = config.mongodb.database;
 });
 
 
@@ -86,6 +87,7 @@ db.open(function(err, db) {
 var middleware = function(req, res, next) {
   req.db = app.set('db');
   req.collections = app.set('collections');
+  req.database = config.mongodb.database;
 
   req.updateCollections = function(collections) {
     app.set('collections', collections);
@@ -95,6 +97,7 @@ var middleware = function(req, res, next) {
 
 //Routes
 app.get('/', middleware,  routes.index);
+app.post('/', middleware, routes.createCollection);
 app.get('/db/:collection', middleware, routes.collection);
 
 

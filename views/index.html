@@ -3,4 +3,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
+<h2>Create Collection</h2>
+
+<form class="well form-inline" method="POST">
+    <div class="input-prepend">
+      <span class="add-on">{{ database }} . </span>
+      <input class="span2" type="text" id="collection_name" name="collection_name" placeholder="Collection Name">
+    </div>
+  <button type="submit" class="btn btn-primary">Create collection</button>
+</form>
+
 {% endblock %}
