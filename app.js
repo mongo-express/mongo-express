@@ -98,7 +98,9 @@ var middleware = function(req, res, next) {
 //Routes
 app.get('/', middleware,  routes.index);
 app.post('/', middleware, routes.createCollection);
+//TODO: Use route param pre-conditions to automatically assign collection name variables to request
 app.get('/db/:collection', middleware, routes.collection);
+app.del('/db/:collection', middleware, routes.deleteCollection);
 
 
 app.listen(config.site.port || 80);

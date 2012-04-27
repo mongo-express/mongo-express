@@ -1,6 +1,7 @@
-//Collection routes
+//Add routes from other files
 var coll = require('./collection');
 exports.collection = coll.collection;
+exports.deleteCollection = coll.deleteCollection;
 
 
 //Homepage route
@@ -13,6 +14,7 @@ exports.index = function(req, res){
 };
 
 //Handle form submission when creating new collection
+//TODO: Move this handler to /db/ URL when implementing REST api, to handle PUT requests
 exports.createCollection = function(req, res) {
   var db = req.db;
   var name = req.body.collection_name;

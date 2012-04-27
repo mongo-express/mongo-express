@@ -1,3 +1,6 @@
+var utils = require('../utils');
+
+
 //view all entries in a collection
 exports.collection = function(req, res, next) {
   var db = req.db;
@@ -5,10 +8,7 @@ exports.collection = function(req, res, next) {
 
   var getCollection = function() {
     //remove database prefix from collection name
-    //TODO: refactor this into a helper function
-    var coll_parts = collection_name.split('.');
-    coll_parts.splice(0,1);
-    var coll_name = coll_parts.join('.');
+    var coll_name = utils.parseCollectionName(collection_name);
 
     //get documents from the collection
     db.collection(coll_name, function(err, collection) {
@@ -62,5 +62,33 @@ exports.collection = function(req, res, next) {
       //TODO: show error page for non-existent collection
       next();
     }
+  });
+};
+
+
+exports.deleteCollection = function(req, res, next) {
+  var db = req.db;
+  var collection = req.params.collection;
+  var collection_name = utils.parseCollectionName(collection);
+
+  db.dropCollection(collection_name, function(err, result) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+    }
+
+    //If delete was successful, result === true
+
+    //Update list of collections
+    db.collectionNames(function(err, names) {
+      if (err) {
+        //TODO: handle error
+        console.error(err);
+      }
+
+      req.updateCollections(names);
+
+      res.redirect('/');
+    });
   });
 };
