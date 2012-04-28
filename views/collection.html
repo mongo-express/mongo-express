@@ -21,33 +21,6 @@ No documents found.
 </table>
 {% endif %}
 
-<h2>Collection Stats</h2>
-<table class="table table-bordered table-striped">
-  <tr>
-    <td class="span3"><strong>Number of documents</strong></td>
-    <td class="span2">{{ stats.count }}</td>
-    <td class="span3"><strong>Pre-allocated space</strong></td>
-    <td class="span2">{{ stats.storageSize }} bytes</td>
-  </tr>
-  <tr>
-    <td><strong>Total document size</strong></td>
-    <td>{{ stats.size }} bytes</td>
-    <td><strong>Average document size</strong></td>
-    <td>{{ stats.avgObjSize }} bytes</td>
-  </tr>
-  <tr>
-    <td><strong>Number of indexes</strong></td>
-    <td>{{ stats.nindexes }}</td>
-    <td><strong>Padding factor</strong></td>
-    <td>{{ stats.paddingFactor }}</td>
-  </tr>
-  <tr>
-    <td><strong>Total index size</strong></td>
-    <td>{{ stats.totalIndexSize }} bytes</td>
-    <td><strong>Number of extents</strong></td>
-    <td>{{ stats.numExtents }}</td>
-</table>
-
 
 <h2>Delete Collection</h2>
 <form method="POST" action="db/{{ collection }}" class="well">
@@ -59,4 +32,48 @@ No documents found.
   </button>
 </form>
 
+{% endblock %}
+
+
+
+{% block sidebar %}
+<div class="sidebar-nav">
+  <ul class="nav nav-list">
+    <li class="nav-header">Collection Stats</li>
+    <li>
+      <strong>Documents</strong>
+      <span class="pull-right">{{ stats.count }}</span>
+    </li>
+    <li>
+      <strong>Total doc size</strong>
+      <span class="pull-right">{{ stats.size }} bytes</span>
+    </li>
+    <li>
+      <strong>Average doc size</strong>
+      <span class="pull-right">{{ stats.avgObjSize }} bytes</span>
+    </li>
+    <li>
+      <strong>Pre-allocated size</strong>
+      <span class="pull-right">{{ stats.storageSize }} bytes</span>
+    </li>
+    <li>&nbsp;</li>
+    <li>
+      <strong>Indexes</strong>
+      <span class="pull-right">{{ stats.nindexes }}</span>
+    </li>
+    <li>
+      <strong>Total index size</strong>
+      <span class="pull-right">{{ stats.totalIndexSize }} bytes</span>
+    </li>
+    <li>&nbsp;</li>
+    <li>
+      <strong>Padding factor</strong>
+      <span class="pull-right">{{ stats.paddingFactor }}</span>
+    </li>
+    <li>
+      <strong>Extents</strong>
+      <span class="pull-right">{{ stats.numExtents }}</span>
+    </li>
+  </ul>
+</div>
 {% endblock %}
