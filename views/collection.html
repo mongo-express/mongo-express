@@ -21,11 +21,42 @@ No documents found.
 </table>
 {% endif %}
 
+<h2>Collection Stats</h2>
+<table class="table table-bordered table-striped">
+  <tr>
+    <td class="span3"><strong>Number of documents</strong></td>
+    <td class="span2">{{ stats.count }}</td>
+    <td class="span3"><strong>Pre-allocated space</strong></td>
+    <td class="span2">{{ stats.storageSize }} bytes</td>
+  </tr>
+  <tr>
+    <td><strong>Total document size</strong></td>
+    <td>{{ stats.size }} bytes</td>
+    <td><strong>Average document size</strong></td>
+    <td>{{ stats.avgObjSize }} bytes</td>
+  </tr>
+  <tr>
+    <td><strong>Number of indexes</strong></td>
+    <td>{{ stats.nindexes }}</td>
+    <td><strong>Padding factor</strong></td>
+    <td>{{ stats.paddingFactor }}</td>
+  </tr>
+  <tr>
+    <td><strong>Total index size</strong></td>
+    <td>{{ stats.totalIndexSize }} bytes</td>
+    <td><strong>Number of extents</strong></td>
+    <td>{{ stats.numExtents }}</td>
+</table>
+
+
 <h2>Delete Collection</h2>
 <form method="POST" action="db/{{ collection }}" class="well">
   <input type="hidden" name="_method" value="delete">
   <p>Are you sure you want to delete this collection? All documents will be deleted.</p>
-  <button type="submit" class="btn btn-danger btn-large">Delete</button>
+  <button type="submit" class="btn btn-danger btn-large">
+  <i class="icon-trash icon-white"></i>
+  Delete
+  </button>
 </form>
 
 {% endblock %}

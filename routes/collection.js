@@ -10,7 +10,7 @@ exports.collection = function(req, res, next) {
     //remove database prefix from collection name
     var coll_name = utils.parseCollectionName(collection_name);
 
-    //get documents from the collection
+    //get collection
     db.collection(coll_name, function(err, collection) {
       if (err) {
         //TODO: handle error
@@ -22,14 +22,18 @@ exports.collection = function(req, res, next) {
         skip: 0
       };
 
+      //get documents from the collection
       collection.find({}, query_options).toArray(function(err, items) {
-        var ctx = {
-          title: 'Viewing Collection: ' + collection_name,
-          collection: collection_name,
-          documents: items
-        };
-
-        res.render('collection', ctx);
+        collection.stats(function(err, stats) {
+          var ctx = {
+            title: 'Viewing Collection: ' + collection_name,
+            collection: collection_name,
+            documents: items,
+            stats: stats
+          };
+  
+          res.render('collection', ctx);
+        });
       });
     });
   };
