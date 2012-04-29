@@ -9,16 +9,10 @@
 No documents found.
 </p>
 {% else %}
-<table class="table">
-  {% for document in documents %}
-  <tr>
-    <td>
-      <pre class="prettyprint">{{ document|json }}</pre>
-      <!--<a href="db/{{ collection }}/{{ document._id }}">Edit</a>-->
-    </td>
-  </tr>
-  {% endfor %}
-</table>
+{% for document in documents %}
+  <pre class="prettyprint">{{ document|json }}</pre>
+  <!--<a href="db/{{ collection }}/{{ document._id }}">Edit</a>-->
+{% endfor %}
 {% endif %}
 
 
