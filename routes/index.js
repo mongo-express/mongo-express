@@ -6,11 +6,23 @@ exports.deleteCollection = coll.deleteCollection;
 
 //Homepage route
 exports.index = function(req, res){
-  var ctx = {
-    title: 'Mongo Express'
-  };
+  var db = req.db;
 
-  res.render('index', ctx);
+  //TODO: add possibility to add admin credentials to config and authenticate as admin
+  db.admin(function(err, admin) {
+    admin.serverStatus(function(err, info) {
+      if (err) {
+        //TODO: handle error
+        console.error(err);
+      }
+
+      var ctx = {
+        title: 'Mongo Express',
+        info: info
+      };
+      res.render('index', ctx);
+    });
+  });
 };
 
 //Handle form submission when creating new collection

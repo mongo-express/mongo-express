@@ -5,22 +5,36 @@
 {% block content %}
 
 {% if documents.length == 0 %}
-<p>
+<p class="well">
 No documents found.
 </p>
 {% else %}
-<table class="table">
-  {% for document in documents %}
+{% for document in documents %}
+  <pre class="prettyprint">{{ document|json }}</pre>
+  <!--<a href="db/{{ collection }}/{{ document._id }}">Edit</a>-->
+{% endfor %}
+{% endif %}
+
+
+{#
+  # Not very useful, since it doesn't show correct index names
+  # Could use db.coll.getIndexes(), but that is an extra query on every collection page
+<h2>Indexes</h2>
+{% if stats.nindexes == 0 %}
+<p class="well">
+No indexes found.
+</p>
+{% else %}
+<table class="table table-bordered table-striped">
+  {% for size in stats.indexSizes %}
   <tr>
-    <td>
-      <pre class="prettyprint">{{ document|json }}</pre>
-      <!--<a href="db/{{ collection }}/{{ document._id }}">Edit</a>-->
-    </td>
+    <td>{{ loop.key }}</td>
+    <td>{{ size }} bytes</td>
   </tr>
   {% endfor %}
 </table>
 {% endif %}
-
+#}
 
 <h2>Delete Collection</h2>
 <form method="POST" action="db/{{ collection }}" class="well">

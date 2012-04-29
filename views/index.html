@@ -17,4 +17,76 @@
   </button>
 </form>
 
+<h2>Server Status</h2>
+<table class="table table-bordered table-striped">
+  <tr>
+    <td class="span2"><strong>Hostname</strong></td>
+    <td class="span3">{{ info.host }}</td>
+    <td class="span2"><strong>MongoDB Version</strong></td>
+    <td class="span3">{{ info.version }}</td>
+  </tr>
+  <tr>
+    <td><strong>Uptime</strong></td>
+    <td>{{ info.uptime }} seconds</td>
+    <td><strong>Server Time</strong></td>
+    <td>{{ info.localTime|date('r') }}</td>
+  </tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr>
+    <td><strong>Current Connections</strong></td>
+    <td>{{ info.connections.current }}</td>
+    <td><strong>Available Connections</strong></td>
+    <td>{{ info.connections.available }}</td>
+  </tr>
+  <tr>
+    <td><strong>Active Clients</strong></td>
+    <td>{{ info.globalLock.activeClients.total }}</td>
+    <td><strong>Queued Operations</strong></td>
+    <td>{{ info.globalLock.currentQueue.total }}</td>
+  </tr>
+  <tr>
+    <td><strong>Clients Reading</strong></td>
+    <td>{{ info.globalLock.activeClients.readers }}</td>
+    <td><strong>Clients Writing</strong></td>
+    <td>{{ info.globalLock.activeClients.writers}}</td>
+  </tr>
+  <tr>
+    <td><strong>Read Lock Queue</strong></td>
+    <td>{{ info.globalLock.currentQueue.readers }}</td>
+    <td><strong>Write Lock Queue</strong></td>
+    <td>{{ info.globalLock.currentQueue.writers}}</td>
+  </tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr>
+    <td><strong>Disk Flushes</strong></td>
+    <td>{{ info.backgroundFlushing.flushes }}</td>
+    <td><strong>Last Flush</strong></td>
+    <td>{{ info.backgroundFlushing.last_finished|date('r') }}</td>
+  </tr>
+  <tr>
+    <td><strong>Time Spent Flushing</strong></td>
+    <td>{{ info.backgroundFlushing.total_ms }} ms</td>
+    <td><strong>Average Flush Time</strong></td>
+    <td>{{ info.backgroundFlushing.average_ms }} ms</td>
+  </tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr>
+    <td><strong>Total Inserts</strong></td>
+    <td>{{ info.opcounters.insert }}</td>
+    <td><strong>Total Queries</strong></td>
+    <td>{{ info.opcounters.query}}</td>
+  </tr>
+  <tr>
+    <td><strong>Total Updates</strong></td>
+    <td>{{ info.opcounters.update}}</td>
+    <td><strong>Total Deletes</strong></td>
+    <td>{{ info.opcounters.delete}}</td>
+  </tr>
+</table>
+
+
+{#
+  # Still need to add global lock time stats and replica set stats
+#}
+
 {% endblock %}

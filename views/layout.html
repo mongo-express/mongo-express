@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
   <link href="stylesheets/prettify.css" rel="stylesheet" />
   <style type="text/css">
     body {
@@ -19,6 +18,7 @@
     }
   </style>
 
+  <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
   <script type="text/javascript" src="javascripts/prettify.js"></script>
 </head>
 
@@ -54,7 +54,10 @@
     </div>
 
     <div class="span9">
+      <div class="page-header">
       <h1>{{ title }}</h1>
+      </div>
+
       {% block content %}{% endblock %}
     </div>
   </div>
