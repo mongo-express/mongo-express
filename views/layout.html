@@ -43,9 +43,9 @@
     <div class="span3">
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
-          <li class="nav-header">Collections</li>
-          {% for collection in collections %}
-          <li><a href="db/{{ collection.name }}">{{ collection.name }}</a></li>
+          <li class="nav-header">Databases</li>
+          {% for db in databases %}
+          <li><a href="db/{{ db }}">{{ db }}</a></li>
           {% endfor %}
         </ul>
       </div>

@@ -6,7 +6,6 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
-//TODO: remove underscore.js from dependencies or is it more often
 _ = require('underscore');
 
 var mongodb = require('mongodb');
@@ -14,12 +13,6 @@ var mongodb = require('mongodb');
 var swig = require('swig');
 var swig_filters = require('./filters');
 var app = express();
-
-var config = require('./config');
-var host = config.mongodb.host || 'localhost';
-var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
-var db = new mongodb.Db('local', new mongodb.Server(host, port, {auto_reconnect: true}));
-
 
 //Set up swig
 swig.init({
@@ -62,6 +55,12 @@ app.configure('development', function(){
 });
 
 
+//Set up database stuff
+var config = require('./config');
+var host = config.mongodb.host || 'localhost';
+var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
+var db = new mongodb.Db('local', new mongodb.Server(host, port, {auto_reconnect: true}));
+
 
 var connections = {};
 var databases = [];
@@ -94,6 +93,7 @@ db.open(function(err, db) {
   if (!err) {
     console.log('Database connected!');
 
+    //get admin instance
     db.admin(function(err, a) {
       adminDb = a;
 
@@ -101,6 +101,7 @@ db.open(function(err, db) {
         console.log('Admin DB connected');
         updateDatabases(adminDb);
       } else {
+        //auth details were supplied, authenticate admin account with them
         adminDb.authenticate(config.mongodb.username, config.mongodb.password, function(err, result) {
           if (err) {
             //TODO: handle error
@@ -124,21 +125,37 @@ db.open(function(err, db) {
 //View helper, sets local variables used in templates
 app.locals.use(function(req, res) {
   res.locals.base_href = config.site.base_url;
-  res.locals.databases = connections;
+  res.locals.databases = databases;
   res.locals.collections = app.set('collections');
 });
+
+
+//route param pre-conditions
+app.param('database', function(req, res, next, id) {
+  //Make sure database exists
+  var exists = false;
+  if (!_.include(databases, id)) {
+    updateDatabases(adminDb);
+    if (!_include(databases, id)) {
+      return next('Error!');
+    }
+  }
+
+  if (connections[id] !== undefined) {
+    req.db = connections[id];
+  } else {
+    connections[id] = mainConn.db(id);
+    req.db = connections[id];
+  }
+
+  next();
+});
+
 
 //mongodb middleware
 var middleware = function(req, res, next) {
   req.adminDb = adminDb;
-  req.getDb = function(db) {
-    if (connections[db] !== undefined) {
-      return connections[db];
-    } else {
-      connections[db] = mainConn.db(db);
-      return connections[db];
-    }
-  };
+  req.databases = databases;
   req.collections = app.set('collections');
   //req.database = config.mongodb.database;
 
@@ -151,7 +168,6 @@ var middleware = function(req, res, next) {
 //Routes
 app.get('/', middleware,  routes.index);
 //app.post('/', middleware, routes.createCollection);
-//TODO: Use route param pre-conditions to automatically assign collection name variables to request
 //app.get('/db/:collection', middleware, routes.collection);
 //app.del('/db/:collection', middleware, routes.deleteCollection);
 
