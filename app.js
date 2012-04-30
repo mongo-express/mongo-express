@@ -6,20 +6,14 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
-//TODO: remove underscore.js from dependencies or is it more often
-_ = require('underscore');
+var _ = require('underscore');
+var utils = require('./utils');
 
 var mongodb = require('mongodb');
 //var cons = require('consolidate');
 var swig = require('swig');
 var swig_filters = require('./filters');
 var app = express();
-
-var config = require('./config');
-var host = config.mongodb.host || 'localhost';
-var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
-var db = new mongodb.Db(config.mongodb.database, new mongodb.Server(host, port, {auto_reconnect: true}));
-
 
 //Set up swig
 swig.init({
@@ -61,46 +55,169 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-//View helper, sets local variables used in templates
-app.locals.use(function(req, res) {
-  res.locals.base_href = config.site.base_url;
-  res.locals.collections = app.set('collections');
-  res.locals.database = config.mongodb.database;
-});
+
+//Set up database stuff
+var config = require('./config');
+var host = config.mongodb.host || 'localhost';
+var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
+var db = new mongodb.Db('local', new mongodb.Server(host, port, {auto_reconnect: true}));
+
+
+var connections = {};
+var databases = [];
+var collections = {};
+var adminDb;
+var mainConn; //main db connection
+
+
+
+//Update the collections list
+var updateCollections = function(db, db_name, callback) {
+  db.collectionNames(function (err, result) {
+    var names = [];
+
+    for (var r in result) {
+      names.push(utils.parseCollectionName(result[r].name));
+    }
+
+    collections[db_name] = names.sort();
+
+    if (callback) {
+      callback(err);
+    }
+  });
+};
+
+//Update database list
+var updateDatabases = function(admin) {
+  admin.listDatabases(function(err, dbs) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+    }
+
+    for (var key in dbs.databases) {
+      var db_name = dbs.databases[key]['name'];
+
+      //'local' is special database, ignore it
+      if (db_name == 'local') {
+        continue;
+      }
+
+      connections[db_name] = mainConn.db(db_name);
+      databases.push(db_name);
+
+      updateCollections(connections[db_name], db_name);
+    }
+
+    //Sort database names
+    databases = databases.sort();
+  });
+};
 
 
 //Connect to mongodb database
 db.open(function(err, db) {
   if (!err) {
     console.log('Database connected!');
-    app.set('db', db);
 
-    db.collectionNames(function(err, names) {
-      app.set('collections', _.sortBy(names, 'name'));
+    mainConn = db;
+
+    //get admin instance
+    db.admin(function(err, a) {
+      adminDb = a;
+
+      if (config.mongodb.username.length == 0) {
+        console.log('Admin DB connected');
+        updateDatabases(adminDb);
+      } else {
+        //auth details were supplied, authenticate admin account with them
+        adminDb.authenticate(config.mongodb.username, config.mongodb.password, function(err, result) {
+          if (err) {
+            //TODO: handle error
+            console.error(err);
+          }
+
+          console.log('Admin DB connected');
+          updateDatabases(adminDb);
+        });
+      }
     });
   } else {
     throw err;
   }
 });
 
+//View helper, sets local variables used in templates
+app.locals.use(function(req, res) {
+  res.locals.base_href = config.site.base_url;
+  res.locals.databases = databases;
+  res.locals.collections = collections;
+});
+
+
+//route param pre-conditions
+app.param('database', function(req, res, next, id) {
+  //Make sure database exists
+  if (!_.include(databases, id)) {
+    //TODO: handle error
+    return next('Error!');
+  }
+
+  req.db_name = id;
+  res.locals.db_name = id;
+
+  if (connections[id] !== undefined) {
+    req.db = connections[id];
+  } else {
+    connections[id] = mainConn.db(id);
+    req.db = connections[id];
+  }
+
+  next();
+});
+
+//:collection param MUST be preceded by a :database param
+app.param('collection', function(req, res, next, id) {
+  //Make sure collection exists
+  if (!_.include(collections[req.db_name], id)) {
+    //TODO: handle error
+    return next('Error!');
+  }
+
+  req.collection_name = id;
+  res.locals.collection_name = id;
+
+  connections[req.db_name].collection(id, function(err, coll) {
+    if (err) {
+      //TODO: handle error
+      return next('Error!');
+    }
+
+    req.collection = coll;
+
+    next();
+  });
+});
+
+
 //mongodb middleware
 var middleware = function(req, res, next) {
-  req.db = app.set('db');
-  req.collections = app.set('collections');
-  req.database = config.mongodb.database;
+  req.adminDb = adminDb;
+  req.databases = databases; //List of database names
+  req.collections = collections; //List of collection names in all databases
 
-  req.updateCollections = function(collections) {
-    app.set('collections', _.sortBy(collections, 'name'));
-  };
+  //Allow page handlers to request an update for collection list
+  req.updateCollections = updateCollections;
+
   next();
 };
 
 //Routes
 app.get('/', middleware,  routes.index);
-app.post('/', middleware, routes.createCollection);
-//TODO: Use route param pre-conditions to automatically assign collection name variables to request
-app.get('/db/:collection', middleware, routes.collection);
-app.del('/db/:collection', middleware, routes.deleteCollection);
+//app.post('/db/:database', middleware, routes.createCollection);
+app.get('/db/:database/:collection', middleware, routes.viewCollection);
+app.del('/db/:database/:collection', middleware, routes.deleteCollection);
 
 
 app.listen(config.site.port || 80);
