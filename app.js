@@ -139,10 +139,6 @@ db.open(function(err, db) {
         });
       }
     });
-
-    db.collectionNames(function(err, names) {
-      app.set('collections', _.sortBy(names, 'name'));
-    });
   } else {
     throw err;
   }
@@ -159,10 +155,13 @@ app.locals.use(function(req, res) {
 //route param pre-conditions
 app.param('database', function(req, res, next, id) {
   //Make sure database exists
-  var exists = false;
   if (!_.include(databases, id)) {
+    //TODO: handle error
     return next('Error!');
   }
+
+  req.db_name = id;
+  res.locals.db_name = id;
 
   if (connections[id] !== undefined) {
     req.db = connections[id];
@@ -174,12 +173,34 @@ app.param('database', function(req, res, next, id) {
   next();
 });
 
+//:collection param MUST be preceded by a :database param
+app.param('collection', function(req, res, next, id) {
+  //Make sure collection exists
+  if (!_.include(collections[req.db_name], id)) {
+    //TODO: handle error
+    return next('Error!');
+  }
+
+  req.collection_name = id;
+
+  connections[req.db_name].collection(id, function(err, coll) {
+    if (err) {
+      //TODO: handle error
+      return next('Error!');
+    }
+
+    req.collection = coll;
+
+    next();
+  });
+});
+
 
 //mongodb middleware
 var middleware = function(req, res, next) {
   req.adminDb = adminDb;
-  req.databases = databases;
-  req.collections = collections;
+  req.databases = databases; //List of database names
+  req.collections = collections; //List of collection names in all databases
   //req.database = config.mongodb.database;
 
   //req.updateCollections = function(collections) {
@@ -191,7 +212,7 @@ var middleware = function(req, res, next) {
 //Routes
 app.get('/', middleware,  routes.index);
 //app.post('/', middleware, routes.createCollection);
-//app.get('/db/:collection', middleware, routes.collection);
+app.get('/db/:database/:collection', middleware, routes.collection);
 //app.del('/db/:collection', middleware, routes.deleteCollection);
 
 
