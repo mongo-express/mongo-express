@@ -6,7 +6,8 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http');
 
-_ = require('underscore');
+var _ = require('underscore');
+var utils = require('./utils');
 
 var mongodb = require('mongodb');
 //var cons = require('consolidate');
@@ -64,10 +65,26 @@ var db = new mongodb.Db('local', new mongodb.Server(host, port, {auto_reconnect:
 
 var connections = {};
 var databases = [];
+var collections = {};
 var adminDb;
 var mainConn; //main db connection
 
 
+
+//Update the collections list
+var updateCollections = function(db, db_name) {
+  db.collectionNames(function (err, result) {
+    var names = [];
+
+    for (var r in result) {
+      names.push(utils.parseCollectionName(result[r].name));
+    }
+
+    collections[db_name] = names.sort();
+  });
+};
+
+//Update database list
 var updateDatabases = function(admin) {
   admin.listDatabases(function(err, dbs) {
     if (err) {
@@ -76,22 +93,31 @@ var updateDatabases = function(admin) {
     }
 
     for (var key in dbs.databases) {
+      var db_name = dbs.databases[key]['name'];
+
       //'local' is special database, ignore it
-      if (dbs.databases[key]['name'] == 'local') {
+      if (db_name == 'local') {
         continue;
       }
-      connections[dbs.databases[key]['name']] = null;
-      databases.push(dbs.databases[key]['name']);
+
+      connections[db_name] = mainConn.db(db_name);
+      databases.push(db_name);
+
+      updateCollections(connections[db_name], db_name);
     }
-    //Remove duplicates and order the db names
-    databases = _.uniq(databases).sort();
+
+    //Sort database names
+    databases = databases.sort();
   });
 };
+
 
 //Connect to mongodb database
 db.open(function(err, db) {
   if (!err) {
     console.log('Database connected!');
+
+    mainConn = db;
 
     //get admin instance
     db.admin(function(err, a) {
@@ -126,7 +152,7 @@ db.open(function(err, db) {
 app.locals.use(function(req, res) {
   res.locals.base_href = config.site.base_url;
   res.locals.databases = databases;
-  res.locals.collections = app.set('collections');
+  res.locals.collections = collections;
 });
 
 
@@ -135,10 +161,7 @@ app.param('database', function(req, res, next, id) {
   //Make sure database exists
   var exists = false;
   if (!_.include(databases, id)) {
-    updateDatabases(adminDb);
-    if (!_include(databases, id)) {
-      return next('Error!');
-    }
+    return next('Error!');
   }
 
   if (connections[id] !== undefined) {
@@ -156,7 +179,7 @@ app.param('database', function(req, res, next, id) {
 var middleware = function(req, res, next) {
   req.adminDb = adminDb;
   req.databases = databases;
-  req.collections = app.set('collections');
+  req.collections = collections;
   //req.database = config.mongodb.database;
 
   //req.updateCollections = function(collections) {

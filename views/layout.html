@@ -43,9 +43,22 @@
     <div class="span3">
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
-          <li class="nav-header">Databases</li>
           {% for db in databases %}
-          <li><a href="db/{{ db }}">{{ db }}</a></li>
+          <li class="nav-header" onclick="$('#toggle_{{ db }}').collapse('toggle')">
+            {{ db }}
+            <i class="icon-chevron-down pull-right"></i>
+          </li>
+          <li><a href="db/{{ db }}"><i class="icon-book"></i> View Database</a></li>
+            <ul class="unstyled collapse nav nav-list" id="toggle_{{ db }}">
+            {% for collection_db in collections %}
+              {% if loop.key == db %}
+                {% for collection in collection_db %}
+                  <li><a href="db/{{ db }}/{{ collection }}"><i class="icon-folder-open"></i> {{ collection }}</a></li>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+            </ul>
+          <li class="divider"></li>
           {% endfor %}
         </ul>
       </div>
@@ -62,6 +75,10 @@
     </div>
   </div>
 </div>
+
+
+<script src="javascripts/jquery-1.7.2.min.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
 
 </body>
 </html>

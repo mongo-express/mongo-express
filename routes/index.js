@@ -6,7 +6,6 @@ exports.deleteCollection = coll.deleteCollection;
 
 //Homepage route
 exports.index = function(req, res){
-  //TODO: add possibility to add admin credentials to config and authenticate as admin
   req.adminDb.serverStatus(function(err, info) {
     if (err) {
       //TODO: handle error
