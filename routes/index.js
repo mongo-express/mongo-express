@@ -1,6 +1,7 @@
 //Add routes from other files
 var coll = require('./collection');
-exports.collection = coll.collection;
+exports.viewCollection = coll.viewCollection;
+exports.addCollection = coll.addCollection;
 exports.deleteCollection = coll.deleteCollection;
 
 

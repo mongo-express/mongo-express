@@ -2,7 +2,7 @@ var utils = require('../utils');
 
 
 //view all entries in a collection
-exports.collection = function(req, res, next) {
+exports.viewCollection = function(req, res, next) {
   var query_options = {
     limit: 20,
     skip: 0
@@ -12,7 +12,6 @@ exports.collection = function(req, res, next) {
     req.collection.stats(function(err, stats) {
       var ctx = {
         title: 'Viewing Collection: ' + req.collection_name,
-        collection: req.collection_name,
         documents: items,
         stats: stats
       };
@@ -23,12 +22,12 @@ exports.collection = function(req, res, next) {
 };
 
 
-exports.deleteCollection = function(req, res, next) {
-  var db = req.db;
-  var collection = req.params.collection;
-  var collection_name = utils.parseCollectionName(collection);
+exports.addCollection = function(req, res, next) {
+};
 
-  db.dropCollection(collection_name, function(err, result) {
+
+exports.deleteCollection = function(req, res, next) {
+  req.collection.drop(function(err, result) {
     if (err) {
       //TODO: handle error
       console.error(err);
@@ -36,16 +35,13 @@ exports.deleteCollection = function(req, res, next) {
 
     //If delete was successful, result === true
 
-    //Update list of collections
-    db.collectionNames(function(err, names) {
+    req.updateCollections(req.db, req.db_name, function(err) {
       if (err) {
         //TODO: handle error
         console.error(err);
       }
 
-      req.updateCollections(names);
-
-      res.redirect('/');
+      res.redirect('/db/' + req.db_name);
     });
   });
 };

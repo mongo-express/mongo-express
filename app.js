@@ -72,7 +72,7 @@ var mainConn; //main db connection
 
 
 //Update the collections list
-var updateCollections = function(db, db_name) {
+var updateCollections = function(db, db_name, callback) {
   db.collectionNames(function (err, result) {
     var names = [];
 
@@ -81,6 +81,10 @@ var updateCollections = function(db, db_name) {
     }
 
     collections[db_name] = names.sort();
+
+    if (callback) {
+      callback(err);
+    }
   });
 };
 
@@ -182,6 +186,7 @@ app.param('collection', function(req, res, next, id) {
   }
 
   req.collection_name = id;
+  res.locals.collection_name = id;
 
   connections[req.db_name].collection(id, function(err, coll) {
     if (err) {
@@ -201,19 +206,18 @@ var middleware = function(req, res, next) {
   req.adminDb = adminDb;
   req.databases = databases; //List of database names
   req.collections = collections; //List of collection names in all databases
-  //req.database = config.mongodb.database;
 
-  //req.updateCollections = function(collections) {
-  //  app.set('collections', _.sortBy(collections, 'name'));
-  //};
+  //Allow page handlers to request an update for collection list
+  req.updateCollections = updateCollections;
+
   next();
 };
 
 //Routes
 app.get('/', middleware,  routes.index);
-//app.post('/', middleware, routes.createCollection);
-app.get('/db/:database/:collection', middleware, routes.collection);
-//app.del('/db/:collection', middleware, routes.deleteCollection);
+//app.post('/db/:database', middleware, routes.createCollection);
+app.get('/db/:database/:collection', middleware, routes.viewCollection);
+app.del('/db/:database/:collection', middleware, routes.deleteCollection);
 
 
 app.listen(config.site.port || 80);
