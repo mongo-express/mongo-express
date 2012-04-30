@@ -2,80 +2,32 @@ var utils = require('../utils');
 
 
 //view all entries in a collection
-exports.collection = function(req, res, next) {
-  var db = req.db;
-  var collection_name = req.params.collection;
-
-  var getCollection = function() {
-    //remove database prefix from collection name
-    var coll_name = utils.parseCollectionName(collection_name);
-
-    //get collection
-    db.collection(coll_name, function(err, collection) {
-      if (err) {
-        //TODO: handle error
-        console.error(err);
-      }
-
-      var query_options = {
-        limit: 20,
-        skip: 0
-      };
-
-      //get documents from the collection
-      collection.find({}, query_options).toArray(function(err, items) {
-        collection.stats(function(err, stats) {
-          var ctx = {
-            title: 'Viewing Collection: ' + collection_name,
-            collection: collection_name,
-            documents: items,
-            stats: stats
-          };
-  
-          res.render('collection', ctx);
-        });
-      });
-    });
+exports.viewCollection = function(req, res, next) {
+  var query_options = {
+    limit: 20,
+    skip: 0
   };
 
-  //Check if collection name is in list of collections
-  for (var key in req.collections) {
-    if (req.collections[key].name == collection_name) {
-      return getCollection();
-    }
-  }
+  req.collection.find({}, query_options).toArray(function(err, items) {
+    req.collection.stats(function(err, stats) {
+      var ctx = {
+        title: 'Viewing Collection: ' + req.collection_name,
+        documents: items,
+        stats: stats
+      };
 
-  var found = false;
-  //Check if collection is in db
-  db.collectionNames(function(err, names) {
-    if (err) {
-      //TODO: handle error
-      console.error(err);
-    }
-
-    for (var key in names) {
-      if (names[key].name == collection_name) {
-        req.updateCollections(names);
-        getCollection();
-        found = true;
-        return;
-      }
-    }
-
-    if (found === false) {
-      //TODO: show error page for non-existent collection
-      next();
-    }
+      res.render('collection', ctx);
+    });
   });
 };
 
 
-exports.deleteCollection = function(req, res, next) {
-  var db = req.db;
-  var collection = req.params.collection;
-  var collection_name = utils.parseCollectionName(collection);
+exports.addCollection = function(req, res, next) {
+};
 
-  db.dropCollection(collection_name, function(err, result) {
+
+exports.deleteCollection = function(req, res, next) {
+  req.collection.drop(function(err, result) {
     if (err) {
       //TODO: handle error
       console.error(err);
@@ -83,16 +35,13 @@ exports.deleteCollection = function(req, res, next) {
 
     //If delete was successful, result === true
 
-    //Update list of collections
-    db.collectionNames(function(err, names) {
+    req.updateCollections(req.db, req.db_name, function(err) {
       if (err) {
         //TODO: handle error
         console.error(err);
       }
 
-      req.updateCollections(names);
-
-      res.redirect('/');
+      res.redirect('/db/' + req.db_name);
     });
   });
 };

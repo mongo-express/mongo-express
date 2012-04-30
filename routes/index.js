@@ -1,27 +1,23 @@
 //Add routes from other files
 var coll = require('./collection');
-exports.collection = coll.collection;
+exports.viewCollection = coll.viewCollection;
+exports.addCollection = coll.addCollection;
 exports.deleteCollection = coll.deleteCollection;
 
 
 //Homepage route
 exports.index = function(req, res){
-  var db = req.db;
+  req.adminDb.serverStatus(function(err, info) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+    }
 
-  //TODO: add possibility to add admin credentials to config and authenticate as admin
-  db.admin(function(err, admin) {
-    admin.serverStatus(function(err, info) {
-      if (err) {
-        //TODO: handle error
-        console.error(err);
-      }
-
-      var ctx = {
-        title: 'Mongo Express',
-        info: info
-      };
-      res.render('index', ctx);
-    });
+    var ctx = {
+      title: 'Mongo Express',
+      info: info
+    };
+    res.render('index', ctx);
   });
 };
 

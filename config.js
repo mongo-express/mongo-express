@@ -2,7 +2,10 @@ module.exports = {
   mongodb: {
     server: 'localhost',
     port: 27017,
-    database: 'test'
+    //username and password must be for admin account
+    //leave it empty if no admin account
+    username: '',
+    password: ''
   },
   site: {
     //base_url: the URL that mongo express will be located at
