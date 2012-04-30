@@ -18,7 +18,7 @@ var app = express();
 var config = require('./config');
 var host = config.mongodb.host || 'localhost';
 var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
-var db = new mongodb.Db(config.mongodb.database, new mongodb.Server(host, port, {auto_reconnect: true}));
+var db = new mongodb.Db('local', new mongodb.Server(host, port, {auto_reconnect: true}));
 
 
 //Set up swig
@@ -61,19 +61,57 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-//View helper, sets local variables used in templates
-app.locals.use(function(req, res) {
-  res.locals.base_href = config.site.base_url;
-  res.locals.collections = app.set('collections');
-  res.locals.database = config.mongodb.database;
-});
 
+
+var connections = {};
+var databases = [];
+var adminDb;
+var mainConn; //main db connection
+
+
+var updateDatabases = function(admin) {
+  admin.listDatabases(function(err, dbs) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+    }
+
+    for (var key in dbs.databases) {
+      //'local' is special database, ignore it
+      if (dbs.databases[key]['name'] == 'local') {
+        continue;
+      }
+      connections[dbs.databases[key]['name']] = null;
+      databases.push(dbs.databases[key]['name']);
+    }
+    //Remove duplicates and order the db names
+    databases = _.uniq(databases).sort();
+  });
+};
 
 //Connect to mongodb database
 db.open(function(err, db) {
   if (!err) {
     console.log('Database connected!');
-    app.set('db', db);
+
+    db.admin(function(err, a) {
+      adminDb = a;
+
+      if (config.mongodb.username.length == 0) {
+        console.log('Admin DB connected');
+        updateDatabases(adminDb);
+      } else {
+        adminDb.authenticate(config.mongodb.username, config.mongodb.password, function(err, result) {
+          if (err) {
+            //TODO: handle error
+            console.error(err);
+          }
+
+          console.log('Admin DB connected');
+          updateDatabases(adminDb);
+        });
+      }
+    });
 
     db.collectionNames(function(err, names) {
       app.set('collections', _.sortBy(names, 'name'));
@@ -83,24 +121,39 @@ db.open(function(err, db) {
   }
 });
 
+//View helper, sets local variables used in templates
+app.locals.use(function(req, res) {
+  res.locals.base_href = config.site.base_url;
+  res.locals.databases = connections;
+  res.locals.collections = app.set('collections');
+});
+
 //mongodb middleware
 var middleware = function(req, res, next) {
-  req.db = app.set('db');
-  req.collections = app.set('collections');
-  req.database = config.mongodb.database;
-
-  req.updateCollections = function(collections) {
-    app.set('collections', _.sortBy(collections, 'name'));
+  req.adminDb = adminDb;
+  req.getDb = function(db) {
+    if (connections[db] !== undefined) {
+      return connections[db];
+    } else {
+      connections[db] = mainConn.db(db);
+      return connections[db];
+    }
   };
+  req.collections = app.set('collections');
+  //req.database = config.mongodb.database;
+
+  //req.updateCollections = function(collections) {
+  //  app.set('collections', _.sortBy(collections, 'name'));
+  //};
   next();
 };
 
 //Routes
 app.get('/', middleware,  routes.index);
-app.post('/', middleware, routes.createCollection);
+//app.post('/', middleware, routes.createCollection);
 //TODO: Use route param pre-conditions to automatically assign collection name variables to request
-app.get('/db/:collection', middleware, routes.collection);
-app.del('/db/:collection', middleware, routes.deleteCollection);
+//app.get('/db/:collection', middleware, routes.collection);
+//app.del('/db/:collection', middleware, routes.deleteCollection);
 
 
 app.listen(config.site.port || 80);
