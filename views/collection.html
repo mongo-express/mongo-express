@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ collection_name }}{% endblock %}
+{% block title %}{{ collectionName }}{% endblock %}
 
 {% block content %}
 
@@ -11,7 +11,7 @@ No documents found.
 {% else %}
 {% for document in documents %}
   <pre class="prettyprint">{{ document|json }}</pre>
-  <!--<a href="db/{{ db_name }}/{{ collection_name }}/{{ document._id }}">Edit</a>-->
+  <!--<a href="db/{{ db_name }}/{{ collectionName }}/{{ document._id }}">Edit</a>-->
 {% endfor %}
 {% endif %}
 
@@ -37,7 +37,7 @@ No indexes found.
 #}
 
 <h2>Delete Collection</h2>
-<form method="POST" action="db/{{ db_name }}/{{ collection_name }}" class="well">
+<form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well">
   <input type="hidden" name="_method" value="delete">
   <p>Are you sure you want to delete this collection? All documents will be deleted.</p>
   <button type="submit" class="btn btn-danger btn-large">

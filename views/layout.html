@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="{{base_href}}">
+  <base href="{{ baseHref }}">
   <meta charset="utf-8">
   <title>{% block title %}Index{% endblock %} - Mongo Express</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,14 +48,14 @@
             {{ db }}
             <i class="icon-chevron-down pull-right"></i>
           </li>
-          <li><a href="db/{{ db }}"><i class="icon-book"></i> View Database</a></li>
+          <li><a href="db/{{ db }}"><i class="icon-folder-open"></i> View Database</a></li>
             <ul class="unstyled collapse nav nav-list
-            {%- if db == db_name %} in{% endif -%}
+            {%- if db == dbName %} in{% endif -%}
             " id="toggle_{{ db }}">
             {% for collection_db in collections -%}
               {% if loop.key == db -%}
                 {% for collection in collection_db -%}
-                  <li><a href="db/{{ db }}/{{ collection }}"><i class="icon-folder-open"></i> {{ collection }}</a></li>
+                  <li><a href="db/{{ db }}/{{ collection }}"><i class="icon-list-alt"></i> {{ collection }}</a></li>
                 {%- endfor %}
               {%- endif %}
             {%- endfor %}

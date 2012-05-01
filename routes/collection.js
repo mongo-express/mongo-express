@@ -11,7 +11,7 @@ exports.viewCollection = function(req, res, next) {
   req.collection.find({}, query_options).toArray(function(err, items) {
     req.collection.stats(function(err, stats) {
       var ctx = {
-        title: 'Viewing Collection: ' + req.collection_name,
+        title: 'Viewing Collection: ' + req.collectionName,
         documents: items,
         stats: stats
       };
@@ -35,13 +35,13 @@ exports.deleteCollection = function(req, res, next) {
 
     //If delete was successful, result === true
 
-    req.updateCollections(req.db, req.db_name, function(err) {
+    req.updateCollections(req.db, req.dbName, function(err) {
       if (err) {
         //TODO: handle error
         console.error(err);
       }
 
-      res.redirect('/db/' + req.db_name);
+      res.redirect('/db/' + req.dbName);
     });
   });
 };
