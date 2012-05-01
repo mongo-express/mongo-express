@@ -5,7 +5,10 @@ module.exports = {
     //username and password must be for admin account
     //leave it empty if no admin account
     username: '',
-    password: ''
+    password: '',
+    autoReconnect: true,
+    //poolSize: size of connection pool
+    poolSize: 4
   },
   site: {
     //base_url: the URL that mongo express will be located at

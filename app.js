@@ -60,7 +60,11 @@ app.configure('development', function(){
 var config = require('./config');
 var host = config.mongodb.host || 'localhost';
 var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
-var db = new mongodb.Db('local', new mongodb.Server(host, port, {auto_reconnect: true}));
+var dbOptions = {
+  auto_reconnect: config.mongodb.autoReconnect,
+  poolSize: config.mongodb.poolSize
+};
+var db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions));
 
 
 var connections = {};
