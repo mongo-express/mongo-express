@@ -25,7 +25,7 @@ exports.index = function(req, res){
 //TODO: Move this handler to /db/ URL when implementing REST api, to handle PUT requests
 exports.createCollection = function(req, res) {
   var db = req.db;
-  var name = req.body.collection_name;
+  var name = req.body.collectionName;
 
   if (name === undefined) {
     //TODO: handle error

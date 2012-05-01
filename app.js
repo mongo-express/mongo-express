@@ -12,14 +12,14 @@ var utils = require('./utils');
 var mongodb = require('mongodb');
 //var cons = require('consolidate');
 var swig = require('swig');
-var swig_filters = require('./filters');
+var swigFilters = require('./filters');
 var app = express();
 
 //Set up swig
 swig.init({
   root: __dirname + '/views',
   allowErrors: false,
-  filters: swig_filters
+  filters: swigFilters
 });
 
 /*
@@ -154,7 +154,7 @@ db.open(function(err, db) {
 
 //View helper, sets local variables used in templates
 app.locals.use(function(req, res) {
-  res.locals.base_href = config.site.base_url;
+  res.locals.baseHref = config.site.baseUrl;
   res.locals.databases = databases;
   res.locals.collections = collections;
 });
@@ -168,8 +168,8 @@ app.param('database', function(req, res, next, id) {
     return next('Error!');
   }
 
-  req.db_name = id;
-  res.locals.db_name = id;
+  req.dbName = id;
+  res.locals.dbName = id;
 
   if (connections[id] !== undefined) {
     req.db = connections[id];
@@ -184,15 +184,15 @@ app.param('database', function(req, res, next, id) {
 //:collection param MUST be preceded by a :database param
 app.param('collection', function(req, res, next, id) {
   //Make sure collection exists
-  if (!_.include(collections[req.db_name], id)) {
+  if (!_.include(collections[req.dbName], id)) {
     //TODO: handle error
     return next('Error!');
   }
 
-  req.collection_name = id;
-  res.locals.collection_name = id;
+  req.collectionName = id;
+  res.locals.collectionName = id;
 
-  connections[req.db_name].collection(id, function(err, coll) {
+  connections[req.dbName].collection(id, function(err, coll) {
     if (err) {
       //TODO: handle error
       return next('Error!');
