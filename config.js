@@ -8,7 +8,11 @@ module.exports = {
     password: '',
     autoReconnect: true,
     //poolSize: size of connection pool
-    poolSize: 4
+    poolSize: 4,
+    //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
+    whitelist: [],
+    //blacklist: hide databases listed in the blacklist (empty list for no blacklist)
+    blacklist: []
   },
   site: {
     //baseUrl: the URL that mongo express will be located at

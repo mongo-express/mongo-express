@@ -76,15 +76,16 @@ var mainConn; //main db connection
 
 
 //Update the collections list
-var updateCollections = function(db, db_name, callback) {
+var updateCollections = function(db, dbName, callback) {
   db.collectionNames(function (err, result) {
     var names = [];
 
     for (var r in result) {
-      names.push(utils.parseCollectionName(result[r].name));
+      var coll = utils.parseCollectionName(result[r].name);
+      names.push(coll.name);
     }
 
-    collections[db_name] = names.sort();
+    collections[dbName] = names.sort();
 
     if (callback) {
       callback(err);
@@ -101,17 +102,28 @@ var updateDatabases = function(admin) {
     }
 
     for (var key in dbs.databases) {
-      var db_name = dbs.databases[key]['name'];
+      var dbName = dbs.databases[key]['name'];
 
       //'local' is special database, ignore it
-      if (db_name == 'local') {
+      if (dbName == 'local') {
         continue;
       }
 
-      connections[db_name] = mainConn.db(db_name);
-      databases.push(db_name);
+      if (config.mongodb.whitelist.length != 0) {
+        if (!_.include(config.mongodb.whitelist, dbName)) {
+          continue;
+        }
+      }
+      if (config.mongodb.blacklist.length != 0) {
+        if (_.include(config.mongodb.blacklist, dbName)) {
+          continue;
+        }
+      }
 
-      updateCollections(connections[db_name], db_name);
+      connections[dbName] = mainConn.db(dbName);
+      databases.push(dbName);
+
+      updateCollections(connections[dbName], dbName);
     }
 
     //Sort database names
@@ -224,6 +236,10 @@ app.get('/db/:database/:collection', middleware, routes.viewCollection);
 app.del('/db/:database/:collection', middleware, routes.deleteCollection);
 
 
-app.listen(config.site.port || 80);
+if (!module.parent) {
+  app.listen(config.site.port || 80);
 
-console.log("Mongo Express server listening on port " + (config.site.port || 80));
+  console.log("Mongo Express server listening on port " + (config.site.port || 80));
+} else {
+  module.exports = app;
+}
