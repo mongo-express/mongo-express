@@ -76,15 +76,16 @@ var mainConn; //main db connection
 
 
 //Update the collections list
-var updateCollections = function(db, db_name, callback) {
+var updateCollections = function(db, dbName, callback) {
   db.collectionNames(function (err, result) {
     var names = [];
 
     for (var r in result) {
-      names.push(utils.parseCollectionName(result[r].name));
+      var coll = utils.parseCollectionName(result[r].name);
+      names.push(coll.name);
     }
 
-    collections[db_name] = names.sort();
+    collections[dbName] = names.sort();
 
     if (callback) {
       callback(err);
@@ -101,17 +102,17 @@ var updateDatabases = function(admin) {
     }
 
     for (var key in dbs.databases) {
-      var db_name = dbs.databases[key]['name'];
+      var dbName = dbs.databases[key]['name'];
 
       //'local' is special database, ignore it
-      if (db_name == 'local') {
+      if (dbName == 'local') {
         continue;
       }
 
-      connections[db_name] = mainConn.db(db_name);
-      databases.push(db_name);
+      connections[dbName] = mainConn.db(dbName);
+      databases.push(dbName);
 
-      updateCollections(connections[db_name], db_name);
+      updateCollections(connections[dbName], dbName);
     }
 
     //Sort database names
