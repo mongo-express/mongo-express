@@ -224,6 +224,10 @@ app.get('/db/:database/:collection', middleware, routes.viewCollection);
 app.del('/db/:database/:collection', middleware, routes.deleteCollection);
 
 
-app.listen(config.site.port || 80);
+if (!module.parent) {
+  app.listen(config.site.port || 80);
 
-console.log("Mongo Express server listening on port " + (config.site.port || 80));
+  console.log("Mongo Express server listening on port " + (config.site.port || 80));
+} else {
+  module.exports = app;
+}
