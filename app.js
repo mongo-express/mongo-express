@@ -109,6 +109,17 @@ var updateDatabases = function(admin) {
         continue;
       }
 
+      if (config.mongodb.whitelist.length != 0) {
+        if (!_.include(config.mongodb.whitelist, dbName)) {
+          continue;
+        }
+      }
+      if (config.mongodb.blacklist.length != 0) {
+        if (_.include(config.mongodb.blacklist, dbName)) {
+          continue;
+        }
+      }
+
       connections[dbName] = mainConn.db(dbName);
       databases.push(dbName);
 
