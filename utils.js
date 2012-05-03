@@ -7,5 +7,5 @@ exports.parseCollectionName = function parseCollectionName(full_name) {
   }
 
   var database = coll_parts.splice(0,1);
-  return { name: coll_parts.join('.'), database: database };
+  return { name: coll_parts.join('.'), database: database.toString() };
 };
