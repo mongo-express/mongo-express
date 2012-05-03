@@ -21,6 +21,8 @@
   "engine": "node >= 0.6",
   "license": "MIT",
   "scripts": {
-    "start": "node app"
-  }
+    "start": "node app",
+    "test": "./node_modules/.bin/mocha"
+  },
+  "main": "./app"
 }
