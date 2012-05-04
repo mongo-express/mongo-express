@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ dbName }}{% endblock %}
+
+{% block content %}
+<h2>Create Collection</h2>
+<form class="well form-inline" method="POST">
+    <div class="input-prepend">
+      <span class="add-on">{{ dbName }} . </span>
+      <input class="span3" type="text" id="collectionName" name="collectionName" placeholder="Collection Name">
+    </div>
+  <button type="submit" class="btn btn-primary">
+  <i class="icon-folder-open icon-white"></i>
+  Create collection
+  </button>
+</form>
+
+
+<h2>Collections</h2>
+<table class="table table-bordered table-striped table-condensed">
+  {% for c in colls %}
+  <tr>
+    <td class="span2">
+      <a href="db/{{ dbName }}/{{ c }}" class="btn btn-success span2">
+        <i class="icon-list-alt icon-white"></i> View
+      </a>
+    </td>
+    <td><h3><a href="db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
+    <td class="span2">
+      <form method="POST" action="db/{{ dbName }}/{{ c }}" style="margin: 0px;">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="btn btn-danger span2">
+          <i class="icon-trash icon-white"></i>
+          Delete
+        </button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
