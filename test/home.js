@@ -20,8 +20,10 @@ describe('Home Page', function() {
         adminDb.serverStatus(function(err, info) {
           browser.visit('http://localhost:8081/', function() {
             expect(browser).to.have.property('success').to.be.true;
-            expect(browser.html(":contains(" + info.version + ")")).to.have.string(info.version);
-            
+
+            //Check database version is being displayed
+            expect(browser.text('#dbVersion')).to.have.string(info.version);
+
             done();
           });
         });
