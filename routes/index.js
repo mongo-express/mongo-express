@@ -22,31 +22,3 @@ exports.index = function(req, res) {
     res.render('index', ctx);
   });
 };
-
-//Handle form submission when creating new collection
-//TODO: Move this handler to /db/ URL when implementing REST api, to handle PUT requests
-exports.createCollection = function(req, res) {
-  var db = req.db;
-  var name = req.body.collectionName;
-
-  if (name === undefined) {
-    //TODO: handle error
-    return res.redirect('back');
-  }
-
-  //Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots
-  if (!name.match(/^[a-zA-Z_][a-zA-Z0-9\._]*$/)) {
-    //TODO: handle error
-    return res.redirect('back');
-  }
-
-  db.createCollection(name, function(err, collection) {
-    if (err) {
-      //TODO: handle error
-      console.error(err);
-    }
-
-    //TODO: use session flash to show success or error message
-    res.redirect('/db/' + req.database + '.' + name);
-  });
-};
