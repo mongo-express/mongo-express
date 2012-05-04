@@ -6,7 +6,7 @@ var browser = new Browser();
 
 describe('Home Page', function() {
   before(function(done) {
-    app.listen(3000);
+    app.listen(8081);
     db.open(function(err, conn) {
       db = conn;
       done();
@@ -18,7 +18,7 @@ describe('Home Page', function() {
 
       db.admin(function(err, adminDb) {
         adminDb.serverStatus(function(err, info) {
-          browser.visit('http://localhost:3000/', function() {
+          browser.visit('http://localhost:8081/', function() {
             expect(browser).to.have.property('success').to.be.true;
             expect(browser.html(":contains(" + info.version + ")")).to.have.string(info.version);
             

@@ -7,3 +7,4 @@ branches:
     - develop
 before_script:
   - node app &
+script: "sudo npm test"
