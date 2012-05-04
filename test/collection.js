@@ -16,8 +16,10 @@ describe('Collections', function() {
     });
   });
 
-  after(function() {
-    db.dropCollection('mongoExpressTest');
+  after(function(done) {
+    db.dropCollection('mongoExpressTest', function(err, res) {
+      done();
+    });
   });
 
   describe('Home', function() {
