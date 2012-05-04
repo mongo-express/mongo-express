@@ -6,5 +6,5 @@ branches:
     - master
     - develop
 before_script:
-  - node app &
+  - "#node app &"
 script: "#sudo npm test"
