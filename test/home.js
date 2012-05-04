@@ -1,4 +1,3 @@
-var app = require('../app');
 var db = require('./setupDatabase');
 var expect = require('chai').expect;
 var Browser = require('zombie');
@@ -6,7 +5,6 @@ var browser = new Browser();
 
 describe('Home Page', function() {
   before(function(done) {
-    app.listen(8081);
     db.open(function(err, conn) {
       db = conn;
       done();
@@ -22,7 +20,7 @@ describe('Home Page', function() {
             expect(browser).to.have.property('success').to.be.true;
 
             //Check database version is being displayed
-            expect(browser.text('#dbVersion')).to.have.string(info.version);
+            expect(browser.text('#dbVersion')).to.be.string(info.version);
 
             done();
           });
