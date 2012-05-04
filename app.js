@@ -234,6 +234,7 @@ app.get('/', middleware,  routes.index);
 //app.post('/db/:database', middleware, routes.createCollection);
 app.get('/db/:database/:collection', middleware, routes.viewCollection);
 app.del('/db/:database/:collection', middleware, routes.deleteCollection);
+app.get('/db/:database', middleware, routes.viewDatabase);
 
 app.listen(config.site.port || 80);
 
