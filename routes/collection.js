@@ -23,6 +23,30 @@ exports.viewCollection = function(req, res, next) {
 
 
 exports.addCollection = function(req, res, next) {
+  var name = req.body.collection;
+
+  if (name === undefined) {
+    //TODO: handle error
+    return res.redirect('back');
+  }
+
+  //Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots
+  if (!name.match(/^[a-zA-Z_][a-zA-Z0-9\._]*$/)) {
+    //TODO: handle error
+    return res.redirect('back');
+  }
+
+  req.db.createCollection(name, function(err, collection) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+    }
+
+    req.updateCollections(req.db, req.dbName, function() {
+      //TODO: use session flash to show success or error message
+      res.redirect('/db/' + req.dbName + '/' + name);
+    });
+  });
 };
 
 
