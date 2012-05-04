@@ -1,2 +1,2 @@
 --reporter dot
---globals __keys
+--ignore-leaks
