@@ -2,6 +2,17 @@
 
 {% block title %}{{ dbName }}{% endblock %}
 
+{% block breadcrumb %}
+<li>
+  <a href="">Home</a>
+  <span class="divider">/</span>
+</li>
+<li class="active">
+  {{ dbName }}
+</li>
+{% endblock %}
+
+
 {% block content %}
 <h2>Create Collection</h2>
 <form class="well form-inline" method="POST">

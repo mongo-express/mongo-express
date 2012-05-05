@@ -2,6 +2,21 @@
 
 {% block title %}{{ collectionName }}{% endblock %}
 
+{% block breadcrumb %}
+<li>
+  <a href="">Home</a>
+  <span class="divider">/</span>
+</li>
+<li>
+  <a href="/db/{{ dbName }}">{{ dbName }}</a>
+  <span class="divider">/</span>
+</li>
+<li class="active">
+  {{ collectionName }}
+</li>
+{% endblock %}
+
+
 {% block content %}
 
 {% if documents.length == 0 %}

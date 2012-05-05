@@ -70,6 +70,14 @@
     </div>
 
     <div class="span9">
+      <ul class="breadcrumb">
+      {% block breadcrumb %}
+        <li class="active">
+          Home
+        </li>
+      {% endblock %}
+      </ul>
+
       <div class="page-header">
       <h1 id="pageTitle">{{ title }}</h1>
       </div>
