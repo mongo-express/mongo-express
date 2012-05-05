@@ -1,9 +1,22 @@
 mongo-express
 =============
 
-Web-based MongoDB admin written with Node.js and express
+Web-based MongoDB admin interface written with Node.js and express
 
 
-[![Build Status](https://secure.travis-ci.org/andzdroid/mongo-express.png?branch=master)](http://travis-ci.org/andzdroid/mongo-express) - Master (stable) branch
+Features
+--------
 
-[![Build Status](https://secure.travis-ci.org/andzdroid/mongo-express.png?branch=develop)](http://travis-ci.org/andzdroid/mongo-express) - Develop branch
+Current features:
+
+* Supports multiple databases
+* Database blacklist/whitelist
+* View/add/rename/delete collections
+* View documents
+
+Planned features:
+
+* Add/edit/delete documents
+* Support for replica set connections
+* Web-based command-line interface
+* Site authentication
