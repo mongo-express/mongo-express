@@ -10,7 +10,7 @@ No documents found.
 </p>
 {% else %}
 {% for document in documents %}
-  <pre class="prettyprint">{{ document|json }}</pre>
+  <pre class="prettyprint" style="height: 100px; overflow: auto;">{{ document|json }}</pre>
   <!--<a href="db/{{ db_name }}/{{ collectionName }}/{{ document._id }}">Edit</a>-->
 {% endfor %}
 {% endif %}
