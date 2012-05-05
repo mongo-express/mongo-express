@@ -8,6 +8,7 @@
 
   <link href="stylesheets/bootstrap.css" rel="stylesheet">
   <link href="stylesheets/prettify.css" rel="stylesheet" />
+  <link href="stylesheets/style.css" rel="stylesheet" />
   <style type="text/css">
     body {
       padding-top: 60px;
@@ -69,6 +70,14 @@
     </div>
 
     <div class="span9">
+      <ul class="breadcrumb">
+      {% block breadcrumb %}
+        <li class="active">
+          Home
+        </li>
+      {% endblock %}
+      </ul>
+
       <div class="page-header">
       <h1 id="pageTitle">{{ title }}</h1>
       </div>

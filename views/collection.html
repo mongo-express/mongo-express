@@ -2,6 +2,21 @@
 
 {% block title %}{{ collectionName }}{% endblock %}
 
+{% block breadcrumb %}
+<li>
+  <a href="">Home</a>
+  <span class="divider">/</span>
+</li>
+<li>
+  <a href="/db/{{ dbName }}">{{ dbName }}</a>
+  <span class="divider">/</span>
+</li>
+<li class="active">
+  {{ collectionName }}
+</li>
+{% endblock %}
+
+
 {% block content %}
 
 {% if documents.length == 0 %}
@@ -9,9 +24,21 @@
 No documents found.
 </p>
 {% else %}
+
+{% if collectionName != 'system.indexes' %}
+<script type="text/javascript">
+function loadDocument(id) {
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + id;
+}
+</script>
+{% endif %}
+
 {% for document in documents %}
-  <pre class="prettyprint">{{ document|json }}</pre>
-  <!--<a href="db/{{ db_name }}/{{ collectionName }}/{{ document._id }}">Edit</a>-->
+  <pre class="prettyprint documentlist"
+    {%- if collectionName != 'system.indexes' %} onclick="loadDocument('{{ document._id }}')"{% endif -%}
+  >
+{{ document|json }}
+  </pre>
 {% endfor %}
 {% endif %}
 

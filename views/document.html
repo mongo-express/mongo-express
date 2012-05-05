@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ document._id }}{% endblock %}
+
+{% block breadcrumb %}
+<li>
+  <a href="">Home</a>
+  <span class="divider">/</span>
+</li>
+<li>
+  <a href="/db/{{ dbName }}">{{ dbName }}</a>
+  <span class="divider">/</span>
+</li>
+<li>
+  <a href="/db/{{ dbName }}/{{ collectionName }}">{{ collectionName }}</a>
+  <span class="divider">/</span>
+</li>
+<li class="active">
+  {{ document._id }}
+</li>
+{% endblock %}
+
+
+{% block content %}
+
+<textarea class="prettyprint span9" style="height: 500px;">
+{{ document|json }}
+</textarea>
+
+{% endblock %}

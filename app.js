@@ -177,7 +177,7 @@ app.param('database', function(req, res, next, id) {
   //Make sure database exists
   if (!_.include(databases, id)) {
     //TODO: handle error
-    return next('Error!');
+    return next('Error! Database not found!');
   }
 
   req.dbName = id;
@@ -207,10 +207,28 @@ app.param('collection', function(req, res, next, id) {
   connections[req.dbName].collection(id, function(err, coll) {
     if (err) {
       //TODO: handle error
-      return next('Error!');
+      return next('Error! Collection not found!');
     }
 
     req.collection = coll;
+
+    next();
+  });
+});
+
+//:document param MUST be preceded by a :collection param
+app.param('document', function(req, res, next, id) {
+  //Convert id string to mongodb object ID
+  var id = new mongodb.ObjectID.createFromHexString(id);
+
+  req.collection.findOne({_id: id}, function(err, doc) {
+    if (err) {
+      //TODO: handle error
+      return next('Error! Document not found!');
+    }
+
+    req.document = doc;
+    res.locals.document = doc;
 
     next();
   });
@@ -231,6 +249,7 @@ var middleware = function(req, res, next) {
 
 //Routes
 app.get('/', middleware,  routes.index);
+app.get('/db/:database/:collection/:document', middleware, routes.viewDocument);
 app.get('/db/:database/:collection', middleware, routes.viewCollection);
 app.del('/db/:database/:collection', middleware, routes.deleteCollection);
 app.put('/db/:database/:collection', middleware, routes.renameCollection);
