@@ -20,6 +20,8 @@ module.exports = {
     port: 8081
   },
   options: {
+    //The options below aren't being used yet
+
     //cmdType: the type of command line you want mongo express to run
     //values: eval, subprocess
     //  eval - uses db.eval. commands block, so only use this if you have to
