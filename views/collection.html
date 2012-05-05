@@ -2,18 +2,36 @@
 
 {% block title %}{{ collectionName }}{% endblock %}
 
+
+{% block head %}
+  <link href="stylesheets/codemirror.css" rel="stylesheet">
+  <script type="text/javascript" src="javascripts/codemirror-compressed.js"></script>
+
+  {% if editorTheme != "default" %}
+  <link href="stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
+  {% endif %}
+
+  <style type="text/css">
+    .CodeMirror-scroll {
+      height: 100px;
+      overflow: auto;
+    }
+  </style>
+{% endblock %}
+
+
 {% block breadcrumb %}
-<li>
-  <a href="">Home</a>
-  <span class="divider">/</span>
-</li>
-<li>
-  <a href="/db/{{ dbName }}">{{ dbName }}</a>
-  <span class="divider">/</span>
-</li>
-<li class="active">
-  {{ collectionName }}
-</li>
+  <li>
+    <a href="">Home</a>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="/db/{{ dbName }}">{{ dbName }}</a>
+    <span class="divider">/</span>
+  </li>
+  <li class="active">
+    {{ collectionName }}
+  </li>
 {% endblock %}
 
 
@@ -34,11 +52,22 @@ function loadDocument(id) {
 {% endif %}
 
 {% for document in documents %}
-  <pre class="prettyprint documentlist"
-    {%- if collectionName != 'system.indexes' %} onclick="loadDocument('{{ document._id }}')"{% endif -%}
-  >
-{{ document|json }}
-  </pre>
+  <textarea readonly="readonly" class="span9" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document|json }}</textarea>
+  <p>&nbsp;</p>
+
+<script>
+  var doc = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
+    mode: { name: "javascript", json: true },
+    readOnly: true,
+    autoClearEmptyLines: true,
+    matchBrackets: true,
+    theme: "{{ editorTheme }}",
+    lineNumbers: true
+    {%- if collectionName != 'system.indexes' %},
+    onFocus: function() { loadDocument('{{ document._id }}') }
+    {%- endif %}
+  });
+</script>
 {% endfor %}
 {% endif %}
 
@@ -99,43 +128,43 @@ No indexes found.
 
 
 {% block sidebar %}
-<div class="sidebar-nav">
-  <ul class="nav nav-list">
-    <li class="nav-header">Collection Stats</li>
-    <li>
-      <strong>Documents</strong>
-      <span class="pull-right" id="collStatsCount">{{ stats.count }}</span>
-    </li>
-    <li>
-      <strong>Total doc size</strong>
-      <span class="pull-right">{{ stats.size }} bytes</span>
-    </li>
-    <li>
-      <strong>Average doc size</strong>
-      <span class="pull-right">{{ stats.avgObjSize }} bytes</span>
-    </li>
-    <li>
-      <strong>Pre-allocated size</strong>
-      <span class="pull-right">{{ stats.storageSize }} bytes</span>
-    </li>
-    <li>&nbsp;</li>
-    <li>
-      <strong>Indexes</strong>
-      <span class="pull-right">{{ stats.nindexes }}</span>
-    </li>
-    <li>
-      <strong>Total index size</strong>
-      <span class="pull-right">{{ stats.totalIndexSize }} bytes</span>
-    </li>
-    <li>&nbsp;</li>
-    <li>
-      <strong>Padding factor</strong>
-      <span class="pull-right">{{ stats.paddingFactor }}</span>
-    </li>
-    <li>
-      <strong>Extents</strong>
-      <span class="pull-right">{{ stats.numExtents }}</span>
-    </li>
-  </ul>
-</div>
+  <div class="sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">Collection Stats</li>
+      <li>
+        <strong>Documents</strong>
+        <span class="pull-right" id="collStatsCount">{{ stats.count }}</span>
+      </li>
+      <li>
+        <strong>Total doc size</strong>
+        <span class="pull-right">{{ stats.size }} bytes</span>
+      </li>
+      <li>
+        <strong>Average doc size</strong>
+        <span class="pull-right">{{ stats.avgObjSize }} bytes</span>
+      </li>
+      <li>
+        <strong>Pre-allocated size</strong>
+        <span class="pull-right">{{ stats.storageSize }} bytes</span>
+      </li>
+      <li>&nbsp;</li>
+      <li>
+        <strong>Indexes</strong>
+        <span class="pull-right">{{ stats.nindexes }}</span>
+      </li>
+      <li>
+        <strong>Total index size</strong>
+        <span class="pull-right">{{ stats.totalIndexSize }} bytes</span>
+      </li>
+      <li>&nbsp;</li>
+      <li>
+        <strong>Padding factor</strong>
+        <span class="pull-right">{{ stats.paddingFactor }}</span>
+      </li>
+      <li>
+        <strong>Extents</strong>
+        <span class="pull-right">{{ stats.numExtents }}</span>
+      </li>
+    </ul>
+  </div>
 {% endblock %}

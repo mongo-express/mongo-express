@@ -21,6 +21,10 @@ module.exports = {
     port: 8081
   },
   options: {
+    //editorTheme: Name of the theme you want to use for displaying documents
+    //See http://codemirror.net/demo/theme.html for all examples
+    editorTheme: "rubyblue",
+
     //The options below aren't being used yet
 
     //cmdType: the type of command line you want mongo express to run

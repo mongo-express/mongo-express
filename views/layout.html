@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="stylesheets/prettify.css" rel="stylesheet" />
   <link href="stylesheets/style.css" rel="stylesheet" />
   <style type="text/css">
     body {
@@ -19,11 +18,14 @@
     }
   </style>
 
-  <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
-  <script type="text/javascript" src="javascripts/prettify.js"></script>
+  <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+  <script src="javascripts/jquery-1.7.2.min.js"></script>
+  <script src="javascripts/bootstrap.min.js"></script>
+
+  {% block head %}{% endblock %}
 </head>
 
-<body onload="prettyPrint()">
+<body>
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -32,7 +34,7 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="">Home</a></li>
-          <li><a href="cmd">Command Line</a></li>
+          {#<li><a href="cmd">Command Line</a></li>#}
         </ul>
       </div>
     </div>
@@ -86,10 +88,6 @@
     </div>
   </div>
 </div>
-
-
-<script src="javascripts/jquery-1.7.2.min.js"></script>
-<script src="javascripts/bootstrap.min.js"></script>
 
 </body>
 </html>

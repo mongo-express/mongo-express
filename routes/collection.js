@@ -1,3 +1,5 @@
+var config = require('../config');
+
 //view all entries in a collection
 exports.viewCollection = function(req, res, next) {
   var query_options = {
@@ -10,7 +12,8 @@ exports.viewCollection = function(req, res, next) {
       var ctx = {
         title: 'Viewing Collection: ' + req.collectionName,
         documents: items,
-        stats: stats
+        stats: stats,
+        editorTheme: config.options.editorTheme
       };
 
       res.render('collection', ctx);
