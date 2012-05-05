@@ -36,15 +36,36 @@ No indexes found.
 {% endif %}
 #}
 
+<div class="row">
+<div class="span5">
+
+<h2>Rename Collection</h2>
+<form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
+  <input type="hidden" name="_method" value="put">
+  <div class="input-prepend">
+    <span class="add-on">{{ dbName }} . </span>
+    <input class="input-medium" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
+  </div>
+  <button type="submit" class="btn btn-primary">
+  <i class="icon-folder-open icon-white"></i>
+  Rename
+  </button>
+</form>
+
+</div>
+<div class="span4">
+
 <h2>Delete Collection</h2>
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well">
   <input type="hidden" name="_method" value="delete">
   <p>Are you sure you want to delete this collection? All documents will be deleted.</p>
-  <button type="submit" class="btn btn-danger btn-large">
+  <button type="submit" class="btn btn-danger">
   <i class="icon-trash icon-white"></i>
   Delete
   </button>
 </form>
+
+</div>
 
 {% endblock %}
 
