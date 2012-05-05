@@ -69,3 +69,30 @@ exports.deleteCollection = function(req, res, next) {
     });
   });
 };
+
+
+exports.renameCollection = function(req, res, next) {
+  var name = req.body.collection;
+
+  if (name == undefined) {
+    //TODO: handle error
+    return res.redirect('back');
+  }
+
+  //Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots
+  if (!name.match(/^[a-zA-Z_][a-zA-Z0-9\._]*$/)) {
+    //TODO: handle error
+    return res.redirect('back');
+  }
+
+  req.collection.rename(name, function(err, collection) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+    }
+
+    req.updateCollections(req.db, req.dbName, function() {
+      res.redirect('/db/' + req.dbName + '/' + name);
+    });
+  });
+};

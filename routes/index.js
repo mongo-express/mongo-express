@@ -5,6 +5,7 @@ exports.viewDatabase = db.viewDatabase;
 exports.viewCollection = coll.viewCollection;
 exports.addCollection = coll.addCollection;
 exports.deleteCollection = coll.deleteCollection;
+exports.renameCollection = coll.renameCollection;
 
 
 //Homepage route

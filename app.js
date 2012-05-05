@@ -233,6 +233,7 @@ var middleware = function(req, res, next) {
 app.get('/', middleware,  routes.index);
 app.get('/db/:database/:collection', middleware, routes.viewCollection);
 app.del('/db/:database/:collection', middleware, routes.deleteCollection);
+app.put('/db/:database/:collection', middleware, routes.renameCollection);
 app.get('/db/:database', middleware, routes.viewDatabase);
 app.post('/db/:database', middleware, routes.addCollection);
 
