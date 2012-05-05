@@ -2,29 +2,57 @@
 
 {% block title %}{{ document._id }}{% endblock %}
 
+
+{% block head %}
+  <link href="stylesheets/codemirror.css" rel="stylesheet">
+  <script type="text/javascript" src="javascripts/codemirror-compressed.js"></script>
+
+  {% if editorTheme != "default" %}
+  <link href="stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
+  {% endif %}
+
+  <style type="text/css">
+    .CodeMirror-scroll {
+      height: auto;
+      overflow-y: hidden;
+      overflow-x: auto;
+      width: 100%;
+    }
+  </style>
+{% endblock %}
+
+
 {% block breadcrumb %}
-<li>
-  <a href="">Home</a>
-  <span class="divider">/</span>
-</li>
-<li>
-  <a href="/db/{{ dbName }}">{{ dbName }}</a>
-  <span class="divider">/</span>
-</li>
-<li>
-  <a href="/db/{{ dbName }}/{{ collectionName }}">{{ collectionName }}</a>
-  <span class="divider">/</span>
-</li>
-<li class="active">
-  {{ document._id }}
-</li>
+  <li>
+    <a href="">Home</a>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="/db/{{ dbName }}">{{ dbName }}</a>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="/db/{{ dbName }}/{{ collectionName }}">{{ collectionName }}</a>
+    <span class="divider">/</span>
+  </li>
+  <li class="active">
+    {{ document._id }}
+  </li>
 {% endblock %}
 
 
 {% block content %}
 
-<textarea class="span9" style="height: 500px;">
-{{ document|json }}
-</textarea>
+<textarea class="span9" id="documentContent" name="documentContent">{{ document|json }}</textarea>
+
+<script>
+  var doc = CodeMirror.fromTextArea(document.getElementById('documentContent'), {
+    mode: { name: "javascript", json: true },
+    lineNumbers: true,
+    autoClearEmptyLines: true,
+    matchBrackets: true,
+    theme: "{{ editorTheme }}"
+  });
+</script>
 
 {% endblock %}
