@@ -1,6 +1,3 @@
-var utils = require('../utils');
-
-
 //view all entries in a collection
 exports.viewCollection = function(req, res, next) {
   var query_options = {

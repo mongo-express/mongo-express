@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ document._id }}{% endblock %}
+
+{% block content %}
+
+<textarea class="prettyprint span9" style="height: 500px;">
+{{ document|json }}
+</textarea>
+
+{% endblock %}
