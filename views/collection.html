@@ -9,9 +9,21 @@
 No documents found.
 </p>
 {% else %}
+
+{% if collectionName != 'system.indexes' %}
+<script type="text/javascript">
+function loadDocument(id) {
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + id;
+}
+</script>
+{% endif %}
+
 {% for document in documents %}
-  <pre class="prettyprint" style="height: 100px; overflow: auto;">{{ document|json }}</pre>
-  <!--<a href="db/{{ db_name }}/{{ collectionName }}/{{ document._id }}">Edit</a>-->
+  <pre class="prettyprint documentlist"
+    {%- if collectionName != 'system.indexes' %} onclick="loadDocument('{{ document._id }}')"{% endif -%}
+  >
+{{ document|json }}
+  </pre>
 {% endfor %}
 {% endif %}
 
