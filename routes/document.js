@@ -28,11 +28,10 @@ exports.updateDocument = function(req, res, next) {
     return res.redirect('back');
   }
 
-  var id = new mongodb.ObjectID.createFromHexString(docJSON._id);
-  docJSON._id = id;
+  docJSON._id = req.document._id;
 
   //TODO: change collection.save to collection.update, figure out how to use ObjectID
-  req.collection.save(docJSON, {safe: true}, function(err, result) {
+  req.collection.update({_id: docJSON._id}, docJSON, {safe: true}, function(err, result) {
     if (err) {
       //TODO: handle error
       //document was not saved
