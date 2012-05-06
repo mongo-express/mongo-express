@@ -43,10 +43,19 @@
 
 {% block content %}
 
-<textarea class="span9" id="documentContent" name="documentContent">{{ document|json }}</textarea>
+<form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id }}">
+  <input type="hidden" name="_method" value="put">
+  <button type="submit" class="btn btn-success btn-large">
+    <i class="icon-folder-open icon-white"></i>
+    Save
+  </button>
+  <br /><br />
+
+  <textarea class="span9" id="document" name="document">{{ document|json }}</textarea>
+</form>
 
 <script>
-  var doc = CodeMirror.fromTextArea(document.getElementById('documentContent'), {
+  var doc = CodeMirror.fromTextArea(document.getElementById('document'), {
     mode: { name: "javascript", json: true },
     indentUnit: 4,
     lineNumbers: true,

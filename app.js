@@ -249,12 +249,16 @@ var middleware = function(req, res, next) {
 
 //Routes
 app.get('/', middleware,  routes.index);
+
 app.get('/db/:database/:collection/:document', middleware, routes.viewDocument);
+app.put('/db/:database/:collection/:document', middleware, routes.updateDocument);
+
 app.get('/db/:database/:collection', middleware, routes.viewCollection);
-app.del('/db/:database/:collection', middleware, routes.deleteCollection);
 app.put('/db/:database/:collection', middleware, routes.renameCollection);
-app.get('/db/:database', middleware, routes.viewDatabase);
+app.del('/db/:database/:collection', middleware, routes.deleteCollection);
 app.post('/db/:database', middleware, routes.addCollection);
+
+app.get('/db/:database', middleware, routes.viewDatabase);
 
 app.listen(config.site.port || 80);
 
