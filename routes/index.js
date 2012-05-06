@@ -12,6 +12,7 @@ exports.renameCollection = coll.renameCollection;
 
 exports.viewDocument = doc.viewDocument;
 exports.updateDocument = doc.updateDocument;
+exports.deleteDocument = doc.deleteDocument;
 
 
 //Homepage route

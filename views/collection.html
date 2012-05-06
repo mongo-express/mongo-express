@@ -76,9 +76,10 @@ function loadDocument(id) {
   <br /><br />
   <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id }}">
   <input type="hidden" name="_method" value="delete">
-  <button type="submit" class="btn btn-danger btn-mini">
+  <button type="submit" name="submit" class="btn btn-danger btn-mini">
   <i class="icon-remove icon-white"></i>
   </button>
+  </form>
 </div>
 </div>
 {% endfor %}

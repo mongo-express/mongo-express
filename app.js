@@ -252,6 +252,7 @@ app.get('/', middleware,  routes.index);
 
 app.get('/db/:database/:collection/:document', middleware, routes.viewDocument);
 app.put('/db/:database/:collection/:document', middleware, routes.updateDocument);
+app.del('/db/:database/:collection/:document', middleware, routes.deleteDocument);
 
 app.get('/db/:database/:collection', middleware, routes.viewCollection);
 app.put('/db/:database/:collection', middleware, routes.renameCollection);

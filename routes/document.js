@@ -42,3 +42,15 @@ exports.updateDocument = function(req, res, next) {
     return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
   });
 };
+
+
+exports.deleteDocument = function(req, res, next) {
+  req.collection.remove({_id: req.document._id}, {safe: true}, function(err, result) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+    }
+
+    return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+  });
+};
