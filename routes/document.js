@@ -10,6 +10,7 @@ exports.viewDocument = function(req, res, next) {
   res.render('document', ctx);
 };
 
+
 exports.updateDocument = function(req, res, next) {
   var doc = req.body.document;
 
@@ -27,10 +28,10 @@ exports.updateDocument = function(req, res, next) {
     return res.redirect('back');
   }
 
-  var id = new mongodb.ObjectID.createFromHexString(docJSON._id);
-  docJSON._id = id;
+  docJSON._id = req.document._id;
 
-  req.collection.save(docJSON, {safe: true}, function(err, result) {
+  //TODO: change collection.save to collection.update, figure out how to use ObjectID
+  req.collection.update({_id: docJSON._id}, docJSON, {safe: true}, function(err, result) {
     if (err) {
       //TODO: handle error
       //document was not saved
