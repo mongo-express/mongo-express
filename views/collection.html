@@ -52,24 +52,37 @@ function loadDocument(id) {
 {% endif %}
 
 {% for document in documents %}
-  <textarea readonly="readonly" class="span9" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document|json }}</textarea>
+<div class="row">
+<div class="span8">
+  <textarea readonly="readonly" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document|json }}</textarea>
   <p>&nbsp;</p>
 
-<script>
-  var doc = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
-    mode: { name: "javascript", json: true },
-    readOnly: true,
-    indentUnit: 4,
-    autoClearEmptyLines: true,
-    matchBrackets: true,
-    theme: "{{ editorTheme }}",
-    lineNumbers: true
-    {%- if collectionName != 'system.indexes' %},
-    onFocus: function() { loadDocument('{{ document._id }}') }
-    {%- endif %}
-  });
-</script>
+  <script>
+    var doc = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
+      mode: { name: "javascript", json: true },
+      readOnly: true,
+      indentUnit: 4,
+      autoClearEmptyLines: true,
+      matchBrackets: true,
+      theme: "{{ editorTheme }}",
+      lineNumbers: true
+      {%- if collectionName != 'system.indexes' %},
+      onFocus: function() { loadDocument('{{ document._id }}') }
+      {%- endif %}
+    });
+  </script>
+</div>
+<div class="span1">
+  <br /><br />
+  <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id }}">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn btn-danger btn-mini">
+  <i class="icon-remove icon-white"></i>
+  </button>
+</div>
+</div>
 {% endfor %}
+
 {% endif %}
 
 
