@@ -13,7 +13,7 @@
 
   <style type="text/css">
     .CodeMirror-scroll {
-      height: 100px;
+      height: 120px;
       overflow: auto;
     }
   </style>
@@ -59,6 +59,7 @@ function loadDocument(id) {
   var doc = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
     mode: { name: "javascript", json: true },
     readOnly: true,
+    indentUnit: 4,
     autoClearEmptyLines: true,
     matchBrackets: true,
     theme: "{{ editorTheme }}",

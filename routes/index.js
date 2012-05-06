@@ -2,12 +2,16 @@
 var db = require('./database');
 var coll = require('./collection');
 var doc = require('./document');
+
 exports.viewDatabase = db.viewDatabase;
+
 exports.viewCollection = coll.viewCollection;
 exports.addCollection = coll.addCollection;
 exports.deleteCollection = coll.deleteCollection;
 exports.renameCollection = coll.renameCollection;
+
 exports.viewDocument = doc.viewDocument;
+exports.updateDocument = doc.updateDocument;
 
 
 //Homepage route
