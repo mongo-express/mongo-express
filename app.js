@@ -58,7 +58,7 @@ app.configure('development', function(){
 
 //Set up database stuff
 var config = require('./config');
-var host = config.mongodb.host || 'localhost';
+var host = config.mongodb.server || 'localhost';
 var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
 var dbOptions = {
   auto_reconnect: config.mongodb.autoReconnect,
