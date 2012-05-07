@@ -12,11 +12,11 @@ Current features:
 * Supports multiple databases
 * Database blacklist/whitelist
 * View/add/rename/delete collections
-* View/update/delete documents
+* View/add/update/delete documents
 
 Planned features:
 
-* Add documents
+* Error messages/responses
 * Support for replica set connections
 * Web-based command-line interface
 * Site authentication
