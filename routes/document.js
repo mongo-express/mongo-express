@@ -11,6 +11,35 @@ exports.viewDocument = function(req, res, next) {
 };
 
 
+exports.addDocument = function(req, res, next) {
+  var doc = req.body.document;
+
+  if (doc == undefined) {
+    //TODO: handle error
+    return res.redirect('back');
+  }
+
+  var docJSON;
+  try {
+    docJSON = JSON.parse(doc);
+  } catch (err) {
+    //TODO: handle error
+    console.error(err)
+    return res.redirect('back');
+  }
+
+  req.collection.insert(docJSON, {safe: true}, function(err, result) {
+    if (err) {
+      //TODO: handle error
+      console.error(err);
+      return res.redirect('back');
+    }
+
+    res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+  });
+};
+
+
 exports.updateDocument = function(req, res, next) {
   var doc = req.body.document;
 

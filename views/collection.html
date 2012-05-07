@@ -16,6 +16,14 @@
       height: 120px;
       overflow: auto;
     }
+
+    .modal-body .CodeMirror .CodeMirror-scroll {
+      height: auto;
+      min-height: 200px;
+      overflow-y: hidden;
+      overflow-x: auto;
+      width: 100%;
+    }
   </style>
 {% endblock %}
 
@@ -36,6 +44,49 @@
 
 
 {% block content %}
+
+<p>
+<a data-toggle="modal" href="#addDocument" class="btn btn-success btn-large">
+  <i class="icon-file icon-white"></i>
+  New Document
+</a>
+</p>
+
+<div class="modal fade" id="addDocument">
+  <form method="post" action="db/{{ dbName }}/{{ collectionName }}">
+
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <h3>Add Document</h3>
+  </div>
+
+  <div class="modal-body">
+    <textarea id="document" name="document">{
+}</textarea>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-error" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-success">
+      <i class="icon-pencil icon-white"></i>
+      Save
+    </button>
+  </div>
+
+  </form>
+</div>
+
+<script>
+  $("#addDocument").modal("hide");
+  var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
+    mode: { name: "javascript", json: true },
+    indentUnit: 4,
+    electricChars: true,
+    matchBrackets: true,
+    lineNumbers: true,
+    theme: "{{ editorTheme }}"
+  });
+</script>
 
 {% if documents.length == 0 %}
 <p class="well">
@@ -58,12 +109,10 @@ function loadDocument(id) {
   <p>&nbsp;</p>
 
   <script>
-    var doc = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
+    var doc_{{ loop.index }} = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
       mode: { name: "javascript", json: true },
       readOnly: true,
       indentUnit: 4,
-      autoClearEmptyLines: true,
-      matchBrackets: true,
       theme: "{{ editorTheme }}",
       lineNumbers: true
       {%- if collectionName != 'system.indexes' %},
@@ -76,7 +125,7 @@ function loadDocument(id) {
   <br /><br />
   <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id }}">
   <input type="hidden" name="_method" value="delete">
-  <button type="submit" name="submit" class="btn btn-danger btn-mini">
+  <button type="submit" class="btn btn-danger btn-mini">
   <i class="icon-remove icon-white"></i>
   </button>
   </form>
@@ -129,12 +178,15 @@ No indexes found.
 <h2>Delete Collection</h2>
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well">
   <input type="hidden" name="_method" value="delete">
-  <p>Are you sure you want to delete this collection? All documents will be deleted.</p>
-  <button type="submit" class="btn btn-danger">
+  <button id="deleteButton" type="submit" class="btn btn-danger" title="Warning">
   <i class="icon-trash icon-white"></i>
   Delete
   </button>
 </form>
+
+<script>
+  $('#deleteButton').popover({content: "Are you sure you want to delete this collection? All documents will be deleted."});
+</script>
 
 </div>
 
