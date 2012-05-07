@@ -36,15 +36,21 @@ Usage
 -----
 
 To install:
+
     npm install mongo-express
+
 Or if you want to install a global copy:
+
     npm install -g mongo-express
 
 To configure:
+
 Open config.js and fill in your MongoDB server connection and admin auth details.
 
 To run:
+
     node app
 
 To use:
+
 Visit http://localhost:8081 or whatever URL/port you entered into your config.
