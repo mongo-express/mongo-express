@@ -13,6 +13,7 @@ exports.renameCollection = coll.renameCollection;
 exports.viewDocument = doc.viewDocument;
 exports.updateDocument = doc.updateDocument;
 exports.deleteDocument = doc.deleteDocument;
+exports.addDocument = doc.addDocument;
 
 
 //Homepage route
