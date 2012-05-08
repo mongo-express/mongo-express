@@ -59,8 +59,7 @@ exports.updateDocument = function(req, res, next) {
 
   docJSON._id = req.document._id;
 
-  //TODO: change collection.save to collection.update, figure out how to use ObjectID
-  req.collection.update({_id: docJSON._id}, docJSON, {safe: true}, function(err, result) {
+  req.collection.update(req.document, docJSON, {safe: true}, function(err, result) {
     if (err) {
       //TODO: handle error
       //document was not saved
@@ -74,7 +73,7 @@ exports.updateDocument = function(req, res, next) {
 
 
 exports.deleteDocument = function(req, res, next) {
-  req.collection.remove({_id: req.document._id}, {safe: true}, function(err, result) {
+  req.collection.remove(req.document, {safe: true}, function(err, result) {
     if (err) {
       //TODO: handle error
       console.error(err);

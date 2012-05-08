@@ -21,8 +21,13 @@ Planned features:
 * Web-based command-line interface
 * Site authentication
 
-Currently mongo-express *requires* admin access to the database.
-Support for regular user connections will be coming soon.
+Limitations
+-----------
+
+* Requires admin authentication details
+* Requires documents to have an _id property
+* Cannot edit document._id
+* Cannot use regular user authentication
 
 
 Screenshots

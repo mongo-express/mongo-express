@@ -204,15 +204,15 @@ No indexes found.
       </li>
       <li>
         <strong>Total doc size</strong>
-        <span class="pull-right">{{ stats.size }} bytes</span>
+        <span class="pull-right">{{ stats.size|convertBytes }}</span>
       </li>
       <li>
         <strong>Average doc size</strong>
-        <span class="pull-right">{{ stats.avgObjSize }} bytes</span>
+        <span class="pull-right">{{ stats.avgObjSize|convertBytes }}</span>
       </li>
       <li>
         <strong>Pre-allocated size</strong>
-        <span class="pull-right">{{ stats.storageSize }} bytes</span>
+        <span class="pull-right">{{ stats.storageSize|convertBytes }}</span>
       </li>
       <li>&nbsp;</li>
       <li>
@@ -221,7 +221,7 @@ No indexes found.
       </li>
       <li>
         <strong>Total index size</strong>
-        <span class="pull-right">{{ stats.totalIndexSize }} bytes</span>
+        <span class="pull-right">{{ stats.totalIndexSize|convertBytes }}</span>
       </li>
       <li>&nbsp;</li>
       <li>
