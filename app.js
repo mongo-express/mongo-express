@@ -74,7 +74,6 @@ var adminDb;
 var mainConn; //main db connection
 
 
-
 //Update the collections list
 var updateCollections = function(db, dbName, callback) {
   db.collectionNames(function (err, result) {
@@ -139,26 +138,51 @@ db.open(function(err, db) {
 
     mainConn = db;
 
-    //get admin instance
-    db.admin(function(err, a) {
-      adminDb = a;
-
-      if (config.mongodb.username.length == 0) {
-        console.log('Admin DB connected');
-        updateDatabases(adminDb);
-      } else {
-        //auth details were supplied, authenticate admin account with them
-        adminDb.authenticate(config.mongodb.username, config.mongodb.password, function(err, result) {
-          if (err) {
-            //TODO: handle error
-            console.error(err);
-          }
-
-          console.log('Admin DB connected');
+    //Check if admin features are on
+    if (config.mongodb.admin === true) {
+      //get admin instance
+      db.admin(function(err, a) {
+        adminDb = a;
+  
+        if (config.mongodb.adminUsername.length == 0) {
+          console.log('Admin Database connected');
           updateDatabases(adminDb);
-        });
+        } else {
+          //auth details were supplied, authenticate admin account with them
+          adminDb.authenticate(config.mongodb.adminUsername, config.mongodb.adminPassword, function(err, result) {
+            if (err) {
+              //TODO: handle error
+              console.error(err);
+            }
+  
+            console.log('Admin Database connected');
+            updateDatabases(adminDb);
+          });
+        }
+      });
+    } else {
+      //Regular user authentication
+      if (typeof config.mongodb.auth.length == 0) {
+        throw new Error('Add auth details to config!');
       }
-    });
+
+      for (var i in config.mongodb.auth) {
+        var auth = config.mongodb.auth[i];
+        connections[auth.database] = mainConn.db(auth.database);
+        databases.push(auth.database);
+
+        if (auth.username.length != 0) {
+          connections[auth.database].authenticate(auth.username, auth.password, function(err, result) {
+            if (err) {
+              //TODO: handle error
+              console.error(err);
+            }
+          });
+        }
+
+        updateCollections(connections[auth.database], auth.database);
+      }
+    }
   } else {
     throw err;
   }
