@@ -162,7 +162,7 @@ db.open(function(err, db) {
       });
     } else {
       //Regular user authentication
-      if (typeof config.mongodb.auth.length == 0) {
+      if (typeof config.mongodb.auth == "undefined" || config.mongodb.auth.length == 0) {
         throw new Error('Add auth details to config!');
       }
 
@@ -171,7 +171,7 @@ db.open(function(err, db) {
         connections[auth.database] = mainConn.db(auth.database);
         databases.push(auth.database);
 
-        if (auth.username.length != 0) {
+        if (typeof auth.username != "undefined" && auth.username.length != 0) {
           connections[auth.database].authenticate(auth.username, auth.password, function(err, result) {
             if (err) {
               //TODO: handle error
