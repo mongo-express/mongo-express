@@ -21,6 +21,7 @@ Planned features:
 * Support for replica set connections
 * Web-based command-line interface
 * Site authentication
+* REST interface
 
 Limitations
 -----------
