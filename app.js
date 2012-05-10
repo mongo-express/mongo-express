@@ -7,6 +7,7 @@ var express = require('express')
   , http = require('http');
 
 var _ = require('underscore');
+var async = require('async');
 var utils = require('./utils');
 
 var mongodb = require('mongodb');
@@ -172,10 +173,14 @@ db.open(function(err, db) {
         databases.push(auth.database);
 
         if (typeof auth.username != "undefined" && auth.username.length != 0) {
-          connections[auth.database].authenticate(auth.username, auth.password, function(err, result) {
+          connections[auth.database].authenticate(auth.username, auth.password, function(err, success) {
             if (err) {
               //TODO: handle error
               console.error(err);
+            }
+
+            if (!success) {
+              console.error('Could not authenticate to database "' + auth.database + '"');
             }
           });
         }
