@@ -4,6 +4,15 @@
 
 {% block content %}
 
+{% if info == false %}
+
+<h2>Server Status</h2>
+<p>
+  Turn on admin in config.js to view server stats!
+</p>
+
+{% else %}
+
 <h2>Server Status</h2>
 <table class="table table-bordered table-striped">
   <tr>
@@ -71,6 +80,7 @@
   </tr>
 </table>
 
+{% endif %}
 
 {#
   # Still need to add global lock time stats and replica set stats
