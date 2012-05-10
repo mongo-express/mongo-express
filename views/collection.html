@@ -115,7 +115,7 @@ function loadDocument(id) {
       indentUnit: 4,
       theme: "{{ editorTheme }}",
       lineNumbers: true
-      {%- if collectionName != 'system.indexes' %},
+      {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
       onFocus: function() { loadDocument('{{ document._id }}') }
       {%- endif %}
     });
