@@ -2,13 +2,38 @@ module.exports = {
   mongodb: {
     server: 'localhost',
     port: 27017,
-    //username and password must be for admin account
-    //leave it empty if no admin account
-    username: '',
-    password: '',
+
+    //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
-    //poolSize: size of connection pool
+    //poolSize: size of connection pool (number of connections to use)
     poolSize: 4,
+    //set admin to true if you want to turn on admin features
+    //if admin is true, the auth list below will be ignored
+    //if admin is true, you will need to enter an admin username/password below (if it is needed)
+    admin: true,
+
+
+    // >>>>  If you are using regular accounts, fill out auth details in the section below
+    // >>>>  If you have admin auth, leave this section empty and skip to the next section
+    auth: [
+      /*
+       * Add the the name, the username, and the password of the databases you want to connect to
+       * Add as many databases as you want!
+      {
+        database: 'test',
+        username: 'user',
+        password: 'pass'
+      }
+      */
+    ],
+
+
+    //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
+    //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
+
+    //leave username and password empty if no admin account exists
+    adminUsername: 'admin',
+    adminPassword: 'pass',
     //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
     //blacklist: hide databases listed in the blacklist (empty list for no blacklist)

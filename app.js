@@ -7,6 +7,7 @@ var express = require('express')
   , http = require('http');
 
 var _ = require('underscore');
+var async = require('async');
 var utils = require('./utils');
 
 var mongodb = require('mongodb');
@@ -74,7 +75,6 @@ var adminDb;
 var mainConn; //main db connection
 
 
-
 //Update the collections list
 var updateCollections = function(db, dbName, callback) {
   db.collectionNames(function (err, result) {
@@ -134,33 +134,68 @@ var updateDatabases = function(admin) {
 
 //Connect to mongodb database
 db.open(function(err, db) {
-  if (!err) {
-    console.log('Database connected!');
+  if (err) {
+    throw err;
+  }
 
-    mainConn = db;
+  console.log('Database connected!');
 
+  mainConn = db;
+
+  //Check if admin features are on
+  if (config.mongodb.admin === true) {
     //get admin instance
     db.admin(function(err, a) {
       adminDb = a;
 
-      if (config.mongodb.username.length == 0) {
-        console.log('Admin DB connected');
+      if (config.mongodb.adminUsername.length == 0) {
+        console.log('Admin Database connected');
         updateDatabases(adminDb);
       } else {
         //auth details were supplied, authenticate admin account with them
-        adminDb.authenticate(config.mongodb.username, config.mongodb.password, function(err, result) {
+        adminDb.authenticate(config.mongodb.adminUsername, config.mongodb.adminPassword, function(err, result) {
           if (err) {
             //TODO: handle error
             console.error(err);
           }
 
-          console.log('Admin DB connected');
+          console.log('Admin Database connected');
           updateDatabases(adminDb);
         });
       }
     });
   } else {
-    throw err;
+    //Regular user authentication
+    if (typeof config.mongodb.auth == "undefined" || config.mongodb.auth.length == 0) {
+      throw new Error('Add auth details to config or turn on admin!');
+    }
+
+    async.forEachSeries(config.mongodb.auth, function(auth, callback) {
+      console.log("Connecting to " + auth.database + "...");
+      connections[auth.database] = mainConn.db(auth.database);
+      databases.push(auth.database);
+
+      if (typeof auth.username != "undefined" && auth.username.length != 0) {
+        connections[auth.database].authenticate(auth.username, auth.password, function(err, success) {
+          if (err) {
+            //TODO: handle error
+            console.error(err);
+          }
+
+          if (!success) {
+            console.error('Could not authenticate to database "' + auth.database + '"');
+          }
+
+          updateCollections(connections[auth.database], auth.database);
+          console.log('Connected!');
+          callback();
+        });
+      } else {
+        updateCollections(connections[auth.database], auth.database);
+        console.log('Connected!');
+        callback();
+      }
+    });
   }
 });
 

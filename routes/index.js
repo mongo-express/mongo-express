@@ -18,16 +18,23 @@ exports.addDocument = doc.addDocument;
 
 //Homepage route
 exports.index = function(req, res) {
+  var ctx = {
+    title: 'Mongo Express',
+    info: false
+  };
+
+  if (typeof req.adminDb == "undefined") {
+    return res.render('index');
+  }
+
   req.adminDb.serverStatus(function(err, info) {
     if (err) {
       //TODO: handle error
       console.error(err);
     }
 
-    var ctx = {
-      title: 'Mongo Express',
-      info: info
-    };
+    ctx.info = info;
+
     res.render('index', ctx);
   });
 };

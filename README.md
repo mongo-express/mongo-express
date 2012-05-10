@@ -10,6 +10,7 @@ Features
 Current features:
 
 * Supports multiple databases
+* Supports regular user authentication or admin authentication
 * Database blacklist/whitelist
 * View/add/rename/delete collections
 * View/add/update/delete documents
@@ -24,10 +25,9 @@ Planned features:
 Limitations
 -----------
 
-* Requires admin authentication details
 * Requires documents to have an _id property
-* Cannot edit document._id
-* Cannot use regular user authentication
+* Cannot edit document._id property
+* No pagination yet, can only view first 20 documents (WILL BE FIXED SOON!)
 
 
 Screenshots
