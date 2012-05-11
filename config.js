@@ -41,11 +41,13 @@ module.exports = {
   },
   site: {
     //baseUrl: the URL that mongo express will be located at
-    //Remember to add the trailing forward slash at the end!
+    //Remember to add the forward slash at the end!
     baseUrl: 'http://localhost:8081/',
     port: 8081
   },
   options: {
+    //documentsPerPage: how many documents you want to see at once in collection view
+    documentsPerPage: 10,
     //editorTheme: Name of the theme you want to use for displaying documents
     //See http://codemirror.net/demo/theme.html for all examples
     editorTheme: "rubyblue",
