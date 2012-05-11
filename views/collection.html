@@ -102,6 +102,19 @@ function loadDocument(id) {
 </script>
 {% endif %}
 
+<ul class="pager span7">
+  <li class="previous"><a href="db/{{ dbName }}/{{ collectionName }}?skip=0">&larr; First</a></li>
+  <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
+    <a{% if prev.skip >= 0 %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}"{% endif %}>&larr; Prev</a>
+  </li>
+
+  <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
+    <a{% if next.skip < stats.count %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}"{% endif %}>Next &rarr;</a>
+  </li>
+
+  <li class="next"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ last }}">Last &rarr;</a></li>
+</ul>
+
 {% for document in documents %}
 <div class="row">
 <div class="span8">
@@ -132,6 +145,36 @@ function loadDocument(id) {
 </div>
 </div>
 {% endfor %}
+
+<div class="pagination pagination-centered span7">
+  <ul>
+    {%- if prev2.skip >= 0 %}
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}">{{ prev2.page }}</a></li>
+    {% else %}
+    <li><a>&nbsp;</a></li>
+    {%- endif %}
+
+    {%- if prev.skip >= 0 %}
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}">{{ prev.page }}</a></li>
+    {% else %}
+    <li><a>&nbsp;</a></li>
+    {%- endif %}
+
+    <li class="active"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}">{{ here }}</a></li>
+
+    {%- if next.skip < stats.count %}
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}">{{ next.page }}</a></li>
+    {% else %}
+    <li><a>&nbsp;</a></li>
+    {% endif %}
+
+    {%- if next2.skip < stats.count %}
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}">{{ next2.page }}</a></li>
+    {% else %}
+    <li><a>&nbsp;</a></li>
+    {% endif %}
+  </ul>
+</div>
 
 {% endif %}
 

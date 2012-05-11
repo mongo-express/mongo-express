@@ -2,18 +2,54 @@ var config = require('../config');
 
 //view all entries in a collection
 exports.viewCollection = function(req, res, next) {
+  //var limit = parseInt(req.params.limit, 10) || config.options.documentsPerPage;
+  var limit = config.options.documentsPerPage;
+  var skip = parseInt(req.query.skip, 10) || 0;
+
   var query_options = {
-    limit: 20,
-    skip: 0
+    limit: limit,
+    skip: skip
   };
 
   req.collection.find({}, query_options).toArray(function(err, items) {
     req.collection.stats(function(err, stats) {
+
+      //Pagination
+      //Have to do this here, swig template doesn't allow any calculations :(
+      var prev, back2, here, next2, next, last;
+
+      prev = {
+        page: Math.round((skip - limit) / limit) + 1,
+        skip: skip - limit
+      };
+      prev2 = {
+        page: Math.round((skip - limit * 2) / limit) + 1,
+        skip: skip - limit * 2
+      };
+      next2 = {
+        page: Math.round((skip + limit * 2) / limit) + 1,
+        skip: skip + limit * 2
+      };
+      next = {
+        page: Math.round((skip + limit) / limit) + 1,
+        skip: skip + limit
+      };
+      here = Math.round(skip / limit) + 1;
+      last = (Math.ceil(stats.count / limit) - 1) * limit;
+
       var ctx = {
         title: 'Viewing Collection: ' + req.collectionName,
         documents: items,
         stats: stats,
-        editorTheme: config.options.editorTheme
+        editorTheme: config.options.editorTheme,
+        limit: limit,
+        skip: skip,
+        prev: prev,
+        prev2: prev2,
+        next2: next2,
+        next: next,
+        here: here,
+        last: last
       };
 
       res.render('collection', ctx);
