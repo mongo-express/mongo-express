@@ -39,6 +39,8 @@ Screenshots
 Click here for more screenshots: 
 [http://imgur.com/a/OTZHe](http://imgur.com/a/OTZHe)
 
+These screenshots are from version 0.11.0.
+
 
 Usage
 -----
