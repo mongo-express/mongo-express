@@ -23,18 +23,20 @@ Planned features:
 * Site authentication
 * REST interface
 
+
 Limitations
 -----------
 
-* Requires documents to have an _id property
+* Requires documents to have a document._id property
 * Cannot edit document._id property
-* No pagination yet, can only view first 20 documents (WILL BE FIXED SOON!)
 
 
 Screenshots
 -----------
 
-Click here for screenshots: 
+<img src="http://i.imgur.com/DOi3b.png" title="Viewing documents in a collection" />
+
+Click here for more screenshots: 
 [http://imgur.com/a/OTZHe](http://imgur.com/a/OTZHe)
 
 
@@ -60,3 +62,16 @@ To run:
 To use:
 
 Visit http://localhost:8081 or whatever URL/port you entered into your config.
+
+
+License
+-------
+MIT License
+
+Copyright (c) 2012 Chun-hao Hu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
