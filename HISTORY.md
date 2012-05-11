@@ -1,3 +1,12 @@
+0.13.0
+------
+
+* Added version history
+* Added MIT license
+* Added pager links above document list
+* Added pagination links below document list
+* Added config option to set number of documents displayed per page
+
 0.12.0
 ------
 
