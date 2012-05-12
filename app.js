@@ -16,6 +16,8 @@ var swig = require('swig');
 var swigFilters = require('./filters');
 var app = express();
 
+var config = require('./config');
+
 //Set up swig
 swig.init({
   root: __dirname + '/views',
@@ -48,8 +50,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.static(__dirname + '/public'));
   app.use(express.bodyParser());
-  app.use(express.cookieParser("cookiesecret"));
-  app.use(express.session({ secret: "sessionsecret" }));
+  app.use(express.cookieParser(config.site.cookieSecret));
+  app.use(express.session({ secret: config.site.sessionSecret }));
   app.use(express.methodOverride());
   app.use(app.router);
 });
@@ -60,7 +62,6 @@ app.configure('development', function(){
 
 
 //Set up database stuff
-var config = require('./config');
 var host = config.mongodb.server || 'localhost';
 var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
 var dbOptions = {
