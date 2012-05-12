@@ -1,3 +1,8 @@
+0.14.1
+------
+
+* Forgot to updated HISTORY file
+
 0.14.0
 ------
 
