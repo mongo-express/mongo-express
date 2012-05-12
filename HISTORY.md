@@ -1,3 +1,12 @@
+0.14.0
+------
+
+* Added success/error feedback messages
+* Added cookie/session middleware
+* Added cookieSecret and sessionSecret options to config
+* Moved config.js to config.default.js
+* Updated configuration instructions in README
+
 0.13.0
 ------
 
