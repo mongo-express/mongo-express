@@ -1,7 +1,7 @@
 0.14.1
 ------
 
-* Forgot to updated HISTORY file
+* Forgot to update HISTORY file
 
 0.14.0
 ------
