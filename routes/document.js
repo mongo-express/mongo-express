@@ -14,8 +14,8 @@ exports.viewDocument = function(req, res, next) {
 exports.addDocument = function(req, res, next) {
   var doc = req.body.document;
 
-  if (doc == undefined) {
-    //TODO: handle error
+  if (doc == undefined || doc.length == 0) {
+    req.session.error = "You forgot to enter a document!";
     return res.redirect('back');
   }
 
@@ -23,18 +23,19 @@ exports.addDocument = function(req, res, next) {
   try {
     docJSON = JSON.parse(doc);
   } catch (err) {
-    //TODO: handle error
+    req.session.error = "That document is not valid!";
     console.error(err)
     return res.redirect('back');
   }
 
   req.collection.insert(docJSON, {safe: true}, function(err, result) {
     if (err) {
-      //TODO: handle error
+      req.session.error = "Something went wrong: " + err;
       console.error(err);
       return res.redirect('back');
     }
 
+    req.session.success = "Document added!";
     res.redirect('/db/' + req.dbName + '/' + req.collectionName);
   });
 };
@@ -43,8 +44,8 @@ exports.addDocument = function(req, res, next) {
 exports.updateDocument = function(req, res, next) {
   var doc = req.body.document;
 
-  if (doc == undefined) {
-    //TODO: handle error
+  if (doc == undefined || doc.length == 0) {
+    req.session.error = "You forgot to enter a document!";
     return res.redirect('back');
   }
 
@@ -52,7 +53,7 @@ exports.updateDocument = function(req, res, next) {
   try {
     docJSON = JSON.parse(doc);
   } catch (err) {
-    //TODO: handle error
+    req.session.error = "That document is not valid!";
     console.error(err);
     return res.redirect('back');
   }
@@ -61,13 +62,14 @@ exports.updateDocument = function(req, res, next) {
 
   req.collection.update(req.document, docJSON, {safe: true}, function(err, result) {
     if (err) {
-      //TODO: handle error
       //document was not saved
+      req.session.error = "Something went wrong: " + err;
       console.error(err);
       return res.redirect('back');
     }
 
-    return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+    req.session.success = "Document updated!";
+    res.redirect('/db/' + req.dbName + '/' + req.collectionName);
   });
 };
 
@@ -75,10 +77,12 @@ exports.updateDocument = function(req, res, next) {
 exports.deleteDocument = function(req, res, next) {
   req.collection.remove(req.document, {safe: true}, function(err, result) {
     if (err) {
-      //TODO: handle error
+      req.session.error = "Something went wrong! " + err;
       console.error(err);
+      return res.redirect('back');
     }
 
-    return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+    req.session.success = "Document deleted!";
+    res.redirect('/db/' + req.dbName + '/' + req.collectionName);
   });
 };

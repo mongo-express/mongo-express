@@ -48,6 +48,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.static(__dirname + '/public'));
   app.use(express.bodyParser());
+  app.use(express.cookieParser("cookiesecret"));
+  app.use(express.session({ secret: "sessionsecret" }));
   app.use(express.methodOverride());
   app.use(app.router);
 });
@@ -204,6 +206,17 @@ app.locals.use(function(req, res) {
   res.locals.baseHref = config.site.baseUrl;
   res.locals.databases = databases;
   res.locals.collections = collections;
+
+  //Flash messages
+  if (req.session.success) {
+    res.locals.messageSuccess = req.session.success;
+    delete req.session.success;
+  }
+
+  if (req.session.error) {
+    res.locals.messageError = req.session.error;
+    delete req.session.error;
+  }
 });
 
 
