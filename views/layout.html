@@ -84,6 +84,20 @@
       <h1 id="pageTitle">{{ title }}</h1>
       </div>
 
+      {% if messageSuccess %}
+      <div class="alert alert-success">
+        <button class="close" data-dismiss="alert">×</button>
+        <strong>{{ messageSuccess }}</strong>
+      </div>
+      {% endif %}
+
+      {% if messageError %}
+      <div class="alert alert-error">
+        <button class="close" data-dismiss="alert">×</button>
+        <strong>{{ messageError }}</strong>
+      </div>
+      {% endif %}
+
       {% block content %}{% endblock %}
     </div>
   </div>

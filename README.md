@@ -17,7 +17,6 @@ Current features:
 
 Planned features:
 
-* Error messages/responses
 * Support for replica set connections
 * Web-based command-line interface
 * Site authentication
@@ -45,7 +44,7 @@ These screenshots are from version 0.11.0.
 Usage
 -----
 
-To install:
+**To install:**
 
     npm install mongo-express
 
@@ -53,17 +52,19 @@ Or if you want to install a global copy:
 
     npm install -g mongo-express
 
-To configure:
+**To configure:**
 
-Open config.js and fill in your MongoDB server connection and admin auth details.
+Copy `config.default.js` into a new file called `config.js`.
 
-To run:
+Fill in your MongoDB connection details, and any other options you want to change.
+
+**To run:**
 
     node app
 
-To use:
+**To use:**
 
-Visit http://localhost:8081 or whatever URL/port you entered into your config.
+Visit `http://localhost:8081` or whatever URL/port you entered into your config.
 
 
 License
