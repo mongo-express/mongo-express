@@ -14,6 +14,7 @@ Current features:
 * Database blacklist/whitelist
 * View/add/rename/delete collections
 * View/add/update/delete documents
+* Supports BSON data types
 
 Planned features:
 
@@ -26,8 +27,9 @@ Planned features:
 Limitations
 -----------
 
-* Requires documents to have a document._id property
-* Cannot edit document._id property
+* Can only edit documents which have a document._id property
+* Cannot edit document._id property (will be fixed soon)
+* Converts all documents from BSON to JSON when viewing (will be fixed soon)
 
 
 Screenshots
@@ -66,6 +68,26 @@ Fill in your MongoDB connection details, and any other options you want to chang
 
 Visit `http://localhost:8081` or whatever URL/port you entered into your config.
 
+
+BSON Data Types
+---------------
+
+When adding/editing documents, you may want to use BSON data types.
+
+Here is an example of how to use them:
+
+    {
+      _id: ObjectID(), // or ObjectId()
+      long: Long(3000), // or NumberLong()
+      double: Double(4.4), // or NumberDouble()
+      ts: Timestamp()
+    }
+
+Writing this in the document editor will automatically convert the document to the BSON format.
+
+See [https://github.com/mongodb/node-mongodb-native](https://github.com/mongodb/node-mongodb-native) for a full list of supported data types.
+
+At the moment, viewing documents do not show the BSON types, they are only used when adding/editing documents.
 
 License
 -------

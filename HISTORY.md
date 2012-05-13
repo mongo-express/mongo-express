@@ -1,7 +1,12 @@
+0.15.0
+------
+
+* Added support for BSON data types when adding/editing docs
+
 0.14.1
 ------
 
-* Forgot to updated HISTORY file
+* Forgot to update HISTORY file
 
 0.14.0
 ------

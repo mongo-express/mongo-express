@@ -45,7 +45,7 @@
 
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id }}">
   <input type="hidden" name="_method" value="put">
-  <button type="submit" class="btn btn-success btn-large">
+  <button type="submit" class="btn btn-success btn-large"{# onclick="return checkJSON()"#}>
     <i class="icon-pencil icon-white"></i>
     Save
   </button>
@@ -63,6 +63,21 @@
     matchBrackets: true,
     theme: "{{ editorTheme }}"
   });
+
+{# This can check for valid JSON on the client side
+ # Not used at the moment, since it doesn't allow BSON types
+  function checkJSON() {
+    var d = doc.getValue();
+
+    try {
+      docJSON = JSON.parse(d);
+      return true;
+    } catch (err) {
+      alert('This is not a valid document!');
+      return false;
+    }
+  }
+#}
 </script>
 
 {% endblock %}
