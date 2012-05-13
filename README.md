@@ -14,6 +14,7 @@ Current features:
 * Database blacklist/whitelist
 * View/add/rename/delete collections
 * View/add/update/delete documents
+* Supports BSON data types
 
 Planned features:
 
@@ -26,8 +27,9 @@ Planned features:
 Limitations
 -----------
 
-* Requires documents to have a document._id property
-* Cannot edit document._id property
+* Can only edit documents which have a document._id property
+* Cannot edit document._id property (will be fixed soon)
+* Converts all documents from BSON to JSON when viewing (will be fixed soon)
 
 
 Screenshots

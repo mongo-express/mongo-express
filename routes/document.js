@@ -1,5 +1,7 @@
 var config = require('../config');
-var mongodb = require('mongodb');
+var utils = require('../utils');
+var vm = require('vm');
+
 
 exports.viewDocument = function(req, res, next) {
   var ctx = {
@@ -20,13 +22,19 @@ exports.addDocument = function(req, res, next) {
   }
 
   var docJSON;
+  var sandbox = utils.getSandbox();
+
+  //JSON.parse doesn't support BSON data types
+  //Document is evaluated in a vm in order to support BSON data types
+  //Sandbox contains BSON data type functions from node-mongodb-native
   try {
-    docJSON = JSON.parse(doc);
+    vm.runInNewContext('doc = eval((' + doc + '));', sandbox);
   } catch (err) {
     req.session.error = "That document is not valid!";
-    console.error(err)
+    console.error(err);
     return res.redirect('back');
   }
+  var docJSON = sandbox.doc;
 
   req.collection.insert(docJSON, {safe: true}, function(err, result) {
     if (err) {
@@ -49,14 +57,15 @@ exports.updateDocument = function(req, res, next) {
     return res.redirect('back');
   }
 
-  var docJSON;
+  var sandbox = utils.getSandbox();
   try {
-    docJSON = JSON.parse(doc);
+    vm.runInNewContext('doc = eval((' + doc + '));', sandbox);
   } catch (err) {
     req.session.error = "That document is not valid!";
     console.error(err);
     return res.redirect('back');
   }
+  var docJSON = sandbox.doc;
 
   docJSON._id = req.document._id;
 
