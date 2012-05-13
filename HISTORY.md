@@ -1,3 +1,8 @@
+0.15.0
+------
+
+* Added support for BSON data types when adding/editing docs
+
 0.14.1
 ------
 
