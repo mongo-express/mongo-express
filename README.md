@@ -9,12 +9,13 @@ Features
 
 Current features:
 
-* Supports multiple databases
-* Supports regular user authentication or admin authentication
+* Connect to multiple databases
+* Connect and authenticate to individual databases
+* Authenticate as admin to view all databases
 * Database blacklist/whitelist
 * View/add/rename/delete collections
 * View/add/update/delete documents
-* Supports BSON data types
+* Use BSON data types in documents
 
 Planned features:
 
