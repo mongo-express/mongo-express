@@ -30,7 +30,7 @@ exports.getSandbox = function() {
     Symbol: mongodb.Symbol,
     MinKey: mongodb.MinKey,
     MaxKey: mongodb.MaxKey,
-    ISODate: Date,
+    ISODate: Date
   };
 };
 
