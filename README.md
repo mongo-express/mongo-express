@@ -28,8 +28,6 @@ Planned features:
 Limitations
 -----------
 
-* Can only edit documents which have a document._id property
-* Cannot edit document._id property (will be fixed soon)
 * Converts all documents from BSON to JSON when viewing (will be fixed soon)
 
 
