@@ -1,4 +1,5 @@
 var config = require('../config');
+var utils = require('../utils');
 
 //view all entries in a collection
 exports.viewCollection = function(req, res, next) {
@@ -37,9 +38,17 @@ exports.viewCollection = function(req, res, next) {
       here = Math.round(skip / limit) + 1;
       last = (Math.ceil(stats.count / limit) - 1) * limit;
 
+      var docs = [];
+
+      for(var i in items) {
+        docs[i] = items[i];
+        items[i] = utils.docToString(items[i]);
+      }
+
       var ctx = {
         title: 'Viewing Collection: ' + req.collectionName,
-        documents: items,
+        documents: items, //Docs converted to strings
+        docs: docs, //Original docs
         stats: stats,
         editorTheme: config.options.editorTheme,
         limit: limit,

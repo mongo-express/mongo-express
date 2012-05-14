@@ -1,4 +1,5 @@
 var mongodb = require('mongodb');
+var vm = require('vm');
 
 //Given a full collection namescpace, returns the database and collection
 exports.parseCollectionName = function parseCollectionName(full_name) {
@@ -29,6 +30,49 @@ exports.getSandbox = function() {
     Symbol: mongodb.Symbol,
     MinKey: mongodb.MinKey,
     MaxKey: mongodb.MaxKey,
-    ISODate: Date
+    ISODate: Date,
   };
+};
+
+//JSON.parse doesn't support BSON data types
+//Document is evaluated in a vm in order to support BSON data types
+//Sandbox contains BSON data type functions from node-mongodb-native
+exports.stringToBSON = function(string) {
+  var sandbox = exports.getSandbox();
+
+  string = string.replace(/ISODate\(/g, "new ISODate(");
+
+  vm.runInNewContext('doc = eval((' + string + '));', sandbox);
+
+  return sandbox.doc;
+};
+
+//Function for converting BSON docs to string representation
+exports.docToString = function(doc) {
+  //Let JSON.stringify do most of the hard work
+  //Then use replacer function to replace the BSON data
+
+  var replacer = function(key, value) {
+    if (doc[key] instanceof mongodb.ObjectID) {
+      return '""ObjectId(rep"lace' + value + 'rep"lace)""';
+    } else if (doc[key] instanceof mongodb.Long) {
+      return '""Long(rep"lace' + value + 'rep"lace)""';
+    } else if (doc[key] instanceof mongodb.Double) {
+      return '""Double(rep"lace' + value + 'rep"lace)""';
+    } else if (doc[key] instanceof mongodb.Timestamp) {
+      return '""Timestamp(rep"lace' + value + 'rep"lace)""';
+    } else if (doc[key] instanceof Date) {
+      return '""ISODate(rep"lace' + value + 'rep"lace)""';
+    } else {
+      return value;
+    }
+  };
+
+  var newDoc = JSON.stringify(doc, replacer, '    ');
+
+  newDoc = newDoc.replace(/"\\"\\"/gi, "");
+  newDoc = newDoc.replace(/\\"\\""/gi, "");
+  newDoc = newDoc.replace(/rep\\"lace/gi, "\"");
+
+  return newDoc;
 };

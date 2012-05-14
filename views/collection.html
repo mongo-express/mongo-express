@@ -119,7 +119,7 @@ function loadDocument(id) {
 {% for document in documents %}
 <div class="row">
 <div class="span8">
-  <textarea readonly="readonly" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document|json }}</textarea>
+  <textarea readonly="readonly" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document }}</textarea>
   <p>&nbsp;</p>
 
   <script>
@@ -130,7 +130,7 @@ function loadDocument(id) {
       theme: "{{ editorTheme }}",
       lineNumbers: true
       {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
-      onFocus: function() { loadDocument('{{ document._id }}') }
+      onFocus: function() { loadDocument('{{ docs[loop.index0]._id }}') }
       {%- endif %}
     });
   </script>
