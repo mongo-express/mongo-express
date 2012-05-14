@@ -28,7 +28,9 @@ Planned features:
 Limitations
 -----------
 
-* Converts all documents from BSON to JSON when viewing (will be fixed soon)
+* Documents must have document._id property to be edited
+* No GridFS support (might become a planned feature)
+* BSON data types are not all working correctly (Do not use mongo-express for editing complex docs for now!)
 
 
 Screenshots
@@ -71,22 +73,41 @@ Visit `http://localhost:8081` or whatever URL/port you entered into your config.
 BSON Data Types
 ---------------
 
-When adding/editing documents, you may want to use BSON data types.
+Not all BSON data types are working correctly. This means that mongo-express cannot display or add these data types.
+
+The currently working data types:
+
+* Native Javascript types: strings, numbers, floats, lists, booleans, null, etc.
+* ObjectID: can also use ObjectId
+* ISODate: **Do not use Date, use ISODate**
+
+Not tested (probably broken):
+
+* Long/NumberLong
+* Double/NumberDouble (uses regular Javascript 
+* Timestamp
+* DBRef
+* Binary/BinData
+* Code
+* Symbol
+* MinKey
+* MaxKey
 
 Here is an example of how to use them:
 
     {
-      _id: ObjectID(), // or ObjectId()
-      long: Long(3000), // or NumberLong()
-      double: Double(4.4), // or NumberDouble()
-      ts: Timestamp()
+      "_id": ObjectID(), // or ObjectId()
+      "date": ISODate("2012-05-14T16:20:09.314Z"),
+      "new_date": ISODate(),
+      "bool": true,
+      "string": "hello world!",
+      "list of numbers": [
+        123,
+        1234566789,
+        4.4,
+        -12345.765
+      ]
     }
-
-Writing this in the document editor will automatically convert the document to the BSON format.
-
-See [https://github.com/mongodb/node-mongodb-native](https://github.com/mongodb/node-mongodb-native) for a full list of supported data types.
-
-At the moment, viewing documents do not show the BSON types, they are only used when adding/editing documents.
 
 License
 -------
