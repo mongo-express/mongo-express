@@ -1,12 +1,12 @@
 var config = require('../config');
 var utils = require('../utils');
-var vm = require('vm');
 
 
 exports.viewDocument = function(req, res, next) {
   var ctx = {
     title: 'Viewing Document: ' + req.document._id,
-    editorTheme: config.options.editorTheme
+    editorTheme: config.options.editorTheme,
+    docString: utils.docToString(req.document)
   };
 
   res.render('document', ctx);
@@ -21,22 +21,17 @@ exports.addDocument = function(req, res, next) {
     return res.redirect('back');
   }
 
-  var docJSON;
-  var sandbox = utils.getSandbox();
+  var docBSON;
 
-  //JSON.parse doesn't support BSON data types
-  //Document is evaluated in a vm in order to support BSON data types
-  //Sandbox contains BSON data type functions from node-mongodb-native
   try {
-    vm.runInNewContext('doc = eval((' + doc + '));', sandbox);
+    docBSON = utils.stringToBSON(doc);
   } catch (err) {
     req.session.error = "That document is not valid!";
     console.error(err);
     return res.redirect('back');
   }
-  var docJSON = sandbox.doc;
 
-  req.collection.insert(docJSON, {safe: true}, function(err, result) {
+  req.collection.insert(docBSON, {safe: true}, function(err, result) {
     if (err) {
       req.session.error = "Something went wrong: " + err;
       console.error(err);
@@ -57,19 +52,18 @@ exports.updateDocument = function(req, res, next) {
     return res.redirect('back');
   }
 
-  var sandbox = utils.getSandbox();
+  var docBSON;
   try {
-    vm.runInNewContext('doc = eval((' + doc + '));', sandbox);
+    docBSON = utils.stringToBSON(doc);
   } catch (err) {
     req.session.error = "That document is not valid!";
     console.error(err);
     return res.redirect('back');
   }
-  var docJSON = sandbox.doc;
 
-  docJSON._id = req.document._id;
+  docBSON._id = req.document._id;
 
-  req.collection.update(req.document, docJSON, {safe: true}, function(err, result) {
+  req.collection.update(req.document, docBSON, {safe: true}, function(err, result) {
     if (err) {
       //document was not saved
       req.session.error = "Something went wrong: " + err;
