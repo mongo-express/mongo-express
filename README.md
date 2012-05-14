@@ -84,7 +84,7 @@ The currently working data types:
 Not tested (probably broken):
 
 * Long/NumberLong
-* Double/NumberDouble (uses regular Javascript 
+* Double/NumberDouble (gets converted to Javascript number type)
 * Timestamp
 * DBRef
 * Binary/BinData
