@@ -225,8 +225,8 @@ app.locals.use(function(req, res) {
 app.param('database', function(req, res, next, id) {
   //Make sure database exists
   if (!_.include(databases, id)) {
-    //TODO: handle error
-    return next('Error! Database not found!');
+    req.session.error = "Database not found!";
+    return res.redirect('/');
   }
 
   req.dbName = id;
@@ -246,17 +246,17 @@ app.param('database', function(req, res, next, id) {
 app.param('collection', function(req, res, next, id) {
   //Make sure collection exists
   if (!_.include(collections[req.dbName], id)) {
-    //TODO: handle error
-    return next('Error!');
+    req.session.error = "Collection not found!";
+    return res.redirect('/db/' + req.dbName);
   }
 
   req.collectionName = id;
   res.locals.collectionName = id;
 
   connections[req.dbName].collection(id, function(err, coll) {
-    if (err) {
-      //TODO: handle error
-      return next('Error! Collection not found!');
+    if (err || coll == null) {
+      req.session.error = "Collection not found!";
+      return res.redirect('/db/' + req.dbName);
     }
 
     req.collection = coll;
@@ -268,12 +268,17 @@ app.param('collection', function(req, res, next, id) {
 //:document param MUST be preceded by a :collection param
 app.param('document', function(req, res, next, id) {
   //Convert id string to mongodb object ID
-  var id = new mongodb.ObjectID.createFromHexString(id);
+  try {
+    var id = new mongodb.ObjectID.createFromHexString(id);
+  } catch (err) {
+    req.session.error = "Document not found!";
+    return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+  }
 
   req.collection.findOne({_id: id}, function(err, doc) {
-    if (err) {
-      //TODO: handle error
-      return next('Error! Document not found!');
+    if (err || doc == null) {
+      req.session.error = "Document not found!";
+      return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
     }
 
     req.document = doc;
