@@ -1,3 +1,9 @@
+0.16.0
+------
+
+* Added support for some BSON data types when viewing docs
+* Updated READme with list of supported data types
+
 0.15.0
 ------
 
