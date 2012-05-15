@@ -1,12 +1,12 @@
 var config = require('../config');
-var utils = require('../utils');
+var bson = require('../bson');
 
 
 exports.viewDocument = function(req, res, next) {
   var ctx = {
     title: 'Viewing Document: ' + req.document._id,
     editorTheme: config.options.editorTheme,
-    docString: utils.docToString(req.document)
+    docString: bson.toString(req.document)
   };
 
   res.render('document', ctx);
@@ -24,7 +24,7 @@ exports.addDocument = function(req, res, next) {
   var docBSON;
 
   try {
-    docBSON = utils.stringToBSON(doc);
+    docBSON = bson.toBSON(doc);
   } catch (err) {
     req.session.error = "That document is not valid!";
     console.error(err);
@@ -54,7 +54,7 @@ exports.updateDocument = function(req, res, next) {
 
   var docBSON;
   try {
-    docBSON = utils.stringToBSON(doc);
+    docBSON = bson.toBSON(doc);
   } catch (err) {
     req.session.error = "That document is not valid!";
     console.error(err);

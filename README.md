@@ -30,7 +30,9 @@ Limitations
 
 * Documents must have document._id property to be edited
 * No GridFS support (might become a planned feature)
-* BSON data types are not all working correctly (Do not use mongo-express for editing complex docs for now!)
+* Binary BSON data type not tested
+
+Recommend only using mongo-express for development purposes as an ad-hoc MongoDB viewer.
 
 
 Screenshots
@@ -73,40 +75,107 @@ Visit `http://localhost:8081` or whatever URL/port you entered into your config.
 BSON Data Types
 ---------------
 
-Not all BSON data types are working correctly. This means that mongo-express cannot display or add these data types.
+The following BSON data types are supported in the mongo-express document editor/viewer.
 
-The currently working data types:
+**Native Javascript Types**
 
-* Native Javascript types: strings, numbers, floats, lists, booleans, null, etc.
-* ObjectID: can also use ObjectId
-* ISODate: **Do not use Date, use ISODate**
+Strings, numbers, lists, booleans, null, etc.
 
-Not tested (probably broken):
+All numbers in Javascript are 64-bit floating points.
 
-* Long/NumberLong
-* Double/NumberDouble (gets converted to Javascript number type)
-* Timestamp
-* DBRef
+**ObjectID/ObjectId**
+
+    ObjectID()
+
+Creates a new Object ID type.
+
+    ObjectID(id)
+
+Use Object ID with the given 24-digit hexadecimal string.
+
+**ISODate**
+
+    ISODate()
+
+Creates a new ISODate object with current time.
+
+`new Date()` can also be used (note the `new` keyword there).
+
+    ISODate(timestamp)
+
+Uses ISODate object with the given timestamp.
+
+**DBRef/Dbref**
+
+    DBRef(collection, objectID)
+
+    DBRef(collection, objectID, database)
+
+Object ID is the ID string, not the ObjectID type.
+
+The database value is optional.
+
+**Timestamp**
+
+    Timestamp()
+
+Creates a new Timestamp object with a value of 0.
+
+    Timestamp(time, ordinal)
+
+Example: `Timestamp(ISODate(), 0)`.
+
+See [http://www.mongodb.org/display/DOCS/Timestamp+data+type](http://www.mongodb.org/display/DOCS/Timestamp+data+type) for more info about the Timestamp data type.
+
+**Code**
+
+    Code(code)
+
+Code can be a native Javascript function, or it can be a string.
+
+Specifying a scope/context is not supported.
+
+**MinKey**
+
+    MinKey()
+
+**MaxKey**
+
+    MaxKey()
+
+**Symbol**
+
+    Symbol(string)
+
+---
+
+Not tested:
+
 * Binary/BinData
-* Code
-* Symbol
-* MinKey
-* MaxKey
 
-Here is an example of how to use them:
+Here is an example of a document which can be read/edited in mongo-express:
 
     {
       "_id": ObjectID(), // or ObjectId()
-      "date": ISODate("2012-05-14T16:20:09.314Z"),
-      "new_date": ISODate(),
+      "dates": {
+        "date": ISODate("2012-05-14T16:20:09.314Z"),
+        "new_date": ISODate(),
+        "alternative": new Date()
+      },
       "bool": true,
       "string": "hello world!",
       "list of numbers": [
         123,
-        1234566789,
+        111e+87,
         4.4,
         -12345.765
-      ]
+      ],
+      "reference": DBRef("collection", "4fb1299686a989240b000001"),
+      "ts": Timestamp(ISODate(), 1),
+      "minkey": MinKey(),
+      "maxkey": MaxKey(),
+      "func": Code(function() { alert('Hello World!') }),
+      "symbol": Symbol("test")
     }
 
 License
