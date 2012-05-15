@@ -48,6 +48,8 @@ exports.toString = function(doc) {
       return '""Timestamp($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof Date) {
       return '""ISODate($$replace$$' + value + '$$replace$$)""';
+    } else if (doc[key] instanceof mongodb.DBRef) {
+      return '""DBRef($$replace$$' + doc[key].namespace + '$$replace$$, $$replace$$' + doc[key].oid + '$$replace$$, $$replace$$' + doc[key].db + '$$replace$$)""';
     } else {
       return value;
     }
