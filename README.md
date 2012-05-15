@@ -123,7 +123,7 @@ Creates a new Timestamp object with a value of 0.
 
     Timestamp(time, ordinal)
 
-Use like `Timestamp(new Date(), 0)`.
+Example: `Timestamp(ISODate(), 0)`.
 
 See [http://www.mongodb.org/display/DOCS/Timestamp+data+type](http://www.mongodb.org/display/DOCS/Timestamp+data+type) for more info about the Timestamp data type.
 
