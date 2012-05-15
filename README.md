@@ -80,11 +80,10 @@ The currently working data types:
 * Native Javascript types: strings, numbers, floats, lists, booleans, null, etc.
 * ObjectID: can also use ObjectId
 * ISODate: **Do not use Date, use ISODate**
+* Long/Double: use native Javascript numbers
 
 Not tested (probably broken):
 
-* Long/NumberLong
-* Double/NumberDouble (gets converted to Javascript number type)
 * Timestamp
 * DBRef
 * Binary/BinData
@@ -103,7 +102,7 @@ Here is an example of how to use them:
       "string": "hello world!",
       "list of numbers": [
         123,
-        1234566789,
+        111e+87,
         4.4,
         -12345.765
       ]

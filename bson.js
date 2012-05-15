@@ -44,10 +44,6 @@ exports.toString = function(doc) {
   var replacer = function(key, value) {
     if (doc[key] instanceof mongodb.ObjectID) {
       return '""ObjectId($$replace$$' + value + '$$replace$$)""';
-    } else if (doc[key] instanceof mongodb.Long) {
-      return '""Long($$replace$$' + value + '$$replace$$)""';
-    } else if (doc[key] instanceof mongodb.Double) {
-      return '""Double($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.Timestamp) {
       return '""Timestamp($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof Date) {
