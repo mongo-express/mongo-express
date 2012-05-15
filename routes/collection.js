@@ -1,5 +1,5 @@
 var config = require('../config');
-var utils = require('../utils');
+var bson = require('../bson');
 
 //view all entries in a collection
 exports.viewCollection = function(req, res, next) {
@@ -42,7 +42,7 @@ exports.viewCollection = function(req, res, next) {
 
       for(var i in items) {
         docs[i] = items[i];
-        items[i] = utils.docToString(items[i]);
+        items[i] = bson.toString(items[i]);
       }
 
       var ctx = {
