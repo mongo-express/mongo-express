@@ -73,15 +73,7 @@ Visit `http://localhost:8081` or whatever URL/port you entered into your config.
 BSON Data Types
 ---------------
 
-Not all BSON data types are working correctly. This means that mongo-express cannot display or add these data types.
-
-The currently working data types:
-
-* Native Javascript types: strings, numbers, floats, lists, booleans, null, etc.
-* ObjectID: can also use ObjectId
-* ISODate
-* Long/Double: use native Javascript numbers
-* DBRef/Dbref: Use as `DBRef("collection", "object ID", "database")`
+The following BSON data types are supported in the mongo-express document editor/viewer.
 
 ---
 
@@ -139,20 +131,20 @@ See [http://www.mongodb.org/display/DOCS/Timestamp+data+type](http://www.mongodb
 
 Not tested (probably broken):
 
-* Timestamp
 * Binary/BinData
 * Code
 * Symbol
 * MinKey
 * MaxKey
 
-Here is an example of a document with BSON data types in mongo-express:
+Here is an example of a document which can be read/edited in mongo-express:
 
     {
       "_id": ObjectID(), // or ObjectId()
       "dates": {
         "date": ISODate("2012-05-14T16:20:09.314Z"),
-        "new_date": ISODate()
+        "new_date": ISODate(),
+        "alternative": new Date()
       },
       "bool": true,
       "string": "hello world!",
@@ -163,7 +155,7 @@ Here is an example of a document with BSON data types in mongo-express:
         -12345.765
       ],
       "reference": DBRef("collection", "4fb1299686a989240b000001"),
-      "ts": Timestamp(new Date(), 1)
+      "ts": Timestamp(ISODate(), 1)
     }
 
 License
