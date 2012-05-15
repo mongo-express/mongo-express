@@ -30,7 +30,9 @@ Limitations
 
 * Documents must have document._id property to be edited
 * No GridFS support (might become a planned feature)
-* BSON data types are not all working correctly (Do not use mongo-express for editing complex docs for now!)
+* Some BSOn data types are not supported
+
+Recommend only using mongo-express for development purposes as an ad-hoc MongoDB viewer.
 
 
 Screenshots
@@ -74,8 +76,6 @@ BSON Data Types
 ---------------
 
 The following BSON data types are supported in the mongo-express document editor/viewer.
-
----
 
 **Native Javascript Types**
 
