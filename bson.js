@@ -71,6 +71,14 @@ exports.toString = function(doc) {
       } else {
         return '""DBRef($$replace$$' + doc[key].namespace + '$$replace$$, $$replace$$' + doc[key].oid + '$$replace$$, $$replace$$' + doc[key].db + '$$replace$$)""';
       }
+    } else if (doc[key] instanceof mongodb.Code) {
+      return '""Code($$replace$$' + doc[key].code + '$$replace$$)""';
+    } else if (doc[key] instanceof mongodb.MinKey) {
+      return '""MinKey()""';
+    } else if (doc[key] instanceof mongodb.MaxKey) {
+      return '""MaxKey()""';
+    } else if (doc[key] instanceof mongodb.Symbol) {
+      return '""Symbol($$replace$$' + value + '$$replace$$)""';
     } else {
       return value;
     }
