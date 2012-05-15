@@ -30,7 +30,7 @@ Limitations
 
 * Documents must have document._id property to be edited
 * No GridFS support (might become a planned feature)
-* Some BSOn data types are not supported
+* Binary BSON data type not tested
 
 Recommend only using mongo-express for development purposes as an ad-hoc MongoDB viewer.
 
@@ -89,7 +89,7 @@ All numbers in Javascript are 64-bit floating points.
 
 Creates a new Object ID type.
 
-    ObjectID("id")
+    ObjectID(id)
 
 Use Object ID with the given 24-digit hexadecimal string.
 
@@ -101,15 +101,15 @@ Creates a new ISODate object with current time.
 
 `new Date()` can also be used (note the `new` keyword there).
 
-    ISODate("timestamp")
+    ISODate(timestamp)
 
 Uses ISODate object with the given timestamp.
 
 **DBRef/Dbref**
 
-    DBRef("collection", "object ID")
+    DBRef(collection, objectID)
 
-    DBRef("collection", "object ID", "database")
+    DBRef(collection, objectID, database)
 
 Object ID is the ID string, not the ObjectID type.
 
@@ -127,15 +127,31 @@ Use like `Timestamp(new Date(), 0)`.
 
 See [http://www.mongodb.org/display/DOCS/Timestamp+data+type](http://www.mongodb.org/display/DOCS/Timestamp+data+type) for more info about the Timestamp data type.
 
+**Code**
+
+    Code(code)
+
+Code can be a native Javascript function, or it can be a string.
+
+Specifying a scope/context is not supported.
+
+**MinKey**
+
+    MinKey()
+
+**MaxKey**
+
+    MaxKey()
+
+**Symbol**
+
+    Symbol(string)
+
 ---
 
-Not tested (probably broken):
+Not tested:
 
 * Binary/BinData
-* Code
-* Symbol
-* MinKey
-* MaxKey
 
 Here is an example of a document which can be read/edited in mongo-express:
 
@@ -155,7 +171,11 @@ Here is an example of a document which can be read/edited in mongo-express:
         -12345.765
       ],
       "reference": DBRef("collection", "4fb1299686a989240b000001"),
-      "ts": Timestamp(ISODate(), 1)
+      "ts": Timestamp(ISODate(), 1),
+      "minkey": MinKey(),
+      "maxkey": MaxKey(),
+      "func": Code(function() { alert('Hello World!') }),
+      "symbol": Symbol("test")
     }
 
 License
