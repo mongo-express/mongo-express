@@ -1,3 +1,8 @@
+0.16.1
+------
+
+* Fixed bug: when trying to delete document, collection gets deleted
+
 0.16.0
 ------
 

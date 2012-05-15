@@ -24,13 +24,14 @@ exports.getSandbox = function() {
     ObjectID: mongodb.ObjectID,
     Timestamp: mongodb.Timestamp,
     DBRef: mongodb.DBRef,
+    Dbref: mongodb.DBRef,
     Binary: mongodb.Binary,
     BinData: mongodb.Binary,
     Code: mongodb.Code,
     Symbol: mongodb.Symbol,
     MinKey: mongodb.MinKey,
     MaxKey: mongodb.MaxKey,
-    ISODate: Date,
+    ISODate: Date
   };
 };
 
@@ -54,15 +55,15 @@ exports.docToString = function(doc) {
 
   var replacer = function(key, value) {
     if (doc[key] instanceof mongodb.ObjectID) {
-      return '""ObjectId(rep"lace' + value + 'rep"lace)""';
+      return '""ObjectId($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.Long) {
-      return '""Long(rep"lace' + value + 'rep"lace)""';
+      return '""Long($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.Double) {
-      return '""Double(rep"lace' + value + 'rep"lace)""';
+      return '""Double($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.Timestamp) {
-      return '""Timestamp(rep"lace' + value + 'rep"lace)""';
+      return '""Timestamp($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof Date) {
-      return '""ISODate(rep"lace' + value + 'rep"lace)""';
+      return '""ISODate($$replace$$' + value + '$$replace$$)""';
     } else {
       return value;
     }
@@ -72,7 +73,7 @@ exports.docToString = function(doc) {
 
   newDoc = newDoc.replace(/"\\"\\"/gi, "");
   newDoc = newDoc.replace(/\\"\\""/gi, "");
-  newDoc = newDoc.replace(/rep\\"lace/gi, "\"");
+  newDoc = newDoc.replace(/\$\$replace\$\$/gi, "\"");
 
   return newDoc;
 };
