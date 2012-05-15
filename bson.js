@@ -1,6 +1,15 @@
 var mongodb = require('mongodb');
 var vm = require('vm');
 
+
+var DBRef = function(namespace, oid, db) {
+  if (db == undefined || db == null) {
+    db = '';
+  }
+
+  return mongodb.DBRef(namespace, oid, db);
+}
+
 //Create sandbox with BSON data types
 exports.getSandbox = function() {
   return {
@@ -11,8 +20,8 @@ exports.getSandbox = function() {
     ObjectId: mongodb.ObjectID,
     ObjectID: mongodb.ObjectID,
     Timestamp: mongodb.Timestamp,
-    DBRef: mongodb.DBRef,
-    Dbref: mongodb.DBRef,
+    DBRef: DBRef,
+    Dbref: DBRef,
     Binary: mongodb.Binary,
     BinData: mongodb.Binary,
     Code: mongodb.Code,
@@ -49,7 +58,11 @@ exports.toString = function(doc) {
     } else if (doc[key] instanceof Date) {
       return '""ISODate($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.DBRef) {
-      return '""DBRef($$replace$$' + doc[key].namespace + '$$replace$$, $$replace$$' + doc[key].oid + '$$replace$$, $$replace$$' + doc[key].db + '$$replace$$)""';
+      if (doc[key].db == '') {
+        return '""DBRef($$replace$$' + doc[key].namespace + '$$replace$$, $$replace$$' + doc[key].oid + '$$replace$$)""';
+      } else {
+        return '""DBRef($$replace$$' + doc[key].namespace + '$$replace$$, $$replace$$' + doc[key].oid + '$$replace$$, $$replace$$' + doc[key].db + '$$replace$$)""';
+      }
     } else {
       return value;
     }

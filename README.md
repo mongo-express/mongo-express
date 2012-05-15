@@ -81,23 +81,65 @@ The currently working data types:
 * ObjectID: can also use ObjectId
 * ISODate: **Do not use Date, use ISODate**
 * Long/Double: use native Javascript numbers
+* DBRef/Dbref: Use as `DBRef("collection", "object ID", "database")`
+
+---
+
+**Native Javascript Types**
+
+Strings, numbers, lists, booleans, null, etc.
+
+All numbers in Javascript are 64-bit floating points.
+
+**ObjectID/ObjectId**
+
+`ObjectID()`
+
+Creates a new Object ID type.
+
+`ObjectID("id")`
+
+Use Object ID with the given 24-digit hexadecimal string.
+
+**ISODate**
+
+`ISODate()`
+
+Creates a new ISODate object with current time.
+
+`ISODate("timestamp")`
+
+Uses ISODate object with the given timestamp.
+
+**DBRef/Dbref**
+
+`DBRef("collection", "object ID")`
+
+`DBRef("collection", "object ID", "database")`
+
+Object ID is the ID string, not the ObjectID type.
+
+The database value is optional.
+
+---
 
 Not tested (probably broken):
 
 * Timestamp
-* DBRef
 * Binary/BinData
 * Code
 * Symbol
 * MinKey
 * MaxKey
 
-Here is an example of how to use them:
+Here is an example of a document with BSON data types in mongo-express:
 
     {
       "_id": ObjectID(), // or ObjectId()
-      "date": ISODate("2012-05-14T16:20:09.314Z"),
-      "new_date": ISODate(),
+      "dates": {
+        "date": ISODate("2012-05-14T16:20:09.314Z"),
+        "new_date": ISODate()
+      },
       "bool": true,
       "string": "hello world!",
       "list of numbers": [
@@ -105,7 +147,8 @@ Here is an example of how to use them:
         111e+87,
         4.4,
         -12345.765
-      ]
+      ],
+      "reference": DBRef("collection", "4fb1299686a989240b000001")
     }
 
 License
