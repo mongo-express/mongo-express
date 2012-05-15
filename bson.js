@@ -6,7 +6,6 @@ var DBRef = function(namespace, oid, db) {
   if (db == undefined || db == null) {
     db = '';
   }
-
   return mongodb.DBRef(namespace, oid, db);
 }
 
@@ -28,7 +27,8 @@ exports.getSandbox = function() {
     Symbol: mongodb.Symbol,
     MinKey: mongodb.MinKey,
     MaxKey: mongodb.MaxKey,
-    ISODate: Date
+    ISODate: Date,
+    Date: Date
   };
 };
 
@@ -54,7 +54,7 @@ exports.toString = function(doc) {
     if (doc[key] instanceof mongodb.ObjectID) {
       return '""ObjectId($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.Timestamp) {
-      return '""Timestamp($$replace$$' + value + '$$replace$$)""';
+      return '""Timestamp(' + doc[key].low_ + ', ' + doc[key].high_ + ')""';
     } else if (doc[key] instanceof Date) {
       return '""ISODate($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.DBRef) {
