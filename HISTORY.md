@@ -1,3 +1,9 @@
+0.17.0
+
+* Added support for all BSON data types except Binary
+* Fixed BSON converter so not only top-level values get converted
+* Updated README with more BSON data type examples
+
 0.16.1
 ------
 
@@ -7,7 +13,7 @@
 ------
 
 * Added support for some BSON data types when viewing docs
-* Updated READme with list of supported data types
+* Updated README with list of supported data types
 
 0.15.0
 ------
