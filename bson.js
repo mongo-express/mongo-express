@@ -2,11 +2,19 @@ var mongodb = require('mongodb');
 var vm = require('vm');
 
 
+//Adaptors for BSON types
+
 var DBRef = function(namespace, oid, db) {
+  //Allow empty/undefined db value
   if (db == undefined || db == null) {
     db = '';
   }
   return mongodb.DBRef(namespace, oid, db);
+}
+
+var Timestamp = function(high, low) {
+  //Switch low/high bits to Timestamp constructor
+  return mongodb.Timestamp(low, high);
 }
 
 //Create sandbox with BSON data types
@@ -18,7 +26,7 @@ exports.getSandbox = function() {
     NumberDouble: mongodb.Double,
     ObjectId: mongodb.ObjectID,
     ObjectID: mongodb.ObjectID,
-    Timestamp: mongodb.Timestamp,
+    Timestamp: Timestamp,
     DBRef: DBRef,
     Dbref: DBRef,
     Binary: mongodb.Binary,
@@ -54,7 +62,7 @@ exports.toString = function(doc) {
     if (doc[key] instanceof mongodb.ObjectID) {
       return '""ObjectId($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.Timestamp) {
-      return '""Timestamp(' + doc[key].low_ + ', ' + doc[key].high_ + ')""';
+      return '""Timestamp(' + doc[key].high_ + ', ' + doc[key].low_ + ')""';
     } else if (doc[key] instanceof Date) {
       return '""ISODate($$replace$$' + value + '$$replace$$)""';
     } else if (doc[key] instanceof mongodb.DBRef) {
