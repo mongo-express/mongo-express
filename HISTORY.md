@@ -1,4 +1,10 @@
+0.17.1
+------
+
+* Added tests for BSON conversion functions
+
 0.17.0
+------
 
 * Added support for all BSON data types except Binary
 * Fixed BSON converter so not only top-level values get converted
