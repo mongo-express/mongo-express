@@ -1,3 +1,8 @@
+0.17.1
+------
+
+* Added tests for BSON conversion functions
+
 0.17.0
 ------
 
