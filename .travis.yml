@@ -5,6 +5,4 @@ branches:
   only:
     - master
     - develop
-before_script:
-  - "#node app &"
 script: "npm test"
