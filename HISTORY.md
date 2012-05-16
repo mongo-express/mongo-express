@@ -1,3 +1,8 @@
+0.17.2
+------
+
+* Added build status images in README
+
 0.17.1
 ------
 
