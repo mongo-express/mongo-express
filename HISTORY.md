@@ -1,3 +1,9 @@
+0.17.4
+------
+
+* Removed hacky BSON->string conversion function
+* Replaced it with a modified JSON.stringify function
+
 0.17.3
 ------
 
