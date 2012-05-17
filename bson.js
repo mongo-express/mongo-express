@@ -1,5 +1,6 @@
 var mongodb = require('mongodb');
 var vm = require('vm');
+var json = require('./json');
 
 
 //Adaptors for BSON types
@@ -53,69 +54,8 @@ exports.toBSON = function(string) {
   return sandbox.doc;
 };
 
-//Function for converting BSON docs to string representation
+//Convert BSON documents to string
 exports.toString = function(doc) {
-  //Let JSON.stringify do most of the hard work
-  //Then use replacer function to replace the BSON data
-
-  var replacer = function(obj) {
-    var stack = new Array();
-
-    return function(key, value) {
-      if (key == '') {
-        return value;
-      }
-
-      //Use a stack to recursively replace BSON values with BSON functions
-      //Needed to parse documents with >1 depth
-      var o = stack.pop();
-      if (o == undefined) {
-        o = obj[key];
-      } else {
-        o = o[key];
-      }
-
-      //Replace data types with associated functions
-      //JSON automatically converts values to strings
-      //$$rep$$ placeholder is used to remove extra quotation marks at the end
-      //$$replace$$ is placeholder to add unescaped quotation marks
-      if (o instanceof mongodb.ObjectID) {
-        return '$$rep$$ObjectId($$replace$$' + value + '$$replace$$)$$rep$$';
-      } else if (o instanceof mongodb.Timestamp) {
-        return '$$rep$$Timestamp(' + o.high_ + ', ' + o.low_ + ')$$rep$$';
-      } else if (o instanceof Date) {
-        return '$$rep$$ISODate($$replace$$' + value + '$$replace$$)$$rep$$';
-      } else if (o instanceof mongodb.DBRef) {
-        if (o.db == '') {
-          return '$$rep$$DBRef($$replace$$' + o.namespace + '$$replace$$, $$replace$$' + o.oid + '$$replace$$)$$rep$$';
-        } else {
-          return '$$rep$$DBRef($$replace$$' + o.namespace + '$$replace$$, $$replace$$' + o.oid + '$$replace$$, $$replace$$' + o.db + '$$replace$$)$$rep$$';
-        }
-      } else if (o instanceof mongodb.Code) {
-        return '$$rep$$Code($$replace$$' + o.code + '$$replace$$)$$rep$$';
-      } else if (o instanceof mongodb.MinKey) {
-        return '$$rep$$MinKey()$$rep$$';
-      } else if (o instanceof mongodb.MaxKey) {
-        return '$$rep$$MaxKey()$$rep$$';
-      } else if (o instanceof mongodb.Symbol) {
-        return '$$rep$$Symbol($$replace$$' + value + '$$replace$$)$$rep$$';
-      } else if (typeof o == 'object') {
-        //Add current depth object to stack
-        for (var i in o) {
-          stack.push(o);
-        }
-        return value;
-      } else {
-        return value;
-      }
-    };
-  };
-
-  var newDoc = JSON.stringify(doc, replacer(doc), '    ');
-
-  newDoc = newDoc.replace(/"\$\$rep\$\$/gi, "");
-  newDoc = newDoc.replace(/\$\$rep\$\$"/gi, "");
-  newDoc = newDoc.replace(/\$\$replace\$\$/gi, "\"");
-
-  return newDoc;
+  //Use custom json stringify function from json.js
+  return json.stringify(doc, null, '    ');
 };
