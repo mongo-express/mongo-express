@@ -267,12 +267,12 @@ app.param('collection', function(req, res, next, id) {
 
 //:document param MUST be preceded by a :collection param
 app.param('document', function(req, res, next, id) {
-  //Convert id string to mongodb object ID
-  try {
-    var id = new mongodb.ObjectID.createFromHexString(id);
-  } catch (err) {
-    req.session.error = "Document not found!";
-    return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+  if (id.length == 24) {
+    //Convert id string to mongodb object ID
+    try {
+      id = new mongodb.ObjectID.createFromHexString(id);
+    } catch (err) {
+    }
   }
 
   req.collection.findOne({_id: id}, function(err, doc) {
