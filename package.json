@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "mocha": "1.0.x",
-    "zombie": "0.13.x",
     "chai": "0.5.x",
     "coffee-script": "1.3.x"
   },
