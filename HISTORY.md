@@ -1,3 +1,8 @@
+0.17.3
+------
+
+* Removed requirement for doc IDs to be ObjectID type
+
 0.17.2
 ------
 
