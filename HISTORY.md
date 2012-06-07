@@ -1,3 +1,8 @@
+0.17.5
+------
+
+* Specified version 3.0.0alpha1 of express in package.json. Latest version of express is causing errors.
+
 0.17.4
 ------
 
