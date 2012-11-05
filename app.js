@@ -188,7 +188,7 @@ db.open(function(err, db) {
 });
 
 //View helper, sets local variables used in templates
-app.locals.use(function(req, res) {
+app.locals(function(req, res) {
   res.locals.baseHref = config.site.baseUrl;
   res.locals.databases = databases;
   res.locals.collections = collections;
