@@ -11,7 +11,7 @@ var async = require('async');
 var utils = require('./utils');
 
 var mongodb = require('mongodb');
-//var cons = require('consolidate');
+var cons = require('consolidate');
 var swig = require('swig');
 var swigFilters = require('./filters');
 var app = express();
@@ -19,31 +19,16 @@ var app = express();
 var config = require('./config');
 
 //Set up swig
+app.engine('html', cons.swig);
 swig.init({
   root: __dirname + '/views',
   allowErrors: false,
   filters: swigFilters
 });
 
-/*
-* Monkey-patching swig until swig supports express
-*/
-swig.__express = function(path, options, fn) {
-  options = options || {};
-  try {
-    options.filename = path;
-    var tmpl = swig.compileFile(_.last(path.split('/')));
-    fn(null, tmpl.render(options));
-  } catch (err) {
-    fn(err);
-  }
-};
-
-
 //App configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
-  app.engine('.html', swig.__express);
   app.set('view engine', 'html');
   app.set('view options', {layout: false});
   app.use(express.favicon());
