@@ -51,7 +51,17 @@
   New Document
 </a>
 </p>
-
+<form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
+  <div class="input-prepend">
+      <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key">
+      <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value">
+      <label class="checkbox inline"><input type="checkbox" name="type" value="N">Number</label>
+  </div>
+  <button type="submit" class="btn btn-primary pull-right">
+    <i class="icon-search icon-white"></i>
+    Find
+  </button>
+</form>
 <div class="modal fade" id="addDocument">
   <form method="post" action="db/{{ dbName }}/{{ collectionName }}">
 
