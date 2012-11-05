@@ -204,7 +204,7 @@ app.all('*', function(req, res, next) {
     delete req.session.error;
   }
 
-  next();
+  return next();
 });
 
 
