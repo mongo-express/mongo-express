@@ -51,17 +51,19 @@
   New Document
 </a>
 </p>
+
 <form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
   <div class="input-prepend">
-      <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key">
-      <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value">
-      <label class="checkbox inline"><input type="checkbox" name="type" value="N">Number</label>
+      <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
+      <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
+      <label class="checkbox inline"><input type="checkbox" name="type" {% if type == 'N' %}checked="checked" {% endif %} value="N" >Number</label>
   </div>
   <button type="submit" class="btn btn-primary pull-right">
     <i class="icon-search icon-white"></i>
     Find
   </button>
 </form>
+
 <div class="modal fade" id="addDocument">
   <form method="post" action="db/{{ dbName }}/{{ collectionName }}">
 
@@ -114,16 +116,16 @@ function loadDocument(id) {
 {% endif %}
 
 <ul class="pager span7">
-  <li class="previous"><a href="db/{{ dbName }}/{{ collectionName }}?skip=0">&larr; First</a></li>
+  <li class="previous"><a href="db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}">&larr; First</a></li>
   <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-    <a{% if prev.skip >= 0 %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}"{% endif %}>&larr; Prev</a>
+    <a{% if prev.skip >= 0 %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}"{% endif %}>&larr; Prev</a>
   </li>
 
   <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-    <a{% if next.skip < stats.count %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}"{% endif %}>Next &rarr;</a>
+    <a{% if next.skip < stats.count %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}"{% endif %}>Next &rarr;</a>
   </li>
 
-  <li class="next"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ last }}">Last &rarr;</a></li>
+  <li class="next"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}">Last &rarr;</a></li>
 </ul>
 
 {% for document in documents %}
@@ -160,27 +162,27 @@ function loadDocument(id) {
 <div class="pagination pagination-centered span7">
   <ul>
     {%- if prev2.skip >= 0 %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}">{{ prev2.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ prev2.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {%- endif %}
 
     {%- if prev.skip >= 0 %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}">{{ prev.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ prev.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {%- endif %}
 
-    <li class="active"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}">{{ here }}</a></li>
+    <li class="active"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ here }}</a></li>
 
     {%- if next.skip < stats.count %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}">{{ next.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ next.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {% endif %}
 
     {%- if next2.skip < stats.count %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}">{{ next2.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ next2.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {% endif %}
