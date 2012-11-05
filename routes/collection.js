@@ -6,13 +6,25 @@ exports.viewCollection = function(req, res, next) {
   //var limit = parseInt(req.params.limit, 10) || config.options.documentsPerPage;
   var limit = config.options.documentsPerPage;
   var skip = parseInt(req.query.skip, 10) || 0;
-
   var query_options = {
     limit: limit,
     skip: skip
   };
 
-  req.collection.find({}, query_options).toArray(function(err, items) {
+  if (req.query.key && req.query.value) {
+    var query = {};
+    var key = req.query.key;
+    var value = req.query.value;
+    var type = req.query.type;
+    if (type.toUpperCase() == 'N') {
+      value = Number(req.query.value);
+    }
+    query[key] = value;
+  } else {
+    var query = {};
+  }
+
+  req.collection.find(query, query_options).toArray(function(err, items) {
     req.collection.stats(function(err, stats) {
 
       //Pagination
