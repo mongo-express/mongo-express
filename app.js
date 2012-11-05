@@ -188,7 +188,7 @@ db.open(function(err, db) {
 });
 
 //View helper, sets local variables used in templates
-app.locals(function(req, res) {
+app.all('*', function(req, res, next) {
   res.locals.baseHref = config.site.baseUrl;
   res.locals.databases = databases;
   res.locals.collections = collections;
@@ -203,6 +203,8 @@ app.locals(function(req, res) {
     res.locals.messageError = req.session.error;
     delete req.session.error;
   }
+
+  next();
 });
 
 
