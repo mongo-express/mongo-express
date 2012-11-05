@@ -14,9 +14,9 @@ exports.viewCollection = function(req, res, next) {
   // some query filter
   if (req.query.key && req.query.value) {
     var query = {};
-    var key = req.query.key;
-    var value = req.query.value;
-    var type = req.query.type;
+    var key = req.query.key || '';
+    var value = req.query.value || '';
+    var type = req.query.type || '';
     if (type.toUpperCase() == 'N') {
       value = Number(req.query.value);
     }
