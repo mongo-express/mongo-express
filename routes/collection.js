@@ -11,6 +11,7 @@ exports.viewCollection = function(req, res, next) {
     skip: skip
   };
 
+  // some query filter
   if (req.query.key && req.query.value) {
     var query = {};
     var key = req.query.key;
