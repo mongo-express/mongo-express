@@ -12,11 +12,12 @@ exports.viewCollection = function(req, res, next) {
   };
 
   // some query filter
-  if (req.query.key && req.query.value) {
-    var query = {};
-    var key = req.query.key || '';
-    var value = req.query.value || '';
-    var type = req.query.type || '';
+  var query = {};
+  var key = req.query.key || '';
+  var value = req.query.value || '';
+  var type = req.query.type || '';
+
+  if (key && value) {
     if (type.toUpperCase() == 'N') {
       value = Number(req.query.value);
     }
@@ -71,7 +72,10 @@ exports.viewCollection = function(req, res, next) {
         next2: next2,
         next: next,
         here: here,
-        last: last
+        last: last,
+        key: key,
+        value: value,
+        type: type
       };
 
       res.render('collection', ctx);
