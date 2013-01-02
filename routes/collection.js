@@ -6,13 +6,27 @@ exports.viewCollection = function(req, res, next) {
   //var limit = parseInt(req.params.limit, 10) || config.options.documentsPerPage;
   var limit = config.options.documentsPerPage;
   var skip = parseInt(req.query.skip, 10) || 0;
-
   var query_options = {
     limit: limit,
     skip: skip
   };
 
-  req.collection.find({}, query_options).toArray(function(err, items) {
+  // some query filter
+  var query = {};
+  var key = req.query.key || '';
+  var value = req.query.value || '';
+  var type = req.query.type || '';
+
+  if (key && value) {
+    if (type.toUpperCase() == 'N') {
+      value = Number(req.query.value);
+    }
+    query[key] = value;
+  } else {
+    var query = {};
+  }
+
+  req.collection.find(query, query_options).toArray(function(err, items) {
     req.collection.stats(function(err, stats) {
 
       //Pagination
@@ -58,7 +72,10 @@ exports.viewCollection = function(req, res, next) {
         next2: next2,
         next: next,
         here: here,
-        last: last
+        last: last,
+        key: key,
+        value: value,
+        type: type
       };
 
       res.render('collection', ctx);
