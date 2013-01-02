@@ -1,3 +1,10 @@
+0.18.0
+------
+
+* Updated express package version
+* Updated swig package version
+* Added simple key-value document searching
+
 0.17.5
 ------
 
