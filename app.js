@@ -213,7 +213,7 @@ app.param('database', function(req, res, next, id) {
   //Make sure database exists
   if (!_.include(databases, id)) {
     req.session.error = "Database not found!";
-    return res.redirect('/');
+    return res.redirect(config.site.baseUrl);
   }
 
   req.dbName = id;
@@ -234,7 +234,7 @@ app.param('collection', function(req, res, next, id) {
   //Make sure collection exists
   if (!_.include(collections[req.dbName], id)) {
     req.session.error = "Collection not found!";
-    return res.redirect('/db/' + req.dbName);
+    return res.redirect(config.site.baseUrl + 'db/' + req.dbName);
   }
 
   req.collectionName = id;
@@ -243,7 +243,7 @@ app.param('collection', function(req, res, next, id) {
   connections[req.dbName].collection(id, function(err, coll) {
     if (err || coll == null) {
       req.session.error = "Collection not found!";
-      return res.redirect('/db/' + req.dbName);
+      return res.redirect(config.site.baseUrl + 'db/' + req.dbName);
     }
 
     req.collection = coll;
@@ -265,7 +265,7 @@ app.param('document', function(req, res, next, id) {
   req.collection.findOne({_id: id}, function(err, doc) {
     if (err || doc == null) {
       req.session.error = "Document not found!";
-      return res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+      return res.redirect(config.site.baseUrl + 'db/' + req.dbName + '/' + req.collectionName);
     }
 
     req.document = doc;
