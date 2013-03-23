@@ -33,7 +33,7 @@ app.configure(function(){
   app.set('view options', {layout: false});
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.static(__dirname + '/public'));
+  app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
   app.use(express.bodyParser());
   app.use(express.cookieParser(config.site.cookieSecret));
   app.use(express.session({ secret: config.site.sessionSecret }));
@@ -234,7 +234,7 @@ app.param('collection', function(req, res, next, id) {
   //Make sure collection exists
   if (!_.include(collections[req.dbName], id)) {
     req.session.error = "Collection not found!";
-    return res.redirect(config.site.baseUrl + 'db/' + req.dbName);
+    return res.redirect(config.site.baseUrl+'db/' + req.dbName);
   }
 
   req.collectionName = id;
@@ -243,7 +243,7 @@ app.param('collection', function(req, res, next, id) {
   connections[req.dbName].collection(id, function(err, coll) {
     if (err || coll == null) {
       req.session.error = "Collection not found!";
-      return res.redirect(config.site.baseUrl + 'db/' + req.dbName);
+      return res.redirect(config.site.baseUrl+'db/' + req.dbName);
     }
 
     req.collection = coll;
@@ -265,7 +265,7 @@ app.param('document', function(req, res, next, id) {
   req.collection.findOne({_id: id}, function(err, doc) {
     if (err || doc == null) {
       req.session.error = "Document not found!";
-      return res.redirect(config.site.baseUrl + 'db/' + req.dbName + '/' + req.collectionName);
+      return res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
     }
 
     req.document = doc;
@@ -289,20 +289,31 @@ var middleware = function(req, res, next) {
 };
 
 //Routes
-app.get('/', middleware,  routes.index);
+app.get(config.site.baseUrl, middleware,  routes.index);
 
-app.get('/db/:database/:collection/:document', middleware, routes.viewDocument);
-app.put('/db/:database/:collection/:document', middleware, routes.updateDocument);
-app.del('/db/:database/:collection/:document', middleware, routes.deleteDocument);
-app.post('/db/:database/:collection', middleware, routes.addDocument);
+app.get(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.viewDocument);
+app.put(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.updateDocument);
+app.del(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.deleteDocument);
+app.post(config.site.baseUrl+'db/:database/:collection', middleware, routes.addDocument);
 
-app.get('/db/:database/:collection', middleware, routes.viewCollection);
-app.put('/db/:database/:collection', middleware, routes.renameCollection);
-app.del('/db/:database/:collection', middleware, routes.deleteCollection);
-app.post('/db/:database', middleware, routes.addCollection);
+app.get(config.site.baseUrl+'db/:database/:collection', middleware, routes.viewCollection);
+app.put(config.site.baseUrl+'db/:database/:collection', middleware, routes.renameCollection);
+app.del(config.site.baseUrl+'db/:database/:collection', middleware, routes.deleteCollection);
+app.post(config.site.baseUrl+'db/:database', middleware, routes.addCollection);
 
-app.get('/db/:database', middleware, routes.viewDatabase);
+app.get(config.site.baseUrl+'db/:database', middleware, routes.viewDatabase);
 
-app.listen(config.site.port || 80);
+//run as standalone App?
+if (require.main === module){
+  app.listen(config.site.port);
+  console.log("Mongo Express server listening on port " + (config.site.port || 80));
+}else{
+  //as a module
+  console.log('Mongo Express module ready to use on route "'+config.site.baseUrl+'*"');
+  server=http.createServer(app);  
+  module.exports=function(req,res,next){    
+    server.emit('request', req, res);
+  };
+}
 
-console.log("Mongo Express server listening on port " + (config.site.port || 80));
+
