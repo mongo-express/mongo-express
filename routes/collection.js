@@ -107,7 +107,7 @@ exports.addCollection = function(req, res, next) {
 
     req.updateCollections(req.db, req.dbName, function() {
       req.session.success = 'Collection created!';
-      res.redirect(config.site.baseUrl + 'db/' + req.dbName + '/' + name);
+      res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + name);
     });
   });
 };
@@ -131,7 +131,7 @@ exports.deleteCollection = function(req, res, next) {
       }
 
       req.session.success = "Collection  '" + req.collectionName + "' deleted!";
-      res.redirect(config.site.baseUrl + 'db/' + req.dbName);
+      res.redirect(config.site.baseUrl+'db/' + req.dbName);
     });
   });
 };
@@ -165,7 +165,7 @@ exports.renameCollection = function(req, res, next) {
       }
 
       req.session.success('Collection renamed!');
-      res.redirect(config.site.baseUrl + 'db/' + req.dbName + '/' + name);
+      res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + name);
     });
   });
 };
