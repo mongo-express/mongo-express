@@ -2,8 +2,7 @@ var config = require('../config');
 var bson = require('../bson');
 
 
-exports.viewDocument = function(req, res, next) {
-  console.log(config);
+exports.viewDocument = function(req, res, next) {  
   var ctx = {
     title: 'Viewing Document: ' + req.document._id,
     editorTheme: config.options.editorTheme,
