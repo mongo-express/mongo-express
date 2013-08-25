@@ -188,7 +188,11 @@ db.open(function(err, db) {
 
 //View helper, sets local variables used in templates
 app.all('*', function(req, res, next) {
-  res.locals.baseHref = app.route;
+  if (app.route[app.route.length - 1] === '/')
+    res.locals.baseHref = app.route;
+  else
+    res.locals.baseHref = app.route + '/';
+
   res.locals.databases = databases;
   res.locals.collections = collections;
 
