@@ -17,7 +17,6 @@ var swigFilters = require('./filters');
 var app = express();
 
 var config = require('./config');
-
 //Set up swig
 app.engine('html', cons.swig);
 swig.init({
@@ -33,7 +32,7 @@ app.configure(function(){
   app.set('view options', {layout: false});
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
+  app.use(express.static(__dirname + '/public'));
   app.use(express.bodyParser());
   app.use(express.cookieParser(config.site.cookieSecret));
   app.use(express.session({ secret: config.site.sessionSecret }));
@@ -189,7 +188,11 @@ db.open(function(err, db) {
 
 //View helper, sets local variables used in templates
 app.all('*', function(req, res, next) {
-  res.locals.baseHref = config.site.baseUrl;
+  if (app.route[app.route.length - 1] === '/')
+    res.locals.baseHref = app.route;
+  else
+    res.locals.baseHref = app.route + '/';
+
   res.locals.databases = databases;
   res.locals.collections = collections;
 
@@ -213,7 +216,7 @@ app.param('database', function(req, res, next, id) {
   //Make sure database exists
   if (!_.include(databases, id)) {
     req.session.error = "Database not found!";
-    return res.redirect(config.site.baseUrl);
+    return res.redirect(app.route);
   }
 
   req.dbName = id;
@@ -234,7 +237,7 @@ app.param('collection', function(req, res, next, id) {
   //Make sure collection exists
   if (!_.include(collections[req.dbName], id)) {
     req.session.error = "Collection not found!";
-    return res.redirect(config.site.baseUrl+'db/' + req.dbName);
+    return res.redirect('db/' + req.dbName);
   }
 
   req.collectionName = id;
@@ -243,7 +246,7 @@ app.param('collection', function(req, res, next, id) {
   connections[req.dbName].collection(id, function(err, coll) {
     if (err || coll == null) {
       req.session.error = "Collection not found!";
-      return res.redirect(config.site.baseUrl+'db/' + req.dbName);
+      return res.redirect('db/' + req.dbName);
     }
 
     req.collection = coll;
@@ -265,7 +268,7 @@ app.param('document', function(req, res, next, id) {
   req.collection.findOne({_id: id}, function(err, doc) {
     if (err || doc == null) {
       req.session.error = "Document not found!";
-      return res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
+      return res.redirect('db/' + req.dbName + '/' + req.collectionName);
     }
 
     req.document = doc;
@@ -289,31 +292,20 @@ var middleware = function(req, res, next) {
 };
 
 //Routes
-app.get(config.site.baseUrl, middleware,  routes.index);
+app.get('/', middleware,  routes.index);
 
-app.get(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.viewDocument);
-app.put(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.updateDocument);
-app.del(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.deleteDocument);
-app.post(config.site.baseUrl+'db/:database/:collection', middleware, routes.addDocument);
+app.get('/db/:database/:collection/:document', middleware, routes.viewDocument);
+app.put('/db/:database/:collection/:document', middleware, routes.updateDocument);
+app.del('/db/:database/:collection/:document', middleware, routes.deleteDocument);
+app.post('/db/:database/:collection', middleware, routes.addDocument);
 
-app.get(config.site.baseUrl+'db/:database/:collection', middleware, routes.viewCollection);
-app.put(config.site.baseUrl+'db/:database/:collection', middleware, routes.renameCollection);
-app.del(config.site.baseUrl+'db/:database/:collection', middleware, routes.deleteCollection);
-app.post(config.site.baseUrl+'db/:database', middleware, routes.addCollection);
+app.get('/db/:database/:collection', middleware, routes.viewCollection);
+app.put('/db/:database/:collection', middleware, routes.renameCollection);
+app.del('/db/:database/:collection', middleware, routes.deleteCollection);
+app.post('/db/:database', middleware, routes.addCollection);
 
-app.get(config.site.baseUrl+'db/:database', middleware, routes.viewDatabase);
+app.get('/db/:database', middleware, routes.viewDatabase);
 
-//run as standalone App?
-if (require.main === module){
-  app.listen(config.site.port);
-  console.log("Mongo Express server listening on port " + (config.site.port || 80));
-}else{
-  //as a module
-  console.log('Mongo Express module ready to use on route "'+config.site.baseUrl+'*"');
-  server=http.createServer(app);  
-  module.exports=function(req,res,next){    
-    server.emit('request', req, res);
-  };
-}
-
-
+module.exports = function () {
+  return app;
+};

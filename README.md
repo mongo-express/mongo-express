@@ -47,7 +47,7 @@ Screenshots
 
 <img src="http://i.imgur.com/DOi3b.png" title="Viewing documents in a collection" />
 
-Click here for more screenshots: 
+Click here for more screenshots:
 [http://imgur.com/a/OTZHe](http://imgur.com/a/OTZHe)
 
 These screenshots are from version 0.11.0.
@@ -70,14 +70,25 @@ Copy or rename `config.default.js` into a new file called `config.js`.
 
 Fill in your MongoDB connection details, and any other options you want to change.
 
-**To run:**
+**To run it as an standalone app:**
 
-    node app
+    npm start
 
 **To use:**
 
 Visit `http://localhost:8081` or whatever URL/port you entered into your config.
 
+**To mount it in other express instance**
+
+    var express = require('express');
+    var mongoExpress = require('mongo-express');
+
+    var parent = express();
+    parent.use('/mount', mongoExpress());
+
+    parent.listen(3000);
+
+Note when mounted, `baseUrl` setting in `config.js` is ignored
 
 BSON Data Types
 ---------------

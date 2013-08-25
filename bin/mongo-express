@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+var express = require('express');
+
+var config = require('../config.js');
+var baseUrl = config.site.baseUrl;
+var port = config.site.port;
+
+var app = express();
+var mongoExpress = require('../index.js');
+
+app.use(baseUrl, mongoExpress());
+
+// when running standalone redirect access of "/" to mongo-express
+
+if (baseUrl !== '/') {
+  app.get('/', function (req, res) {
+    res.redirect(baseUrl);
+  });
+}
+
+app.listen(port, function(err) {
+  if (!err) {
+    console.log("listening on " + port);
+  }
+});
