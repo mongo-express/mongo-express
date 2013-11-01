@@ -38,7 +38,7 @@ app.configure(function(){
   app.use(express.cookieParser(config.site.cookieSecret));
   app.use(express.session({ 
     secret: config.site.sessionSecret,
-    key: "mongo-express"
+    key: config.site.cookieKeyName
   }));
   app.use(express.methodOverride());
   app.use(app.router);
