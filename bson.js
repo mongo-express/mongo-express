@@ -57,7 +57,16 @@ exports.toBSON = function(string) {
 // Converts string to ObjectID.  TODO: Add validation.
 exports.toObjectId = function(string){
   var sandbox = exports.getSandbox();
-  return sandbox.ObjectID(string);
+  // Strip quotes
+  string = string.replace('"', '').replace('"', '');
+  // Convert ObjectId("526ddf5a9f610ffd26000001") to 526ddf5a9f610ffd26000001
+  string = string.replace(/ObjectID\(/i, '').replace(')', '');
+  // Make sure it's a 24-character string to prevent errors.
+  if (string.length == 24) {
+    return sandbox.ObjectID(string);
+  } else {
+    return false;
+  }
 }
 
 //Convert BSON documents to string

@@ -26,6 +26,10 @@ exports.viewCollection = function(req, res, next) {
     // TODO: Add ObjectID validation to prevent error messages.
     if (type.toUpperCase() == 'O') {
       value = bson.toObjectId(req.query.value);
+      if (!value) {
+        req.session.error = "ObjectIDs must be 24 characters long!";
+        return res.redirect('back');
+      }
     }
     query[key] = value;
   } else {
