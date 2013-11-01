@@ -56,7 +56,11 @@
   <div class="input-prepend">
       <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
       <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
-      <label class="checkbox inline"><input type="checkbox" name="type" {% if type == 'N' %}checked="checked" {% endif %} value="N" >Number</label>
+      <select name="type" class="input-small">
+        <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
+        <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
+        <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
+      </select>
   </div>
   <button type="submit" class="btn btn-primary pull-right">
     <i class="icon-search icon-white"></i>

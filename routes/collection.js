@@ -18,8 +18,14 @@ exports.viewCollection = function(req, res, next) {
   var type = req.query.type || '';
 
   if (key && value) {
+    // If type == N, convert value to Number
     if (type.toUpperCase() == 'N') {
       value = Number(req.query.value);
+    }
+    // If type == O, convert value to ObjectID
+    // TODO: Add ObjectID validation to prevent error messages.
+    if (type.toUpperCase() == 'O') {
+      value = bson.toObjectId(req.query.value);
     }
     query[key] = value;
   } else {

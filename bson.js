@@ -54,6 +54,12 @@ exports.toBSON = function(string) {
   return sandbox.doc;
 };
 
+// Converts string to ObjectID.  TODO: Add validation.
+exports.toObjectId = function(string){
+  var sandbox = exports.getSandbox();
+  return sandbox.ObjectID(string);
+}
+
 //Convert BSON documents to string
 exports.toString = function(doc) {
   //Use custom json stringify function from json.js
