@@ -142,14 +142,14 @@ function loadDocument(id) {
       theme: "{{ editorTheme }}",
       lineNumbers: true
       {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
-      onFocus: function() { loadDocument('{{ docs[loop.index0]._id }}') }
+      onFocus: function() { loadDocument('{{ docs[loop.index0]._id|to_string }}') }
       {%- endif %}
     });
   </script>
 </div>
 <div class="span1">
   <br /><br />
-  <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id }}">
+  <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id|to_string }}">
   <input type="hidden" name="_method" value="delete">
   <button type="submit" class="btn btn-danger btn-mini">
   <i class="icon-remove icon-white"></i>
