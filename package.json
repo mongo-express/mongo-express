@@ -8,19 +8,23 @@
     "url": "git://github.com/andzdroid/mongo-express.git"
   },
   "dependencies": {
-    "express": "3.0.0",
-    "mongodb": "0.9.9-8",
-    "consolidate":">= 0.4.0",
-    "swig": "0.12.x",
-    "underscore": "1.3.x",
-    "async": "0.1.x"
+    "express": "~3.4.8",
+    "mongodb": "~1.3.23",
+    "consolidate": "~0.10.0",
+    "swig": "~1.3.2",
+    "underscore": "~1.6.0",
+    "async": "~0.8.0",
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0",
+    "pwd": "0.0.3"
   },
   "devDependencies": {
-    "mocha": "1.0.x",
-    "chai": "0.5.x",
-    "coffee-script": "1.3.x"
+    "mocha": "~1.18.2",
+    "chai": "~1.9.1",
+    "grunt": "~0.4.4",
+    "load-grunt-config": "~0.8.0"
   },
-  "engine": "node >= 0.6",
+  "engine": "node >= 0.10",
   "license": "MIT",
   "scripts": {
     "start": "node app",

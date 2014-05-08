@@ -66,25 +66,24 @@
 
 <div class="modal fade" id="addDocument">
   <form method="post" action="db/{{ dbName }}/{{ collectionName }}">
+    {% include './partials/csrf.html' %}
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">×</button>
+      <h3>Add Document</h3>
+    </div>
 
-  <div class="modal-header">
-    <button class="close" data-dismiss="modal">×</button>
-    <h3>Add Document</h3>
-  </div>
+    <div class="modal-body">
+      <textarea id="document" name="document">{
+        "_id": ObjectID()
+      }</textarea>
+    </div>
 
-  <div class="modal-body">
-    <textarea id="document" name="document">{
-    "_id": ObjectID()
-}</textarea>
-  </div>
-
-  <div class="modal-footer">
-    <button class="btn btn-error" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-success">
-      <i class="icon-pencil icon-white"></i>
-      Save
-    </button>
-  </div>
+    <div class="modal-footer">
+      <button class="btn btn-error" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-success">
+        <i class="icon-pencil icon-white"></i>Save
+      </button>
+    </div>
 
   </form>
 </div>
@@ -110,7 +109,7 @@ No documents found.
 {% if collectionName != 'system.indexes' %}
 <script type="text/javascript">
 function loadDocument(id) {
-  location.href = '{{ baseHref }}/db/{{ dbName }}/{{ collectionName }}/' + id;
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + id;
 }
 </script>
 {% endif %}
@@ -142,18 +141,19 @@ function loadDocument(id) {
       theme: "{{ editorTheme }}",
       lineNumbers: true
       {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
-      onFocus: function() { loadDocument('{{ docs[loop.index0]._id }}') }
+      onFocus: function() { loadDocument('{{ docs[loop.index0]._id|to_string }}') }
       {%- endif %}
     });
   </script>
 </div>
 <div class="span1">
   <br /><br />
-  <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id }}">
-  <input type="hidden" name="_method" value="delete">
-  <button type="submit" class="btn btn-danger btn-mini">
-  <i class="icon-remove icon-white"></i>
-  </button>
+  <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id|to_string }}">
+    {% include './partials/csrf.html' %}
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger btn-mini">
+      <i class="icon-remove icon-white"></i>
+    </button>
   </form>
 </div>
 </div>
@@ -217,6 +217,7 @@ No indexes found.
 
 <h2>Rename Collection</h2>
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
+  {% include './partials/csrf.html' %}
   <input type="hidden" name="_method" value="put">
   <div class="input-prepend">
     <span class="add-on">{{ dbName }} . </span>
@@ -233,6 +234,7 @@ No indexes found.
 
 <h2>Delete Collection</h2>
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well">
+  {% include './partials/csrf.html' %}
   <input type="hidden" name="_method" value="delete">
   <button id="deleteButton" type="submit" class="btn btn-danger" title="Warning">
   <i class="icon-trash icon-white"></i>
