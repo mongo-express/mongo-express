@@ -17,6 +17,7 @@ var swigFilters = require('./filters');
 var app = express();
 
 var config = require('./config');
+var site_auth;
 
 //Set up swig
 app.engine('html', cons.swig);
@@ -26,23 +27,31 @@ Object.keys(swigFilters).forEach(function (name) {
 });
 
 //App configuration
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'html');
-  app.set('view options', {layout: false});
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
-  app.use(express.bodyParser());
-  app.use(express.cookieParser(config.site.cookieSecret));
-  app.use(express.session({ secret: config.site.sessionSecret }));
-  app.use(express.methodOverride());
-  app.use(app.router);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+app.set('view options', {layout: false});
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
+app.use(express.bodyParser());
+app.use(express.cookieParser(config.site.cookieSecret));
+app.use(express.session({ secret: config.site.sessionSecret }));
+app.use(express.csrf());
+app.use(function (req, res, next) {
+  res.locals.csrftoken = req.csrfToken();
+  next();
 });
 
-app.configure('development', function(){
+if ( config.site.admins ) {
+  site_auth = require('./auth')(app);
+}
+
+app.use(express.methodOverride());
+app.use(app.router);
+
+if ('development' == app.get('env') ) {
   app.use(express.errorHandler());
-});
+}
 
 
 //Set up database stuff
@@ -205,6 +214,38 @@ app.all('*', function(req, res, next) {
 
   return next();
 });
+
+
+// site auth routes
+if ( site_auth ) {
+  app.get(config.site.baseUrl + 'login', function (req, res) {
+    if ( req.isAuthenticated() ) {
+      res.redirect(config.site.baseUrl);
+    }
+    else {
+      res.render('login');
+    }
+  });
+
+  app.post(config.site.baseUrl + 'login', site_auth.authenticate(),
+        function (req, res) {
+            if ( !req.user || !req.isAuthenticated() ) {
+                res.redirect(config.site.baseUrl + 'login', { message: 'Username or password incorrect.' });
+            }
+            // If this function gets called, authentication was successful.
+            // `req.user` contains the authenticated user.
+            else {
+                res.redirect(config.site.baseUrl);
+            }
+        });
+
+  app.get(config.site.baseUrl + 'logout', function (req, res) {
+    req.logout();
+    res.redirect(config.site.baseUrl + 'login');
+  });
+
+  app.all('*', site_auth.requireAuthentication);
+}
 
 
 //route param pre-conditions
