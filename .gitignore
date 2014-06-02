@@ -15,5 +15,8 @@ results
 
 node_modules
 npm-debug.log
+Thumbs.db
 
 config.js
+admins.json
+
