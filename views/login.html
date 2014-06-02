@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+  <form method="post" action="login">
+      {% include './partials/csrf.html' %}
+      <input type="text" name="username" placeholder="username"/>
+      <input type="password" name="password"/>
+      <button type="submit" class="btn btn-primary pull-right">Log in</button>
+  </form>
+
+{% endblock %}

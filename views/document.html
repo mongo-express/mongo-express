@@ -44,6 +44,7 @@
 {% block content %}
 
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id }}">
+  {% include './partials/csrf.html' %}
   <input type="hidden" name="_method" value="put">
   <button type="submit" class="btn btn-success btn-large"{# onclick="return checkJSON()"#}>
     <i class="icon-pencil icon-white"></i>

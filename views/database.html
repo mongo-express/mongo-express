@@ -16,13 +16,14 @@
 {% block content %}
 <h2>Create Collection</h2>
 <form class="well form-inline" method="POST">
-    <div class="input-prepend">
-      <span class="add-on">{{ dbName }} . </span>
-      <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
-    </div>
+  {% include './partials/csrf.html' %}
+  <div class="input-prepend">
+    <span class="add-on">{{ dbName }} . </span>
+    <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
+  </div>
   <button type="submit" class="btn btn-primary">
-  <i class="icon-folder-open icon-white"></i>
-  Create collection
+    <i class="icon-folder-open icon-white"></i>
+    Create collection
   </button>
 </form>
 
@@ -43,6 +44,7 @@
     <td><h3><a href="db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
     <td class="span2">
       <form method="POST" action="db/{{ dbName }}/{{ c }}" style="margin: 0px;">
+        {% include './partials/csrf.html' %}
         <input type="hidden" name="_method" value="delete">
         <button type="submit" class="btn btn-danger span2">
           <i class="icon-trash icon-white"></i>
