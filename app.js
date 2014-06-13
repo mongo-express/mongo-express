@@ -20,10 +20,9 @@ var config = require('./config');
 
 //Set up swig
 app.engine('html', cons.swig);
-swig.init({
-  root: __dirname + '/views',
-  allowErrors: false,
-  filters: swigFilters
+
+Object.keys(swigFilters).forEach(function (name) {
+    swig.setFilter(name, swigFilters[name]);
 });
 
 //App configuration
