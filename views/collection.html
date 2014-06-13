@@ -110,7 +110,7 @@ No documents found.
 {% if collectionName != 'system.indexes' %}
 <script type="text/javascript">
 function loadDocument(id) {
-  location.href = '{{ baseHref }}/db/{{ dbName }}/{{ collectionName }}/' + id;
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + id;
 }
 </script>
 {% endif %}
