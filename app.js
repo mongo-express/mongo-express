@@ -35,7 +35,10 @@ app.configure(function(){
   app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
   app.use(express.bodyParser());
   app.use(express.cookieParser(config.site.cookieSecret));
-  app.use(express.session({ secret: config.site.sessionSecret }));
+  app.use(express.session({ 
+    secret: config.site.sessionSecret,
+    key: config.site.cookieKeyName
+  }));
   app.use(express.methodOverride());
   app.use(app.router);
 });

@@ -45,7 +45,8 @@ module.exports = {
     baseUrl: '/',
     port: 8081,
     cookieSecret: 'cookiesecret',
-    sessionSecret: 'sessionsecret'
+    sessionSecret: 'sessionsecret',
+    cookieKeyName: 'mongo-express'
   },
   options: {
     //documentsPerPage: how many documents you want to see at once in collection view
