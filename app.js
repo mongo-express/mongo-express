@@ -293,6 +293,8 @@ var middleware = function(req, res, next) {
 //Routes
 app.get(config.site.baseUrl, middleware,  routes.index);
 
+app.get(config.site.baseUrl+'db/:database/export/:collection', middleware, routes.exportCollection);
+
 app.get(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.viewDocument);
 app.put(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.updateDocument);
 app.del(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.deleteDocument);

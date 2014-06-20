@@ -93,6 +93,19 @@ exports.viewCollection = function(req, res, next) {
   });
 };
 
+exports.exportCollection = function(req, res, next) {
+	req.collection.find().toArray(function(err, items) {		
+      res.setHeader('Content-disposition', 'attachment; filename=' + req.collectionName + '.json');
+	  res.setHeader('Content-type', 'application/json');
+	  var aItems = [];
+	  for(var i in items) {
+		var docStr = bson.toJsonString(items[i]);
+		aItems.push(docStr);
+      }
+	  res.write(aItems.join('\n'));
+	  res.end();
+	});
+};
 
 exports.addCollection = function(req, res, next) {
   var name = req.body.collection;
