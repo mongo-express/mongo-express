@@ -1,5 +1,6 @@
 var config = require('../config');
 var bson = require('../bson');
+var os = require('os');
 
 //view all entries in a collection
 exports.viewCollection = function(req, res, next) {
@@ -102,7 +103,7 @@ exports.exportCollection = function(req, res, next) {
 		var docStr = bson.toJsonString(items[i]);
 		aItems.push(docStr);
       }
-	  res.write(aItems.join('\n'));
+	  res.write(aItems.join(os.EOL));
 	  res.end();
 	});
 };
