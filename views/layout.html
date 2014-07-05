@@ -16,6 +16,15 @@
     .sidebar-nav {
       padding: 9px 0;
     }
+    .sidebar-nav a {
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .tooltip-inner {
+      max-width: 500px;
+    }
   </style>
 
   <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
@@ -104,4 +113,16 @@
 </div>
 
 </body>
+<script>
+$(document).ready(function(){
+  $(".sidebar-nav").find("a").each(function(){
+    if ($(this).text().length > 20) {
+      $(this).tooltip({
+        title: $(this).text(),
+        delay: { show: 500, hide: 100 }
+      });
+    }
+  });
+});
+</script>
 </html>
