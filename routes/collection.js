@@ -18,6 +18,10 @@ exports.viewCollection = function(req, res, next) {
   var type = req.query.type || '';
 
   if (key && value) {
+    // If type == J, convert value as json document
+    if (type.toUpperCase() == 'J') {
+      value = JSON.parse(req.query.value);
+    }
     // If type == N, convert value to Number
     if (type.toUpperCase() == 'N') {
       value = Number(req.query.value);
