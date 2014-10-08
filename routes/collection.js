@@ -1,18 +1,43 @@
 var config = require('../config');
 var bson = require('../bson');
+var os = require('os');
 
 //view all entries in a collection
 exports.viewCollection = function(req, res, next) {
   //var limit = parseInt(req.params.limit, 10) || config.options.documentsPerPage;
   var limit = config.options.documentsPerPage;
   var skip = parseInt(req.query.skip, 10) || 0;
-
   var query_options = {
     limit: limit,
     skip: skip
   };
 
-  req.collection.find({}, query_options).toArray(function(err, items) {
+  // some query filter
+  var query = {};
+  var key = req.query.key || '';
+  var value = req.query.value || '';
+  var type = req.query.type || '';
+
+  if (key && value) {
+    // If type == N, convert value to Number
+    if (type.toUpperCase() == 'N') {
+      value = Number(req.query.value);
+    }
+    // If type == O, convert value to ObjectID
+    // TODO: Add ObjectID validation to prevent error messages.
+    if (type.toUpperCase() == 'O') {
+      value = bson.toObjectId(req.query.value);
+      if (!value) {
+        req.session.error = "ObjectIDs must be 24 characters long!";
+        return res.redirect('back');
+      }
+    }
+    query[key] = value;
+  } else {
+    var query = {};
+  }
+
+  req.collection.find(query, query_options).toArray(function(err, items) {
     req.collection.stats(function(err, stats) {
 
       //Pagination
@@ -58,7 +83,10 @@ exports.viewCollection = function(req, res, next) {
         next2: next2,
         next: next,
         here: here,
-        last: last
+        last: last,
+        key: key,
+        value: value,
+        type: type
       };
 
       res.render('collection', ctx);
@@ -66,6 +94,19 @@ exports.viewCollection = function(req, res, next) {
   });
 };
 
+exports.exportCollection = function(req, res, next) {
+	req.collection.find().toArray(function(err, items) {		
+      res.setHeader('Content-disposition', 'attachment; filename=' + req.collectionName + '.json');
+	  res.setHeader('Content-type', 'application/json');
+	  var aItems = [];
+	  for(var i in items) {
+		var docStr = bson.toJsonString(items[i]);
+		aItems.push(docStr);
+      }
+	  res.write(aItems.join(os.EOL));
+	  res.end();
+	});
+};
 
 exports.addCollection = function(req, res, next) {
   var name = req.body.collection;
@@ -90,7 +131,7 @@ exports.addCollection = function(req, res, next) {
 
     req.updateCollections(req.db, req.dbName, function() {
       req.session.success = 'Collection created!';
-      res.redirect('/db/' + req.dbName + '/' + name);
+      res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + name);
     });
   });
 };
@@ -114,7 +155,7 @@ exports.deleteCollection = function(req, res, next) {
       }
 
       req.session.success = "Collection  '" + req.collectionName + "' deleted!";
-      res.redirect('/db/' + req.dbName);
+      res.redirect(config.site.baseUrl+'db/' + req.dbName);
     });
   });
 };
@@ -136,19 +177,19 @@ exports.renameCollection = function(req, res, next) {
 
   req.collection.rename(name, function(err, collection) {
     if (err) {
-      req.session.error('Something went wrong: ' + err);
+      req.session.error = 'Something went wrong: ' + err;
       console.error(err);
       return res.redirect('back');
     }
 
     req.updateCollections(req.db, req.dbName, function(err) {
       if (err) {
-        req.session.error('Something went wrong: ' + err);
+        req.session.error = 'Something went wrong: ' + err;
         return res.redirect('back');
       }
 
-      req.session.success('Collection renamed!');
-      res.redirect('/db/' + req.dbName + '/' + name);
+      req.session.success = 'Collection renamed!';
+      res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + name);
     });
   });
 };

@@ -32,11 +32,14 @@ Planned features:
 Limitations
 -----------
 
-* Documents must have document._id property to be edited
+* Documents must have `document._id` property to be edited
 * No GridFS support (might become a planned feature)
 * Binary BSON data type not tested
 
-Recommend only using mongo-express for development purposes as an ad-hoc MongoDB viewer.
+JSON documents are parsed through a javascript virtual machine, so the web
+interface can be used for executing malicious javascript on a server.
+
+**mongo-express should only be used privately for development purposes**.
 
 
 Screenshots
@@ -63,7 +66,7 @@ Or if you want to install a global copy:
 
 **To configure:**
 
-Copy `config.default.js` into a new file called `config.js`.
+Copy or rename `config.default.js` into a new file called `config.js`.
 
 Fill in your MongoDB connection details, and any other options you want to change.
 

@@ -2,7 +2,7 @@ var config = require('../config');
 var bson = require('../bson');
 
 
-exports.viewDocument = function(req, res, next) {
+exports.viewDocument = function(req, res, next) {  
   var ctx = {
     title: 'Viewing Document: ' + req.document._id,
     editorTheme: config.options.editorTheme,
@@ -39,7 +39,7 @@ exports.addDocument = function(req, res, next) {
     }
 
     req.session.success = "Document added!";
-    res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+    res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
   });
 };
 
@@ -72,7 +72,7 @@ exports.updateDocument = function(req, res, next) {
     }
 
     req.session.success = "Document updated!";
-    res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+    res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
   });
 };
 
@@ -86,6 +86,6 @@ exports.deleteDocument = function(req, res, next) {
     }
 
     req.session.success = "Document deleted!";
-    res.redirect('/db/' + req.dbName + '/' + req.collectionName);
+    res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
   });
 };

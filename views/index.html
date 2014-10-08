@@ -23,7 +23,7 @@
   </tr>
   <tr>
     <td><strong>Uptime</strong></td>
-    <td>{{ info.uptime }} seconds</td>
+    <td>{{ info.uptime }} seconds {% if info.uptime > 86400 %} ({{ Math.floor( info.uptime/86400 ) }} days) {% endif %}</td>
     <td><strong>Server Time</strong></td>
     <td>{{ info.localTime|date('r') }}</td>
   </tr>

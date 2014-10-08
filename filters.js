@@ -2,7 +2,7 @@ exports.json = function(input) {
   return JSON.stringify(input, null, '    ');
 };
 
-exports.convertBytes= function(input) {
+exports.convertBytes = function(input) {
   input = parseInt(input, 10);
   if (input < 1024) {
     return input.toString() + ' Bytes';
@@ -16,4 +16,8 @@ exports.convertBytes= function(input) {
   } else {
     return input.toString() + ' Bytes';
   }
+};
+
+exports.to_string = function (input) {
+    return input != null ? input.toString() : "";
 };
