@@ -119,6 +119,7 @@ function loadDocument(id) {
 </script>
 {% endif %}
 
+{%- if pagination %}
 <ul class="pager span7">
   <li class="previous"><a href="db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}">&larr; First</a></li>
   <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
@@ -131,6 +132,7 @@ function loadDocument(id) {
 
   <li class="next"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}">Last &rarr;</a></li>
 </ul>
+{% endif %}
 
 {% for document in documents %}
 <div class="row">
@@ -163,6 +165,7 @@ function loadDocument(id) {
 </div>
 {% endfor %}
 
+{%- if pagination %}
 <div class="pagination pagination-centered span7">
   <ul>
     {%- if prev2.skip >= 0 %}
@@ -192,6 +195,7 @@ function loadDocument(id) {
     {% endif %}
   </ul>
 </div>
+{% endif %}
 
 {% endif %}
 

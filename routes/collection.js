@@ -42,7 +42,7 @@ exports.viewCollection = function(req, res, next) {
 
       //Pagination
       //Have to do this here, swig template doesn't allow any calculations :(
-      var prev, back2, here, next2, next, last;
+      var prev, back2, here, next2, next, last, pagination;
 
       prev = {
         page: Math.round((skip - limit) / limit) + 1,
@@ -62,6 +62,7 @@ exports.viewCollection = function(req, res, next) {
       };
       here = Math.round(skip / limit) + 1;
       last = (Math.ceil(stats.count / limit) - 1) * limit;
+      pagination = stats.count > limit;
 
       var docs = [];
 
@@ -84,6 +85,7 @@ exports.viewCollection = function(req, res, next) {
         next: next,
         here: here,
         last: last,
+        pagination: pagination,
         key: key,
         value: value,
         type: type
