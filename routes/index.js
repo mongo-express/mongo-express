@@ -9,6 +9,7 @@ exports.viewCollection = coll.viewCollection;
 exports.addCollection = coll.addCollection;
 exports.deleteCollection = coll.deleteCollection;
 exports.renameCollection = coll.renameCollection;
+exports.exportCollection = coll.exportCollection;
 
 exports.viewDocument = doc.viewDocument;
 exports.updateDocument = doc.updateDocument;
