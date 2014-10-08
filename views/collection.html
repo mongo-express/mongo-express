@@ -269,15 +269,6 @@ No indexes found.
 });
 </script>
 
-<div class="span4">
-	<h2>Export Collection</h2>
-	<div class="well">
-	<a href="db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning span2">
-		<i class="icon-download icon-white"></i> Export
-	</a>
-	</div>
-</div>
-
 </div>
 
 <div id="confirm-deletion" class="modal hide fade">
@@ -299,6 +290,15 @@ No indexes found.
     <button type="button" data-dismiss="modal" class="btn" id="delete">Delete</button>
     <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
   </div>
+</div>
+
+<div class="span4">
+	<h2>Export Collection</h2>
+	<div class="well">
+	<a href="db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning span2">
+		<i class="icon-download icon-white"></i> Export
+	</a>
+	</div>
 </div>
 
 {% endblock %}
