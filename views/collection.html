@@ -71,25 +71,24 @@
 
 <div class="modal fade" id="addDocument">
   <form method="post" action="db/{{ dbName }}/{{ collectionName }}">
+    {% include './partials/csrf.html' %}
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">×</button>
+      <h3>Add Document</h3>
+    </div>
 
-  <div class="modal-header">
-    <button class="close" data-dismiss="modal">×</button>
-    <h3>Add Document</h3>
-  </div>
+    <div class="modal-body">
+      <textarea id="document" name="document">{
+        "_id": ObjectID()
+      }</textarea>
+    </div>
 
-  <div class="modal-body">
-    <textarea id="document" name="document">{
-    "_id": ObjectID()
-}</textarea>
-  </div>
-
-  <div class="modal-footer">
-    <button class="btn btn-error" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-success">
-      <i class="icon-pencil icon-white"></i>
-      Save
-    </button>
-  </div>
+    <div class="modal-footer">
+      <button class="btn btn-error" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-success">
+        <i class="icon-pencil icon-white"></i>Save
+      </button>
+    </div>
 
   </form>
 </div>
@@ -157,10 +156,11 @@ function loadDocument(id) {
 <div class="span1">
   <br /><br />
   <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id|to_string }}">
-  <input type="hidden" name="_method" value="delete">
-  <button type="submit" class="btn btn-danger btn-mini">
-  <i class="icon-remove icon-white"></i>
-  </button>
+    {% include './partials/csrf.html' %}
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger btn-mini">
+      <i class="icon-remove icon-white"></i>
+    </button>
   </form>
 </div>
 </div>
@@ -226,6 +226,7 @@ No indexes found.
 
 <h2>Rename Collection</h2>
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
+  {% include './partials/csrf.html' %}
   <input type="hidden" name="_method" value="put">
   <div class="input-prepend">
     <span class="add-on">{{ dbName }} . </span>
@@ -242,6 +243,7 @@ No indexes found.
 
 <h2>Delete Collection</h2>
 <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
+  {% include './partials/csrf.html' %}
   <input type="hidden" name="_method" value="delete">
   <input type="submit" class="hidden" />
   <button class="btn btn-danger deleteButton" title="Warning" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">

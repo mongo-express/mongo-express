@@ -45,8 +45,17 @@ module.exports = {
     baseUrl: '/',
     port: 8081,
     cookieSecret: 'cookiesecret',
-    sessionSecret: 'sessionsecret',
-    cookieKeyName: 'mongo-express'
+    cookieKeyName: 'mongo-express',
+    sessionSecret: 'sessionsecret'
+
+    //  >>>>  if you want to restrict access to the app add an admins.json file and uncomment the line below:
+    , admins: require('./admins.json')
+      /*
+       * The above JSON file should contain a single object
+       * mapping usernames to hashed passwords, using a salt
+       * generated via auth.utils.generateSalt().
+       * You also must prepare your config.js file before using this utility.
+       */
   },
   options: {
     //documentsPerPage: how many documents you want to see at once in collection view
