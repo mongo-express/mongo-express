@@ -17,3 +17,4 @@ node_modules
 npm-debug.log
 
 config.js
+admins.json
