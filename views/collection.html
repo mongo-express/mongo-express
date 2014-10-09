@@ -58,6 +58,7 @@
       <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
       <select name="type" class="input-small">
         <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
+        <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
         <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
         <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
       </select>
