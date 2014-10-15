@@ -1,3 +1,12 @@
+0.20.0
+------
+
+* Added JSON find type
+* Added collection export
+* Added confirmation dialog on delete
+* Added uptime info in days
+* Fixed long collection name issue
+
 0.18.0
 ------
 
