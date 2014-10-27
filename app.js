@@ -3,49 +3,58 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , http = require('http');
+  , routes = require('./routes');
 
 var _ = require('underscore');
 var async = require('async');
 var utils = require('./utils');
 
 var mongodb = require('mongodb');
-var cons = require('consolidate');
 var swig = require('swig');
 var swigFilters = require('./filters');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var methodOverride = require('method-override');
+var errorHandler = require('errorhandler');
 var app = express();
 
 var config = require('./config');
 
 //Set up swig
-app.engine('html', cons.swig);
+app.engine('html', swig.renderFile);
 
 Object.keys(swigFilters).forEach(function (name) {
     swig.setFilter(name, swigFilters[name]);
 });
 
 //App configuration
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'html');
-  app.set('view options', {layout: false});
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
-  app.use(express.bodyParser());
-  app.use(express.cookieParser(config.site.cookieSecret));
-  app.use(express.session({ 
-    secret: config.site.sessionSecret,
-    key: config.site.cookieKeyName
-  }));
-  app.use(express.methodOverride());
-  app.use(app.router);
-});
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+app.use(favicon(__dirname + '/public/images/mongodb.ico'));
+app.use(logger('dev'));
+app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser(config.site.cookieSecret));
+app.use(session({ 
+  secret: config.site.sessionSecret,
+  name: config.site.cookieKeyName,
+  saveUninitialized: true,
+  resave: true
+}));
+app.use(methodOverride(function(req, res){
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}));
 
-app.configure('development', function(){
-  app.use(express.errorHandler());
-});
+if('development' == app.get('env')) {
+  app.use(errorHandler());
+}
 
 
 //Set up database stuff
@@ -297,12 +306,12 @@ app.get(config.site.baseUrl+'db/:database/export/:collection', middleware, route
 
 app.get(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.viewDocument);
 app.put(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.updateDocument);
-app.del(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.deleteDocument);
+app.delete(config.site.baseUrl+'db/:database/:collection/:document', middleware, routes.deleteDocument);
 app.post(config.site.baseUrl+'db/:database/:collection', middleware, routes.addDocument);
 
 app.get(config.site.baseUrl+'db/:database/:collection', middleware, routes.viewCollection);
 app.put(config.site.baseUrl+'db/:database/:collection', middleware, routes.renameCollection);
-app.del(config.site.baseUrl+'db/:database/:collection', middleware, routes.deleteCollection);
+app.delete(config.site.baseUrl+'db/:database/:collection', middleware, routes.deleteCollection);
 app.post(config.site.baseUrl+'db/:database', middleware, routes.addCollection);
 
 app.get(config.site.baseUrl+'db/:database', middleware, routes.viewDatabase);
@@ -314,8 +323,8 @@ if (require.main === module){
 }else{
   //as a module
   console.log('Mongo Express module ready to use on route "'+config.site.baseUrl+'*"');
-  server=http.createServer(app);  
-  module.exports=function(req,res,next){    
+  server = app.listen();  
+  module.exports = function(req,res,next){    
     server.emit('request', req, res);
   };
 }
