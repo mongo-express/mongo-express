@@ -5,5 +5,4 @@ branches:
   only:
     - master
     - develop
-    - ng
 script: "npm test"
