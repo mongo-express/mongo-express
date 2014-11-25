@@ -70,6 +70,10 @@ Copy or rename `config.default.js` into a new file called `config.js`.
 
 Fill in your MongoDB connection details, and any other options you want to change.
 
+Alternatively you can provide path to your config:
+
+	node node_modules/mongo-express/app.js --conf=/path/to/myConfig.js
+
 **To run:**
 
     node app

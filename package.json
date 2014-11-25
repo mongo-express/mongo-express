@@ -16,8 +16,9 @@
     "async": "~0.8.0"
   },
   "devDependencies": {
+    "chai": "~1.9.1",
     "mocha": "~1.18.2",
-    "chai": "~1.9.1"
+    "optimist": "^0.6.1"
   },
   "engine": "node >= 0.10",
   "license": "MIT",

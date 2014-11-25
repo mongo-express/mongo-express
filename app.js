@@ -1,6 +1,16 @@
+#!/usr/bin/env node
 /**
  * Module dependencies.
  */
+var argv = require('optimist').argv;
+var config = require('./config');
+
+if (argv.conf) {
+  var userConfig = require(argv.conf);
+  for(var k in userConfig) {
+    config[k] = userConfig[k];
+  }
+}
 
 var express = require('express')
   , routes = require('./routes')
@@ -16,7 +26,6 @@ var swig = require('swig');
 var swigFilters = require('./filters');
 var app = express();
 
-var config = require('./config');
 
 //Set up swig
 app.engine('html', cons.swig);
@@ -308,10 +317,10 @@ app.post(config.site.baseUrl+'db/:database', middleware, routes.addCollection);
 app.get(config.site.baseUrl+'db/:database', middleware, routes.viewDatabase);
 
 //run as standalone App?
-if (require.main === module){
+if (require.main === module) {
   app.listen(config.site.port);
   console.log("Mongo Express server listening on port " + (config.site.port || 80));
-}else{
+} else {
   //as a module
   console.log('Mongo Express module ready to use on route "'+config.site.baseUrl+'*"');
   server=http.createServer(app);  
@@ -319,5 +328,3 @@ if (require.main === module){
     server.emit('request', req, res);
   };
 }
-
-
