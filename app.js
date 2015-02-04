@@ -281,8 +281,12 @@ app.param('document', function(req, res, next, id) {
 //mongodb middleware
 var middleware = function(req, res, next) {
   req.adminDb = adminDb;
-  req.databases = databases; //List of database names
   req.collections = collections; //List of collection names in all databases
+  
+  //Update the list of database
+  databases = []; //Reset the list of databases
+  updateDatabases(adminDb);
+  req.databases = databases; //List of database names
 
   //Allow page handlers to request an update for collection list
   req.updateCollections = updateCollections;
