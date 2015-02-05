@@ -1,4 +1,4 @@
-//Given a full collection namescpace, returns the database and collection
+//Given a full collection namespace, returns the database and collection
 exports.parseCollectionName = function parseCollectionName(full_name) {
   var coll_parts = full_name.split('.');
 
