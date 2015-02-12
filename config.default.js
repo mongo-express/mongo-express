@@ -1,5 +1,6 @@
 module.exports = {
   mongodb: {
+    service: 'mongodb-ahalet',
     server: 'localhost',
     port: 27017,
 

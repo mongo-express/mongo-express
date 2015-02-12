@@ -15,7 +15,7 @@ var cons = require('consolidate');
 var swig = require('swig');
 var swigFilters = require('./filters');
 var app = express();
-
+var cfenv = require('cfenv');
 var config = require('./config');
 
 //Set up swig
@@ -49,6 +49,16 @@ app.configure('development', function(){
 
 
 //Set up database stuff
+
+if(config.mongodb.service){
+  var appEnv = cfenv.getAppEnv();
+  var serviceMongo = appEnv.getService(config.mongodb.service);
+  config.mongodb.server = serviceMongo.credentials.host;
+  config.mongodb.port = serviceMongo.credentials.port;
+  config.mongodb.adminUsername = serviceMongo.credentials.username;
+  config.mongodb.adminPassword = serviceMongo.credentials.password;
+  config.mongodb.auth.push({'database': serviceMongo.credentials.db, 'username': serviceMongo.credentials.username, 'password': serviceMongo.credentials.password});
+}
 var host = config.mongodb.server || 'localhost';
 var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
 var dbOptions = {
@@ -309,8 +319,9 @@ app.get(config.site.baseUrl+'db/:database', middleware, routes.viewDatabase);
 
 //run as standalone App?
 if (require.main === module){
-  app.listen(config.site.port);
-  console.log("Mongo Express server listening on port " + (config.site.port || 80));
+  var port = process.env.PORT || config.site.port;
+  app.listen(port);
+  console.log("Mongo Express server listening on port " + (port || 80));
 }else{
   //as a module
   console.log('Mongo Express module ready to use on route "'+config.site.baseUrl+'*"');
