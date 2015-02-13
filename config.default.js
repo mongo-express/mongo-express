@@ -1,6 +1,7 @@
 module.exports = {
   mongodb: {
-    service: 'mongodb-ahalet',
+    //set the service name to make it work with cloudfoundry and that's all
+    service: '',
     server: 'localhost',
     port: 27017,
 
