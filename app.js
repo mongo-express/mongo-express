@@ -49,10 +49,9 @@ app.configure('development', function(){
 
 
 //Set up database stuff
-
-if(config.mongodb.service){
-  var appEnv = cfenv.getAppEnv();
-  var serviceMongo = appEnv.getService(config.mongodb.service);
+var appEnv = cfenv.getAppEnv();
+  var serviceMongo = appEnv.getService(/.*mongodb.*/i);
+if(serviceMongo != null){
   config.mongodb.server = serviceMongo.credentials.host;
   config.mongodb.port = serviceMongo.credentials.port;
   config.mongodb.adminUsername = serviceMongo.credentials.username;
