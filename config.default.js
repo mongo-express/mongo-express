@@ -39,6 +39,7 @@ module.exports = {
     //blacklist: hide databases listed in the blacklist (empty list for no blacklist)
     blacklist: []
   },
+
   site: {
     //baseUrl: the URL that mongo express will be located at
     //Remember to add the forward slash at the end!
@@ -48,6 +49,17 @@ module.exports = {
     sessionSecret: 'sessionsecret',
     cookieKeyName: 'mongo-express'
   },
+
+  //set ifBasicAuth to true if you want to basicAuth before login mongo-express
+  //if admin is false, the basicAuthInfo list below will be ignored
+  ifBasicAuth: true,
+
+  basicAuthInfo: {
+
+    uname: 'admin',
+    pass: 'pass'
+  },
+
   options: {
     //documentsPerPage: how many documents you want to see at once in collection view
     documentsPerPage: 10,
