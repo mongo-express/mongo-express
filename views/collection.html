@@ -6,7 +6,14 @@
 {% block head %}
   <link href="stylesheets/codemirror.css" rel="stylesheet">
   <script type="text/javascript" src="javascripts/codemirror-compressed.js"></script>
-
+  <script type="text/javascript">
+	jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+		if (document.location.href.indexOf("query=") >= 0) {
+			$('#tabs a[href="#advanced"]').tab('show')
+		}
+    });
+  </script>
   {% if editorTheme != "default" %}
   <link href="stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
@@ -52,22 +59,42 @@
 </a>
 </p>
 
-<form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
-  <div class="input-prepend">
-      <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
-      <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
-      <select name="type" class="input-small">
-        <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
-        <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
-        <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
-        <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
-      </select>
-  </div>
-  <button type="submit" class="btn btn-primary pull-right">
-    <i class="icon-search icon-white"></i>
-    Find
-  </button>
-</form>
+<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+	<li class="active"><a href="#simple" data-toggle="tab">Simple</a></li>
+	<li><a href="#advanced" data-toggle="tab">Advanced</a></li>
+</ul>
+<div id="my-tab-content" class="tab-content">
+	<div class="tab-pane active" id="simple">
+		<form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
+		  <div class="input-prepend">
+			  <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
+			  <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
+			  <select name="type" class="input-small">
+				<option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
+				<option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
+				<option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
+				<option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
+			  </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary pull-right">
+			<i class="icon-search icon-white"></i>
+			Find
+		  </button>
+		</form>
+	</div>
+	<div class="tab-pane" id="advanced">
+		<form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
+		  <div class="input-prepend">
+			  <textarea class="input-medium" style="width: 700px; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary pull-right">
+			<i class="icon-search icon-white"></i>
+			Find
+		  </button>
+		</form>
+	</div>
+</div>
+<br/>
 
 <div class="modal fade" id="addDocument">
   <form method="post" action="db/{{ dbName }}/{{ collectionName }}">

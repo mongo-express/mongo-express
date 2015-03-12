@@ -17,6 +17,7 @@ exports.viewCollection = function(req, res, next) {
   var key = req.query.key || '';
   var value = req.query.value || '';
   var type = req.query.type || '';
+  var jsonQuery = req.query.query || '';  
 
   if (key && value) {
     // If type == J, convert value as json document
@@ -37,6 +38,14 @@ exports.viewCollection = function(req, res, next) {
       }
     }
     query[key] = value;
+  } else if (jsonQuery) {
+	try{
+		query = bson.toBSON(jsonQuery);
+	}
+	catch(err) {
+		req.session.error = "Query entered is not valid";
+		query = {};
+	}
   } else {
     var query = {};
   }
@@ -90,7 +99,8 @@ exports.viewCollection = function(req, res, next) {
         last: last,
         key: key,
         value: value,
-        type: type
+        type: type,
+		query: jsonQuery
       };
 
       res.render('collection', ctx);
