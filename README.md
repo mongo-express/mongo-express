@@ -36,8 +36,8 @@ Limitations
 * No GridFS support (might become a planned feature)
 * Binary BSON data type not tested
 
-JSON documents are parsed through a javascript virtual machine, so the web
-interface can be used for executing malicious javascript on a server.
+JSON documents are parsed through a javascript virtual machine, so **the web
+interface can be used for executing malicious javascript on a server**.
 
 **mongo-express should only be used privately for development purposes**.
 
