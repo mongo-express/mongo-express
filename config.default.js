@@ -32,8 +32,8 @@ module.exports = {
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
 
     //leave username and password empty if no admin account exists
-    adminUsername: 'admin',
-    adminPassword: 'pass',
+    adminUsername: '',
+    adminPassword: '',
     //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
     //blacklist: hide databases listed in the blacklist (empty list for no blacklist)
@@ -52,12 +52,11 @@ module.exports = {
 
   //set ifBasicAuth to true if you want to basicAuth before login mongo-express
   //if admin is false, the basicAuthInfo list below will be ignored
-  ifBasicAuth: true,
+  useBasicAuth: true,
 
-  basicAuthInfo: {
-
-    uname: 'admin',
-    pass: 'pass'
+  basicAuth: {
+    username: 'admin',
+    password: 'pass'
   },
 
   options: {

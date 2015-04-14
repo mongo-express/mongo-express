@@ -27,8 +27,8 @@ Object.keys(swigFilters).forEach(function (name) {
 
 //App configuration
 app.configure(function(){
-  if(config.ifBasicAuth){
-    app.use(express.basicAuth(config.basicAuthInfo.uname, config.basicAuthInfo.pass));
+  if(config.useBasicAuth){
+    app.use(express.basicAuth(config.basicAuth.username, config.basicAuth.password));
   }
   app.set('views', __dirname + '/views');
   app.set('view engine', 'html');
