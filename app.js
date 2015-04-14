@@ -27,15 +27,18 @@ Object.keys(swigFilters).forEach(function (name) {
 
 //App configuration
 app.configure(function(){
+  if(config.ifBasicAuth){
+    app.use(express.basicAuth(config.basicAuthInfo.uname, config.basicAuthInfo.pass));
+  }
   app.set('views', __dirname + '/views');
   app.set('view engine', 'html');
   app.set('view options', {layout: false});
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(config.site.baseUrl,express.static(__dirname + '/public'));  
+  app.use(config.site.baseUrl,express.static(__dirname + '/public'));
   app.use(express.bodyParser());
   app.use(express.cookieParser(config.site.cookieSecret));
-  app.use(express.session({ 
+  app.use(express.session({
     secret: config.site.sessionSecret,
     key: config.site.cookieKeyName
   }));
@@ -314,8 +317,8 @@ if (require.main === module){
 }else{
   //as a module
   console.log('Mongo Express module ready to use on route "'+config.site.baseUrl+'*"');
-  server=http.createServer(app);  
-  module.exports=function(req,res,next){    
+  server=http.createServer(app);
+  module.exports=function(req,res,next){
     server.emit('request', req, res);
   };
 }
