@@ -14,9 +14,12 @@ exports.viewCollection = function(req, res, next) {
 
   // some query filter
   var query = {};
+  var fields = {};
   var key = req.query.key || '';
   var value = req.query.value || '';
   var type = req.query.type || '';
+  var jsonQuery = req.query.query || '';  
+  var jsonFields = req.query.fields || '';
 
   if (key && value) {
     // If type == J, convert value as json document
@@ -37,11 +40,20 @@ exports.viewCollection = function(req, res, next) {
       }
     }
     query[key] = value;
+  } else if (jsonQuery) {
+	query = bson.toSafeBSON(jsonQuery);
+	if (query == null) {
+		req.session.error = "Query entered is not valid";
+		return res.redirect('back');
+	}
+	if (jsonFields) {
+		fields = bson.toSafeBSON(jsonFields) || {};
+	}
   } else {
     var query = {};
   }
 
-  req.collection.find(query, query_options).toArray(function(err, items) {
+  req.collection.find(query, fields, query_options).toArray(function(err, items) {
     req.collection.stats(function(err, stats) {
 
       //Pagination
@@ -90,7 +102,9 @@ exports.viewCollection = function(req, res, next) {
         last: last,
         key: key,
         value: value,
-        type: type
+        type: type,
+        query: jsonQuery,
+        fields: jsonFields
       };
 
       res.render('collection', ctx);

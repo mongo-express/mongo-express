@@ -54,6 +54,19 @@ exports.toBSON = function(string) {
   return sandbox.doc;
 };
 
+// This function as the name suggests attempts to parse
+// the free form string in to BSON, since the possibilities of failure
+// are higher, this function uses a try..catch
+exports.toSafeBSON = function(string) {
+	try{
+		var bsonObject = exports.toBSON(string);
+		return bsonObject;
+	}
+	catch(err){
+		return null;
+	}
+};
+
 // Converts string to ObjectID.  TODO: Add validation.
 exports.toObjectId = function(string){
   var sandbox = exports.getSandbox();

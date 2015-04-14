@@ -6,7 +6,14 @@
 {% block head %}
   <link href="stylesheets/codemirror.css" rel="stylesheet">
   <script type="text/javascript" src="javascripts/codemirror-compressed.js"></script>
-
+  <script type="text/javascript">
+	jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+		if (document.location.href.indexOf("query=") >= 0) {
+			$('#tabs a[href="#advanced"]').tab('show')
+		}
+    });
+  </script>
   {% if editorTheme != "default" %}
   <link href="stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
@@ -52,22 +59,43 @@
 </a>
 </p>
 
-<form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
-  <div class="input-prepend">
-      <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
-      <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
-      <select name="type" class="input-small">
-        <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
-        <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
-        <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
-        <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
-      </select>
-  </div>
-  <button type="submit" class="btn btn-primary pull-right">
-    <i class="icon-search icon-white"></i>
-    Find
-  </button>
-</form>
+<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+	<li class="active"><a href="#simple" data-toggle="tab">Simple</a></li>
+	<li><a href="#advanced" data-toggle="tab">Advanced</a></li>
+</ul>
+<div id="my-tab-content" class="tab-content">
+	<div class="tab-pane active" id="simple">
+		<form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
+		  <div class="input-prepend">
+			  <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
+			  <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
+			  <select name="type" class="input-small">
+				<option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
+				<option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
+				<option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
+				<option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
+			  </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary pull-right">
+			<i class="icon-search icon-white"></i>
+			Find
+		  </button>
+		</form>
+	</div>
+	<div class="tab-pane" id="advanced">
+		<form class="well form-inline" method="get" action="db/{{ dbName }}/{{ collectionName }}">
+		  <div class="input-prepend">
+			  <textarea class="input-medium" style="width: 350px; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
+			  <textarea class="input-medium" style="width: 350px; height: 150px" id="fields" name="fields" placeholder="Fields" title="Fields">{{ fields }}</textarea>
+		  </div>
+		  <button type="submit" class="btn btn-primary pull-right">
+			<i class="icon-search icon-white"></i>
+			Find
+		  </button>
+		</form>
+	</div>
+</div>
+<br/>
 
 <div class="modal fade" id="addDocument">
   <form method="post" action="db/{{ dbName }}/{{ collectionName }}">
@@ -121,16 +149,16 @@ function loadDocument(id) {
 {% endif %}
 
 <ul class="pager span7">
-  <li class="previous"><a href="db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}">&larr; First</a></li>
+  <li class="previous"><a href="db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">&larr; First</a></li>
   <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-    <a{% if prev.skip >= 0 %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}"{% endif %}>&larr; Prev</a>
+    <a{% if prev.skip >= 0 %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}"{% endif %}>&larr; Prev</a>
   </li>
 
   <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-    <a{% if next.skip < stats.count %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}"{% endif %}>Next &rarr;</a>
+    <a{% if next.skip < stats.count %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}"{% endif %}>Next &rarr;</a>
   </li>
 
-  <li class="next"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}">Last &rarr;</a></li>
+  <li class="next"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">Last &rarr;</a></li>
 </ul>
 
 {% for document in documents %}
@@ -167,27 +195,27 @@ function loadDocument(id) {
 <div class="pagination pagination-centered span7">
   <ul>
     {%- if prev2.skip >= 0 %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ prev2.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">{{ prev2.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {%- endif %}
 
     {%- if prev.skip >= 0 %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ prev.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">{{ prev.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {%- endif %}
 
-    <li class="active"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ here }}</a></li>
+    <li class="active"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">{{ here }}</a></li>
 
     {%- if next.skip < stats.count %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ next.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">{{ next.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {% endif %}
 
     {%- if next2.skip < stats.count %}
-    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}">{{ next2.page }}</a></li>
+    <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">{{ next2.page }}</a></li>
     {% else %}
     <li><a>&nbsp;</a></li>
     {% endif %}
