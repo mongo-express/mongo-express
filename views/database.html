@@ -14,6 +14,28 @@
 
 
 {% block content %}
+<div class="stats">
+	<h2>Database Stats</h2>
+	<table class="table table-bordered table-striped">
+	  <tr>
+		<td class="span2"><strong>Collections (including system.namespaces)</strong></td>
+		<td class="span3">{{ stats.collections }}</td>
+	  </tr>
+	  <tr>
+		<td><strong>Data Size</strong></td>
+		<td>{{ stats.dataSize }}</td>
+	  </tr>
+	  <tr>
+		<td><strong>Storage Size</strong></td>
+		<td>{{ stats.storageSize }}</td>
+	  </tr>
+	  <tr>
+		<td><strong>File Size (on disk)</strong></td>
+		<td>{{ stats.fileSize }}</td>
+	  </tr>
+	</table>
+</div>
+
 <h2>Create Collection</h2>
 <form class="well form-inline" method="POST">
     <div class="input-prepend">
@@ -51,7 +73,6 @@
    });
  });
 </script>
-
 
 <h2>Collections</h2>
 <table class="table table-bordered table-striped table-condensed">
