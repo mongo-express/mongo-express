@@ -13,11 +13,12 @@
     "consolidate": "~0.10.0",
     "swig": "~1.3.2",
     "underscore": "~1.6.0",
-    "async": "~0.8.0"
+    "async": "~0.8.0",
+    "optimist": "^0.6.1"
   },
   "devDependencies": {
-    "mocha": "~1.18.2",
-    "chai": "~1.9.1"
+    "chai": "~1.9.1",
+    "mocha": "~1.18.2"
   },
   "engine": "node >= 0.10",
   "license": "MIT",

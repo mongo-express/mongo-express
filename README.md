@@ -66,9 +66,13 @@ Or if you want to install a global copy:
 
 **To configure:**
 
-Copy or rename `config.default.js` into a new file called `config.js`.
+Default config is in `config.default.js`, overwrite the configuration in `config.js`.
 
 Fill in your MongoDB connection details, and any other options you want to change.
+
+Alternatively you can provide absolute path to your config:
+
+	node node_modules/mongo-express/app.js --conf=/path/to/myConfig.js
 
 **To run:**
 
