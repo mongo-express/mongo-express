@@ -1,3 +1,10 @@
+0.21.0
+------
+
+* Added database statistics (karthik25)
+* Added basic auth (netpi)
+* Added complex querying (kathik25)
+
 0.20.0
 ------
 
