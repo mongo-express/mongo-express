@@ -1,7 +1,7 @@
 mongo-express
 =============
 
-Web-based MongoDB admin interface written with Node.js and express
+Web-based MongoDB admin interface written with Node.js and express and works great with cloudfoundry just bind a service with mongodb inside his name, app will find by itself (use regular expression).
 
 [![Build Status](https://secure.travis-ci.org/andzdroid/mongo-express.png?branch=master)](http://travis-ci.org/andzdroid/mongo-express) - Master (stable) branch
 
