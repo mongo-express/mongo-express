@@ -70,12 +70,11 @@ var mainConn; //main db connection
 
 //Update the collections list
 var updateCollections = function(db, dbName, callback) {
-  db.collectionNames(function (err, result) {
+  db.listCollections().toArray(function (err, result) {
     var names = [];
 
     for (var r in result) {
-      var coll = utils.parseCollectionName(result[r].name);
-      names.push(coll.name);
+      names.push(result[r].name);
     }
 
     collections[dbName] = names.sort();
@@ -138,25 +137,23 @@ db.open(function(err, db) {
   //Check if admin features are on
   if (config.mongodb.admin === true) {
     //get admin instance
-    db.admin(function(err, a) {
-      adminDb = a;
+    adminDb = db.admin();
 
-      if (config.mongodb.adminUsername.length == 0) {
+    if (config.mongodb.adminUsername.length == 0) {
+      console.log('Admin Database connected');
+      updateDatabases(adminDb);
+    } else {
+      //auth details were supplied, authenticate admin account with them
+      adminDb.authenticate(config.mongodb.adminUsername, config.mongodb.adminPassword, function(err, result) {
+        if (err) {
+          //TODO: handle error
+          console.error(err);
+        }
+
         console.log('Admin Database connected');
         updateDatabases(adminDb);
-      } else {
-        //auth details were supplied, authenticate admin account with them
-        adminDb.authenticate(config.mongodb.adminUsername, config.mongodb.adminPassword, function(err, result) {
-          if (err) {
-            //TODO: handle error
-            console.error(err);
-          }
-
-          console.log('Admin Database connected');
-          updateDatabases(adminDb);
-        });
-      }
-    });
+      });
+    }
   } else {
     //Regular user authentication
     if (typeof config.mongodb.auth == "undefined" || config.mongodb.auth.length == 0) {
