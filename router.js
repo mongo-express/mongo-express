@@ -31,7 +31,7 @@ var router = function(config) {
   }
   appRouter.use(favicon(__dirname + '/public/favicon.ico'));
   appRouter.use(logger('dev'));
-  appRouter.use(config.site.baseUrl,express.static(__dirname + '/public'));
+  appRouter.use('/',express.static(__dirname + '/public'));
   appRouter.use(bodyParser());
   appRouter.use(cookieParser(config.site.cookieSecret));
   appRouter.use(session({
@@ -148,21 +148,21 @@ var router = function(config) {
 
 
   // routes
-  appRouter.get(config.site.baseUrl, mongoMiddleware, routes(config).index);
+  appRouter.get('/', mongoMiddleware, routes(config).index);
 
-  appRouter.get(config.site.baseUrl+'db/:database/export/:collection', mongoMiddleware, routes(config).exportCollection);
+  appRouter.get('/db/:database/export/:collection', mongoMiddleware, routes(config).exportCollection);
 
-  appRouter.get(config.site.baseUrl+'db/:database/:collection/:document', mongoMiddleware, routes(config).viewDocument);
-  appRouter.put(config.site.baseUrl+'db/:database/:collection/:document', mongoMiddleware, routes(config).updateDocument);
-  appRouter.delete(config.site.baseUrl+'db/:database/:collection/:document', mongoMiddleware, routes(config).deleteDocument);
-  appRouter.post(config.site.baseUrl+'db/:database/:collection', mongoMiddleware, routes(config).addDocument);
+  appRouter.get('/db/:database/:collection/:document', mongoMiddleware, routes(config).viewDocument);
+  appRouter.put('/db/:database/:collection/:document', mongoMiddleware, routes(config).updateDocument);
+  appRouter.delete('/db/:database/:collection/:document', mongoMiddleware, routes(config).deleteDocument);
+  appRouter.post('/db/:database/:collection', mongoMiddleware, routes(config).addDocument);
 
-  appRouter.get(config.site.baseUrl+'db/:database/:collection', mongoMiddleware, routes(config).viewCollection);
-  appRouter.put(config.site.baseUrl+'db/:database/:collection', mongoMiddleware, routes(config).renameCollection);
-  appRouter.delete(config.site.baseUrl+'db/:database/:collection', mongoMiddleware, routes(config).deleteCollection);
-  appRouter.post(config.site.baseUrl+'db/:database', mongoMiddleware, routes(config).addCollection);
+  appRouter.get('/db/:database/:collection', mongoMiddleware, routes(config).viewCollection);
+  appRouter.put('/db/:database/:collection', mongoMiddleware, routes(config).renameCollection);
+  appRouter.delete('/db/:database/:collection', mongoMiddleware, routes(config).deleteCollection);
+  appRouter.post('/db/:database', mongoMiddleware, routes(config).addCollection);
 
-  appRouter.get(config.site.baseUrl+'db/:database', mongoMiddleware, routes(config).viewDatabase);
+  appRouter.get('/db/:database', mongoMiddleware, routes(config).viewDatabase);
 
   return appRouter;
 };
