@@ -152,7 +152,7 @@ var routes = function(config) {
 
       req.updateCollections(req.db, req.dbName, function() {
         req.session.success = 'Collection created!';
-        res.redirect(req.app.mountpath + '/db/' + req.dbName + '/' + name);
+        res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + name);
       });
     });
   };
@@ -176,7 +176,7 @@ var routes = function(config) {
         }
 
         req.session.success = "Collection  '" + req.collectionName + "' deleted!";
-        res.redirect(req.app.mountpath + '/db/' + req.dbName);
+        res.redirect(res.locals.baseHref + 'db/' + req.dbName);
       });
     });
   };
@@ -210,7 +210,7 @@ var routes = function(config) {
         }
 
         req.session.success = 'Collection renamed!';
-        res.redirect(req.app.mountpath + '/db/' + req.dbName + '/' + name);
+        res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + name);
       });
     });
   };

@@ -87,7 +87,7 @@ Fill in your MongoDB connection details, and any other options you want to chang
       ;
 
     var app = express();
-    app.use(config.site.baseUrl, middleware(config));
+    app.use('/your-mountpath', middleware(config));
     app.listen(config.site.port, function() {
       console.log("Mongo Express server listening on port " + (config.site.port || 80));
     });

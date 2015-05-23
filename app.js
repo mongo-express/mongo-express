@@ -9,7 +9,7 @@ var
   ;
 
 var app = express();
-app.use(config.site.baseUrl, middleware(config));
+app.use('/db-admin', middleware(config));
 app.listen(config.site.port, function() {
   console.log("Mongo Express server listening on port " + (config.site.port || 80));
 });
