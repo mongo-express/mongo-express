@@ -40,7 +40,7 @@ var routes = function(config) {
       }
 
       req.session.success = "Document added!";
-      res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
+      res.redirect(req.app.mountpath + '/db/' + req.dbName + '/' + req.collectionName);
     });
   };
 
@@ -73,7 +73,7 @@ var routes = function(config) {
       }
 
       req.session.success = "Document updated!";
-      res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
+      res.redirect(req.app.mountpath + '/db/' + req.dbName + '/' + req.collectionName);
     });
   };
 
@@ -87,7 +87,7 @@ var routes = function(config) {
       }
 
       req.session.success = "Document deleted!";
-      res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
+      res.redirect(req.app.mountpath + '/db/' + req.dbName + '/' + req.collectionName);
     });
   };
 

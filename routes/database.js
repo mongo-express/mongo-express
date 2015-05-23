@@ -4,6 +4,7 @@ var routes = function(config) {
   var exp = {};
 
   exp.viewDatabase = function(req, res) {
+
     req.db.stats(function(err, data){
       var ctx = {
       title: 'Viewing Database: ' + req.dbName,

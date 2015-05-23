@@ -18,8 +18,6 @@ var
   ;
 
 
-
-
 var router = function(config) {
   var appRouter = express.Router();
   var mongo = db(config);
@@ -32,13 +30,20 @@ var router = function(config) {
   appRouter.use(favicon(__dirname + '/public/favicon.ico'));
   appRouter.use(logger('dev'));
   appRouter.use('/',express.static(__dirname + '/public'));
-  appRouter.use(bodyParser());
+  appRouter.use(bodyParser.urlencoded());
   appRouter.use(cookieParser(config.site.cookieSecret));
   appRouter.use(session({
     secret: config.site.sessionSecret,
     key: config.site.cookieKeyName
   }));
-  appRouter.use(methodOverride());
+  appRouter.use(methodOverride(function(req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      var method = req.body._method
+      delete req.body._method
+      return method
+    }
+  }));
 
   if (process.env.NODE_ENV === 'development') {
     appRouter.use(errorHandler());
@@ -47,7 +52,7 @@ var router = function(config) {
 
   // view helper, sets local variables used in templates
   appRouter.all('*', function(req, res, next) {
-    res.locals.baseHref = config.site.baseUrl;
+    res.locals.baseHref = req.app.mountpath;
     res.locals.databases = mongo.databases;
     res.locals.collections = mongo.collections;
 
@@ -71,7 +76,7 @@ var router = function(config) {
     //Make sure database exists
     if (!_.include(mongo.databases, id)) {
       req.session.error = "Database not found!";
-      return res.redirect(config.site.baseUrl);
+      return res.redirect(req.app.mountpath);
     }
 
     req.dbName = id;
@@ -92,7 +97,7 @@ var router = function(config) {
     //Make sure collection exists
     if (!_.include(mongo.collections[req.dbName], id)) {
       req.session.error = "Collection not found!";
-      return res.redirect(config.site.baseUrl+'db/' + req.dbName);
+      return res.redirect(req.app.mountpath + '/db/' + req.dbName); // XXX
     }
 
     req.collectionName = id;
@@ -101,7 +106,7 @@ var router = function(config) {
     mongo.connections[req.dbName].collection(id, function(err, coll) {
       if (err || coll == null) {
         req.session.error = "Collection not found!";
-        return res.redirect(config.site.baseUrl+'db/' + req.dbName);
+        return res.redirect(req.app.mountpath + '/db/' + req.dbName);
       }
 
       req.collection = coll;
@@ -123,7 +128,7 @@ var router = function(config) {
     req.collection.findOne({_id: id}, function(err, doc) {
       if (err || doc == null) {
         req.session.error = "Document not found!";
-        return res.redirect(config.site.baseUrl+'db/' + req.dbName + '/' + req.collectionName);
+        return res.redirect(req.app.mountpath + '/db/' + req.dbName + '/' + req.collectionName);
       }
 
       req.document = doc;
