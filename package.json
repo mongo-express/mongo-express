@@ -33,5 +33,5 @@
     "start": "node app",
     "test": "./node_modules/.bin/mocha"
   },
-  "main": "./app"
+  "main": "./middleware"
 }
