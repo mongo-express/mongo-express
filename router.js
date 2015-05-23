@@ -30,11 +30,13 @@ var router = function(config) {
   appRouter.use(favicon(__dirname + '/public/favicon.ico'));
   appRouter.use(logger('dev'));
   appRouter.use('/',express.static(__dirname + '/public'));
-  appRouter.use(bodyParser.urlencoded());
+  appRouter.use(bodyParser.urlencoded({ extended: true }));
   appRouter.use(cookieParser(config.site.cookieSecret));
   appRouter.use(session({
     secret: config.site.sessionSecret,
-    key: config.site.cookieKeyName
+    key: config.site.cookieKeyName,
+    resave: true,
+    saveUninitialized: true
   }));
   appRouter.use(methodOverride(function(req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
