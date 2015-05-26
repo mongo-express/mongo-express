@@ -6,8 +6,8 @@
   <title>{% block title %}Index{% endblock %} - Mongo Express</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="stylesheets/style.css" rel="stylesheet" />
+  <link href="{{ baseHref }}stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="{{ baseHref }}stylesheets/style.css" rel="stylesheet" />
   <style type="text/css">
     body {
       padding-top: 60px;
@@ -27,9 +27,9 @@
     }
   </style>
 
-  <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
-  <script src="javascripts/jquery-1.7.2.min.js"></script>
-  <script src="javascripts/bootstrap.min.js"></script>
+  <link href="{{ baseHref }}stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+  <script src="{{ baseHref }}javascripts/jquery-1.7.2.min.js"></script>
+  <script src="{{ baseHref }}javascripts/bootstrap.min.js"></script>
 
   {% block head %}{% endblock %}
 </head>
@@ -60,14 +60,14 @@
             {{ db }}
             <i class="icon-chevron-down pull-right"></i>
           </li>
-          <li><a href="db/{{ db }}"><i class="icon-folder-open"></i> View Database</a></li>
+          <li><a href="{{ baseHref }}db/{{ db }}"><i class="icon-folder-open"></i> View Database</a></li>
             <ul class="unstyled collapse nav nav-list
             {%- if db == dbName %} in{% endif -%}
             " id="toggle_{{ db }}">
             {% for collection_db in collections -%}
               {% if loop.key == db -%}
                 {% for collection in collection_db -%}
-                  <li><a href="db/{{ db }}/{{ collection }}"><i class="icon-list-alt"></i> {{ collection }}</a></li>
+                  <li><a href="{{ baseHref }}db/{{ db }}/{{ collection }}"><i class="icon-list-alt"></i> {{ collection }}</a></li>
                 {%- endfor %}
               {%- endif %}
             {%- endfor %}

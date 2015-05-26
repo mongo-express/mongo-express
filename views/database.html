@@ -51,21 +51,21 @@
 <script>
   $( document ).ready( function() {
     $( '#collection' ).popover({ content: "Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots." });
-    
+
     $( '.deleteButton' ).popover({ placement: "left", title: "Warning", content: "Are you sure you want to delete this collection? All documents will be deleted." });
-    
+
     $( '.deleteButton' ).on( 'click', function( event ) {
       event.preventDefault();
       var target = $( this );
       var parentForm = $( '#' + target.attr( 'childof' ) );
-      
+
       $( '#confirmation-input' ).attr( 'shouldbe', target.attr( 'collection-name' ) );
       $( '#modal-collection-name' ).text( target.attr( 'collection-name' ) );
       $( '#confirm-deletion' ).modal({ backdrop: 'static', keyboard: false })
-        .one( 'click', '#delete', function() {  
+        .one( 'click', '#delete', function() {
           var input = $( '#confirmation-input' );
           if ( input.val().toLowerCase() === input.attr( 'shouldbe' ).toLowerCase() ) {
-            parentForm.trigger( 'submit' );  
+            parentForm.trigger( 'submit' );
           } else {
             // wrong collection name
           }
@@ -79,18 +79,18 @@
   {% for c in colls %}
   <tr>
     <td class="span2">
-      <a href="db/{{ dbName }}/{{ c }}" class="btn btn-success span2">
+      <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success span2">
         <i class="icon-list-alt icon-white"></i> View
       </a>
     </td>
 	<td class="span2">
-	     <a href="db/{{ dbName }}/export/{{ c }}" class="btn btn-warning span2">
+	     <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning span2">
 	      <i class="icon-download icon-white"></i> Export
 	    </a>
 	</td>
-    <td><h3><a href="db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
+    <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
     <td class="span2">
-      <form method="POST" id="db-{{ dbName }}-{{ c }}" action="db/{{ dbName }}/{{ c }}" style="margin: 0px;">
+      <form method="POST" id="db-{{ dbName }}-{{ c }}" action="{{ baseHref }}db/{{ dbName }}/{{ c }}" style="margin: 0px;">
         <input type="hidden" name="_method" value="delete">
         <button type="submit" class="hidden"></button>
       </form>
@@ -117,7 +117,7 @@
       <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
     </p>
   </div>
-  
+
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn" id="delete">Delete</button>
     <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>

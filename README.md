@@ -47,7 +47,7 @@ Screenshots
 
 <img src="http://i.imgur.com/DOi3b.png" title="Viewing documents in a collection" />
 
-Click here for more screenshots: 
+Click here for more screenshots:
 [http://imgur.com/a/OTZHe](http://imgur.com/a/OTZHe)
 
 These screenshots are from version 0.11.0.
@@ -66,7 +66,7 @@ Or if you want to install a global copy:
 
 **To configure:**
 
-Copy or rename `config.default.js` into a new file called `config.js`.
+Copy or rename `node_modules/mongo-express/config.default.js` into a new file.
 
 Fill in your MongoDB connection details, and any other options you want to change.
 
@@ -74,9 +74,30 @@ Fill in your MongoDB connection details, and any other options you want to chang
 
     node app
 
+**To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
+
+    var
+        express = require('express')
+      , http = require('http')
+      ;
+
+    var
+        config = require('./config')
+      , middleware = require('./middleware')
+      ;
+
+    var app = express();
+    app.use('/your-mountpath', middleware(config));
+    app.listen(config.site.port, function() {
+      console.log("Mongo Express server listening on port " + (config.site.port || 80));
+    });
+
+
 **To use:**
 
-Visit `http://localhost:8081` or whatever URL/port you entered into your config.
+Visit `http://localhost:8081` or whatever URL/port you entered into your
+config (if running standalone) or whatever `config.site.baseUrl` (if mounting
+as a middleware).
 
 
 BSON Data Types

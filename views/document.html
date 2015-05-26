@@ -4,11 +4,11 @@
 
 
 {% block head %}
-  <link href="stylesheets/codemirror.css" rel="stylesheet">
-  <script type="text/javascript" src="javascripts/codemirror-compressed.js"></script>
+  <link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
+  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
 
   {% if editorTheme != "default" %}
-  <link href="stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
+  <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
 
   <style type="text/css">
@@ -28,11 +28,11 @@
     <span class="divider">/</span>
   </li>
   <li>
-    <a href="db/{{ dbName }}">{{ dbName }}</a>
+    <a href="{{ baseHref }}db/{{ dbName }}">{{ dbName }}</a>
     <span class="divider">/</span>
   </li>
   <li>
-    <a href="db/{{ dbName }}/{{ collectionName }}">{{ collectionName }}</a>
+    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">{{ collectionName }}</a>
     <span class="divider">/</span>
   </li>
   <li class="active">
@@ -43,7 +43,7 @@
 
 {% block content %}
 
-<form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string }}">
+<form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string }}">
   <input type="hidden" name="_method" value="put">
   <button type="submit" class="btn btn-success btn-large"{# onclick="return checkJSON()"#}>
     <i class="icon-pencil icon-white"></i>

@@ -1,41 +1,51 @@
 //Add routes from other files
-var db = require('./database');
-var coll = require('./collection');
-var doc = require('./document');
+var
+    database = require('./database')
+  , collection = require('./collection')
+  , document = require('./document')
+  ;
 
-exports.viewDatabase = db.viewDatabase;
+var routes = function(config) {
+  var exp = {};
 
-exports.viewCollection = coll.viewCollection;
-exports.addCollection = coll.addCollection;
-exports.deleteCollection = coll.deleteCollection;
-exports.renameCollection = coll.renameCollection;
-exports.exportCollection = coll.exportCollection;
+  exp.viewDatabase = database(config).viewDatabase;
 
-exports.viewDocument = doc.viewDocument;
-exports.updateDocument = doc.updateDocument;
-exports.deleteDocument = doc.deleteDocument;
-exports.addDocument = doc.addDocument;
+  exp.viewCollection = collection(config).viewCollection;
+  exp.addCollection = collection(config).addCollection;
+  exp.deleteCollection = collection(config).deleteCollection;
+  exp.renameCollection = collection(config).renameCollection;
+  exp.exportCollection = collection(config).exportCollection;
+
+  exp.viewDocument = document(config).viewDocument;
+  exp.updateDocument = document(config).updateDocument;
+  exp.deleteDocument = document(config).deleteDocument;
+  exp.addDocument = document(config).addDocument;
 
 
-//Homepage route
-exports.index = function(req, res) {
-  var ctx = {
-    title: 'Mongo Express',
-    info: false
-  };
+  //Homepage route
+  exp.index = function(req, res) {
+    var ctx = {
+      title: 'Mongo Express',
+      info: false
+    };
 
-  if (typeof req.adminDb == "undefined") {
-    return res.render('index');
-  }
-
-  req.adminDb.serverStatus(function(err, info) {
-    if (err) {
-      //TODO: handle error
-      console.error(err);
+    if (typeof req.adminDb == "undefined") {
+      return res.render('index');
     }
 
-    ctx.info = info;
+    req.adminDb.serverStatus(function(err, info) {
+      if (err) {
+        //TODO: handle error
+        console.error(err);
+      }
 
-    res.render('index', ctx);
-  });
+      ctx.info = info;
+
+      res.render('index', ctx);
+    });
+  };
+
+  return exp;
 };
+
+module.exports = routes;
