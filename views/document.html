@@ -43,7 +43,7 @@
 
 {% block content %}
 
-<form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string }}">
+<form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string|url_encode }}">
   <input type="hidden" name="_method" value="put">
   <button type="submit" class="btn btn-success btn-large"{# onclick="return checkJSON()"#}>
     <i class="icon-pencil icon-white"></i>
