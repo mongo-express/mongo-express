@@ -9,6 +9,7 @@ var routes = function(config) {
   var exp = {};
 
   exp.viewDatabase = database(config).viewDatabase;
+  exp.updateCollections = database(config).updateCollections;
 
   exp.viewCollection = collection(config).viewCollection;
   exp.addCollection = collection(config).addCollection;
