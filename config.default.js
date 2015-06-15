@@ -42,6 +42,7 @@ module.exports = {
 
   site: {
     port: 8081,
+    address: '127.0.0.1',
     cookieSecret: 'cookiesecret',
     sessionSecret: 'sessionsecret',
     cookieKeyName: 'mongo-express'
