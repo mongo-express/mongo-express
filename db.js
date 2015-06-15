@@ -20,7 +20,8 @@ var connect = function(config) {
   var connections = {};
   var databases = [];
   var collections = {};
-  var adminDb;
+  //get admin instance
+  var adminDb = db.admin();
   var mainConn; // main db connection
 
 
@@ -92,9 +93,6 @@ var connect = function(config) {
 
     //Check if admin features are on
     if (config.mongodb.admin === true) {
-      //get admin instance
-      adminDb = db.admin();
-
       if (config.mongodb.adminUsername.length == 0) {
         console.log('Admin Database connected');
         updateDatabases(adminDb);
@@ -144,7 +142,7 @@ var connect = function(config) {
       });
     }
   });
-
+  
   return {
     updateCollections: updateCollections,
     connections: connections,
