@@ -52,12 +52,14 @@
 
 {% block content %}
 
+{% if !settings.read_only %}
 <p>
 <a data-toggle="modal" href="#addDocument" class="btn btn-success btn-large">
   <i class="icon-file icon-white"></i>
   New Document
 </a>
 </p>
+{% endif %}
 
 <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
 	<li class="active"><a href="#simple" data-toggle="tab">Simple</a></li>
@@ -180,6 +182,7 @@ function loadDocument(id) {
     });
   </script>
 </div>
+{% if !settings.read_only %}
 <div class="span1">
   <br /><br />
   <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id|to_string|url_encode }}">
@@ -189,6 +192,7 @@ function loadDocument(id) {
   </button>
   </form>
 </div>
+{% endif %}
 </div>
 {% endfor %}
 
@@ -248,6 +252,7 @@ No indexes found.
 <div class="row">
 <div class="span5">
 
+{% if !settings.read_only %}
 <h2>Rename Collection</h2>
 <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
   <input type="hidden" name="_method" value="put">
@@ -299,6 +304,7 @@ No indexes found.
 </script>
 
 </div>
+{% endif %}
 
 <div id="confirm-deletion" class="modal hide fade">
   <div class="modal-header">
