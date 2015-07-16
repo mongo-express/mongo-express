@@ -1,6 +1,6 @@
 {
   "author": "https://github.com/andzdroid",
-  "name": "mongo-express",
+  "name": "mongo-express-patch",
   "description": "Web-based admin interface for MongoDB",
   "version": "0.21.0",
   "repository": {
