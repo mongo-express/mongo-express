@@ -1,7 +1,15 @@
+var url = require('url');
+
+if (typeof process.env.MONGODB_PORT === 'string') {
+	var mongoConnection = url.parse(process.env.MONGODB_PORT);	
+	process.env.ME_CONFIG_MONGODB_SERVER = mongoConnection.hostname;
+	process.env.ME_CONFIG_MONGODB_PORT = mongoConnection.port;
+}
+
 module.exports = {
   mongodb: {
-    server: 'localhost',
-    port: 27017,
+    server: process.env.ME_CONFIG_MONGODB_SERVER || 'localhost',
+    port: process.env.ME_CONFIG_MONGODB_PORT || 27017,
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
@@ -42,8 +50,8 @@ module.exports = {
 
   site: {
     port: 8081,
-    cookieSecret: 'cookiesecret',
-    sessionSecret: 'sessionsecret',
+    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
+    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
     cookieKeyName: 'mongo-express'
   },
 
@@ -52,8 +60,8 @@ module.exports = {
   useBasicAuth: true,
 
   basicAuth: {
-    username: 'admin',
-    password: 'pass'
+    username: process.env.ME_CONFIG_BASICAUTH_USERNAME || 'admin',
+    password: process.env.ME_CONFIG_BASICAUTH_PASSWORD || 'pass'
   },
 
   options: {
