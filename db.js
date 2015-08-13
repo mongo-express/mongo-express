@@ -1,6 +1,7 @@
 var
     async = require('async')
   , mongodb = require('mongodb')
+  , _ = require('underscore')
   ;
 
 var utils = require('./utils');
