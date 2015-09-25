@@ -10,6 +10,8 @@ var
 
 var app = express();
 app.use('/', middleware(config));
-app.listen(config.site.port, function() {
-  console.log("Mongo Express server listening on port " + (config.site.port || 80));
+app.listen(config.site.port, config.site.host, function() {
+  console.log("Mongo Express server listening",
+    "on port " + (config.site.port || 80),
+    "at " + (config.site.host || "0.0.0.0"));
 });
