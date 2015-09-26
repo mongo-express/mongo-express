@@ -66,13 +66,15 @@ Or if you want to install a global copy:
 
 **To configure:**
 
-Copy or rename `node_modules/mongo-express/config.default.js` into a new file.
+Copy `YOUR_PATH/node_modules/mongo-express/config.default.js` into a new file called `YOUR_PATH/node_modules/mongo-express/config.js`.
 
-Fill in your MongoDB connection details, and any other options you want to change.
+*Note:* YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
+
+Fill in your MongoDB connection details and any other options you want to change in `config.js`.
 
 **To run:**
 
-    node app
+    cd YOUR_PATH/node_modules/mongo-express/ && node app.js
 
 **To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
 
