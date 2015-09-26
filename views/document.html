@@ -44,14 +44,16 @@
 {% block content %}
 
 <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string|url_encode }}">
+  {% if !settings.read_only %}
   <input type="hidden" name="_method" value="put">
   <button type="submit" class="btn btn-success btn-large"{# onclick="return checkJSON()"#}>
     <i class="icon-pencil icon-white"></i>
     Save
   </button>
   <br /><br />
+  {% endif %}
 
-  <textarea class="span9" id="document" name="document">{{ docString }}</textarea>
+  <textarea class="span9" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ docString }}</textarea>
 </form>
 
 <script>
@@ -61,6 +63,9 @@
     lineNumbers: true,
     autoClearEmptyLines: true,
     matchBrackets: true,
+    {% if settings.read_only %}
+    readOnly: true,
+    {% endif %}
     theme: "{{ editorTheme }}"
   });
 

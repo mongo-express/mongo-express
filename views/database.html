@@ -36,6 +36,7 @@
 	</table>
 </div>
 
+{% if !settings.read_only %}
 <h2>Create Collection</h2>
 <form class="well form-inline" method="POST">
     <div class="input-prepend">
@@ -73,6 +74,7 @@
    });
  });
 </script>
+{% endif %}
 
 <h2>Collections</h2>
 <table class="table table-bordered table-striped table-condensed">
@@ -89,6 +91,7 @@
 	    </a>
 	</td>
     <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
+    {% if !settings.read_only %}
     <td class="span2">
       <form method="POST" id="db-{{ dbName }}-{{ c }}" action="{{ baseHref }}db/{{ dbName }}/{{ c }}" style="margin: 0px;">
         <input type="hidden" name="_method" value="delete">
@@ -99,6 +102,7 @@
         Delete
       </button>
     </td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>
