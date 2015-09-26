@@ -13,6 +13,12 @@ exports.convertBytes = function(input) {
   } else if (input < 1024 * 1024 * 1024) {
     input = Math.round((input / (1024 * 1024)) * 100) / 100;
     return input.toString() + ' MB';
+  } else if (input < 1024 * 1024 * 1024 * 1024) {
+    input = Math.round((input / (1024 * 1024 * 1024)) * 100) / 100;
+    return input.toString() + ' GB';
+  } else if (input < 1024 * 1024 * 1024 * 1024 * 1024) {
+    input = Math.round((input / (1024 * 1024 * 1024 * 1024)) * 100) / 100;
+    return input.toString() + ' TB';
   } else {
     return input.toString() + ' Bytes';
   }
