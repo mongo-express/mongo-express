@@ -94,6 +94,48 @@ Fill in your MongoDB connection details and any other options you want to change
       console.log("Mongo Express server listening on port " + (config.site.port || 80));
     });
 
+**To run as a Docker container:**
+
+First, build the container from the project directorty:
+
+    docker build -t mongo-express .
+
+If you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/):
+
+    docker run -d -p 8081:8081 --link mongodb:mongodb mongo-express
+
+You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables):
+
+- Variable name: `ME_CONFIG_MONGODB_SERVER`
+- Description: MongoDB host name or IP address.
+- Default value: `localhost`
+
+
+- Variable name: `ME_CONFIG_MONGODB_PORT`
+- Description: MongoDB port.
+- Default value: `27017`
+
+
+- Variable name: `ME_CONFIG_SITE_COOKIESECRET`
+- Description: String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
+- Default value: `cookiesecret`
+
+
+- Variable name: `ME_CONFIG_SITE_SESSIONSECRET`
+- Description: String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
+- Default value: `sessionsecret`
+
+
+- Variable name: `ME_CONFIG_BASICAUTH_USERNAME`
+- Description: mongo-express login name.
+- Default value: `admin`
+
+
+- Variable name: `ME_CONFIG_BASICAUTH_PASSWORD`
+- Description: mongo-express login password.
+- Default value `pass`:
+
+-  
 
 **To use:**
 
