@@ -41,6 +41,7 @@ module.exports = {
   },
 
   site: {
+    host: '0.0.0.0',
     port: 8081,
     cookieSecret: 'cookiesecret',
     sessionSecret: 'sessionsecret',
