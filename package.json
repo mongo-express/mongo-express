@@ -8,7 +8,7 @@
     "url": "git://github.com/andzdroid/mongo-express.git"
   },
   "dependencies": {
-    "async": "0.8.0",
+    "async": "1.4.2",
     "basic-auth-connect": "1.0.0",
     "body-parser": "1.14.0",
     "consolidate": "0.12.1",
