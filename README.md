@@ -135,7 +135,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 - Description: mongo-express login password.
 - Default value `pass`:
 
--  
+-
 
 **To use:**
 
