@@ -1,3 +1,5 @@
+'use strict';
+
 var mongodb = require('mongodb');
 
 //Original code from official JSON.stringify function
@@ -58,9 +60,9 @@ function quote(string) {
     escapable.lastIndex = 0;
     return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
         var c = meta[a];
-        return typeof c === 'string'
-            ? c
-            : '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        return typeof c === 'string' ?
+            c :
+            '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
     }) + '"' : '"' + string + '"';
 }
 
@@ -87,7 +89,7 @@ function str(key, holder) {
     } else if (value instanceof Date) {
       return 'ISODate("' + value.toJSON() + '")';
     } else if (value instanceof mongodb.DBRef) {
-      if (value.db == '') {
+      if (value.db === '') {
         return 'DBRef("' + value.namespace + '", "' + value.oid + '")';
       } else {
         return 'DBRef("' + value.namespace + '", "' + value.oid + '", "' + value.db + '")';
@@ -167,11 +169,11 @@ function str(key, holder) {
 // Join all of the elements together, separated with commas, and wrap them in
 // brackets.
 
-            v = partial.length === 0
-                ? '[]'
-                : gap
-                ? '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']'
-                : '[' + partial.join(',') + ']';
+            v = partial.length === 0 ?
+                '[]' :
+                gap ?
+                '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
+                '[' + partial.join(',') + ']';
             gap = mind;
             return v;
         }
@@ -206,11 +208,11 @@ function str(key, holder) {
 // Join all of the member texts together, separated with commas,
 // and wrap them in braces.
 
-        v = partial.length === 0
-            ? '{}'
-            : gap
-            ? '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}'
-            : '{' + partial.join(',') + '}';
+        v = partial.length === 0 ?
+            '{}' :
+            gap ?
+            '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
+            '{' + partial.join(',') + '}';
         gap = mind;
         return v;
     }
@@ -260,4 +262,3 @@ exports.stringify = function (value, replacer, space) {
 
     return str('', {'': value});
 };
-

@@ -1,3 +1,5 @@
+'use strict';
+
 var mongodb = require('mongodb');
 var vm = require('vm');
 var json = require('./json');
@@ -7,16 +9,16 @@ var json = require('./json');
 
 var DBRef = function(namespace, oid, db) {
   //Allow empty/undefined db value
-  if (db == undefined || db == null) {
+  if (db === undefined || db === null) {
     db = '';
   }
   return mongodb.DBRef(namespace, oid, db);
-}
+};
 
 var Timestamp = function(high, low) {
   //Switch low/high bits to Timestamp constructor
   return mongodb.Timestamp(low, high);
-}
+};
 
 //Create sandbox with BSON data types
 exports.getSandbox = function() {
@@ -47,7 +49,7 @@ exports.getSandbox = function() {
 exports.toBSON = function(string) {
   var sandbox = exports.getSandbox();
 
-  string = string.replace(/ISODate\(/g, "new ISODate(");
+  string = string.replace(/ISODate\(/g, 'new ISODate(');
 
   vm.runInNewContext('doc = eval((' + string + '));', sandbox);
 
@@ -75,12 +77,12 @@ exports.toObjectId = function(string){
   // Convert ObjectId("526ddf5a9f610ffd26000001") to 526ddf5a9f610ffd26000001
   string = string.replace(/ObjectID\(/i, '').replace(')', '');
   // Make sure it's a 24-character string to prevent errors.
-  if (string.length == 24) {
+  if (string.length === 24) {
     return sandbox.ObjectID(string);
   } else {
     return false;
   }
-}
+};
 
 //Convert BSON documents to string
 exports.toString = function(doc) {

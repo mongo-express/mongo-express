@@ -1,14 +1,11 @@
-var
-    express = require('express')
-  , http = require('http')
-  , cons = require('consolidate')
-  , swig = require('swig')
-  ;
+'use strict';
 
-var
-    swigFilters = require('./filters')
-  , router = require('./router')
-  ;
+var express = require('express'),
+  cons = require('consolidate'),
+  swig = require('swig');
+
+var swigFilters = require('./filters'),
+  router = require('./router');
 
 var middleware = function(config) {
   var app = express();
@@ -27,6 +24,6 @@ var middleware = function(config) {
   app.use('/', router(config));
 
   return app;
-}
+};
 
 module.exports = middleware;

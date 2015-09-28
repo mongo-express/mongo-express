@@ -1,7 +1,7 @@
 var url = require('url');
 
 if (typeof process.env.MONGODB_PORT === 'string') {
-	var mongoConnection = url.parse(process.env.MONGODB_PORT);	
+	var mongoConnection = url.parse(process.env.MONGODB_PORT);
 	process.env.ME_CONFIG_MONGODB_SERVER = mongoConnection.hostname;
 	process.env.ME_CONFIG_MONGODB_PORT = mongoConnection.port;
 }
@@ -70,7 +70,7 @@ module.exports = {
     documentsPerPage: 10,
     //editorTheme: Name of the theme you want to use for displaying documents
     //See http://codemirror.net/demo/theme.html for all examples
-    editorTheme: "rubyblue",
+    editorTheme: 'rubyblue',
 
     //The options below aren't being used yet
 

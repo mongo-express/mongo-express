@@ -1,11 +1,8 @@
-var
-    async = require('async')
-  , mongodb = require('mongodb')
-  , _ = require('underscore')
-  ;
+'use strict';
 
-var utils = require('./utils');
-
+var async = require('async');
+var mongodb = require('mongodb');
+var _ = require('underscore');
 
 var connect = function(config) {
   // set up database stuff
@@ -52,19 +49,19 @@ var connect = function(config) {
       }
 
       for (var key in dbs.databases) {
-        var dbName = dbs.databases[key]['name'];
+        var dbName = dbs.databases[key].name;
 
         //'local' is special database, ignore it
-        if (dbName == 'local') {
+        if (dbName === 'local') {
           continue;
         }
 
-        if (config.mongodb.whitelist.length != 0) {
+        if (config.mongodb.whitelist.length !== 0) {
           if (!_.include(config.mongodb.whitelist, dbName)) {
             continue;
           }
         }
-        if (config.mongodb.blacklist.length != 0) {
+        if (config.mongodb.blacklist.length !== 0) {
           if (_.include(config.mongodb.blacklist, dbName)) {
             continue;
           }
@@ -94,12 +91,12 @@ var connect = function(config) {
 
     //Check if admin features are on
     if (config.mongodb.admin === true) {
-      if (config.mongodb.adminUsername.length == 0) {
+      if (config.mongodb.adminUsername.length === 0) {
         console.log('Admin Database connected');
         updateDatabases(adminDb);
       } else {
         //auth details were supplied, authenticate admin account with them
-        adminDb.authenticate(config.mongodb.adminUsername, config.mongodb.adminPassword, function(err, result) {
+        adminDb.authenticate(config.mongodb.adminUsername, config.mongodb.adminPassword, function(err) {
           if (err) {
             //TODO: handle error
             console.error(err);
@@ -111,16 +108,16 @@ var connect = function(config) {
       }
     } else {
       //Regular user authentication
-      if (typeof config.mongodb.auth == "undefined" || config.mongodb.auth.length == 0) {
+      if (typeof config.mongodb.auth === 'undefined' || config.mongodb.auth.length === 0) {
         throw new Error('Add auth details to config or turn on admin!');
       }
 
       async.forEachSeries(config.mongodb.auth, function(auth, callback) {
-        console.log("Connecting to " + auth.database + "...");
+        console.log('Connecting to ' + auth.database + '...');
         connections[auth.database] = mainConn.db(auth.database);
         databases.push(auth.database);
 
-        if (typeof auth.username != "undefined" && auth.username.length != 0) {
+        if (typeof auth.username !== 'undefined' && auth.username.length !== 0) {
           connections[auth.database].authenticate(auth.username, auth.password, function(err, success) {
             if (err) {
               //TODO: handle error
@@ -143,7 +140,7 @@ var connect = function(config) {
       });
     }
   });
-  
+
   return {
     updateCollections: updateCollections,
     connections: connections,
@@ -151,7 +148,7 @@ var connect = function(config) {
     collections: collections,
     adminDb: adminDb,
     mainConn: mainConn
-  }
+  };
 };
 
 module.exports = connect;

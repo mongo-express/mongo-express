@@ -1,3 +1,5 @@
+'use strict';
+
 var os = require('os');
 
 var bson = require('../bson');
@@ -6,7 +8,7 @@ var routes = function(config) {
   var exp = {};
 
   //view all entries in a collection
-  exp.viewCollection = function(req, res, next) {
+  exp.viewCollection = function(req, res) {
     //var limit = parseInt(req.params.limit, 10) || config.options.documentsPerPage;
     var limit = config.options.documentsPerPage;
     var skip = parseInt(req.query.skip, 10) || 0;
@@ -26,34 +28,34 @@ var routes = function(config) {
 
     if (key && value) {
       // If type == J, convert value as json document
-      if (type.toUpperCase() == 'J') {
+      if (type.toUpperCase() === 'J') {
         value = JSON.parse(req.query.value);
       }
       // If type == N, convert value to Number
-      if (type.toUpperCase() == 'N') {
+      if (type.toUpperCase() === 'N') {
         value = Number(req.query.value);
       }
       // If type == O, convert value to ObjectID
       // TODO: Add ObjectID validation to prevent error messages.
-      if (type.toUpperCase() == 'O') {
+      if (type.toUpperCase() === 'O') {
         value = bson.toObjectId(req.query.value);
         if (!value) {
-          req.session.error = "ObjectIDs must be 24 characters long!";
+          req.session.error = 'ObjectIDs must be 24 characters long!';
           return res.redirect('back');
         }
       }
       query[key] = value;
     } else if (jsonQuery) {
     query = bson.toSafeBSON(jsonQuery);
-    if (query == null) {
-      req.session.error = "Query entered is not valid";
+    if (query === null) {
+      req.session.error = 'Query entered is not valid';
       return res.redirect('back');
     }
     if (jsonFields) {
       fields = bson.toSafeBSON(jsonFields) || {};
     }
     } else {
-      var query = {};
+      query = {};
     }
 
     req.collection.find(query, fields, query_options).toArray(function(err, items) {
@@ -61,7 +63,7 @@ var routes = function(config) {
 
         //Pagination
         //Have to do this here, swig template doesn't allow any calculations :(
-        var prev, back2, here, next2, next, last;
+        var prev, prev2, here, next2, next, last;
 
         prev = {
           page: Math.round((skip - limit) / limit) + 1,
@@ -115,7 +117,7 @@ var routes = function(config) {
     });
   };
 
-  exp.exportCollection = function(req, res, next) {
+  exp.exportCollection = function(req, res) {
     req.collection.find().toArray(function(err, items) {
         res.setHeader('Content-disposition', 'attachment; filename=' + req.collectionName + '.json');
       res.setHeader('Content-type', 'application/json');
@@ -129,23 +131,23 @@ var routes = function(config) {
     });
   };
 
-  exp.addCollection = function(req, res, next) {
+  exp.addCollection = function(req, res) {
     var name = req.body.collection;
 
-    if (name === undefined || name.length == 0) {
-      req.session.error = "You forgot to enter a collection name!";
+    if (name === undefined || name.length === 0) {
+      req.session.error = 'You forgot to enter a collection name!';
       return res.redirect('back');
     }
 
     //Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots
     if (!name.match(/^[a-zA-Z_][a-zA-Z0-9\._]*$/)) {
-      req.session.error = "That collection name is invalid.";
+      req.session.error = 'That collection name is invalid.';
       return res.redirect('back');
     }
 
-    req.db.createCollection(name, function(err, collection) {
+    req.db.createCollection(name, function(err) {
       if (err) {
-        req.session.error = "Something went wrong: " + err;
+        req.session.error = 'Something went wrong: ' + err;
         console.error(err);
         return res.redirect('back');
       }
@@ -158,10 +160,10 @@ var routes = function(config) {
   };
 
 
-  exp.deleteCollection = function(req, res, next) {
-    req.collection.drop(function(err, result) {
+  exp.deleteCollection = function(req, res) {
+    req.collection.drop(function(err) {
       if (err) {
-        req.session.error = "Something went wrong: " + err;
+        req.session.error = 'Something went wrong: ' + err;
         console.error(err);
         return res.redirect('back');
       }
@@ -170,29 +172,29 @@ var routes = function(config) {
 
       req.updateCollections(req.db, req.dbName, function(err) {
         if (err) {
-          req.session.error = "Something went wrong: " + err;
+          req.session.error = 'Something went wrong: ' + err;
           console.error(err);
           return res.redirect('back');
         }
 
-        req.session.success = "Collection  '" + req.collectionName + "' deleted!";
+        req.session.success = 'Collection  "' + req.collectionName + '" deleted!';
         res.redirect(res.locals.baseHref + 'db/' + req.dbName);
       });
     });
   };
 
 
-  exp.renameCollection = function(req, res, next) {
+  exp.renameCollection = function(req, res) {
     var name = req.body.collection;
 
-    if (name == undefined || name.length == 0) {
-      req.session.error = "You forgot to enter a collection name!";
+    if (name === undefined || name.length === 0) {
+      req.session.error = 'You forgot to enter a collection name!';
       return res.redirect('back');
     }
 
     //Collection names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots
     if (!name.match(/^[a-zA-Z_][a-zA-Z0-9\._]*$/)) {
-      req.session.error = "That collection name is invalid.";
+      req.session.error = 'That collection name is invalid.';
       return res.redirect('back');
     }
 

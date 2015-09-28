@@ -1,21 +1,19 @@
-var
-    express = require('express')
-  , bodyParser = require('body-parser')
-  , cookieParser = require('cookie-parser')
-  , methodOverride = require('method-override')
-  , errorHandler = require('errorhandler')
-  , session = require('express-session')
-  , favicon = require('serve-favicon')
-  , basicAuth = require('basic-auth-connect')
-  , logger = require('morgan')
-  , _ = require('underscore')
-  , mongodb = require('mongodb')
-  ;
+'use strict';
 
-var
-    routes = require('./routes')
-  , db = require('./db')
-  ;
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    methodOverride = require('method-override'),
+    errorHandler = require('errorhandler'),
+    session = require('express-session'),
+    favicon = require('serve-favicon'),
+    basicAuth = require('basic-auth-connect'),
+    logger = require('morgan'),
+    _ = require('underscore'),
+    mongodb = require('mongodb');
+
+var routes = require('./routes'),
+    db = require('./db');
 
 
 var router = function(config) {
@@ -29,7 +27,7 @@ var router = function(config) {
   }
   appRouter.use(favicon(__dirname + '/public/images/favicon.ico'));
   appRouter.use(logger('dev'));
-  appRouter.use('/',express.static(__dirname + '/public'));
+  appRouter.use('/', express.static(__dirname + '/public'));
   appRouter.use(bodyParser.urlencoded({ extended: true }));
   appRouter.use(cookieParser(config.site.cookieSecret));
   appRouter.use(session({
@@ -38,12 +36,12 @@ var router = function(config) {
     resave: true,
     saveUninitialized: true
   }));
-  appRouter.use(methodOverride(function(req, res) {
+  appRouter.use(methodOverride(function(req) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
-      var method = req.body._method
-      delete req.body._method
-      return method
+      var method = req.body._method;
+      delete req.body._method;
+      return method;
     }
   }));
 
@@ -78,7 +76,7 @@ var router = function(config) {
   appRouter.param('database', function(req, res, next, id) {
     //Make sure database exists
     if (!_.include(mongo.databases, id)) {
-      req.session.error = "Database not found!";
+      req.session.error = 'Database not found!';
       return res.redirect(res.locals.baseHref);
     }
 
@@ -99,7 +97,7 @@ var router = function(config) {
   appRouter.param('collection', function(req, res, next, id) {
     //Make sure collection exists
     if (!_.include(mongo.collections[req.dbName], id)) {
-      req.session.error = "Collection not found!";
+      req.session.error = 'Collection not found!';
       return res.redirect(res.locals.baseHref + 'db/' + req.dbName); // XXX
     }
 
@@ -107,8 +105,8 @@ var router = function(config) {
     res.locals.collectionName = id;
 
     mongo.connections[req.dbName].collection(id, function(err, coll) {
-      if (err || coll == null) {
-        req.session.error = "Collection not found!";
+      if (err || coll === null) {
+        req.session.error = 'Collection not found!';
         return res.redirect(res.locals.baseHref + 'db/' + req.dbName);
       }
 
@@ -120,7 +118,7 @@ var router = function(config) {
 
   // :document param MUST be preceded by a :collection param
   appRouter.param('document', function(req, res, next, id) {
-    if (id.length == 24) {
+    if (id.length === 24) {
       //Convert id string to mongodb object ID
       try {
         id = new mongodb.ObjectID.createFromHexString(id);
@@ -129,8 +127,8 @@ var router = function(config) {
     }
 
     req.collection.findOne({_id: id}, function(err, doc) {
-      if (err || doc == null) {
-        req.session.error = "Document not found!";
+      if (err || doc === null) {
+        req.session.error = 'Document not found!';
         return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
       }
 

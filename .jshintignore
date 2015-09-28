@@ -1,0 +1,11 @@
+*.md
+.gitignore
+.jshintrc
+.jshintignore
+.travis.yml
+
+Dockerfile
+node_modules
+package.json
+public
+test

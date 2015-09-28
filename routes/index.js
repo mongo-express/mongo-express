@@ -1,9 +1,10 @@
+'use strict';
+
 //Add routes from other files
 var
-    database = require('./database')
-  , collection = require('./collection')
-  , document = require('./document')
-  ;
+    database = require('./database'),
+    collection = require('./collection'),
+    document = require('./document');
 
 var routes = function(config) {
   var exp = {};
@@ -29,7 +30,7 @@ var routes = function(config) {
       info: false
     };
 
-    if (typeof req.adminDb == "undefined") {
+    if (typeof req.adminDb === 'undefined') {
       return res.render('index');
     }
 

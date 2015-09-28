@@ -1,6 +1,8 @@
+'use strict';
+
 var utils = require('../utils');
 
-var routes = function(config) {
+var routes = function() {
   var exp = {};
 
   exp.viewDatabase = function(req, res) {
@@ -18,7 +20,7 @@ var routes = function(config) {
       };
       res.render('database', ctx);
     });
-  }
+  };
 
   return exp;
 };

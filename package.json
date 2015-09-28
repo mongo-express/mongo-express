@@ -31,7 +31,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node app",
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "main": "./middleware"
 }
