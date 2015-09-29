@@ -24,7 +24,7 @@
     "underscore": "1.8.3"
   },
   "devDependencies": {
-    "mocha": "1.18.2",
+    "mocha": "2.3.3",
     "chai": "1.9.2"
   },
   "engine": "node >= 0.10",
