@@ -76,7 +76,19 @@
 </script>
 {% endif %}
 
-<h2>Collections</h2>
+<table>
+  <tr>
+    <td>
+      <h2>Collections</h2>
+    </td>
+    <td>
+      <a href="{{ baseHref }}db/{{ dbName }}/updateCollections" class="btn btn-primary">
+        <i class="icon-refresh icon-white"></i>
+      </a>
+    </td>
+  </tr>
+</table>
+
 <table class="table table-bordered table-striped table-condensed">
   {% for c in colls %}
   <tr>

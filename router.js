@@ -155,7 +155,8 @@ var router = function(config) {
 
   // routes
   appRouter.get('/', mongoMiddleware, routes(config).index);
-
+  
+  appRouter.get('/db/:database/updateCollections', mongoMiddleware, routes(config).updateCollections);
   appRouter.get('/db/:database/export/:collection', mongoMiddleware, routes(config).exportCollection);
 
   appRouter.get('/db/:database/:collection/:document', mongoMiddleware, routes(config).viewDocument);
