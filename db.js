@@ -12,8 +12,17 @@ var connect = function(config) {
     auto_reconnect: config.mongodb.autoReconnect,
     poolSize: config.mongodb.poolSize
   };
-  var db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions), {safe:true});
 
+  var db;
+
+  if (Array.isArray(host)) {
+    host = host.map(function(host) {
+      return new mongodb.Server(host, port, dbOptions);
+    });
+    db = new mongodb.Db('local', new mongodb.ReplSet(host), { safe: true, w: 0 });
+  } else {
+    db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions), {safe:true});
+  }
 
   var connections = {};
   var databases = [];
@@ -152,3 +161,4 @@ var connect = function(config) {
 };
 
 module.exports = connect;
+
