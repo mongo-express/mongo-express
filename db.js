@@ -50,8 +50,9 @@ var connect = function(config) {
   };
 
   // update database list
-  var updateDatabases = function(admin) {
+  var updateDatabases = function(admin, callback) {
     admin.listDatabases(function(err, dbs) {
+      databases = [];
       if (err) {
         //TODO: handle error
         console.error(err);
@@ -84,6 +85,10 @@ var connect = function(config) {
 
       //Sort database names
       databases = databases.sort();
+      
+      if(callback){
+        callback(databases);
+      }
     });
   };
 
@@ -152,6 +157,7 @@ var connect = function(config) {
 
   return {
     updateCollections: updateCollections,
+    updateDatabases: updateDatabases,
     connections: connections,
     databases: databases,
     collections: collections,

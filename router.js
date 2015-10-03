@@ -67,8 +67,13 @@ var router = function(config) {
       res.locals.messageError = req.session.error;
       delete req.session.error;
     }
-
-    return next();
+    
+    mongo.updateDatabases(mongo.adminDb, function(databases){
+        mongo.databases = databases;
+        res.locals.databases = mongo.databases;
+        
+        return next();
+    });
   });
 
 
