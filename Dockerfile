@@ -1,4 +1,4 @@
-FROM google/nodejs
+FROM node:latest
 
 WORKDIR /app
 ADD . /app
@@ -8,5 +8,5 @@ RUN cp config.default.js config.js
 
 EXPOSE 8081
 
-CMD ["/nodejs/bin/npm", "start"]
+CMD ["npm", "start"]
 
