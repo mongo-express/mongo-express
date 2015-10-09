@@ -115,6 +115,13 @@ You can use the following [environment variables](https://docs.docker.com/refere
 - Description: MongoDB port.
 - Default value: `27017`
 
+- Variable name: `ME_CONFIG_MONGODB_ADMINUSERNAME`
+- Description: Administrator username.
+- Default value: ``
+
+- Variable name: `ME_CONFIG_MONGODB_ADMINPASSWORD`
+- Description: Administrator password.
+- Default value: ``
 
 - Variable name: `ME_CONFIG_SITE_COOKIESECRET`
 - Description: String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
@@ -127,13 +134,17 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
 
 - Variable name: `ME_CONFIG_BASICAUTH_USERNAME`
-- Description: mongo-express login name.
+- Description: mongo-express login name. Sending an empty string will disable basic authentication.
 - Default value: `admin`
 
 
 - Variable name: `ME_CONFIG_BASICAUTH_PASSWORD`
 - Description: mongo-express login password.
-- Default value `pass`:
+- Default value `pass`
+
+- Variable name: `ME_CONFIG_OPTIONS_EDITORTHEME`
+- Description: Web editor color theme.
+- Default value: `rubyblue`
 
 -
 

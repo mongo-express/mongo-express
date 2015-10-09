@@ -40,8 +40,8 @@ module.exports = {
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
 
     //leave username and password empty if no admin account exists
-    adminUsername: '',
-    adminPassword: '',
+    adminUsername: process.env.ME_CONFIG_MONGODB_ADMINUSERNAME || '',
+    adminPassword: process.env.ME_CONFIG_MONGODB_ADMINPASSWORD || '',
     //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
     //blacklist: hide databases listed in the blacklist (empty list for no blacklist)
@@ -56,9 +56,10 @@ module.exports = {
     cookieKeyName: 'mongo-express'
   },
 
-  //set ifBasicAuth to true if you want to basicAuth before login mongo-express
+  //set useBasicAuth to true if you want to authehticate mongo-express loggins
   //if admin is false, the basicAuthInfo list below will be ignored
-  useBasicAuth: true,
+  //this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
+  useBasicAuth: process.env.ME_CONFIG_BASICAUTH_USERNAME != '',
 
   basicAuth: {
     username: process.env.ME_CONFIG_BASICAUTH_USERNAME || 'admin',
@@ -70,7 +71,7 @@ module.exports = {
     documentsPerPage: 10,
     //editorTheme: Name of the theme you want to use for displaying documents
     //See http://codemirror.net/demo/theme.html for all examples
-    editorTheme: 'rubyblue',
+    editorTheme: process.env.ME_CONFIG_OPTIONS_EDITORTHEME || 'rubyblue',
 
     //The options below aren't being used yet
 
