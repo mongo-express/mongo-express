@@ -56,33 +56,34 @@ var connect = function(config) {
       if (err) {
         //TODO: handle error
         console.error(err);
-      }
+        databases = _.pluck(config.mongodb.auth, 'database');
+      } else {
 
-      for (var key in dbs.databases) {
-        var dbName = dbs.databases[key].name;
+        for (var key in dbs.databases) {
+          var dbName = dbs.databases[key].name;
 
-        //'local' is special database, ignore it
-        if (dbName === 'local') {
-          continue;
-        }
-
-        if (config.mongodb.whitelist.length !== 0) {
-          if (!_.include(config.mongodb.whitelist, dbName)) {
+          //'local' is special database, ignore it
+          if (dbName === 'local') {
             continue;
           }
-        }
-        if (config.mongodb.blacklist.length !== 0) {
-          if (_.include(config.mongodb.blacklist, dbName)) {
-            continue;
+
+          if (config.mongodb.whitelist.length !== 0) {
+            if (!_.include(config.mongodb.whitelist, dbName)) {
+              continue;
+            }
           }
+          if (config.mongodb.blacklist.length !== 0) {
+            if (_.include(config.mongodb.blacklist, dbName)) {
+              continue;
+            }
+          }
+
+          connections[dbName] = mainConn.db(dbName);
+          databases.push(dbName);
+
+          updateCollections(connections[dbName], dbName);
         }
-
-        connections[dbName] = mainConn.db(dbName);
-        databases.push(dbName);
-
-        updateCollections(connections[dbName], dbName);
       }
-
       //Sort database names
       databases = databases.sort();
       
