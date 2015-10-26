@@ -25,6 +25,9 @@ var routes = function(config) {
     var type = req.query.type || '';
     var jsonQuery = req.query.query || '';
     var jsonFields = req.query.fields || '';
+    var dbName = req.params.database;
+    var collectionName = req.params.collection;
+    var defaultKey = config.defaultKeyNames[dbName][collectionName] || '_id';
 
     if (key && value) {
       // If type == J, convert value as json document
@@ -109,7 +112,8 @@ var routes = function(config) {
           value: value,
           type: type,
           query: jsonQuery,
-          fields: jsonFields
+          fields: jsonFields,
+          defaultKey: defaultKey
         };
 
         res.render('collection', ctx);

@@ -163,38 +163,59 @@ function loadDocument(id) {
   <li class="next"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">Last &rarr;</a></li>
 </ul>
 
-{% for document in documents %}
-<div class="row">
-<div class="span8">
-  <textarea readonly="readonly" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document }}</textarea>
-  <p>&nbsp;</p>
-
-  <script>
-    var doc_{{ loop.index }} = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
-      mode: { name: "javascript", json: true },
-      readOnly: true,
-      indentUnit: 4,
-      theme: "{{ editorTheme }}",
-      lineNumbers: true
-      {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
-      onFocus: function() { loadDocument('{{ docs[loop.index0]._id|to_string }}') }
-      {%- endif %}
-    });
-  </script>
+<table class="table table-striped">
+{% for document in docs %}
+<tr><td>
+<div class="accordian span9" id="_accordian">
+  <div class="accordian-group">
+      <div class="accordian-heading">
+        <a class="accordian-toggle" data-toggle="collapse" data-parent="_accordian" href="#body_{{ loop.index}}">
+          {% if document[defaultKey] == "" %}
+            {{defaultKey}} is empty for {{document["_id"]|to_string}}
+          {% else %}
+            {{document[defaultKey] |to_string}}
+          {% endif %}
+        </a>
+      </div>
+      <div class="accordian-body collapse" id="body_{{ loop.index}}">
+        <div class="accordion-inner">
+          <div class="row">
+          <div class="span9">
+            <textarea readonly="readonly" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document | json }}</textarea>
+            <script>
+              var doc_{{ loop.index }} = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
+                mode: { name: "javascript", json: true },
+                readOnly: true,
+                indentUnit: 4,
+                theme: "{{ editorTheme }}",
+                lineNumbers: true
+                {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
+                onFocus: function() { loadDocument('{{ docs[loop.index0]._id|to_string }}') }
+                {%- endif %}
+              });
+            </script>
+          </div>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
+</td>
 {% if !settings.read_only %}
-<div class="span1">
-  <br /><br />
-  <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id|to_string|url_encode }}">
-  <input type="hidden" name="_method" value="delete">
-  <button type="submit" class="btn btn-danger btn-mini">
-  <i class="icon-remove icon-white"></i>
-  </button>
-  </form>
-</div>
+<td>
+  <div class="span1">
+    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id|to_string|url_encode }}">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger btn-mini">
+    <i class="icon-remove icon-white"></i>
+    </button>
+    </form>
+  </div>
+</td>
 {% endif %}
-</div>
+</tr>
 {% endfor %}
+</table>
 
 <div class="pagination pagination-centered span7">
   <ul>
