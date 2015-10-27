@@ -20,6 +20,7 @@ Current features:
 * View/add/rename/delete collections
 * View/add/update/delete documents
 * Use BSON data types in documents
+* Ability to specify the default key to be shown in the docs list.
 
 Planned features:
 
@@ -67,6 +68,22 @@ Or if you want to install a global copy:
 **To configure:**
 
 Copy `YOUR_PATH/node_modules/mongo-express/config.default.js` into a new file called `YOUR_PATH/node_modules/mongo-express/config.js`.
+
+*Note:* Populate the defaultKeyNames field with your database names, collection names and the key name to be displayed by default in the documents list of collections page.
+
+For example :
+```
+    defaultKeyNames:{
+    	"world_db":{  //Database 1 Name
+    		"continent":"cont_name", // collection:feild
+    		"country":"country_name",
+    		"city":"name"
+    	},
+    	... // Database 2
+    	... // Database 3
+    }
+```
+If no key name is specified for a collection, it defaults to '_id'.
 
 *Note:* YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
 
