@@ -27,7 +27,7 @@ var routes = function(config) {
     var jsonFields = req.query.fields || '';
     var dbName = req.params.database;
     var collectionName = req.params.collection;
-    var defaultKey = config.defaultKeyNames[dbName][collectionName] || '_id';
+    var defaultKey = (config.defaultKeyNames && config.defaultKeyNames[dbName] && config.defaultKeyNames[dbName][collectionName]) ? config.defaultKeyNames[dbName][collectionName] : '_id';
 
     if (key && value) {
       // If type == J, convert value as json document
