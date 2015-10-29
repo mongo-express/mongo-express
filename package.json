@@ -2,7 +2,7 @@
   "author": "https://github.com/andzdroid",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
-  "version": "0.23.5",
+  "version": "0.23.6",
   "repository": {
     "type": "git",
     "url": "git://github.com/andzdroid/mongo-express.git"
