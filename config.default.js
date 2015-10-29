@@ -53,7 +53,10 @@ module.exports = {
     port: 8081,
     cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
     sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
-    cookieKeyName: 'mongo-express'
+    cookieKeyName: 'mongo-express',
+    sslEnabled: process.env.ME_CONFIG_SITE_SSL_ENABLED || false,
+    sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
+    sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || ''
   },
 
   //set useBasicAuth to true if you want to authehticate mongo-express loggins
