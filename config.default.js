@@ -86,7 +86,7 @@ module.exports = {
     //subprocessTimeout: number of seconds of non-interaction before a subprocess is shut down
     subprocessTimeout: 300,
     //readOnly: if readOnly is true, components of writing are not visible.
-    readOnly: true
+    readOnly: false
   },
 
 	// Specify the default keyname that should be picked from a document to display in collections list.
