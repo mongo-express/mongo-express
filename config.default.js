@@ -1,9 +1,9 @@
 var url = require('url');
 
 if (typeof process.env.MONGODB_PORT === 'string') {
-	var mongoConnection = url.parse(process.env.MONGODB_PORT);
-	process.env.ME_CONFIG_MONGODB_SERVER = mongoConnection.hostname;
-	process.env.ME_CONFIG_MONGODB_PORT = mongoConnection.port;
+  var mongoConnection = url.parse(process.env.MONGODB_PORT);
+  process.env.ME_CONFIG_MONGODB_SERVER = mongoConnection.hostname;
+  process.env.ME_CONFIG_MONGODB_PORT = mongoConnection.port;
 }
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
         password: 'pass'
       }
       */
-    ],
+      ],
 
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
@@ -62,7 +62,7 @@ module.exports = {
   //set useBasicAuth to true if you want to authehticate mongo-express loggins
   //if admin is false, the basicAuthInfo list below will be ignored
   //this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
-  useBasicAuth: process.env.ME_CONFIG_BASICAUTH_USERNAME != '',
+  useBasicAuth: process.env.ME_CONFIG_BASICAUTH_USERNAME !== '',
 
   basicAuth: {
     username: process.env.ME_CONFIG_BASICAUTH_USERNAME || 'admin',
@@ -89,19 +89,18 @@ module.exports = {
     readOnly: false
   },
 
-	// Specify the default keyname that should be picked from a document to display in collections list.
-	// Keynames can be specified for every database and collection.
-	// If no keyname is specified, it defalts to '_id', which is a mandatory feild.
-	// For Example :
-	//
-	// defaultKeyNames{
-	//	"world_db":{  //Database Name
-	//		"continent":"cont_name", // collection:feild
-	//		"country":"country_name",
-	//		"city":"name"
-	//	}
-  //}
-	defaultKeyNames: {
+  // Specify the default keyname that should be picked from a document to display in collections list.
+  // Keynames can be specified for every database and collection.
+  // If no keyname is specified, it defalts to '_id', which is a mandatory feild.
+  // For Example :
+  // defaultKeyNames{
+  //   "world_db":{  //Database Name
+  //     "continent":"cont_name", // collection:feild
+  //     "country":"country_name",
+  //     "city":"name"
+  //   }
+  // }
+  defaultKeyNames: {
 
-	}
+  }
 };
