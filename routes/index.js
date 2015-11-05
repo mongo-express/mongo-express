@@ -17,6 +17,7 @@ var routes = function(config) {
   exp.deleteCollection = collection(config).deleteCollection;
   exp.renameCollection = collection(config).renameCollection;
   exp.exportCollection = collection(config).exportCollection;
+  exp.exportColArray = collection(config).exportColArray;
 
   exp.viewDocument = document(config).viewDocument;
   exp.updateDocument = document(config).updateDocument;

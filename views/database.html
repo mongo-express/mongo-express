@@ -92,16 +92,21 @@
 <table class="table table-bordered table-striped table-condensed">
   {% for c in colls %}
   <tr>
-    <td class="span2">
-      <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success span2">
+    <td class="span1">
+      <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success span1">
         <i class="icon-list-alt icon-white"></i> View
       </a>
     </td>
-	<td class="span2">
-	     <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning span2">
-	      <i class="icon-download icon-white"></i> Export
-	    </a>
-	</td>
+  <td class="span1">
+       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning span1">
+        <i class="icon-download icon-white"></i> Export
+      </a>
+  </td>
+  <td class="span1">
+       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning span1">
+        <i class="icon-download icon-white"></i> [JSON]
+      </a>
+  </td>
     <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
     {% if !settings.read_only %}
     <td class="span2">
@@ -110,7 +115,7 @@
         <button type="submit" class="hidden"></button>
       </form>
       <button class="btn btn-danger span2 deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
-        <i class="icon-trash icon-white"></i>
+        <i class="icon-trash icon-white"></i><br>
         Delete
       </button>
     </td>
