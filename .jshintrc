@@ -9,8 +9,9 @@
   "jquery": true,
   "node": true,
 
-  // Define globals used by M Project and Wherewolf
+  // Define globals
   "predef": [
+    "JSON"
   ],
 
   /*
