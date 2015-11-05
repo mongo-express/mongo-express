@@ -7,11 +7,12 @@
   <link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
   <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
   <script type="text/javascript">
-	jQuery(document).ready(function ($) {
+  'use strict';
+  jQuery(document).ready(function ($) {
         $('#tabs').tab();
-		if (document.location.href.indexOf("query=") >= 0) {
-			$('#tabs a[href="#advanced"]').tab('show')
-		}
+    if (document.location.href.indexOf('query=') >= 0) {
+      $('#tabs a[href="#advanced"]').tab('show');
+    }
     });
   </script>
   {% if editorTheme != "default" %}
@@ -62,40 +63,40 @@
 {% endif %}
 
 <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-	<li class="active"><a href="#simple" data-toggle="tab">Simple</a></li>
-	<li><a href="#advanced" data-toggle="tab">Advanced</a></li>
+  <li class="active"><a href="#simple" data-toggle="tab">Simple</a></li>
+  <li><a href="#advanced" data-toggle="tab">Advanced</a></li>
 </ul>
 <div id="my-tab-content" class="tab-content">
-	<div class="tab-pane active" id="simple">
-		<form class="well form-inline" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
-		  <div class="input-prepend">
-			  <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
-			  <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
-			  <select name="type" class="input-small">
-				<option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
-				<option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
-				<option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
-				<option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
-			  </select>
-		  </div>
-		  <button type="submit" class="btn btn-primary pull-right">
-			<i class="icon-search icon-white"></i>
-			Find
-		  </button>
-		</form>
-	</div>
-	<div class="tab-pane" id="advanced">
-		<form class="well form-inline" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
-		  <div class="input-prepend">
-			  <textarea class="input-medium" style="width: 350px; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
-			  <textarea class="input-medium" style="width: 350px; height: 150px" id="fields" name="fields" placeholder="Fields" title="Fields">{{ fields }}</textarea>
-		  </div>
-		  <button type="submit" class="btn btn-primary pull-right">
-			<i class="icon-search icon-white"></i>
-			Find
-		  </button>
-		</form>
-	</div>
+  <div class="tab-pane active" id="simple">
+    <form class="well form-inline" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <div class="input-prepend">
+        <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
+        <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
+        <select name="type" class="input-small">
+        <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
+        <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
+        <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
+        <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary pull-right">
+      <i class="icon-search icon-white"></i>
+      Find
+      </button>
+    </form>
+  </div>
+  <div class="tab-pane" id="advanced">
+    <form class="well form-inline" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <div class="input-prepend">
+        <textarea class="input-medium" style="width: 350px; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
+        <textarea class="input-medium" style="width: 350px; height: 150px" id="fields" name="fields" placeholder="Fields" title="Fields">{{ fields }}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary pull-right">
+      <i class="icon-search icon-white"></i>
+      Find
+      </button>
+    </form>
+  </div>
 </div>
 <br/>
 
@@ -125,14 +126,14 @@
 </div>
 
 <script>
-  $("#addDocument").modal("hide");
+  $('#addDocument').modal('hide');
   var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: { name: "javascript", json: true },
+    mode: { name: 'javascript', json: true },
     indentUnit: 4,
     electricChars: true,
     matchBrackets: true,
     lineNumbers: true,
-    theme: "{{ editorTheme }}"
+    theme: '{{ editorTheme }}'
   });
 </script>
 
@@ -184,10 +185,10 @@ function loadDocument(id) {
             <textarea readonly="readonly" id="doc_{{ loop.index }}" name="doc_{{ loop.index }}">{{ document | json }}</textarea>
             <script>
               var doc_{{ loop.index }} = CodeMirror.fromTextArea(document.getElementById('doc_{{ loop.index }}'), {
-                mode: { name: "javascript", json: true },
+                mode: { name: 'javascript', json: true },
                 readOnly: true,
                 indentUnit: 4,
-                theme: "{{ editorTheme }}",
+                theme: '{{ editorTheme }}',
                 lineNumbers: true
                 {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
                 onFocus: function() { loadDocument('{{ docs[loop.index0]._id|to_string }}') }
@@ -271,64 +272,62 @@ No indexes found.
 #}
 
 <div class="row">
-<div class="span4">
-
 {% if !settings.read_only %}
-<h2>Rename Collection</h2>
-<form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
-  <input type="hidden" name="_method" value="put">
-  <div class="input-prepend">
-    <span class="add-on">{{ dbName }} . </span>
-    <input class="input-medium" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
+  <div class="span4">
+    <h2>Rename Collection</h2>
+    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
+      <input type="hidden" name="_method" value="put">
+      <div class="input-prepend">
+        <span class="add-on">{{ dbName }} . </span>
+        <input class="input-medium" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
+      </div>
+      <button type="submit" class="btn btn-primary">
+      <i class="icon-tag icon-white"></i>
+      Rename
+      </button>
+    </form>
   </div>
-  <button type="submit" class="btn btn-primary">
-  <i class="icon-tag icon-white"></i>
-  Rename
-  </button>
-</form>
-</div>
 
-<div class="span1">
-  <h2>&nbsp;</h2>
-</div>
+  <div class="span1">
+    <!-- spacing for visual balance -->
+    <h2>&nbsp;</h2>
+  </div>
 
-<div class="span4">
+  <div class="span4">
+    <h2>Delete Collection</h2>
+    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" class="hidden" />
+      <button class="btn btn-danger deleteButton" title="Warning" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
+        <i class="icon-trash icon-white"></i>
+        Delete
+      </button>
+    </form>
 
-<h2>Delete Collection</h2>
-<form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" class="hidden" />
-  <button class="btn btn-danger deleteButton" title="Warning" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
-    <i class="icon-trash icon-white"></i>
-    Delete
-  </button>
-</form>
+    <script>
+     $( document ).ready( function() {
+       $( '.deleteButton' ).popover({ placement: "left", title: "Warning", content: "Are you sure you want to delete this collection? All documents will be deleted." });
 
-<script>
- $( document ).ready( function() {
-   $( '.deleteButton' ).popover({ placement: "left", title: "Warning", content: "Are you sure you want to delete this collection? All documents will be deleted." });
+       $( '.deleteButton' ).on( 'click', function( event ) {
+         event.preventDefault();
+         var target = $( this );
+         var parentForm = $( '#' + target.attr( 'childof' ) );
 
-   $( '.deleteButton' ).on( 'click', function( event ) {
-     event.preventDefault();
-     var target = $( this );
-     var parentForm = $( '#' + target.attr( 'childof' ) );
-
-     $( '#confirmation-input' ).attr( 'shouldbe', target.attr( 'collection-name' ) );
-     $( '#modal-collection-name' ).text( target.attr( 'collection-name' ) );
-     $( '#confirm-deletion' ).modal({ backdrop: 'static', keyboard: false })
-       .one( 'click', '#delete', function() {
-         var input = $( '#confirmation-input' );
-         if ( input.val().toLowerCase() === input.attr( 'shouldbe' ).toLowerCase() ) {
-           parentForm.trigger( 'submit' );
-         } else {
-           // wrong collection name
-         }
-   });
-  });
-});
-</script>
-
-</div>
+         $( '#confirmation-input' ).attr( 'shouldbe', target.attr( 'collection-name' ) );
+         $( '#modal-collection-name' ).text( target.attr( 'collection-name' ) );
+         $( '#confirm-deletion' ).modal({ backdrop: 'static', keyboard: false })
+           .one( 'click', '#delete', function() {
+             var input = $( '#confirmation-input' );
+             if ( input.val().toLowerCase() === input.attr( 'shouldbe' ).toLowerCase() ) {
+               parentForm.trigger( 'submit' );
+             } else {
+               // wrong collection name
+             }
+       });
+      });
+    });
+    </script>
+  </div>
 {% endif %}
 
 <div id="confirm-deletion" class="modal hide fade">
@@ -353,15 +352,16 @@ No indexes found.
 </div>
 
 <div class="span4">
-	<h2>Export Collection</h2>
-	<div class="well">
-	<a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning span2">
-		<i class="icon-download icon-white"></i> Export
-	</a>
-	</div>
+  <h2>Export Collection</h2>
+  <div class="well">
+  <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning span2">
+    <i class="icon-download icon-white"></i> Export
+  </a>
+  </div>
 </div>
 
 <div class="span1">
+  <!-- spacing for visual balance -->
   <h2>&nbsp;</h2>
 </div>
 
@@ -373,10 +373,7 @@ No indexes found.
   </a>
   </div>
 </div>
-
 {% endblock %}
-
-
 
 {% block sidebar %}
   <div class="sidebar-nav">
