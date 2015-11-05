@@ -27,7 +27,9 @@ var routes = function(config) {
     var jsonFields = req.query.fields || '';
     var dbName = req.params.database;
     var collectionName = req.params.collection;
-    var defaultKey = (config.defaultKeyNames && config.defaultKeyNames[dbName] && config.defaultKeyNames[dbName][collectionName]) ? config.defaultKeyNames[dbName][collectionName] : '_id';
+    var defaultKey = (config.defaultKeyNames && config.defaultKeyNames[dbName] && config.defaultKeyNames[dbName][collectionName]) ?
+      config.defaultKeyNames[dbName][collectionName] :
+      '_id';
 
     if (key && value) {
       // If type == J, convert value as json document
@@ -202,7 +204,7 @@ var routes = function(config) {
       return res.redirect('back');
     }
 
-    req.collection.rename(name, function(err, collection) {
+    req.collection.rename(name, function(err) {
       if (err) {
         req.session.error = 'Something went wrong: ' + err;
         console.error(err);
