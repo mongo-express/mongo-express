@@ -2,7 +2,10 @@
   "author": "https://github.com/andzdroid",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
-  "version": "0.24.1",
+  "version": "0.25.0",
+  "bin" : {
+    "mongoe" : "./app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/andzdroid/mongo-express.git"
@@ -16,12 +19,13 @@
     "errorhandler": "1.4.2",
     "express": "4.13.3",
     "express-session": "1.11.3",
+    "minimist": "~1.2.0",
     "method-override": "2.3.5",
     "mongodb": "2.0.43",
     "morgan": "1.6.1",
     "serve-favicon": "2.3.0",
     "swig": "1.4.2",
-    "underscore": "1.8.3"
+    "underscore": "~1.8.0"
   },
   "devDependencies": {
     "mocha": "2.3.3",
