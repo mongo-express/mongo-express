@@ -95,22 +95,11 @@ Fill in your MongoDB connection details and any other options you want to change
 
 **To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
 
-    var
-        express = require('express')
-      , http = require('http')
-      ;
+    var mongo_express = require('mongo-express/middleware')
+    var mongo_express_config = require('./mongo_express_config')
 
-    var
-        config = require('./config')
-      , middleware = require('./middleware')
-      ;
-
-    var app = express();
-    app.use('/your-mountpath', middleware(config));
-    app.listen(config.site.port, function() {
-      console.log("Mongo Express server listening on port " + (config.site.port || 80));
-    });
-
+    app.use('/mongo_express', mongo_express(mongo_express_config))
+    
 **To run as a Docker container:**
 
 First, build the container from the project directorty:
