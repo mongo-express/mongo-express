@@ -25,7 +25,6 @@ Current features:
 Planned features:
 
 * Support for replica set connections
-* Web-based command-line interface
 * Site authentication
 * REST interface
 
@@ -65,6 +64,7 @@ Or if you want to install a global copy:
 
     npm install -g mongo-express
 
+
 **To configure:**
 
 Copy `YOUR_PATH/node_modules/mongo-express/config.default.js` into a new file called `YOUR_PATH/node_modules/mongo-express/config.js`.
@@ -92,6 +92,18 @@ Fill in your MongoDB connection details and any other options you want to change
 **To run:**
 
     cd YOUR_PATH/node_modules/mongo-express/ && node app.js
+
+If you installed it globally, you can immediately start mongo-express like this: 
+
+    mongo-express -u user -p password -d database
+
+Or if you want to use it as an administrator: 
+
+    mongo-express -u superuser -p password
+
+For help on configuration options: 
+
+    mongo-express -h
 
 **To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
 
