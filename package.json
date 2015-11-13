@@ -2,9 +2,9 @@
   "author": "https://github.com/andzdroid",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "bin" : {
-    "mongoe" : "./app.js"
+    "mongo-express" : "./app.js"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,10 @@
     "body-parser": "1.14.0",
     "consolidate": "0.12.1",
     "cookie-parser": "1.4.0",
+    "commander": "^2.8.1",
     "errorhandler": "1.4.2",
     "express": "4.13.3",
     "express-session": "1.11.3",
-    "minimist": "~1.2.0",
     "method-override": "2.3.5",
     "mongodb": "2.0.43",
     "morgan": "1.6.1",

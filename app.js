@@ -6,6 +6,7 @@ var express     = require('express');
 var fs          = require('fs');
 var https       = require('https');
 var middleware  = require('./middleware');
+var program     = require('commander');
 var app         = express();
 var defaultPort = 80;
 var server      = app;
@@ -17,56 +18,33 @@ try {
 } catch (e) {
   config = require('./config.default');
 
-  var argv = require('minimist')(process.argv.slice(2), {
-    alias: {
-      u: 'username',
-      p: 'password',
-      _: ['database', 'd'],
-      a: 'admin'
-    },
-    'boolean': ['a'],
-    'default': {
-      port: '8081'
-    }
-  });
+  program
+    .version(require('./package').version)
+    .option('-u, --username <username>', 'username for authentication')
+    .option('-p, --password <password>', 'password for authentication')
+    .option('-a, --admin', 'enable authentication as admin')
+    .option('-d, --database <database>', 'authenticate to database')
+    .option('--port <port>', 'listen on specified port')
+  .parse(process.argv);
 
-  config.site.port = Number.parseInt(argv.port, 10);
-
-  if (argv.u && argv.p && (argv.a ? !argv._.length : argv._.length)) { //TODO: Improve validation
-    if (argv.a) {
-      config.mongodb.admin = true;
-      config.mongodb.adminUsername = argv.u;
-      config.mongodb.adminPassword = argv.p;
-    } else {
-      config.mongodb.admin = false;
-      config.mongodb.auth[0] = {
-        username: argv.u,
-        password: argv.p,
-        database: argv._[0]
-      };
-      if ([argv.u, argv.p, argv._].every(function (ele) { return typeof ele === 'object'; })) { //TODO: Improve validation
-        argv.u.forEach(function (ele, i) {
-          config.mongodb.auth[i] = {
-            username: argv.u[i],
-            password: argv.p[i],
-            database: argv._[i]
-          };
-        });
+  config.mongodb.admin = !!program.admin;
+  if (program.admin) {
+    config.mongodb.adminUsername = program.username;
+    config.mongodb.adminPassword = program.password;
+  } else {
+    var user = {
+      database: program.database,
+      username: program.username,
+      password: program.password
+    };
+    for (var key in user) {
+      if (!user[key]) {
+        program.help();
       }
     }
-  } else {
-    console.log('Usage: mongoe [options] [dbname]');
-    console.log('');
-    console.log('Options:');
-    console.log('  -a, --admin              enable admin login');
-    console.log('  -u, --username=USERNAME  username for authentication. can pass multiple values.');
-    console.log('  -p, --password=PASSWORD  password for authentication. can pass multiple values.');
-    console.log('  -d, --database=DATABASE  use DATABASE. not needed when using admin login. can pass multiple values.');
-    console.log('      --port=PORT          listen on PORT.');
-    console.log('');
-    console.log('Create config.js to supress this message.');
-    process.exit(0);
+    config.mongodb.auth[0] = user;
   }
+  config.site.port = program.port || config.site.port;
 }
 
 app.use('/', middleware(config));
