@@ -45,6 +45,7 @@ try {
     config.mongodb.auth[0] = user;
   }
   config.site.port = program.port || config.site.port;
+  config.useBasicAuth = false;
 }
 
 app.use('/', middleware(config));
