@@ -1,27 +1,24 @@
 'use strict';
 
-var express = require('express'),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    methodOverride = require('method-override'),
-    errorHandler = require('errorhandler'),
-    session = require('express-session'),
-    favicon = require('serve-favicon'),
-    basicAuth = require('basic-auth-connect'),
-    logger = require('morgan'),
-    _ = require('underscore'),
-    mongodb = require('mongodb');
-
-var routes = require('./routes'),
-    db = require('./db');
-
+var _               = require('underscore');
+var basicAuth       = require('basic-auth-connect');
+var bodyParser      = require('body-parser');
+var cookieParser    = require('cookie-parser');
+var db              = require('./db');
+var errorHandler    = require('errorhandler');
+var express         = require('express');
+var favicon         = require('serve-favicon');
+var logger          = require('morgan');
+var methodOverride  = require('method-override');
+var mongodb         = require('mongodb');
+var routes          = require('./routes');
+var session         = require('express-session');
 
 var router = function(config) {
+  // appRouter configuration
   var appRouter = express.Router();
   var mongo = db(config);
 
-
-  // appRouter configuration
   if(config.useBasicAuth){
     appRouter.use(basicAuth(config.basicAuth.username, config.basicAuth.password));
   }
@@ -31,10 +28,10 @@ var router = function(config) {
   appRouter.use(bodyParser.urlencoded({ extended: true }));
   appRouter.use(cookieParser(config.site.cookieSecret));
   appRouter.use(session({
-    secret: config.site.sessionSecret,
-    key: config.site.cookieKeyName,
-    resave: true,
-    saveUninitialized: true
+    key:                config.site.cookieKeyName,
+    resave:             true,
+    saveUninitialized:  true,
+    secret:             config.site.sessionSecret
   }));
   appRouter.use(methodOverride(function(req) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -67,11 +64,10 @@ var router = function(config) {
       res.locals.messageError = req.session.error;
       delete req.session.error;
     }
-    
+
     mongo.updateDatabases(mongo.adminDb, function(databases){
         mongo.databases = databases;
         res.locals.databases = mongo.databases;
-        
         return next();
     });
   });
@@ -147,8 +143,8 @@ var router = function(config) {
 
   // mongodb mongoMiddleware
   var mongoMiddleware = function(req, res, next) {
-    req.adminDb = mongo.adminDb;
-    req.databases = mongo.databases; //List of database names
+    req.adminDb     = mongo.adminDb;
+    req.databases   = mongo.databases; //List of database names
     req.collections = mongo.collections; //List of collection names in all databases
 
     //Allow page handlers to request an update for collection list
