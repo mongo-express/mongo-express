@@ -1,3 +1,5 @@
+'use strict';
+
 var url = require('url');
 
 if (typeof process.env.MONGODB_PORT === 'string') {
