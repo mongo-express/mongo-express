@@ -1,29 +1,27 @@
 'use strict';
 
 //Add routes from other files
-var
-    database = require('./database'),
-    collection = require('./collection'),
-    document = require('./document');
+var collectionRoute  = require('./collection');
+var databaseRoute    = require('./database');
+var documentRoute    = require('./document');
 
 var routes = function(config) {
   var exp = {};
 
-  exp.viewDatabase = database(config).viewDatabase;
-  exp.updateCollections = database(config).updateCollections;
+  exp.updateCollections = databaseRoute(config).updateCollections;
+  exp.viewDatabase      = databaseRoute(config).viewDatabase;
 
-  exp.viewCollection = collection(config).viewCollection;
-  exp.addCollection = collection(config).addCollection;
-  exp.deleteCollection = collection(config).deleteCollection;
-  exp.renameCollection = collection(config).renameCollection;
-  exp.exportCollection = collection(config).exportCollection;
-  exp.exportColArray = collection(config).exportColArray;
+  exp.addCollection     = collectionRoute(config).addCollection;
+  exp.deleteCollection  = collectionRoute(config).deleteCollection;
+  exp.exportColArray    = collectionRoute(config).exportColArray;
+  exp.exportCollection  = collectionRoute(config).exportCollection;
+  exp.renameCollection  = collectionRoute(config).renameCollection;
+  exp.viewCollection    = collectionRoute(config).viewCollection;
 
-  exp.viewDocument = document(config).viewDocument;
-  exp.updateDocument = document(config).updateDocument;
-  exp.deleteDocument = document(config).deleteDocument;
-  exp.addDocument = document(config).addDocument;
-
+  exp.addDocument       = documentRoute(config).addDocument;
+  exp.deleteDocument    = documentRoute(config).deleteDocument;
+  exp.updateDocument    = documentRoute(config).updateDocument;
+  exp.viewDocument      = documentRoute(config).viewDocument;
 
   //Homepage route
   exp.index = function(req, res) {
