@@ -19,6 +19,7 @@ var routes = function(config) {
   exp.viewCollection    = collectionRoute(config).viewCollection;
 
   exp.addDocument       = documentRoute(config).addDocument;
+  exp.checkValid        = documentRoute(config).checkValid;
   exp.deleteDocument    = documentRoute(config).deleteDocument;
   exp.updateDocument    = documentRoute(config).updateDocument;
   exp.viewDocument      = documentRoute(config).viewDocument;

@@ -5,11 +5,12 @@ var mongodb = require('mongodb');
 //Original code from official JSON.stringify function
 //Modified to accept BSON data types
 
-
-// function f(n) {
-//     // Format integers to have at least two digits.
-//     return n < 10 ? '0' + n : n;
-// }
+// JSHint warning suppression
+/*exported f */
+function f(n) {
+    // Format integers to have at least two digits.
+    return n < 10 ? '0' + n : n;
+}
 
 /*
 if (typeof Date.prototype.toJSON !== 'function') {
@@ -34,7 +35,9 @@ if (typeof Date.prototype.toJSON !== 'function') {
 }
 */
 
-// var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+// JSHint warning suppression
+/*exported cx */
+var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
 var escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
 var gap;
 var indent;

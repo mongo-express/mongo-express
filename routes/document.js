@@ -15,6 +15,16 @@ var routes = function(config) {
     res.render('document', ctx);
   };
 
+  exp.checkValid = function(req, res) {
+    var doc = req.body.document;
+    try {
+      bson.toBSON(doc);
+    } catch (err) {
+      console.error(err);
+      return res.send('Invalid');
+    }
+    res.send('Valid');
+  };
 
   exp.addDocument = function(req, res) {
     var doc = req.body.document;

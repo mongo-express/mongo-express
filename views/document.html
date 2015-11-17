@@ -43,10 +43,10 @@
 
 {% block content %}
 
-<form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string|url_encode }}">
+<form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string|url_encode }}">
   {% if !settings.read_only %}
   <input type="hidden" name="_method" value="put">
-  <button type="submit" class="btn btn-success btn-large"{# onclick="return checkJSON()"#}>
+  <button type="submit" class="btn btn-success btn-large" onclick="return onSubmitClick()">
     <i class="icon-pencil icon-white"></i>
     Save
   </button>
@@ -69,20 +69,25 @@
     theme: "{{ editorTheme }}"
   });
 
-{# This can check for valid JSON on the client side
- # Not used at the moment, since it doesn't allow BSON types
-  function checkJSON() {
-    var d = doc.getValue();
-
-    try {
-      docJSON = JSON.parse(d);
-      return true;
-    } catch (err) {
-      alert('This is not a valid document!');
-      return false;
-    }
+  function onSubmitClick() {
+    $.ajax({
+      type: 'POST',
+      url: "/checkValid",
+      data: {
+        document: doc.getValue()
+      },
+    }).done(function(data) {
+      console.log(data);
+      if (data === 'Valid') {
+        $('#documentInvalidJSON').remove();
+        $('#documentEditForm').submit();
+      } else if ($('#documentInvalidJSON').length === 0){
+        $('#documentEditForm').parent().append('<div id="documentInvalidJSON" class="alert alert-error"><strong>Invalid JSON</strong></div>');
+      }
+    });
+    return false;
   }
-#}
+
 </script>
 
 {% endblock %}
