@@ -30,6 +30,16 @@ var routes = function(config) {
     var defaultKey = (config.defaultKeyNames && config.defaultKeyNames[dbName] && config.defaultKeyNames[dbName][collectionName]) ?
       config.defaultKeyNames[dbName][collectionName] :
       '_id';
+    var edKey = function (doc, defaultKey) {
+      var defaultKeyAsArray = defaultKey.split('.');
+      var val = doc;
+      for (var i = 0; i < defaultKeyAsArray.length; i++) {
+        if (val[defaultKeyAsArray[i]]) {
+          val = val[defaultKeyAsArray[i]];
+        }
+      }
+      return val;
+    };
 
     if (key && value) {
       // If type == J, convert value as json document
@@ -115,7 +125,8 @@ var routes = function(config) {
           type: type,
           query: jsonQuery,
           fields: jsonFields,
-          defaultKey: defaultKey
+          defaultKey: defaultKey,
+          edKey: edKey
         };
 
         res.render('collection', ctx);

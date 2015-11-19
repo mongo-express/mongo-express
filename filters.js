@@ -29,3 +29,7 @@ exports.convertBytes = function(input) {
 exports.to_string = function (input) {
     return input !== null ? input.toString() : '';
 };
+
+exports.is_embeddedDocumentNotation = function (input) {
+  return /^(?:[a-zA-Z0-9_]+\.)+[a-zA-Z0-9_]+/.test(input);
+}
