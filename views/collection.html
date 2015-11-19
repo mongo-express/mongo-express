@@ -174,7 +174,15 @@ function loadDocument(id) {
           {% if document[defaultKey] == "" %}
             {{defaultKey}} is empty for {{document["_id"]|to_string}}
           {% else %}
-            {{document[defaultKey] |to_string}}
+            {% if !document[defaultKey] %}
+              {% if defaultKey|is_embeddedDocumentNotation %}
+                {{edKey(document, defaultKey)}}
+              {% else %}
+                {{defaultKey}} is undefined for {{document["_id"]|to_string}}
+              {% endif %}
+            {% else %}
+              {{document[defaultKey] |to_string}}
+            {% endif %}
           {% endif %}
         </a>
       </div>
