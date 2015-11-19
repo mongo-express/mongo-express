@@ -72,7 +72,7 @@
   function onSubmitClick() {
     $.ajax({
       type: 'POST',
-      url: "/checkValid",
+      url: "{{ baseHref }}checkValid",
       data: {
         document: doc.getValue()
       },
