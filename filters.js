@@ -27,7 +27,7 @@ exports.convertBytes = function(input) {
 };
 
 exports.to_string = function (input) {
-    return input !== null ? input.toString() : '';
+    return ( input !== null && input != undefined ) ? input.toString() : '';
 };
 
 exports.is_embeddedDocumentNotation = function (input) {
