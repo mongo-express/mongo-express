@@ -125,6 +125,8 @@ var router = function(config) {
         id = new mongodb.ObjectID.createFromHexString(id);
       } catch (err) {
       }
+    } else{
+      id = /^[1-9]+[0-9]*$/.test(id) ? +id : id;
     }
 
     req.collection.findOne({_id: id}, function(err, doc) {
