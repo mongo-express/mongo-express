@@ -1,3 +1,7 @@
+'use strict';
+
+/*globals describe, it*/
+
 var bson = require('../bson');
 var expect = require('chai').expect;
 var mongodb = require('mongodb');
@@ -10,7 +14,7 @@ describe('BSON', function() {
 
       expect(result).to.eql({
         test: true,
-        s: "hello",
+        s: 'hello',
         i: -99.44
       });
     });
@@ -88,7 +92,7 @@ describe('BSON', function() {
     it('should convert simple documents', function() {
       var test = {
         bool: true,
-        str: "string",
+        str: 'string',
         number: -678.53,
         list: [
           1,
@@ -105,7 +109,7 @@ describe('BSON', function() {
     it('should convert ObjectID to string', function() {
       var test = {
         id: mongodb.ObjectID(),
-        id2: mongodb.ObjectID("4fb1299686a989240b000001")
+        id2: mongodb.ObjectID('4fb1299686a989240b000001')
       };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
@@ -136,8 +140,8 @@ describe('BSON', function() {
 
     it('should convert DBRef to string', function() {
       var test = {
-        ref: mongodb.DBRef("coll", "id", ""),
-        ref2: mongodb.DBRef("coll", "id", "db")
+        ref: mongodb.DBRef('coll', 'id', ''),
+        ref2: mongodb.DBRef('coll', 'id', 'db')
       };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
@@ -146,7 +150,7 @@ describe('BSON', function() {
     });
 
     it('should convert Symbol to string', function() {
-      var test = { symbol: mongodb.Symbol("test") };
+      var test = { symbol: mongodb.Symbol('test') };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
 
@@ -171,7 +175,7 @@ describe('BSON', function() {
 
     it('should convert Code to string', function() {
       var test = {
-        code: mongodb.Code("function() { x; }")
+        code: mongodb.Code('function() { x; }')
       };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
