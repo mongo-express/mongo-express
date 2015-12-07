@@ -93,11 +93,11 @@ module.exports = {
 
   // Specify the default keyname that should be picked from a document to display in collections list.
   // Keynames can be specified for every database and collection.
-  // If no keyname is specified, it defalts to '_id', which is a mandatory feild.
+  // If no keyname is specified, it defaults to '_id', which is a mandatory field.
   // For Example :
   // defaultKeyNames{
   //   "world_db":{  //Database Name
-  //     "continent":"cont_name", // collection:feild
+  //     "continent":"cont_name", // collection:field
   //     "country":"country_name",
   //     "city":"name"
   //   }
