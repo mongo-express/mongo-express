@@ -93,15 +93,15 @@ Fill in your MongoDB connection details and any other options you want to change
 
     cd YOUR_PATH/node_modules/mongo-express/ && node app.js
 
-If you installed it globally, you can immediately start mongo-express like this: 
+If you installed it globally, you can immediately start mongo-express like this:
 
     mongo-express -u user -p password -d database
 
-Or if you want to use it as an administrator: 
+Or if you want to use it as an administrator:
 
     mongo-express -u superuser -p password
 
-For help on configuration options: 
+For help on configuration options:
 
     mongo-express -h
 
@@ -114,57 +114,38 @@ For help on configuration options:
     
 **To run as a Docker container:**
 
-First, build the container from the project directorty:
+    docker run -it --rm \
+        --name mongo-express \
+        --link NAME_OF_MONGODB_CONTAINER:mongo \
+        knickers/mongo-express
 
-    docker build -t mongo-express .
-
-If you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/):
-
-    docker run -d -p 8081:8081 --link mongodb:mongodb mongo-express
+Make sure you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/) and specify it in the `--link` line.
 
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables):
 
-- Variable name: `ME_CONFIG_MONGODB_SERVER`
-- Description: MongoDB host name or IP address.
-- Default value: `localhost`
+    Name                              | Default         | Description
+    ----------------------------------|-----------------|------------
+    `ME_CONFIG_MONGODB_SERVER`        | `localhost`     | MongoDB host name or IP address.
+    `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
+    `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
+    `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
+    `ME_CONFIG_SITE_COOKIESECRET`     | `cookiesecret`  | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
+    `ME_CONFIG_SITE_SESSIONSECRET`    | `sessionsecret` | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
+    `ME_CONFIG_BASICAUTH_USERNAME`    | `admin`         | mongo-express login name. Sending an empty string will disable basic authentication.
+    `ME_CONFIG_BASICAUTH_PASSWORD`    | `pass`          | mongo-express login password.
+    `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
 
+**Example**
 
-- Variable name: `ME_CONFIG_MONGODB_PORT`
-- Description: MongoDB port.
-- Default value: `27017`
+    docker run -it --rm \
+        --name mongo-express \
+        --link web_db_1:mongo \
+        -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
+        -e ME_CONFIG_BASICAUTH_USERNAME="" \
+        -e ME_CONFIG_BASICAUTH_PASSWORD="" \
+        knickers/mongo-express
 
-- Variable name: `ME_CONFIG_MONGODB_ADMINUSERNAME`
-- Description: Administrator username.
-- Default value: ``
-
-- Variable name: `ME_CONFIG_MONGODB_ADMINPASSWORD`
-- Description: Administrator password.
-- Default value: ``
-
-- Variable name: `ME_CONFIG_SITE_COOKIESECRET`
-- Description: String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
-- Default value: `cookiesecret`
-
-
-- Variable name: `ME_CONFIG_SITE_SESSIONSECRET`
-- Description: String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
-- Default value: `sessionsecret`
-
-
-- Variable name: `ME_CONFIG_BASICAUTH_USERNAME`
-- Description: mongo-express login name. Sending an empty string will disable basic authentication.
-- Default value: `admin`
-
-
-- Variable name: `ME_CONFIG_BASICAUTH_PASSWORD`
-- Description: mongo-express login password.
-- Default value `pass`
-
-- Variable name: `ME_CONFIG_OPTIONS_EDITORTHEME`
-- Description: Web editor color theme.
-- Default value: `rubyblue`
-
--
+This changes the editor's color theme and turns off basic authentication.
 
 **To use:**
 
