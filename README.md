@@ -133,7 +133,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_SITE_SESSIONSECRET`    | `sessionsecret` | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
     `ME_CONFIG_BASICAUTH_USERNAME`    | `admin`         | mongo-express login name. Sending an empty string will disable basic authentication.
     `ME_CONFIG_BASICAUTH_PASSWORD`    | `pass`          | mongo-express login password.
-    `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme [more here](http://codemirror.net/demo/theme.html).
+    `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
 
 **Example**
 
