@@ -66,9 +66,7 @@ Or if you want to install a global copy:
 
 **To configure:**
 
-Copy or rename `node_modules/mongo-express/config.default.js` into a new file.
-
-Fill in your MongoDB connection details, and any other options you want to change.
+Modify `node_modules/mongo-express/config.js` to set your preferences, filling in your MongoDB connection details, and any other options you want to change.
 
 **To run:**
 
@@ -99,6 +97,8 @@ Visit `http://localhost:8081` or whatever URL/port you entered into your
 config (if running standalone) or whatever `config.site.baseUrl` (if mounting
 as a middleware).
 
+* Default username: admin
+* Default password: pass
 
 BSON Data Types
 ---------------
