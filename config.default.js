@@ -56,6 +56,7 @@ module.exports = {
     cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
     sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
     cookieKeyName: 'mongo-express',
+    requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '100kb',
     sslEnabled: process.env.ME_CONFIG_SITE_SSL_ENABLED || false,
     sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
     sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || ''

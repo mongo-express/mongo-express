@@ -25,7 +25,10 @@ var router = function(config) {
   appRouter.use(favicon(__dirname + '/public/images/favicon.ico'));
   appRouter.use(logger('dev'));
   appRouter.use('/', express.static(__dirname + '/public'));
-  appRouter.use(bodyParser.urlencoded({ extended: true }));
+  appRouter.use(bodyParser.urlencoded({
+    extended: true,
+    limit:    config.site.requestSizeLimit
+  }));
   appRouter.use(cookieParser(config.site.cookieSecret));
   appRouter.use(session({
     key:                config.site.cookieKeyName,
