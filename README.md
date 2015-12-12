@@ -126,7 +126,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
     Name                              | Default         | Description
     ----------------------------------|-----------------|------------
-    `ME_CONFIG_MONGODB_SERVER`        | `localhost`     | MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image.
+    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image.
     `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
     `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
     `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
