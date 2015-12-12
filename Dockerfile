@@ -16,5 +16,7 @@ COPY . /app
 RUN npm install
 RUN cp config.default.js config.js
 
+ENV ME_CONFIG_MONGODB_SERVER="mongo"
+
 EXPOSE 8081
 CMD ["tini", "--", "npm", "start"]
