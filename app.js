@@ -48,7 +48,7 @@ try {
   config.useBasicAuth = false;
 }
 
-app.use('/', middleware(config));
+app.use(config.site.baseUrl, middleware(config));
 app.set('read_only', config.options.readOnly || false);
 
 if (config.site.sslEnabled){
