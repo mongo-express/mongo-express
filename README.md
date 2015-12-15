@@ -112,20 +112,21 @@ For help on configuration options:
 
     app.use('/mongo_express', mongo_express(mongo_express_config))
     
-**To run as a Docker container:**
+**To run in a Docker container:**
 
-    docker run -it --rm \
-        --name mongo-express \
-        --link NAME_OF_MONGODB_CONTAINER:mongo \
-        knickers/mongo-express
+First, build an image from the project directory:
 
-Make sure you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/) and specify it in the `--link` line.
+    docker build -t mongo-express .
 
-You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables):
+Then run the image. Make sure you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/) and specify it's name in the `--link` argument.
+
+    docker run -it --rm --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+
+You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
     Name                              | Default         | Description
     ----------------------------------|-----------------|------------
-    `ME_CONFIG_MONGODB_SERVER`        | `localhost`     | MongoDB host name or IP address.
+    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image.
     `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
     `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
     `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
@@ -136,23 +137,20 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
     `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
 
-**Example**
+**Example:**
 
     docker run -it --rm \
         --name mongo-express \
         --link web_db_1:mongo \
         -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
         -e ME_CONFIG_BASICAUTH_USERNAME="" \
-        -e ME_CONFIG_BASICAUTH_PASSWORD="" \
-        knickers/mongo-express
+        mongo-express
 
-This changes the editor's color theme and turns off basic authentication.
+This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
 
 **To use:**
 
-Visit `http://localhost:8081` or whatever URL/port you entered into your
-config (if running standalone) or whatever `config.site.baseUrl` (if mounting
-as a middleware).
+The default port exposed from the container is 8081, so visit `http://localhost:8081` or whatever URL/port you entered into your config (if running standalone) or whatever `config.site.baseUrl` (if mounting as a middleware).
 
 
 BSON Data Types
