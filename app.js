@@ -6,7 +6,7 @@ var express     = require('express');
 var fs          = require('fs');
 var https       = require('https');
 var middleware  = require('./middleware');
-var program     = require('commander');
+var commander   = require('commander');
 var app         = express();
 var defaultPort = 80;
 var server      = app;
@@ -17,36 +17,39 @@ try {
   config = require('./config');
 } catch (e) {
   config = require('./config.default');
+}
 
-  program
-    .version(require('./package').version)
-    .option('-u, --username <username>', 'username for authentication')
-    .option('-p, --password <password>', 'password for authentication')
-    .option('-a, --admin', 'enable authentication as admin')
-    .option('-d, --database <database>', 'authenticate to database')
-    .option('--port <port>', 'listen on specified port')
-  .parse(process.argv);
+commander
+  .version(require('./package').version)
+  .option('-u, --username <username>', 'username for authentication')
+  .option('-p, --password <password>', 'password for authentication')
+  .option('-a, --admin', 'enable authentication as admin')
+  .option('-d, --database <database>', 'authenticate to database')
+  .option('--port <port>', 'listen on specified port')
+.parse(process.argv);
 
-  config.mongodb.admin = !!program.admin;
-  if (program.admin) {
-    config.mongodb.adminUsername = program.username;
-    config.mongodb.adminPassword = program.password;
+if (commander.username && commander.password) {
+  config.mongodb.admin = !!commander.admin;
+  if (commander.admin) {
+    config.mongodb.adminUsername = commander.username;
+    config.mongodb.adminPassword = commander.password;
   } else {
     var user = {
-      database: program.database,
-      username: program.username,
-      password: program.password
+      database: commander.database,
+      username: commander.username,
+      password: commander.password
     };
     for (var key in user) {
       if (!user[key]) {
-        program.help();
+        commander.help();
       }
     }
     config.mongodb.auth[0] = user;
   }
-  config.site.port = program.port || config.site.port;
   config.useBasicAuth = false;
 }
+
+config.site.port = commander.port || config.site.port;
 
 app.use(config.site.baseUrl, middleware(config));
 app.set('read_only', config.options.readOnly || false);
