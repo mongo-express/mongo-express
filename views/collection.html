@@ -199,7 +199,7 @@ function loadDocument(id) {
                 theme: '{{ editorTheme }}',
                 lineNumbers: true
                 {%- if collectionName != 'system.indexes' && collectionName != 'system.users' %},
-                onFocus: function() { loadDocument('{{ docs[loop.index0]._id|to_string }}') }
+                onFocus: function() { loadDocument( '{{ docs[loop.index0]._id | json | safe | url_encode }}') }
                 {%- endif %}
               });
             </script>
@@ -213,7 +213,7 @@ function loadDocument(id) {
 {% if !settings.read_only %}
 <td>
   <div class="span1">
-    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id|to_string|url_encode }}">
+    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id| json | safe | url_encode }}">
     <input type="hidden" name="_method" value="delete">
     <button type="submit" class="btn btn-danger btn-mini">
     <i class="icon-remove icon-white"></i>

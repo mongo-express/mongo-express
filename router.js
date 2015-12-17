@@ -122,29 +122,73 @@ var router = function(config) {
 
   // :document param MUST be preceded by a :collection param
   appRouter.param('document', function(req, res, next, id) {
-    if (id.length === 24) {
-      //Convert id string to mongodb object ID
-      try {
-        id = new mongodb.ObjectID.createFromHexString(id);
-      } catch (err) {
-      }
-    } else{
-      id = /^[1-9]+[0-9]*$/.test(id) ? +id : id;
+    id = JSON.parse(decodeURIComponent(id));
+    var obj_id;
+
+    // Attempt to create ObjectID from passed 'id'
+    try {
+      obj_id = new mongodb.ObjectID.createFromHexString(id);
+    } catch (err) {
     }
 
-    req.collection.findOne({_id: id}, function(err, doc) {
-      if (err || doc === null) {
-        req.session.error = 'Document not found!';
-        return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
-      }
+    // If an ObjectID was correctly created from passed id param, try getting the ObjID first else falling back to try getting the string id
+    // If not valid ObjectID created, try getting string id
 
-      req.document = doc;
-      res.locals.document = doc;
+    if (obj_id) {
+      // passed id has successfully been turned into a valid ObjectID
+      req.collection.findOne({_id: obj_id}, function(err, doc) {
+        if (err) {
+          req.session.error = 'Error: ' + err;
+          return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
+        }
 
-      next();
-    });
+        if (doc === null) {
+          // No document found with obj_id, try again with straight id
+          req.collection.findOne({_id: id }, function(err, doc) {
+            if (err) {
+              req.session.error = 'Error: ' + err;
+              return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
+            }
+
+            if (doc === null) {
+              req.session.error = 'Document not found!';
+              return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
+            }
+
+            // Document found - send it back
+            req.document = doc;
+            res.locals.document = doc;
+
+            next();
+          });
+        } else {
+          // Document found - send it back
+          req.document = doc;
+          res.locals.document = doc;
+
+          next();
+        }
+
+      });
+    } else {
+      // Passed id was NOT a valid ObjectID
+      req.collection.findOne({_id: id}, function(err, doc) {
+        if (err) {
+          req.session.error = 'Error: ' + err;
+          return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
+        }
+        if (doc === null) {
+          req.session.error = 'Document not found!';
+          return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
+        }
+
+        req.document = doc;
+        res.locals.document = doc;
+
+        next();
+      });
+    }
   });
-
 
   // mongodb mongoMiddleware
   var mongoMiddleware = function(req, res, next) {

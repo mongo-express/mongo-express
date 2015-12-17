@@ -43,7 +43,7 @@
 
 {% block content %}
 
-<form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id|to_string|url_encode }}">
+<form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
   {% if !settings.read_only %}
   <input type="hidden" name="_method" value="put">
   <button type="submit" class="btn btn-success btn-large" onclick="return onSubmitClick()">
