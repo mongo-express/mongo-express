@@ -58,10 +58,8 @@ var connect = function(config) {
         console.error(err);
         databases = _.pluck(config.mongodb.auth, 'database');
       } else {
-
-        for (var key in dbs.databases) {
-          var dbName = dbs.databases[key].name;
-
+        for (var i=0; i< dbs.databases.length; i++) {
+          var dbName = dbs.databases[i].name;
           //'local' is special database, ignore it
           if (dbName === 'local') {
             continue;
@@ -80,13 +78,12 @@ var connect = function(config) {
 
           connections[dbName] = mainConn.db(dbName);
           databases.push(dbName);
-
           updateCollections(connections[dbName], dbName);
         }
       }
       //Sort database names
       databases = databases.sort();
-
+      
       if(callback){
         callback(databases);
       }
@@ -157,13 +154,13 @@ var connect = function(config) {
   });
 
   return {
-    adminDb: adminDb,
-    collections: collections,
+    updateCollections: updateCollections,
+    updateDatabases: updateDatabases,
     connections: connections,
     databases: databases,
-    mainConn: mainConn,
-    updateCollections: updateCollections,
-    updateDatabases: updateDatabases
+    collections: collections,
+    adminDb: adminDb,
+    mainConn: mainConn
   };
 };
 
