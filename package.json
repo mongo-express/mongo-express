@@ -21,7 +21,7 @@
     "express": "4.13.3",
     "express-session": "1.11.3",
     "method-override": "2.3.5",
-    "mongodb": "2.0.43",
+    "mongodb": "^2.0.0",
     "morgan": "1.6.1",
     "serve-favicon": "2.3.0",
     "swig": "1.4.2",
