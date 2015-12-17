@@ -154,13 +154,13 @@ var connect = function(config) {
   });
 
   return {
-    updateCollections: updateCollections,
-    updateDatabases: updateDatabases,
+    adminDb: adminDb,
+    collections: collections,
     connections: connections,
     databases: databases,
-    collections: collections,
-    adminDb: adminDb,
-    mainConn: mainConn
+    mainConn: mainConn,
+    updateCollections: updateCollections,
+    updateDatabases: updateDatabases
   };
 };
 
