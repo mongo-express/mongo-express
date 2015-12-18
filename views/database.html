@@ -50,29 +50,32 @@
 </form>
 
 <script>
-  $( document ).ready( function() {
-    $( '#collection' ).popover({ content: "Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots." });
+'use strict';
+$(document).ready(function() {
+  $('#collection').popover({
+    content: 'Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
+  });
 
-    $( '.deleteButton' ).popover({ placement: "left", title: "Warning", content: "Are you sure you want to delete this collection? All documents will be deleted." });
+  $('.deleteButton').popover({
+    placement: 'left', title: 'Warning', content: 'Are you sure you want to delete this collection? All documents will be deleted.',
+  });
 
-    $( '.deleteButton' ).on( 'click', function( event ) {
-      event.preventDefault();
-      var target = $( this );
-      var parentForm = $( '#' + target.attr( 'childof' ) );
+  $('.deleteButton').on('click', function(event) {
+    event.preventDefault();
+    var target = $(this);
+    var parentForm = $('#' + target.attr('childof'));
 
-      $( '#confirmation-input' ).attr( 'shouldbe', target.attr( 'collection-name' ) );
-      $( '#modal-collection-name' ).text( target.attr( 'collection-name' ) );
-      $( '#confirm-deletion' ).modal({ backdrop: 'static', keyboard: false })
-        .one( 'click', '#delete', function() {
-          var input = $( '#confirmation-input' );
-          if ( input.val().toLowerCase() === input.attr( 'shouldbe' ).toLowerCase() ) {
-            parentForm.trigger( 'submit' );
-          } else {
-            // wrong collection name
-          }
-    });
-   });
- });
+    $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
+    $('#modal-collection-name').text(target.attr('collection-name'));
+    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
+      .one('click', '#delete', function() {
+        var input = $('#confirmation-input');
+        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
+          parentForm.trigger('submit');
+        }
+      });
+  });
+});
 </script>
 {% endif %}
 
