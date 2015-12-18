@@ -2,7 +2,7 @@
   "author": "https://github.com/andzdroid",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
-  "version": "0.28.2",
+  "version": "0.28.3",
   "bin": {
     "mongo-express": "./app.js"
   },
