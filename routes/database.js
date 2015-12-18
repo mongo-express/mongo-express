@@ -12,11 +12,11 @@ var routes = function() {
         title: 'Viewing Database: ' + req.dbName,
         colls: req.collections[req.dbName],
         stats: {
-        collections: data.collections,
-        dataSize: utils.bytesToSize(data.dataSize),
-        storageSize: utils.bytesToSize(data.storageSize),
-        fileSize: utils.bytesToSize(data.fileSize),
-      },
+          collections:  data.collections,
+          dataSize:     utils.bytesToSize(data.dataSize),
+          fileSize:     utils.bytesToSize(data.fileSize),
+          storageSize:  utils.bytesToSize(data.storageSize),
+        },
       };
       res.render('database', ctx);
     });
