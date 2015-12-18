@@ -2,7 +2,7 @@
   "author": "https://github.com/andzdroid",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
-  "version": "0.28.1",
+  "version": "0.28.2",
   "bin": {
     "mongo-express": "./app.js"
   },
@@ -35,11 +35,13 @@
   "engine": "node >= 0.10",
   "license": "MIT",
   "scripts": {
-    "start": "node app",
+    "jshint": "jshint -c .jshintrc --exclude-path .jshintignore .",
     "jscs": "jscs .",
+    "start": "node app",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "pre-commit": [
+    "jshint",
     "jscs"
   ],
   "main": "./middleware"

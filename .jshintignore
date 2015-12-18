@@ -1,5 +1,6 @@
 *.md
 .gitignore
+.jscsrc
 .jshintrc
 .jshintignore
 .travis.yml
