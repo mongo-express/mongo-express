@@ -53,6 +53,11 @@ if (commander.username && commander.password) {
 
 config.site.port = commander.port || config.site.port;
 
+if (!config.site.baseUrl) {
+  console.error('Please specify a baseUrl in your config. Using "/" for now.');
+  config.site.baseUrl = '/';
+}
+
 app.use(config.site.baseUrl, middleware(config));
 app.set('read_only', config.options.readOnly || false);
 
