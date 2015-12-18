@@ -2,7 +2,22 @@
   "author": "https://github.com/andzdroid",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
-  "version": "0.28.3",
+  "keywords": [
+    "admin",
+    "administration",
+    "collection"
+    "database",
+    "GUI",
+    "interface",
+    "manage",
+    "manage-mongo",
+    "mongo",
+    "mongodb",
+    "phpmyadmin",
+    "UI",
+    "web-based"
+  ],
+  "version": "0.28.4",
   "bin": {
     "mongo-express": "./app.js"
   },
@@ -42,7 +57,8 @@
   },
   "pre-commit": [
     "jshint",
-    "jscs"
+    "jscs",
+    "test"
   ],
   "main": "./middleware"
 }
