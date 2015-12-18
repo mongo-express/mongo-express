@@ -89,6 +89,7 @@ var routes = function(config) {
         var next2;
         var next;
         var last;
+        var pagination;
 
         prev = {
           page: Math.round((skip - limit) / limit) + 1,
@@ -108,6 +109,7 @@ var routes = function(config) {
         };
         here = Math.round(skip / limit) + 1;
         last = (Math.ceil(stats.count / limit) - 1) * limit;
+        pagination = stats.count > limit;
 
         var docs = [];
 
@@ -130,6 +132,7 @@ var routes = function(config) {
           next: next,
           here: here,
           last: last,
+          pagination: pagination,
           key: key,
           value: value,
           type: type,
