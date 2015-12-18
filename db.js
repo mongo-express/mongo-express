@@ -83,7 +83,7 @@ var connect = function(config) {
       }
       //Sort database names
       databases = databases.sort();
-      
+
       if(callback){
         callback(databases);
       }
