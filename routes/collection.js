@@ -14,7 +14,7 @@ var routes = function(config) {
     var skip = parseInt(req.query.skip, 10) || 0;
     var query_options = {
       limit: limit,
-      skip: skip
+      skip: skip,
     };
 
     // some query filter
@@ -30,7 +30,7 @@ var routes = function(config) {
     var defaultKey = (config.defaultKeyNames && config.defaultKeyNames[dbName] && config.defaultKeyNames[dbName][collectionName]) ?
       config.defaultKeyNames[dbName][collectionName] :
       '_id';
-    var edKey = function (doc, defaultKey) {
+    var edKey = function(doc, defaultKey) {
       var defaultKeyAsArray = defaultKey.split('.');
       var val = doc;
       for (var i = 0; i < defaultKeyAsArray.length; i++) {
@@ -38,6 +38,7 @@ var routes = function(config) {
           val = val[defaultKeyAsArray[i]];
         }
       }
+
       return val;
     };
 
@@ -46,10 +47,12 @@ var routes = function(config) {
       if (type.toUpperCase() === 'J') {
         value = JSON.parse(req.query.value);
       }
+
       // If type == N, convert value to Number
       if (type.toUpperCase() === 'N') {
         value = Number(req.query.value);
       }
+
       // If type == O, convert value to ObjectID
       // TODO: Add ObjectID validation to prevent error messages.
       if (type.toUpperCase() === 'O') {
@@ -59,16 +62,18 @@ var routes = function(config) {
           return res.redirect('back');
         }
       }
+
       query[key] = value;
     } else if (jsonQuery) {
-    query = bson.toSafeBSON(jsonQuery);
-    if (query === null) {
-      req.session.error = 'Query entered is not valid';
-      return res.redirect('back');
-    }
-    if (jsonFields) {
-      fields = bson.toSafeBSON(jsonFields) || {};
-    }
+      query = bson.toSafeBSON(jsonQuery);
+      if (query === null) {
+        req.session.error = 'Query entered is not valid';
+        return res.redirect('back');
+      }
+
+      if (jsonFields) {
+        fields = bson.toSafeBSON(jsonFields) || {};
+      }
     } else {
       query = {};
     }
@@ -78,30 +83,35 @@ var routes = function(config) {
 
         //Pagination
         //Have to do this here, swig template doesn't allow any calculations :(
-        var prev, prev2, here, next2, next, last;
+        var prev;
+        var prev2;
+        var here;
+        var next2;
+        var next;
+        var last;
 
         prev = {
           page: Math.round((skip - limit) / limit) + 1,
-          skip: skip - limit
+          skip: skip - limit,
         };
         prev2 = {
           page: Math.round((skip - limit * 2) / limit) + 1,
-          skip: skip - limit * 2
+          skip: skip - limit * 2,
         };
         next2 = {
           page: Math.round((skip + limit * 2) / limit) + 1,
-          skip: skip + limit * 2
+          skip: skip + limit * 2,
         };
         next = {
           page: Math.round((skip + limit) / limit) + 1,
-          skip: skip + limit
+          skip: skip + limit,
         };
         here = Math.round(skip / limit) + 1;
         last = (Math.ceil(stats.count / limit) - 1) * limit;
 
         var docs = [];
 
-        for(var i in items) {
+        for (var i in items) {
           docs[i] = items[i];
           items[i] = bson.toString(items[i]);
         }
@@ -126,7 +136,7 @@ var routes = function(config) {
           query: jsonQuery,
           fields: jsonFields,
           defaultKey: defaultKey,
-          edKey: edKey
+          edKey: edKey,
         };
 
         res.render('collection', ctx);
@@ -136,13 +146,14 @@ var routes = function(config) {
 
   exp.exportCollection = function(req, res) {
     req.collection.find().toArray(function(err, items) {
-        res.setHeader('Content-disposition', 'attachment; filename=' + req.collectionName + '.json');
+      res.setHeader('Content-disposition', 'attachment; filename=' + req.collectionName + '.json');
       res.setHeader('Content-type', 'application/json');
       var aItems = [];
-      for(var i in items) {
-      var docStr = bson.toJsonString(items[i]);
-      aItems.push(docStr);
-        }
+      for (var i in items) {
+        var docStr = bson.toJsonString(items[i]);
+        aItems.push(docStr);
+      }
+
       res.write(aItems.join(os.EOL));
       res.end();
     });
@@ -150,7 +161,7 @@ var routes = function(config) {
 
   exp.exportColArray = function(req, res) {
     req.collection.find().toArray(function(err, items) {
-        res.setHeader('Content-disposition', 'attachment; filename=' + req.collectionName + '.json');
+      res.setHeader('Content-disposition', 'attachment; filename=' + req.collectionName + '.json');
       res.setHeader('Content-type', 'application/json');
       res.write(bson.toJsonString(items));
       res.end();
@@ -185,7 +196,6 @@ var routes = function(config) {
     });
   };
 
-
   exp.deleteCollection = function(req, res) {
     req.collection.drop(function(err) {
       if (err) {
@@ -208,7 +218,6 @@ var routes = function(config) {
       });
     });
   };
-
 
   exp.renameCollection = function(req, res) {
     var name = req.body.collection;
@@ -242,6 +251,7 @@ var routes = function(config) {
       });
     });
   };
+
   return exp;
 };
 

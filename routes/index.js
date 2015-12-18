@@ -28,7 +28,7 @@ var routes = function(config) {
   exp.index = function(req, res) {
     var ctx = {
       title: 'Mongo Express',
-      info: false
+      info: false,
     };
 
     if (typeof req.adminDb === 'undefined') {

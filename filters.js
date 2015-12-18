@@ -26,10 +26,10 @@ exports.convertBytes = function(input) {
   }
 };
 
-exports.to_string = function (input) {
-    return ( input !== null && input !== undefined ) ? input.toString() : '';
+exports.to_string = function(input) {
+  return (input !== null && input !== undefined) ? input.toString() : '';
 };
 
-exports.is_embeddedDocumentNotation = function (input) {
+exports.is_embeddedDocumentNotation = function(input) {
   return /^(?:[a-zA-Z0-9_]+\.)+[a-zA-Z0-9_]+/.test(input);
 };

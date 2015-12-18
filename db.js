@@ -10,7 +10,7 @@ var connect = function(config) {
   var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
   var dbOptions = {
     auto_reconnect: config.mongodb.autoReconnect,
-    poolSize: config.mongodb.poolSize
+    poolSize: config.mongodb.poolSize,
   };
 
   var db;
@@ -19,6 +19,7 @@ var connect = function(config) {
     host = host.map(function(host) {
       return new mongodb.Server(host, port, dbOptions);
     });
+
     db = new mongodb.Db('local', new mongodb.ReplSet(host), { safe: true, w: 0 });
   } else {
     db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions), {safe:true});
@@ -27,14 +28,14 @@ var connect = function(config) {
   var connections = {};
   var databases = [];
   var collections = {};
+
   //get admin instance
   var adminDb = db.admin();
   var mainConn; // main db connection
 
-
   // update the collections list
   var updateCollections = function(db, dbName, callback) {
-    db.listCollections().toArray(function (err, result) {
+    db.listCollections().toArray(function(err, result) {
       var names = [];
 
       for (var r in result) {
@@ -58,8 +59,9 @@ var connect = function(config) {
         console.error(err);
         databases = _.pluck(config.mongodb.auth, 'database');
       } else {
-        for (var i=0; i< dbs.databases.length; i++) {
+        for (var i = 0; i < dbs.databases.length; i++) {
           var dbName = dbs.databases[i].name;
+
           //'local' is special database, ignore it
           if (dbName === 'local') {
             continue;
@@ -70,6 +72,7 @@ var connect = function(config) {
               continue;
             }
           }
+
           if (config.mongodb.blacklist.length !== 0) {
             if (_.include(config.mongodb.blacklist, dbName)) {
               continue;
@@ -81,15 +84,15 @@ var connect = function(config) {
           updateCollections(connections[dbName], dbName);
         }
       }
+
       //Sort database names
       databases = databases.sort();
 
-      if(callback){
+      if (callback) {
         callback(databases);
       }
     });
   };
-
 
   // connect to mongodb database
   db.open(function(err, db) {
@@ -160,9 +163,8 @@ var connect = function(config) {
     databases: databases,
     mainConn: mainConn,
     updateCollections: updateCollections,
-    updateDatabases: updateDatabases
+    updateDatabases: updateDatabases,
   };
 };
 
 module.exports = connect;
-

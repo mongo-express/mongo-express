@@ -1,19 +1,18 @@
 'use strict';
 
-var express = require('express'),
-  cons = require('consolidate'),
-  swig = require('swig');
-
-var swigFilters = require('./filters'),
-  router = require('./router');
+var express     = require('express');
+var cons        = require('consolidate');
+var swig        = require('swig');
+var swigFilters = require('./filters');
+var router      = require('./router');
 
 var middleware = function(config) {
   var app = express();
 
   //Set up swig
   app.engine('html', cons.swig);
-  Object.keys(swigFilters).forEach(function (name) {
-      swig.setFilter(name, swigFilters[name]);
+  Object.keys(swigFilters).forEach(function(name) {
+    swig.setFilter(name, swigFilters[name]);
   });
 
   //App configuration

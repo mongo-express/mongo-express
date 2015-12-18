@@ -1,0 +1,17 @@
+{
+	"preset": "airbnb",
+  "requireCamelCaseOrUpperCaseIdentifiers": false,
+  excludeFiles: [
+    ".DS_Store",
+    ".gitignore",
+    ".jscsrc",
+    ".jshintignore",
+    ".jshintrc",
+    ".travis.yml",
+    "HISTORY.md",
+    "README.md",
+    "Dockerfile",
+    "package.json",
+    "public/javascripts/**",
+  ]
+}

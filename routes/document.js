@@ -9,7 +9,7 @@ var routes = function(config) {
     var ctx = {
       title: 'Viewing Document: ' + req.document._id,
       editorTheme: config.options.editorTheme,
-      docString: bson.toString(req.document)
+      docString: bson.toString(req.document),
     };
 
     res.render('document', ctx);
@@ -23,6 +23,7 @@ var routes = function(config) {
       console.error(err);
       return res.send('Invalid');
     }
+
     res.send('Valid');
   };
 
@@ -56,7 +57,6 @@ var routes = function(config) {
     });
   };
 
-
   exp.updateDocument = function(req, res) {
     var doc = req.body.document;
 
@@ -88,7 +88,6 @@ var routes = function(config) {
       res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
     });
   };
-
 
   exp.deleteDocument = function(req, res) {
     req.collection.remove(req.document, {safe: true}, function(err) {

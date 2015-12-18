@@ -4,7 +4,6 @@ var mongodb = require('mongodb');
 var vm = require('vm');
 var json = require('./json');
 
-
 //Adaptors for BSON types
 
 var DBRef = function(namespace, oid, db) {
@@ -12,6 +11,7 @@ var DBRef = function(namespace, oid, db) {
   if (db === undefined || db === null) {
     db = '';
   }
+
   return mongodb.DBRef(namespace, oid, db);
 };
 
@@ -39,7 +39,7 @@ exports.getSandbox = function() {
     MinKey: mongodb.MinKey,
     MaxKey: mongodb.MaxKey,
     ISODate: Date,
-    Date: Date
+    Date: Date,
   };
 };
 
@@ -60,22 +60,25 @@ exports.toBSON = function(string) {
 // the free form string in to BSON, since the possibilities of failure
 // are higher, this function uses a try..catch
 exports.toSafeBSON = function(string) {
-	try{
-		var bsonObject = exports.toBSON(string);
-		return bsonObject;
-	}
-	catch(err){
-		return null;
-	}
+  try {
+    var bsonObject = exports.toBSON(string);
+    return bsonObject;
+  }
+  catch (err) {
+    return null;
+  }
 };
 
 // Converts string to ObjectID.  TODO: Add validation.
-exports.toObjectId = function(string){
+exports.toObjectId = function(string) {
   var sandbox = exports.getSandbox();
+
   // Strip quotes
   string = string.replace('"', '').replace('"', '');
+
   // Convert ObjectId("526ddf5a9f610ffd26000001") to 526ddf5a9f610ffd26000001
   string = string.replace(/ObjectID\(/i, '').replace(')', '');
+
   // Make sure it's a 24-character string to prevent errors.
   if (string.length === 24) {
     return sandbox.ObjectID(string);

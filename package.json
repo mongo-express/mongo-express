@@ -3,8 +3,8 @@
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
   "version": "0.28.1",
-  "bin" : {
-    "mongo-express" : "./app.js"
+  "bin": {
+    "mongo-express": "./app.js"
   },
   "repository": {
     "type": "git",
@@ -28,14 +28,19 @@
     "underscore": "~1.8.0"
   },
   "devDependencies": {
+    "chai": "3.3.0",
     "mocha": "2.3.3",
-    "chai": "3.3.0"
+    "pre-commit": "^1.1.2"
   },
   "engine": "node >= 0.10",
   "license": "MIT",
   "scripts": {
     "start": "node app",
+    "jscs": "jscs .",
     "test": "./node_modules/mocha/bin/mocha"
   },
+  "pre-commit": [
+    "jscs"
+  ],
   "main": "./middleware"
 }

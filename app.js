@@ -37,15 +37,17 @@ if (commander.username && commander.password) {
     var user = {
       database: commander.database,
       username: commander.username,
-      password: commander.password
+      password: commander.password,
     };
     for (var key in user) {
       if (!user[key]) {
         commander.help();
       }
     }
+
     config.mongodb.auth[0] = user;
   }
+
   config.useBasicAuth = false;
 }
 
@@ -54,11 +56,11 @@ config.site.port = commander.port || config.site.port;
 app.use(config.site.baseUrl, middleware(config));
 app.set('read_only', config.options.readOnly || false);
 
-if (config.site.sslEnabled){
+if (config.site.sslEnabled) {
   defaultPort     = 443;
   sslOptions  = {
     key:  fs.readFileSync(config.site.sslKey),
-    cert: fs.readFileSync(config.site.sslCert)
+    cert: fs.readFileSync(config.site.sslCert),
   };
   server = https.createServer(sslOptions, app);
 }

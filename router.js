@@ -19,22 +19,23 @@ var router = function(config) {
   var appRouter = express.Router();
   var mongo = db(config);
 
-  if(config.useBasicAuth){
+  if (config.useBasicAuth) {
     appRouter.use(basicAuth(config.basicAuth.username, config.basicAuth.password));
   }
+
   appRouter.use(favicon(__dirname + '/public/images/favicon.ico'));
   appRouter.use(logger('dev'));
   appRouter.use('/', express.static(__dirname + '/public'));
   appRouter.use(bodyParser.urlencoded({
     extended: true,
-    limit:    config.site.requestSizeLimit
+    limit:    config.site.requestSizeLimit,
   }));
   appRouter.use(cookieParser(config.site.cookieSecret));
   appRouter.use(session({
     key:                config.site.cookieKeyName,
     resave:             true,
     saveUninitialized:  true,
-    secret:             config.site.sessionSecret
+    secret:             config.site.sessionSecret,
   }));
   appRouter.use(methodOverride(function(req) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -49,11 +50,10 @@ var router = function(config) {
     appRouter.use(errorHandler());
   }
 
-
   // view helper, sets local variables used in templates
   appRouter.all('*', function(req, res, next) {
     // ensure a trailing slash on the baseHref (used as a prefix in routes and views)
-    res.locals.baseHref = req.app.mountpath + (req.app.mountpath[req.app.mountpath.length-1] === '/' ? '' : '/');
+    res.locals.baseHref = req.app.mountpath + (req.app.mountpath[req.app.mountpath.length - 1] === '/' ? '' : '/');
     res.locals.databases = mongo.databases;
     res.locals.collections = mongo.collections;
 
@@ -68,13 +68,12 @@ var router = function(config) {
       delete req.session.error;
     }
 
-    mongo.updateDatabases(mongo.adminDb, function(databases){
-        mongo.databases = databases;
-        res.locals.databases = mongo.databases;
-        return next();
+    mongo.updateDatabases(mongo.adminDb, function(databases) {
+      mongo.databases = databases;
+      res.locals.databases = mongo.databases;
+      return next();
     });
   });
-
 
   // route param pre-conditions
   appRouter.param('database', function(req, res, next, id) {
@@ -177,6 +176,7 @@ var router = function(config) {
           req.session.error = 'Error: ' + err;
           return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
         }
+
         if (doc === null) {
           req.session.error = 'Document not found!';
           return res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + req.collectionName);
@@ -202,7 +202,6 @@ var router = function(config) {
     next();
   };
 
-
   // routes
   appRouter.get('/', mongoMiddleware, routes(config).index);
 
@@ -226,6 +225,5 @@ var router = function(config) {
 
   return appRouter;
 };
-
 
 module.exports = router;
