@@ -56,23 +56,25 @@
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
           {% for db in databases %}
-          <li class="nav-header" onclick="$('#toggle_{{ db }}').collapse('toggle')">
-            {{ db }}
-            <i class="icon-chevron-down pull-right"></i>
-          </li>
-          <li><a href="{{ baseHref }}db/{{ db }}"><i class="icon-folder-open"></i> View Database</a></li>
-            <ul class="unstyled collapse nav nav-list
-            {%- if db == dbName %} in{% endif -%}
-            " id="toggle_{{ db }}">
-            {% for collection_db in collections -%}
-              {% if loop.key == db -%}
-                {% for collection in collection_db -%}
-                  <li><a href="{{ baseHref }}db/{{ db }}/{{ collection }}"><i class="icon-list-alt"></i> {{ collection }}</a></li>
-                {%- endfor %}
-              {%- endif %}
-            {%- endfor %}
-            </ul>
-          <li class="divider"></li>
+            <li class="nav-header" onclick="$('#toggle_{{ db }}').collapse('toggle')">
+              {{ db }}
+              <i class="icon-chevron-down pull-right"></i>
+            </li>
+            <li><a href="{{ baseHref }}db/{{ db }}"><i class="icon-folder-open"></i> View Database</a></li>
+              <ul class="unstyled collapse nav nav-list
+              {%- if db == dbName %} in{% endif -%}
+              " id="toggle_{{ db }}">
+              {% for collection_db in collections -%}
+                {% if loop.key == db -%}
+                  {% for collection in collection_db -%}
+                    <li><a href="{{ baseHref }}db/{{ db }}/{{ collection }}"><i class="icon-list-alt"></i> {{ collection }}</a></li>
+                  {%- endfor %}
+                {%- endif %}
+              {%- endfor %}
+              </ul>
+            {% if !loop.last %}
+              <li class="divider"></li>
+            {% endif %}
           {% endfor %}
         </ul>
       </div>
