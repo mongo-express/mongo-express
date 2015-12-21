@@ -55,7 +55,7 @@
 
 {% if !settings.read_only %}
 <p>
-<a data-toggle="modal" href="#addDocument" class="btn btn-success btn-large">
+<a data-toggle="modal" href="#addDocument" class="btn btn-success btn-large input-block-level">
   <i class="icon-file icon-white"></i>
   New Document
 </a>
@@ -169,7 +169,7 @@ function loadDocument(id) {
 <table class="table table-striped">
 {% for document in docs %}
 <tr><td>
-<div class="accordian span9" id="_accordian">
+<div class="accordian span8" id="_accordian">
   <div class="accordian-group">
       <div class="accordian-heading">
         <a class="accordian-toggle" data-toggle="collapse" data-parent="_accordian" href="#body_{{ loop.index}}">
@@ -300,26 +300,25 @@ No indexes found.
     </div>
   {% endif %}
 
-  <div class="span4">
-    <h2>Export Collection</h2>
-    <div class="well">
-    <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning span2">
-      <i class="icon-download icon-white"></i> Export
-    </a>
+  <div class="span9">
+    <h2>Export</h2>
+    <div class="span4">
+      <h3>Standard</h3>
+      <div class="well">
+      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning span2">
+        <i class="icon-download icon-white"></i> Export
+      </a>
+      </div>
     </div>
-  </div>
 
-  <div class="span1">
-    <!-- spacing for visual balance -->
-    <h2>&nbsp;</h2>
-  </div>
 
-  <div class="span4">
-    <h2>Export Collection --jsonArray</h2>
-    <div class="well">
-    <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning span2">
-      <i class="icon-download icon-white"></i> Export
-    </a>
+    <div class="span4">
+      <h3>--jsonArray</h3>
+      <div class="well">
+      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning span2">
+        <i class="icon-download icon-white"></i> Export
+      </a>
+      </div>
     </div>
   </div>
 
