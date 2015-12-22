@@ -14,70 +14,6 @@
 
 
 {% block content %}
-<div class="stats">
-	<h2>Database Stats</h2>
-	<table class="table table-bordered table-striped">
-	  <tr>
-		<td class="span2"><strong>Collections (including system.namespaces)</strong></td>
-		<td class="span3">{{ stats.collections }}</td>
-	  </tr>
-	  <tr>
-		<td><strong>Data Size</strong></td>
-		<td>{{ stats.dataSize }}</td>
-	  </tr>
-	  <tr>
-		<td><strong>Storage Size</strong></td>
-		<td>{{ stats.storageSize }}</td>
-	  </tr>
-	  <tr>
-		<td><strong>File Size (on disk)</strong></td>
-		<td>{{ stats.fileSize }}</td>
-	  </tr>
-	</table>
-</div>
-
-{% if !settings.read_only %}
-<h2>Create Collection</h2>
-<form class="well form-inline" method="POST">
-    <div class="input-prepend">
-      <span class="add-on">{{ dbName }} . </span>
-      <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
-    </div>
-  <button type="submit" class="btn btn-primary">
-  <i class="icon-folder-open icon-white"></i>
-  Create collection
-  </button>
-</form>
-
-<script>
-'use strict';
-$(document).ready(function() {
-  $('#collection').popover({
-    content: 'Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
-  });
-
-  $('.deleteButton').popover({
-    placement: 'left', title: 'Warning', content: 'Are you sure you want to delete this collection? All documents will be deleted.',
-  });
-
-  $('.deleteButton').on('click', function(event) {
-    event.preventDefault();
-    var target = $(this);
-    var parentForm = $('#' + target.attr('childof'));
-
-    $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
-    $('#modal-collection-name').text(target.attr('collection-name'));
-    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
-      .one('click', '#delete', function() {
-        var input = $('#confirmation-input');
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
-          parentForm.trigger('submit');
-        }
-      });
-  });
-});
-</script>
-{% endif %}
 
 <table>
   <tr>
@@ -146,6 +82,115 @@ $(document).ready(function() {
     <button type="button" data-dismiss="modal" class="btn" id="delete">Delete</button>
     <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
   </div>
+</div>
+
+{% if !settings.read_only %}
+<h2>Create Collection</h2>
+<form class="well form-inline" method="POST">
+    <div class="input-prepend">
+      <span class="add-on">{{ dbName }} . </span>
+      <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
+    </div>
+  <button type="submit" class="btn btn-primary">
+  <i class="icon-folder-open icon-white"></i>
+  Create collection
+  </button>
+</form>
+
+<script>
+'use strict';
+$(document).ready(function() {
+  $('#collection').popover({
+    content: 'Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
+  });
+
+  $('.deleteButton').popover({
+    placement: 'left', title: 'Warning', content: 'Are you sure you want to delete this collection? All documents will be deleted.',
+  });
+
+  $('.deleteButton').on('click', function(event) {
+    event.preventDefault();
+    var target = $(this);
+    var parentForm = $('#' + target.attr('childof'));
+
+    $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
+    $('#modal-collection-name').text(target.attr('collection-name'));
+    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
+      .one('click', '#delete', function() {
+        var input = $('#confirmation-input');
+        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
+          parentForm.trigger('submit');
+        }
+      });
+  });
+});
+</script>
+{% endif %}
+
+<div class="stats">
+  <h2>Database Stats</h2>
+  <table class="table table-bordered table-striped">
+    <tr>
+    <td class="span2"><strong>Collections (including system.namespaces)</strong></td>
+    <td class="span3">{{ stats.collections }}</td>
+    </tr>
+    <tr>
+    <td><strong>Data Size</strong></td>
+    <td>{{ stats.dataSize }}</td>
+    </tr>
+    <tr>
+    <td><strong>Storage Size</strong></td>
+    <td>{{ stats.storageSize }}</td>
+    </tr>
+    {% if stats.fileSize %}
+      <tr>
+      <td><strong>File Size (on disk)</strong></td>
+      <td>{{ stats.fileSize }}</td>
+      </tr>
+    {% endif %}
+    {% if stats.avgObjSize %}
+      <tr>
+      <td><strong>Avg Obj Size #</strong></td>
+      <td>{{ stats.avgObjSize }}</td>
+      </tr>
+    {% endif %}
+    {% if stats.objects %}
+      <tr>
+      <td><strong>Objects #</strong></td>
+      <td>{{ stats.objects }}</td>
+      </tr>
+    {% endif %}
+    {% if stats.numExtents %}
+      <tr>
+      <td><strong>Extents #</strong></td>
+      <td>{{ stats.numExtents }}</td>
+      </tr>
+    {% endif %}
+    {% if stats.extentFreeListNum %}
+      <tr>
+      <td><strong>Extents Free List</strong></td>
+      <td>{{ stats.extentFreeListNum }}</td>
+      </tr>
+    {% endif %}
+    {% if stats.indexes %}
+      <tr>
+      <td><strong>Indexes #</strong></td>
+      <td>{{ stats.indexes }}</td>
+      </tr>
+    {% endif %}
+    {% if stats.indexSize %}
+      <tr>
+      <td><strong>Index Size</strong></td>
+      <td>{{ stats.indexSize }}</td>
+      </tr>
+    {% endif %}
+    {% if stats.dataFileVersion %}
+      <tr>
+      <td><strong>Data File Version</strong></td>
+      <td>{{ stats.dataFileVersion }}</td>
+      </tr>
+    {% endif %}
+  </table>
 </div>
 
 {% endblock %}

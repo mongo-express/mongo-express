@@ -12,10 +12,17 @@ var routes = function() {
         title: 'Viewing Database: ' + req.dbName,
         colls: req.collections[req.dbName],
         stats: {
-          collections:  data.collections,
-          dataSize:     utils.bytesToSize(data.dataSize),
-          fileSize:     utils.bytesToSize(data.fileSize),
-          storageSize:  utils.bytesToSize(data.storageSize),
+          avgObjSize:         utils.bytesToSize(data.avgObjSize),
+          collections:        data.collections,
+          dataFileVersion:    data.dataFileVersion,
+          dataSize:           utils.bytesToSize(data.dataSize),
+          extentFreeListNum:  (data.extentFreeList && data.extentFreeList.num ? data.extentFreeList.num : null),
+          fileSize:           (typeof data.fileSize !== 'undefined' ? utils.bytesToSize(data.fileSize) : null),
+          indexes:            data.indexes,
+          indexSize:          utils.bytesToSize(data.indexSize),
+          numExtents:         data.numExtents.toString(),
+          objects:            data.objects,
+          storageSize:        utils.bytesToSize(data.storageSize),
         },
       };
       res.render('database', ctx);
