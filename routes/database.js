@@ -14,7 +14,9 @@ var routes = function() {
         stats: {
           avgObjSize:         utils.bytesToSize(data.avgObjSize),
           collections:        data.collections,
-          dataFileVersion:    data.dataFileVersion,
+          dataFileVersion:    (data.dataFileVersion && data.dataFileVersion.major && data.dataFileVersion.minor ?
+            data.dataFileVersion.major + '.' + data.dataFileVersion.minor :
+            null),
           dataSize:           utils.bytesToSize(data.dataSize),
           extentFreeListNum:  (data.extentFreeList && data.extentFreeList.num ? data.extentFreeList.num : null),
           fileSize:           (typeof data.fileSize !== 'undefined' ? utils.bytesToSize(data.fileSize) : null),
