@@ -1,13 +1,13 @@
 'use strict';
 
-var async = require('async');
+var async   = require('async');
 var mongodb = require('mongodb');
-var _ = require('underscore');
+var _       = require('underscore');
 
 var connect = function(config) {
   // set up database stuff
-  var host = config.mongodb.server || 'localhost';
-  var port = config.mongodb.port || mongodb.Connection.DEFAULT_PORT;
+  var host = config.mongodb.server  || 'localhost';
+  var port = config.mongodb.port    || mongodb.Connection.DEFAULT_PORT;
   var dbOptions = {
     auto_reconnect: config.mongodb.autoReconnect,
     poolSize: config.mongodb.poolSize,
@@ -26,7 +26,7 @@ var connect = function(config) {
   }
 
   var connections = {};
-  var databases = [];
+  var databases   = [];
   var collections = {};
 
   //get admin instance
@@ -100,7 +100,7 @@ var connect = function(config) {
       throw err;
     }
 
-    console.log('Database connected!');
+    console.log('Database connected');
 
     mainConn = db;
 
@@ -144,12 +144,12 @@ var connect = function(config) {
             }
 
             updateCollections(connections[auth.database], auth.database);
-            console.log('Connected!');
+            console.log('Database ' + auth.database + ' connected');
             callback();
           });
         } else {
           updateCollections(connections[auth.database], auth.database);
-          console.log('Connected!');
+          console.log('Database ' + auth.database + ' connected');
           callback();
         }
       });
@@ -157,13 +157,13 @@ var connect = function(config) {
   });
 
   return {
-    adminDb: adminDb,
-    collections: collections,
-    connections: connections,
-    databases: databases,
-    mainConn: mainConn,
-    updateCollections: updateCollections,
-    updateDatabases: updateDatabases,
+    adminDb:            adminDb,
+    collections:        collections,
+    connections:        connections,
+    databases:          databases,
+    mainConn:           mainConn,
+    updateCollections:  updateCollections,
+    updateDatabases:    updateDatabases,
   };
 };
 
