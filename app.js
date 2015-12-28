@@ -7,6 +7,7 @@ var fs          = require('fs');
 var https       = require('https');
 var middleware  = require('./middleware');
 var commander   = require('commander');
+var clc         = require('cli-color');
 var app         = express();
 var defaultPort = 80;
 var server      = app;
@@ -56,6 +57,10 @@ config.site.port = commander.port || config.site.port;
 if (!config.site.baseUrl) {
   console.error('Please specify a baseUrl in your config. Using "/" for now.');
   config.site.baseUrl = '/';
+}
+
+if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+  console.error(clc.red.underline('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
 }
 
 app.use(config.site.baseUrl, middleware(config));

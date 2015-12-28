@@ -17,7 +17,7 @@
     "UI",
     "web-based"
   ],
-  "version": "0.28.7",
+  "version": "0.28.8",
   "bin": {
     "mongo-express": "./app.js"
   },
@@ -29,9 +29,10 @@
     "async": "1.4.2",
     "basic-auth-connect": "1.0.0",
     "body-parser": "1.14.0",
+    "cli-color": "^1.1.0",
+    "commander": "^2.8.1",
     "consolidate": "0.12.1",
     "cookie-parser": "1.4.0",
-    "commander": "^2.8.1",
     "errorhandler": "1.4.2",
     "express": "4.13.3",
     "express-session": "1.11.3",
