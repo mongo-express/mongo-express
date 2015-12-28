@@ -64,6 +64,7 @@ Or if you want to install a global copy:
 
     npm install -g mongo-express
 
+By default `config.default.js` is used where the default authentication is admin:pass 
 
 **To configure:**
 
