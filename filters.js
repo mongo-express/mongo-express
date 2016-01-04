@@ -30,6 +30,19 @@ exports.to_string = function(input) {
   return (input !== null && input !== undefined) ? input.toString() : '';
 };
 
+exports.to_display = function(input) {
+
+  if (typeof input === 'string' && (input.substr(0, 22) === 'data:image/png;base64,' || input.substr(0, 22) === 'data:image/gif;base64,'))  {
+    return '<img src="' + input + '"/>';
+  }
+
+  if (input !== null && input !== undefined) {
+    return input.toString();
+  }
+
+  return '';
+};
+
 exports.is_embeddedDocumentNotation = function(input) {
   return /^(?:[a-zA-Z0-9_]+\.)+[a-zA-Z0-9_]+/.test(input);
 };

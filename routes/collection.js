@@ -1,8 +1,8 @@
 'use strict';
 
-var os = require('os');
-
-var bson = require('../bson');
+var _     = require('underscore');
+var os    = require('os');
+var bson  = require('../bson');
 
 var routes = function(config) {
   var exp = {};
@@ -111,17 +111,23 @@ var routes = function(config) {
         last = (Math.ceil(stats.count / limit) - 1) * limit;
         pagination = stats.count > limit;
 
-        var docs = [];
+        var docs    = [];
+        var columns = [];
 
         for (var i in items) {
           docs[i] = items[i];
+          columns.push(Object.keys(items[i]));
           items[i] = bson.toString(items[i]);
         }
 
+        // Generate an array of columns used by all documents visible on this page
+        columns = _.uniq(_.flatten(columns));
+
         var ctx = {
           title: 'Viewing Collection: ' + req.collectionName,
-          documents: items, //Docs converted to strings
-          docs: docs, //Original docs
+          documents: items, // Docs converted to strings
+          docs: docs,       // Original docs
+          columns: columns, // All used columns
           stats: stats,
           editorTheme: config.options.editorTheme,
           limit: limit,

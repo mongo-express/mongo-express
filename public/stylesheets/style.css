@@ -7,3 +7,9 @@
   cursor: pointer;
   background: #EEE;
 }
+
+.tableWrapper {
+  /*overflow: scroll;*/
+  display: table;
+  cursor: pointer;
+}
