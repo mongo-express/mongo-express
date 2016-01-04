@@ -45,12 +45,14 @@ interface can be used for executing malicious javascript on a server**.
 Screenshots
 -----------
 
-<img src="http://i.imgur.com/DOi3b.png" title="Viewing documents in a collection" />
+<img src="http://imgur.com/6Ggxe1J.png" title="Viewing documents in a collection" />
+<img src="http://imgur.com/ojSu5Nn.png" title="Viewing server status" />
+<img src="http://imgur.com/OA0idFS.png" title="Viewing database" />
 
 Click here for more screenshots:
-[http://imgur.com/a/OTZHe](http://imgur.com/a/OTZHe)
+[https://imgur.com/gallery/etfhv/](https://imgur.com/gallery/etfhv/)
 
-These screenshots are from version 0.11.0.
+These screenshots are from version 0.29.1.
 
 
 Usage
