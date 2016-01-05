@@ -27,6 +27,6 @@ stages:
       application: ${CF_APP}
     script: |-
       #!/bin/bash
-      cf push
+      cf push "${CF_APP}" -c "mongo-express --admin"
       # view logs
       #cf logs "${CF_APP}" --recent
