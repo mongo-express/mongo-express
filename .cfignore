@@ -1,4 +1,3 @@
-
 # List of files and directories to ignore when deploying to Cloud Foundry
 .DS_Store
 .nodemonignore
