@@ -3,15 +3,28 @@ mongo-express
 
 Web-based MongoDB admin interface written with Node.js and express (see original project [here](https://github.com/andzdroid/mongo-express)).
 
-The project was modified to fit Bluemix specification.
+The project was modified to fit Bluemix's specification.
 
-After you have git cloned it, take the following action to fit your environment:
+Doing manually:
 
+* Git clone this repository
 * Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
 * Change the file `manifest.yml` to fit your Bluemix app and service environment
+
+
+Doing automatically:
+
+* Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/eduardomourar/mongo-express.git)
+
+
+Then, take the following action to customize to your environment:
+
 * Create your `config.js` file based on `config.default.js`
   * Check if it is necessary to change the `dbLabel` according to the MongoDB service created
   * Change the `basicAuth` properties, not to keep the default values
+  * Keep in mind that argument `--admin` is being passed in the `package.json` file
 
 
 Features
