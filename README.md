@@ -24,7 +24,6 @@ Then, take the following action to customize to your environment:
 * Create your `config.js` file based on `config.default.js`
   * Check if it is necessary to change the `dbLabel` according to the MongoDB service created
   * Change the `basicAuth` properties, not to keep the default values
-  * Keep in mind that argument `--admin` is being passed in the `package.json` file
 
 
 Features
