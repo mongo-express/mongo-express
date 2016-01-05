@@ -1,0 +1,10 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: mybluemix.net
+  name: mongo-express
+  host: mongo-express
+  disk_quota: 1024M
+  services:
+  - db-mongo
