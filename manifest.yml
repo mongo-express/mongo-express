@@ -6,7 +6,7 @@ declared-services:
 applications:
   memory: 128M
   name: mongo-express
-  host: mongo-express
+  host: mongo-express-${random-word}
   services:
   - db-mongo
   env:
