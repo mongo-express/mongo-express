@@ -9,7 +9,7 @@ stages:
   jobs:
   - name: Build
     type: builder
-    build_type: simple
+    artifact_dir: ''
 - name: Deploy
   inputs:
   - type: job
