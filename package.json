@@ -48,7 +48,10 @@
     "mocha": "2.3.3",
     "pre-commit": "^1.1.2"
   },
-  "engine": "node >= 0.10",
+  "engines": {
+    "node": ">=0.12.0",
+    "npm": ">=2.0.0"
+  },
   "license": "MIT",
   "scripts": {
     "jshint": "jshint -c .jshintrc --exclude-path .jshintignore .",
