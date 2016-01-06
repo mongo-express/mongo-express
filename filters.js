@@ -44,6 +44,17 @@ exports.to_display = function(input) {
     return '<img src="' + input + '"/>';
   }
 
+  // Audio inline
+  if (
+    typeof input === 'string' &&
+    (
+      input.substr(0, 22) === 'data:audio/ogg;base64,' ||
+      input.substr(0, 22) === 'data:audio/mp3;base64,'
+    )
+  )  {
+    return '<audio controls src="' + input + '"/>';
+  }
+
   // Try and output .toString()
   if (input !== null && input !== undefined) {
     return input.toString();
