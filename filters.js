@@ -55,6 +55,18 @@ exports.to_display = function(input) {
     return '<audio controls src="' + input + '"/>';
   }
 
+  // Video inline
+  if (
+    typeof input === 'string' &&
+    (
+      input.substr(0, 23) === 'data:video/webm;base64,' ||
+      input.substr(0, 22) === 'data:video/mp4;base64,'  ||
+      input.substr(0, 22) === 'data:video/ogv;base64,'
+    )
+  )  {
+    return '<video controls><source type="' + input.substring(input.indexOf(':') + 1, input.indexOf(';')) + '" src="' + input + '"/></video>';
+  }
+
   // Concatenate long strings
   if (typeof input === 'string' && input.length > 20) {
     return input.substr(0, 19) + '…';
