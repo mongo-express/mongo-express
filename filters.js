@@ -72,8 +72,8 @@ exports.to_display = function(input) {
   }
 
   // Concatenate long strings
-  if (typeof input === 'string' && input.length > 20) {
-    return input.substr(0, 19) + '…';
+  if (typeof input === 'string' && input.length > 50) {
+    return input.substr(0, 49) + '…';
   }
 
   // Try and output .toString()
