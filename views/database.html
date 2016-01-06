@@ -4,14 +4,16 @@
 
 {% block breadcrumb %}
 <li>
-  <a href="">Home</a>
-  <span class="divider">/</span>
+  <a href="">
+    Home
+  </a>
 </li>
-<li class="active">
-  {{ dbName }}
+<li>
+  <a>
+    Database: {{ dbName }}
+  </a>
 </li>
 {% endblock %}
-
 
 {% block content %}
 

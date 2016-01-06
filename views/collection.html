@@ -40,17 +40,18 @@ jQuery(document).ready(function($) {
 {% block breadcrumb %}
   <li>
     <a href="">Home</a>
-    <span class="divider">/</span>
   </li>
   <li>
-    <a href="db/{{ dbName }}">{{ dbName }}</a>
-    <span class="divider">/</span>
+    <a href="db/{{ dbName }}">
+      Database: {{ dbName }}
+    </a>
   </li>
-  <li class="active">
-    {{ collectionName }}
+  <li>
+    <a>
+      Collection: {{ collectionName }}
+    </a>
   </li>
 {% endblock %}
-
 
 {% block content %}
 

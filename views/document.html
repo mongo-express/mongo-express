@@ -24,19 +24,24 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="">Home</a>
-    <span class="divider">/</span>
+    <a href="">
+      Home
+    </a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}">{{ dbName }}</a>
-    <span class="divider">/</span>
+    <a href="{{ baseHref }}db/{{ dbName }}">
+      Database: {{ dbName }}
+    </a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">{{ collectionName }}</a>
-    <span class="divider">/</span>
+    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      Collection: {{ collectionName }}
+    </a>
   </li>
-  <li class="active">
-    {{ document._id|to_string }}
+  <li>
+    <a>
+      Document: {{ document._id|to_string }}
+    </a>
   </li>
 {% endblock %}
 
