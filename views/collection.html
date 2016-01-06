@@ -4,17 +4,18 @@
 
 
 {% block head %}
-  <link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
-  <script type="text/javascript">
-  'use strict';
-  jQuery(document).ready(function ($) {
-        $('#tabs').tab();
-    if (document.location.href.indexOf('query=') >= 0) {
-      $('#tabs a[href="#advanced"]').tab('show');
-    }
-    });
-  </script>
+<link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
+<script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
+<script type="text/javascript">
+'use strict';
+jQuery(document).ready(function($) {
+  $('#tabs').tab();
+  if (document.location.href.indexOf('query=') >= 0) {
+    $('#tabs a[href="#advanced"]').tab('show');
+  }
+});
+</script>
+
   {% if editorTheme != "default" %}
   <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
@@ -126,15 +127,15 @@
 </div>
 
 <script>
-  $('#addDocument').modal('hide');
-  var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: { name: 'javascript', json: true },
-    indentUnit: 4,
-    electricChars: true,
-    matchBrackets: true,
-    lineNumbers: true,
-    theme: '{{ editorTheme }}'
-  });
+$('#addDocument').modal('hide');
+var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
+  mode: { name: 'javascript', json: true },
+  indentUnit: 4,
+  electricChars: true,
+  matchBrackets: true,
+  lineNumbers: true,
+  theme: '{{ editorTheme }}',
+});
 </script>
 
 {% if documents.length == 0 %}
@@ -144,11 +145,11 @@
 {% else %}
 
 {% if collectionName != 'system.indexes' %}
-  <script type="text/javascript">
-    function loadDocument(id) {
-      location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
-    }
-  </script>
+<script type="text/javascript">
+function loadDocument(id) {
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
+}
+</script>
 {% endif %}
 
 {% if pagination %}
@@ -272,7 +273,7 @@ No indexes found.
         <input type="hidden" name="_method" value="put">
         <div class="input-prepend">
           <span class="add-on">{{ dbName }} . </span>
-          <input class="input-medium" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
+          <input class="input-medium span7" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
         </div>
         <button type="submit" class="btn btn-primary">
         <i class="icon-tag icon-white"></i>
@@ -282,35 +283,34 @@ No indexes found.
     </div>
   {% endif %}
 
-  <div class="span9">
-    <h2>Export</h2>
-    <div class="span4">
-      <h3>Standard</h3>
-      <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning span2">
-        <i class="icon-download icon-white"></i> Export
-      </a>
-      </div>
+</div>
+<div class="row">
+  <div class="span3">
+    <h3>Export Standard</h3>
+    <div class="well">
+    <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning" style="width:90%;">
+      <i class="icon-download icon-white"></i> Export
+    </a>
     </div>
+  </div>
 
 
-    <div class="span4">
-      <h3>--jsonArray</h3>
-      <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning span2">
-        <i class="icon-download icon-white"></i> Export
-      </a>
-      </div>
+  <div class="span3">
+    <h3>Export --jsonArray</h3>
+    <div class="well">
+    <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning" style="width:90%;">
+      <i class="icon-download icon-white"></i> Export
+    </a>
     </div>
   </div>
 
   {% if !settings.read_only %}
-    <div class="span9">
-      <h2>Delete Collection</h2>
+    <div class="span3">
+      <h3>Delete Collection</h3>
       <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" class="hidden" />
-        <button class="btn btn-danger deleteButton" title="Warning" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
+        <button class="btn btn-danger deleteButton" style="width:90%;" title="Warning" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
           <i class="icon-trash icon-white"></i>
           Delete
         </button>
