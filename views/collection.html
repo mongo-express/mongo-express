@@ -71,9 +71,9 @@ jQuery(document).ready(function($) {
   <div class="tab-pane active" id="simple">
     <form class="well form-inline" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
       <div class="input-prepend">
-        <input class="input-medium" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
-        <input class="input-medium" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
-        <select name="type" class="input-small">
+        <input class="input-medium span2" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
+        <input class="input-medium span2" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
+        <select name="type" class="input-small span2">
         <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
         <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
         <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
