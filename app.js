@@ -17,6 +17,15 @@ var sslOptions;
 try {
   config = require('./config');
 } catch (e) {
+  if (e.code === 'MODULE_NOT_FOUND') {
+    console.log('No custom config.js found, loading config.default.js');
+  } else {
+    console.error(clc.red('Unable to load config.js!'));
+    console.error(clc.red('Error is:'));
+    console.log(clc.red(e));
+    process.exit(1);
+  }
+
   config = require('./config.default');
 }
 
@@ -60,7 +69,7 @@ if (!config.site.baseUrl) {
 }
 
 if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-  console.error(clc.red.underline('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+  console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
 }
 
 app.use(config.site.baseUrl, middleware(config));
