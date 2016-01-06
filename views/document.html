@@ -46,7 +46,7 @@
 <form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
   {% if !settings.read_only %}
   <input type="hidden" name="_method" value="put">
-  <button type="submit" class="btn btn-success btn-large" onclick="return onSubmitClick()">
+  <button type="submit" class="btn btn-success btn-large input-block-level" onclick="return onSubmitClick()">
     <i class="icon-pencil icon-white"></i>
     Save
   </button>
