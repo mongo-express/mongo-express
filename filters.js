@@ -67,6 +67,10 @@ exports.to_display = function(input) {
     return '<video controls><source type="' + input.substring(input.indexOf(':') + 1, input.indexOf(';')) + '" src="' + input + '"/></video>';
   }
 
+  if (typeof input === 'object' && input.toString() === '[object Object]') {
+    return '<pre>' + JSON.stringify(input, null, 2) + '</pre>';
+  }
+
   // Concatenate long strings
   if (typeof input === 'string' && input.length > 20) {
     return input.substr(0, 19) + '…';
