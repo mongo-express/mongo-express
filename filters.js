@@ -55,6 +55,11 @@ exports.to_display = function(input) {
     return '<audio controls src="' + input + '"/>';
   }
 
+  // Concatenate long strings
+  if (typeof input === 'string' && input.length > 20) {
+    return input.substr(0, 19) + '…';
+  }
+
   // Try and output .toString()
   if (input !== null && input !== undefined) {
     return input.toString();
