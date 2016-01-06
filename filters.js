@@ -32,16 +32,19 @@ exports.to_string = function(input) {
 
 exports.to_display = function(input) {
 
+  // Images inline
   if (
     typeof input === 'string' &&
     (
       input.substr(0, 22) === 'data:image/png;base64,' ||
       input.substr(0, 22) === 'data:image/gif;base64,' ||
-      input.substr(0, 23) === 'data:image/jpeg;base64,')
-    )  {
+      input.substr(0, 23) === 'data:image/jpeg;base64,'
+    )
+  )  {
     return '<img src="' + input + '"/>';
   }
 
+  // Try and output .toString()
   if (input !== null && input !== undefined) {
     return input.toString();
   }
