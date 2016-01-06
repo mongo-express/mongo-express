@@ -1,8 +1,8 @@
 'use strict';
 
+var _       = require('underscore');
 var async   = require('async');
 var mongodb = require('mongodb');
-var _       = require('underscore');
 
 var connect = function(config) {
   // set up database stuff
@@ -10,7 +10,7 @@ var connect = function(config) {
   var port = config.mongodb.port    || mongodb.Connection.DEFAULT_PORT;
   var dbOptions = {
     auto_reconnect: config.mongodb.autoReconnect,
-    poolSize: config.mongodb.poolSize,
+    poolSize:       config.mongodb.poolSize,
   };
 
   var db;
@@ -25,9 +25,9 @@ var connect = function(config) {
     db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions), {safe:true});
   }
 
-  var connections = {};
   var databases   = [];
   var collections = {};
+  var connections = {};
 
   //get admin instance
   var adminDb = db.admin();

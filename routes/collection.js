@@ -18,15 +18,15 @@ var routes = function(config) {
     };
 
     // some query filter
-    var query = {};
-    var fields = {};
-    var key = req.query.key || '';
-    var value = req.query.value || '';
-    var type = req.query.type || '';
-    var jsonQuery = req.query.query || '';
-    var jsonFields = req.query.fields || '';
-    var dbName = req.params.database;
-    var collectionName = req.params.collection;
+    var query           = {};
+    var fields          = {};
+    var key             = req.query.key     || '';
+    var value           = req.query.value   || '';
+    var type            = req.query.type    || '';
+    var jsonQuery       = req.query.query   || '';
+    var jsonFields      = req.query.fields  || '';
+    var dbName          = req.params.database;
+    var collectionName  = req.params.collection;
     var defaultKey = (config.defaultKeyNames && config.defaultKeyNames[dbName] && config.defaultKeyNames[dbName][collectionName]) ?
       config.defaultKeyNames[dbName][collectionName] :
       '_id';
