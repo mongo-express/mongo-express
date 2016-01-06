@@ -19,6 +19,7 @@ Current features:
 * Database blacklist/whitelist
 * View/add/rename/delete collections
 * View/add/update/delete documents
+* View data URI images inline in collection table view
 * Use BSON data types in documents
 * Ability to specify the default key to be shown in the docs list.
 
