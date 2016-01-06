@@ -1,0 +1,10 @@
+ignore:
+  'npm:uglify-js:20151024':
+    - 'swig > uglify-js':
+        reason: No patch available
+        expires: '2016-02-05T02:49:04.784Z'
+patch:
+  'npm:uglify-js:20151024':
+    - uglify-js:
+        patched: '2016-01-06T02:41:15.287Z'
+version: v1

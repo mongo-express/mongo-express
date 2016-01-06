@@ -41,7 +41,8 @@
     "morgan": "1.6.1",
     "serve-favicon": "2.3.0",
     "swig": "1.4.2",
-    "underscore": "~1.8.0"
+    "underscore": "~1.8.0",
+    "snyk": "^1.8.3"
   },
   "devDependencies": {
     "chai": "3.3.0",
@@ -54,12 +55,15 @@
     "jshint": "jshint -c .jshintrc --exclude-path .jshintignore .",
     "jscs": "jscs .",
     "start": "node app",
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "snyk test && ./node_modules/mocha/bin/mocha",
+    "snyk-protect": "snyk protect",
+    "postinstall": "npm run snyk-protect"
   },
   "pre-commit": [
     "jshint",
     "jscs",
     "test"
   ],
-  "main": "./middleware"
+  "main": "./middleware",
+  "snyk": true
 }
