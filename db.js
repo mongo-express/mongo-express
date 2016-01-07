@@ -31,7 +31,8 @@ var connect = function(config) {
 
   //get admin instance
   var adminDb = db.admin();
-  var mainConn; // main db connection
+  // mainConn should be defined or /dbs will throw an error...
+  var mainConn = db; // main db connection
 
   // update the collections list
   var updateCollections = function(db, dbName, callback) {

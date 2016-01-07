@@ -195,6 +195,7 @@ var router = function(config) {
 
   // mongodb mongoMiddleware
   var mongoMiddleware = function(req, res, next) {
+    req.mainConn    = mongo.mainConn;
     req.adminDb     = mongo.adminDb;
     req.databases   = mongo.databases; //List of database names
     req.collections = mongo.collections; //List of collection names in all databases
@@ -225,6 +226,11 @@ var router = function(config) {
   appRouter.post('/db/:database', mongoMiddleware, routes(config).addCollection);
 
   appRouter.get('/db/:database', mongoMiddleware, routes(config).viewDatabase);
+
+  
+  appRouter.get('/dbs', mongoMiddleware, routes(config).viewDatabases);
+  appRouter.post('/dbs', mongoMiddleware, routes(config).addDatabases);
+  appRouter.delete('/dbs/:database', mongoMiddleware, routes(config).deleteDatabases);
 
   return appRouter;
 };

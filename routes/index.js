@@ -11,6 +11,10 @@ var routes = function(config) {
   exp.updateCollections = databaseRoute(config).updateCollections;
   exp.viewDatabase      = databaseRoute(config).viewDatabase;
 
+  exp.viewDatabases     = databaseRoute(config).viewDatabases;
+  exp.addDatabases      = databaseRoute(config).addDatabases;
+  exp.deleteDatabases   = databaseRoute(config).deleteDatabases;
+
   exp.addCollection     = collectionRoute(config).addCollection;
   exp.deleteCollection  = collectionRoute(config).deleteCollection;
   exp.exportColArray    = collectionRoute(config).exportColArray;

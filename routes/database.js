@@ -31,6 +31,69 @@ var routes = function() {
     });
   };
 
+  exp.viewDatabases = function(req, res) {
+
+    var ctx = {
+      title: 'Manage Databases',
+      databases: req.databases
+    }
+
+    res.render( 'databases', ctx );   
+
+  };
+
+  exp.addDatabases = function(req, res) {
+
+    var name = req.body.database;
+
+    if (name === undefined || name.length === 0) {
+      //TODO: handle error
+      console.error( 'That database name is invalid.' );
+      req.session.error = 'That database name is invalid.';
+      return res.redirect('back');
+    }
+
+   //Database names must begin with a letter or underscore, and can contain only letters, underscores, numbers or dots
+    if (!name.match(/^[a-zA-Z_][a-zA-Z0-9\._]*$/)) {
+      //TODO: handle error
+      console.error( 'That database name is invalid.' );
+      req.session.error = 'That database name is invalid.';
+      return res.redirect('back');
+    }
+
+    var ndb = req.mainConn.db(name);
+    ndb.createCollection("delete_me", function(err) {
+      if( err ) {
+        //TODO: handle error
+        console.error( 'Could not create collection.' );
+        req.session.error = 'Could not create collection.';
+        return res.redirect('back');
+      }
+      ndb.dropCollection("delete_me", function( err ) {
+        if( err ) {
+          //TODO: handle error
+          console.error( 'Could not delete collection.' );
+          req.session.error = 'Could not delete collection.';
+          return res.redirect('back');
+        }
+        res.redirect(res.locals.baseHref + 'dbs');
+      });
+    });
+
+  };
+
+  exp.deleteDatabases = function(req,res) {
+    req.db.dropDatabase(function(err){
+      if( err ) {
+        //TODO: handle error
+        console.error( 'Could not to delte database.' );
+        req.session.error = 'Failed to delte database.';
+        return res.redirect('back');
+      }
+      res.redirect(res.locals.baseHref + 'dbs');
+    });
+  };
+
   exp.updateCollections = function(req, res) {
     req.updateCollections(req.db, req.dbName, function(err) {
       if (err) {
