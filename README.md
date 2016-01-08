@@ -47,10 +47,10 @@ interface can be used for executing malicious javascript on a server**.
 Screenshots
 -----------
 
-<img src="https://imgur.com/UmGSr3x" title="Viewing collection of documents" />
-<img src="https://imgur.com/lL38abn" title="Editing a document" />
-<img src="https://imgur.com/jSWNAIA" title="Viewing server status and databases" />
-<img src="https://imgur.com/nNXuIu0" title="Viewing database" />
+<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" />
+<img src="https://imgur.com/lL38abn.png" title="Editing a document" />
+<img src="https://imgur.com/jSWNAIA.png" title="Viewing server status and databases" />
+<img src="https://imgur.com/nNXuIu0.png" title="Viewing database" />
 
 Click here for more screenshots:
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
