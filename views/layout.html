@@ -104,7 +104,7 @@
       {% endif %}
 
       {% if messageError %}
-      <div class="alert alert-error">
+      <div class="alert alert-danger">
         <button class="close" data-dismiss="alert">×</button>
         <strong>{{ messageError }}</strong>
       </div>
@@ -122,16 +122,4 @@
 </div>
 
 </body>
-<script>
-$(document).ready(function(){
-  $(".sidebar-nav").find("a").each(function(){
-    if ($(this).text().length > 20) {
-      $(this).tooltip({
-        title: $(this).text(),
-        delay: { show: 500, hide: 100 }
-      });
-    }
-  });
-});
-</script>
 </html>

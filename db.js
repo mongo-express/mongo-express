@@ -22,7 +22,7 @@ var connect = function(config) {
 
     db = new mongodb.Db('local', new mongodb.ReplSet(host), { safe: true, w: 0 });
   } else {
-    db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions), {safe:true});
+    db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions), { safe:true });
   }
 
   var databases   = [];
@@ -30,8 +30,8 @@ var connect = function(config) {
   var connections = {};
 
   //get admin instance
-  var adminDb = db.admin();
-  var mainConn; // main db connection
+  var adminDb   = db.admin();
+  var mainConn  = db; // main db connection
 
   // update the collections list
   var updateCollections = function(db, dbName, callback) {

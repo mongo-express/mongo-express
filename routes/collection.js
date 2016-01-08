@@ -261,6 +261,18 @@ var routes = function(config) {
     });
   };
 
+  exp.updateCollections = function(req, res) {
+    req.updateCollections(req.db, req.dbName, function(err) {
+      if (err) {
+        req.session.error = 'Something went wrong: ' + err;
+        return res.redirect('back');
+      }
+
+      req.session.success = 'Collections Updated!';
+      res.redirect(res.locals.baseHref + 'db/' + req.dbName);
+    });
+  };
+
   return exp;
 };
 
