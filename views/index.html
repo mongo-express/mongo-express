@@ -2,7 +2,26 @@
 
 {% block title %}Home{% endblock %}
 
+{% block breadcrumb %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      {% for db in databases %}
+      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+{% endblock %}
+
+
 {% block content %}
+
+<h2>Databases</h2>
+{% for db in databases %}
+<a class="btn btn-lg btn-success btn-block" href="{{ baseHref }}db/{{ db }}/">
+    {{ db }}
+</a>
+{% endfor %}
 
 {% if info == false %}
 

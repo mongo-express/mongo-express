@@ -109,6 +109,7 @@ var router = function(config) {
 
     req.collectionName = id;
     res.locals.collectionName = id;
+    res.locals.collections = mongo.collections[req.dbName];
 
     mongo.connections[req.dbName].collection(id, function(err, coll) {
       if (err || coll === null) {

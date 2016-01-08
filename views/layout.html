@@ -6,7 +6,8 @@
   <title>{% block title %}Index{% endblock %} - Mongo Express</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="{{ baseHref }}stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="{{ baseHref }}stylesheets/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ baseHref }}stylesheets/bootstrap-theme.min.css" rel="stylesheet">
   <link href="{{ baseHref }}stylesheets/style.css" rel="stylesheet" />
   <style type="text/css">
     body {
@@ -27,8 +28,7 @@
     }
   </style>
 
-  <link href="{{ baseHref }}stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
-  <script src="{{ baseHref }}javascripts/jquery-1.7.2.min.js"></script>
+  <script src="{{ baseHref }}javascripts/jquery-2.1.4.min.js"></script>
   <script src="{{ baseHref }}javascripts/bootstrap.min.js"></script>
 
   {% block head %}{% endblock %}
@@ -36,61 +36,64 @@
 
 <body>
 
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="">Mongo Express</a>
-      <div class="nav-collapse">
-        <ul class="nav">
-          {% block breadcrumb %}
-            <li>
-              <a>
-                Home
-              </a>
-            </li>
-          {% endblock %}
-        </ul>
-      </div>
+<nav class="navbar-nav navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+   <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      </ul>
     </div>
   </div>
-</div>
+</nav>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="logo-nav">
+        <img src="{{ baseHref }}images/mongo-express-logo.png" />
+      </div>
+      <a class="navbar-brand" href="">Mongo Express</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+
+
+        {% block breadcrumb %}
+        {% endblock %}
+      </ul>
+
+<!--       <ul class="nav navbar-nav navbar-right">
+        <li><a href="../navbar/">Default</a></li>
+        <li><a href="../navbar-static-top/">Static top</a></li>
+        <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+      </ul>
+ -->
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
 
 <div class="container">
   <div class="row">
-    <div class="span3">
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-          {% for db in databases %}
-            <li class="nav-header" onclick="$('#toggle_{{ db }}').collapse('toggle')">
-              {{ db }}
-              <i class="icon-chevron-down pull-right"></i>
-            </li>
-            <li><a href="{{ baseHref }}db/{{ db }}"><i class="icon-folder-open"></i> View Database</a></li>
-              <ul class="unstyled collapse nav nav-list
-              {%- if db == dbName %} in{% endif -%}
-              " id="toggle_{{ db }}">
-              {% for collection_db in collections -%}
-                {% if loop.key == db -%}
-                  {% for collection in collection_db -%}
-                    <li><a href="{{ baseHref }}db/{{ db }}/{{ collection }}"><i class="icon-list-alt"></i> {{ collection }}</a></li>
-                  {%- endfor %}
-                {%- endif %}
-              {%- endfor %}
-              </ul>
-            {% if !loop.last %}
-              <li class="divider"></li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-
-      {% block sidebar %}{% endblock %}
-    </div>
-
-    <div class="span9">
-
+    <div class="col-md-12">
       <div class="page-header">
-      <h1 id="pageTitle">{{ title }}</h1>
+        <h1 id="pageTitle">{{ title }}</h1>
       </div>
 
       {% if messageSuccess %}
@@ -107,7 +110,13 @@
       </div>
       {% endif %}
 
-      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {% block content %}
+      {% endblock %}
     </div>
   </div>
 </div>

@@ -41,7 +41,7 @@ exports.to_display = function(input) {
       input.substr(0, 23) === 'data:image/jpeg;base64,'
     )
   )  {
-    return '<img src="' + input + '"/>';
+    return '<img src="' + input + '" style="max-height:100%; max-width:100%; "/>';
   }
 
   // Audio inline
@@ -52,7 +52,7 @@ exports.to_display = function(input) {
       input.substr(0, 22) === 'data:audio/mp3;base64,'
     )
   )  {
-    return '<audio controls src="' + input + '"/>';
+    return '<audio controls style="width:45px;" src="' + input + '">Your browser does not support the audio element.</audio>';
   }
 
   // Video inline
@@ -64,7 +64,8 @@ exports.to_display = function(input) {
       input.substr(0, 22) === 'data:video/ogv;base64,'
     )
   )  {
-    return '<video controls><source type="' + input.substring(input.indexOf(':') + 1, input.indexOf(';')) + '" src="' + input + '"/></video>';
+    return '<video controls><source type="' + input.substring(input.indexOf(':') + 1, input.indexOf(';')) + '" src="' + input + '"/>' +
+      'Your browser does not support the video element.</video>';
   }
 
   if (typeof input === 'object' && input.toString() === '[object Object]') {
