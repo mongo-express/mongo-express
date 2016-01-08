@@ -17,18 +17,19 @@ Current features:
 * Connect and authenticate to individual databases
 * Authenticate as admin to view all databases
 * Database blacklist/whitelist
+* View/add/delete databases
 * View/add/rename/delete collections
 * View/add/update/delete documents
 * View data URI images inline in collection table view
 * Use BSON data types in documents
-* Ability to specify the default key to be shown in the docs list.
+* Ability to specify the default key to be shown in the docs list
+* Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
 
 Planned features:
 
 * Support for replica set connections
 * Site authentication
 * REST interface
-
 
 Limitations
 -----------
@@ -46,14 +47,15 @@ interface can be used for executing malicious javascript on a server**.
 Screenshots
 -----------
 
-<img src="https://i.imgur.com/tUNZ4Ck.png" title="Viewing documents in a collection" />
-<img src="http://imgur.com/ojSu5Nn.png" title="Viewing server status" />
-<img src="http://imgur.com/OA0idFS.png" title="Viewing database" />
+<img src="https://imgur.com/UmGSr3x" title="Viewing collection of documents" />
+<img src="https://imgur.com/lL38abn" title="Editing a document" />
+<img src="https://imgur.com/jSWNAIA" title="Viewing server status and databases" />
+<img src="https://imgur.com/nNXuIu0" title="Viewing database" />
 
 Click here for more screenshots:
-[https://imgur.com/gallery/nGg1j//](https://imgur.com/gallery/nGg1j/)
+[https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
 
-These screenshots are from version 0.29.2.
+These screenshots are from version 0.29.5.
 
 
 Usage
