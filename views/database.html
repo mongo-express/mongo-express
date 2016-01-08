@@ -129,19 +129,19 @@ $(document).ready(function() {
 {% endif %}
 
 <div class="stats">
-  <h2>Database Stats</h2>
+  <h3>Database Stats</h3>
   <table class="table table-bordered table-striped">
     <tr>
-    <td class="span2"><strong>Collections (incl. system.namespaces)</strong></td>
-    <td class="span3">{{ stats.collections }}</td>
+      <td><strong>Collections (incl. system.namespaces)</strong></td>
+      <td>{{ stats.collections }}</td>
     </tr>
     <tr>
-    <td><strong>Data Size</strong></td>
-    <td>{{ stats.dataSize }}</td>
+      <td><strong>Data Size</strong></td>
+      <td>{{ stats.dataSize }}</td>
     </tr>
     <tr>
-    <td><strong>Storage Size</strong></td>
-    <td>{{ stats.storageSize }}</td>
+      <td><strong>Storage Size</strong></td>
+      <td>{{ stats.storageSize }}</td>
     </tr>
     {% if stats.fileSize %}
       <tr>

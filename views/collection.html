@@ -265,30 +265,10 @@ $('#addDocument').on('shown.bs.modal', function() {
 
   {% endif %}
 
-  {#
-    # Not very useful, since it doesn't show correct index names
-    # Could use db.coll.getIndexes(), but that is an extra query on every collection page
-  <h2>Indexes</h2>
-  {% if stats.nindexes == 0 %}
-  <p class="well">
-  No indexes found.
-  </p>
-  {% else %}
-  <table class="table table-bordered table-striped">
-    {% for size in stats.indexSizes %}
-    <tr>
-      <td>{{ loop.key }}</td>
-      <td>{{ size }} bytes</td>
-    </tr>
-    {% endfor %}
-  </table>
-  {% endif %}
-  #}
-
   <div class="row">
     {% if !settings.read_only %}
       <div class="col-md-12">
-        <h2>Rename Collection</h2>
+        <h3>Rename Collection</h3>
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
@@ -390,46 +370,85 @@ $('#addDocument').on('shown.bs.modal', function() {
         </div>
       </div>
     {% endif %}
-{% endblock %}
 
-{% block sidebar %}
-  <div class="sidebar-nav">
-    <ul class="nav nav-list">
-      <li class="nav-header">Collection Stats</li>
-      <li>
-        <strong>Documents</strong>
-        <span class="pull-right" id="collStatsCount">{{ stats.count }}</span>
-      </li>
-      <li>
-        <strong>Total doc size</strong>
-        <span class="pull-right">{{ stats.size|convertBytes }}</span>
-      </li>
-      <li>
-        <strong>Average doc size</strong>
-        <span class="pull-right">{{ stats.avgObjSize|convertBytes }}</span>
-      </li>
-      <li>
-        <strong>Pre-allocated size</strong>
-        <span class="pull-right">{{ stats.storageSize|convertBytes }}</span>
-      </li>
-      <li>&nbsp;</li>
-      <li>
-        <strong>Indexes</strong>
-        <span class="pull-right">{{ stats.nindexes }}</span>
-      </li>
-      <li>
-        <strong>Total index size</strong>
-        <span class="pull-right">{{ stats.totalIndexSize|convertBytes }}</span>
-      </li>
-      <li>&nbsp;</li>
-      <li>
-        <strong>Padding factor</strong>
-        <span class="pull-right">{{ stats.paddingFactor }}</span>
-      </li>
-      <li>
-        <strong>Extents</strong>
-        <span class="pull-right">{{ stats.numExtents }}</span>
-      </li>
-    </ul>
+
+  <div class="stats col-md-12">
+    <h3>Collection Stats</h3>
+    <table class="table table-bordered table-striped">
+      <tr>
+        <td>
+          <strong>Documents</strong>
+        </td>
+        <td>
+          {{ stats.count }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Total doc size</strong>
+        </td>
+        <td>
+          {{ stats.size|convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Average doc size</strong>
+        </td>
+        <td>
+          {{ stats.avgObjSize|convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Pre-allocated size</strong>
+        </td>
+        <td>
+          {{ stats.storageSize|convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Indexes</strong>
+        </td>
+        <td>
+          {{ stats.nindexes }}
+        </td>
+      </tr>
+
+      {% if stats.nindexes %}
+        {% for size in stats.indexSizes %}
+        <tr>
+          <td><li>{{ loop.key }}</li></td>
+          <td>{{ size|convertBytes }}</td>
+        </tr>
+        {% endfor %}
+      {% endif %}
+
+      <tr>
+        <td>
+          <strong>Total index size</strong>
+        </td>
+        <td>
+          {{ stats.totalIndexSize|convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Padding factor</strong>
+        </td>
+        <td>
+          {{ stats.paddingFactor }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Extents</strong>
+        </td>
+        <td>
+          {{ stats.numExtents }}
+        </td>
+      </tr>
+    </table>
   </div>
 {% endblock %}

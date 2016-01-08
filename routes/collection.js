@@ -1,8 +1,8 @@
 'use strict';
 
 var _     = require('underscore');
-var os    = require('os');
 var bson  = require('../bson');
+var os    = require('os');
 
 var routes = function(config) {
   var exp = {};
