@@ -30,11 +30,12 @@ exports.deepmerge = function(target, src) {
     });
   } else {
     if (target && typeof target === 'object') {
-      Object.keys(target).forEach(function (key) {
+      Object.keys(target).forEach(function(key) {
         dst[key] = target[key];
-      })
+      });
     }
-    Object.keys(src).forEach(function (key) {
+
+    Object.keys(src).forEach(function(key) {
       if (typeof src[key] !== 'object' || !src[key]) {
         dst[key] = src[key];
       } else {
@@ -48,4 +49,4 @@ exports.deepmerge = function(target, src) {
   }
 
   return dst;
-}
+};
