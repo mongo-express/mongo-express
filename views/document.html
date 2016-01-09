@@ -58,21 +58,57 @@
 {% block content %}
 
 <form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
-  {% if !settings.read_only %}
-  <input type="hidden" name="_method" value="put">
-  <button type="submit" class="btn btn-success btn-large btn-block" onclick="return onSubmitClick()">
-    <span class="glyphicon glyphicon-pencil"></span>
-    Save
-  </button>
-  <br /><br />
+
+  {% if docLength > 10 %}
+    {% if !settings.read_only %}
+      <input type="hidden" name="_method" value="put">
+      <button onclick="return onBackClick()" class="btn btn-warning btn-large col-md-6">
+        <span class="glyphicon glyphicon-remove"></span>
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Save
+      </button>
+    {% else %}
+      <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+        <span class="glyphicon glyphicon-remove"></span>
+        Cancel
+      </button>
+    {% endif %}
+  <br />
   {% endif %}
 
-  <textarea class="span9" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ docString }}</textarea>
+  <textarea class="col-md-12" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ docString }}</textarea>
+
+  <br />
+
+  {% if !settings.read_only %}
+    <input type="hidden" name="_method" value="put">
+    <button onclick="return onBackClick()" class="btn btn-warning btn-large col-md-6">
+      <span class="glyphicon glyphicon-remove"></span>
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
+      <span class="glyphicon glyphicon-pencil"></span>
+      Save
+    </button>
+  {% else %}
+    <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+      <span class="glyphicon glyphicon-remove"></span>
+      Cancel
+    </button>
+  {% endif %}
+
 </form>
 
 <script>
+'use strict';
   var doc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: { name: 'javascript', json: true },
+    mode: {
+      name: 'javascript',
+      json: true,
+    },
     indentUnit: 4,
     lineNumbers: true,
     autoClearEmptyLines: true,
@@ -82,6 +118,12 @@
     {% endif %}
     theme: "{{ editorTheme }}"
   });
+
+  function onBackClick() {
+    //
+    history.back();
+    return false;
+  }
 
   function onSubmitClick() {
     $.ajax({

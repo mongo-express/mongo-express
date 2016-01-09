@@ -9,6 +9,7 @@ var routes = function(config) {
     var ctx = {
       title: 'Viewing Document: ' + req.document._id,
       editorTheme: config.options.editorTheme,
+      docLength: bson.toString(req.document).split(/\r\n|\r|\n/).length,
       docString: bson.toString(req.document),
     };
 
