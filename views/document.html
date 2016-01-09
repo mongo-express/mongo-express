@@ -66,9 +66,9 @@
   {% if docLength > 10 %}
     {% if !settings.read_only %}
       <input type="hidden" name="_method" value="put">
-      <button onclick="return onBackClick()" class="btn btn-warning btn-large col-md-6">
+      <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large col-md-6">
         <span class="glyphicon glyphicon-remove"></span>
-        Cancel
+        Back
       </button>
       <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
         <span class="glyphicon glyphicon-pencil"></span>
@@ -77,7 +77,7 @@
     {% else %}
       <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
         <span class="glyphicon glyphicon-remove"></span>
-        Cancel
+        Back
       </button>
     {% endif %}
   <br />
@@ -89,9 +89,9 @@
 
   {% if !settings.read_only %}
     <input type="hidden" name="_method" value="put">
-    <button onclick="return onBackClick()" class="btn btn-warning btn-large col-md-6">
+    <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large col-md-6">
       <span class="glyphicon glyphicon-remove"></span>
-      Cancel
+      Back
     </button>
     <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
       <span class="glyphicon glyphicon-pencil"></span>
@@ -100,7 +100,7 @@
   {% else %}
     <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
       <span class="glyphicon glyphicon-remove"></span>
-      Cancel
+      Back
     </button>
   {% endif %}
 
@@ -124,12 +124,23 @@
   });
 
   function onBackClick() {
-    //
-    history.back();
+    // "Back" button is clicked
+
+    if (doc.isClean()) {
+      history.back();
+    } else if ($('#discardChanges').length === 0){
+      $('#pageTitle').parent().append('<div id="discardChanges" class="alert alert-warning"><strong>Document has changed! Are you sure you wish to go back?</strong></div>');
+      $('.backButton').text('Back & Discard Changes')
+    } else {
+      history.back();
+    }
+
     return false;
   }
 
   function onSubmitClick() {
+    // Save button is clicked
+
     $.ajax({
       type: 'POST',
       url: "{{ baseHref }}checkValid",
@@ -142,7 +153,7 @@
         $('#documentInvalidJSON').remove();
         $('#documentEditForm').submit();
       } else if ($('#documentInvalidJSON').length === 0){
-        $('#documentEditForm').parent().append('<div id="documentInvalidJSON" class="alert alert-error"><strong>Invalid JSON</strong></div>');
+        $('#pageTitle').parent().append('<div id="documentInvalidJSON" class="alert alert-danger"><strong>Invalid JSON</strong></div>');
       }
     });
     return false;
