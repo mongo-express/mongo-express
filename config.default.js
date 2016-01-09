@@ -8,10 +8,28 @@ if (typeof process.env.MONGODB_PORT === 'string') {
   process.env.ME_CONFIG_MONGODB_PORT = mongoConnection.port;
 }
 
+// Accesing Bluemix variable to get MongoDB info
+if (process.env.VCAP_SERVICES) {
+  var dbLabel = 'mongodb-2.4';
+  var env = JSON.parse(process.env.VCAP_SERVICES);
+  if (env[dbLabel]) {
+    var mongo = env[dbLabel][0]['credentials'];
+  }
+} else {
+  var mongo = {
+    'host': 'localhost',
+    'port': 27017,
+    'username': 'admin',
+    'password': 'pass',
+    'db': 'db',
+    'url': '"mongodb://localhost:27017/db'
+  };
+}
+
 module.exports = {
   mongodb: {
-    server: process.env.ME_CONFIG_MONGODB_SERVER || 'localhost',
-    port: process.env.ME_CONFIG_MONGODB_PORT || 27017,
+    server: process.env.ME_CONFIG_MONGODB_SERVER || mongo.host,
+    port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
@@ -22,7 +40,7 @@ module.exports = {
     //set admin to true if you want to turn on admin features
     //if admin is true, the auth list below will be ignored
     //if admin is true, you will need to enter an admin username/password below (if it is needed)
-    admin: true,
+    admin: false,
 
     // >>>>  If you are using regular accounts, fill out auth details in the section below
     // >>>>  If you have admin auth, leave this section empty and skip to the next section
@@ -30,12 +48,12 @@ module.exports = {
       /*
        * Add the the name, the username, and the password of the databases you want to connect to
        * Add as many databases as you want!
-      {
-        database: 'test',
-        username: 'user',
-        password: 'pass'
-      }
-      */
+       */
+       {
+         database: mongo.db,
+         username: mongo.username,
+         password: mongo.password
+       }
       ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
@@ -55,8 +73,8 @@ module.exports = {
   site: {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the stard and end!
     baseUrl: '/',
-    host: '0.0.0.0',
-    port: 8081,
+    host: process.env.VCAP_APP_HOST || 'localhost',
+    port: process.env.VCAP_APP_PORT || 8081,
     cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
     sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
     cookieKeyName: 'mongo-express',

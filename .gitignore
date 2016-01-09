@@ -1,4 +1,36 @@
-lib-cov
+# OS
+# ===========
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Node and related ecosystem
+# ==========================
+.nodemonignore
+.sass-cache/
+node_modules/
+public/lib/
+app/tests/coverage/
+.bower-*/
+.idea/
+coverage/
+npm-debug.log
+
+# MEAN.js app and assets
+# ======================
+public/dist/
+uploads
+modules/users/client/img/profile/uploads
+config/env/local.js
+config/env/local-*.js
+*.pem
+
+# Ignoring MEAN.JS's gh-pages branch for documenation
+_site/
+
+# General
+# =======
 *.seed
 *.log
 *.csv
@@ -6,15 +38,47 @@ lib-cov
 *.out
 *.pid
 *.gz
+*.tmp
+*.bak
 *.swo
 *.swp
-
+launchConfigurations/
+logs/
+build/
+lib-cov
 pids
-logs
 results
-
-node_modules
-npm-debug.log
-
 config.js
 admins.json
+
+# Sublime editor
+# ==============
+.sublime-project
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse project files
+# =====================
+.project
+.settings/
+.*.md.html
+.metadata
+*~.nib
+local.properties
+
+# IntelliJ
+# ========
+*.iml
+
+# Cloud9 IDE
+# =========
+.c9/
+data/
+mongod
+
+# Visual Studio
+# =========
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
