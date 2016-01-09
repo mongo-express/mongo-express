@@ -285,7 +285,11 @@ $('#addDocument').on('shown.bs.modal', function() {
 
   </div>
   <div class="row">
-    <div class="col-md-4">
+    {% if !settings.read_only %}
+      <div class="col-md-4">
+    {% else %}
+      <div class="col-md-6">
+    {% endif %}
       <h2>Export Standard</h2>
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning btn-block">
@@ -294,8 +298,11 @@ $('#addDocument').on('shown.bs.modal', function() {
       </div>
     </div>
 
-
-    <div class="col-md-4">
+    {% if !settings.read_only %}
+      <div class="col-md-4">
+    {% else %}
+      <div class="col-md-6">
+    {% endif %}
       <h2>Export --jsonArray</h2>
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning btn-block">
