@@ -103,6 +103,9 @@ $(document).ready(function() {
     $('#confirmation-input').attr('shouldbe', target.attr('database-name'));
     $('#modal-database-name').text(target.attr('database-name'));
     $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
+      .one('shown.bs.modal', function () {
+        $('#confirmation-input').focus();
+      })
       .one('click', '#delete', function() {
         var input = $('#confirmation-input');
         if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
