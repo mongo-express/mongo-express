@@ -1,7 +1,7 @@
 mongo-express
 =============
 
-Web-based MongoDB admin interface written with Node.js and express (see original project [here](https://github.com/andzdroid/mongo-express)).
+Web-based MongoDB admin interface written with Node.js and express
 
 
 Features
@@ -21,23 +21,33 @@ Current features:
 * Ability to specify the default key to be shown in the docs list
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
 
-Planned features:
+Here is an example of a document which can be read/edited in mongo-express (truncated media):
 
-* Support for replica set connections
-* Site authentication
-* REST interface
-
-Limitations
------------
-
-* Documents must have `document._id` property to be edited
-* No GridFS support (might become a planned feature)
-* Binary BSON data type not tested
-
-JSON documents are parsed through a javascript virtual machine, so **the web
-interface can be used for executing malicious javascript on a server**.
-
-**mongo-express should only be used privately for development purposes**.
+    {
+      "_id": ObjectID(), // or ObjectId()
+      "dates": {
+        "date": ISODate("2012-05-14T16:20:09.314Z"),
+        "new_date": ISODate(),
+        "alternative": new Date()
+      },
+      "photo": "data:image/jpeg;base64,/9j/4...",
+      "video": "data:video/webm;base64,GkXfo...",
+      "audio": "data:audio/ogg;base64,T2dnUw...",
+      "bool": true,
+      "string": "hello world!",
+      "list of numbers": [
+        123,
+        111e+87,
+        4.4,
+        -12345.765
+      ],
+      "reference": DBRef("collection", "4fb1299686a989240b000001"),
+      "ts": Timestamp(ISODate(), 1),
+      "minkey": MinKey(),
+      "maxkey": MaxKey(),
+      "func": Code(function() { alert('Hello World!') }),
+      "symbol": Symbol("test")
+    }
 
 
 Screenshots
@@ -48,14 +58,13 @@ Screenshots
 <img src="https://imgur.com/jSWNAIA.png" title="Viewing server status and databases" />
 <img src="https://imgur.com/nNXuIu0.png" title="Viewing database" />
 
-Click here for more screenshots:
+These screenshots are from version 0.29.5.
+View album for more screenshots: (server status, database views etc..)
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
 
-These screenshots are from version 0.29.5.
 
-
-Usage
------
+Usage (npm / CLI)
+-----------------
 
 **To install:**
 
@@ -107,13 +116,19 @@ For help on configuration options:
 
     mongo-express -h
 
+Usage (Express 4 middleware)
+----------------------------
+
 **To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
 
     var mongo_express = require('mongo-express/middleware')
     var mongo_express_config = require('./mongo_express_config')
 
     app.use('/mongo_express', mongo_express(mongo_express_config))
-    
+
+Usage (Docker)
+--------------
+
 **To run in a Docker container:**
 
 First, build an image from the project directory:
@@ -139,7 +154,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
     `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
 
-***Example:***
+**Example:**
 
     docker run -it --rm \
         --name mongo-express \
@@ -150,9 +165,12 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
 This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
 
-***To use:***
+**To use:**
 
 The default port exposed from the container is 8081, so visit `http://localhost:8081` or whatever URL/port you entered into your config (if running standalone) or whatever `config.site.baseUrl` (if mounting as a middleware).
+
+Usage (Bluemix)
+---------------
 
 **Deploy to Bluemix**
 
@@ -175,6 +193,34 @@ Then, take the following action to customize to your environment:
 * Create your `config.js` file based on `config.default.js`
   * Check if it is necessary to change the `dbLabel` according to the MongoDB service created
   * Change the `basicAuth` properties, not to keep the default values
+
+
+Planned features
+----------------
+
+Pull Requests are always welcome
+
+* Support for replica set connections
+* Site authentication
+* REST interface
+
+Limitations
+-----------
+
+* Documents must have `document._id` property to be edited
+* No GridFS support (might become a planned feature)
+* Binary BSON data type not tested
+
+Not tested
+----------
+
+* Binary/BinData
+
+JSON documents are parsed through a javascript virtual machine, so **the web
+interface can be used for executing malicious javascript on a server**.
+
+**mongo-express should only be used privately for development purposes**.
+
 
 
 BSON Data Types
@@ -253,35 +299,6 @@ Specifying a scope/context is not supported.
     Symbol(string)
 
 ---
-
-Not tested:
-
-* Binary/BinData
-
-Here is an example of a document which can be read/edited in mongo-express:
-
-    {
-      "_id": ObjectID(), // or ObjectId()
-      "dates": {
-        "date": ISODate("2012-05-14T16:20:09.314Z"),
-        "new_date": ISODate(),
-        "alternative": new Date()
-      },
-      "bool": true,
-      "string": "hello world!",
-      "list of numbers": [
-        123,
-        111e+87,
-        4.4,
-        -12345.765
-      ],
-      "reference": DBRef("collection", "4fb1299686a989240b000001"),
-      "ts": Timestamp(ISODate(), 1),
-      "minkey": MinKey(),
-      "maxkey": MaxKey(),
-      "func": Code(function() { alert('Hello World!') }),
-      "symbol": Symbol("test")
-    }
 
 License
 -------
