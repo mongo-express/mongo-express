@@ -1,5 +1,6 @@
 'use strict';
 
+var mongo;
 var url = require('url');
 
 if (typeof process.env.MONGODB_PORT === 'string') {
@@ -13,16 +14,16 @@ if (process.env.VCAP_SERVICES) {
   var dbLabel = 'mongodb-2.4';
   var env = JSON.parse(process.env.VCAP_SERVICES);
   if (env[dbLabel]) {
-    var mongo = env[dbLabel][0]['credentials'];
+    mongo = env[dbLabel][0].credentials;
   }
 } else {
-  var mongo = {
-    'host': 'localhost',
-    'port': 27017,
-    'username': 'admin',
-    'password': 'pass',
-    'db': 'db',
-    'url': '"mongodb://localhost:27017/db'
+  mongo = {
+    host: 'localhost',
+    port: 27017,
+    username: 'admin',
+    password: 'pass',
+    db: 'db',
+    url: '"mongodb://localhost:27017/db',
   };
 }
 
@@ -52,8 +53,8 @@ module.exports = {
        {
          database: mongo.db,
          username: mongo.username,
-         password: mongo.password
-       }
+         password: mongo.password,
+       },
       ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
