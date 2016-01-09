@@ -1,8 +1,8 @@
 'use strict';
 
 var _     = require('underscore');
-var os    = require('os');
 var bson  = require('../bson');
+var os    = require('os');
 
 var routes = function(config) {
   var exp = {};
@@ -258,6 +258,18 @@ var routes = function(config) {
         req.session.success = 'Collection renamed!';
         res.redirect(res.locals.baseHref + 'db/' + req.dbName + '/' + name);
       });
+    });
+  };
+
+  exp.updateCollections = function(req, res) {
+    req.updateCollections(req.db, req.dbName, function(err) {
+      if (err) {
+        req.session.error = 'Something went wrong: ' + err;
+        return res.redirect('back');
+      }
+
+      req.session.success = 'Collections Updated!';
+      res.redirect(res.locals.baseHref + 'db/' + req.dbName);
     });
   };
 

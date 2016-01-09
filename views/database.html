@@ -3,59 +3,50 @@
 {% block title %}{{ dbName }}{% endblock %}
 
 {% block breadcrumb %}
-<li>
-  <a href="">Home</a>
-  <span class="divider">/</span>
-</li>
-<li class="active">
-  {{ dbName }}
-</li>
+  <li>
+    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+  </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      {% for db in databases %}
+      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
 {% endblock %}
-
 
 {% block content %}
 
-<table>
-  <tr>
-    <td>
-      <h2>Collections</h2>
-    </td>
-    <td>
-      <a href="{{ baseHref }}db/{{ dbName }}/updateCollections" class="btn btn-primary">
-        <i class="icon-refresh icon-white"></i>
-      </a>
-    </td>
-  </tr>
-</table>
+<h2>Collections</h2>
 
 <table class="table table-bordered table-striped table-condensed">
   {% for c in colls %}
   <tr>
-    <td class="span1">
-      <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success span2">
-        <i class="icon-list-alt icon-white"></i><br>View
+    <td class="col-md-2">
+      <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success btn-block">
+        <span class="glyphicon glyphicon-eye-open"></span><br>View
       </a>
     </td>
-  <td class="span1">
-       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning span1">
-        <i class="icon-download icon-white"></i> Export
+    <td class="col-md-1">
+       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning btn-block">
+        <span class="glyphicon glyphicon-floppy-save"></span><br>Export
       </a>
-  </td>
-  <td class="span1">
-       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning span1">
-        <i class="icon-download icon-white"></i> [JSON]
+    </td>
+    <td class="col-md-1">
+       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning btn-block">
+        <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
       </a>
-  </td>
+    </td>
     <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
     {% if !settings.read_only %}
-    <td class="span1">
+    <td class="col-md-1">
       <form method="POST" id="db-{{ dbName }}-{{ c }}" action="{{ baseHref }}db/{{ dbName }}/{{ c }}" style="margin: 0px;">
         <input type="hidden" name="_method" value="delete">
         <button type="submit" class="hidden"></button>
       </form>
-      <button class="btn btn-danger span1 deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
-        <i class="icon-trash icon-white"></i><br>
-        Del
+      <button class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
+        <span class="glyphicon glyphicon-trash"></span><br>Del
       </button>
     </td>
     {% endif %}
@@ -63,38 +54,44 @@
   {% endfor %}
 </table>
 
-<div id="confirm-deletion" class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">Delete collection</h4>
-  </div>
-  <div class="modal-body">
-    <p>
-      Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong> collection.
-    </p>
-    <p>
-      <label for="confirmation-input">Type the collection name to proceed.</label>
-      <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
-    </p>
-  </div>
+<div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
 
-  <div class="modal-footer">
-    <button type="button" data-dismiss="modal" class="btn" id="delete">Delete</button>
-    <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete collection</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong> collection.
+        </p>
+        <p>
+          <label for="confirmation-input">Type the collection name to proceed.</label>
+          <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn" id="delete">Delete</button>
+        <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+      </div>
+    </div>
   </div>
 </div>
 
 {% if !settings.read_only %}
 <h2>Create Collection</h2>
 <form class="well form-inline" method="POST">
-    <div class="input-prepend">
+    <div class="form-group">
       <span class="add-on">{{ dbName }} . </span>
       <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
     </div>
-  <button type="submit" class="btn btn-primary">
-  <i class="icon-folder-open icon-white"></i>
-  Create collection
-  </button>
+    <button type="submit" class="btn btn-primary pull-right">
+      <span class="glyphicon glyphicon-plus"></span>
+      Create collection
+    </button>
 </form>
 
 <script>
@@ -104,12 +101,16 @@ $(document).ready(function() {
     content: 'Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
   });
 
-  $('.deleteButton').popover({
-    placement: 'left', title: 'Warning', content: 'Are you sure you want to delete this collection? All documents will be deleted.',
+  $('.deleteButton').tooltip({
+    title: 'Warning! Are you sure you want to delete this collection? All documents will be deleted.',
   });
 
   $('.deleteButton').on('click', function(event) {
+
+    $('.deleteButton').tooltip('hide');
+
     event.preventDefault();
+
     var target = $(this);
     var parentForm = $('#' + target.attr('childof'));
 
@@ -131,16 +132,16 @@ $(document).ready(function() {
   <h2>Database Stats</h2>
   <table class="table table-bordered table-striped">
     <tr>
-    <td class="span2"><strong>Collections (incl. system.namespaces)</strong></td>
-    <td class="span3">{{ stats.collections }}</td>
+      <td><strong>Collections (incl. system.namespaces)</strong></td>
+      <td>{{ stats.collections }}</td>
     </tr>
     <tr>
-    <td><strong>Data Size</strong></td>
-    <td>{{ stats.dataSize }}</td>
+      <td><strong>Data Size</strong></td>
+      <td>{{ stats.dataSize }}</td>
     </tr>
     <tr>
-    <td><strong>Storage Size</strong></td>
-    <td>{{ stats.storageSize }}</td>
+      <td><strong>Storage Size</strong></td>
+      <td>{{ stats.storageSize }}</td>
     </tr>
     {% if stats.fileSize %}
       <tr>

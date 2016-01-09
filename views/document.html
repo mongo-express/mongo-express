@@ -24,20 +24,34 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="">Home</a>
-    <span class="divider">/</span>
+    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+  </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      {% for db in databases %}
+      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      {% endfor %}
+    </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}">{{ dbName }}</a>
-    <span class="divider">/</span>
+    <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">{{ collectionName }}</a>
-    <span class="divider">/</span>
+    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">Collection:</a>
   </li>
-  <li class="active">
-    {{ document._id|to_string }}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      {% for collection in collections %}
+      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
+      {% endfor %}
+    </ul>
   </li>
+  <li>
+    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+  </li>
+  <li><a>Document {{ document._id|to_string }}</a></li>
 {% endblock %}
 
 
@@ -46,8 +60,8 @@
 <form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
   {% if !settings.read_only %}
   <input type="hidden" name="_method" value="put">
-  <button type="submit" class="btn btn-success btn-large input-block-level" onclick="return onSubmitClick()">
-    <i class="icon-pencil icon-white"></i>
+  <button type="submit" class="btn btn-success btn-large btn-block" onclick="return onSubmitClick()">
+    <span class="glyphicon glyphicon-pencil"></span>
     Save
   </button>
   <br /><br />
@@ -58,7 +72,7 @@
 
 <script>
   var doc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: { name: "javascript", json: true },
+    mode: { name: 'javascript', json: true },
     indentUnit: 4,
     lineNumbers: true,
     autoClearEmptyLines: true,

@@ -8,9 +8,36 @@
   background: #EEE;
 }
 
+.nav > li > a {
+  padding: 15px 2px;
+}
+
+.logo {
+  float: left;
+}
+
+.logo-nav {
+  float: left;
+}
+
+.logo-nav img {
+  height: 25px;
+  width: 25px;
+  margin: 12px;
+}
+
 .tableWrapper {
-  /*overflow: scroll;*/
-  width: 100%;
-  display: table;
   cursor: pointer;
+}
+
+.tableContent {
+  width: auto;
+  height: auto;
+  display: inline-table;
+  max-height: 100px;
+  max-width: 100%;
+}
+
+.CodeMirror pre {
+  color: #fff;
 }

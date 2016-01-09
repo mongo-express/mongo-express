@@ -2,7 +2,117 @@
 
 {% block title %}Home{% endblock %}
 
+{% block breadcrumb %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      {% for db in databases %}
+      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+{% endblock %}
+
+
 {% block content %}
+
+<h2>Databases</h2>
+<table class="table table-bordered table-striped table-condensed">
+  {% for db in databases %}
+  <tr>
+    <td class="col-md-2">
+      <a href="{{ baseHref }}db/{{ db }}/" class="btn btn-success btn-block" >
+        <span class="glyphicon glyphicon-eye-open"></span><br>View
+      </a>
+    </td>
+    <td><h3><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></h3></td>
+    {% if !settings.read_only %}
+    <td class="col-md-2">
+      <form method="POST" id="db-{{ db }}" action="{{ baseHref }}{{ db }}" style="margin: 0px;">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="hidden"></button>
+      </form>
+      <button class="btn btn-danger btn-block deleteButton" database-name="{{ db }}" childof="db-{{ db }}">
+        <span class="glyphicon glyphicon-trash"></span><br>Del
+      </button>
+    </td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+</table>
+
+{% if !settings.read_only %}
+<div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete database</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Be careful! You are about to delete whole <strong><span id="modal-database-name"></span></strong> database.
+        </p>
+        <p>
+          <label for="confirmation-input">Type the database name to proceed.</label>
+          <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn" id="delete">Delete</button>
+        <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Create Database</h2>
+<form class="well form-inline" method="POST">
+    <div class="form-group">
+      <input class="input-medium" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
+    </div>
+    <button type="submit" class="btn btn-primary pull-right">
+      <span class="glyphicon glyphicon-plus"></span>
+      Create Database
+    </button>
+</form>
+
+<script>
+'use strict';
+$(document).ready(function() {
+  $('#database').popover({
+    content: 'Database names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
+  });
+
+  $('.deleteButton').tooltip({
+    title: 'Warning! Are you sure you want to delete this database? All collenctions and documents will be deleted.',
+  });
+
+  $('.deleteButton').on('click', function(event) {
+
+    $('.deleteButton').tooltip('hide');
+
+    event.preventDefault();
+
+    var target = $(this);
+    var parentForm = $('#' + target.attr('childof'));
+
+    $('#confirmation-input').attr('shouldbe', target.attr('database-name'));
+    $('#modal-database-name').text(target.attr('database-name'));
+    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
+      .one('click', '#delete', function() {
+        var input = $('#confirmation-input');
+        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
+          parentForm.trigger('submit');
+        }
+      });
+  });
+});
+</script>
+{% endif %}
 
 {% if info == false %}
 

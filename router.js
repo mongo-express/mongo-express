@@ -56,9 +56,9 @@ var router = function(config) {
   // view helper, sets local variables used in templates
   appRouter.all('*', function(req, res, next) {
     // ensure a trailing slash on the baseHref (used as a prefix in routes and views)
-    res.locals.baseHref = req.app.mountpath + (req.app.mountpath[req.app.mountpath.length - 1] === '/' ? '' : '/');
-    res.locals.databases = mongo.databases;
-    res.locals.collections = mongo.collections;
+    res.locals.baseHref     = req.app.mountpath + (req.app.mountpath[req.app.mountpath.length - 1] === '/' ? '' : '/');
+    res.locals.databases    = mongo.databases;
+    res.locals.collections  = mongo.collections;
 
     //Flash messages
     if (req.session.success) {
@@ -109,6 +109,7 @@ var router = function(config) {
 
     req.collectionName = id;
     res.locals.collectionName = id;
+    res.locals.collections = mongo.collections[req.dbName];
 
     mongo.connections[req.dbName].collection(id, function(err, coll) {
       if (err || coll === null) {
@@ -208,6 +209,9 @@ var router = function(config) {
 
   // routes
   appRouter.get('/', mongoMiddleware, routes(config).index);
+  appRouter.post('/', mongoMiddleware, routes(config).addDatabase);
+  appRouter.delete('/:database', mongoMiddleware, routes(config).deleteDatabase);
+  appRouter.get('/db/:database', mongoMiddleware, routes(config).viewDatabase);
 
   appRouter.post('/checkValid', mongoMiddleware, routes(config).checkValid);
 
@@ -224,13 +228,6 @@ var router = function(config) {
   appRouter.put('/db/:database/:collection', mongoMiddleware, routes(config).renameCollection);
   appRouter.delete('/db/:database/:collection', mongoMiddleware, routes(config).deleteCollection);
   appRouter.post('/db/:database', mongoMiddleware, routes(config).addCollection);
-
-  appRouter.get('/db/:database', mongoMiddleware, routes(config).viewDatabase);
-
-  
-  appRouter.get('/dbs', mongoMiddleware, routes(config).viewDatabases);
-  appRouter.post('/dbs', mongoMiddleware, routes(config).addDatabases);
-  appRouter.delete('/dbs/:database', mongoMiddleware, routes(config).deleteDatabases);
 
   return appRouter;
 };

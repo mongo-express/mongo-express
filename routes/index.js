@@ -8,18 +8,18 @@ var documentRoute    = require('./document');
 var routes = function(config) {
   var exp = {};
 
-  exp.updateCollections = databaseRoute(config).updateCollections;
+  exp.addDatabase       = databaseRoute(config).addDatabase;
+  exp.deleteDatabase    = databaseRoute(config).deleteDatabase;
   exp.viewDatabase      = databaseRoute(config).viewDatabase;
 
   exp.viewDatabases     = databaseRoute(config).viewDatabases;
-  exp.addDatabases      = databaseRoute(config).addDatabases;
-  exp.deleteDatabases   = databaseRoute(config).deleteDatabases;
 
   exp.addCollection     = collectionRoute(config).addCollection;
   exp.deleteCollection  = collectionRoute(config).deleteCollection;
   exp.exportColArray    = collectionRoute(config).exportColArray;
   exp.exportCollection  = collectionRoute(config).exportCollection;
   exp.renameCollection  = collectionRoute(config).renameCollection;
+  exp.updateCollections = collectionRoute(config).updateCollections;
   exp.viewCollection    = collectionRoute(config).viewCollection;
 
   exp.addDocument       = documentRoute(config).addDocument;
