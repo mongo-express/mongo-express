@@ -4,8 +4,9 @@
 
 
 {% block head %}
-  <link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
+  <link href="{{ baseHref }}stylesheets/codemirror-5.10.css" rel="stylesheet">
+  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.js"></script>
+  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.javascript.js"></script>
 
   {% if editorTheme != "default" %}
   <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
@@ -17,6 +18,9 @@
       overflow-y: hidden;
       overflow-x: auto;
       width: 100%;
+    }
+    .CodeMirror {
+      height: auto;
     }
   </style>
 {% endblock %}
