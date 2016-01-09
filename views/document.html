@@ -141,6 +141,8 @@
   function onSubmitClick() {
     // Save button is clicked
 
+    $('#discardChanges').remove();
+
     $.ajax({
       type: 'POST',
       url: "{{ baseHref }}checkValid",

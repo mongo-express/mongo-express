@@ -7,7 +7,7 @@ var routes = function(config) {
 
   exp.viewDocument = function(req, res) {
     var ctx = {
-      title: 'Viewing Document: ' + req.document._id,
+      title: (config.options.readOnly ? 'Viewing' : 'Editing') + ' Document: ' + req.document._id,
       editorTheme: config.options.editorTheme,
       docLength: bson.toString(req.document).split(/\r\n|\r|\n/).length,
       docString: bson.toString(req.document),
