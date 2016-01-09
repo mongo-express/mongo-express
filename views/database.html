@@ -117,6 +117,9 @@ $(document).ready(function() {
     $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
     $('#modal-collection-name').text(target.attr('collection-name'));
     $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
+      .one('shown.bs.modal', function () {
+        $('#confirmation-input').focus();
+      })
       .one('click', '#delete', function() {
         var input = $('#confirmation-input');
         if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {

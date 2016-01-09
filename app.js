@@ -2,6 +2,7 @@
 
 'use strict';
 
+var utils       = require('./utils');
 var express     = require('express');
 var fs          = require('fs');
 var https       = require('https');
@@ -19,7 +20,7 @@ console.log('------------------------');
 console.log('\n');
 
 try {
-  config = require('./config');
+  config = utils.deepmerge(require('./config.default'), require('./config'));
 } catch (e) {
   if (e.code === 'MODULE_NOT_FOUND') {
     console.log('No custom config.js found, loading config.default.js');
