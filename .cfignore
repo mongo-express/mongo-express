@@ -1,0 +1,10 @@
+# List of files and directories to ignore when deploying to Cloud Foundry
+.DS_Store
+.nodemonignore
+.sass-cache/
+npm-debug.log
+node_modules/
+public/lib
+app/tests/coverage/
+.bower-*/
+.idea/

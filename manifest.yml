@@ -1,0 +1,13 @@
+---
+declared-services:
+  db-mongo:
+    label: mongodb
+    plan: 100
+applications:
+- name: mongo-express
+  host: mongo-express
+  memory: 128M
+  services:
+    - db-mongo
+  env:
+    NODE_ENV: cloud-foundry
