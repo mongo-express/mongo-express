@@ -3,28 +3,6 @@ mongo-express
 
 Web-based MongoDB admin interface written with Node.js and express (see original project [here](https://github.com/andzdroid/mongo-express)).
 
-The project was modified to fit Bluemix's specification.
-
-Doing manually:
-
-* Git clone this repository
-* Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
-* Change the file `manifest.yml` to fit your Bluemix app and service environment
-
-
-Doing automatically:
-
-* Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/eduardomourar/mongo-express.git)
-
-
-Then, take the following action to customize to your environment:
-
-* Create your `config.js` file based on `config.default.js`
-  * Check if it is necessary to change the `dbLabel` according to the MongoDB service created
-  * Change the `basicAuth` properties, not to keep the default values
-
 
 Features
 --------
@@ -161,7 +139,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
     `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
 
-**Example:**
+***Example:***
 
     docker run -it --rm \
         --name mongo-express \
@@ -172,9 +150,31 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
 This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
 
-**To use:**
+***To use:***
 
 The default port exposed from the container is 8081, so visit `http://localhost:8081` or whatever URL/port you entered into your config (if running standalone) or whatever `config.site.baseUrl` (if mounting as a middleware).
+
+**Deploy to Bluemix**
+
+Doing manually:
+
+* Git clone this repository
+* Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
+* Change the file `manifest.yml` to fit your Bluemix app and service environment
+
+
+Doing automatically:
+
+* Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/andzdroid/mongo-express.git)
+
+
+Then, take the following action to customize to your environment:
+
+* Create your `config.js` file based on `config.default.js`
+  * Check if it is necessary to change the `dbLabel` according to the MongoDB service created
+  * Change the `basicAuth` properties, not to keep the default values
 
 
 BSON Data Types
