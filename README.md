@@ -7,8 +7,6 @@ Web-based MongoDB admin interface written with Node.js and express
 Features
 --------
 
-Current features:
-
 * Connect to multiple databases
 * Connect and authenticate to individual databases
 * Authenticate as admin to view all databases
@@ -21,7 +19,21 @@ Current features:
 * Ability to specify the default key to be shown in the docs list
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
 
-Here is an example of a document which can be read/edited in mongo-express (truncated media):
+
+Screenshots
+-----------
+
+<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" />
+<img src="https://imgur.com/lL38abn.png" title="Editing a document" />
+
+These screenshots are from version 0.29.5.
+View album for more screenshots: (server status, database views etc..)
+[https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
+
+Example Document
+----------------
+
+Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
 
     {
       "_id": ObjectID(), // or ObjectId()
@@ -48,19 +60,6 @@ Here is an example of a document which can be read/edited in mongo-express (trun
       "func": Code(function() { alert('Hello World!') }),
       "symbol": Symbol("test")
     }
-
-
-Screenshots
------------
-
-<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" />
-<img src="https://imgur.com/lL38abn.png" title="Editing a document" />
-<img src="https://imgur.com/jSWNAIA.png" title="Viewing server status and databases" />
-<img src="https://imgur.com/nNXuIu0.png" title="Viewing database" />
-
-These screenshots are from version 0.29.5.
-View album for more screenshots: (server status, database views etc..)
-[https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
 
 
 Usage (npm / CLI)
