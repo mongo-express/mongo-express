@@ -2,17 +2,19 @@
 
 'use strict';
 
-var utils       = require('./utils');
+var clc         = require('cli-color');
+var commander   = require('commander');
 var express     = require('express');
 var fs          = require('fs');
 var https       = require('https');
 var middleware  = require('./middleware');
-var commander   = require('commander');
-var clc         = require('cli-color');
+var utils       = require('./utils');
+
 var app         = express();
+
+var config;
 var defaultPort = 80;
 var server      = app;
-var config;
 var sslOptions;
 
 console.log('Welcome to mongo-express');
