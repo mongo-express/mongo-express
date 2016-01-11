@@ -5,8 +5,8 @@ var url = require('url');
 
 if (typeof process.env.MONGODB_PORT === 'string') {
   var mongoConnection = url.parse(process.env.MONGODB_PORT);
-  process.env.ME_CONFIG_MONGODB_SERVER = mongoConnection.hostname;
-  process.env.ME_CONFIG_MONGODB_PORT = mongoConnection.port;
+  process.env.ME_CONFIG_MONGODB_SERVER  = mongoConnection.hostname;
+  process.env.ME_CONFIG_MONGODB_PORT    = mongoConnection.port;
 }
 
 // Accesing Bluemix variable to get MongoDB info
@@ -18,19 +18,19 @@ if (process.env.VCAP_SERVICES) {
   }
 } else {
   mongo = {
-    host: 'localhost',
-    port: 27017,
-    username: 'admin',
+    db:       'db',
+    host:     'localhost',
     password: 'pass',
-    db: 'db',
-    url: '"mongodb://localhost:27017/db',
+    port:     27017,
+    url:      '"mongodb://localhost:27017/db',
+    username: 'admin',
   };
 }
 
 module.exports = {
   mongodb: {
-    server: process.env.ME_CONFIG_MONGODB_SERVER || mongo.host,
-    port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
+    server: process.env.ME_CONFIG_MONGODB_SERVER  || mongo.host,
+    port:   process.env.ME_CONFIG_MONGODB_PORT    || mongo.port,
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
@@ -74,15 +74,15 @@ module.exports = {
   site: {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the stard and end!
     baseUrl: '/',
-    host: process.env.VCAP_APP_HOST || 'localhost',
-    port: process.env.VCAP_APP_PORT || 8081,
-    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
-    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
     cookieKeyName: 'mongo-express',
-    requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '50mb',
-    sslEnabled: process.env.ME_CONFIG_SITE_SSL_ENABLED || false,
-    sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
-    sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
+    cookieSecret:     process.env.ME_CONFIG_SITE_COOKIESECRET   || 'cookiesecret',
+    host:             process.env.VCAP_APP_HOST                 || 'localhost',
+    port:             process.env.VCAP_APP_PORT                 || 8081,
+    requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE        || '50mb',
+    sessionSecret:    process.env.ME_CONFIG_SITE_SESSIONSECRET  || 'sessionsecret',
+    sslCert:          process.env.ME_CONFIG_SITE_SSL_CRT_PATH   || '',
+    sslEnabled:       process.env.ME_CONFIG_SITE_SSL_ENABLED    || false,
+    sslKey:           process.env.ME_CONFIG_SITE_SSL_KEY_PATH   || '',
   },
 
   //set useBasicAuth to true if you want to authehticate mongo-express loggins
