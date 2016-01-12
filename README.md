@@ -144,6 +144,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     ----------------------------------|-----------------|------------
     `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image.
     `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
+    `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access.
     `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
     `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
     `ME_CONFIG_SITE_COOKIESECRET`     | `cookiesecret`  | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
