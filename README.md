@@ -136,7 +136,7 @@ First, build an image from the project directory:
 
 Then run the image. Make sure you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/) and specify it's name in the `--link` argument.
 
-    docker run -it --rm --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+    docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
 
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
@@ -159,6 +159,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     docker run -it --rm \
         --name mongo-express \
         --link web_db_1:mongo \
+        -p 8081:8081 \
         -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
         -e ME_CONFIG_BASICAUTH_USERNAME="" \
         mongo-express
