@@ -210,7 +210,7 @@ $('#addDocument').on('shown.bs.modal', function() {
       {% for document in docs %}
         <tr onclick="loadDocument( '{{ docs[loop.index0]._id | json | safe | url_encode }}')">
           {% for column in columns %}
-            <td><div class="tableContent">{% if document[column] == "" %}{{column}} is empty for {{document["_id"]| to_display}}{% else %}{% if !document[column] %}{% if column|is_embeddedDocumentNotation %}{{edKey(document, column)}}{% else %}{% endif %}{% else %}{{document[column] | to_display | safe}}{% endif %}{% endif %}</div></td>
+            <td><div class="tableContent">{{document[column] | to_display | safe}}</div></td>
           {% endfor %}
           {% if !settings.read_only %}
             <td>
