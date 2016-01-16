@@ -32,6 +32,11 @@ exports.to_string = function(input) {
 
 exports.to_display = function(input) {
 
+  // Get nulls out of the way
+  if (input === null || input === undefined) {
+    return '';
+  }
+
   // Images inline
   if (
     typeof input === 'string' &&
@@ -77,12 +82,8 @@ exports.to_display = function(input) {
     return input.substr(0, 49) + '…';
   }
 
-  // Try and output .toString()
-  if (input !== null && input !== undefined) {
-    return input.toString();
-  }
-
-  return '';
+  // Return basic .toString() since we've tried all other cases
+  return input.toString();
 };
 
 exports.is_embeddedDocumentNotation = function(input) {
