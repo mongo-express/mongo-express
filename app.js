@@ -2,23 +2,23 @@
 
 'use strict';
 
-var clc             = require('cli-color');
-var commander       = require('commander');
-var express         = require('express');
-var fs              = require('fs');
-var https           = require('https');
-var middleware      = require('./middleware');
-var utils           = require('./utils');
-var updateNotifier  = require('update-notifier');
-var pkg             = require('./package.json');
+const clc             = require('cli-color');
+const commander       = require('commander');
+const express         = require('express');
+const fs              = require('fs');
+const https           = require('https');
+const middleware      = require('./middleware');
+const utils           = require('./utils');
+const updateNotifier  = require('update-notifier');
+const pkg             = require('./package.json');
 
-var app             = express();
-var notifier        = updateNotifier({pkg});
+let app               = express();
+let notifier          = updateNotifier({pkg});
 
-var config;
-var defaultPort = 80;
-var server      = app;
-var sslOptions;
+let config;
+let defaultPort = 80;
+let server      = app;
+let sslOptions;
 
 console.log('Welcome to mongo-express');
 console.log('------------------------');
@@ -57,12 +57,12 @@ if (commander.username && commander.password) {
     config.mongodb.adminUsername = commander.username;
     config.mongodb.adminPassword = commander.password;
   } else {
-    var user = {
+    let user = {
       database: commander.database,
       username: commander.username,
       password: commander.password,
     };
-    for (var key in user) {
+    for (let key in user) {
       if (!user[key]) {
         commander.help();
       }
