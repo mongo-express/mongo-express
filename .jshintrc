@@ -29,6 +29,9 @@
   // Suppress warnings about == null comparisons.
   "eqnull": false,
 
+  // Set ECMAScript version
+  "esversion": 6,
+
   // Enforce tab width of 4 spaces.
   "indent": 4,
 
