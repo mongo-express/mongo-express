@@ -1,19 +1,19 @@
 'use strict';
 
-var _       = require('underscore');
-var async   = require('async');
-var mongodb = require('mongodb');
+const _       = require('underscore');
+const async   = require('async');
+const mongodb = require('mongodb');
 
-var connect = function(config) {
+let connect = function(config) {
   // set up database stuff
-  var host = config.mongodb.server  || 'localhost';
-  var port = config.mongodb.port    || mongodb.Connection.DEFAULT_PORT;
-  var dbOptions = {
+  let host = config.mongodb.server  || 'localhost';
+  let port = config.mongodb.port    || mongodb.Connection.DEFAULT_PORT;
+  let dbOptions = {
     auto_reconnect: config.mongodb.autoReconnect,
     poolSize:       config.mongodb.poolSize,
   };
 
-  var db;
+  let db;
 
   if (Array.isArray(host)) {
     host = host.map(function(host) {
@@ -25,20 +25,21 @@ var connect = function(config) {
     db = new mongodb.Db('local', new mongodb.Server(host, port, dbOptions), { safe:true });
   }
 
-  var databases   = [];
-  var collections = {};
-  var connections = {};
+  let collections     = {};
+  let connections     = {};
+  let databases       = [];
+  let gridFSBuckets   = [];
 
   //get admin instance
-  var adminDb   = db.admin();
-  var mainConn  = db; // main db connection
+  let adminDb   = db.admin();
+  let mainConn  = db; // main db connection
 
   // update the collections list
-  var updateCollections = function(db, dbName, callback) {
+  let updateCollections = function(db, dbName, callback) {
     db.listCollections().toArray(function(err, result) {
-      var names = [];
+      let names = [];
 
-      for (var r in result) {
+      for (let r in result) {
         names.push(result[r].name);
       }
 
@@ -51,7 +52,7 @@ var connect = function(config) {
   };
 
   // update database list
-  var updateDatabases = function(admin, callback) {
+  let updateDatabases = function(admin, callback) {
     admin.listDatabases(function(err, dbs) {
       databases = [];
       if (err) {
@@ -59,8 +60,8 @@ var connect = function(config) {
         console.error(err);
         databases = _.pluck(config.mongodb.auth, 'database');
       } else {
-        for (var i = 0; i < dbs.databases.length; i++) {
-          var dbName = dbs.databases[i].name;
+        for (let i = 0; i < dbs.databases.length; i++) {
+          let dbName = dbs.databases[i].name;
 
           //'local' is special database, ignore it
           if (dbName === 'local') {
@@ -88,8 +89,18 @@ var connect = function(config) {
       //Sort database names
       databases = databases.sort();
 
+      // Generate list of GridFS buckets
+      // takes databases, filters by having suffix of '.files' and also a corresponding '.chunks' in the DB list, then returns just the prefix name.
+      gridFSBuckets = _.map(
+        _.filter(databases, function(database) {
+          return database.substr(-6) === '.files' && _.intersection(databases, [database.slice(0, -6) + '.chunks']);
+        }),
+
+        function(database) { return database.slice(0, -6);
+      });
+
       if (callback) {
-        callback(databases);
+        callback({ databases: databases, gridFSBuckets: gridFSBuckets});
       }
     });
   };
