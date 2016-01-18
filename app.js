@@ -2,15 +2,18 @@
 
 'use strict';
 
-var clc         = require('cli-color');
-var commander   = require('commander');
-var express     = require('express');
-var fs          = require('fs');
-var https       = require('https');
-var middleware  = require('./middleware');
-var utils       = require('./utils');
+var clc             = require('cli-color');
+var commander       = require('commander');
+var express         = require('express');
+var fs              = require('fs');
+var https           = require('https');
+var middleware      = require('./middleware');
+var utils           = require('./utils');
+var updateNotifier  = require('update-notifier');
+var pkg             = require('./package.json');
 
-var app         = express();
+var app             = express();
+var notifier        = updateNotifier({pkg});
 
 var config;
 var defaultPort = 80;
@@ -20,6 +23,9 @@ var sslOptions;
 console.log('Welcome to mongo-express');
 console.log('------------------------');
 console.log('\n');
+
+// Notify of any updates
+notifier.notify();
 
 try {
   config = utils.deepmerge(require('./config.default'), require('./config'));
