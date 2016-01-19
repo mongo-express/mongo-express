@@ -24,8 +24,9 @@ Features
 Screenshots
 -----------
 
-<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" />
-<img src="https://imgur.com/lL38abn.png" title="Editing a document" />
+Collection View | Editing A Document
+--- | ---
+<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
 
 These screenshots are from version 0.29.5.
 View album for more screenshots: (server status, database views etc..)
