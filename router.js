@@ -71,11 +71,9 @@ var router = function(config) {
       delete req.session.error;
     }
 
-    mongo.updateDatabases(mongo.adminDb, function(ret) {
-      mongo.databases           = ret.databases;
-      mongo.gridFSBuckets       = ret.gridFSBuckets;
-      res.locals.databases      = mongo.databases;
-      res.locals.gridFSBuckets  = mongo.gridFSBuckets;
+    mongo.updateDatabases(mongo.adminDb, function(databases) {
+      mongo.databases       = databases;
+      res.locals.databases  = mongo.databases;
       return next();
     });
   });

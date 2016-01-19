@@ -28,7 +28,6 @@ let connect = function(config) {
   let collections     = {};
   let connections     = {};
   let databases       = [];
-  let gridFSBuckets   = [];
 
   //get admin instance
   let adminDb   = db.admin();
@@ -89,18 +88,8 @@ let connect = function(config) {
       //Sort database names
       databases = databases.sort();
 
-      // Generate list of GridFS buckets
-      // takes databases, filters by having suffix of '.files' and also a corresponding '.chunks' in the DB list, then returns just the prefix name.
-      gridFSBuckets = _.map(
-        _.filter(databases, function(database) {
-          return database.substr(-6) === '.files' && _.intersection(databases, [database.slice(0, -6) + '.chunks']);
-        }),
-
-        function(database) { return database.slice(0, -6);
-      });
-
       if (callback) {
-        callback({ databases: databases, gridFSBuckets: gridFSBuckets});
+        callback(databases);
       }
     });
   };
