@@ -15,6 +15,7 @@ Features
 * View/add/rename/delete collections
 * View/add/update/delete documents
 * View data URI images inline in collection table view
+* Async on-demand loading of big document properties (>100KB default) to keep table view fast
 * Use BSON data types in documents
 * Ability to specify the default key to be shown in the docs list
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
@@ -23,43 +24,13 @@ Features
 Screenshots
 -----------
 
-<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" />
-<img src="https://imgur.com/lL38abn.png" title="Editing a document" />
+Collection View | Editing A Document
+--- | ---
+<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
 
 These screenshots are from version 0.29.5.
 View album for more screenshots: (server status, database views etc..)
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
-
-Example Document
-----------------
-
-Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
-
-    {
-      "_id": ObjectID(), // or ObjectId()
-      "dates": {
-        "date": ISODate("2012-05-14T16:20:09.314Z"),
-        "new_date": ISODate(),
-        "alternative": new Date()
-      },
-      "photo": "data:image/jpeg;base64,/9j/4...",
-      "video": "data:video/webm;base64,GkXfo...",
-      "audio": "data:audio/ogg;base64,T2dnUw...",
-      "bool": true,
-      "string": "hello world!",
-      "list of numbers": [
-        123,
-        111e+87,
-        4.4,
-        -12345.765
-      ],
-      "reference": DBRef("collection", "4fb1299686a989240b000001"),
-      "ts": Timestamp(ISODate(), 1),
-      "minkey": MinKey(),
-      "maxkey": MaxKey(),
-      "func": Code(function() { alert('Hello World!') }),
-      "symbol": Symbol("test")
-    }
 
 
 Usage (npm / CLI)
@@ -67,33 +38,17 @@ Usage (npm / CLI)
 
 **To install:**
 
-    npm install mongo-express
-
-Or if you want to install a global copy:
-
     npm install -g mongo-express
+
+Or if you want to install a non-global copy:
+
+    npm install mongo-express
 
 By default `config.default.js` is used where the default authentication is admin:pass 
 
 **To configure:**
 
 Copy `YOUR_PATH/node_modules/mongo-express/config.default.js` into a new file called `YOUR_PATH/node_modules/mongo-express/config.js`.
-
-*Note:* Populate the defaultKeyNames field with your database names, collection names and the key name to be displayed by default in the documents list of collections page.
-
-For example :
-```
-    defaultKeyNames:{
-    	"world_db":{  //Database 1 Name
-    		"continent":"cont_name", // collection:feild
-    		"country":"country_name",
-    		"city":"name"
-    	},
-    	... // Database 2
-    	... // Database 3
-    }
-```
-If no key name is specified for a collection, it defaults to '_id'.
 
 *Note:* YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
 
@@ -202,17 +157,17 @@ Then, take the following action to customize to your environment:
 Planned features
 ----------------
 
-Pull Requests are always welcome
+Pull Requests are always welcome!
 
 * Support for replica set connections
 * Site authentication
-* REST interface
+* GridFS (work in progess)
+* Mongo Shell console (work in progress)
 
 Limitations
 -----------
 
 * Documents must have `document._id` property to be edited
-* No GridFS support (might become a planned feature)
 * Binary BSON data type not tested
 
 Not tested
@@ -301,6 +256,37 @@ Specifying a scope/context is not supported.
 **Symbol**
 
     Symbol(string)
+
+Example Document
+----------------
+
+Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
+
+    {
+      "_id": ObjectID(), // or ObjectId()
+      "dates": {
+        "date": ISODate("2012-05-14T16:20:09.314Z"),
+        "new_date": ISODate(),
+        "alternative": new Date()
+      },
+      "photo": "data:image/jpeg;base64,/9j/4...",
+      "video": "data:video/webm;base64,GkXfo...",
+      "audio": "data:audio/ogg;base64,T2dnUw...",
+      "bool": true,
+      "string": "hello world!",
+      "list of numbers": [
+        123,
+        111e+87,
+        4.4,
+        -12345.765
+      ],
+      "reference": DBRef("collection", "4fb1299686a989240b000001"),
+      "ts": Timestamp(ISODate(), 1),
+      "minkey": MinKey(),
+      "maxkey": MaxKey(),
+      "func": Code(function() { alert('Hello World!') }),
+      "symbol": Symbol("test")
+    }
 
 ---
 
