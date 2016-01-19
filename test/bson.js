@@ -2,7 +2,7 @@
 
 /*globals describe, it*/
 
-var bson = require('../bson');
+var bson = require('../lib/bson');
 var expect = require('chai').expect;
 var mongodb = require('mongodb');
 

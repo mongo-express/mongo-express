@@ -7,8 +7,8 @@ const commander       = require('commander');
 const express         = require('express');
 const fs              = require('fs');
 const https           = require('https');
-const middleware      = require('./middleware');
-const utils           = require('./utils');
+const middleware      = require('./lib/middleware');
+const utils           = require('./lib/utils');
 const updateNotifier  = require('update-notifier');
 const pkg             = require('./package.json');
 
