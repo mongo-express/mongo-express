@@ -90,7 +90,8 @@ if (!config.site.host || config.site.host === '0.0.0.0') {
 }
 
 app.use(config.site.baseUrl, middleware(config));
-app.set('read_only', config.options.readOnly || false);
+app.set('read_only',      config.options.readOnly       || false);
+app.set('gridFSEnabled',  config.options.gridFSEnabled  || false);
 
 if (config.site.sslEnabled) {
   defaultPort     = 443;

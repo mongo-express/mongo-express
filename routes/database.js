@@ -12,6 +12,7 @@ var routes = function() {
         title: 'Viewing Database: ' + req.dbName,
         databases: req.databases,
         colls: req.collections[req.dbName],
+        grids: req.gridFSBuckets[req.dbName],
         stats: {
           avgObjSize:         utils.bytesToSize(data.avgObjSize),
           collections:        data.collections,
