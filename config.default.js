@@ -103,10 +103,10 @@ module.exports = {
     //See http://codemirror.net/demo/theme.html for all examples
     editorTheme: process.env.ME_CONFIG_OPTIONS_EDITORTHEME || 'rubyblue',
 
-    // Maximum size of a single property
+    // Maximum size of a single property & single row
     // Reduces the risk of sending a huge amount of data when viewing collections
-    // Default: 100KB
-    maxPropSize: (100 * 1000),
+    maxPropSize: (100 * 1000),  // default 100KB
+    maxRowSize: (1000 * 1000),  // default 1MB
 
     //The options below aren't being used yet
 

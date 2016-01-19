@@ -31,13 +31,23 @@
 }
 
 .tableContent {
-  width: auto;
+  width: 100%;
   height: auto;
-  display: inline-table;
+  display: table;
   max-height: 100px;
   max-width: 100%;
 }
 
 .CodeMirror pre {
   color: #fff;
+}
+
+.tooDamnBig {
+  padding: 10px;
+  background: rgb(202, 202, 202);
+  /*background: rgba(25, 25, 25, .25);*/
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px; /* future proofing */
+  -khtml-border-radius: 4px; /* for old Konqueror browsers */
 }
