@@ -37,33 +37,17 @@ Usage (npm / CLI)
 
 **To install:**
 
-    npm install mongo-express
-
-Or if you want to install a global copy:
-
     npm install -g mongo-express
+
+Or if you want to install a non-global copy:
+
+    npm install mongo-express
 
 By default `config.default.js` is used where the default authentication is admin:pass 
 
 **To configure:**
 
 Copy `YOUR_PATH/node_modules/mongo-express/config.default.js` into a new file called `YOUR_PATH/node_modules/mongo-express/config.js`.
-
-*Note:* Populate the defaultKeyNames field with your database names, collection names and the key name to be displayed by default in the documents list of collections page.
-
-For example :
-```
-    defaultKeyNames:{
-    	"world_db":{  //Database 1 Name
-    		"continent":"cont_name", // collection:feild
-    		"country":"country_name",
-    		"city":"name"
-    	},
-    	... // Database 2
-    	... // Database 3
-    }
-```
-If no key name is specified for a collection, it defaults to '_id'.
 
 *Note:* YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
 
@@ -172,17 +156,17 @@ Then, take the following action to customize to your environment:
 Planned features
 ----------------
 
-Pull Requests are always welcome
+Pull Requests are always welcome!
 
 * Support for replica set connections
 * Site authentication
-* REST interface
+* GridFS (work in progess)
+* Mongo Shell console (work in progress)
 
 Limitations
 -----------
 
 * Documents must have `document._id` property to be edited
-* No GridFS support (might become a planned feature)
 * Binary BSON data type not tested
 
 Not tested
