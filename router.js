@@ -197,6 +197,11 @@ var router = function(config) {
     }
   });
 
+  appRouter.param('prop', function(req, res, next, prop) {
+    req.prop = req.document[prop];
+    next();
+  });
+
   // mongodb mongoMiddleware
   var mongoMiddleware = function(req, res, next) {
     req.mainConn      = mongo.mainConn;
@@ -227,6 +232,8 @@ var router = function(config) {
   appRouter.put('/db/:database/:collection/:document', mongoMiddleware, routes(config).updateDocument);
   appRouter.delete('/db/:database/:collection/:document', mongoMiddleware, routes(config).deleteDocument);
   appRouter.post('/db/:database/:collection', mongoMiddleware, routes(config).addDocument);
+
+  appRouter.get('/db/:database/:collection/:document/:prop', mongoMiddleware, routes(config).getProperty);
 
   appRouter.get('/db/:database/:collection', mongoMiddleware, routes(config).viewCollection);
   appRouter.put('/db/:database/:collection', mongoMiddleware, routes(config).renameCollection);

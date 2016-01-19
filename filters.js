@@ -37,6 +37,27 @@ exports.to_display = function(input) {
     return '';
   }
 
+  if (
+    typeof input === 'object' &&
+    input.display &&
+    input.display === '*** LARGE PROPERTY ***' &&
+    input.preface &&
+    input.roughSz &&
+    input.humanSz &&
+    input.attribu &&
+    input.maxSize &&
+    input._id
+  ) {
+    // Object was too big
+    var retHTML = '';
+    retHTML += '<div class="tooDamnBig" doc_id="' + encodeURIComponent(JSON.stringify(input._id)) + '" ' +
+      'doc_prop="' + input.attribu + '" title="Max prop size: ' + input.maxSize + '">';
+    retHTML += input.display + '<br>~' + input.humanSz;
+    retHTML += '<br>Click to fetch';
+    retHTML += '</div>';
+    return retHTML;
+  }
+
   // Images inline
   if (
     typeof input === 'string' &&

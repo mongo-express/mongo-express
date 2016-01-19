@@ -176,15 +176,6 @@ $('#addDocument').on('shown.bs.modal', function() {
     </p>
   {% else %}
 
-  {% if collectionName != 'system.indexes' %}
-<script type="text/javascript">
-
-function loadDocument(id) {
-  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
-}
-</script>
-  {% endif %}
-
   {% if pagination %}
     <ul class="pager span7">
       <li class="previous"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&fields= {{ fields }}">&larr; First</a></li>
@@ -324,9 +315,73 @@ function loadDocument(id) {
         </form>
 
 <script type="text/javascript">
+
+function loadDocument(id) {
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
+}
+
 $(document).ready(function() {
   $('.deleteButton').tooltip({
     title: 'Are you sure you want to delete this collection? All documents will be deleted.',
+  });
+
+  $('.tooDamnBig').bind('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var target = $(this);
+    var _id = target.attr('doc_id');
+    var prop = target.attr('doc_prop');
+    var spinner = '<img src="{{ baseHref }}images/gears.gif" />';
+
+    // Set the element with spinner for now
+    target.html(spinner);
+
+    $.get('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(_id) + '/' + prop, function(input) {
+
+      // Images inline
+      if (
+        typeof input === 'string' &&
+        (
+          input.substr(0, 22) === 'data:image/png;base64,' ||
+          input.substr(0, 22) === 'data:image/gif;base64,' ||
+          input.substr(0, 23) === 'data:image/jpeg;base64,'
+        )
+      )  {
+        input = '<img src="' + input + '" style="max-height:100%; max-width:100%; "/>';
+      }
+
+      // Audio inline
+      if (
+        typeof input === 'string' &&
+        (
+          input.substr(0, 22) === 'data:audio/ogg;base64,' ||
+          input.substr(0, 22) === 'data:audio/mp3;base64,'
+        )
+      )  {
+        input = '<audio controls style="width:45px;" src="' + input + '">Your browser does not support the audio element.</audio>';
+      }
+
+      // Video inline
+      if (
+        typeof input === 'string' &&
+        (
+          input.substr(0, 23) === 'data:video/webm;base64,' ||
+          input.substr(0, 22) === 'data:video/mp4;base64,'  ||
+          input.substr(0, 22) === 'data:video/ogv;base64,'
+        )
+      )  {
+        input = '<video controls><source type="' + input.substring(input.indexOf(':') + 1, input.indexOf(';')) + '" src="' + input + '"/>' +
+          'Your browser does not support the video element.</video>';
+      }
+
+      if (typeof input === 'object' && input.toString() === '[object Object]') {
+        input = '<pre>' + JSON.stringify(input, null, 2) + '</pre>';
+      }
+
+      // Set the element with gotten datas
+      target.parent().html(input);
+    });
   });
 
   $('.deleteButton').on('click', function(event) {

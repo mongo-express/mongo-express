@@ -154,7 +154,6 @@
         document: doc.getValue()
       },
     }).done(function(data) {
-      console.log(data);
       if (data === 'Valid') {
         $('#documentInvalidJSON').remove();
         $('#documentEditForm').submit();

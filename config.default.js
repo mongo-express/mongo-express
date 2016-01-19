@@ -103,6 +103,11 @@ module.exports = {
     //See http://codemirror.net/demo/theme.html for all examples
     editorTheme: process.env.ME_CONFIG_OPTIONS_EDITORTHEME || 'rubyblue',
 
+    // Maximum size of a single property
+    // Reduces the risk of sending a huge amount of data when viewing collections
+    // Default: 100KB
+    maxPropSize: (100 * 1000),
+
     //The options below aren't being used yet
 
     //cmdType: the type of command line you want mongo express to run

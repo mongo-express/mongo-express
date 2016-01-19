@@ -5,6 +5,12 @@ var bson = require('../bson');
 var routes = function(config) {
   var exp = {};
 
+  exp.getProperty = function(req, res) {
+    // Get a single property
+    // URI like database/collection/document/prop
+    res.send(req.prop);
+  };
+
   exp.viewDocument = function(req, res) {
     var ctx = {
       title: (config.options.readOnly ? 'Viewing' : 'Editing') + ' Document: ' + req.document._id,

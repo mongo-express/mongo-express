@@ -3,6 +3,7 @@
 var _     = require('underscore');
 var bson  = require('../bson');
 var os    = require('os');
+var utils = require('../utils');
 
 var routes = function(config) {
   var exp = {};
@@ -115,6 +116,22 @@ var routes = function(config) {
         var columns = [];
 
         for (var i in items) {
+
+          // Prep items with stubs so as not to send large info down the wire
+          for (var prop in items[i]) {
+            if (utils.roughSizeOfObject(items[i][prop]) > config.options.maxPropSize) {
+              items[i][prop] = {
+                attribu: prop,
+                display: '*** LARGE PROPERTY ***',
+                humanSz: utils.bytesToSize(utils.roughSizeOfObject(items[i][prop])),
+                maxSize: utils.bytesToSize(config.options.maxPropSize),
+                preface: JSON.stringify(items[i][prop]).substr(0, 100),
+                roughSz: utils.roughSizeOfObject(items[i][prop]),
+                _id: items[i]._id,
+              };
+            }
+          }
+
           docs[i] = items[i];
           columns.push(Object.keys(items[i]));
           items[i] = bson.toString(items[i]);
