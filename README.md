@@ -15,6 +15,7 @@ Features
 * View/add/rename/delete collections
 * View/add/update/delete documents
 * View data URI images inline in collection table view
+* Async on-demand loading of big document properties (>100KB default) to keep table view fast
 * Use BSON data types in documents
 * Ability to specify the default key to be shown in the docs list
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
@@ -29,37 +30,6 @@ Screenshots
 These screenshots are from version 0.29.5.
 View album for more screenshots: (server status, database views etc..)
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
-
-Example Document
-----------------
-
-Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
-
-    {
-      "_id": ObjectID(), // or ObjectId()
-      "dates": {
-        "date": ISODate("2012-05-14T16:20:09.314Z"),
-        "new_date": ISODate(),
-        "alternative": new Date()
-      },
-      "photo": "data:image/jpeg;base64,/9j/4...",
-      "video": "data:video/webm;base64,GkXfo...",
-      "audio": "data:audio/ogg;base64,T2dnUw...",
-      "bool": true,
-      "string": "hello world!",
-      "list of numbers": [
-        123,
-        111e+87,
-        4.4,
-        -12345.765
-      ],
-      "reference": DBRef("collection", "4fb1299686a989240b000001"),
-      "ts": Timestamp(ISODate(), 1),
-      "minkey": MinKey(),
-      "maxkey": MaxKey(),
-      "func": Code(function() { alert('Hello World!') }),
-      "symbol": Symbol("test")
-    }
 
 
 Usage (npm / CLI)
@@ -301,6 +271,37 @@ Specifying a scope/context is not supported.
 **Symbol**
 
     Symbol(string)
+
+Example Document
+----------------
+
+Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
+
+    {
+      "_id": ObjectID(), // or ObjectId()
+      "dates": {
+        "date": ISODate("2012-05-14T16:20:09.314Z"),
+        "new_date": ISODate(),
+        "alternative": new Date()
+      },
+      "photo": "data:image/jpeg;base64,/9j/4...",
+      "video": "data:video/webm;base64,GkXfo...",
+      "audio": "data:audio/ogg;base64,T2dnUw...",
+      "bool": true,
+      "string": "hello world!",
+      "list of numbers": [
+        123,
+        111e+87,
+        4.4,
+        -12345.765
+      ],
+      "reference": DBRef("collection", "4fb1299686a989240b000001"),
+      "ts": Timestamp(ISODate(), 1),
+      "minkey": MinKey(),
+      "maxkey": MaxKey(),
+      "func": Code(function() { alert('Hello World!') }),
+      "symbol": Symbol("test")
+    }
 
 ---
 
