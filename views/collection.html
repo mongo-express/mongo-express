@@ -156,19 +156,19 @@ jQuery(document).ready(function($) {
     </div>
   </div>
 
-  <script>
-  var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: { name: 'javascript', json: true },
-    indentUnit: 4,
-    electricChars: true,
-    matchBrackets: true,
-    lineNumbers: true,
-    theme: '{{ editorTheme }}',
-  });
+<script>
+var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
+  mode: { name: 'javascript', json: true },
+  indentUnit: 4,
+  electricChars: true,
+  matchBrackets: true,
+  lineNumbers: true,
+  theme: '{{ editorTheme }}',
+});
 $('#addDocument').on('shown.bs.modal', function() {
   addDoc.refresh();
 });
-  </script>
+</script>
 
   {% if documents.length == 0 %}
     <p class="well">
@@ -177,11 +177,12 @@ $('#addDocument').on('shown.bs.modal', function() {
   {% else %}
 
   {% if collectionName != 'system.indexes' %}
-  <script type="text/javascript">
-  function loadDocument(id) {
-    location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
-  }
-  </script>
+<script type="text/javascript">
+
+function loadDocument(id) {
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
+}
+</script>
   {% endif %}
 
   {% if pagination %}
@@ -322,8 +323,7 @@ $('#addDocument').on('shown.bs.modal', function() {
           </button>
         </form>
 
-<script>
-'use strict';
+<script type="text/javascript">
 $(document).ready(function() {
   $('.deleteButton').tooltip({
     title: 'Are you sure you want to delete this collection? All documents will be deleted.',
@@ -341,7 +341,7 @@ $(document).ready(function() {
     $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
     $('#modal-collection-name').text(target.attr('collection-name'));
     $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
-      .one('shown.bs.modal', function () {
+      .one('shown.bs.modal', function() {
         $('#confirmation-input').focus();
       })
       .one('click', '#delete', function() {
