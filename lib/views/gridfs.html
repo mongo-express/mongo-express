@@ -22,7 +22,7 @@
     <a href="{{ baseHref }}db/{{ dbName }}/{{ gridFSName }}">Bucket:</a>
   </li>
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ gridFSName }}<span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ bucketName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for bucket in buckets %}
       <li><a href="{{ baseHref }}db/{{ dbName }}/{{ bucket }}">{{ bucket }}</a></li>
@@ -212,12 +212,11 @@
   <div class="row">
     {% if !settings.read_only %}
       <div class="col-md-12">
-        <h2>Rename Collection</h2>
+        <h2>Rename Bucket</h2>
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ gridFSName }}" class="well form-inline">
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
-            <span class="add-on">{{ dbName }} . </span>
-            <input class="input-medium span7" type="text" id="collection" name="collection" placeholder="{{ gridFSName }}">
+            <input class="input-medium span7" type="text" id="bucket" name="bucket" placeholder="{{ gridFSName }}">
           </div>
           <button type="submit" class="btn btn-primary pull-right">
             <span class="glyphicon glyphicon-pencil"></span>
@@ -390,7 +389,7 @@ $(document).ready(function() {
 
 
   <div class="stats col-md-12">
-    <h2>Collection Stats</h2>
+    <h2>Bucket Stats</h2>
     <table class="table table-bordered table-striped">
       <tr>
         <td>
