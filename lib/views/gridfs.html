@@ -95,7 +95,32 @@
         </form>
       </div>
     {% endif %}
+  </div>
 
+  <div class="modal fade" id="addFile" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h2>Add File</h2>
+      </div>
+
+      <div class="modal-body">
+        <input type="file" name="filefield">
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-error" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">
+          <span class="glyphicon glyphicon-pencil"></span>
+          Upload
+        </button>
+      </div>
+    </form>
+    </div>
+    </div>
   </div>
 
 
