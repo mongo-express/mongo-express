@@ -51,18 +51,19 @@
     <table class="table table-striped">
       <thead>
         {% for column in columns %}
-          <th>{{column}}</th>
+          <th>{{ column }}</th>
         {% endfor %}
-        <th>Name</th>
         <th>Delete</th>
       </thead>
       {% for file in files %}
-        <tr onclick="">
-          <td><div class="tableContent">{{file}}</div></td>
+        <tr onclick="loadFile('{{ file._id | json | safe | url_encode }}')">
+        {% for column in columns %}
+          <td><div class="tableContent">{{ file[column] | to_display | safe }}</div></td>
+        {% endfor %}
           {% if !settings.read_only %}
             <td>
               <div class="col-md-1">
-                <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ gridFSName }}/{{ file }}">
+                <form method="POST" action="{{ baseHref }}db/{{ dbName }}/gridFS/{{ gridFSName }}/{{ file }}">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
@@ -97,4 +98,13 @@
 
   </div>
 
+
+<script type="text/javascript">
+'use strict';
+function loadFile(id) {
+  console.log(id);
+  location.href = '{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/' + encodeURIComponent(id);
+}
+
+</script>
 {% endblock %}
