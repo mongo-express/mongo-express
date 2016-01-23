@@ -200,7 +200,7 @@ $('#addDocument').on('shown.bs.modal', function() {
         <th>Delete</th>
       </thead>
       {% for document in docs %}
-        <tr onclick="loadDocument( '{{ docs[loop.index0]._id | json | safe | url_encode }}')">
+        <tr onclick="loadDocument('{{ docs[loop.index0]._id | json | safe | url_encode }}')">
           {% for column in columns %}
             <td><div class="tableContent">{{document[column] | to_display | safe}}</div></td>
           {% endfor %}
