@@ -25,22 +25,13 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ bucketName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for bucket in buckets %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ bucket }}">{{ bucket }}</a></li>
+      <li><a href="{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucket }}">{{ bucket }}</a></li>
       {% endfor %}
     </ul>
   </li>
 {% endblock %}
 
 {% block content %}
-  {% if !settings.read_only %}
-    <p>
-      <button type="button" data-toggle="modal" data-target="#addFile" class="btn btn-success btn-large btn-block">
-        <span class="glyphicon glyphicon-pencil"></span>
-        New File
-      </button>
-    </p>
-  {% endif %}
-
   {% if files.length == 0 %}
     <p class="well">
       No files found.
@@ -79,8 +70,9 @@
 
   {% endif %}
 
+{% if !settings.read_only %}
+<!--
   <div class="row">
-    {% if !settings.read_only %}
       <div class="col-md-12">
         <h2>Rename Bucket</h2>
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ bucketName }}" class="well form-inline">
@@ -94,34 +86,25 @@
           </button>
         </form>
       </div>
-    {% endif %}
   </div>
+ -->
+<div class="row">
+  <div class="col-md-12">
+    <h2>Add File</h2>
+    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data" class="well form-inline">
 
-  <div class="modal fade" id="addFile" role="dialog" tabindex="-1">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
-    <form method="POST" action="{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data">
-      <div class="modal-header">
-        <button class="close" data-dismiss="modal">×</button>
-        <h2>Add File</h2>
+      <div class="form-group">
+        <input type="file" class="input-medium span7" name="filefield">
       </div>
 
-      <div class="modal-body">
-        <input type="file" name="filefield">
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-error" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success">
-          <span class="glyphicon glyphicon-pencil"></span>
-          Upload
-        </button>
-      </div>
+      <button type="submit" class="btn btn-success pull-right">
+        <span class="glyphicon glyphicon-upload"></span>
+        Upload
+      </button>
     </form>
-    </div>
-    </div>
   </div>
+</div>
+{% endif %}
 
 
 <script type="text/javascript">
