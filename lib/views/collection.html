@@ -207,7 +207,7 @@ $('#addDocument').on('shown.bs.modal', function() {
           {% if !settings.read_only %}
             <td>
               <div class="col-md-1">
-                <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id| json | safe | url_encode }}">
+                <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id | json | safe | url_encode }}">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
