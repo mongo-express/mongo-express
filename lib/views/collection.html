@@ -276,36 +276,36 @@ $('#addDocument').on('shown.bs.modal', function() {
     {% endif %}
 
   </div>
+  <h2>Tools</h2>
   <div class="row">
-    {% if !settings.read_only %}
-      <div class="col-md-4">
-    {% else %}
-      <div class="col-md-6">
-    {% endif %}
-      <h2>Export Standard</h2>
+    <div class="col-md-6">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>Export
+        <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
       </a>
       </div>
     </div>
 
-    {% if !settings.read_only %}
-      <div class="col-md-4">
-    {% else %}
-      <div class="col-md-6">
-    {% endif %}
-      <h2>Export --jsonArray</h2>
+    <div class="col-md-6">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
+        <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
       </a>
       </div>
     </div>
 
     {% if !settings.read_only %}
-      <div class="col-md-4">
-        <h2>Delete Collection</h2>
+      <div class="col-md-6">
+        <div class="well">
+          <a href="{{ baseHref }}db/{{ dbName }}/compact/{{ collectionName }}" class="btn btn-danger btn-block">
+            <span class="glyphicon glyphicon-resize-small"></span><br>Compact
+          </a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if !settings.read_only %}
+      <div class="col-md-6">
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" class="hidden" />
