@@ -1,4 +1,4 @@
-FROM node:0.12-slim
+FROM node:5.4.1-slim
 
 ENV TINI_VERSION 0.5.0
 RUN set -x \
