@@ -204,7 +204,7 @@ $('#addDocument').on('shown.bs.modal', function() {
           {% for column in columns %}
             <td><div class="tableContent">{{document[column] | to_display | safe}}</div></td>
           {% endfor %}
-          {% if !settings.read_only %}
+          {% if !settings.read_only && collectionName !== 'system.indexes' %}
             <td>
               <div class="col-md-1">
                 <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id | json | safe | url_encode }}">
@@ -215,6 +215,8 @@ $('#addDocument').on('shown.bs.modal', function() {
                 </form>
               </div>
             </td>
+          {% else %}
+            <td></td>
           {% endif %}
         </tr>
       {% endfor %}
