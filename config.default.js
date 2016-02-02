@@ -24,6 +24,7 @@ if (process.env.VCAP_SERVICES) {
     port:     27017,
     url:      '"mongodb://localhost:27017/db',
     username: 'admin',
+    ssl:      false
   };
 }
 
@@ -31,6 +32,9 @@ module.exports = {
   mongodb: {
     server: process.env.ME_CONFIG_MONGODB_SERVER  || mongo.host,
     port:   process.env.ME_CONFIG_MONGODB_PORT    || mongo.port,
+
+    //useSSL: connect to the server using secure SSL
+    useSSL: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
