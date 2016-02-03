@@ -33,6 +33,16 @@ jQuery(document).ready(function($) {
       overflow-x: auto;
       width: 100%;
     }
+    
+    .tab-pane > form {
+      padding-bottom: 5px;
+    }
+    
+    @media (min-width: 992px) { /* meduim and up */
+      #advanced .form-group .btn {
+        height: 150px;
+      }
+    }
   </style>
 {% endblock %}
 
@@ -81,23 +91,23 @@ jQuery(document).ready(function($) {
   </ul>
   <div id="my-tab-content" class="tab-content">
     <div class="tab-pane active" id="simple">
-      <form class="well form-inline" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
       <div class="row">
-        <div class="form-group col-md-5">
+        <div class="form-group col-sm-6 col-md-4">
           <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group col-sm-6 col-md-4">
           <input style="width:100%;" class="input-medium form-control" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
         </div>
-        <div class="form-group">
-          <select name="type" class="input-small form-control">
+        <div class="form-group col-sm-6 col-md-2">
+          <select name="type" class="form-control">
             <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
             <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
             <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
             <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group col-sm-6 col-md-2">
           <button type="submit" class="btn btn-primary btn-block">
             <span class="glyphicon glyphicon-search"></span>
             Find
@@ -107,12 +117,12 @@ jQuery(document).ready(function($) {
       </form>
     </div>
     <div class="tab-pane" id="advanced">
-      <form class="well form-inline" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
         <div class="row">
-          <div class="form-group col-md-5">
+          <div class="form-group col-sm-6 col-md-5">
             <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
           </div>
-          <div class="form-group col-md-5">
+          <div class="form-group col-sm-6 col-md-5">
             <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="fields" name="fields" placeholder="Fields" title="Fields">{{ fields }}</textarea>
           </div>
           <div class="form-group col-md-2">
@@ -267,9 +277,9 @@ $('#addDocument').on('shown.bs.modal', function() {
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
             <span class="add-on">{{ dbName }} . </span>
-            <input class="input-medium span7" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
+            <input class="form-control" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
           </div>
-          <button type="submit" class="btn btn-primary pull-right">
+          <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-pencil"></span>
             Rename
           </button>
@@ -280,7 +290,7 @@ $('#addDocument').on('shown.bs.modal', function() {
   </div>
   <h2>Tools</h2>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
@@ -288,7 +298,7 @@ $('#addDocument').on('shown.bs.modal', function() {
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
@@ -297,7 +307,7 @@ $('#addDocument').on('shown.bs.modal', function() {
     </div>
 
     {% if !settings.read_only %}
-      <div class="col-md-6">
+      <div class="col-sm-6 col-lg-3">
         <div class="well">
           <a href="{{ baseHref }}db/{{ dbName }}/compact/{{ collectionName }}" class="btn btn-danger btn-block">
             <span class="glyphicon glyphicon-resize-small"></span><br>Compact
@@ -307,7 +317,7 @@ $('#addDocument').on('shown.bs.modal', function() {
     {% endif %}
 
     {% if !settings.read_only %}
-      <div class="col-md-6">
+      <div class="col-sm-6 col-lg-3">
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" class="hidden" />
