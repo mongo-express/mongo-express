@@ -17,7 +17,7 @@
     "UI",
     "web-based"
   ],
-  "version": "0.30.5",
+  "version": "0.30.6",
   "bin": {
     "mongo-express": "./app.js"
   },
