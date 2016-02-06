@@ -58,26 +58,24 @@
   <li><a>Document {{ document._id|to_string }}</a></li>
 {% endblock %}
 
-
 {% block content %}
 
 <form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
-
   {% if docLength > 10 %}
-    <div class="row">
+    <div>
       {% if !settings.read_only %}
         <input type="hidden" name="_method" value="put">
-        <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large col-md-6">
-          <span class="glyphicon glyphicon-remove"></span>
+        <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+         <span class="glyphicon glyphicon-arrow-left"></span>
           Back
         </button>
-        <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
+        <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
           <span class="glyphicon glyphicon-pencil"></span>
           Save
         </button>
       {% else %}
         <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-          <span class="glyphicon glyphicon-remove"></span>
+         <span class="glyphicon glyphicon-arrow-left"></span>
           Back
         </button>
       {% endif %}
@@ -86,29 +84,39 @@
   {% endif %}
 
   <textarea class="col-md-12" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ docString }}</textarea>
-
   <br />
 
-  <div class="row">
+  <div>
     {% if !settings.read_only %}
       <input type="hidden" name="_method" value="put">
-      <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large col-md-6">
-        <span class="glyphicon glyphicon-remove"></span>
+      <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+       <span class="glyphicon glyphicon-arrow-left"></span>
         Back
       </button>
-      <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
+
+      <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
         <span class="glyphicon glyphicon-pencil"></span>
         Save
       </button>
     {% else %}
       <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-        <span class="glyphicon glyphicon-remove"></span>
+       <span class="glyphicon glyphicon-arrow-left"></span>
         Back
       </button>
     {% endif %}
   </div>
-
 </form>
+
+{% if !settings.read_only %}
+  <br>
+  <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger">
+      <span class="glyphicon glyphicon-trash"></span>
+      Delete
+    </button>
+  </form>
+{% endif %}
 
 <script>
 'use strict';
