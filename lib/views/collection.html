@@ -212,14 +212,14 @@ $('#addDocument').on('shown.bs.modal', function() {
         <tr onclick="loadDocument('{{ docs[loop.index0]._id | json | safe | url_encode }}')">
           {% for column in columns %}
             <td><div class="tableContent">{{document[column] | to_display | safe}}
-            {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
-              <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id | json | safe | url_encode }}">
-              <input type="hidden" name="_method" value="delete">
-              <button type="submit" class="btn btn-danger">
-              <span class="glyphicon glyphicon-trash"></span>
-              </button>
-              </form>
-            {% endif %}
+              {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
+                <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ docs[loop.index0]._id | json | safe | url_encode }}">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                </form>
+              {% endif %}
             </div></td>
           {% endfor %}
         </tr>
