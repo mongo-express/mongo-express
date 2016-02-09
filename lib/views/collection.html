@@ -137,10 +137,11 @@ jQuery(document).ready(function($) {
   </div>
   <br/>
 
+<!-- Add Document Modal -->
   <div class="modal fade" id="addDocument" role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form method="post" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+    <form id="addDocumentForm" method="post" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
 
       <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
@@ -155,7 +156,7 @@ jQuery(document).ready(function($) {
 
       <div class="modal-footer">
         <button class="btn btn-error" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-success" onclick="return checkValidJSON()">
           <span class="glyphicon glyphicon-pencil"></span>
           Save
         </button>
@@ -165,8 +166,31 @@ jQuery(document).ready(function($) {
     </div>
     </div>
   </div>
+<!-- End Add Document Modal -->
 
 <script>
+var checkValidJSON = function() {
+  console.log('yooo');
+  console.log($('#document').val());
+  $.ajax({
+    type: 'POST',
+    url: '{{ baseHref }}checkValid',
+    data: {
+      document: addDoc.getValue(),
+    },
+  }).done(function(data) {
+    console.log('doone: ' + data);
+    if (data === 'Valid') {
+      $('#documentInvalidJSON').remove();
+      $('#addDocumentForm').submit();
+    } else if ($('#documentInvalidJSON').length === 0) {
+      $('.modal-body').parent().append('<div id="documentInvalidJSON" class="alert alert-danger"><strong>Invalid JSON</strong></div>');
+      console.log('invalid');
+    }
+  });
+  return false;
+};
+
 var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
   mode: { name: 'javascript', json: true },
   indentUnit: 4,
