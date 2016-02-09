@@ -225,8 +225,9 @@ $('#addDocument').on('shown.bs.modal', function() {
     </ul>
   {% endif %}
 
+  <div class="fadeToWhite"></div>
   <div class="table-responsive tableWrapper">
-    <table class="table table-striped">
+    <table class="table table-striped tableHeaderFooterBars">
       <thead>
         {% for column in columns %}
           <th>{{column}}</th>
@@ -351,6 +352,12 @@ function loadDocument(id) {
 }
 
 $(document).ready(function() {
+
+  if ($('.tableHeaderFooterBars').width() === $('.tableWrapper').width()) {
+    // table wrapper is the same width as the table itself, so not overflowing, so remove the white gradient
+    $('.fadeToWhite').remove();
+  }
+
   $('.deleteButton').tooltip({
     title: 'Are you sure you want to delete this collection? All documents will be deleted.',
   });
