@@ -102,6 +102,7 @@ jQuery(document).ready(function($) {
         <div class="form-group col-sm-6 col-md-2">
           <select name="type" class="form-control">
             <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
+            <option value="R" {% if type == 'R' %}selected {% endif %}>Regex</option>
             <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
             <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
             <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
