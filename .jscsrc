@@ -2,6 +2,7 @@
 	"preset": "airbnb",
   "requireCamelCaseOrUpperCaseIdentifiers": false,
   excludeFiles: [
+    ".cfignore",
     ".DS_Store",
     ".gitignore",
     ".jscsrc",
@@ -12,6 +13,7 @@
     "HISTORY.md",
     "README.md",
     "Dockerfile",
+    "manifest.yml",
     "package.json",
     "public/javascripts/**",
   ]
