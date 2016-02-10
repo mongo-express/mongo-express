@@ -357,6 +357,8 @@ $(document).ready(function() {
   if ($('.tableHeaderFooterBars').width() === $('.tableWrapper').width()) {
     // table wrapper is the same width as the table itself, so not overflowing, so remove the white gradient
     $('.fadeToWhite').remove();
+  } else {
+    $('.fadeToWhite').height($('.tableWrapper').height()); // limit the height only to the table div
   }
 
   $('.deleteButton').tooltip({
