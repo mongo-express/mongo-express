@@ -125,6 +125,12 @@ module.exports = {
 
     //readOnly: if readOnly is true, components of writing are not visible.
     readOnly: false,
+
+    //collapsibleJSON: if set to true, jsons will be displayed collapsible
+    collapsibleJSON: true,
+    //collapsibleJSONDefaultUnfold: if collapsibleJSON is set to `true`, this defines default level
+    //  to which JSONs are displayed unfolded; use number or "all" to unfold all levels
+    collapsibleJSONDefaultUnfold: 1
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
