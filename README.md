@@ -16,7 +16,8 @@ Features
 * View/add/update/delete documents
 * View data URI images inline in collection table view
 * Async on-demand loading of big document properties (>100KB default) to keep table view fast
-* GridFS support - add/get/delete large files
+* Nested objects are collapsible for easy overview
+* GridFS support - add/get/delete incredibly large files
 * Use BSON data types in documents
 * Ability to specify the default key to be shown in the docs list
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
