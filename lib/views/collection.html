@@ -208,7 +208,7 @@ $('#addDocument').on('shown.bs.modal', function() {
 {% if collapsibleJSON %}
 $(function() {
   // convert all objects to renderjson elements
-  $("div.tableContent").each(function() {
+  $('div.tableContent').each(function() {
     var html = $.trim($(this).html());
     if (html && html.substr(0,5) === '<pre>') {
       // strip <pre> and </pre> from element content
@@ -217,7 +217,7 @@ $(function() {
   });
 
   // prevent parent click events if user cliks collapse/uncollapse icon
-  $("pre.renderjson a").click(function(e) {
+  $('pre.renderjson a').click(function(e) {
     e.stopPropagation();
   });
 });
