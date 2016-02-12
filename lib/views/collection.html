@@ -204,6 +204,25 @@ var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
 $('#addDocument').on('shown.bs.modal', function() {
   addDoc.refresh();
 });
+
+{% if collapsibleJSON %}
+$(function() {
+  // convert all objects to renderjson elements
+  $("div.tableContent").each(function() {
+    var html = $.trim($(this).html());
+    if (html[0] == "<") {
+      // strip <pre> and </pre> from element content
+      $(this).html(renderjson(JSON.parse(html.slice(5, -6))));
+    }
+  });
+
+  // prevent parent click events if user cliks collapse/uncollapse icon
+  $("pre.renderjson a").click(function(e) {
+    e.stopPropagation();
+  });
+});
+renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
+{% endif %}
 </script>
 
   {% if documents.length == 0 %}
