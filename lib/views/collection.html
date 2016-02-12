@@ -210,7 +210,7 @@ $(function() {
   // convert all objects to renderjson elements
   $("div.tableContent").each(function() {
     var html = $.trim($(this).html());
-    if (html[0] == "<") {
+    if (html && html.substr(0,5) === '<pre>') {
       // strip <pre> and </pre> from element content
       $(this).html(renderjson(JSON.parse(html.slice(5, -6))));
     }
