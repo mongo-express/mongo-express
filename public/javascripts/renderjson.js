@@ -83,7 +83,7 @@ var module;
                                                    if (classname) a.className = classname;
                                                    a.appendChild(text(txt));
                                                    a.href = '#';
-                                                   a.onclick = function() { callback(); return false; };
+                                                   a.onclick = function(e) { callback(); e.stopPropagation(); return false; };
                                                    return a; };
 
     function _renderjson(json, indent, dont_indent, show_level, max_string, sort_objects) {
