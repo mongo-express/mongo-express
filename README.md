@@ -1,26 +1,25 @@
 mongo-express
 =============
 
-Web-based MongoDB admin interface written with Node.js and express
+Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
 
 
 Features
 --------
 
 * Connect to multiple databases
-* Connect and authenticate to individual databases
-* Authenticate as admin to view all databases
-* Database blacklist/whitelist
 * View/add/delete databases
 * View/add/rename/delete collections
 * View/add/update/delete documents
-* View data URI images inline in collection table view
+* Preview audio/video/image assets inline in collection table view
+* Nested and/or large objects are collapsible for easy overview
 * Async on-demand loading of big document properties (>100KB default) to keep table view fast
-* Nested objects are collapsible for easy overview
 * GridFS support - add/get/delete incredibly large files
 * Use BSON data types in documents
-* Ability to specify the default key to be shown in the docs list
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
+* Connect and authenticate to individual databases
+* Authenticate as admin to view all databases
+* Database blacklist/whitelist
 
 
 Screenshots
