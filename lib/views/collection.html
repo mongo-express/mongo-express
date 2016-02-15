@@ -215,11 +215,6 @@ $(function() {
       $(this).html(renderjson(JSON.parse(html.slice(5, -6))));
     }
   });
-
-  // prevent parent click events if user cliks collapse/uncollapse icon
-  $('pre.renderjson a').click(function(e) {
-    e.stopPropagation();
-  });
 });
 renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 {% endif %}
