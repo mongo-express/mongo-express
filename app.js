@@ -13,7 +13,7 @@ const updateNotifier  = require('update-notifier');
 const pkg             = require('./package.json');
 
 let app               = express();
-let notifier          = updateNotifier({pkg});
+let notifier          = updateNotifier({ pkg });
 
 let config;
 let defaultPort = 80;
@@ -102,7 +102,7 @@ if (config.site.sslEnabled) {
   server = https.createServer(sslOptions, app);
 }
 
-server.listen(config.site.port, config.site.host, function() {
+server.listen(config.site.port, config.site.host, function () {
   console.log('Mongo Express server listening',
     'on port ' + (config.site.port || defaultPort),
     'at '      + (config.site.host || '0.0.0.0'));
