@@ -45,7 +45,7 @@ Or if you want to install a non-global copy:
 
     npm install mongo-express
 
-By default `config.default.js` is used where the basic access authentication is `admin`:`pass`.  
+By default `config.default.js` is used where the basic access authentication is `admin`:`pass`.
 *mongo-express* requires Node.js v4.x.x or higher.
 
 **To configure:**
