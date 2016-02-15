@@ -6,9 +6,9 @@ var bson = require('../lib/bson');
 var expect = require('chai').expect;
 var mongodb = require('mongodb');
 
-describe('BSON', function() {
-  describe('toBSON', function() {
-    it('should convert documents with native JS types', function() {
+describe('BSON', function () {
+  describe('toBSON', function () {
+    it('should convert documents with native JS types', function () {
       var test = '{test: true, "s": "hello", i: -99.44}';
       var result = bson.toBSON(test);
 
@@ -19,7 +19,7 @@ describe('BSON', function() {
       });
     });
 
-    it('should convert ObjectID to BSON', function() {
+    it('should convert ObjectID to BSON', function () {
       var test = '{_id: ObjectID(), id2: ObjectId()}';
       var result = bson.toBSON(test);
 
@@ -27,7 +27,7 @@ describe('BSON', function() {
       expect(result).to.have.property('id2').to.be.an.instanceof(mongodb.ObjectID);
     });
 
-    it('should convert ISODate to BSON', function() {
+    it('should convert ISODate to BSON', function () {
       var test = '{date: ISODate(), date2: new Date()}';
       var result = bson.toBSON(test);
 
@@ -35,14 +35,14 @@ describe('BSON', function() {
       expect(result).to.have.property('date2').to.be.an.instanceof(Date);
     });
 
-    it('should convert Timestamp to BSON', function() {
+    it('should convert Timestamp to BSON', function () {
       var test = '{ts: Timestamp()}';
       var result = bson.toBSON(test);
 
       expect(result).to.have.property('ts').to.be.an.instanceof(mongodb.Timestamp);
     });
 
-    it('should convert DBRef to BSON', function() {
+    it('should convert DBRef to BSON', function () {
       var test = '{ref: DBRef("coll", "id"), ref2: DBRef("coll", "id", "db"), ref3: Dbref("coll", "id", "")}';
       var result = bson.toBSON(test);
 
@@ -57,28 +57,28 @@ describe('BSON', function() {
       expect(result).to.have.property('ref3').to.be.an.instanceof(mongodb.DBRef);
     });
 
-    it('should convert Symbol to BSON', function() {
+    it('should convert Symbol to BSON', function () {
       var test = '{symbol: Symbol("test")}';
       var result = bson.toBSON(test);
 
       expect(result).to.have.property('symbol').to.be.an.instanceof(mongodb.Symbol);
     });
 
-    it('should convert MinKey to BSON', function() {
+    it('should convert MinKey to BSON', function () {
       var test = '{key: MinKey()}';
       var result = bson.toBSON(test);
 
       expect(result).to.have.property('key').to.be.an.instanceof(mongodb.MinKey);
     });
 
-    it('should convert MaxKey to BSON', function() {
+    it('should convert MaxKey to BSON', function () {
       var test = '{key: MaxKey()}';
       var result = bson.toBSON(test);
 
       expect(result).to.have.property('key').to.be.an.instanceof(mongodb.MaxKey);
     });
 
-    it('should convert Code to BSON', function() {
+    it('should convert Code to BSON', function () {
       var test = '{code: Code(function() { x; }), code2: Code("function() { x; }")}';
       var result = bson.toBSON(test);
 
@@ -87,8 +87,8 @@ describe('BSON', function() {
     });
   });
 
-  describe('toString', function() {
-    it('should convert simple documents', function() {
+  describe('toString', function () {
+    it('should convert simple documents', function () {
       var test = {
         bool: true,
         str: 'string',
@@ -105,7 +105,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert ObjectID to string', function() {
+    it('should convert ObjectID to string', function () {
       var test = {
         id: mongodb.ObjectID(),
         id2: mongodb.ObjectID('4fb1299686a989240b000001'),
@@ -116,7 +116,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert ISODate to string', function() {
+    it('should convert ISODate to string', function () {
       var test = {
         date: new Date(),
       };
@@ -126,7 +126,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert Timestamp to string', function() {
+    it('should convert Timestamp to string', function () {
       var test = {
         ts: mongodb.Timestamp(),
         ts2: mongodb.Timestamp(100, 100),
@@ -137,7 +137,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert DBRef to string', function() {
+    it('should convert DBRef to string', function () {
       var test = {
         ref: mongodb.DBRef('coll', 'id', ''),
         ref2: mongodb.DBRef('coll', 'id', 'db'),
@@ -148,7 +148,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert Symbol to string', function() {
+    it('should convert Symbol to string', function () {
       var test = { symbol: mongodb.Symbol('test') };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
@@ -156,7 +156,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert MinKey to string', function() {
+    it('should convert MinKey to string', function () {
       var test = { key: mongodb.MinKey() };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
@@ -164,7 +164,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert MaxKey to string', function() {
+    it('should convert MaxKey to string', function () {
       var test = { key: mongodb.MaxKey() };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
@@ -172,7 +172,7 @@ describe('BSON', function() {
       expect(test).to.eql(test2);
     });
 
-    it('should convert Code to string', function() {
+    it('should convert Code to string', function () {
       var test = {
         code: mongodb.Code('function() { x; }'),
       };
