@@ -11,9 +11,9 @@ Features
 * View/add/delete databases
 * View/add/rename/delete collections
 * View/add/update/delete documents
-* Preview audio/video/image assets inline in collection table view
+* Preview audio/video/image assets inline in collection view
 * Nested and/or large objects are collapsible for easy overview
-* Async on-demand loading of big document properties (>100KB default) to keep table view fast
+* Async on-demand loading of big document properties (>100KB default) to keep collection view fast
 * GridFS support - add/get/delete incredibly large files
 * Use BSON data types in documents
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
