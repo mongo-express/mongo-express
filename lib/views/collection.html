@@ -250,9 +250,9 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
         {% endfor %}
       </thead>
       {% for document in docs %}
-        <tr onclick="loadDocument('{{ docs[loop.index0]._id | json | safe | url_encode }}')">
+        <tr onclick="loadDocument('{{ document._id | json | safe | url_encode }}')">
           {% for column in columns %}
-            <td><div class="tableContent">{{document[column] | to_display | safe}}
+            <td><div class="tableContent">{{ document[column] | stringDocIDs | escape | to_display | safe }}
               {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
                 <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
                 <input type="hidden" name="_method" value="delete">
