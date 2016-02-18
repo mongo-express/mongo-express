@@ -104,7 +104,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access. Send strings: `"true"` or `"false"`.
     `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
     `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
-    `ME_CONFIG_MONGODB_AUTH_DATABASE` | `db`            | Database name (only needed if `admin` is `"false"`).
+    `ME_CONFIG_MONGODB_AUTH_DATABASE` | `db`            | Database name (only needed if `ENABLE_ADMIN` is `"false"`).
     `ME_CONFIG_MONGODB_AUTH_USERNAME` | `admin`         | Database username (only needed if `ENABLE_ADMIN` is `"false"`).
     `ME_CONFIG_MONGODB_AUTH_PASSWORD` | `pass`          | Database password (only needed if `ENABLE_ADMIN` is `"false"`).
     `ME_CONFIG_SITE_COOKIESECRET`     | `cookiesecret`  | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
