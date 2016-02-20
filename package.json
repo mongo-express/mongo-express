@@ -17,7 +17,7 @@
     "UI",
     "web-based"
   ],
-  "version": "0.30.19",
+  "version": "0.30.20",
   "bin": {
     "mongo-express": "./app.js"
   },
@@ -32,23 +32,23 @@
     "busboy": "^0.2.12",
     "cli-color": "^1.1.0",
     "commander": "^2.9.0",
-    "consolidate": "^0.13.0",
-    "cookie-parser": "1.4.0",
-    "errorhandler": "1.4.2",
-    "express": "4.13.3",
-    "express-session": "1.11.3",
+    "consolidate": "^0.14.0",
+    "cookie-parser": "1.4.1",
+    "errorhandler": "1.4.3",
+    "express": "4.13.4",
+    "express-session": "1.13.0",
     "gridfs-stream": "^1.1.1",
     "method-override": "2.3.5",
     "mongodb": "^2.1.0",
-    "morgan": "1.6.1",
+    "morgan": "1.7.0",
     "serve-favicon": "2.3.0",
     "swig": "1.4.2",
     "underscore": "~1.8.0",
     "update-notifier": "^0.6.0"
   },
   "devDependencies": {
-    "chai": "3.3.0",
-    "mocha": "2.3.3",
+    "chai": "3.5.0",
+    "mocha": "2.4.5",
     "pre-commit": "^1.1.2"
   },
   "engines": {
