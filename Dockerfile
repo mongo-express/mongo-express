@@ -16,15 +16,19 @@ RUN set -x \
 	&& apt-get purge --auto-remove -y ca-certificates curl \
 	&& rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-COPY . /app
+EXPOSE 8081
 
-RUN npm install
-RUN cp config.default.js config.js
-
+# override some config defaults with values that will work better for docker
 ENV ME_CONFIG_MONGODB_SERVER="mongo"
 ENV ME_CONFIG_MONGODB_ENABLE_ADMIN="true"
 ENV VCAP_APP_HOST="0.0.0.0"
 
-EXPOSE 8081
+WORKDIR /app
+
+COPY . /app
+
+RUN cp config.default.js config.js
+
+RUN npm install
+
 CMD ["tini", "--", "npm", "start"]
