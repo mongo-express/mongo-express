@@ -23,7 +23,7 @@ if (process.env.VCAP_SERVICES) {
     password: 'pass',
     port:     27017,
     ssl:      false,
-    url:      '"mongodb://localhost:27017/db',
+    url:      'mongodb://localhost:27017/db',
     username: 'admin',
   };
 }
