@@ -21,6 +21,8 @@ Features
 * Authenticate as admin to view all databases
 * Database blacklist/whitelist
 
+[![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
+
 
 Screenshots
 -----------
