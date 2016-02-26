@@ -1,5 +1,8 @@
 mongo-express
-=============
+===
+
+[![npm version](https://badge.fury.io/js/mongo-express.svg)](https://badge.fury.io/js/mongo-express) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
+
 
 Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
 
@@ -20,8 +23,6 @@ Features
 * Connect and authenticate to individual databases
 * Authenticate as admin to view all databases
 * Database blacklist/whitelist
-
-[![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
 
 
 Screenshots
