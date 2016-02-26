@@ -1,7 +1,7 @@
 mongo-express
 ===
 
-[![npm version](https://badge.fury.io/js/mongo-express.svg)](https://badge.fury.io/js/mongo-express) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
+[![npm version](https://badge.fury.io/js/mongo-express.svg)](https://badge.fury.io/js/mongo-express) [![GitHub stars](https://img.shields.io/github/stars/mongo-express/mongo-express.svg)](https://github.com/mongo-express/mongo-express/stargazers) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
 
 
 Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
