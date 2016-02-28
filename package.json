@@ -17,7 +17,7 @@
     "UI",
     "web-based"
   ],
-  "version": "0.30.25",
+  "version": "0.30.26",
   "bin": {
     "mongo-express": "./app.js"
   },
@@ -45,7 +45,7 @@
     "snyk": "^1.11.1",
     "swig": "1.4.2",
     "underscore": "~1.8.0",
-    "update-notifier": "^0.6.0"
+    "update-notifier": "^0.6.1"
   },
   "devDependencies": {
     "chai": "3.5.0",
