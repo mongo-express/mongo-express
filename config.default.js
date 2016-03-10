@@ -77,7 +77,7 @@ module.exports = {
 
   site: {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the stard and end!
-    baseUrl: '/',
+    baseUrl: process.env.ME_CONFIG_SITE_BASEURL || '/',
     cookieKeyName: 'mongo-express',
     cookieSecret:     process.env.ME_CONFIG_SITE_COOKIESECRET   || 'cookiesecret',
     host:             process.env.VCAP_APP_HOST                 || 'localhost',
