@@ -173,11 +173,10 @@ See [MongoDB db.collection.find()](https://docs.mongodb.org/manual/reference/met
 Planned features
 ----------------
 
-Pull Requests are always welcome!
+Pull Requests are always welcome! <3
 
 * Support for replica set connections
 * Site authentication
-* GridFS (work in progess)
 * Mongo Shell console (work in progress)
 
 Limitations
