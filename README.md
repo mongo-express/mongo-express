@@ -163,6 +163,13 @@ Then, take the following action to customize to your environment:
   * Change the `basicAuth` properties, not to keep the default values
 
 
+Search
+------
+* *Simple* search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
+* *Advanced* search passes the find and projection fields straight into MongoDB find(). The `find` object is where your query happens, while the `projection` object determines which columns are returned.
+
+See [MongoDB db.collection.find()](https://docs.mongodb.org/manual/reference/method/db.collection.find/) documentation for examples and exact usage.
+
 Planned features
 ----------------
 
