@@ -365,7 +365,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 <script type="text/javascript">
 
 function loadDocument(id) {
-  location.href = '/' + encodeURIComponent(id);
+  location.href = 'db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
 }
 
 $(document).ready(function() {
