@@ -4,8 +4,8 @@
 
 
 {% block head %}
-<link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
-<script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
+<link href="stylesheets/codemirror.css" rel="stylesheet">
+<script type="text/javascript" src="javascripts/codemirror-compressed.js"></script>
 <script type="text/javascript">
 'use strict';
 function getParameterByName(name) { name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]"); var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); }
@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
 </script>
 
   {% if editorTheme != "default" %}
-  <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
+  <link href="stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
 
   <style type="text/css">
@@ -50,27 +50,27 @@ jQuery(document).ready(function($) {
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+    <a href="db/{{ dbName}}">Database:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <li><a href="db/{{ db }}/">{{ db }}</a></li>
       {% endfor %}
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">Collection:</a>
+    <a href="db/{{ dbName }}/{{ collectionName }}">Collection:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for collection in collections %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
+      <li><a href="db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
       {% endfor %}
     </ul>
   </li>
@@ -92,7 +92,7 @@ jQuery(document).ready(function($) {
   </ul>
   <div id="my-tab-content" class="tab-content">
     <div class="tab-pane active" id="simple">
-      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="db/{{ dbName }}/{{ collectionName }}">
       <div class="row">
         <div class="form-group col-sm-6 col-md-4">
           <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
       </form>
     </div>
     <div class="tab-pane" id="advanced">
-      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="db/{{ dbName }}/{{ collectionName }}">
         <div class="row">
           <div class="form-group col-sm-6 col-md-5">
             <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
@@ -143,7 +143,7 @@ jQuery(document).ready(function($) {
   <div class="modal fade" id="addDocument" role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form id="addDocumentForm" method="post" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+    <form id="addDocumentForm" method="post" action="db/{{ dbName }}/{{ collectionName }}">
 
       <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
@@ -176,7 +176,7 @@ var checkValidJSON = function() {
   console.log($('#document').val());
   $.ajax({
     type: 'POST',
-    url: '{{ baseHref }}checkValid',
+    url: 'checkValid',
     data: {
       document: addDoc.getValue(),
     },
@@ -228,16 +228,16 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 
   {% if pagination %}
     <ul class="pager span7">
-      <li class="previous"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">&larr; First</a></li>
+      <li class="previous"><a href="db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">&larr; First</a></li>
       <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}"{% endif %}>&larr; Prev</a>
+        <a{% if prev.skip >= 0 %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}"{% endif %}>&larr; Prev</a>
       </li>
 
       <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}"{% endif %}>Next &rarr;</a>
+        <a{% if next.skip < stats.count %} href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}"{% endif %}>Next &rarr;</a>
       </li>
 
-      <li class="next"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">Last &rarr;</a></li>
+      <li class="next"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">Last &rarr;</a></li>
     </ul>
   {% endif %}
 
@@ -254,7 +254,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
           {% for column in columns %}
             <td><div class="tableContent">
               {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
-                <form method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
+                <form method="POST" style="display:inline;" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
@@ -274,27 +274,27 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
       <div class="text-center">
       <ul class="pagination">
         {%- if prev2.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ prev2.page }}</a></li>
+        <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ prev2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
         {%- if prev.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ prev.page }}</a></li>
+        <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ prev.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
-        <li class="active"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ here }}</a></li>
+        <li class="active"><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ here }}</a></li>
 
         {%- if next.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ next.page }}</a></li>
+        <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ next.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
 
         {%- if next2.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ next2.page }}</a></li>
+        <li><a href="db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ next2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
@@ -309,7 +309,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     {% if !settings.read_only %}
       <div class="col-md-12">
         <h2>Rename Collection</h2>
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
+        <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
             <span class="add-on">{{ dbName }} . </span>
@@ -328,7 +328,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
   <div class="row">
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning btn-block">
+      <a href="db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
       </a>
       </div>
@@ -336,7 +336,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning btn-block">
+      <a href="db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
       </a>
       </div>
@@ -345,7 +345,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     {% if !settings.read_only %}
       <div class="col-sm-6 col-lg-3">
         <div class="well">
-          <a href="{{ baseHref }}db/{{ dbName }}/compact/{{ collectionName }}" class="btn btn-danger btn-block">
+          <a href="db/{{ dbName }}/compact/{{ collectionName }}" class="btn btn-danger btn-block">
             <span class="glyphicon glyphicon-resize-small"></span><br>Compact
           </a>
         </div>
@@ -354,7 +354,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 
     {% if !settings.read_only %}
       <div class="col-sm-6 col-lg-3">
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
+        <form method="POST" action="db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" class="hidden" />
           <button class="btn btn-danger deleteButton btn-block" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
@@ -388,12 +388,12 @@ $(document).ready(function() {
     var target = $(this);
     var _id = target.attr('doc_id');
     var prop = target.attr('doc_prop');
-    var spinner = '<img src="{{ baseHref }}images/gears.gif" />';
+    var spinner = '<img src="images/gears.gif" />';
 
     // Set the element with spinner for now
     target.html(spinner);
 
-    $.get('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(_id) + '/' + prop, function(input) {
+    $.get('db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(_id) + '/' + prop, function(input) {
 
       // Images inline
       if (
