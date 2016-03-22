@@ -261,7 +261,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
                 </button>
                 </form>
               {% endif %}
-            {{ document[column] | stringDocIDs | escape | to_display | safe }}
+            {{ document[column] | stringDocIDs | to_display | safe }}
             </div></td>
           {% endfor %}
         </tr>
