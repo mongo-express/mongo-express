@@ -4,12 +4,12 @@
 
 
 {% block head %}
-  <link href="{{ baseHref }}stylesheets/codemirror-5.10.css" rel="stylesheet">
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.js"></script>
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.javascript.js"></script>
+  <link href="stylesheets/codemirror-5.10.css" rel="stylesheet">
+  <script type="text/javascript" src="javascripts/codemirror-5.10.js"></script>
+  <script type="text/javascript" src="javascripts/codemirror-5.10.javascript.js"></script>
 
   {% if editorTheme != "default" %}
-  <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
+  <link href="stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
 
   <style type="text/css">
@@ -28,39 +28,39 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+    <a href="db/{{ dbName}}">Database:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <li><a href="db/{{ db }}/">{{ db }}</a></li>
       {% endfor %}
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">Collection:</a>
+    <a href="db/{{ dbName }}/{{ collectionName }}">Collection:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for collection in collections %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
+      <li><a href="db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
       {% endfor %}
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="db/{{ dbName }}/{{ collectionName }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li><a>Document {{ document._id|to_string }}</a></li>
 {% endblock %}
 
 {% block content %}
 
-<form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
+<form method="POST" id="documentEditForm" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
   {% if docLength > 10 %}
     <div>
       {% if !settings.read_only %}
@@ -109,7 +109,7 @@
 
 {% if !settings.read_only %}
   <br>
-  <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
+  <form method="POST" action="db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
     <input type="hidden" name="_method" value="delete">
     <button type="submit" class="btn btn-danger">
       <span class="glyphicon glyphicon-trash"></span>
@@ -157,7 +157,7 @@
 
     $.ajax({
       type: 'POST',
-      url: "{{ baseHref }}checkValid",
+      url: "checkValid",
       data: {
         document: doc.getValue()
       },
