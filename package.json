@@ -26,7 +26,7 @@
     "url": "git://github.com/mongo-express/mongo-express.git"
   },
   "dependencies": {
-    "async": "^1.5.2",
+    "async": "^2.0.0-rc.2",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.14.2",
     "busboy": "^0.2.12",
