@@ -29,7 +29,7 @@
     "async": "^2.0.0-rc.2",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.14.2",
-    "busboy": "^0.2.12",
+    "busboy": "^0.2.13",
     "cli-color": "^1.1.0",
     "commander": "^2.9.0",
     "consolidate": "^0.14.0",
