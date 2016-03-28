@@ -2,7 +2,7 @@ ignore:
   'npm:uglify-js:20151024':
     - 'swig > uglify-js':
         reason: None given
-        expires: '2016-03-26T10:48:20.028Z'
+        expires: '2016-04-27T20:35:55.112Z'
 patch:
   'npm:uglify-js:20151024':
     - uglify-js:
