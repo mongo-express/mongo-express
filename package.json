@@ -45,7 +45,7 @@
     "snyk": "^1.13.1",
     "swig": "1.4.2",
     "underscore": "~1.8.0",
-    "update-notifier": "^0.6.1"
+    "update-notifier": "^0.6.3"
   },
   "devDependencies": {
     "chai": "3.5.0",
