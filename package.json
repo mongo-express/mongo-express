@@ -39,7 +39,7 @@
     "express-session": "1.13.0",
     "gridfs-stream": "^1.1.1",
     "method-override": "2.3.5",
-    "mongodb": "^2.1.11",
+    "mongodb": "^2.1.14",
     "morgan": "1.7.0",
     "serve-favicon": "2.3.0",
     "snyk": "^1.13.1",
