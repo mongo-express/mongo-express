@@ -17,42 +17,62 @@
 {% endblock %}
 
 {% block content %}
-
-<h2>Collections</h2>
-
-<table class="table table-bordered table-striped table-condensed">
-  {% for c in colls %}
-  <tr>
-    <td class="col-md-2">
-      <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success btn-block">
-        <span class="glyphicon glyphicon-eye-open"></span><br>View
-      </a>
-    </td>
-    <td class="col-md-1">
-       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>Export
-      </a>
-    </td>
-    <td class="col-md-1">
-       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
-      </a>
-    </td>
-    <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div style="display: inline-block;">
+    <h4 style="font-weight: bold;">Collections</h4>
+      </div>
     {% if !settings.read_only %}
-    <td class="col-md-1">
-      <form method="POST" id="db-{{ dbName }}-{{ c }}" action="{{ baseHref }}db/{{ dbName }}/{{ c }}" style="margin: 0px;">
-        <input type="hidden" name="_method" value="delete">
-        <button type="submit" class="hidden"></button>
-      </form>
-      <button class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
-        <span class="glyphicon glyphicon-trash"></span><br>Del
-      </button>
-    </td>
+        <form class="form-inline" method="POST" style="float: right;">
+          <div class="input-group">
+            <input class="form-control" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                Create collection
+              </button>
+            </span>
+          </div><!-- /input-group -->
+        </form>
     {% endif %}
-  </tr>
-  {% endfor %}
-</table>
+
+  </div>
+  <div class="panel-body" style="padding: 0px;">
+    <table class="table table-bordered table-striped table-condensed" style="margin: 0px;">
+      {% for c in colls %}
+      <tr>
+        <td class="col-md-2">
+          <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success btn-block">
+            <span class="glyphicon glyphicon-eye-open"></span><br>View
+          </a>
+        </td>
+        <td class="col-md-1">
+          <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span><br>Export
+          </a>
+        </td>
+        <td class="col-md-1">
+          <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
+          </a>
+        </td>
+        <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
+        {% if !settings.read_only %}
+        <td class="col-md-1">
+          <form method="POST" id="db-{{ dbName }}-{{ c }}" action="{{ baseHref }}db/{{ dbName }}/{{ c }}" style="margin: 0px;">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="hidden"></button>
+          </form>
+          <button class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
+            <span class="glyphicon glyphicon-trash"></span><br>Del
+          </button>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
 
 <div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
   <div class="modal-dialog" role="document">
@@ -99,7 +119,7 @@
 {% endif %}
 
 {% if !settings.read_only %}
-<div class="row">
+<!--div class="row">
   <div class="col-md-6">
     <h2>Create Collection</h2>
     <form class="well form-inline" method="POST">
@@ -113,7 +133,7 @@
         </button>
     </form>
   </div>
-</div>
+</div-->
 <!--
 <div class="row">
   <div class="col-md-6">
@@ -168,8 +188,10 @@ $(document).ready(function() {
 </script>
 {% endif %}
 
-<div class="stats">
-  <h2>Database Stats</h2>
+<div class="panel panel-default stats">
+  <div class="panel-heading">
+    <h4 style="font-weight: bold;">Database Stats</h4>
+  </div>
   <table class="table table-bordered table-striped">
     <tr>
       <td><strong>Collections (incl. system.namespaces)</strong></td>

@@ -75,3 +75,13 @@
   border-radius: 4px; /* future proofing */
   -khtml-border-radius: 4px; /* for old Konqueror browsers */
 }
+
+.main-title{
+  padding-bottom: 0px;
+  margin: 10px 0 15px;
+  border-bottom:3px solid #353535;
+}
+
+.main-title > h1{
+  margin-top: 0px;
+}
