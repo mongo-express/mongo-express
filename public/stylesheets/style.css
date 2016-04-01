@@ -85,3 +85,15 @@
 .main-title > h1{
   margin-top: 0px;
 }
+
+.no-margin{
+  margin: 0px;
+}
+
+.no-padding{
+  padding:0px;
+}
+
+.bold{
+  font-weight:bold;
+}
