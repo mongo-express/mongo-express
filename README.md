@@ -88,15 +88,22 @@ Usage (Express 4 middleware)
 Usage (Docker)
 --------------
 
-**To run in a Docker container:**
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) and specify it's name in the `--link` argument.
 
-First, build an image from the project directory:
+**Use the docker hub image:**
 
-    docker build -t mongo-express .
+```console
+$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo knickers/mongo-express
+```
 
-Then run the image. Make sure you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/) and specify it's name in the `--link` argument.
+**Build from source:**
 
-    docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+Build an image from the project directory, then run the image.
+
+```console
+$ docker build -t mongo-express .
+$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+```
 
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
