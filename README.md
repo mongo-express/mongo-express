@@ -93,7 +93,7 @@ Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/
 **Use the docker hub image:**
 
 ```console
-$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo knickers/mongo-express
+$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
 ```
 
 **Build from source:**
