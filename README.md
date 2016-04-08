@@ -30,7 +30,7 @@ Screenshots
 
 Home Page | Database View | Collection View | Editing A Document
 --- | --- | --- | ---
-<img src="http://i.imgur.com/XiYhblA.png" title="Home Page"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections in database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
+<img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
 
 These screenshots are from version 0.30.40
 View album for more screenshots: (server status, database views etc..)
