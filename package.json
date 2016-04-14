@@ -1,5 +1,5 @@
 {
-  "version": "0.30.45",
+  "version": "0.30.46",
   "author": "https://github.com/mongo-express",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
