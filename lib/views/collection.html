@@ -203,6 +203,7 @@ var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
 });
 $('#addDocument').on('shown.bs.modal', function() {
   addDoc.refresh();
+  addDoc.focus();
 });
 
 {% if collapsibleJSON %}
