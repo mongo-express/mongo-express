@@ -395,6 +395,7 @@ $(document).ready(function() {
     var _id = target.attr('doc_id');
     var prop = target.attr('doc_prop');
     var spinner = '<img src="{{ baseHref }}images/gears.gif" />';
+    var leftScroll = $('.tableWrapper').scrollLeft();
 
     // Set the element with spinner for now
     target.html(spinner);
@@ -444,6 +445,9 @@ $(document).ready(function() {
 
       // Set the element with gotten datas
       target.parent().html(input);
+
+      // Set original scroll position
+      $('.tableWrapper').scrollLeft(leftScroll);
     });
   });
 
