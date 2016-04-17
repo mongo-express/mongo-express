@@ -255,7 +255,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
           {% for column in columns %}
             <td><div class="tableContent">
               {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
-                <form method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
+                <form method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
