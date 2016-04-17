@@ -433,8 +433,8 @@ $(document).ready(function() {
           'Your browser does not support the video element.</video>';
       }
 
-      if (typeof input === 'object' && input.toString() === '[object Object]') {
-        input = '<pre>' + JSON.stringify(input, null, 2) + '</pre>';
+      if (typeof input === 'object' && (input.toString() === '[object Object]' || input.toString().substr(0,7) === '[object')) {
+        input = renderjson(input);
       }
 
       // Set the element with gotten datas

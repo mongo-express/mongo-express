@@ -1,3 +1,7 @@
+0.30.48
+-------
+ * Add support for super large Objects
+
 0.21.0
 ------
 
