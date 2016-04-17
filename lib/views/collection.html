@@ -242,7 +242,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     </ul>
   {% endif %}
 
-  <div class="fadeToWhite"></div>
+  <div class="fadeToWhite" id="fadeToWhiteID"></div>
   <div class="table-responsive tableWrapper">
     <table class="table table-striped tableHeaderFooterBars">
       <thead>
@@ -380,6 +380,11 @@ $(document).ready(function() {
 
   $('.deleteButton').tooltip({
     title: 'Are you sure you want to delete this collection? All documents will be deleted.',
+  });
+
+  $('.tableWrapper').scroll(function() {
+    var proximityToRightOfTable = $('.tableWrapper table').width() - $('.tableWrapper').scrollLeft() - $('.tableWrapper').width();
+    document.getElementById('fadeToWhiteID').style.opacity = Math.min(Math.max(proximityToRightOfTable - 50, 50) - 50, 100) / 100;
   });
 
   $('.tooDamnBig').bind('click', function(e) {
