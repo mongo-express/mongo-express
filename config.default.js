@@ -54,12 +54,12 @@ module.exports = {
        * Add the name, username, and password of the databases you want to connect to
        * Add as many databases as you want!
        */
-       {
-         database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
-         username: process.env.ME_CONFIG_MONGODB_AUTH_USERNAME || mongo.username,
-         password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password,
-       },
-      ],
+      {
+        database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
+        username: process.env.ME_CONFIG_MONGODB_AUTH_USERNAME || mongo.username,
+        password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password,
+      },
+    ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
