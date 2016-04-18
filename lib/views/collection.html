@@ -172,8 +172,6 @@ jQuery(document).ready(function($) {
 
 <script>
 var checkValidJSON = function() {
-  console.log('yooo');
-  console.log($('#document').val());
   $.ajax({
     type: 'POST',
     url: '{{ baseHref }}checkValid',
@@ -181,13 +179,11 @@ var checkValidJSON = function() {
       document: addDoc.getValue(),
     },
   }).done(function(data) {
-    console.log('doone: ' + data);
     if (data === 'Valid') {
       $('#documentInvalidJSON').remove();
       $('#addDocumentForm').submit();
     } else if ($('#documentInvalidJSON').length === 0) {
       $('.modal-body').parent().append('<div id="documentInvalidJSON" class="alert alert-danger"><strong>Invalid JSON</strong></div>');
-      console.log('invalid');
     }
   });
   return false;
