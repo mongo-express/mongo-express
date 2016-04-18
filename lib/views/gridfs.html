@@ -110,7 +110,6 @@
 <script type="text/javascript">
 'use strict';
 function loadFile(id) {
-  console.log(id);
   location.href = '{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/' + encodeURIComponent(id);
 }
 
