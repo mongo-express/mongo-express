@@ -24,7 +24,7 @@ if (process.env.VCAP_SERVICES) {
     port:     27017,
     ssl:      false,
     url:      'mongodb://localhost:27017/db',
-    username: 'admin'
+    username: 'admin',
   };
 }
 
@@ -57,8 +57,8 @@ module.exports = {
       {
         database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
         username: process.env.ME_CONFIG_MONGODB_AUTH_USERNAME || mongo.username,
-        password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password
-      }
+        password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password,
+      },
     ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
@@ -72,7 +72,7 @@ module.exports = {
     whitelist: [],
 
     //blacklist: hide databases listed in the blacklist (empty list for no blacklist)
-    blacklist: []
+    blacklist: [],
   },
 
   site: {
@@ -86,7 +86,7 @@ module.exports = {
     sessionSecret:    process.env.ME_CONFIG_SITE_SESSIONSECRET  || 'sessionsecret',
     sslCert:          process.env.ME_CONFIG_SITE_SSL_CRT_PATH   || '',
     sslEnabled:       process.env.ME_CONFIG_SITE_SSL_ENABLED    || false,
-    sslKey:           process.env.ME_CONFIG_SITE_SSL_KEY_PATH   || ''
+    sslKey:           process.env.ME_CONFIG_SITE_SSL_KEY_PATH   || '',
   },
 
   //set useBasicAuth to true if you want to authehticate mongo-express loggins
@@ -96,10 +96,9 @@ module.exports = {
 
   basicAuth: {
     username: process.env.ME_CONFIG_BASICAUTH_USERNAME || 'admin',
-    password: process.env.ME_CONFIG_BASICAUTH_PASSWORD || 'pass'
+    password: process.env.ME_CONFIG_BASICAUTH_PASSWORD || 'pass',
   },
-  //console: turn on and off console logs you dont wish to see
-  console: true,
+
   options: {
     //documentsPerPage: how many documents you want to see at once in collection view
     documentsPerPage: 10,
@@ -132,7 +131,7 @@ module.exports = {
 
     //collapsibleJSONDefaultUnfold: if collapsibleJSON is set to `true`, this defines default level
     //  to which JSONs are displayed unfolded; use number or "all" to unfold all levels
-    collapsibleJSONDefaultUnfold: 1
+    collapsibleJSONDefaultUnfold: 1,
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
@@ -148,5 +147,5 @@ module.exports = {
   // }
   defaultKeyNames: {
 
-  }
+  },
 };
