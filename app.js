@@ -20,9 +20,11 @@ let defaultPort = 80;
 let server      = app;
 let sslOptions;
 
-console.log('Welcome to mongo-express');
-console.log('------------------------');
-console.log('\n');
+if (config.console) {
+  console.log('Welcome to mongo-express');
+  console.log('------------------------');
+  console.log('\n');
+}
 
 // Notify of any updates
 notifier.notify();
@@ -103,7 +105,7 @@ if (config.site.sslEnabled) {
 }
 
 server.listen(config.site.port, config.site.host, function () {
-  console.log('Mongo Express server listening',
+  if (config.console)console.log('Mongo Express server listening',
     'on port ' + (config.site.port || defaultPort),
     'at '      + (config.site.host || '0.0.0.0'));
 });
