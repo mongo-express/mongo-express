@@ -100,6 +100,9 @@ module.exports = {
   },
 
   options: {
+    // Display startup text on console
+    console: true,
+
     //documentsPerPage: how many documents you want to see at once in collection view
     documentsPerPage: 10,
 
