@@ -1,5 +1,5 @@
 {
-  "version": "0.30.52",
+  "version": "0.30.53",
   "author": "https://github.com/mongo-express",
   "name": "mongo-express",
   "description": "Web-based admin interface for MongoDB",
@@ -61,12 +61,15 @@
     "jshint": "jshint -c .jshintrc --exclude-path .jshintignore .",
     "jscs": "jscs .",
     "start": "node app",
-    "test": "snyk test && ./node_modules/mocha/bin/mocha"
+    "test": "snyk test && ./node_modules/mocha/bin/mocha",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "pre-commit": [
     "jshint",
     "jscs",
     "test"
   ],
-  "main": "./middleware"
+  "main": "./middleware",
+  "snyk": true
 }
