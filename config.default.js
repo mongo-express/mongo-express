@@ -33,8 +33,14 @@ module.exports = {
     server: process.env.ME_CONFIG_MONGODB_SERVER  || mongo.host,
     port:   process.env.ME_CONFIG_MONGODB_PORT    || mongo.port,
 
-    //useSSL: connect to the server using secure SSL
-    useSSL: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
+    //ssl: connect to the server using secure SSL
+    ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
+
+    //sslValidate: validate mongod server certificate against CA
+    sslValidate:  true,
+    
+    //sslCA: array of valid CA certificates
+    sslCA:  [],
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
