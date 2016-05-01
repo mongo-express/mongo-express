@@ -37,7 +37,7 @@ module.exports = {
     ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
 
     //sslValidate: validate mongod server certificate against CA
-    sslValidate:  true,
+    sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
     
     //sslCA: array of valid CA certificates
     sslCA:  [],
