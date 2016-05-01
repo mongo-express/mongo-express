@@ -23,6 +23,7 @@ Features
 * Connect and authenticate to individual databases
 * Authenticate as admin to view all databases
 * Database blacklist/whitelist
+* Custom CA and CA validation disabling
 
 
 Screenshots
@@ -125,6 +126,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
     `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
     `ME_CONFIG_SITE_SSL_ENABLED`      | `false`         | Enable SSL.
+    `ME_CONFIG_MONGODB_SSLVALIDATE`   | `true`          | Validate mongod server certificate against CA
     `ME_CONFIG_SITE_SSL_CRT_PATH`     | ` `             | SSL certificate file.
     `ME_CONFIG_SITE_SSL_KEY_PATH`     | ` `             | SSL key file.
 
