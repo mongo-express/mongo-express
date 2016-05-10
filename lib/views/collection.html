@@ -7,14 +7,22 @@
 <link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
 <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
 <script type="text/javascript">
-'use strict';
-function getParameterByName(name) { name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]"); var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); }
-jQuery(document).ready(function($) {
-  $('#tabs').tab();
-  if (document.location.href.indexOf('query=') >= 0 && getParameterByname('query')!='') {
-    $('#tabs a[href="#advanced"]').tab('show');
+  'use strict';
+
+  function getParameterByName(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
   }
-});
+
+  jQuery(document).ready(function($) {
+    $('#tabs').tab();
+    if (document.location.href.indexOf('query=') >= 0 && getParameterByName('query') !== '') {
+      $('#tabs a[href="#advanced"]').tab('show');
+    }
+  });
+
 </script>
 
   {% if editorTheme != "default" %}
