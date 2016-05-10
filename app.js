@@ -3,6 +3,7 @@
 'use strict';
 
 const clc             = require('cli-color');
+const csrf            = require('csurf');
 const commander       = require('commander');
 const express         = require('express');
 const fs              = require('fs');
@@ -92,6 +93,8 @@ if (!config.site.host || config.site.host === '0.0.0.0') {
 }
 
 app.use(config.site.baseUrl, middleware(config));
+app.use(csrf());
+
 app.set('read_only',      config.options.readOnly       || false);
 app.set('gridFSEnabled',  config.options.gridFSEnabled  || false);
 
