@@ -110,7 +110,6 @@ if (config.site.sslEnabled) {
 server.listen(config.site.port, config.site.host, function () {
   if (config.options.console) {
     console.log('Mongo Express server listening',
-      'on port ' + (config.site.port || defaultPort),
-      'at '      + (config.site.host || '0.0.0.0'));
+      'at '      + (config.site.sslEnabled ? 'https://' : 'http://') + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort));
   }
 });
