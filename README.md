@@ -41,6 +41,8 @@ View album for more screenshots: (server status, database views etc..)
 Usage (npm / CLI)
 -----------------
 
+*mongo-express* requires Node.js v4 or higher.
+
 **To install:**
 
     npm install -g mongo-express
@@ -49,8 +51,7 @@ Or if you want to install a non-global copy:
 
     npm install mongo-express
 
-By default `config.default.js` is used where the basic access authentication is `admin`:`pass`.
-*mongo-express* requires Node.js v4.x.x or higher.
+By default `config.default.js` is used where the basic access authentication is `admin`:`pass`. This is obviously not safe, and there are warnings in the console.
 
 **To configure:**
 
