@@ -7,21 +7,21 @@
 <link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
 <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
 <script type="text/javascript">
-  'use strict';
+'use strict';
 
-  function getParameterByName(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+jQuery(document).ready(function ($) {
+  $('#tabs').tab();
+  if (document.location.href.indexOf('query=') >= 0 && getParameterByName('query') !== '') {
+    $('#tabs a[href="#advanced"]').tab('show');
   }
-
-  jQuery(document).ready(function($) {
-    $('#tabs').tab();
-    if (document.location.href.indexOf('query=') >= 0 && getParameterByName('query') !== '') {
-      $('#tabs a[href="#advanced"]').tab('show');
-    }
-  });
+});
 
 </script>
 
@@ -259,7 +259,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
           {% for column in columns %}
             <td><div class="tableContent">
               {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
-                <form method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
+                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
@@ -362,7 +362,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" class="hidden" />
-          <button class="btn btn-danger deleteButton btn-block" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
+          <button class="btn btn-danger deleteButtonCollection btn-block" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
             <span class="glyphicon glyphicon-trash"></span><br>Delete
           </button>
         </form>
@@ -373,7 +373,7 @@ function loadDocument(id) {
   location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
   if ($('.tableHeaderFooterBars').width() === $('.tableWrapper').width()) {
     // table wrapper is the same width as the table itself, so not overflowing, so remove the white gradient
@@ -382,16 +382,16 @@ $(document).ready(function() {
     $('.fadeToWhite').height($('.tableWrapper').height()); // limit the height only to the table div
   }
 
-  $('.deleteButton').tooltip({
+  $('.deleteButtonCollection').tooltip({
     title: 'Are you sure you want to delete this collection? All documents will be deleted.',
   });
 
-  $('.tableWrapper').scroll(function() {
+  $('.tableWrapper').scroll(function () {
     var proximityToRightOfTable = $('.tableWrapper table').width() - $('.tableWrapper').scrollLeft() - $('.tableWrapper').width();
     document.getElementById('fadeToWhiteID').style.opacity = Math.min(Math.max(proximityToRightOfTable - 50, 50) - 50, 100) / 100;
   });
 
-  $('.tooDamnBig').bind('click', function(e) {
+  $('.tooDamnBig').bind('click', function (e) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -404,7 +404,7 @@ $(document).ready(function() {
     // Set the element with spinner for now
     target.html(spinner);
 
-    $.get('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(_id) + '/' + prop, function(input) {
+    $.get('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(_id) + '/' + prop, function (input) {
 
       // Images inline
       if (
@@ -443,7 +443,7 @@ $(document).ready(function() {
           'Your browser does not support the video element.</video>';
       }
 
-      if (typeof input === 'object' && (input.toString() === '[object Object]' || input.toString().substr(0,7) === '[object')) {
+      if (typeof input === 'object' && (input.toString() === '[object Object]' || input.toString().substr(0, 7) === '[object')) {
         input = renderjson(input);
       }
 
@@ -455,25 +455,39 @@ $(document).ready(function() {
     });
   });
 
-  $('.deleteButton').on('click', function(event) {
+  $('.deleteButtonDocument').on('click', function (e) {
+    console.log(this, e);
+      var $form = $(this).closest('form');
+      console.log($form);
+      e.stopPropagation();
+      e.preventDefault();
 
-    $('.deleteButton').tooltip('hide');
+      $('#confirm-deletion-document').modal({ backdrop: 'static', keyboard: false })
+        .one('click', '#delete', function () {
+          $form.trigger('submit'); // submit the form
+        });
+    }
+  );
+
+  $('.deleteButtonCollection').on('click', function (event) {
+
+    $('.deleteButtonCollection').tooltip('hide');
 
     event.preventDefault();
 
-    var target = $(this);
-    var parentForm = $('#' + target.attr('childof'));
+    var $target = $(this);
+    var $parentForm = $('#' + target.attr('childof'));
 
-    $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
-    $('#modal-collection-name').text(target.attr('collection-name'));
-    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
-      .one('shown.bs.modal', function() {
+    $('#confirmation-input').attr('shouldbe', $target.attr('collection-name'));
+    $('#modal-collection-name').text($target.attr('collection-name'));
+    $('#confirm-deletion-collection').modal({ backdrop: 'static', keyboard: false })
+      .one('shown.bs.modal', function () {
         $('#confirmation-input').focus();
       })
-      .one('click', '#delete', function() {
-        var input = $('#confirmation-input');
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
-          parentForm.trigger('submit');
+      .one('click', '#delete', function () {
+        var $input = $('#confirmation-input');
+        if ($input.val().toLowerCase() === $input.attr('shouldbe').toLowerCase()) {
+          $parentForm.trigger('submit');
         }
       });
   });
@@ -481,7 +495,22 @@ $(document).ready(function() {
 </script>
       </div>
 
-      <div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
+      <div id="confirm-deletion-document" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Are you sure?
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="confirm-deletion-collection" class="modal fade" role="dialog" aria-labelledby="confirmDeletionCollectionLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
