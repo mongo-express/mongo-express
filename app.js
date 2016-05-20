@@ -84,14 +84,6 @@ if (!config.site.baseUrl) {
   config.site.baseUrl = '/';
 }
 
-if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-  console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
-}
-
-if (!config.site.host || config.site.host === '0.0.0.0') {
-  console.error(clc.red('Server is open to allow connections from anyone (0.0.0.0)'));
-}
-
 app.use(config.site.baseUrl, middleware(config));
 app.use(csrf());
 
@@ -107,9 +99,32 @@ if (config.site.sslEnabled) {
   server = https.createServer(sslOptions, app);
 }
 
+let addressString = (config.site.sslEnabled ? 'https://' : 'http://') + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
+
 server.listen(config.site.port, config.site.host, function () {
   if (config.options.console) {
-    console.log('Mongo Express server listening',
-      'at '      + (config.site.sslEnabled ? 'https://' : 'http://') + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort));
+
+    console.log('Mongo Express server listening', 'at ' + addressString);
+
+    if (!config.site.host || config.site.host === '0.0.0.0') {
+      console.error(clc.red('Server is open to allow connections from anyone (0.0.0.0)'));
+    }
+
+    if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+      console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+    }
+
   }
+})
+.on('error', function (e) {
+  if (e.code === 'EADDRINUSE') {
+    console.log();
+    console.error(clc.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
+    console.log('Maybe mongo-express is already running?');
+  }
+
+  console.log();
+  console.log('If you are still having trouble, try Googling for the key parts of the following error object before posting an issue');
+  console.log(JSON.stringify(e));
+  return process.exit(1);
 });
