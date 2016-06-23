@@ -266,7 +266,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     <table class="table table-striped tableHeaderFooterBars">
       <thead>
         {% for column in columns %}
-          <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}">
+          <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}" title="Sort by {{column}}">
             {{column}}
             {% if sort[column] == 1 %}
               <span class="glyphicon glyphicon-triangle-top"></span>
