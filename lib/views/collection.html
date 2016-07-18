@@ -47,6 +47,10 @@ jQuery(document).ready(function ($) {
       padding-bottom: 5px;
     }
 
+    .sorting-button {
+      white-space: nowrap;
+    }
+    
     @media (min-width: 992px) { /* meduim and up */
       #advanced .form-group .btn {
         height: 150px;
@@ -101,6 +105,9 @@ jQuery(document).ready(function ($) {
   <div id="my-tab-content" class="tab-content">
     <div class="tab-pane active" id="simple">
       <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+        {% for column in columns %}
+          <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
+        {% endfor %}
       <div class="row">
         <div class="form-group col-sm-6 col-md-4">
           <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
@@ -128,6 +135,9 @@ jQuery(document).ready(function ($) {
     </div>
     <div class="tab-pane" id="advanced">
       <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+        {% for column in columns %}
+          <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
+        {% endfor %}
         <div class="row">
           <div class="form-group col-sm-6 col-md-5">
             <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
@@ -233,16 +243,21 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 
   {% if pagination %}
     <ul class="pager span7">
-      <li class="previous"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">&larr; First</a></li>
+      <li class="previous{% if prev.skip < 0 %} disabled{% endif %}">
+        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
+      </li>
+
       <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}"{% endif %}>&larr; Prev</a>
+        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
       </li>
 
       <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}"{% endif %}>Next &rarr;</a>
+        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
       </li>
 
-      <li class="next"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">Last &rarr;</a></li>
+      <li class="next{% if next.skip >= stats.count %} disabled{% endif %}">
+        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
+      </li>
     </ul>
   {% endif %}
 
@@ -251,7 +266,14 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     <table class="table table-striped tableHeaderFooterBars">
       <thead>
         {% for column in columns %}
-          <th>{{column}}</th>
+          <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}" title="Sort by {{column}}">
+            {{column}}
+            {% if sort[column] == 1 %}
+              <span class="glyphicon glyphicon-triangle-top"></span>
+            {% elseif sort[column] == -1 %}
+              <span class="glyphicon glyphicon-triangle-bottom"></span>
+            {% endif %}
+          </th>
         {% endfor %}
       </thead>
       {% for document in docs %}
@@ -279,27 +301,27 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
       <div class="text-center">
       <ul class="pagination">
         {%- if prev2.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ prev2.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
         {%- if prev.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ prev.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
-        <li class="active"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ here }}</a></li>
+        <li class="active"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
 
         {%- if next.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ next.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
 
         {%- if next2.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">{{ next2.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
@@ -490,6 +512,23 @@ $(document).ready(function () {
           $parentForm.trigger('submit');
         }
       });
+  });
+
+  var nextSort = {
+    '1': -1,
+    '-1': 0,
+    '0': 1,
+    'undefined': 1
+  };
+  $('.sorting-button').on('click', function(e) {
+    var $this = $(this);
+    var column = $this.data('column');
+    var direction = nextSort[$this.data('direction')];
+
+    $('input.sort-' + column).val(direction).prop('checked', direction!=0);
+
+    var $form = $($('#tabs li.active a').attr('href') + ' form');
+    $form.find('button[type="submit"]').click();
   });
 });
 </script>
