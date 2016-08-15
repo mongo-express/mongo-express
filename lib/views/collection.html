@@ -498,7 +498,7 @@ $(document).ready(function () {
     event.preventDefault();
 
     var $target = $(this);
-    var $parentForm = $('#' + target.attr('childof'));
+    var $parentForm = $('#' + $target.attr('childof'));
 
     $('#confirmation-input').attr('shouldbe', $target.attr('collection-name'));
     $('#modal-collection-name').text($target.attr('collection-name'));
