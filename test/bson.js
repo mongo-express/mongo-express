@@ -43,12 +43,13 @@ describe('BSON', function () {
     });
 
     it('should convert DBRef to BSON', function () {
-      var test = '{ref: DBRef("coll", "id"), ref2: DBRef("coll", "id", "db"), ref3: Dbref("coll", "id", "")}';
+      var test = '{ref: DBRef("coll", "579e18580bddc20700502419"), ref2: DBRef("coll", "579e18580bddc20700502419", "db"), ref3: Dbref("coll", "579e18580bddc20700502419", "")}';
       var result = bson.toBSON(test);
 
       expect(result).to.have.property('ref').to.be.an.instanceof(mongodb.DBRef);
       expect(result).to.have.property('ref').to.have.property('namespace', 'coll');
-      expect(result).to.have.property('ref').to.have.property('oid', 'id');
+      expect(result).to.have.property('ref').to.have.property('oid').to.be.an.instanceof(mongodb.ObjectID);
+      expect(result).to.have.property('ref').to.have.property('oid').eql(mongodb.ObjectID('579e18580bddc20700502419'));
       expect(result).to.have.property('ref').to.have.property('db', '');
 
       expect(result).to.have.property('ref2').to.be.an.instanceof(mongodb.DBRef);
@@ -139,8 +140,8 @@ describe('BSON', function () {
 
     it('should convert DBRef to string', function () {
       var test = {
-        ref: mongodb.DBRef('coll', 'id', ''),
-        ref2: mongodb.DBRef('coll', 'id', 'db'),
+        ref: mongodb.DBRef('coll', mongodb.ObjectID('57b80f922128ccef64333288'), ''),
+        ref2: mongodb.DBRef('coll', mongodb.ObjectID('57b80f922128ccef64333288'), 'db'),
       };
       var result = bson.toString(test);
       var test2 = bson.toBSON(result);
