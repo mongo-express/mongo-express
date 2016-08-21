@@ -141,6 +141,9 @@ module.exports = {
     //collapsibleJSONDefaultUnfold: if collapsibleJSON is set to `true`, this defines default level
     //  to which JSONs are displayed unfolded; use number or "all" to unfold all levels
     collapsibleJSONDefaultUnfold: 1,
+
+	//gridFSEnabled: if gridFSEnabled is set to 'true', you will be able to manage uploaded files ( ak. grids, gridFS )
+	gridFSEnabled: false
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
