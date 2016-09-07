@@ -71,7 +71,7 @@ If you installed it globally, you can immediately start mongo-express like this:
 
 Or if you want to use it as an administrator:
 
-    mongo-express -u superuser -p password
+    mongo-express -a -u superuser -p password
 
 For help on configuration options:
 
