@@ -43,7 +43,7 @@
     "mongodb": "^2.1.18",
     "morgan": "1.7.0",
     "serve-favicon": "2.3.0",
-    "snyk": "^1.14.2",
+    "snyk": "1.19.1",
     "swig": "1.4.2",
     "underscore": "~1.8.0",
     "update-notifier": "^0.6.3"
