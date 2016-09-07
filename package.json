@@ -33,7 +33,7 @@
     "cli-color": "^1.1.0",
     "commander": "^2.9.0",
     "consolidate": "^0.14.1",
-    "cookie-parser": "1.4.1",
+    "cookie-parser": "1.4.3",
     "csurf": "^1.8.3",
     "errorhandler": "1.4.3",
     "express": "4.13.4",
