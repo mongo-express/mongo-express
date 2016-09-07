@@ -36,7 +36,7 @@
     "cookie-parser": "1.4.3",
     "csurf": "1.9.0",
     "errorhandler": "1.4.3",
-    "express": "4.13.4",
+    "express": "4.14.0",
     "express-session": "1.13.0",
     "gridfs-stream": "^1.1.1",
     "method-override": "2.3.5",
