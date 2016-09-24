@@ -68,6 +68,10 @@ Fill in your MongoDB connection details and any other options you want to change
 If you installed it globally, you can immediately start mongo-express like this:
 
     mongo-express -u user -p password -d database
+    
+You can access a remote database by providing MongoDB Host and Port:
+
+    mongo-express -u user -p password -d database -H mongoDBHost -P mongoDBPort
 
 Or if you want to use it as an administrator:
 
