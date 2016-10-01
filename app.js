@@ -47,6 +47,8 @@ if (config.options.console) {
 
 commander
   .version(require('./package').version)
+  .option('-H, --host <host>', 'hostname or adress')
+  .option('-P, --dbport <host>', 'port of the db')
   .option('-u, --username <username>', 'username for authentication')
   .option('-p, --password <password>', 'password for authentication')
   .option('-a, --admin', 'enable authentication as admin')
@@ -76,6 +78,9 @@ if (commander.username && commander.password) {
 
   config.useBasicAuth = false;
 }
+
+config.mongodb.server = commander.host;
+config.mongodb.port = commander.dbport;
 
 config.site.port = commander.port || config.site.port;
 
