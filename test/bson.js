@@ -183,4 +183,22 @@ describe('BSON', function () {
       expect(test).to.eql(test2);
     });
   });
+
+  describe('toJsonString', function () {
+    it('should conver to a valid JSON string', function () {
+      var doc = {
+        dateObject: new Date(),
+        objectID: new mongodb.ObjectID(),
+        someValue: 'someValue',
+        nestedObject: {
+          level1: {
+            level2: 2,
+          },
+        },
+      };
+      var result = bson.toJsonString(doc);
+      var parsed = JSON.parse(result);
+      expect(parsed).to.exist;
+    });
+  });
 });
