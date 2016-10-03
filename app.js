@@ -79,8 +79,8 @@ if (commander.username && commander.password) {
   config.useBasicAuth = false;
 }
 
-config.mongodb.server = commander.host;
-config.mongodb.port = commander.dbport;
+config.mongodb.server = commander.host || config.mongodb.server;
+config.mongodb.port = commander.dbport || config.mongodb.port;
 
 config.site.port = commander.port || config.site.port;
 
