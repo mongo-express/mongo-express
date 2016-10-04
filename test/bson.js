@@ -43,6 +43,7 @@ describe('BSON', function () {
     });
 
     it('should convert DBRef to BSON', function () {
+      // eslint-disable-next-line max-len
       var test = '{ref: DBRef("coll", "579e18580bddc20700502419"), ref2: DBRef("coll", "579e18580bddc20700502419", "db"), ref3: Dbref("coll", "579e18580bddc20700502419", "")}';
       var result = bson.toBSON(test);
 
@@ -198,7 +199,7 @@ describe('BSON', function () {
       };
       var result = bson.toJsonString(doc);
       var parsed = JSON.parse(result);
-      expect(parsed).to.exist;
+      expect(parsed.someValue).to.equal(doc.someValue);
     });
   });
 });

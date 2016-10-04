@@ -25,6 +25,7 @@ let sslOptions;
 notifier.notify();
 
 try {
+  // eslint-disable-next-line import/no-unresolved
   config = utils.deepmerge(require('./config.default'), require('./config'));
 } catch (e) {
   if (e.code === 'MODULE_NOT_FOUND') {
