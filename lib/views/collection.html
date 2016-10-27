@@ -369,6 +369,14 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
       </div>
     </div>
 
+    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
+      <div class="well">
+      <a href="{{ baseHref }}db/{{ dbName }}/expCsv/{{ collectionName }}" class="btn btn-warning btn-block">
+        <span class="glyphicon glyphicon-floppy-save"></span><br>Export --csv
+      </a>
+      </div>
+    </div>
+
     {% if !settings.read_only %}
       <div class="col-sm-6 col-lg-3">
         <div class="well">
