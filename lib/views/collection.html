@@ -696,7 +696,9 @@ $(document).ready(function () {
           {% endfor %}
         </td>
         <td>
-          <a class="btn btn-danger" href="{{ baseHref }}db/{{ dbName }}/dropIndex/{{ collectionName }}?name={{ index.name }}"><span class="glyphicon glyphicon-trash"></span> &nbsp;DEL</a>
+          <a class="btn btn-danger" href="{{ baseHref }}db/{{ dbName }}/dropIndex/{{ collectionName }}?name={{ index.name }}">
+            <span class="glyphicon glyphicon-trash"></span> &nbsp;DEL
+          </a>
         </td>
       </tr>
     {% endfor %}
