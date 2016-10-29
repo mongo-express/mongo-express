@@ -56,6 +56,10 @@ jQuery(document).ready(function ($) {
         height: 150px;
       }
     }
+
+    #indexes td {
+      vertical-align: middle;
+    }
   </style>
 {% endblock %}
 
@@ -377,6 +381,14 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
       </div>
     </div>
 
+    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
+      <div class="well">
+      <a href="{{ baseHref }}db/{{ dbName }}/reIndex/{{ collectionName }}" class="btn btn-warning btn-block">
+        <span class="glyphicon glyphicon-resize-small"></span><br>Reindex
+      </a>
+      </div>
+    </div>
+
     {% if !settings.read_only %}
       <div class="col-sm-6 col-lg-3">
         <div class="well">
@@ -628,16 +640,6 @@ $(document).ready(function () {
           {{ stats.nindexes }}
         </td>
       </tr>
-
-      {% if stats.nindexes %}
-        {% for size in stats.indexSizes %}
-        <tr>
-          <td><li>{{ loop.key }}</li></td>
-          <td>{{ size|convertBytes }}</td>
-        </tr>
-        {% endfor %}
-      {% endif %}
-
       <tr>
         <td>
           <strong>Total index size</strong>
@@ -662,6 +664,44 @@ $(document).ready(function () {
           {{ stats.numExtents }}
         </td>
       </tr>
+    </table>
+  </div>
+
+  <div class="col-md-12">
+    <h2>Indexes</h2>
+    <table id="indexes" class="table table-bordered table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Columns</th>
+        <th>Size</th>
+        <th>Attributes</th>
+        <th>Actions</th>
+      </tr>
+    {% for index in indexes %}
+      <tr>
+        <td>
+          {{ index.name }}
+        </td>
+        <td>
+          {% for sort in index.key %}
+          <div>{{ loop.key }} &nbsp; {% if sort == 1 %} ASC {% else %} DSC {% endif %}</div>
+          {% endfor %}
+        </td>
+        <td>
+          {{ index.size|convertBytes }}
+        </td>
+        <td>
+          {% for k,v in index %}
+          <div>{% if k != 'key' && k != 'v' && k != 'name' && k != 'ns' && k != 'size'%} {{ k }}: &nbsp;{{ v }} {% endif %}</div>
+          {% endfor %}
+        </td>
+        <td>
+          <a class="btn btn-danger" href="{{ baseHref }}db/{{ dbName }}/dropIndex/{{ collectionName }}?name={{ index.name }}">
+            <span class="glyphicon glyphicon-trash"></span> &nbsp;DEL
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
     </table>
   </div>
 {% endblock %}
