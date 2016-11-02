@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "eslint": "^3.7.1",
+    "eslint": "~3.9.1",
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-plugin-import": "^1.16.0",
     "mocha": "3.0.2",
