@@ -32,7 +32,6 @@ var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.M
 
 module.exports = {
   mongodb: {
-    
     //server: mongodb hostname or IP address
     //for replica set, use array of string instead
     server: (meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]) || mongo.host,
