@@ -30,6 +30,9 @@ if (process.env.VCAP_SERVICES) {
 
 module.exports = {
   mongodb: {
+    
+    //server: mongodb hostname or IP address
+    //for replica set, use array of string instead
     server: process.env.ME_CONFIG_MONGODB_SERVER  || mongo.host,
     port:   process.env.ME_CONFIG_MONGODB_PORT    || mongo.port,
 
