@@ -28,12 +28,14 @@ if (process.env.VCAP_SERVICES) {
   };
 }
 
+var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.ME_CONFIG_MONGODB_SERVER.split(',') : false;
+
 module.exports = {
   mongodb: {
     
     //server: mongodb hostname or IP address
     //for replica set, use array of string instead
-    server: process.env.ME_CONFIG_MONGODB_SERVER  || mongo.host,
+    server: (meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]) || mongo.host,
     port:   process.env.ME_CONFIG_MONGODB_PORT    || mongo.port,
 
     //ssl: connect to the server using secure SSL
