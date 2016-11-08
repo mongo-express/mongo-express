@@ -24,6 +24,7 @@ Features
 * Authenticate as admin to view all databases
 * Database blacklist/whitelist
 * Custom CA and CA validation disabling
+* Supports replica sets
 
 
 Screenshots
@@ -115,7 +116,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
     Name                              | Default         | Description
     ----------------------------------|-----------------|------------
-    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image.
+    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image. If it is a replica set, use a comma delimited list of the host names.
     `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
     `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access. Send strings: `"true"` or `"false"`.
     `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
