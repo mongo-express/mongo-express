@@ -1,3 +1,15 @@
+0.32.0 - Sat Nov 12, 2016
+------
+
+## New
+* ObjectID can now be used without the ObjectID wrapper.
+* Added export to CSV
+* Added index management. You can now delete index or reIndex a collection
+
+## Fixes
+* Fixed issue where ObjectID we're incorrectly stringified
+
+
 0.30.48
 -------
  * Add support for super large Objects
