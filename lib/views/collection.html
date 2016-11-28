@@ -159,6 +159,18 @@ jQuery(document).ready(function ($) {
       </form>
     </div>
   </div>
+  {% if !settings.read_only && count > 0 %}
+  <p>
+    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}">
+      {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want #}
+      <input type="hidden" name="_method" value="delete">
+      <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
+        <span class="glyphicon glyphicon-trash"></span>
+        Delete all {{count}} documents retrieved
+      </button>
+    </form>
+  </p>
+  {% endif %}
   <br/>
 
 <!-- Add Document Modal -->
@@ -511,6 +523,15 @@ $(document).ready(function () {
     }
   );
 
+  $('#deleteListConfirmButton').on('click', function (e) {
+    console.log('deleteList', e);
+//    e.stopPropagation();
+//    e.preventDefault();
+    // we just need to POST the form, as all the query parameters are already embedded in it
+    $('#deleteListForm').trigger('submit');
+    }
+  );
+
   $('.deleteButtonCollection').on('click', function (event) {
 
     $('.deleteButtonCollection').tooltip('hide');
@@ -562,6 +583,20 @@ $(document).ready(function () {
             </div>
             <div class="modal-footer">
               <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deleteListModal" class="modal fade" role="dialog" aria-labelledby="confirmDeletionListLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Are you sure you want to delete all {{count}} documents?
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-danger" id="deleteListConfirmButton">Delete</button>
               <button type="button" data-dismiss="modal" class="btn">Cancel</button>
             </div>
           </div>
