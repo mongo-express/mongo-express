@@ -424,7 +424,9 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 <script type="text/javascript">
 
 function loadDocument(id) {
-  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
+  if( window.getSelection() == "" ) {
+    location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
+  }
 }
 
 $(document).ready(function () {
