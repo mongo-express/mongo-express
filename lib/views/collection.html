@@ -722,11 +722,16 @@ $(document).ready(function () {
           <div>{% if k != 'key' && k != 'v' && k != 'name' && k != 'ns' && k != 'size'%} {{ k }}: &nbsp;{{ v }} {% endif %}</div>
           {% endfor %}
         </td>
+      {% if !settings.read_only %}
         <td>
           <a class="btn btn-danger" href="{{ baseHref }}db/{{ dbName }}/dropIndex/{{ collectionName }}?name={{ index.name }}">
             <span class="glyphicon glyphicon-trash"></span> &nbsp;DEL
           </a>
         </td>
+      {% else %}
+        <td>
+        </td>
+      {% endif %}
       </tr>
     {% endfor %}
     </table>

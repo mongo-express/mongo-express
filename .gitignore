@@ -16,6 +16,7 @@ app/tests/coverage/
 .idea/
 coverage/
 npm-debug.log
+yarn.lock
 
 # MEAN.js app and assets
 # ======================
