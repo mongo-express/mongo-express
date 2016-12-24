@@ -1,3 +1,9 @@
+0.34.0 - Fri Dec 23, 2016
+------
+
+## Fixes
+* Fixed index are no longer deletable in read-only mode
+
 0.33.0 - Tue Dec 6, 2016
 ------
 
