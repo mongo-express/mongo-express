@@ -148,6 +148,9 @@ module.exports = {
 
     //gridFSEnabled: if gridFSEnabled is set to 'true', you will be able to manage uploaded files ( ak. grids, gridFS )
     gridFSEnabled: false,
+
+    // logger: this object will be used to initialize router logger (morgan)
+    logger: {},
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
