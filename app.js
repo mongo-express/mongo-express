@@ -93,9 +93,6 @@ if (!config.site.baseUrl) {
 app.use(config.site.baseUrl, middleware(config));
 app.use(csrf());
 
-app.set('read_only',      config.options.readOnly       || false);
-app.set('gridFSEnabled',  config.options.gridFSEnabled  || false);
-
 if (config.site.sslEnabled) {
   defaultPort     = 443;
   sslOptions  = {
