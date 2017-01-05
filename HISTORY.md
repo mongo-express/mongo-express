@@ -1,8 +1,14 @@
+0.35.0 - Thu Jan 5, 2017
+------
+* Removed Duplicated navbar in mobile layout (#302)
+* Add logger options to control logging (#300)
+* Pass options in middleware-only usage (#299)
+
 0.34.0 - Fri Dec 23, 2016
 ------
 
 ## Fixes
-* Fixed index are no longer deletable in read-only mode
+* Fixed index are no longer deletable in read-only mode (#298)
 
 0.33.0 - Tue Dec 6, 2016
 ------
