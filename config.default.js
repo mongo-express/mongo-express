@@ -147,7 +147,7 @@ module.exports = {
     collapsibleJSONDefaultUnfold: 1,
 
     //gridFSEnabled: if gridFSEnabled is set to 'true', you will be able to manage uploaded files ( ak. grids, gridFS )
-    gridFSEnabled: false,
+    gridFSEnabled: process.env.ME_CONFIG_SITE_GRIDFS_ENABLED || false,
 
     // logger: this object will be used to initialize router logger (morgan)
     logger: {},
