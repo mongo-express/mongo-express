@@ -69,7 +69,7 @@ Fill in your MongoDB connection details and any other options you want to change
 If you installed it globally, you can immediately start mongo-express like this:
 
     mongo-express -u user -p password -d database
-    
+
 You can access a remote database by providing MongoDB Host and Port:
 
     mongo-express -u user -p password -d database -H mongoDBHost -P mongoDBPort
@@ -135,6 +135,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_MONGODB_SSLVALIDATE`   | `true`          | Validate mongod server certificate against CA
     `ME_CONFIG_SITE_SSL_CRT_PATH`     | ` `             | SSL certificate file.
     `ME_CONFIG_SITE_SSL_KEY_PATH`     | ` `             | SSL key file.
+    `ME_CONFIG_SITE_GRIDFS_ENABLED`   | `false`         | Enable gridFS to manage uploaded files.
 
 **Example:**
 
