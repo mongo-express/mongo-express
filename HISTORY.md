@@ -1,3 +1,7 @@
+0.36.0 - Tue Feb 7, 2017
+------
+* Fix content-disposition non-ascii header, set config.gridFSEnabled via env vars (#304)
+
 0.35.0 - Thu Jan 5, 2017
 ------
 * Removed Duplicated navbar in mobile layout (#302)
