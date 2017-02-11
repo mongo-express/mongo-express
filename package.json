@@ -46,7 +46,6 @@
     "mongodb": "2.2.9",
     "morgan": "1.7.0",
     "serve-favicon": "2.3.0",
-    "snyk": "1.19.1",
     "swig": "1.4.2",
     "underscore": "~1.8.0",
     "update-notifier": "1.0.2"
@@ -67,14 +66,11 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node app",
-    "test": "snyk test && npm run mocha && npm run lint",
-    "mocha": "mocha",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "test": "npm run mocha && npm run lint",
+    "mocha": "mocha"
   },
   "pre-commit": [
     "test"
   ],
-  "main": "./middleware",
-  "snyk": true
+  "main": "./middleware"
 }
