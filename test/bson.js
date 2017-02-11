@@ -186,10 +186,10 @@ describe('BSON', function () {
   });
 
   describe('toJsonString', function () {
-    it('should conver to a valid JSON string', function () {
-      var doc = {
-        dateObject: new Date(),
-        objectID: new mongodb.ObjectID(),
+    it('should convert to a valid JSON string', function () {
+      const doc = {
+        dateObject: new Date(Date.UTC(2017, 1, 11)),
+        objectID: new mongodb.ObjectID('589f79826ea20d18e06b1c36'),
         someValue: 'someValue',
         nestedObject: {
           level1: {
@@ -197,9 +197,22 @@ describe('BSON', function () {
           },
         },
       };
-      var result = bson.toJsonString(doc);
-      var parsed = JSON.parse(result);
+      const result = bson.toJsonString(doc);
+      const expected = '{"dateObject":"2017-02-11T00:00:00.000Z","objectID":{ "$oid": "589f79826ea20d18e06b1c36" },"someValue":"someValue","nestedObject":{"level1":{"level2":2}}}'; // eslint-disable-line max-len
+      expect(result).to.equal(expected);
+      const parsed = JSON.parse(result);
       expect(parsed.someValue).to.equal(doc.someValue);
+    });
+
+    it('shouldn\'t convert lone parenthesis to }', function () {
+      const doc = {
+        someString: '))))',
+      };
+      const result = bson.toJsonString(doc);
+      const expected = '{"someString":"))))"}';
+      expect(result).to.equal(expected);
+      const parsed = JSON.parse(result);
+      expect(parsed.someString).to.equal(doc.someString);
     });
   });
 });
