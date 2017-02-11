@@ -23,7 +23,7 @@ if (process.env.VCAP_SERVICES) {
     password: 'pass',
     port:     27017,
     ssl:      false,
-    url:      'mongodb://localhost:27017/db',
+//  url:      'mongodb://localhost:27017/db',
     username: 'admin',
   };
 }
@@ -36,6 +36,7 @@ module.exports = {
     //for replica set, use array of string instead
     server: (meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]) || mongo.host,
     port:   process.env.ME_CONFIG_MONGODB_PORT    || mongo.port,
+    url:    process.env.ME_CONFIG_MONGODB_URL     || mongo.url,
 
     //ssl: connect to the server using secure SSL
     ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
