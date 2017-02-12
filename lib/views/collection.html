@@ -50,7 +50,7 @@ jQuery(document).ready(function ($) {
     .sorting-button {
       white-space: nowrap;
     }
-    
+
     @media (min-width: 992px) { /* meduim and up */
       #advanced .form-group .btn {
         height: 150px;
@@ -409,9 +409,6 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
           </a>
         </div>
       </div>
-    {% endif %}
-
-    {% if !settings.read_only %}
       <div class="col-sm-6 col-lg-3">
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
           <input type="hidden" name="_method" value="delete">
@@ -420,6 +417,65 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
             <span class="glyphicon glyphicon-trash"></span><br>Delete
           </button>
         </form>
+
+      </div>
+
+      <div id="confirm-deletion-document" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Are you sure?
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deleteListModal" class="modal fade" role="dialog" aria-labelledby="confirmDeletionListLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              Are you sure you want to delete all {{count}} documents?
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-danger" id="deleteListConfirmButton">Delete</button>
+              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="confirm-deletion-collection" class="modal fade" role="dialog" aria-labelledby="confirmDeletionCollectionLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete collection</h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong> collection.
+              </p>
+              <p>
+                <label for="confirmation-input">Type the collection name to proceed.</label>
+                <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+              </p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
 
 <script type="text/javascript">
 
@@ -565,64 +621,6 @@ $(document).ready(function () {
   });
 });
 </script>
-      </div>
-
-      <div id="confirm-deletion-document" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              Are you sure?
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
-              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="deleteListModal" class="modal fade" role="dialog" aria-labelledby="confirmDeletionListLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              Are you sure you want to delete all {{count}} documents?
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-danger" id="deleteListConfirmButton">Delete</button>
-              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div id="confirm-deletion-collection" class="modal fade" role="dialog" aria-labelledby="confirmDeletionCollectionLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Delete collection</h4>
-            </div>
-            <div class="modal-body">
-              <p>
-                Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong> collection.
-              </p>
-              <p>
-                <label for="confirmation-input">Type the collection name to proceed.</label>
-                <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
-              </p>
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
-              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    {% endif %}
-
 
   <div class="stats col-md-12">
     <h2>Collection Stats</h2>
