@@ -4,10 +4,12 @@ module.exports = {
     "sourceType": "script",
   },
   env: {
-    node: true
+    node: true,
+    es6: true
   },
   plugins: [
-    "import"
+    "import",
+    "lodash"
   ],
   rules: {
     "strict": ["error", "global"],
@@ -39,8 +41,15 @@ module.exports = {
     "padded-blocks": ["off"],
     "no-underscore-dangle": ["off"],
 
-
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/test/*.js"]}],
+
+    "lodash/callback-binding": ["error"],
+    "lodash/collection-method-value": ["error"],
+    "lodash/collection-return": ["error"],
+    "lodash/no-double-unwrap": ["error"],
+    "lodash/no-extra-args": ["error"],
+    "lodash/no-unbound-this": ["error"],
+    "lodash/unwrap": ["error"],
 
     // To be turned on
     "no-var": ["off"],
