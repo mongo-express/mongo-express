@@ -74,7 +74,7 @@
           Save
         </button>
       {% else %}
-        <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+        <button onclick="return onBackClick()" class="btn btn-warning btn-large btn-block">
          <span class="glyphicon glyphicon-arrow-left"></span>
           Back
         </button>
@@ -139,12 +139,12 @@
     // "Back" button is clicked
 
     if (doc.isClean()) {
-      history.back();
+      window.location.replace('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}');
     } else if ($('#discardChanges').length === 0){
       $('#pageTitle').parent().append('<div id="discardChanges" class="alert alert-warning"><strong>Document has changed! Are you sure you wish to go back?</strong></div>');
       $('.backButton').text('Back & Discard Changes')
     } else {
-      history.back();
+      window.location.replace('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}');
     }
 
     return false;
