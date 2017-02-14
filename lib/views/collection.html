@@ -80,13 +80,13 @@ jQuery(document).ready(function ($) {
     <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">Collection:</a>
+    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">Collection:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for collection in collections %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
+      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection | url_encode }}">{{ collection }}</a></li>
       {% endfor %}
     </ul>
   </li>
@@ -108,7 +108,7 @@ jQuery(document).ready(function ($) {
   </ul>
   <div id="my-tab-content" class="tab-content">
     <div class="tab-pane active" id="simple">
-      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">
         {% for column in columns %}
           <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
         {% endfor %}
@@ -138,7 +138,7 @@ jQuery(document).ready(function ($) {
       </form>
     </div>
     <div class="tab-pane" id="advanced">
-      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">
         {% for column in columns %}
           <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
         {% endfor %}
@@ -161,7 +161,7 @@ jQuery(document).ready(function ($) {
   </div>
   {% if !settings.read_only && count > 0 %}
   <p>
-    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}">
+    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}">
       {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want #}
       <input type="hidden" name="_method" value="delete">
       <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
@@ -177,7 +177,7 @@ jQuery(document).ready(function ($) {
   <div class="modal fade" id="addDocument" role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form id="addDocumentForm" method="post" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+    <form id="addDocumentForm" method="post" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">
 
       <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
@@ -260,19 +260,19 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
   {% if pagination %}
     <ul class="pager span7">
       <li class="previous{% if prev.skip < 0 %} disabled{% endif %}">
-        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
+        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
       </li>
 
       <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
+        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
       </li>
 
       <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
+        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
       </li>
 
       <li class="next{% if next.skip >= stats.count %} disabled{% endif %}">
-        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
+        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
       </li>
     </ul>
   {% endif %}
@@ -297,7 +297,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
           {% for column in columns %}
             <td><div class="tableContent">
               {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
-                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
+                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/{{ document._id | json | safe | url_encode }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
@@ -317,27 +317,27 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
       <div class="text-center">
       <ul class="pagination">
         {%- if prev2.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
         {%- if prev.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
-        <li class="active"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
+        <li class="active"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
 
         {%- if next.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
 
         {%- if next2.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
+        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
@@ -352,7 +352,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     {% if !settings.read_only %}
       <div class="col-md-12">
         <h2>Rename Collection</h2>
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
+        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}" class="well form-inline">
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
             <span class="add-on">{{ dbName }} . </span>
@@ -371,7 +371,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
   <div class="row">
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning btn-block">
+      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
       </a>
       </div>
@@ -379,7 +379,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning btn-block">
+      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
       </a>
       </div>
@@ -387,7 +387,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expCsv/{{ collectionName }}" class="btn btn-warning btn-block">
+      <a href="{{ baseHref }}db/{{ dbName }}/expCsv/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --csv
       </a>
       </div>
@@ -395,7 +395,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/reIndex/{{ collectionName }}" class="btn btn-warning btn-block">
+      <a href="{{ baseHref }}db/{{ dbName }}/reIndex/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-resize-small"></span><br>Reindex
       </a>
       </div>
@@ -404,13 +404,13 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     {% if !settings.read_only %}
       <div class="col-sm-6 col-lg-3">
         <div class="well">
-          <a href="{{ baseHref }}db/{{ dbName }}/compact/{{ collectionName }}" class="btn btn-danger btn-block">
+          <a href="{{ baseHref }}db/{{ dbName }}/compact/{{ collectionName | url_encode }}" class="btn btn-danger btn-block">
             <span class="glyphicon glyphicon-resize-small"></span><br>Compact
           </a>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
+        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" class="hidden" />
           <button class="btn btn-danger deleteButtonCollection btn-block" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
@@ -480,7 +480,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
 <script type="text/javascript">
 
 function loadDocument(id) {
-  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
+  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/' + encodeURIComponent(id);
 }
 
 $(document).ready(function () {
@@ -514,7 +514,7 @@ $(document).ready(function () {
     // Set the element with spinner for now
     target.html(spinner);
 
-    $.get('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(_id) + '/' + prop, function (input) {
+    $.get('{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/' + encodeURIComponent(_id) + '/' + prop, function (input) {
 
       // Images inline
       if (
@@ -722,7 +722,7 @@ $(document).ready(function () {
         </td>
       {% if !settings.read_only %}
         <td>
-          <a class="btn btn-danger" href="{{ baseHref }}db/{{ dbName }}/dropIndex/{{ collectionName }}?name={{ index.name }}">
+          <a class="btn btn-danger" href="{{ baseHref }}db/{{ dbName }}/dropIndex/{{ collectionName | url_encode }}?name={{ index.name }}">
             <span class="glyphicon glyphicon-trash"></span> &nbsp;DEL
           </a>
         </td>
