@@ -32,7 +32,6 @@
     "busboy": "^0.2.13",
     "cli-color": "^1.1.0",
     "commander": "^2.9.0",
-    "consolidate": "^0.14.1",
     "cookie-parser": "1.4.3",
     "csurf": "1.9.0",
     "errorhandler": "1.4.3",
@@ -43,10 +42,10 @@
     "json2csv": "^3.7.1",
     "lodash": "~4.17.4",
     "method-override": "2.3.6",
-    "mongodb": "2.2.9",
+    "mongodb": "2.2.24",
     "morgan": "1.7.0",
     "serve-favicon": "2.3.0",
-    "swig": "1.4.2",
+    "swig-templates": "2.0.2",
     "update-notifier": "1.0.2"
   },
   "devDependencies": {
