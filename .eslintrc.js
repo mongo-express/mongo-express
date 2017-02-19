@@ -41,7 +41,13 @@ module.exports = {
     "padded-blocks": ["off"],
     "no-underscore-dangle": ["off"],
 
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/test/*.js"]}],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": [
+        "**/test/*.js",
+        "**/scripts/*.js",
+        "**/webpack.config.js",
+      ]
+    }],
 
     "lodash/callback-binding": ["error"],
     "lodash/collection-method-value": ["error"],
