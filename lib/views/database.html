@@ -156,42 +156,6 @@
   </div>
 </div>
  -->
-<script>
-'use strict';
-$(document).ready(function() {
-  $('#collection').popover({
-    content: 'Collection names must begin with a letter, underscore or slash, and can contain only letters, underscores, numbers, dots or slashes',
-    placement: 'left',
-  });
-
-  $('.deleteButton').tooltip({
-    title: 'Warning! Are you sure you want to delete this collection? All documents will be deleted.',
-  });
-
-  $('.deleteButton').on('click', function(event) {
-
-    $('.deleteButton').tooltip('hide');
-
-    event.preventDefault();
-
-    var target = $(this);
-    var parentForm = $('#' + target.attr('childof'));
-
-    $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
-    $('#modal-collection-name').text(target.attr('collection-name'));
-    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
-      .one('shown.bs.modal', function() {
-        $('#confirmation-input').focus();
-      })
-      .one('click', '#delete', function() {
-        var input = $('#confirmation-input');
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
-          parentForm.trigger('submit');
-        }
-      });
-  });
-});
-</script>
 {% endif %}
 
 <div class="panel panel-default stats">
@@ -263,3 +227,9 @@ $(document).ready(function() {
 </div>
 
 {% endblock %}
+
+{% block scripts %}
+{% if !settings.read_only %}
+<script src="{{ baseHref }}{{ assets.database.js }}"></script>
+{% endblock }
+{% endblock }

@@ -107,11 +107,7 @@
 {% endif %}
 
 
-<script type="text/javascript">
-'use strict';
-function loadFile(id) {
-  location.href = '{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/' + encodeURIComponent(id);
-}
-
-</script>
+{% endblock %}
+{% block scripts %}
+<script src="{{ baseHref }}{{ assets.gridfs.js }}"></script>
 {% endblock %}
