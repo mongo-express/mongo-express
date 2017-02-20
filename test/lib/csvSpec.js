@@ -1,10 +1,8 @@
 'use strict';
 
-/*globals describe, it*/
-
 var expect = require('chai').expect;
 var mongo = require('mongodb');
-var csv = require('../lib/csv');
+var csv = require('../../lib/csv');
 
 var test = function (data, result) {
   expect(csv(data)).to.eql(result);
