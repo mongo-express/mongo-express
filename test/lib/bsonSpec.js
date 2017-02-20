@@ -1,10 +1,9 @@
 'use strict';
 
-/*globals describe, it*/
-
-var bson = require('../lib/bson');
 var expect = require('chai').expect;
 var mongodb = require('mongodb');
+
+var bson = require('../../lib/bson');
 
 describe('BSON', function () {
   describe('toBSON', function () {
