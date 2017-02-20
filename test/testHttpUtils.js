@@ -12,3 +12,5 @@ exports.createServer = () => {
   const request = supertest.agent(httpServer);
   return { request, close: () => asPromise(cb => httpServer.close(cb)) };
 };
+
+exports.getDocumentUrl = (db, collection, documentId) => `/db/${db}/${collection}/${JSON.stringify(documentId)}`;
