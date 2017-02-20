@@ -4,6 +4,8 @@ node_js:
   - 5
   - 6
   - 7
+services:
+  - mongodb
 sudo: false
 branches:
   only:
