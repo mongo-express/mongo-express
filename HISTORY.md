@@ -2,7 +2,11 @@
 ------
 
 ## New
-* Add support for Collection with slash in the name (#309)
+* Added support for Collection with slash in the name (#309)
+* Changed the way scripts work (#312)
+    - Scripts are now built using babel and are in their own files.
+    - Each page has it's own mini-bundle + vendor bundle
+    - Scripts are built on install and output a json file that is used for url purposes
 * Added more tests, and new test utils! (#314, #315)
 
 ## Fixes
