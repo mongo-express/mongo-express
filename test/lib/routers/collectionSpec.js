@@ -14,15 +14,16 @@ describe('Router collection', () => {
   let request;
   let close;
   let db;
-  before(() => {
-    const server = httpUtils.createServer();
-    request = server.request;
-    close = server.close;
-    return mongoUtils.initializeDb()
+  before(() =>
+    mongoUtils.initializeDb()
       .then((newDb) => {
         db = newDb;
-      });
-  });
+        return httpUtils.createServer();
+      }).then((server) => {
+        request = server.request;
+        close = server.close;
+      })
+  );
 
   it('GET /db/<dbName>/<collection> should return html', () =>
     asPromise(cb => request.get(`/db/${dbName}/${urlColName}`).expect(200).end(cb))

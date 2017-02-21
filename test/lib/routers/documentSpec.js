@@ -14,15 +14,16 @@ describe('Router document', () => {
   let request;
   let close;
   let db;
-  before(() => {
-    const server = httpUtils.createServer();
-    request = server.request;
-    close = server.close;
-    return mongoUtils.initializeDb()
+  before(() =>
+    mongoUtils.initializeDb()
       .then((newDb) => {
         db = newDb;
-      });
-  });
+        return httpUtils.createServer();
+      }).then((server) => {
+        request = server.request;
+        close = server.close;
+      })
+  );
 
   it('GET /db/<dbName>/<collection>/<document> should return html', () => {
     const docId = mongoUtils.getFirstDocumentId();
