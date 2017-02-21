@@ -1,3 +1,20 @@
+0.37.0 - Mon Feb 20, 2017
+------
+
+## New
+* Add support for Collection with slash in the name (#309)
+* Added more tests, and new test utils! (#314, #315)
+
+## Fixes
+* Fixed issue where parenthese we're stringified incorrectly (#306)
+* Fixed loadDocument script that was rendered properly in read-only (#308)
+
+## Varia
+* Removed underscore and use only lodash. (#307)
+* Removed Snyk. It was causing more annoyance than actual good (#306)
+* Updated swig to swig-template, which uses a safe version (#311)
+
+
 0.36.0 - Tue Feb 7, 2017
 ------
 * Fix content-disposition non-ascii header, set config.gridFSEnabled via env vars (#304)
