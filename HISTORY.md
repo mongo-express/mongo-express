@@ -1,3 +1,10 @@
+0.37.2 - Tue Feb 21, 2017
+------
+
+## Fixes
+* Small publishing fixes
+
+
 0.37.1 - Tue Feb 21, 2017
 ------
 
