@@ -26,50 +26,50 @@
     "url": "git://github.com/mongo-express/mongo-express.git"
   },
   "dependencies": {
-    "assets-webpack-plugin": "^3.5.1",
     "async": "2.0.1",
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-es2015": "^6.22.0",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "1.15.2",
-    "bootstrap": "^3.3.7",
     "busboy": "^0.2.13",
-    "clean-webpack-plugin": "^0.1.15",
     "cli-color": "^1.1.0",
-    "codemirror": "^5.23.0",
     "commander": "^2.9.0",
     "cookie-parser": "1.4.3",
-    "copy-webpack-plugin": "^4.0.1",
     "csurf": "1.9.0",
     "errorhandler": "1.4.3",
     "express": "4.14.0",
     "express-session": "1.14.1",
     "flat": "^2.0.1",
     "gridfs-stream": "^1.1.1",
-    "jquery": "^3.1.1",
     "json2csv": "^3.7.1",
     "lodash": "~4.17.4",
     "method-override": "2.3.6",
     "mongodb": "2.2.24",
     "morgan": "1.7.0",
-    "renderjson": "^1.2.3",
     "serve-favicon": "2.3.0",
     "swig-templates": "2.0.2",
-    "update-notifier": "1.0.2",
-    "webpack": "^2.2.1"
+    "update-notifier": "1.0.2"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.1",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "bootstrap": "^3.3.7",
     "chai": "3.5.0",
+    "clean-webpack-plugin": "^0.1.15",
+    "codemirror": "^5.23.0",
     "concurrently": "^3.3.0",
+    "copy-webpack-plugin": "^4.0.1",
     "eslint": "~3.9.1",
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-lodash": "^2.3.5",
+    "jquery": "^3.1.1",
     "mocha": "3.0.2",
     "nodemon": "^1.11.0",
     "pre-commit": "1.1.3",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "renderjson ": "^1.2.3",
+    "webpack": "^2.2.1"
   },
   "engines": {
     "node": ">=4.0.0",
@@ -85,7 +85,7 @@
     "test": "npm run mocha && npm run lint",
     "mocha": "NODE_ENV=test mocha",
     "test-watch": "NODE_ENV=test mocha --watch --reporter spec",
-    "postinstall": "npm run build"
+    "prepublish": "npm run build"
   },
   "pre-commit": [
     "test"

@@ -12,6 +12,14 @@ const isProd = !isDev;
 
 const fileSuffix = isDev ? '' : '-[chunkhash].min';
 
+function resolveModulePath(name) {
+  const packageJson = '/package.json';
+  return require.resolve(`${name}${packageJson}`).replace(packageJson, '');
+}
+
+const codemirrorPath = resolveModulePath('codemirror');
+const bootstrapPath = resolveModulePath('bootstrap');
+
 module.exports = {
   entry: {
     index: './lib/scripts/index.js',
@@ -62,14 +70,14 @@ module.exports = {
       { from: 'public/images/*', to: 'img/[name].[ext]' },
       { from: 'public/stylesheets/*', to: 'css/[name].[ext]' },
 
-      { from: 'node_modules/codemirror/lib/codemirror.css', to: 'css/[name].[ext]' },
-      { from: 'node_modules/codemirror/theme/*', to: 'css/theme/[name].[ext]' },
+      { from: `${codemirrorPath}/lib/codemirror.css`, to: 'css/[name].[ext]' },
+      { from: `${codemirrorPath}/theme/*`, to: 'css/theme/[name].[ext]' },
 
-      { from: 'node_modules/bootstrap/dist/fonts/*', to: 'fonts/[name].[ext]' },
-      { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'css/[name].[ext]' },
-      { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css.map', to: 'css/[name].[ext]' },
-      { from: 'node_modules/bootstrap/dist/css/bootstrap-theme.min.css', to: 'css/[name].[ext]' },
-      { from: 'node_modules/bootstrap/dist/css/bootstrap-theme.min.css.map', to: 'css/[name].[ext]' },
+      { from: `${bootstrapPath}/dist/fonts/*`, to: 'fonts/[name].[ext]' },
+      { from: `${bootstrapPath}/dist/css/bootstrap.min.css`, to: 'css/[name].[ext]' },
+      { from: `${bootstrapPath}/dist/css/bootstrap.min.css.map`, to: 'css/[name].[ext]' },
+      { from: `${bootstrapPath}/dist/css/bootstrap-theme.min.css`, to: 'css/[name].[ext]' },
+      { from: `${bootstrapPath}/dist/css/bootstrap-theme.min.css.map`, to: 'css/[name].[ext]' },
     ]),
 
     new AssetsPlugin({ filename: 'build-assets.json' }),
