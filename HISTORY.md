@@ -1,3 +1,10 @@
+0.37.1 - Tue Feb 21, 2017
+------
+
+## Fixes
+* Build is now shipped as part of package
+
+
 0.37.0 - Mon Feb 20, 2017
 ------
 
