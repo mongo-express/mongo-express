@@ -1,3 +1,13 @@
+0.38.0 - Sat Feb 25, 2017
+------
+
+## New
+* Support for mounting on a different baseHref (#320)
+
+## Chores
+* Improve configuration step (#321)
+
+
 0.37.2 - Tue Feb 21, 2017
 ------
 
