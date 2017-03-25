@@ -76,9 +76,13 @@
 {% block content %}
   {% if !settings.read_only %}
     <p>
-      <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large btn-block">
+      <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large">
         <span class="glyphicon glyphicon-pencil"></span>
         New Document
+      </button>
+      <button type="button" data-toggle="modal" data-target="#addIndex" class="btn btn-success btn-large">
+        <span class="glyphicon glyphicon-pencil"></span>
+        New Index
       </button>
     </p>
   {% endif %}
@@ -184,6 +188,41 @@
     </div>
   </div>
 <!-- End Add Document Modal -->
+
+<!-- Add Index Modal -->
+<div class="modal fade" id="addIndex" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form id="addIndexForm" method="post" action="{{ baseHref }}db/{{ dbName }}/addIndex/{{ collectionName | url_encode }}">
+
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h2>Add Indexs</h2>
+        <sapn>A document that contains the field and value pairs where the field is the index key. 1 for an ascending and -1 for an descending index. 
+</span>
+      </div>
+
+      <div class="modal-body">
+        <textarea id="index" name="index">{
+        "key":1
+      }</textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-error" data-dismiss="modal">Close</button>
+<!--         <button type="submit" class="btn btn-success" onclick="return checkValidJSON()"> --> 
+        <button type="submit" class="btn btn-success" > 
+             <span class="glyphicon glyphicon-pencil"></span>
+          Save
+        </button>
+      </div>
+
+    </form>
+    </div>
+    </div>
+  </div>
+<!-- End Add Index Modal -->
+
 
   {% if documents.length == 0 %}
     <p class="well">
