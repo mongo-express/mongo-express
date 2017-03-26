@@ -169,7 +169,7 @@
         <h2>Add Document</h2>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body" id = "document-modal-body">
         <textarea id="document" name="document">{
         "_id": ObjectID()
 }</textarea>
@@ -201,17 +201,14 @@
         <sapn>A document that contains the field and value pairs where the field is the index key. 1 for an ascending and -1 for an descending index. 
 </span>
       </div>
-
-      <div class="modal-body">
+      <div class="modal-body" id = "index-modal-body">
         <textarea id="index" name="index">{
-        "key":1
-      }</textarea>
+        "key": 1
+}</textarea>
       </div>
-
       <div class="modal-footer">
         <button class="btn btn-error" data-dismiss="modal">Close</button>
-<!--         <button type="submit" class="btn btn-success" onclick="return checkValidJSON()"> --> 
-        <button type="submit" class="btn btn-success" > 
+        <button type="submit" class="btn btn-success" onclick="return checkValidIndexJSON()"> 
              <span class="glyphicon glyphicon-pencil"></span>
           Save
         </button>
