@@ -39,6 +39,15 @@ View album for more screenshots: (server status, database views etc..)
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
 
 
+Development
+-----------------
+
+Copy config.default.js to config.js and edit the default property to fit your local environment
+
+**Run the development build using:**
+
+    npm run start-dev
+
 Usage (npm / CLI)
 -----------------
 
@@ -191,9 +200,6 @@ Planned features
 
 Pull Requests are always welcome! <3
 
-* Support for replica set connections
-* Site authentication
-* Mongo Shell console (work in progress)
 
 Limitations
 -----------
@@ -326,6 +332,8 @@ License
 MIT License
 
 Copyright (c) 2012 Chun-hao Hu
+Copyright (c) 2016-present Multiple Contributors
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
