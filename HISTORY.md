@@ -1,3 +1,20 @@
+0.39.1 - Sun Mar 26, 2017
+------
+
+## New
+* Better windows support with usage of cross-env
+
+
+0.39.0 - Sun Mar 26, 2017
+------
+
+## New 
+* Add Create Index functionality (#326)
+
+## Chores
+* Added a bit of readme info, and updated license
+
+
 0.38.0 - Sat Feb 25, 2017
 ------
 

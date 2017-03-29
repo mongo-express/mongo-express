@@ -42,6 +42,7 @@ describe('Router collection', () => {
   it('GET /db/<dbName>/expArr/<collection> should export as array');
   it('GET /db/<dbName>/expCsv/<collection> should export as csv');
   it('GET /db/<dbName>/reIndex/<collection> should reIndex');
+  it('PUT /db/<dbName>/addIndex/<collection> should addIndex');
   it('GET /db/<dbName>/export/<collection> should export as json');
   it('GET /db/<dbName>/dropIndex/<collection> should drop index');
   it('GET /db/<dbName>/updateCollections/<collection> should updateCollections');
