@@ -1,3 +1,10 @@
+0.39.2 - Sun Apr 16, 2017
+------
+
+## Fixes
+* Fixed bug with collapsibleJSON property not able to render properly
+
+
 0.39.1 - Sun Mar 26, 2017
 ------
 
