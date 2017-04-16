@@ -51,9 +51,9 @@
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",
-    "babel-core": "^6.23.1",
+    "babel-core": "^6.24.1",
     "babel-loader": "^6.3.2",
-    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
     "bootstrap": "^3.3.7",
     "chai": "3.5.0",
     "clean-webpack-plugin": "^0.1.15",
@@ -68,9 +68,9 @@
     "mocha": "3.0.2",
     "nodemon": "^1.11.0",
     "pre-commit": "1.1.3",
-    "renderjson": "^1.2.3",
+    "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
     "supertest": "^3.0.0",
-    "webpack": "^2.2.1"
+    "webpack": "^2.4.1"
   },
   "engines": {
     "node": ">=4.0.0",
