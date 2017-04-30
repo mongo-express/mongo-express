@@ -3,7 +3,6 @@
 const expect = require('chai').expect;
 const filters = require('../../lib/filters');
 
-
 describe('filters', function () {
   describe('to_display', function () {
     it('should escape properly a string', () => {
