@@ -1,3 +1,12 @@
+0.40.0 - Mon May 1, 2017
+------
+
+- Fixed more flexible db names (#339)
+- Fixed escaping in nested objects
+- Fixed path resolve for windows for the builds
+- Fixed revise the list database function to support user having access to admin database (#338)
+
+
 0.39.2 - Sun Apr 16, 2017
 ------
 
