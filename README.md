@@ -1,40 +1,57 @@
 mongo-express
-=============
+===
 
-Web-based MongoDB admin interface written with Node.js and express
+[![npm version](https://badge.fury.io/js/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![npm](https://img.shields.io/npm/dm/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![GitHub stars](https://img.shields.io/github/stars/mongo-express/mongo-express.svg)](https://github.com/mongo-express/mongo-express/stargazers) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
+[![Build Status](https://travis-ci.org/mongo-express/mongo-express.svg?branch=master)](https://travis-ci.org/mongo-express/mongo-express)
+
+Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
 
 
 Features
 --------
 
 * Connect to multiple databases
-* Connect and authenticate to individual databases
-* Authenticate as admin to view all databases
-* Database blacklist/whitelist
 * View/add/delete databases
 * View/add/rename/delete collections
 * View/add/update/delete documents
-* View data URI images inline in collection table view
-* Async on-demand loading of big document properties (>100KB default) to keep table view fast
+* Preview audio/video/image assets inline in collection view
+* Nested and/or large objects are collapsible for easy overview
+* Async on-demand loading of big document properties (>100KB default) to keep collection view fast
+* GridFS support - add/get/delete incredibly large files
 * Use BSON data types in documents
-* Ability to specify the default key to be shown in the docs list
 * Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
+* Connect and authenticate to individual databases
+* Authenticate as admin to view all databases
+* Database blacklist/whitelist
+* Custom CA and CA validation disabling
+* Supports replica sets
 
 
 Screenshots
 -----------
 
-Collection View | Editing A Document
---- | ---
-<img src="https://imgur.com/UmGSr3x.png" title="Viewing collection of documents" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
+Home Page | Database View | Collection View | Editing A Document
+--- | --- | --- | ---
+<img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
 
-These screenshots are from version 0.29.5.
+These screenshots are from version 0.30.40
 View album for more screenshots: (server status, database views etc..)
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
 
 
+Development
+-----------------
+
+Copy config.default.js to config.js and edit the default property to fit your local environment
+
+**Run the development build using:**
+
+    npm run start-dev
+
 Usage (npm / CLI)
 -----------------
+
+*mongo-express* requires Node.js v4 or higher.
 
 **To install:**
 
@@ -44,7 +61,7 @@ Or if you want to install a non-global copy:
 
     npm install mongo-express
 
-By default `config.default.js` is used where the default authentication is admin:pass 
+By default `config.default.js` is used where the basic access authentication is `admin`:`pass`. This is obviously not safe, and there are warnings in the console.
 
 **To configure:**
 
@@ -62,9 +79,13 @@ If you installed it globally, you can immediately start mongo-express like this:
 
     mongo-express -u user -p password -d database
 
+You can access a remote database by providing MongoDB Host and Port:
+
+    mongo-express -u user -p password -d database -H mongoDBHost -P mongoDBPort
+
 Or if you want to use it as an administrator:
 
-    mongo-express -u superuser -p password
+    mongo-express -a -u superuser -p password
 
 For help on configuration options:
 
@@ -75,7 +96,7 @@ Usage (Express 4 middleware)
 
 **To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
 
-    var mongo_express = require('mongo-express/middleware')
+    var mongo_express = require('mongo-express/lib/middleware')
     var mongo_express_config = require('./mongo_express_config')
 
     app.use('/mongo_express', mongo_express(mongo_express_config))
@@ -83,34 +104,47 @@ Usage (Express 4 middleware)
 Usage (Docker)
 --------------
 
-**To run in a Docker container:**
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) and specify it's name in the `--link` argument.
 
-First, build an image from the project directory:
+**Use the docker hub image:**
 
-    docker build -t mongo-express .
+```console
+$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+```
 
-Then run the image. Make sure you have a running [MongoDB container](https://registry.hub.docker.com/_/mongo/) and specify it's name in the `--link` argument.
+**Build from source:**
 
-    docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+Build an image from the project directory, then run the image.
+
+```console
+$ docker build -t mongo-express .
+$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+```
 
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
     Name                              | Default         | Description
     ----------------------------------|-----------------|------------
-    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image.
+    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image. If it is a replica set, use a comma delimited list of the host names.
     `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
-    `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access.
+    `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access. Send strings: `"true"` or `"false"`.
     `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
     `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
+    `ME_CONFIG_MONGODB_AUTH_DATABASE` | `db`            | Database name (only needed if `ENABLE_ADMIN` is `"false"`).
+    `ME_CONFIG_MONGODB_AUTH_USERNAME` | `admin`         | Database username (only needed if `ENABLE_ADMIN` is `"false"`).
+    `ME_CONFIG_MONGODB_AUTH_PASSWORD` | `pass`          | Database password (only needed if `ENABLE_ADMIN` is `"false"`).
+    `ME_CONFIG_SITE_BASEURL`          | `/`             | Set the express baseUrl to ease mounting at a subdirectory. Remember to include a leading and trailing slash.
     `ME_CONFIG_SITE_COOKIESECRET`     | `cookiesecret`  | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
     `ME_CONFIG_SITE_SESSIONSECRET`    | `sessionsecret` | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
-    `ME_CONFIG_BASICAUTH_USERNAME`    | `admin`         | mongo-express login name. Sending an empty string will disable basic authentication.
-    `ME_CONFIG_BASICAUTH_PASSWORD`    | `pass`          | mongo-express login password.
+    `ME_CONFIG_BASICAUTH_USERNAME`    | `admin`         | mongo-express web login name. Sending an empty string will disable basic authentication.
+    `ME_CONFIG_BASICAUTH_PASSWORD`    | `pass`          | mongo-express web login password.
     `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
     `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
     `ME_CONFIG_SITE_SSL_ENABLED`      | `false`         | Enable SSL.
+    `ME_CONFIG_MONGODB_SSLVALIDATE`   | `true`          | Validate mongod server certificate against CA
     `ME_CONFIG_SITE_SSL_CRT_PATH`     | ` `             | SSL certificate file.
     `ME_CONFIG_SITE_SSL_KEY_PATH`     | ` `             | SSL key file.
+    `ME_CONFIG_SITE_GRIDFS_ENABLED`   | `false`         | Enable gridFS to manage uploaded files.
 
 **Example:**
 
@@ -144,7 +178,7 @@ Doing automatically:
 
 * Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/andzdroid/mongo-express.git)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/mongo-express/mongo-express.git)
 
 
 Then, take the following action to customize to your environment:
@@ -154,15 +188,18 @@ Then, take the following action to customize to your environment:
   * Change the `basicAuth` properties, not to keep the default values
 
 
+Search
+------
+* *Simple* search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
+* *Advanced* search passes the `find` and `projection` fields/objects straight into MongoDB `db.collection.find(query, projection)`. The `find` object is where your query happens, while the `projection` object determines which columns are returned.
+
+See [MongoDB db.collection.find()](https://docs.mongodb.org/manual/reference/method/db.collection.find/) documentation for examples and exact usage.
+
 Planned features
 ----------------
 
-Pull Requests are always welcome!
+Pull Requests are always welcome! <3
 
-* Support for replica set connections
-* Site authentication
-* GridFS (work in progess)
-* Mongo Shell console (work in progress)
 
 Limitations
 -----------
@@ -295,6 +332,8 @@ License
 MIT License
 
 Copyright (c) 2012 Chun-hao Hu
+Copyright (c) 2016-present Multiple Contributors
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

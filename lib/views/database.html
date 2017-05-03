@@ -17,42 +17,66 @@
 {% endblock %}
 
 {% block content %}
-
-<h2>Collections</h2>
-
-<table class="table table-bordered table-striped table-condensed">
-  {% for c in colls %}
-  <tr>
-    <td class="col-md-2">
-      <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success btn-block">
-        <span class="glyphicon glyphicon-eye-open"></span><br>View
-      </a>
-    </td>
-    <td class="col-md-1">
-       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>Export
-      </a>
-    </td>
-    <td class="col-md-1">
-       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
-      </a>
-    </td>
-    <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div style="display: inline-block;">
+    <h4 style="font-weight: bold;">Collections</h4>
+      </div>
     {% if !settings.read_only %}
-    <td class="col-md-1">
-      <form method="POST" id="db-{{ dbName }}-{{ c }}" action="{{ baseHref }}db/{{ dbName }}/{{ c }}" style="margin: 0px;">
-        <input type="hidden" name="_method" value="delete">
-        <button type="submit" class="hidden"></button>
-      </form>
-      <button class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
-        <span class="glyphicon glyphicon-trash"></span><br>Del
-      </button>
-    </td>
+        <form class="form-inline" method="POST" style="float: right;">
+          <div class="input-group">
+            <input class="form-control" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                Create collection
+              </button>
+            </span>
+          </div><!-- /input-group -->
+        </form>
     {% endif %}
-  </tr>
-  {% endfor %}
-</table>
+
+  </div>
+  <div class="panel-body no-padding">
+    <table class="table table-bordered table-striped table-condensed no-margin">
+      {% for c in colls %}
+      <tr>
+        <td class="col-md-2">
+          <a href="{{ baseHref }}db/{{ dbName }}/{{ c | url_encode }}" class="btn btn-success btn-block">
+            <span class="glyphicon glyphicon-eye-open"></span><br>View
+          </a>
+        </td>
+        <td class="col-md-1">
+          <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span><br>Export
+          </a>
+        </td>
+        <td class="col-md-1">
+          <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
+          </a>
+        </td>
+        <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c | url_encode }}">{{ c }}</a></h3></td>
+        {% if !settings.read_only %}
+        <td class="col-md-1">
+          <form method="POST"
+            id="db-{{ dbName }}-{{ c }}"
+            action="{{ baseHref }}db/{{ dbName }}/{{ c | url_encode }}"
+            style="margin: 0px;"
+          >
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="hidden"></button>
+          </form>
+          <button class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
+            <span class="glyphicon glyphicon-trash"></span><br>Del
+          </button>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
 
 <div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
   <div class="modal-dialog" role="document">
@@ -74,9 +98,10 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn" id="delete">Delete</button>
-        <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+        <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -99,8 +124,8 @@
 {% endif %}
 
 {% if !settings.read_only %}
-<div class="row">
-  <div class="col-md-5">
+<!--div class="row">
+  <div class="col-md-6">
     <h2>Create Collection</h2>
     <form class="well form-inline" method="POST">
         <div class="form-group">
@@ -113,61 +138,30 @@
         </button>
     </form>
   </div>
-
-  <div class="col-md=5">
+</div-->
+<!--
+<div class="row">
+  <div class="col-md-6">
     <h2>Create GridFS Bucket</h2>
     <form class="well form-inline" method="POST">
         <div class="form-group">
           <span class="add-on">{{ dbName }} . </span>
-          <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
+          <input class="input-medium" type="text" id="bucket" name="bucket" placeholder="Bucket Name" title="Bucket Name">
         </div>
         <button type="submit" class="btn btn-primary pull-right">
           <span class="glyphicon glyphicon-plus"></span>
-          Create collection
+          Create bucket
         </button>
     </form>
   </div>
 </div>
-
-<script>
-'use strict';
-$(document).ready(function() {
-  $('#collection').popover({
-    content: 'Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
-  });
-
-  $('.deleteButton').tooltip({
-    title: 'Warning! Are you sure you want to delete this collection? All documents will be deleted.',
-  });
-
-  $('.deleteButton').on('click', function(event) {
-
-    $('.deleteButton').tooltip('hide');
-
-    event.preventDefault();
-
-    var target = $(this);
-    var parentForm = $('#' + target.attr('childof'));
-
-    $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
-    $('#modal-collection-name').text(target.attr('collection-name'));
-    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
-      .one('shown.bs.modal', function() {
-        $('#confirmation-input').focus();
-      })
-      .one('click', '#delete', function() {
-        var input = $('#confirmation-input');
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
-          parentForm.trigger('submit');
-        }
-      });
-  });
-});
-</script>
+ -->
 {% endif %}
 
-<div class="stats">
-  <h2>Database Stats</h2>
+<div class="panel panel-default stats">
+  <div class="panel-heading">
+    <h4 style="font-weight: bold;">Database Stats</h4>
+  </div>
   <table class="table table-bordered table-striped">
     <tr>
       <td><strong>Collections (incl. system.namespaces)</strong></td>
@@ -232,4 +226,10 @@ $(document).ready(function() {
   </table>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+{% if !settings.read_only %}
+<script src="{{ baseHref }}{{ assets.database.js }}"></script>
+{% endif %}
 {% endblock %}

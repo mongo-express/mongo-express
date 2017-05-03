@@ -1,3 +1,122 @@
+0.40.0 - Mon May 1, 2017
+------
+
+- Fixed more flexible db names (#339)
+- Fixed escaping in nested objects
+- Fixed path resolve for windows for the builds
+- Fixed revise the list database function to support user having access to admin database (#338)
+
+
+0.39.2 - Sun Apr 16, 2017
+------
+
+## Fixes
+* Fixed bug with collapsibleJSON property not able to render properly
+
+
+0.39.1 - Sun Mar 26, 2017
+------
+
+## New
+* Better windows support with usage of cross-env
+
+
+0.39.0 - Sun Mar 26, 2017
+------
+
+## New 
+* Add Create Index functionality (#326)
+
+## Chores
+* Added a bit of readme info, and updated license
+
+
+0.38.0 - Sat Feb 25, 2017
+------
+
+## New
+* Support for mounting on a different baseHref (#320)
+
+## Chores
+* Improve configuration step (#321)
+
+
+0.37.2 - Tue Feb 21, 2017
+------
+
+## Fixes
+* Small publishing fixes
+
+
+0.37.1 - Tue Feb 21, 2017
+------
+
+## Fixes
+* Build is now shipped as part of package
+
+
+0.37.0 - Mon Feb 20, 2017
+------
+
+## New
+* Added support for Collection with slash in the name (#309)
+* Changed the way scripts work (#312)
+    - Scripts are now built using babel and are in their own files.
+    - Each page has it's own mini-bundle + vendor bundle
+    - Scripts are built on install and output a json file that is used for url purposes
+* Added more tests, and new test utils! (#314, #315)
+
+## Fixes
+* Fixed issue where parenthese we're stringified incorrectly (#306)
+* Fixed loadDocument script that was rendered properly in read-only (#308)
+
+## Varia
+* Removed underscore and use only lodash. (#307)
+* Removed Snyk. It was causing more annoyance than actual good (#306)
+* Updated swig to swig-template, which uses a safe version (#311)
+
+
+0.36.0 - Tue Feb 7, 2017
+------
+* Fix content-disposition non-ascii header, set config.gridFSEnabled via env vars (#304)
+
+0.35.0 - Thu Jan 5, 2017
+------
+* Removed Duplicated navbar in mobile layout (#302)
+* Add logger options to control logging (#300)
+* Pass options in middleware-only usage (#299)
+
+0.34.0 - Fri Dec 23, 2016
+------
+
+## Fixes
+* Fixed index are no longer deletable in read-only mode (#298)
+
+0.33.0 - Tue Dec 6, 2016
+------
+
+## New 
+* Delete all Documents matching a query.
+
+## Fixes
+* Fixed issue where binary types we're converted to string when updating a document
+
+0.32.0 - Sat Nov 12, 2016
+------
+
+## New
+* ObjectID can now be used without the ObjectID wrapper.
+* Added export to CSV
+* Added index management. You can now delete index or reIndex a collection
+
+## Fixes
+* Fixed issue where ObjectID we're incorrectly stringified
+
+
+0.30.48
+-------
+ * Add support for super large Objects
+
 0.21.0
 ------
 

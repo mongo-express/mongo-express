@@ -22,15 +22,29 @@ if (process.env.VCAP_SERVICES) {
     host:     'localhost',
     password: 'pass',
     port:     27017,
-    url:      '"mongodb://localhost:27017/db',
+    ssl:      false,
+    url:      'mongodb://localhost:27017/db',
     username: 'admin',
   };
 }
 
+var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.ME_CONFIG_MONGODB_SERVER.split(',') : false;
+
 module.exports = {
   mongodb: {
-    server: process.env.ME_CONFIG_MONGODB_SERVER  || mongo.host,
+    //server: mongodb hostname or IP address
+    //for replica set, use array of string instead
+    server: (meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]) || mongo.host,
     port:   process.env.ME_CONFIG_MONGODB_PORT    || mongo.port,
+
+    //ssl: connect to the server using secure SSL
+    ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
+
+    //sslValidate: validate mongod server certificate against CA
+    sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
+
+    //sslCA: array of valid CA certificates
+    sslCA:  [],
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
@@ -41,21 +55,21 @@ module.exports = {
     //set admin to true if you want to turn on admin features
     //if admin is true, the auth list below will be ignored
     //if admin is true, you will need to enter an admin username/password below (if it is needed)
-    admin: !!process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN || false,
+    admin: process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN ? process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN.toLowerCase() === 'true' : false,
 
     // >>>>  If you are using regular accounts, fill out auth details in the section below
     // >>>>  If you have admin auth, leave this section empty and skip to the next section
     auth: [
       /*
-       * Add the the name, the username, and the password of the databases you want to connect to
+       * Add the name, username, and password of the databases you want to connect to
        * Add as many databases as you want!
        */
-       {
-         database: mongo.db,
-         username: mongo.username,
-         password: mongo.password,
-       },
-      ],
+      {
+        database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
+        username: process.env.ME_CONFIG_MONGODB_AUTH_USERNAME || mongo.username,
+        password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password,
+      },
+    ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
@@ -72,8 +86,8 @@ module.exports = {
   },
 
   site: {
-    // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the stard and end!
-    baseUrl: '/',
+    // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the start and end!
+    baseUrl: process.env.ME_CONFIG_SITE_BASEURL || '/',
     cookieKeyName: 'mongo-express',
     cookieSecret:     process.env.ME_CONFIG_SITE_COOKIESECRET   || 'cookiesecret',
     host:             process.env.VCAP_APP_HOST                 || 'localhost',
@@ -85,7 +99,7 @@ module.exports = {
     sslKey:           process.env.ME_CONFIG_SITE_SSL_KEY_PATH   || '',
   },
 
-  //set useBasicAuth to true if you want to authehticate mongo-express loggins
+  //set useBasicAuth to true if you want to authenticate mongo-express loggins
   //if admin is false, the basicAuthInfo list below will be ignored
   //this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
   useBasicAuth: process.env.ME_CONFIG_BASICAUTH_USERNAME !== '',
@@ -96,6 +110,9 @@ module.exports = {
   },
 
   options: {
+    // Display startup text on console
+    console: true,
+
     //documentsPerPage: how many documents you want to see at once in collection view
     documentsPerPage: 10,
 
@@ -121,6 +138,19 @@ module.exports = {
 
     //readOnly: if readOnly is true, components of writing are not visible.
     readOnly: false,
+
+    //collapsibleJSON: if set to true, jsons will be displayed collapsible
+    collapsibleJSON: true,
+
+    //collapsibleJSONDefaultUnfold: if collapsibleJSON is set to `true`, this defines default level
+    //  to which JSONs are displayed unfolded; use number or "all" to unfold all levels
+    collapsibleJSONDefaultUnfold: 1,
+
+    //gridFSEnabled: if gridFSEnabled is set to 'true', you will be able to manage uploaded files ( ak. grids, gridFS )
+    gridFSEnabled: process.env.ME_CONFIG_SITE_GRIDFS_ENABLED || false,
+
+    // logger: this object will be used to initialize router logger (morgan)
+    logger: {},
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.

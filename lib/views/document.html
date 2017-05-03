@@ -3,13 +3,10 @@
 {% block title %}{{ document._id|to_string }}{% endblock %}
 
 
-{% block head %}
-  <link href="{{ baseHref }}stylesheets/codemirror-5.10.css" rel="stylesheet">
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.js"></script>
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.javascript.js"></script>
-
+{% block styles %}
+  <link href="{{ baseHref }}public/css/codemirror.css" rel="stylesheet">
   {% if editorTheme != "default" %}
-  <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
+  <link href="{{ baseHref }}public/css/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
 
   <style type="text/css">
@@ -42,7 +39,7 @@
     <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">Collection:</a>
+    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">Collection:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
@@ -53,31 +50,34 @@
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
   </li>
   <li><a>Document {{ document._id|to_string }}</a></li>
 {% endblock %}
 
-
 {% block content %}
 
-<form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
-
+<form method="POST"
+  id="documentEditForm"
+  action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/{{ document._id | json | safe | url_encode }}"
+>
   {% if docLength > 10 %}
-    <div class="row">
+    <div>
       {% if !settings.read_only %}
         <input type="hidden" name="_method" value="put">
-        <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large col-md-6">
-          <span class="glyphicon glyphicon-remove"></span>
+        <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+         <span class="glyphicon glyphicon-arrow-left"></span>
           Back
         </button>
-        <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
+        <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
           <span class="glyphicon glyphicon-pencil"></span>
           Save
         </button>
       {% else %}
         <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-          <span class="glyphicon glyphicon-remove"></span>
+         <span class="glyphicon glyphicon-arrow-left"></span>
           Back
         </button>
       {% endif %}
@@ -86,84 +86,44 @@
   {% endif %}
 
   <textarea class="col-md-12" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ docString }}</textarea>
-
   <br />
 
-  <div class="row">
+  <div>
     {% if !settings.read_only %}
       <input type="hidden" name="_method" value="put">
-      <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large col-md-6">
-        <span class="glyphicon glyphicon-remove"></span>
+      <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+       <span class="glyphicon glyphicon-arrow-left"></span>
         Back
       </button>
-      <button type="submit" class="btn btn-success btn-large col-md-6" onclick="return onSubmitClick()">
+
+      <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
         <span class="glyphicon glyphicon-pencil"></span>
         Save
       </button>
     {% else %}
       <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-        <span class="glyphicon glyphicon-remove"></span>
+       <span class="glyphicon glyphicon-arrow-left"></span>
         Back
       </button>
     {% endif %}
   </div>
-
 </form>
 
-<script>
-'use strict';
-  var doc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: {
-      name: 'javascript',
-      json: true,
-    },
-    indentUnit: 4,
-    lineNumbers: true,
-    autoClearEmptyLines: true,
-    matchBrackets: true,
-    {% if settings.read_only %}
-    readOnly: true,
-    {% endif %}
-    theme: "{{ editorTheme }}"
-  });
+{% if !settings.read_only %}
+  <br>
+  <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/{{ document._id | json | safe | url_encode }}">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger">
+      <span class="glyphicon glyphicon-trash"></span>
+      Delete
+    </button>
+  </form>
+{% endif %}
 
-  function onBackClick() {
-    // "Back" button is clicked
+{% endblock %}
 
-    if (doc.isClean()) {
-      history.back();
-    } else if ($('#discardChanges').length === 0){
-      $('#pageTitle').parent().append('<div id="discardChanges" class="alert alert-warning"><strong>Document has changed! Are you sure you wish to go back?</strong></div>');
-      $('.backButton').text('Back & Discard Changes')
-    } else {
-      history.back();
-    }
 
-    return false;
-  }
-
-  function onSubmitClick() {
-    // Save button is clicked
-
-    $('#discardChanges').remove();
-
-    $.ajax({
-      type: 'POST',
-      url: "{{ baseHref }}checkValid",
-      data: {
-        document: doc.getValue()
-      },
-    }).done(function(data) {
-      if (data === 'Valid') {
-        $('#documentInvalidJSON').remove();
-        $('#documentEditForm').submit();
-      } else if ($('#documentInvalidJSON').length === 0){
-        $('#pageTitle').parent().append('<div id="documentInvalidJSON" class="alert alert-danger"><strong>Invalid JSON</strong></div>');
-      }
-    });
-    return false;
-  }
-
-</script>
-
+{% block scripts %}
+<script src="{{ baseHref }}{{ assets.codemirror.js }}"></script>
+<script src="{{ baseHref }}{{ assets.document.js }}"></script>
 {% endblock %}

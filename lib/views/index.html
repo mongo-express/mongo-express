@@ -15,9 +15,27 @@
 
 
 {% block content %}
-
-<h2>Databases</h2>
-<table class="table table-bordered table-striped table-condensed">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div style="display: inline-block;">
+      <h4 style="font-weight: bold;">Databases</h4>
+    </div>
+    {% if !settings.read_only %}
+    <form class="form-inline" method="POST" style="float:right;">
+      <div class="input-group">
+        <input class="form-control" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
+        <span class="input-group-btn">
+      <button type="submit" class="btn btn-primary pull-right">
+        <span class="glyphicon glyphicon-plus"></span>
+        Create Database
+      </button>
+        </span>
+      </div>
+    </form>
+    {% endif %}
+    </div>
+  <div class="panel-body no-padding">
+<table class="table table-bordered table-striped table-condensed no-margin">
   {% for db in databases %}
   <tr>
     <td class="col-md-2">
@@ -40,7 +58,8 @@
   </tr>
   {% endfor %}
 </table>
-
+</div>
+  </div>
 {% if !settings.read_only %}
 <div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
   <div class="modal-dialog" role="document">
@@ -69,7 +88,7 @@
   </div>
 </div>
 
-<h2>Create Database</h2>
+<!--h2>Create Database</h2>
 <form class="well form-inline" method="POST">
     <div class="form-group">
       <input class="input-medium" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
@@ -78,43 +97,7 @@
       <span class="glyphicon glyphicon-plus"></span>
       Create Database
     </button>
-</form>
-
-<script>
-'use strict';
-$(document).ready(function() {
-  $('#database').popover({
-    content: 'Database names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
-  });
-
-  $('.deleteButton').tooltip({
-    title: 'Warning! Are you sure you want to delete this database? All collenctions and documents will be deleted.',
-  });
-
-  $('.deleteButton').on('click', function(event) {
-
-    $('.deleteButton').tooltip('hide');
-
-    event.preventDefault();
-
-    var target = $(this);
-    var parentForm = $('#' + target.attr('childof'));
-
-    $('#confirmation-input').attr('shouldbe', target.attr('database-name'));
-    $('#modal-database-name').text(target.attr('database-name'));
-    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
-      .one('shown.bs.modal', function() {
-        $('#confirmation-input').focus();
-      })
-      .one('click', '#delete', function() {
-        var input = $('#confirmation-input');
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
-          parentForm.trigger('submit');
-        }
-      });
-  });
-});
-</script>
+</form-->
 {% endif %}
 
 {% if info == false %}
@@ -125,8 +108,10 @@ $(document).ready(function() {
 </p>
 
 {% else %}
-
-<h2>Server Status</h2>
+<div class="panel panel-default stats">
+  <div class="panel-heading">
+    <h4 style="font-weight: bold;">Server Status</h4>
+  </div>
 <table class="table table-bordered table-striped">
   <tr>
     <td class="span2"><strong>Hostname</strong></td>
@@ -170,7 +155,7 @@ $(document).ready(function() {
     <td><strong>Disk Flushes</strong></td>
     <td>{{ info.backgroundFlushing.flushes }}</td>
     <td><strong>Last Flush</strong></td>
-    <td>{{ info.backgroundFlushing.last_finished|date('r') }}</td>
+    <td>{{ info.backgroundFlushing ? info.backgroundFlushing.last_finished|date('r') : '' }}</td>
   </tr>
   <tr>
     <td><strong>Time Spent Flushing</strong></td>
@@ -192,11 +177,18 @@ $(document).ready(function() {
     <td>{{ info.opcounters.delete}}</td>
   </tr>
 </table>
-
+</div>
 {% endif %}
 
 {#
   # Still need to add global lock time stats and replica set stats
 #}
 
+{% endblock %}
+
+
+{% block scripts %}
+{% if !settings.read_only %}
+<script src="{{ baseHref }}{{ assets.index.js }}"></script>
+{% endif %}
 {% endblock %}
