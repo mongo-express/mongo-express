@@ -91,7 +91,7 @@ if (!config.site.baseUrl) {
 }
 
 app.use(config.site.baseUrl, middleware(config));
-app.use(csrf());
+app.use(config.site.baseUrl, csrf());
 
 if (config.site.sslEnabled) {
   defaultPort     = 443;
