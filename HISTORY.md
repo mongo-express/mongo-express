@@ -1,3 +1,10 @@
+0.41.0 - Tue Jul 4, 2017
+------
+
+- Use stream for exporting collections (#345)
+- Solution for CSRF wiht base url (#347)
+
+
 0.40.0 - Mon May 1, 2017
 ------
 
