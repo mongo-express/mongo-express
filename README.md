@@ -127,6 +127,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     ----------------------------------|-----------------|------------
     `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image. If it is a replica set, use a comma delimited list of the host names.
     `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
+    `ME_CONFIG_MONGODB_URL`           | `mongodb://admin:pass@localhost:27017/db?ssl=false`
     `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access. Send strings: `"true"` or `"false"`.
     `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
     `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.

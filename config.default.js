@@ -1,13 +1,6 @@
 'use strict';
 
 var mongo;
-var url = require('url');
-
-if (typeof process.env.MONGODB_PORT === 'string') {
-  var mongoConnection = url.parse(process.env.MONGODB_PORT);
-  process.env.ME_CONFIG_MONGODB_SERVER  = mongoConnection.hostname;
-  process.env.ME_CONFIG_MONGODB_PORT    = mongoConnection.port;
-}
 
 // Accesing Bluemix variable to get MongoDB info
 if (process.env.VCAP_SERVICES) {
@@ -18,13 +11,9 @@ if (process.env.VCAP_SERVICES) {
   }
 } else {
   mongo = {
-    db:       'db',
-    host:     'localhost',
-    password: 'pass',
-    port:     27017,
-    ssl:      false,
-    url:      'mongodb://localhost:27017/db',
-    username: 'admin',
+    // setting the connection string will only give access to that database
+    // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
+    connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL || 'mongodb://admin:pass@localhost:27017/db?ssl=false',
   };
 }
 
@@ -32,6 +21,9 @@ var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.M
 
 module.exports = {
   mongodb: {
+    // if a connection string options such as server/port/etc are ignored
+    connectionString: mongo.connectionString,
+
     //server: mongodb hostname or IP address
     //for replica set, use array of string instead
     server: (meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]) || mongo.host,
