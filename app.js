@@ -81,7 +81,7 @@ if (commander.username && commander.password) {
   config.useBasicAuth = false;
 }
 
-if(commander.url) {
+if (commander.url) {
   config.mongodb.connectionString = commander.url;
   if (commander.admin) {
     config.mongodb.admin = true;

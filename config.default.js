@@ -2,6 +2,8 @@
 
 var mongo;
 
+const defaultConnectionString = 'mongodb://admin:pass@localhost:27017/db?ssl=false';
+
 // Accesing Bluemix variable to get MongoDB info
 if (process.env.VCAP_SERVICES) {
   var dbLabel = 'mongodb-2.4';
@@ -13,7 +15,7 @@ if (process.env.VCAP_SERVICES) {
   mongo = {
     // setting the connection string will only give access to that database
     // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
-    connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL || 'mongodb://admin:pass@localhost:27017/db?ssl=false',
+    connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL || defaultConnectionString,
   };
 }
 
