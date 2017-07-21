@@ -48,6 +48,7 @@ if (config.options.console) {
 
 commander
   .version(require('./package').version)
+  .option('-U, --url <url>', 'connection string url')
   .option('-H, --host <host>', 'hostname or adress')
   .option('-P, --dbport <host>', 'port of the db')
   .option('-u, --username <username>', 'username for authentication')
@@ -78,6 +79,13 @@ if (commander.username && commander.password) {
   }
 
   config.useBasicAuth = false;
+}
+
+if (commander.url) {
+  config.mongodb.connectionString = commander.url;
+  if (commander.admin) {
+    config.mongodb.admin = true;
+  }
 }
 
 config.mongodb.server = commander.host || config.mongodb.server;
