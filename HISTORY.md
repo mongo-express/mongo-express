@@ -1,3 +1,9 @@
+0.42.0 - Thu Jul 20, 2017
+------
+
+- Add connectionString support to connection (#350)
+
+
 0.41.0 - Tue Jul 4, 2017
 ------
 
