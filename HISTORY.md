@@ -1,3 +1,9 @@
+
+0.42.1 - Mon Aug 7, 2017
+------
+- Fixed typo in tag of collection view (#357)
+
+
 0.42.0 - Thu Jul 20, 2017
 ------
 
