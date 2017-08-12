@@ -1,6 +1,12 @@
+0.42.2 - Sat Aug 12, 2017
+------
+
+- Fixed default port in lib/db.js from documentation
+
 
 0.42.1 - Mon Aug 7, 2017
 ------
+
 - Fixed typo in tag of collection view (#357)
 
 
