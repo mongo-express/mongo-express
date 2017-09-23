@@ -1,3 +1,9 @@
+0.42.3 - Sat Sep 23, 2017
+-----
+
+- Fix small typo causing issue with auth databases (#366)
+
+
 0.42.2 - Sat Aug 12, 2017
 ------
 
