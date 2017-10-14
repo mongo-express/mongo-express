@@ -1,3 +1,9 @@
+0.43.0 - Sat Oct 14, 2017
+-----
+
+- Added support for Binary Data as _id (#368)
+
+
 0.42.3 - Sat Sep 23, 2017
 -----
 
