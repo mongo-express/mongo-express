@@ -1,3 +1,9 @@
+0.43.1 - Tue Oct 24, 2017
+-----
+
+- Fix can not delete database (#373)
+
+
 0.43.0 - Sat Oct 14, 2017
 -----
 
