@@ -143,6 +143,9 @@ module.exports = {
 
     // logger: this object will be used to initialize router logger (morgan)
     logger: {},
+
+    //confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is displayed before deleting a document/collection
+    confirmDelete: false,
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
