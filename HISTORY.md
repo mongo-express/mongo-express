@@ -1,3 +1,9 @@
+0.44.0 - Tue Oct 24, 2017
+-----
+
+- Confirm document delete (#374)
+
+
 0.43.1 - Tue Oct 24, 2017
 -----
 
