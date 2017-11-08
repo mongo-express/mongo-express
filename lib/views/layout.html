@@ -103,6 +103,7 @@ window.ME_SETTINGS = {
   baseHref: '{{ baseHref }}',
   collapsibleJSON: '{{ !!collapsibleJSON }}' === 'true',
   collapsibleJSONDefaultUnfold: parseInt('{{ collapsibleJSONDefaultUnfold || 0}}', 10),
+  confirmDelete: '{{ !!confirmDelete }}' === 'true',
   dbName: '{{ dbName }}',
   collectionName: '{{ collectionName | url_encode }}',
   bucketName: '{{ bucketName }}'

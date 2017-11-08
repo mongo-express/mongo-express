@@ -113,11 +113,27 @@
   <br>
   <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/{{ document._id | json | safe | url_encode }}">
     <input type="hidden" name="_method" value="delete">
-    <button type="submit" class="btn btn-danger">
+    <input type="submit" class="hidden" />
+    <button class="btn btn-danger deleteButtonDocument">
       <span class="glyphicon glyphicon-trash"></span>
       Delete
     </button>
   </form>
+
+  <div id="confirm-document-delete" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          Are you sure?
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+          <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endif %}
 
 {% endblock %}
