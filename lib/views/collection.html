@@ -319,6 +319,10 @@
 
   {% endif %}
 
+  <p>
+    <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}" class="btn btn-primary btn-large btn-block"><span class="glyphicon glyphicon-save"></span> Export Results (json)</a>
+  </p>
+
   <div class="row">
     {% if !settings.read_only %}
       <div class="col-md-12">
