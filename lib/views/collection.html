@@ -342,7 +342,7 @@
   <div class="row">
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
+      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
       </a>
       </div>
@@ -350,7 +350,7 @@
 
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
+      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
       </a>
       </div>
@@ -358,7 +358,7 @@
 
     <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expCsv/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
+      <a href="{{ baseHref }}db/{{ dbName }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --csv
       </a>
       </div>
@@ -566,3 +566,4 @@
 <script src="{{ baseHref }}{{assets.codemirror.js}}"></script>
 <script src="{{ baseHref }}{{assets.collection.js}}"></script>
 {% endblock %}
+ 
