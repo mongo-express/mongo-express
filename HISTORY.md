@@ -1,3 +1,12 @@
+0.45 - Sun Mar 4, 2017
+-----
+
+- Added `VCAP_APP_PORT` in config (#378)
+- Prevent uncaught error if collection has been deleted. (#382)
+- export query results from collections (#388)
+- Allow hyphens in collection names (#389)
+
+
 0.44.0 - Tue Nov 7, 2017
 -----
 
