@@ -1,3 +1,9 @@
+# 0.46.1 - Wed Mar 28, 2018
+
+- Fix bug in filters that mistakenly converts non-Binary and non-Object [(#396)](github.com/mongo-express/mongo-express/pulls/396)
+
+
+
 # 0.46 - Sat Mar 17, 2018
 
 
