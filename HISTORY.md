@@ -1,3 +1,13 @@
+# 0.47.0 - Thu May 10, 2018
+
+- Ensure mongo is never left uninitialised [(#401)](github.com/mongo-express/mongo-express/pulls/401)
+- Fixed when ME_CONFIG_MONGODB_SERVER is ReplSet [(#403)](github.com/mongo-express/mongo-express/pulls/403)
+- Fixed issue where export would only export partial results [(#406)](github.com/mongo-express/mongo-express/pulls/406)
+- Fixed convertBytes filter to handle NaN [(#410)](github.com/mongo-express/mongo-express/pulls/410)
+- Delete database modal now has consistent buttons with other delete modals [(#410)](github.com/mongo-express/mongo-express/pulls/410)
+
+
+
 # 0.46.1 - Wed Mar 28, 2018
 
 - Fix bug in filters that mistakenly converts non-Binary and non-Object [(#396)](github.com/mongo-express/mongo-express/pulls/396)
