@@ -1,6 +1,10 @@
 'use strict';
 
-var mongo;
+var mongo = {
+  // setting the connection string will only give access to that database
+  // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
+  connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL,
+};
 
 // Accesing Bluemix variable to get MongoDB info
 if (process.env.VCAP_SERVICES) {
@@ -9,12 +13,6 @@ if (process.env.VCAP_SERVICES) {
   if (env[dbLabel]) {
     mongo = env[dbLabel][0].credentials;
   }
-} else {
-  mongo = {
-    // setting the connection string will only give access to that database
-    // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
-    connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL,
-  };
 }
 
 var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.ME_CONFIG_MONGODB_SERVER.split(',') : false;
