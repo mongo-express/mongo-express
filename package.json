@@ -36,6 +36,7 @@
     "csurf": "1.9.0",
     "errorhandler": "1.4.3",
     "express": "4.14.0",
+    "express-fileupload": "^0.4.0",
     "express-session": "1.14.1",
     "flat": "^2.0.1",
     "gridfs-stream": "^1.1.1",
