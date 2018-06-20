@@ -56,6 +56,12 @@
             <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
           </a>
         </td>
+        <td class="col-md-1">
+          <a class="btn btn-warning btn-block import-file-link">
+            <span class="glyphicon glyphicon-cloud-upload"></span><br>Import
+          </a>
+          <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ c | url_encode }}"/>
+        </td>
         <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c | url_encode }}">{{ c }}</a></h3></td>
         {% if !settings.read_only %}
         <td class="col-md-1">

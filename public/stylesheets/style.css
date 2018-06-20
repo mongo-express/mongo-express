@@ -98,3 +98,7 @@
 .bold{
   font-weight:bold;
 }
+
+.input-hidden{
+  display:none !important;
+}
