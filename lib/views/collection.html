@@ -340,7 +340,7 @@
   </div>
   <h2>Tools</h2>
   <div class="row">
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
+    <div class="col-sm-4 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
@@ -348,7 +348,7 @@
       </div>
     </div>
 
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
+    <div class="col-sm-4 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
@@ -356,7 +356,7 @@
       </div>
     </div>
 
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
+    <div class="col-sm-4 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-floppy-save"></span><br>Export --csv
@@ -364,11 +364,20 @@
       </div>
     </div>
 
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
+    <div class="col-sm-4 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
       <a href="{{ baseHref }}db/{{ dbName }}/reIndex/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
         <span class="glyphicon glyphicon-resize-small"></span><br>Reindex
       </a>
+      </div>
+    </div>
+
+    <div class="col-sm-4 {% if !settings.read_only %}col-lg-3{% endif %}">
+      <div class="well">
+        <a class="btn btn-warning btn-block import-file-link">
+          <span class="glyphicon glyphicon-cloud-upload"></span><br>Import
+        </a>
+        <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ collectionName | url_encode }}"/>
       </div>
     </div>
 
