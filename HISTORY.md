@@ -1,3 +1,10 @@
+# 0.48.0 - Mon Jun 25, 2018
+
+- Update Dockerfile to build wih node 8. [(#417)](github.com/mongo-express/mongo-express/pulls/417)
+- Export collections with filenames encoded according to RFC 6266. [(#419)](github.com/mongo-express/mongo-express/pulls/419)
+- Add import buttons [(#421)](github.com/mongo-express/mongo-express/pulls/421)
+
+
 # 0.47.0 - Thu May 10, 2018
 
 - Ensure mongo is never left uninitialised [(#401)](github.com/mongo-express/mongo-express/pulls/401)
@@ -104,7 +111,7 @@
 # 0.39.0 - Sun Mar 26, 2017
 
 
-## New 
+## New
 * Add Create Index functionality [(#326)](github.com/mongo-express/mongo-express/pulls/326)
 
 ## Chores
@@ -175,7 +182,7 @@
 # 0.33.0 - Tue Dec 6, 2016
 
 
-## New 
+## New
 * Delete all Documents matching a query.
 
 ## Fixes
