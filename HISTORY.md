@@ -1,3 +1,7 @@
+#0.48.1 - Mon Jul 2, 2018
+- Allow readonly config by environment variable [(#423)](github.com/mongo-express/mongo-express/pulls/423)
+
+
 # 0.48.0 - Mon Jun 25, 2018
 
 - Update Dockerfile to build wih node 8. [(#417)](github.com/mongo-express/mongo-express/pulls/417)
