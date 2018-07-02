@@ -127,7 +127,7 @@ module.exports = {
     subprocessTimeout: 300,
 
     //readOnly: if readOnly is true, components of writing are not visible.
-    readOnly: false,
+    readOnly: process.env.ME_CONFIG_OPTIONS_READONLY || false,
 
     //collapsibleJSON: if set to true, jsons will be displayed collapsible
     collapsibleJSON: true,
