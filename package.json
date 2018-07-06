@@ -73,7 +73,7 @@
     "webpack": "^2.4.1"
   },
   "engines": {
-    "node": ">=4.0.0",
+    "node": ">=6.0.0",
     "npm": ">=3.0.0"
   },
   "license": "MIT",
