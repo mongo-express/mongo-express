@@ -1,4 +1,13 @@
-#0.48.1 - Mon Jul 2, 2018
+# 0.49.0 - Mon Jul 9, 2018
+Breaking:
+- Dropped support for node 4 and 5. Added CI for node 8, 9 and 10. [(#425)](github.com/mongo-express/mongo-express/pulls/425)
+
+Fixes:
+- Fix issue where connectionData would not initialize the correct objects leading to config settings not passing through [(#424)](github.com/mongo-express/mongo-express/pulls/424)
+- Bump Dependencies [(#425)](github.com/mongo-express/mongo-express/pulls/425)
+
+
+# 0.48.1 - Mon Jul 2, 2018
 - Allow readonly config by environment variable [(#423)](github.com/mongo-express/mongo-express/pulls/423)
 
 
