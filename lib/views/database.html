@@ -46,11 +46,13 @@
             <span class="glyphicon glyphicon-eye-open"></span><br>View
           </a>
         </td>
+        {% if !settings.me_no_export %}
         <td class="col-md-1">
           <a href="{{ dbUrl }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>Export
           </a>
         </td>
+        {% endif %}
         <td class="col-md-1">
           <a href="{{ dbUrl }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
