@@ -7,7 +7,7 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <li><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
       {% endfor %}
     </ul>
   </li>

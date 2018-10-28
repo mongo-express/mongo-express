@@ -25,7 +25,7 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+    <a href="{{ dbUrl }}">Database:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
@@ -36,21 +36,21 @@
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="{{ dbUrl }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">Collection:</a>
+    <a href="{{ collectionUrl }}">Collection:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for collection in collections %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
+      <li><a href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
       {% endfor %}
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}">
+    <a href="{{ collectionUrl }}">
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
   </li>
@@ -61,7 +61,7 @@
 
 <form method="POST"
   id="documentEditForm"
-  action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/{{ document._id | json | safe | url_encode }}"
+  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}"
 >
   {% if docLength > 10 %}
     <div>
@@ -111,7 +111,7 @@
 
 {% if !settings.read_only %}
   <br>
-  <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}/{{ document._id | json | safe | url_encode }}">
+  <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" class="hidden" />
     <button class="btn btn-danger deleteButtonDocument">

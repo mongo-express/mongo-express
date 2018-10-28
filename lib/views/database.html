@@ -4,13 +4,13 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+    <a href="{{ dbUrl }}">Database:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <li><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
       {% endfor %}
     </ul>
   </li>
@@ -42,17 +42,17 @@
       {% for c in colls %}
       <tr>
         <td class="col-md-2">
-          <a href="{{ baseHref }}db/{{ dbName }}/{{ c | url_encode }}" class="btn btn-success btn-block">
+          <a href="{{ dbUrl }}/{{ c | url_encode }}" class="btn btn-success btn-block">
             <span class="glyphicon glyphicon-eye-open"></span><br>View
           </a>
         </td>
         <td class="col-md-1">
-          <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block">
+          <a href="{{ dbUrl }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>Export
           </a>
         </td>
         <td class="col-md-1">
-          <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block">
+          <a href="{{ dbUrl }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
           </a>
         </td>
@@ -62,20 +62,19 @@
           </a>
           <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ c | url_encode }}"/>
         </td>
-        <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c | url_encode }}">{{ c }}</a></h3></td>
+        <td><h3><a href="{{ dbUrl }}/{{ c | url_encode }}">{{ c }}</a></h3></td>
         {% if !settings.read_only %}
         <td class="col-md-1">
           <form method="POST"
-            id="db-{{ dbName }}-{{ c }}"
-            action="{{ baseHref }}db/{{ dbName }}/{{ c | url_encode }}"
+            action="{{ dbUrl }}/{{ c | url_encode }}"
             style="margin: 0px;"
           >
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="hidden"></button>
+            <button type="button" class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}">
+              <span class="glyphicon glyphicon-trash"></span><br>Del
+            </button>
           </form>
-          <button class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
-            <span class="glyphicon glyphicon-trash"></span><br>Del
-          </button>
         </td>
         {% endif %}
       </tr>
@@ -119,11 +118,11 @@
   {% for b in grids %}
   <tr>
     <td class="col-md-2">
-      <a href="{{ baseHref }}db/{{ dbName }}/gridFS/{{ b }}" class="btn btn-success btn-block">
+      <a href="{{ dbUrl }}/gridFS/{{ b }}" class="btn btn-success btn-block">
         <span class="glyphicon glyphicon-eye-open"></span><br>View
       </a>
     </td>
-    <td><h3><a href="{{ baseHref }}db/{{ dbName }}/gridFS/{{ b }}">{{ b }}</a></h3></td>
+    <td><h3><a href="{{ dbUrl }}/gridFS/{{ b }}">{{ b }}</a></h3></td>
   </tr>
   {% endfor %}
 </table>
