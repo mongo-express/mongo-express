@@ -375,7 +375,7 @@
     <div class="col-sm-4 {% if !settings.read_only %}col-lg-3{% endif %}">
       <div class="well">
         <a class="btn btn-warning btn-block import-file-link">
-          <span class="glyphicon glyphicon-cloud-upload"></span><br>Import
+          <span class="glyphicon glyphicon-cloud-upload"></span><br>Import --mongoexport json
         </a>
         <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ collectionName | url_encode }}"/>
       </div>
