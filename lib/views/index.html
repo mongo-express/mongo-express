@@ -7,7 +7,7 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <li><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
       {% endfor %}
     </ul>
   </li>
@@ -25,10 +25,10 @@
       <div class="input-group">
         <input class="form-control" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
         <span class="input-group-btn">
-      <button type="submit" class="btn btn-primary pull-right">
-        <span class="glyphicon glyphicon-plus"></span>
-        Create Database
-      </button>
+          <button type="submit" class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create Database
+          </button>
         </span>
       </div>
     </form>
@@ -39,20 +39,20 @@
   {% for db in databases %}
   <tr>
     <td class="col-md-2">
-      <a href="{{ baseHref }}db/{{ db }}/" class="btn btn-success btn-block" >
+      <a href="{{ baseHref }}db/{{ db | url_encode }}/" class="btn btn-success btn-block" >
         <span class="glyphicon glyphicon-eye-open"></span><br>View
       </a>
     </td>
-    <td><h3><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></h3></td>
+    <td><h3><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></h3></td>
     {% if !settings.read_only %}
     <td class="col-md-2">
-      <form method="POST" id="db-{{ db }}" action="{{ baseHref }}{{ db }}" style="margin: 0px;">
+      <form method="POST" action="{{ baseHref }}{{ db | url_encode }}" style="margin: 0px;">
         <input type="hidden" name="_method" value="delete">
         <button type="submit" class="hidden"></button>
+        <button type="button" class="btn btn-danger btn-block deleteButton" database-name="{{ db }}" >
+          <span class="glyphicon glyphicon-trash"></span><br>Del
+        </button>
       </form>
-      <button class="btn btn-danger btn-block deleteButton" database-name="{{ db }}" childof="db-{{ db }}">
-        <span class="glyphicon glyphicon-trash"></span><br>Del
-      </button>
     </td>
     {% endif %}
   </tr>
