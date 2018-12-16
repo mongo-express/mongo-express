@@ -1,76 +1,92 @@
-# 0.49.0 - Mon Jul 9, 2018
-Breaking:
-- Dropped support for node 4 and 5. Added CI for node 8, 9 and 10. [(#425)](https://github.com/mongo-express/mongo-express/pulls/425)
+# 0.50.0 - Sun Dec 16, 2018
+
+New:
+- Allow turning off export. [(#443)](https://github.com/mongo-express/mongo-express/pull/443)
 
 Fixes:
-- Fix issue where connectionData would not initialize the correct objects leading to config settings not passing through [(#424)](https://github.com/mongo-express/mongo-express/pulls/424)
-- Bump Dependencies [(#425)](https://github.com/mongo-express/mongo-express/pulls/425)
+- Fix issue where db with % would not link properly. [(#440)](https://github.com/mongo-express/mongo-express/pull/440)
+- Fix issue where settings were not pass properly to views. [(#442)](https://github.com/mongo-express/mongo-express/pull/442)
+- New Document modal now has a working scrollbar for longer documents. [(#446)](https://github.com/mongo-express/mongo-express/pull/446)
+- Fix bug with import "--mongoexport json". [(#447)](https://github.com/mongo-express/mongo-express/pull/447)
+
+Chores:
+- Refactor urls to use dbUrl and collectionUrl. [(#441)](https://github.com/mongo-express/mongo-express/pull/441)
+- Fixed typo: accessable -> accessible. [(#445)](https://github.com/mongo-express/mongo-express/pull/445)
+
+
+# 0.49.0 - Mon Jul 9, 2018
+Breaking:
+- Dropped support for node 4 and 5. Added CI for node 8, 9 and 10. [(#425)](https://github.com/mongo-express/mongo-express/pull/425)
+
+Fixes:
+- Fix issue where connectionData would not initialize the correct objects leading to config settings not passing through [(#424)](https://github.com/mongo-express/mongo-express/pull/424)
+- Bump Dependencies [(#425)](https://github.com/mongo-express/mongo-express/pull/425)
 
 
 # 0.48.1 - Mon Jul 2, 2018
-- Allow readonly config by environment variable (ME_CONFIG_OPTIONS_READONLY) [(#423)](https://github.com/mongo-express/mongo-express/pulls/423)
+- Allow readonly config by environment variable (ME_CONFIG_OPTIONS_READONLY) [(#423)](https://github.com/mongo-express/mongo-express/pull/423)
 
 
 # 0.48.0 - Mon Jun 25, 2018
 
-- Update Dockerfile to build wih node 8. [(#417)](https://github.com/mongo-express/mongo-express/pulls/417)
-- Export collections with filenames encoded according to RFC 6266. [(#419)](https://github.com/mongo-express/mongo-express/pulls/419)
-- Add import buttons [(#421)](https://github.com/mongo-express/mongo-express/pulls/421)
+- Update Dockerfile to build wih node 8. [(#417)](https://github.com/mongo-express/mongo-express/pull/417)
+- Export collections with filenames encoded according to RFC 6266. [(#419)](https://github.com/mongo-express/mongo-express/pull/419)
+- Add import buttons [(#421)](https://github.com/mongo-express/mongo-express/pull/421)
 
 
 # 0.47.0 - Thu May 10, 2018
 
-- Ensure mongo is never left uninitialised [(#401)](https://github.com/mongo-express/mongo-express/pulls/401)
-- Fixed when ME_CONFIG_MONGODB_SERVER is ReplSet [(#403)](https://github.com/mongo-express/mongo-express/pulls/403)
-- Fixed issue where export would only export partial results [(#406)](https://github.com/mongo-express/mongo-express/pulls/406)
-- Fixed convertBytes filter to handle NaN [(#410)](https://github.com/mongo-express/mongo-express/pulls/410)
-- Delete database modal now has consistent buttons with other delete modals [(#410)](https://github.com/mongo-express/mongo-express/pulls/410)
+- Ensure mongo is never left uninitialised [(#401)](https://github.com/mongo-express/mongo-express/pull/401)
+- Fixed when ME_CONFIG_MONGODB_SERVER is ReplSet [(#403)](https://github.com/mongo-express/mongo-express/pull/403)
+- Fixed issue where export would only export partial results [(#406)](https://github.com/mongo-express/mongo-express/pull/406)
+- Fixed convertBytes filter to handle NaN [(#410)](https://github.com/mongo-express/mongo-express/pull/410)
+- Delete database modal now has consistent buttons with other delete modals [(#410)](https://github.com/mongo-express/mongo-express/pull/410)
 
 
 
 # 0.46.1 - Wed Mar 28, 2018
 
-- Fix bug in filters that mistakenly converts non-Binary and non-Object [(#396)](https://github.com/mongo-express/mongo-express/pulls/396)
+- Fix bug in filters that mistakenly converts non-Binary and non-Object [(#396)](https://github.com/mongo-express/mongo-express/pull/396)
 
 
 
 # 0.46 - Sat Mar 17, 2018
 
 
-- Added support for NaN, +Inifity, -Infinity values [(#395)](https://github.com/mongo-express/mongo-express/pulls/395)
+- Added support for NaN, +Inifity, -Infinity values [(#395)](https://github.com/mongo-express/mongo-express/pull/395)
 
 
 # 0.45 - Sun Mar 4, 2018
 
 
-- Added `VCAP_APP_PORT` in config [(#378)](https://github.com/mongo-express/mongo-express/pulls/378)
-- Prevent uncaught error if collection has been deleted. [(#382)](https://github.com/mongo-express/mongo-express/pulls/382)
-- export query results from collections [(#388)](https://github.com/mongo-express/mongo-express/pulls/388)
-- Allow hyphens in collection names [(#389)](https://github.com/mongo-express/mongo-express/pulls/389)
+- Added `VCAP_APP_PORT` in config [(#378)](https://github.com/mongo-express/mongo-express/pull/378)
+- Prevent uncaught error if collection has been deleted. [(#382)](https://github.com/mongo-express/mongo-express/pull/382)
+- export query results from collections [(#388)](https://github.com/mongo-express/mongo-express/pull/388)
+- Allow hyphens in collection names [(#389)](https://github.com/mongo-express/mongo-express/pull/389)
 
 
 # 0.44.0 - Tue Nov 7, 2017
 
 
-- Confirm document delete [(#374)](https://github.com/mongo-express/mongo-express/pulls/374)
+- Confirm document delete [(#374)](https://github.com/mongo-express/mongo-express/pull/374)
 
 
 # 0.43.1 - Tue Oct 24, 2017
 
 
-- Fix can not delete database [(#373)](https://github.com/mongo-express/mongo-express/pulls/373)
+- Fix can not delete database [(#373)](https://github.com/mongo-express/mongo-express/pull/373)
 
 
 # 0.43.0 - Sat Oct 14, 2017
 
 
-- Added support for Binary Data as _id [(#368)](https://github.com/mongo-express/mongo-express/pulls/368)
+- Added support for Binary Data as _id [(#368)](https://github.com/mongo-express/mongo-express/pull/368)
 
 
 # 0.42.3 - Sat Sep 23, 2017
 
 
-- Fix small typo causing issue with auth databases [(#366)](https://github.com/mongo-express/mongo-express/pulls/366)
+- Fix small typo causing issue with auth databases [(#366)](https://github.com/mongo-express/mongo-express/pull/366)
 
 
 # 0.42.2 - Sat Aug 12, 2017
@@ -82,29 +98,29 @@ Fixes:
 # 0.42.1 - Mon Aug 7, 2017
 
 
-- Fixed typo in tag of collection view [(#357)](https://github.com/mongo-express/mongo-express/pulls/357)
+- Fixed typo in tag of collection view [(#357)](https://github.com/mongo-express/mongo-express/pull/357)
 
 
 # 0.42.0 - Thu Jul 20, 2017
 
 
-- Add connectionString support to connection [(#350)](https://github.com/mongo-express/mongo-express/pulls/350)
+- Add connectionString support to connection [(#350)](https://github.com/mongo-express/mongo-express/pull/350)
 
 
 # 0.41.0 - Tue Jul 4, 2017
 
 
-- Use stream for exporting collections [(#345)](https://github.com/mongo-express/mongo-express/pulls/345)
-- Solution for CSRF wiht base url [(#347)](https://github.com/mongo-express/mongo-express/pulls/347)
+- Use stream for exporting collections [(#345)](https://github.com/mongo-express/mongo-express/pull/345)
+- Solution for CSRF wiht base url [(#347)](https://github.com/mongo-express/mongo-express/pull/347)
 
 
 # 0.40.0 - Mon May 1, 2017
 
 
-- Fixed more flexible db names [(#339)](https://github.com/mongo-express/mongo-express/pulls/339)
+- Fixed more flexible db names [(#339)](https://github.com/mongo-express/mongo-express/pull/339)
 - Fixed escaping in nested objects
 - Fixed path resolve for windows for the builds
-- Fixed revise the list database function to support user having access to admin database [(#338)](https://github.com/mongo-express/mongo-express/pulls/338)
+- Fixed revise the list database function to support user having access to admin database [(#338)](https://github.com/mongo-express/mongo-express/pull/338)
 
 
 # 0.39.2 - Sun Apr 16, 2017
@@ -125,7 +141,7 @@ Fixes:
 
 
 ## New
-* Add Create Index functionality [(#326)](https://github.com/mongo-express/mongo-express/pulls/326)
+* Add Create Index functionality [(#326)](https://github.com/mongo-express/mongo-express/pull/326)
 
 ## Chores
 * Added a bit of readme info, and updated license
@@ -135,10 +151,10 @@ Fixes:
 
 
 ## New
-* Support for mounting on a different baseHref [(#320)](https://github.com/mongo-express/mongo-express/pulls/320)
+* Support for mounting on a different baseHref [(#320)](https://github.com/mongo-express/mongo-express/pull/320)
 
 ## Chores
-* Improve configuration step [(#321)](https://github.com/mongo-express/mongo-express/pulls/321)
+* Improve configuration step [(#321)](https://github.com/mongo-express/mongo-express/pull/321)
 
 
 # 0.37.2 - Tue Feb 21, 2017
@@ -159,38 +175,38 @@ Fixes:
 
 
 ## New
-* Added support for Collection with slash in the name [(#309)](https://github.com/mongo-express/mongo-express/pulls/309)
-* Changed the way scripts work [(#312)](https://github.com/mongo-express/mongo-express/pulls/312)
+* Added support for Collection with slash in the name [(#309)](https://github.com/mongo-express/mongo-express/pull/309)
+* Changed the way scripts work [(#312)](https://github.com/mongo-express/mongo-express/pull/312)
     - Scripts are now built using babel and are in their own files.
     - Each page has it's own mini-bundle + vendor bundle
     - Scripts are built on install and output a json file that is used for url purposes
 * Added more tests, and new test utils! (#314, #315)
 
 ## Fixes
-* Fixed issue where parenthese we're stringified incorrectly [(#306)](https://github.com/mongo-express/mongo-express/pulls/306)
-* Fixed loadDocument script that was rendered properly in read-only [(#308)](https://github.com/mongo-express/mongo-express/pulls/308)
+* Fixed issue where parenthese we're stringified incorrectly [(#306)](https://github.com/mongo-express/mongo-express/pull/306)
+* Fixed loadDocument script that was rendered properly in read-only [(#308)](https://github.com/mongo-express/mongo-express/pull/308)
 
 ## Varia
-* Removed underscore and use only lodash. [(#307)](https://github.com/mongo-express/mongo-express/pulls/307)
-* Removed Snyk. It was causing more annoyance than actual good [(#306)](https://github.com/mongo-express/mongo-express/pulls/306)
-* Updated swig to swig-template, which uses a safe version [(#311)](https://github.com/mongo-express/mongo-express/pulls/311)
+* Removed underscore and use only lodash. [(#307)](https://github.com/mongo-express/mongo-express/pull/307)
+* Removed Snyk. It was causing more annoyance than actual good [(#306)](https://github.com/mongo-express/mongo-express/pull/306)
+* Updated swig to swig-template, which uses a safe version [(#311)](https://github.com/mongo-express/mongo-express/pull/311)
 
 
 # 0.36.0 - Tue Feb 7, 2017
 
-* Fix content-disposition non-ascii header, set config.gridFSEnabled via env vars [(#304)](https://github.com/mongo-express/mongo-express/pulls/304)
+* Fix content-disposition non-ascii header, set config.gridFSEnabled via env vars [(#304)](https://github.com/mongo-express/mongo-express/pull/304)
 
 # 0.35.0 - Thu Jan 5, 2017
 
-* Removed Duplicated navbar in mobile layout [(#302)](https://github.com/mongo-express/mongo-express/pulls/302)
-* Add logger options to control logging [(#300)](https://github.com/mongo-express/mongo-express/pulls/300)
-* Pass options in middleware-only usage [(#299)](https://github.com/mongo-express/mongo-express/pulls/299)
+* Removed Duplicated navbar in mobile layout [(#302)](https://github.com/mongo-express/mongo-express/pull/302)
+* Add logger options to control logging [(#300)](https://github.com/mongo-express/mongo-express/pull/300)
+* Pass options in middleware-only usage [(#299)](https://github.com/mongo-express/mongo-express/pull/299)
 
 # 0.34.0 - Fri Dec 23, 2016
 
 
 ## Fixes
-* Fixed index are no longer deletable in read-only mode [(#298)](https://github.com/mongo-express/mongo-express/pulls/298)
+* Fixed index are no longer deletable in read-only mode [(#298)](https://github.com/mongo-express/mongo-express/pull/298)
 
 # 0.33.0 - Tue Dec 6, 2016
 
