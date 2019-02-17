@@ -1,3 +1,8 @@
+# 0.51.2 - Sun Feb 17, 2019
+Fix:
+- Issue with importing collections [(#456)](https://github.com/mongo-express/mongo-express/pull/456)
+
+
 # 0.51.1 - Sun Jan 13, 2019
 
 Fix:
