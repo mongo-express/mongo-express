@@ -15,23 +15,22 @@ if (process.env.VCAP_SERVICES) {
   }
 }
 
-var basicAuthUsername = "ME_CONFIG_BASICAUTH_USERNAME";
-var basicAuthPassword = "ME_CONFIG_BASICAUTH_PASSWORD";
-var adminUsername = "ME_CONFIG_MONGODB_ADMINUSERNAME";
-var adminPassword = "ME_CONFIG_MONGODB_ADMINPASSWORD";
-var dbAuthUsername = "ME_CONFIG_MONGODB_AUTH_USERNAME";
-var dbAuthPassword = "ME_CONFIG_MONGODB_AUTH_PASSWORD";
+var basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
+var basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
+var adminUsername = 'ME_CONFIG_MONGODB_ADMINUSERNAME';
+var adminPassword = 'ME_CONFIG_MONGODB_ADMINPASSWORD';
+var dbAuthUsername = 'ME_CONFIG_MONGODB_AUTH_USERNAME';
+var dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
 
 function file_env(envVariable) {
 
   var origVar = "process.env." + envVariable;
   var fileVar = origVar + "_FILE";
-  const fs = require('fs');
-
 
   if (typeof eval(fileVar) !== 'undefined' && eval(fileVar)) {
 
     const fs = require('fs');
+    
     const path = eval(fileVar);
 
 
@@ -43,7 +42,7 @@ function file_env(envVariable) {
         return adminPassword_from_file;
       }
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   } else {
 
