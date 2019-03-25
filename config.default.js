@@ -22,10 +22,10 @@ var adminPassword = 'ME_CONFIG_MONGODB_ADMINPASSWORD';
 var dbAuthUsername = 'ME_CONFIG_MONGODB_AUTH_USERNAME';
 var dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
 
-function file_env(envVariable) {
+function getFileEnv(envVariable) {
 
   var origVar = process.env[envVariable];
-  var fileVar = process.env[envVariable + "_FILE"];
+  var fileVar = process.env[envVariable + '_FILE'];
 
   if (typeof fileVar !== 'undefined' &&  fileVar) {
 
@@ -37,9 +37,9 @@ function file_env(envVariable) {
     try {
       if (fs.existsSync(path)) {
         //file exists
-        var var_from_file = fs.readFileSync(path).toString().split(/\r?\n/)[0].trim();
+        var varFromFile = fs.readFileSync(path).toString().split(/\r?\n/)[0].trim();
 
-        return var_from_file;
+        return varFromFile;
       }
     } catch (err) {
       console.error(err);
@@ -92,16 +92,16 @@ module.exports = {
        */
       {
         database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
-        username: file_env(dbAuthUsername) || mongo.username,
-        password: file_env(dbAuthPassword) || mongo.password,
+        username: getFileEnv(dbAuthUsername) || mongo.username,
+        password: getFileEnv(dbAuthPassword) || mongo.password,
       },
     ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
     //leave username and password empty if no admin account exists
-    adminUsername: file_env(adminUsername) || '',
-    adminPassword: file_env(adminPassword) || '',
+    adminUsername: getFileEnv(adminUsername) || '',
+    adminPassword: getFileEnv(adminPassword) || '',
 
     //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
@@ -127,11 +127,11 @@ module.exports = {
   //set useBasicAuth to true if you want to authenticate mongo-express logins
   //if admin is false, the basicAuthInfo list below will be ignored
   //this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
-  useBasicAuth: process.env.ME_CONFIG_BASICAUTH_USERNAME !== '',
+  useBasicAuth: pgetFileEnv(basicAuthUsername) !== '',
 
   basicAuth: {
-    username: file_env(basicAuthUsername) || 'admin',
-    password: file_env(basicAuthPassword) || 'pass',
+    username: getFileEnv(basicAuthUsername) || 'admin',
+    password: getFileEnv(basicAuthPassword) || 'pass',
   },
 
   options: {
