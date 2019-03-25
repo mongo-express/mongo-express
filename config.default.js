@@ -189,6 +189,9 @@ module.exports = {
 
     //confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is displayed before deleting a document/collection
     confirmDelete: false,
+    
+    //noExport: if noExport is set to true, we won't show export buttons
+    noExport: false,
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
