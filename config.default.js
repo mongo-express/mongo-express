@@ -15,6 +15,45 @@ if (process.env.VCAP_SERVICES) {
   }
 }
 
+var basicAuthUsername = "ME_CONFIG_BASICAUTH_USERNAME";
+var basicAuthPassword = "ME_CONFIG_BASICAUTH_PASSWORD";
+var adminUsername = "ME_CONFIG_MONGODB_ADMINUSERNAME";
+var adminPassword = "ME_CONFIG_MONGODB_ADMINPASSWORD";
+var dbAuthUsername = "ME_CONFIG_MONGODB_AUTH_USERNAME";
+var dbAuthPassword = "ME_CONFIG_MONGODB_AUTH_PASSWORD";
+
+function file_env(envVariable) {
+
+  var origVar = "process.env." + envVariable;
+  var fileVar = origVar + "_FILE";
+  const fs = require('fs');
+
+
+  if (typeof eval(fileVar) !== 'undefined' && eval(fileVar)) {
+
+    const fs = require('fs');
+    const path = eval(fileVar);
+
+
+    try {
+      if (fs.existsSync(path)) {
+        //file exists
+        var adminPassword_from_file = fs.readFileSync(path).toString().split(/\r?\n/)[0].trim();
+
+        return adminPassword_from_file;
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  } else {
+
+    return eval(origVar);
+  }
+
+}
+
+
+
 var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.ME_CONFIG_MONGODB_SERVER.split(',') : false;
 
 module.exports = {
@@ -25,7 +64,7 @@ module.exports = {
     //server: mongodb hostname or IP address
     //for replica set, use array of string instead
     server: (meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]) || mongo.host,
-    port:   process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
+    port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
 
     //ssl: connect to the server using secure SSL
     ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
@@ -34,7 +73,7 @@ module.exports = {
     sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
 
     //sslCA: array of valid CA certificates
-    sslCA:  [],
+    sslCA: [],
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
@@ -55,18 +94,24 @@ module.exports = {
        * Add as many databases as you want!
        */
       {
+        // database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
+        // username: process.env.ME_CONFIG_MONGODB_AUTH_USERNAME || mongo.username,
+        // password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password,
         database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
-        username: process.env.ME_CONFIG_MONGODB_AUTH_USERNAME || mongo.username,
-        password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password,
+        username: file_env(dbAuthUsername) || mongo.username,
+        password: file_env(dbAuthPassword) || mongo.password,
       },
     ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
 
+
+    // var fs = require('fs');
+    // adminPassword: fs.readFileSync(process.env.ME_CONFIG_MONGODB_ADMINPASSWORD_FILE).toString().split(/\r?\n/)[0].trim(),
     //leave username and password empty if no admin account exists
-    adminUsername: process.env.ME_CONFIG_MONGODB_ADMINUSERNAME || '',
-    adminPassword: process.env.ME_CONFIG_MONGODB_ADMINPASSWORD || '',
+    adminUsername: file_env(adminUsername) || '',
+    adminPassword: file_env(adminPassword) || '',
 
     //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
@@ -79,14 +124,14 @@ module.exports = {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the start and end!
     baseUrl: process.env.ME_CONFIG_SITE_BASEURL || '/',
     cookieKeyName: 'mongo-express',
-    cookieSecret:     process.env.ME_CONFIG_SITE_COOKIESECRET   || 'cookiesecret',
-    host:             process.env.VCAP_APP_HOST                 || 'localhost',
-    port:             process.env.VCAP_APP_PORT                 || 8081,
-    requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE        || '50mb',
-    sessionSecret:    process.env.ME_CONFIG_SITE_SESSIONSECRET  || 'sessionsecret',
-    sslCert:          process.env.ME_CONFIG_SITE_SSL_CRT_PATH   || '',
-    sslEnabled:       process.env.ME_CONFIG_SITE_SSL_ENABLED    || false,
-    sslKey:           process.env.ME_CONFIG_SITE_SSL_KEY_PATH   || '',
+    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
+    host: process.env.VCAP_APP_HOST || 'localhost',
+    port: process.env.VCAP_APP_PORT || 8081,
+    requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '50mb',
+    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
+    sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
+    sslEnabled: process.env.ME_CONFIG_SITE_SSL_ENABLED || false,
+    sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
   },
 
   //set useBasicAuth to true if you want to authenticate mongo-express logins
@@ -95,8 +140,8 @@ module.exports = {
   useBasicAuth: process.env.ME_CONFIG_BASICAUTH_USERNAME !== '',
 
   basicAuth: {
-    username: process.env.ME_CONFIG_BASICAUTH_USERNAME || 'admin',
-    password: process.env.ME_CONFIG_BASICAUTH_PASSWORD || 'pass',
+    username: file_env(basicAuthUsername) || 'admin',
+    password: file_env(basicAuthPassword) || 'pass',
   },
 
   options: {
@@ -112,8 +157,8 @@ module.exports = {
 
     // Maximum size of a single property & single row
     // Reduces the risk of sending a huge amount of data when viewing collections
-    maxPropSize: (100 * 1000),  // default 100KB
-    maxRowSize: (1000 * 1000),  // default 1MB
+    maxPropSize: (100 * 1000), // default 100KB
+    maxRowSize: (1000 * 1000), // default 1MB
 
     //The options below aren't being used yet
 
@@ -144,9 +189,6 @@ module.exports = {
 
     //confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is displayed before deleting a document/collection
     confirmDelete: false,
-
-    //noExport: if noExport is set to true, we won't show export buttons
-    noExport: false,
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
