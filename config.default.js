@@ -30,6 +30,7 @@ function getFileEnv(envVariable) {
   if (typeof fileVar !== 'undefined' &&  fileVar) {
 
     const fs = require('fs');
+
     const path = fileVar;
 
 
