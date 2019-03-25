@@ -24,29 +24,29 @@ var dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
 
 function file_env(envVariable) {
 
-  var origVar = "process.env." + envVariable;
-  var fileVar = origVar + "_FILE";
+  var origVar = process.env[envVariable];
+  var fileVar = process.env[envVariable + "_FILE"];
 
-  if (typeof eval(fileVar) !== 'undefined' && eval(fileVar)) {
+  if (typeof fileVar !== 'undefined' &&  fileVar) {
 
     const fs = require('fs');
     
-    const path = eval(fileVar);
+    const path = fileVar;
 
 
     try {
       if (fs.existsSync(path)) {
         //file exists
-        var adminPassword_from_file = fs.readFileSync(path).toString().split(/\r?\n/)[0].trim();
+        var var_from_file = fs.readFileSync(path).toString().split(/\r?\n/)[0].trim();
 
-        return adminPassword_from_file;
+        return var_from_file;
       }
     } catch (err) {
       console.error(err);
     }
   } else {
 
-    return eval(origVar);
+    return origVar;
   }
 
 }
