@@ -127,7 +127,7 @@ module.exports = {
   //set useBasicAuth to true if you want to authenticate mongo-express logins
   //if admin is false, the basicAuthInfo list below will be ignored
   //this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
-  useBasicAuth: pgetFileEnv(basicAuthUsername) !== '',
+  useBasicAuth: getFileEnv(basicAuthUsername) !== '',
 
   basicAuth: {
     username: getFileEnv(basicAuthUsername) || 'admin',
