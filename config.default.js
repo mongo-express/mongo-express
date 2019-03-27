@@ -15,6 +15,42 @@ if (process.env.VCAP_SERVICES) {
   }
 }
 
+var basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
+var basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
+var adminUsername = 'ME_CONFIG_MONGODB_ADMINUSERNAME';
+var adminPassword = 'ME_CONFIG_MONGODB_ADMINPASSWORD';
+var dbAuthUsername = 'ME_CONFIG_MONGODB_AUTH_USERNAME';
+var dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
+
+function getFileEnv(envVariable) {
+
+  var origVar = process.env[envVariable];
+  var fileVar = process.env[envVariable + '_FILE'];
+
+  if (typeof fileVar !== 'undefined' &&  fileVar) {
+
+    const fs = require('fs');
+
+    const path = fileVar;
+
+
+    try {
+      if (fs.existsSync(path)) {
+        //file exists
+        var varFromFile = fs.readFileSync(path).toString().split(/\r?\n/)[0].trim();
+
+        return varFromFile;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+
+    return origVar;
+  }
+
+}
+
 var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.ME_CONFIG_MONGODB_SERVER.split(',') : false;
 
 module.exports = {
@@ -25,7 +61,7 @@ module.exports = {
     //server: mongodb hostname or IP address
     //for replica set, use array of string instead
     server: (meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]) || mongo.host,
-    port:   process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
+    port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
 
     //ssl: connect to the server using secure SSL
     ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
@@ -34,7 +70,7 @@ module.exports = {
     sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
 
     //sslCA: array of valid CA certificates
-    sslCA:  [],
+    sslCA: [],
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
@@ -56,17 +92,16 @@ module.exports = {
        */
       {
         database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
-        username: process.env.ME_CONFIG_MONGODB_AUTH_USERNAME || mongo.username,
-        password: process.env.ME_CONFIG_MONGODB_AUTH_PASSWORD || mongo.password,
+        username: getFileEnv(dbAuthUsername) || mongo.username,
+        password: getFileEnv(dbAuthPassword) || mongo.password,
       },
     ],
 
     //  >>>>  If you are using an admin mongodb account, or no admin account exists, fill out section below
     //  >>>>  Using an admin account allows you to view and edit all databases, and view stats
-
     //leave username and password empty if no admin account exists
-    adminUsername: process.env.ME_CONFIG_MONGODB_ADMINUSERNAME || '',
-    adminPassword: process.env.ME_CONFIG_MONGODB_ADMINPASSWORD || '',
+    adminUsername: getFileEnv(adminUsername) || '',
+    adminPassword: getFileEnv(adminPassword) || '',
 
     //whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
@@ -79,24 +114,24 @@ module.exports = {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the start and end!
     baseUrl: process.env.ME_CONFIG_SITE_BASEURL || '/',
     cookieKeyName: 'mongo-express',
-    cookieSecret:     process.env.ME_CONFIG_SITE_COOKIESECRET   || 'cookiesecret',
-    host:             process.env.VCAP_APP_HOST                 || 'localhost',
-    port:             process.env.VCAP_APP_PORT                 || 8081,
-    requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE        || '50mb',
-    sessionSecret:    process.env.ME_CONFIG_SITE_SESSIONSECRET  || 'sessionsecret',
-    sslCert:          process.env.ME_CONFIG_SITE_SSL_CRT_PATH   || '',
-    sslEnabled:       process.env.ME_CONFIG_SITE_SSL_ENABLED    || false,
-    sslKey:           process.env.ME_CONFIG_SITE_SSL_KEY_PATH   || '',
+    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
+    host: process.env.VCAP_APP_HOST || 'localhost',
+    port: process.env.VCAP_APP_PORT || 8081,
+    requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '50mb',
+    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
+    sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
+    sslEnabled: process.env.ME_CONFIG_SITE_SSL_ENABLED || false,
+    sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
   },
 
   //set useBasicAuth to true if you want to authenticate mongo-express logins
   //if admin is false, the basicAuthInfo list below will be ignored
   //this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
-  useBasicAuth: process.env.ME_CONFIG_BASICAUTH_USERNAME !== '',
+  useBasicAuth: getFileEnv(basicAuthUsername) !== '',
 
   basicAuth: {
-    username: process.env.ME_CONFIG_BASICAUTH_USERNAME || 'admin',
-    password: process.env.ME_CONFIG_BASICAUTH_PASSWORD || 'pass',
+    username: getFileEnv(basicAuthUsername) || 'admin',
+    password: getFileEnv(basicAuthPassword) || 'pass',
   },
 
   options: {
@@ -112,8 +147,8 @@ module.exports = {
 
     // Maximum size of a single property & single row
     // Reduces the risk of sending a huge amount of data when viewing collections
-    maxPropSize: (100 * 1000),  // default 100KB
-    maxRowSize: (1000 * 1000),  // default 1MB
+    maxPropSize: (100 * 1000), // default 100KB
+    maxRowSize: (1000 * 1000), // default 1MB
 
     //The options below aren't being used yet
 
