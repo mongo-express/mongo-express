@@ -1,3 +1,9 @@
+# 0.52.0 - Wed Mar 27, 2019
+New:
+- Add support to read Docker Secrets from file [(#460)](https://github.com/mongo-express/mongo-express/pull/460)
+
+
+
 # 0.51.2 - Sun Feb 17, 2019
 Fix:
 - Issue with importing collections [(#456)](https://github.com/mongo-express/mongo-express/pull/456)
