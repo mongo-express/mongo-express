@@ -1,3 +1,8 @@
+# 0.52.1 - Fri Mar 29, 2019
+Fix:
+- Duplicate VCAP_APP_HOST in dockerfile
+
+
 # 0.52.0 - Wed Mar 27, 2019
 New:
 - Add support to read Docker Secrets from file [(#460)](https://github.com/mongo-express/mongo-express/pull/460)
