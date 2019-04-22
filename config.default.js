@@ -51,6 +51,36 @@ function getFileEnv(envVariable) {
 
 }
 
+var sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
+
+function getBinaryFileEnv(envVariable) {
+
+  var fileVar = process.env[envVariable];
+
+  if (typeof fileVar !== 'undefined' &&  fileVar) {
+
+    const fs = require('fs');
+
+    const path = fileVar;
+
+
+    try {
+      if (fs.existsSync(path)) {
+        //file exists
+        var varFromFile = fs.readFileSync(path);
+
+        return varFromFile;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+
+    return null;
+  }
+
+}
+
 var meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ? process.env.ME_CONFIG_MONGODB_SERVER.split(',') : false;
 
 module.exports = {
@@ -70,7 +100,7 @@ module.exports = {
     sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
 
     //sslCA: array of valid CA certificates
-    sslCA: [],
+    sslCA: [getBinaryFileEnv(sslCA)],
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
