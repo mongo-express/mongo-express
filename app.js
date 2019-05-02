@@ -49,7 +49,7 @@ if (config.options.console) {
 commander
   .version(require('./package').version)
   .option('-U, --url <url>', 'connection string url')
-  .option('-H, --host <host>', 'hostname or adress')
+  .option('-H, --host <host>', 'hostname or address of the db')
   .option('-P, --dbport <host>', 'port of the db')
   .option('-u, --username <username>', 'username for authentication')
   .option('-p, --password <password>', 'password for authentication')
