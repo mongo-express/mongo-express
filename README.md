@@ -147,6 +147,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_SITE_SSL_CRT_PATH`     | ` `             | SSL certificate file.
     `ME_CONFIG_SITE_SSL_KEY_PATH`     | ` `             | SSL key file.
     `ME_CONFIG_SITE_GRIDFS_ENABLED`   | `false`         | Enable gridFS to manage uploaded files.
+    `VCAP_APP_HOST`                   | `localhost`     | address that mongo-express will listen on for incoming connections.
     `VCAP_APP_PORT`                   | `8081`          | port that mongo-express will run on.
 
 **Example:**
