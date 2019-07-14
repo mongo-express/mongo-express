@@ -31,7 +31,7 @@
     "busboy": "^0.2.13",
     "cli-color": "^1.1.0",
     "commander": "^2.9.0",
-    "cookie-parser": "1.4.3",
+    "cookie-parser": "1.4.4",
     "cross-env": "^3.2.4",
     "csurf": "1.9.0",
     "errorhandler": "1.4.3",
