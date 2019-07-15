@@ -46,7 +46,7 @@
     "mongodb": "2.2.24",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.5.0",
-    "swig-templates": "2.0.2",
+    "swig-templates": "2.0.3",
     "update-notifier": "1.0.2"
   },
   "devDependencies": {
