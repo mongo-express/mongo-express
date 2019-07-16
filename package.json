@@ -52,7 +52,7 @@
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",
     "babel-core": "^6.24.1",
-    "babel-loader": "^6.3.2",
+    "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "bootstrap": "^3.3.7",
     "chai": "3.5.0",
