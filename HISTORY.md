@@ -1,3 +1,21 @@
+# 0.53 - Sat Jul 20, 2019
+New:
+- Add support to read CA certificate from file [(#465)](https://github.com/mongo-express/mongo-express/pull/465)
+- Add support for BinData v4 for the ID field [(#473)](https://github.com/mongo-express/mongo-express/pull/473)
+
+Deps:
+- Update csurf to 1.10.0 [(#478)](https://github.com/mongo-express/mongo-express/pull/4778)
+- Update mocha to 6.1.4 [(#477)](https://github.com/mongo-express/mongo-express/pull/477)
+- Update cookie parser to 1.4.4 [(#474)](https://github.com/mongo-express/mongo-express/pull/474)
+
+
+Documentation:
+- Update README with VCAP_APP_HOST and add more verbiage to help [(#466)](https://github.com/mongo-express/mongo-express/pull/466)
+- Fix default values of BASICAUTH environment variables in README [(#462)](https://github.com/mongo-express/mongo-express/pull/462)
+
+
+
+
 # 0.52.2 - Sun Apr 7, 2019
 Fix:
 - Test for existence of numExtents [(#463)](https://github.com/mongo-express/mongo-express/pull/463)
