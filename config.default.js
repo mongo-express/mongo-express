@@ -199,6 +199,9 @@ module.exports = {
 
     // noExport: if noExport is set to true, we won't show export buttons
     noExport: false,
+
+    // fullWidthLayout: When set to true an alternative page layout is used utilizing full window width
+    fullWidthLayout: process.env.ME_CONFIG_OPTIONS_FULLWIDTHLAYOUT || false,
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
