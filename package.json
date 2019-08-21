@@ -58,7 +58,7 @@
     "chai": "3.5.0",
     "clean-webpack-plugin": "^0.1.15",
     "codemirror": "^5.23.0",
-    "concurrently": "^3.3.0",
+    "concurrently": "^4.1.2",
     "copy-webpack-plugin": "^4.0.1",
     "eslint": "~3.9.1",
     "eslint-config-airbnb-base": "^8.0.0",
