@@ -137,7 +137,7 @@
   </div>
   {% if !settings.read_only && count > 0 %}
   <p>
-    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}">
+    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query|default('{}') }}&projection={{ projection }}">
       {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want #}
       <input type="hidden" name="_method" value="delete">
       <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
