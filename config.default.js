@@ -56,15 +56,16 @@ function getBinaryFileEnv(envVariable) {
   return getFile(fileVar);
 }
 
+function getBooleanEnv(envVariable, defaultValue) {
+  return envVariable in process.env ? process.env[envVariable].toLowerCase() === 'true' : defaultValue;
+}
+
 const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ?
   process.env.ME_CONFIG_MONGODB_SERVER.split(',') :
   false;
 
 
-const sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
-const sslCAFromEnv = getBinaryFileEnv(sslCA);
-
-module.exports = {
+const config = {
   mongodb: {
     // if a connection string options such as server/port/etc are ignored
     connectionString: mongo.connectionString || '',
@@ -76,15 +77,6 @@ module.exports = {
     ) || mongo.host,
     port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
 
-    // ssl: connect to the server using secure SSL
-    ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
-
-    // sslValidate: validate mongod server certificate against CA
-    sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
-
-    // sslCA: array of valid CA certificates
-    sslCA: sslCAFromEnv ? [sslCAFromEnv] : [],
-
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
 
@@ -94,9 +86,7 @@ module.exports = {
     // set admin to true if you want to turn on admin features
     // if admin is true, the auth list below will be ignored
     // if admin is true, you will need to enter an admin username/password below (if it is needed)
-    admin: process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN ?
-      process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN.toLowerCase() === 'true' :
-      false,
+    admin: getBooleanEnv('ME_CONFIG_MONGODB_ENABLE_ADMIN', false),
 
     // >>>> If you are using regular accounts, fill out auth details in the section below
     // >>>> If you have admin auth, leave this section empty and skip to the next section
@@ -216,3 +206,37 @@ module.exports = {
 
   },
 };
+
+const sslCA = getBinaryFileEnv('ME_CONFIG_MONGODB_CA_FILE');
+const sslCert = getBinaryFileEnv('ME_CONFIG_MONGODB_SSL_CRT_FILE');
+const sslKey = getBinaryFileEnv('ME_CONFIG_MONGODB_SSL_KEY_FILE');
+
+// ssl: connect to the server using secure SSL
+if ('ME_CONFIG_MONGODB_SSL' in process.env) {
+  config.mongodb.ssl = getBooleanEnv('ME_CONFIG_MONGODB_SSL');
+}
+
+// sslValidate: validate mongod server certificate against CA
+config.mongodb.sslValidate = getBooleanEnv('ME_CONFIG_MONGODB_SSLVALIDATE', true);
+
+// sslCA: array of valid CA certificates
+if (sslCA) {
+  config.mongodb.sslCA = [sslCA];
+}
+
+// sslCert: client certificate
+if (sslCert) {
+  config.mongodb.sslCert = sslCert;
+}
+
+// sslKey: client private key
+if (sslKey) {
+  config.mongodb.sslKey = sslKey;
+}
+
+// checkServerIdentity: verify that the mongod server certificate is issued to the server's hostname
+if (!getBooleanEnv('ME_CONFIG_MONGODB_SSL_CHECK_HOST', true)) {
+  config.mongodb.checkServerIdentity = false;
+}
+
+module.exports = config;

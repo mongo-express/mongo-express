@@ -88,6 +88,11 @@ if (commander.url) {
   }
 }
 
+if ((config.mongodb.sslCert && !config.mongodb.sslKey) || (!config.mongodb.sslCert && config.mongodb.sslKey)) {
+  console.error(clc.red('Both sslCert and sslKey must be provided to enable client verification.'));
+  process.exit(1);
+}
+
 config.mongodb.server = commander.host || config.mongodb.server;
 config.mongodb.port = commander.dbport || config.mongodb.port;
 
