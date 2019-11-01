@@ -72,6 +72,9 @@
     "supertest": "^3.0.0",
     "webpack": "^2.4.1"
   },
+  "resolutions": {
+    "**/event-stream": "^4.0.1"
+  },
   "engines": {
     "node": ">=6.0.0",
     "npm": ">=3.0.0"
