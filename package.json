@@ -28,6 +28,7 @@
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.18.3",
+    "bson": "^4.0.2",
     "busboy": "^0.2.13",
     "cli-color": "^1.1.0",
     "commander": "^2.9.0",
@@ -43,7 +44,7 @@
     "json2csv": "^3.7.1",
     "lodash": "~4.17.4",
     "method-override": "^2.3.10",
-    "mongodb": "2.2.24",
+    "mongodb": "2.2.36",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.5.0",
     "swig-templates": "2.0.3",
