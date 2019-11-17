@@ -32,7 +32,7 @@
     "cli-color": "^1.1.0",
     "commander": "^2.9.0",
     "cookie-parser": "1.4.4",
-    "cross-env": "^3.2.4",
+    "cross-env": "^6.0.3",
     "csurf": "1.10.0",
     "errorhandler": "1.5.1",
     "express": "4.17.1",
