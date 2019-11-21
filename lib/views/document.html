@@ -59,10 +59,18 @@
 
 {% block content %}
 
+{% if document._id._bsontype == 'Binary' %}
+<form method="POST"
+  id="documentEditForm"
+  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}"
+>
+{% else %}
 <form method="POST"
   id="documentEditForm"
   action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}"
 >
+{% endif %}
+
   {% if docLength > 10 %}
     <div>
       {% if !settings.read_only %}
