@@ -78,8 +78,7 @@
     "webpack": "^2.4.1"
   },
   "resolutions": {
-    "**/event-stream": "^4.0.1",
-    "bson": "1.1.3"
+    "**/event-stream": "^4.0.1"
   },
   "engines": {
     "node": ">=6.0.0",
