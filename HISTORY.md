@@ -1,3 +1,26 @@
+# 0.54 - Tue Dec 24, 2019
+
+Breaking:
+- Change bson parsing to use mongo-query-parser [(#522)](https://github.com/mongo-express/mongo-express/pull/#522)
+- Drop support for node 6
+
+New:
+- Support playing .wav file inline in collection [(#508)](https://github.com/mongo-express/mongo-express/pull/508)
+- Add node 12, and 13 to CI [(#517)](https://github.com/mongo-express/mongo-express/pull/517)
+- Add yarn.lock [(#515)](https://github.com/mongo-express/mongo-express/pull/515)
+- Fix broken save document for UUID (BinData 3 & 4) [(#537)](https://github.com/mongo-express/mongo-express/pull/#537)
+
+Deps:
+- Pin Event stream to 4.0 [(#514)](https://github.com/mongo-express/mongo-express/pull/514)
+- Bump bootstrap from 3.3.7 to 3.4.1 [(#523)](https://github.com/mongo-express/mongo-express/pull/#523)
+- Bump lodash from 4.17.11 to 4.17.13 [(#532)](https://github.com/mongo-express/mongo-express/pull/#532)
+- Bump jquery from 3.3.1 to 3.4.1 [(#530)](https://github.com/mongo-express/mongo-express/pull/#530)
+- Bump mixin-deep from 1.3.1 to 1.3.2 [(#526)](https://github.com/mongo-express/mongo-express/pull/#526)
+- Bump js-yaml from 3.12.0 to 3.13.1 [(#527)](https://github.com/mongo-express/mongo-express/pull/#527)
+- Bump cross-env from 3.2.4 to 6.0.3 [(#519)](https://github.com/mongo-express/mongo-express/pull/#519)
+- Bump concurrently from 3.6.1 to 5.0.0 [(#507)](https://github.com/mongo-express/mongo-express/pull/#507)
+
+
 # 0.53 - Sat Jul 20, 2019
 New:
 - Add support to read CA certificate from file [(#465)](https://github.com/mongo-express/mongo-express/pull/465)
