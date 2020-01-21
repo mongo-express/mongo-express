@@ -12,6 +12,7 @@ const middleware      = require('./lib/middleware');
 const utils           = require('./lib/utils');
 const updateNotifier  = require('update-notifier');
 const pkg             = require('./package.json');
+const open            = require('open');
 
 let app               = express();
 let notifier          = updateNotifier({ pkg });
@@ -114,7 +115,6 @@ let addressString = (config.site.sslEnabled ? 'https://' : 'http://') + (config.
 
 server.listen(config.site.port, config.site.host, function () {
   if (config.options.console) {
-
     console.log('Mongo Express server listening', 'at ' + addressString);
 
     if (!config.site.host || config.site.host === '0.0.0.0') {
@@ -125,6 +125,10 @@ server.listen(config.site.port, config.site.host, function () {
       console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
     }
 
+    // Open mongo express in browser
+    if (config.options.startBrowser) {
+      open(addressString);
+    }
   }
 })
 .on('error', function (e) {

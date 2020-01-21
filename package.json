@@ -47,6 +47,7 @@
     "mongodb-extended-json": "^1.10",
     "mongodb-query-parser": "1.4.3",
     "morgan": "^1.9.0",
+    "open": "^7.0.0",
     "patch-package": "^6.2.0",
     "serve-favicon": "^2.5.0",
     "swig-templates": "2.0.3",

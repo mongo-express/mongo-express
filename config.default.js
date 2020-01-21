@@ -150,6 +150,9 @@ module.exports = {
   },
 
   options: {
+    // Open browser on startup
+    startBrowser: true,
+
     // Display startup text on console
     console: true,
 
