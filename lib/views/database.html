@@ -41,26 +41,26 @@
     <table class="table table-bordered table-striped table-condensed no-margin">
       {% for c in colls %}
       <tr>
-        <td class="col-md-1">
+        <td class="col-md-2">
           <a href="{{ dbUrl }}/{{ c | url_encode }}" class="btn btn-success btn-block">
-            <span class="glyphicon glyphicon-eye-open"></span> View
+            <span class="glyphicon glyphicon-eye-open"></span><br>View
           </a>
         </td>
         {% if !settings.me_no_export %}
         <td class="col-md-1">
           <a href="{{ dbUrl }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block">
-            <span class="glyphicon glyphicon-floppy-save"></span> Export
+            <span class="glyphicon glyphicon-floppy-save"></span><br>Export
           </a>
         </td>
         {% endif %}
         <td class="col-md-1">
           <a href="{{ dbUrl }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block">
-            <span class="glyphicon glyphicon-floppy-save"></span> [JSON]
+            <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
           </a>
         </td>
         <td class="col-md-1">
           <a class="btn btn-warning btn-block import-file-link">
-            <span class="glyphicon glyphicon-cloud-upload"></span> Import
+            <span class="glyphicon glyphicon-cloud-upload"></span><br>Import
           </a>
           <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ c | url_encode }}"/>
         </td>
@@ -74,7 +74,7 @@
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="hidden"></button>
             <button type="button" class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}">
-              <span class="glyphicon glyphicon-trash"></span> Delete
+              <span class="glyphicon glyphicon-trash"></span><br>Del
             </button>
           </form>
         </td>
