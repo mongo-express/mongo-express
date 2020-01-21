@@ -38,19 +38,19 @@
 <table class="table table-bordered table-striped table-condensed no-margin">
   {% for db in databases %}
   <tr>
-    <td class="col-md-2">
+    <td class="col-md-1">
       <a href="{{ baseHref }}db/{{ db | url_encode }}/" class="btn btn-success btn-block" >
-        <span class="glyphicon glyphicon-eye-open"></span><br>View
+        <span class="glyphicon glyphicon-eye-open"></span> View
       </a>
     </td>
     <td><h3><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></h3></td>
     {% if !settings.read_only %}
-    <td class="col-md-2">
-      <form method="POST" action="{{ baseHref }}{{ db | url_encode }}" style="margin: 0px;">
+    <td class="col-md-1">
+      <form method="POST" action="{{ baseHref }}{{ db | url_encode }}" class="no-margin">
         <input type="hidden" name="_method" value="delete">
         <button type="submit" class="hidden"></button>
         <button type="button" class="btn btn-danger btn-block deleteButton" database-name="{{ db }}" >
-          <span class="glyphicon glyphicon-trash"></span><br>Del
+          <span class="glyphicon glyphicon-trash"></span> Delete
         </button>
       </form>
     </td>

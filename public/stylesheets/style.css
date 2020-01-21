@@ -8,8 +8,23 @@
   background: #EEE;
 }
 
+.navbar.navbar-default.navbar-fixed-top {
+  background: rgba(230,230,230,.7);
+  box-shadow: none;
+  border-bottom: 1px solid #ddd;
+  backdrop-filter: blur(6px);
+}
 .nav > li > a {
   padding: 15px 2px;
+}
+.nav.navbar-nav li {
+  margin: 0 3px;
+}
+.dropdown-menu li a:hover, .dropdown-menu li a:active, .dropdown-menu li a:focus {
+  background: rgba(0, 0, 0, .05);
+}
+.dropdown > .dropdown-toggle {
+  padding: 15px 10px;
 }
 
 .logo {
@@ -19,7 +34,6 @@
 .logo-nav {
   float: left;
 }
-
 .logo-nav img {
   height: 25px;
   width: 25px;
@@ -33,20 +47,16 @@
 
 .tableHeaderFooterBars {
   border-top-color: #337ab7;
-  border-top-width: 5px;
+  border-top-width: 2px;
   border-top-style: solid;
   border-bottom-color: #337ab7;
-  border-bottom-width: 5px;
+  border-bottom-width: 2px;
   border-bottom-style: solid;
 }
 
 .fadeToWhite {
-
-  background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
   pointer-events: none;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
   margin-right: 15px;
   z-index: 10;
   position: absolute;
@@ -70,35 +80,103 @@
 .tooDamnBig {
   padding: 10px;
   background: rgb(202, 202, 202);
-  /*background: rgba(25, 25, 25, .25);*/
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px; /* future proofing */
-  -khtml-border-radius: 4px; /* for old Konqueror browsers */
+  border-radius: 4px;
 }
 
-.main-title{
-  padding-bottom: 0px;
+.main-title {
+  padding-bottom: 0;
   margin: 10px 0 15px;
-  border-bottom:3px solid #353535;
+  border-bottom: 3px solid #353535;
 }
 
-.main-title > h1{
+.main-title > h1 {
   margin-top: 0px;
 }
 
-.no-margin{
-  margin: 0px;
+.no-margin {
+  margin: 0;
+}
+.no-padding {
+  padding: 0;
+}
+.bold {
+  font-weight: bold;
 }
 
-.no-padding{
-  padding:0px;
-}
-
-.bold{
-  font-weight:bold;
-}
-
-.input-hidden{
+.input-hidden {
   display:none !important;
+}
+
+.btn .glyphicon {
+    margin-right: 3px;
+}
+
+td > h3 {
+    margin: 0;
+    padding: 3px 10px;
+}
+
+.nav.nav-pills {
+  margin-top: 40px;
+}
+.nav.nav-pills li a {
+    padding: 5px;
+    border-radius: 0;
+}
+.nav-pills > li {
+  min-width: 150px;
+  text-align: center;
+  line-height: 23px;
+}
+
+body > .container, .navbar.navbar-default > .container {
+    width: 85% !important;
+}
+
+.tableContent {
+    white-space: nowrap;
+}
+.tableContent > .deleteButtonDocument {
+  margin-right: 6px;
+}
+
+td h3 a {
+  display: block;
+  color: #444;
+}
+td h3 a:hover {
+  color: #36c;
+}
+
+.collection-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+  margin-bottom: 50px;
+}
+
+.collection-options .group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-right: 20px;
+  height: 50px;
+}
+.collection-options .btn {
+  margin-top: 0;
+  margin-right: 10px;
+}
+.collection-options .btn .glyphicon {
+  display: block;
+  margin: 5px 0 10px 0;
+}
+
+.stats.col-md-12 {
+  padding: 0;
+}
+
+.panel-default > .panel-heading {
+  background: #ededed;
+  border-bottom: none
 }
