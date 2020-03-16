@@ -23,23 +23,23 @@ exports.testURLCollectionName = encodeURIComponent(exports.testCollectionName);
 exports.createConnection = () =>
   asPromise(cb => MongoClient.connect(mongoConfig.makeConnectionUrl(), cb));
 
-exports.createTestCollection = db =>
-  asPromise(cb => db.collection(exports.testCollectionName).insertMany(exports.testData, cb))
+exports.createTestCollection = client =>
+  asPromise(cb => client.db().collection(exports.testCollectionName).insertMany(exports.testData, cb))
     .then((results) => {
       currentTestData = results.ops;
       return results;
     });
 
-exports.dropTestCollection = db =>
-  asPromise(cb => db.collection(exports.testCollectionName).drop(cb));
+exports.dropTestCollection = client =>
+  asPromise(cb => client.db().collection(exports.testCollectionName).drop(cb));
 
-exports.closeDb = db =>
-  asPromise(cb => db.close(cb));
+exports.closeDb = client =>
+  asPromise(cb => client.close(cb));
 
 exports.initializeDb = () =>
-  exports.createConnection().then(db =>
-    exports.createTestCollection(db).then(() => db)
+  exports.createConnection().then(client =>
+    exports.createTestCollection(client).then(() => client)
   );
 
-exports.cleanAndCloseDb = db =>
-  exports.dropTestCollection(db).then(() => exports.closeDb(db));
+exports.cleanAndCloseDb = client =>
+  exports.dropTestCollection(client).then(() => exports.closeDb(client));

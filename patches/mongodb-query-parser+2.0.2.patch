@@ -1,0 +1,22 @@
+diff --git a/node_modules/mongodb-query-parser/lib/stringify.js b/node_modules/mongodb-query-parser/lib/stringify.js
+index 04bbe2e..29e141f 100644
+--- a/node_modules/mongodb-query-parser/lib/stringify.js
++++ b/node_modules/mongodb-query-parser/lib/stringify.js
+@@ -54,7 +54,7 @@ const BSON_TO_JS_STRING = {
+     return `BinData(${subType.toString(16)}, '${v.buffer.toString('base64')}')`;
+   },
+   DBRef: function(v) {
+-    return `DBRef('${v.namespace}', '${v.oid}')`;
++    return `DBRef('${v.namespace}', '${v.oid}'${typeof v.db === 'string' ? `, '${v.db}'` : ''})`;
+   },
+   Timestamp: function(v) {
+     return `Timestamp(${v.low}, ${v.high})`;
+@@ -66,7 +66,7 @@ const BSON_TO_JS_STRING = {
+     return `NumberDecimal('${v.toString()}')`;
+   },
+   Int32: function(v) {
+-    return `NumberInt{'${v.toString()}')`;
++    return `NumberInt('${v.toString()}')`;
+   },
+   MaxKey: function() {
+     return 'MaxKey()';

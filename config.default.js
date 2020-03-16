@@ -60,15 +60,8 @@ const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ?
   process.env.ME_CONFIG_MONGODB_SERVER.split(',') :
   false;
 
-
-const sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
-const sslCAFromEnv = getBinaryFileEnv(sslCA);
-
-module.exports = {
-  mongodb: {
-    // if a connection string options such as server/port/etc are ignored
-    connectionString: mongo.connectionString || '',
-
+function getConnectionStringFromEnvVariables() {
+  const infos = {
     // server: mongodb hostname or IP address
     // for replica set, use array of string instead
     server: (
@@ -76,20 +69,40 @@ module.exports = {
     ) || mongo.host,
     port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
 
-    // ssl: connect to the server using secure SSL
-    ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
+    // >>>> If you are using an admin mongodb account, or no admin account exists, fill out section below
+    // >>>> Using an admin account allows you to view and edit all databases, and view stats
+    // leave username and password empty if no admin account exists
+    username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username,
+    password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password,
+  };
+  const login = infos.username ? `${infos.username}:${infos.password}@` : '';
+  return `mongodb://${login}${infos.host}:${infos.port}/${infos.dbName}`;
+}
 
-    // sslValidate: validate mongod server certificate against CA
-    sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
+const sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
+const sslCAFromEnv = getBinaryFileEnv(sslCA);
 
-    // sslCA: array of valid CA certificates
-    sslCA: sslCAFromEnv ? [sslCAFromEnv] : [],
+module.exports = {
+  mongodb: {
+    // if a connection string options such as server/port/etc are ignored
+    connectionString: mongo.connectionString || getConnectionStringFromEnvVariables(),
 
-    //autoReconnect: automatically reconnect if connection is lost
-    autoReconnect: true,
+    connectionOptions: {
+      // ssl: connect to the server using secure SSL
+      ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
 
-    //poolSize: size of connection pool (number of connections to use)
-    poolSize: 4,
+      // sslValidate: validate mongod server certificate against CA
+      sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
+
+      // sslCA: array of valid CA certificates
+      sslCA: sslCAFromEnv ? [sslCAFromEnv] : [],
+
+      // autoReconnect: automatically reconnect if connection is lost
+      autoReconnect: true,
+
+      // poolSize: size of connection pool (number of connections to use)
+      poolSize: 4,
+    },
 
     // set admin to true if you want to turn on admin features
     // if admin is true, the auth list below will be ignored
@@ -98,25 +111,6 @@ module.exports = {
       process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN.toLowerCase() === 'true' :
       false,
 
-    // >>>> If you are using regular accounts, fill out auth details in the section below
-    // >>>> If you have admin auth, leave this section empty and skip to the next section
-    auth: [
-      /*
-       * Add the name, username, and password of the databases you want to connect to
-       * Add as many databases as you want!
-       */
-      {
-        database: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.db,
-        username: getFileEnv(dbAuthUsername) || mongo.username,
-        password: getFileEnv(dbAuthPassword) || mongo.password,
-      },
-    ],
-
-    // >>>> If you are using an admin mongodb account, or no admin account exists, fill out section below
-    // >>>> Using an admin account allows you to view and edit all databases, and view stats
-    // leave username and password empty if no admin account exists
-    adminUsername: getFileEnv(adminUsername) || '',
-    adminPassword: getFileEnv(adminPassword) || '',
 
     // whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
