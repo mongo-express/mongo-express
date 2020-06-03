@@ -64,6 +64,12 @@ const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER ?
 const sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
 const sslCAFromEnv = getBinaryFileEnv(sslCA);
 
+const sslCert = 'ME_CONFIG_MONGODB_SSL_CERT_FILE';
+const sslCertFromEnv = getBinaryFileEnv(sslCert);
+
+const sslKey = 'ME_CONFIG_MONGODB_SSL_KEY_FILE';
+const sslKeyFromEnv = getBinaryFileEnv(sslKey);
+
 module.exports = {
   mongodb: {
     // if a connection string options such as server/port/etc are ignored
@@ -84,6 +90,12 @@ module.exports = {
 
     // sslCA: array of valid CA certificates
     sslCA: sslCAFromEnv ? [sslCAFromEnv] : [],
+
+    // sslCert: array of valid ssl certificates
+    sslCert: sslCertFromEnv ? [sslCertFromEnv] : [],
+
+    // sslKey: array of valid ssl keys
+    sslKey: sslKeyFromEnv ? [sslKeyFromEnv] : [],
 
     //autoReconnect: automatically reconnect if connection is lost
     autoReconnect: true,
