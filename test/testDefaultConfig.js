@@ -4,16 +4,9 @@ const mongoConfig = require('./testMongoConfig');
 
 module.exports = () => ({
   mongodb: {
-    server: mongoConfig.host,
-    port: mongoConfig.port,
+    connectionString: mongoConfig.makeConnectionUrl(),
 
-    autoReconnect: true,
-    poolSize: 4,
     admin: true,
-    auth: [],
-
-    adminUsername: '',
-    adminPassword: '',
     whitelist: [mongoConfig.dbName],
     blacklist: [],
   },

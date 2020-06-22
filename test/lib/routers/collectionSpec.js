@@ -13,11 +13,11 @@ const urlColName = mongoUtils.testURLCollectionName;
 describe('Router collection', () => {
   let request;
   let close;
-  let db;
+  let client;
   before(() =>
     mongoUtils.initializeDb()
-      .then((newDb) => {
-        db = newDb;
+      .then((newClient) => {
+        client = newClient;
         return httpUtils.createServer();
       }).then((server) => {
         request = server.request;
@@ -48,7 +48,7 @@ describe('Router collection', () => {
   it('GET /db/<dbName>/updateCollections/<collection> should updateCollections');
 
   after(() => Promise.all([
-    mongoUtils.cleanAndCloseDb(db),
+    mongoUtils.cleanAndCloseDb(client),
     close(),
   ]));
 });
