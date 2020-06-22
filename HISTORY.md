@@ -1,3 +1,17 @@
+# 1.0-alpha.1 - Mon Jun 22, 2020
+Brekaing:
+- Change mongo-query-parser to 2.0. This changes how parsing works altogether and drop support for some advanced syntax but is safer [(#528)](https://github.com/mongo-express/mongo-express/pull/#528)
+- Rewrite the connection module to use mongo as much as possible and update mongodb to 3.5 [(#528)](https://github.com/mongo-express/mongo-express/pull/#528)
+
+New:
+- Add csv extension in file export [(#578)](https://github.com/mongo-express/mongo-express/pull/#578)
+- Don't drop the collection on Delete docs action when no query is provided. [(#502)](https://github.com/mongo-express/mongo-express/pull/#502)
+- Fix broken delete document for UUID (BinData 3 & 4) [(#538)](https://github.com/mongo-express/mongo-express/pull/#538)
+
+Deps:
+- Bump lodash to 4.6.2 [(#525)](https://github.com/mongo-express/mongo-express/pull/#525)
+
+
 # 0.54 - Tue Dec 24, 2019
 
 Breaking:
