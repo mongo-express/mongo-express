@@ -104,12 +104,12 @@ Usage (Express 4 middleware)
 Usage (Docker)
 --------------
 
-Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) and specify it's name in the `--link` argument.
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set `ME_CONFIG_MONGODB_SERVER` to the name/alias of your MongoDB container on your Docker network.
 
-**Use the docker hub image:**
+**Use [the Docker Hub image](https://hub.docker.com/_/mongo-express/):**
 
 ```console
-$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+$ docker run -it --rm -p 8081:8081 --network some-network mongo-express
 ```
 
 **Build from source:**
@@ -118,7 +118,7 @@ Build an image from the project directory, then run the image.
 
 ```console
 $ docker build -t mongo-express .
-$ docker run -it --rm -p 8081:8081 --link YOUR_MONGODB_CONTAINER:mongo mongo-express
+$ docker run -it --rm -p 8081:8081 --network some-network mongo-express
 ```
 
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
@@ -162,10 +162,11 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
     docker run -it --rm \
         --name mongo-express \
-        --link web_db_1:mongo \
+        --network web_default \
         -p 8081:8081 \
         -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
         -e ME_CONFIG_BASICAUTH_USERNAME="" \
+        -e ME_CONFIG_MONGODB_SERVER="db" \
         mongo-express
 
 This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
