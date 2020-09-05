@@ -9,6 +9,8 @@ let mongo = {
   host: '127.0.0.1',
   port: '27017',
   dbName: '',
+  username: '',
+  password: '',
 };
 
 // Accessing Bluemix variable to get MongoDB info
@@ -56,6 +58,20 @@ const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER
   ? process.env.ME_CONFIG_MONGODB_SERVER.split(',')
   : false;
 
+function getConnectionStringFromInlineParams() {
+  const infos = {
+    server: (
+      meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]
+    ) ||  mongo.host || process.env.ME_CONFIG_MONGODB_SERVER || '127.0.0.1',
+    port: mongo.port || process.env.ME_CONFIG_MONGODB_PORT || '27017',
+    dbName: mongo.dbName,
+    username: mongo.username,
+    password: mongo.password,
+  };
+  const login = infos.username ? `${infos.username}:${infos.password}@` : '';
+  return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
+}
+
 function getConnectionStringFromEnvVariables() {
   const infos = {
     // server: mongodb hostname or IP address
@@ -82,6 +98,8 @@ function getBoolean(str, defaultValue = false) {
 
 export default {
   mongodb: {
+    mongo,
+    getConnectionStringFromInlineParams,
     // if a connection string options such as server/port/etc are ignored
     connectionString: mongo.connectionString || getConnectionStringFromEnvVariables(),
 
