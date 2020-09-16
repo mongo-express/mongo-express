@@ -117,7 +117,7 @@
   </div>
 </form>
 
-{% if !settings.read_only %}
+{% if !settings.read_only && !settings.no_delete %}
   <br>
 
   {% if document._id._bsontype == 'Binary' %}

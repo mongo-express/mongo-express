@@ -193,6 +193,9 @@ module.exports = {
 
     // noExport: if noExport is set to true, we won't show export buttons
     noExport: false,
+
+    // noDelete: if noDelete is set to true, we won't show delete buttons
+    noDelete: process.env.ME_CONFIG_OPTIONS_NO_DELETE || false,
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.

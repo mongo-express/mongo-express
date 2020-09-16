@@ -99,6 +99,7 @@
 'use strict';
 window.ME_SETTINGS = {
   readOnly: '{{ !!settings.read_only }}' === 'true',
+  noDelete: '{{ !!settings.no_delete }}' === 'true',
   codeMirrorEditorTheme: '{{ editorTheme }}',
   baseHref: '{{ baseHref }}',
   collapsibleJSON: '{{ !!settings.me_collapsible_json }}' === 'true',
