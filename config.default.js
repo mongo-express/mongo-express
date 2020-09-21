@@ -171,7 +171,9 @@ module.exports = {
     subprocessTimeout: 300,
 
     // readOnly: if readOnly is true, components of writing are not visible.
-    readOnly: process.env.ME_CONFIG_OPTIONS_READONLY || false,
+    readOnly: process.env.ME_CONFIG_OPTIONS_READONLY ?
+      process.env.ME_CONFIG_OPTIONS_READONLY.toLowerCase() === 'true' :
+      false,
 
     // collapsibleJSON: if set to true, jsons will be displayed collapsible
     collapsibleJSON: true,
@@ -182,7 +184,9 @@ module.exports = {
 
     // gridFSEnabled: if gridFSEnabled is set to 'true', you will be able to manage uploaded files
     // ( ak. grids, gridFS )
-    gridFSEnabled: process.env.ME_CONFIG_SITE_GRIDFS_ENABLED || false,
+    gridFSEnabled: process.env.ME_CONFIG_SITE_GRIDFS_ENABLED ?
+      process.env.ME_CONFIG_SITE_GRIDFS_ENABLED.toLowerCase() === 'true' :
+      false,
 
     // logger: this object will be used to initialize router logger (morgan)
     logger: {},
