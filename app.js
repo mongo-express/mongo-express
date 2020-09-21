@@ -68,16 +68,23 @@ if (commander.username && commander.password) {
       database: commander.database,
       username: commander.username,
       password: commander.password,
+      host: commander.host,
+      port: commander.dbport,
     };
     for (let key in user) {
       if (!user[key]) {
         commander.help();
       }
     }
-
-    config.mongodb.auth[0] = user;
+    config.mongodb.mongo.username = user.username;
+    config.mongodb.mongo.password = user.password;
+    config.mongodb.mongo.database = user.database;
+    config.mongodb.mongo.host = user.host;
+    config.mongodb.mongo.port = user.port;
+    
+    let inlineParamsString = config.mongodb.getConnectionStringFromInlineParams();
+    config.mongodb.connectionString = inlineParamsString; 
   }
-
   config.useBasicAuth = false;
 }
 
@@ -88,8 +95,8 @@ if (commander.url) {
   }
 }
 
-config.mongodb.server = commander.host || config.mongodb.server;
-config.mongodb.port = commander.dbport || config.mongodb.port;
+config.mongodb.server = commander.host || config.mongodb.server ;
+config.mongodb.port = commander.dbport || config.mongodb.port ;
 
 config.site.port = commander.port || config.site.port;
 
