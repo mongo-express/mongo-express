@@ -51,7 +51,7 @@
         {% for column in columns %}
           <td><div class="tableContent">{{ file[column] | to_display | safe }}</div></td>
         {% endfor %}
-          {% if !settings.read_only %}
+          {% if !settings.read_only && !settings.no_delete %}
             <td>
               <div class="col-md-1">
                 <form method="POST" action="{{ dbUrl }}/gridFS/{{ bucketName }}/{{ file._id | json | safe | url_encode }}">

@@ -44,7 +44,7 @@
       </a>
     </td>
     <td><h3><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></h3></td>
-    {% if !settings.read_only %}
+    {% if !settings.read_only && !settings.no_delete %}
     <td class="col-md-2">
       <form method="POST" action="{{ baseHref }}{{ db | url_encode }}" style="margin: 0px;">
         <input type="hidden" name="_method" value="delete">
@@ -60,7 +60,7 @@
 </table>
 </div>
   </div>
-{% if !settings.read_only %}
+{% if !settings.read_only && !settings.no_delete %}
 <div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

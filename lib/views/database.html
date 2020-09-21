@@ -65,7 +65,7 @@
           <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ c | url_encode }}"/>
         </td>
         <td><h3><a href="{{ dbUrl }}/{{ c | url_encode }}">{{ c }}</a></h3></td>
-        {% if !settings.read_only %}
+        {% if !settings.read_only && !settings.no_delete %}
         <td class="col-md-1">
           <form method="POST"
             action="{{ dbUrl }}/{{ c | url_encode }}"
