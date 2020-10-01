@@ -138,6 +138,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`    | `false`   | if set to true an alternative page layout is used utilizing full window width.
     `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`   | `false`   | if set to true, remain on same page after clicked on Save button
     `ME_CONFIG_OPTIONS_NO_DELETE`      | `false`        | if noDelete is true, components of deleting are not visible.
+    `ME_CONFIG_OPTIONS_NO_RAW_COMMAND`| `false`         | if noRawCommand is true, the Raw tab in collection view is not visible.
     `ME_CONFIG_SITE_SSL_ENABLED`      | `false`         | Enable SSL.
     `ME_CONFIG_MONGODB_SSLVALIDATE`   | `true`          | Validate mongod server certificate against CA
     `ME_CONFIG_SITE_SSL_CRT_PATH`     | ` `             | SSL certificate file.
