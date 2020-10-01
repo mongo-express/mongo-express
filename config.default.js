@@ -200,6 +200,8 @@ module.exports = {
 
     // noDelete: if noDelete is set to true, we won't show delete buttons
     noDelete: process.env.ME_CONFIG_OPTIONS_NO_DELETE || false,
+
+    noRawCommand: process.env.ME_CONFIG_OPTIONS_NO_RAW_COMMAND ? process.env.ME_CONFIG_OPTIONS_NO_RAW_COMMAND.toLowerCase() === 'true' : false,
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
