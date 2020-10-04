@@ -4,9 +4,12 @@ let mongo = {
   // Setting the connection string will only give access to that database
   // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
   connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL,
+  host: '127.0.0.1',
+  port: '27017',
+  dbName: '',
 };
 
-// Accesing Bluemix variable to get MongoDB info
+// Accessing Bluemix variable to get MongoDB info
 if (process.env.VCAP_SERVICES) {
   const dbLabel = 'mongodb-2.4';
   const env = JSON.parse(process.env.VCAP_SERVICES);
@@ -68,15 +71,16 @@ function getConnectionStringFromEnvVariables() {
       meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]
     ) || mongo.host,
     port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
+    dbName: process.env.ME_CONFIG_MONGODB_PORT || mongo.dbName,
 
     // >>>> If you are using an admin mongodb account, or no admin account exists, fill out section below
     // >>>> Using an admin account allows you to view and edit all databases, and view stats
     // leave username and password empty if no admin account exists
-    username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username,
-    password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password,
+    username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username || dbAuthUsername,
+    password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password || dbAuthPassword,
   };
   const login = infos.username ? `${infos.username}:${infos.password}@` : '';
-  return `mongodb://${login}${infos.host}:${infos.port}/${infos.dbName}`;
+  return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
 }
 
 const sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
