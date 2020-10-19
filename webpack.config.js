@@ -3,7 +3,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const AssetsPlugin = require('assets-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const env = process.env.NODE_ENV || 'development';
@@ -38,12 +38,12 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /.js$/,
         loader: 'babel-loader',
         exclude: /(node_modules)/,
-        query: {
+        options: {
           presets: ['es2015'],
         },
       },
@@ -51,7 +51,9 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['build']),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['build'],
+    }),
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
