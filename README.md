@@ -313,6 +313,7 @@ Example Document
 
 Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
 
+1.Sample Document 1 
     {
       "_id": ObjectID(), // or ObjectId()
       "dates": {
@@ -338,6 +339,12 @@ Here is an example of a document which can be read/edited in mongo-express (medi
       "func": Code(function() { alert('Hello World!') }),
       "symbol": Symbol("test")
     }
+
+2.Sample Document 2
+db.mycollect.insertOne({
+                           "name" : "Max",
+                           "age" : 29
+                       })    
 
 ---
 
