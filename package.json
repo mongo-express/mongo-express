@@ -59,7 +59,7 @@
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.24.1",
     "bootstrap": "^3.3.7",
-    "chai": "3.5.0",
+    "chai": "4.2.0",
     "clean-webpack-plugin": "^3.0.0",
     "codemirror": "^5.23.0",
     "concurrently": "^5.0.0",
