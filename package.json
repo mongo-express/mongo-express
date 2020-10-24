@@ -31,7 +31,7 @@
     "body-parser": "^1.18.3",
     "bson": "^4.0.3",
     "busboy": "^0.2.13",
-    "cli-color": "^1.1.0",
+    "cli-color": "^2.0.0",
     "commander": "^2.9.0",
     "cookie-parser": "1.4.4",
     "cross-env": "^6.0.3",
