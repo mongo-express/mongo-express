@@ -21,6 +21,7 @@ const codemirrorPath = resolveModulePath('codemirror');
 const bootstrapPath = resolveModulePath('bootstrap');
 
 module.exports = {
+  mode: isProd ? 'production' : 'development',
   entry: {
     index: './lib/scripts/index.js',
     database: './lib/scripts/database.js',
@@ -37,6 +38,30 @@ module.exports = {
     publicPath: 'public/',
   },
 
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'all',
+          test(module, chunks) {
+            const name = module.nameForCondition && module.nameForCondition();
+            return chunks.some(chunk =>
+              chunk.name === 'vendor' && /[\\/]node_modules[\\/]/.test(name)
+            );
+          },
+        },
+        codemirror: {
+          name: 'codemirror',
+          chunks: 'all',
+          test(module, chunks) {
+            return chunks.some(chunk => chunk.name === 'codemirror');
+          },
+        },
+      },
+    },
+  },
+
   module: {
     rules: [
       {
@@ -44,7 +69,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /(node_modules)/,
         options: {
-          presets: ['es2015'],
+          presets: ['@babel/preset-env'],
         },
       },
     ],
@@ -59,14 +84,6 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(env),
       __DEV__: isDev,
     }),
-
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['codemirror', 'vendor'],
-      filename: `[name]${fileSuffix}.js`,
-    }),
-
-    isProd && (new webpack.optimize.UglifyJsPlugin()),
-    isProd && (new webpack.optimize.OccurrenceOrderPlugin(true)),
 
     new CopyWebpackPlugin([
       { from: 'public/images/*', to: 'img/[name].[ext]' },
