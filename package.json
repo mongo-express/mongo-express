@@ -69,11 +69,11 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-lodash": "^2.3.5",
     "jquery": "^3.1.1",
-    "mocha": "^6.1.4",
+    "mocha": "^8.2.0",
     "nodemon": "^2.0.0",
     "pre-commit": "1.2.2",
     "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
-    "supertest": "^3.0.0",
+    "supertest": "^5.0.0",
     "webpack": "^4.0.0",
     "webpack-cli": "^4.0.0"
   },
