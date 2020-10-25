@@ -53,7 +53,6 @@ module.exports = {
     'lodash/unwrap': ['error'],
 
     // To be turned on
-    'no-var': ['off'],
     'prefer-const': ['off'],
     'object-shorthand': ['off'],
     'no-path-concat': ['off'],
