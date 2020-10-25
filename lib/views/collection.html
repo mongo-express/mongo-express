@@ -81,6 +81,9 @@
   <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">
     <li class="active"><a href="#simple" data-toggle="tab"><span class="glyphicon glyphicon-tag"></span>  Simple</a></li>
     <li><a href="#advanced" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>  Advanced</a></li>
+    {% if !settings.read_only && !settings.no_raw_command %}
+    <li><a href="#raw" data-toggle="tab"><span class="glyphicon glyphicon-play"></span>  Raw</a></li>
+    {% endif %}
   </ul>
   <div id="my-tab-content" class="tab-content">
     <div class="tab-pane active" id="simple">
@@ -129,6 +132,24 @@
             <button style="height:150px;" type="submit" class="btn btn-primary btn-block">
               <span class="glyphicon glyphicon-search"></span>
             Find
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="tab-pane" id="raw">
+      <form class="well" method="get" action="{{ collectionUrl }}">
+        {% for column in columns %}
+        <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
+        {% endfor %}
+        <div class="row">
+          <div class="form-group col-sm-12 col-md-10">
+            <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="command" name="command" placeholder="Command" title="Command">{{ command }}</textarea>
+          </div>
+          <div class="form-group col-md-2">
+            <button style="height:150px;" type="submit" class="btn btn-primary btn-block">
+              <span class="glyphicon glyphicon-play"></span>
+              Run
             </button>
           </div>
         </div>

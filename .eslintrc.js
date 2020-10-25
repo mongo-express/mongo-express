@@ -62,6 +62,7 @@ module.exports = {
     "prefer-const": ["off"],
     "object-shorthand": ["off"],
     "no-path-concat": ["off"],
+    "no-eval": ["off"],
     "no-shadow": ["off", {allow: ["err", "error"]}],
     "camelcase": ["off"],
   },
