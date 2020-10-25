@@ -54,6 +54,5 @@ module.exports = {
 
     // To be turned on
     'no-shadow': ['off', { allow: ['err', 'error'] }],
-    camelcase: ['off'],
   },
 };
