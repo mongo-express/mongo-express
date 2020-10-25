@@ -15,7 +15,7 @@ exports.createServer = async () => {
   // @TODO fix the race condition and remove me
   await testUtils.timeoutPromise(50);
 
-  return ({ request, close: () => testUtils.asPromise(cb => httpServer.close(cb)) });
+  return ({ request, close: () => testUtils.asPromise((cb) => httpServer.close(cb)) });
 };
 
 exports.getDocumentUrl = (db, collection, documentId) => `/db/${db}/${collection}/${JSON.stringify(documentId)}`;

@@ -71,9 +71,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['build'],
-    }),
+    new CleanWebpackPlugin(),
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
@@ -97,5 +95,5 @@ module.exports = {
     }),
 
     new AssetsPlugin({ filename: 'build-assets.json' }),
-  ].filter(n => !!n),
+  ].filter((n) => !!n),
 };
