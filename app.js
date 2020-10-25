@@ -13,8 +13,8 @@ const middleware      = require('./lib/middleware');
 const utils           = require('./lib/utils');
 const pkg             = require('./package.json');
 
-let app               = express();
-let notifier          = updateNotifier({ pkg });
+const app               = express();
+const notifier          = updateNotifier({ pkg });
 
 let config;
 let defaultPort = 80;
@@ -64,12 +64,12 @@ if (commander.username && commander.password) {
     config.mongodb.adminUsername = commander.username;
     config.mongodb.adminPassword = commander.password;
   } else {
-    let user = {
+    const user = {
       database: commander.database,
       username: commander.username,
       password: commander.password,
     };
-    for (let key in user) {
+    for (const key in user) {
       if (!user[key]) {
         commander.help();
       }
@@ -112,7 +112,7 @@ async function bootstrap() {
     server = https.createServer(sslOptions, app);
   }
 
-  let addressString = (config.site.sslEnabled ? 'https://' : 'http://') + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
+  const addressString = (config.site.sslEnabled ? 'https://' : 'http://') + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
 
   server.listen(config.site.port, config.site.host, function () {
     if (config.options.console) {
