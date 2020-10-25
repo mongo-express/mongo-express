@@ -1,6 +1,6 @@
 'use strict';
 
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const mongodb = require('mongodb');
 const bson = require('bson');
 
@@ -139,14 +139,15 @@ describe('BSON', function () {
         ref2: new bson.DBRef('coll', new bson.ObjectId('57b80f922128ccef64333288'), 'db'),
       };
       const result = libBson.toString(test);
-      const expected = `{\n    ref: DBRef('coll', '57b80f922128ccef64333288', ''),\n    ref2: DBRef('coll', '57b80f922128ccef64333288', 'db')\n}`;
+      // eslint-disable-next-line max-len
+      const expected = '{\n    ref: DBRef(\'coll\', \'57b80f922128ccef64333288\', \'\'),\n    ref2: DBRef(\'coll\', \'57b80f922128ccef64333288\', \'db\')\n}';
       expect(result).to.eql(expected);
     });
 
     it('should convert Symbol to string', function () {
       const test = { symbol: new bson.BSONSymbol('test') };
       const result = libBson.toString(test);
-      expect(result).to.eql(`{\n    symbol: {\n        value: 'test'\n    }\n}`);
+      expect(result).to.eql('{\n    symbol: {\n        value: \'test\'\n    }\n}');
     });
 
     it('should convert MinKey to string', function () {
@@ -168,7 +169,7 @@ describe('BSON', function () {
     it('should convert Code to string', function () {
       const test = { code: new bson.Code('function() { x; }') };
       const result = libBson.toString(test);
-      expect(result).to.eql(`{\n    code: Code('function() { x; }')\n}`);
+      expect(result).to.eql('{\n    code: Code(\'function() { x; }\')\n}');
     });
   });
 

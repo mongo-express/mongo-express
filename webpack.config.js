@@ -95,5 +95,5 @@ module.exports = {
     }),
 
     new AssetsPlugin({ filename: 'build-assets.json' }),
-  ].filter(n => !!n),
+  ].filter((n) => !!n),
 };

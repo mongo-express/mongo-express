@@ -8,9 +8,9 @@ const commander       = require('commander');
 const express         = require('express');
 const fs              = require('fs');
 const https           = require('https');
+const updateNotifier  = require('update-notifier');
 const middleware      = require('./lib/middleware');
 const utils           = require('./lib/utils');
-const updateNotifier  = require('update-notifier');
 const pkg             = require('./package.json');
 
 let app               = express();
@@ -56,7 +56,7 @@ commander
   .option('-a, --admin', 'enable authentication as admin')
   .option('-d, --database <database>', 'authenticate to database')
   .option('--port <port>', 'listen on specified port')
-.parse(process.argv);
+  .parse(process.argv);
 
 if (commander.username && commander.password) {
   config.mongodb.admin = !!commander.admin;
@@ -106,7 +106,7 @@ async function bootstrap() {
   if (config.site.sslEnabled) {
     defaultPort     = 443;
     sslOptions  = {
-      key:  fs.readFileSync(config.site.sslKey),
+      key: fs.readFileSync(config.site.sslKey),
       cert: fs.readFileSync(config.site.sslCert),
     };
     server = https.createServer(sslOptions, app);
@@ -116,7 +116,6 @@ async function bootstrap() {
 
   server.listen(config.site.port, config.site.host, function () {
     if (config.options.console) {
-
       console.log('Mongo Express server listening', 'at ' + addressString);
 
       if (!config.site.host || config.site.host === '0.0.0.0') {
@@ -126,21 +125,19 @@ async function bootstrap() {
       if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
         console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
       }
-
     }
   })
-  .on('error', function (e) {
-    if (e.code === 'EADDRINUSE') {
-      console.log();
-      console.error(clc.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
-      console.log('Maybe mongo-express is already running?');
-    }
+    .on('error', function (e) {
+      if (e.code === 'EADDRINUSE') {
+        console.log();
+        console.error(clc.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
+        console.log('Maybe mongo-express is already running?');
+      }
 
-    console.log();
-    console.log('If you are still having trouble, try Googling for the key parts of the following error object before posting an issue');
-    console.log(JSON.stringify(e));
-    return process.exit(1);
-  });
+      console.log();
+      console.log('If you are still having trouble, try Googling for the key parts of the following error object before posting an issue');
+      console.log(JSON.stringify(e));
+      return process.exit(1);
+    });
 }
 bootstrap();
-
