@@ -53,7 +53,6 @@ module.exports = {
     'lodash/unwrap': ['error'],
 
     // To be turned on
-    'no-path-concat': ['off'],
     'no-shadow': ['off', { allow: ['err', 'error'] }],
     camelcase: ['off'],
   },
