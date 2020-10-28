@@ -26,7 +26,9 @@ describe('Router collection', () => {
   it('GET /db/<dbName>/<collection> should return html', () => asPromise((cb) => request.get(`/db/${dbName}/${urlColName}`).expect(200).end(cb))
     .then((res) => {
       expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
-      expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
+      expect(res.text).to.match(
+        new RegExp(`<p id="pageTitle" class="text-muted font-weight-bold text-uppercase small mb-4">Viewing Collection: ${collectionName}</p>`),
+      );
     }));
 
   it('POST /db/<dbName> should add a new collection');
