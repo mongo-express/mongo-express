@@ -1,23 +1,19 @@
-.documentlist {
-  height: 100px;
-  overflow: auto;
+$primary: #41A948;
+// $border-radius: .5rem;
+$enable-rounded: false;
+
+@import "../../node_modules/line-awesome/dist/font-awesome-line-awesome/css/all.css";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+main {
+  padding: 3rem 0;
+  min-height: 100vh;
 }
 
-.documentlist:hover {
-  cursor: pointer;
-  background: #EEE;
-}
-
-.nav > li > a {
-  padding: 15px 2px;
-}
-
-.logo {
-  float: left;
-}
-
-.logo-nav {
-  float: left;
+#indexes {
+  td {
+    vertical-align: middle;
+  }
 }
 
 .logo-nav img {
@@ -26,41 +22,18 @@
   margin: 12px;
 }
 
-.tableWrapper {
-  cursor: pointer;
-  position: relative;
-}
-
-.tableHeaderFooterBars {
-  border-top-color: #337ab7;
-  border-top-width: 5px;
-  border-top-style: solid;
-  border-bottom-color: #337ab7;
-  border-bottom-width: 5px;
-  border-bottom-style: solid;
-}
-
 .fadeToWhite {
-
   background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   pointer-events: none;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
-  margin-right: 15px;
+  margin-right: 0;
   z-index: 10;
   position: absolute;
   width: 75px;
   right: 0;
   height: 100%;
-}
-
-.tableContent {
-  width: 100%;
-  height: auto;
-  display: table;
-  max-height: 100px;
-  max-width: 100%;
 }
 
 .CodeMirror pre {
@@ -77,28 +50,7 @@
   -khtml-border-radius: 4px; /* for old Konqueror browsers */
 }
 
-.main-title{
-  padding-bottom: 0px;
-  margin: 10px 0 15px;
-  border-bottom:3px solid #353535;
-}
-
-.main-title > h1{
-  margin-top: 0px;
-}
-
-.no-margin{
-  margin: 0px;
-}
-
-.no-padding{
-  padding:0px;
-}
-
-.bold{
-  font-weight:bold;
-}
-
-.input-hidden{
-  display:none !important;
+.fa-ellipsis-v {
+  font-size: 1.3rem;
+  line-height: 1;
 }

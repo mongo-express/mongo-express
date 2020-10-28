@@ -91,3 +91,4 @@ mongod
 instrumented/
 cypress/videos
 cypress/screenshots
+cypress/screenshots
