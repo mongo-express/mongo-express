@@ -1,116 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <base href="{{ baseHref }}">
   <meta charset="utf-8">
   <title>{% block title %}Index{% endblock %} - Mongo Express</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="{{ baseHref }}public/css/bootstrap.min.css" rel="stylesheet">
-  <link href="{{ baseHref }}public/css/bootstrap-theme.min.css" rel="stylesheet">
   <link href="{{ baseHref }}public/css/style.css" rel="stylesheet" />
 
   <link rel="prefetch" href="{{ baseHref }}public/img/gears.gif">
-
-  <style type="text/css">
-    body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-    }
-    .sidebar-nav {
-      padding: 9px 0;
-    }
-    .sidebar-nav a {
-      display: inline-block;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-    .tooltip-inner {
-      max-width: 500px;
-    }
-  </style>
 
   {% block styles %}{% endblock %}
 </head>
 
 <body>
-
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="logo-nav">
-        <a href="{{ baseHref }}">
-          <img src="{{ baseHref }}public/img/mongo-express-logo.png" />
-        </a>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+      <div class="container">
+        <div class="d-flex justify-content-start align-items-center">
+          <div class="logo-nav">
+            <a href="{{ baseHref }}">
+              <img src="{{ baseHref }}public/img/mongo-express-logo.png" />
+            </a>
+          </div>
+          <a class="navbar-brand" href="">Mongo Express</a>
+        </div>
+        <div>
+          <ul class="nav navbar-nav">
+            {% block navigation %}
+            {% endblock %}
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
       </div>
-      <a class="navbar-brand" href="">Mongo Express</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        {% block breadcrumb %}
-        {% endblock %}
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
+    </nav>
+  </header>
 
+  <main>
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-5">
+        <ol class="breadcrumb">
+          {% block breadcrumb %}
+          {% endblock %}
+        </ol>
+      </nav>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="page-header main-title">
-        <h1 id="pageTitle">{{ title }}</h1>
-      </div>
+      {% if title %}
+      <p id="pageTitle" class="text-muted font-weight-bold text-uppercase small mb-4">{{ title }}</p>
+      {% endif %}
 
       {% if messageSuccess %}
       <div class="alert alert-success">
-        <button class="close" data-dismiss="alert">×</button>
         <strong>{{ messageSuccess }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       {% endif %}
 
       {% if messageError %}
       <div class="alert alert-danger">
-        <button class="close" data-dismiss="alert">×</button>
         <strong>{{ messageError }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       {% endif %}
 
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
       {% block content %}
       {% endblock %}
     </div>
-  </div>
-</div>
+  </main>
 
-<script src="{{ baseHref }}{{assets.vendor.js}}"></script>
-<script type="text/javascript">
-'use strict';
-window.ME_SETTINGS = {
-  readOnly: '{{ !!settings.read_only }}' === 'true',
-  noDelete: '{{ !!settings.no_delete }}' === 'true',
-  codeMirrorEditorTheme: '{{ editorTheme }}',
-  baseHref: '{{ baseHref }}',
-  collapsibleJSON: '{{ !!settings.me_collapsible_json }}' === 'true',
-  collapsibleJSONDefaultUnfold: parseInt('{{ settings.me_collapsible_json_default_unfold || 0}}', 10),
-  confirmDelete: '{{ !!settings.me_confirm_delete }}' === 'true',
-  dbName: '{{ dbName | url_encode }}',
-  collectionName: '{{ collectionName | url_encode }}',
-  bucketName: '{{ bucketName }}'
-};
-</script>
-{% block scripts %}
-{% endblock %}
+
+
+  <script src="{{ baseHref }}{{assets.vendor.js}}"></script>
+  <script type="text/javascript">
+    'use strict';
+    window.ME_SETTINGS = {
+      readOnly: '{{ !!settings.read_only }}' === 'true',
+      noDelete: '{{ !!settings.no_delete }}' === 'true',
+      codeMirrorEditorTheme: '{{ editorTheme }}',
+      baseHref: '{{ baseHref }}',
+      collapsibleJSON: '{{ !!settings.me_collapsible_json }}' === 'true',
+      collapsibleJSONDefaultUnfold: parseInt('{{ settings.me_collapsible_json_default_unfold || 0}}', 10),
+      confirmDelete: '{{ !!settings.me_confirm_delete }}' === 'true',
+      dbName: '{{ dbName | url_encode }}',
+      collectionName: '{{ collectionName | url_encode }}',
+      bucketName: '{{ bucketName }}'
+    };
+  </script>
+  {% block scripts %}
+  {% endblock %}
 </body>
+
 </html>

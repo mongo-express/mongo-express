@@ -1,10 +1,11 @@
 'use strict';
 
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = env === 'development';
@@ -18,7 +19,8 @@ function resolveModulePath(name) {
 }
 
 const codemirrorPath = resolveModulePath('codemirror');
-const bootstrapPath = resolveModulePath('bootstrap');
+// const bootstrapPath = resolveModulePath('bootstrap');
+const lineAwesomePath = resolveModulePath('line-awesome');
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
@@ -45,7 +47,7 @@ module.exports = {
     },
 
     // Shared
-    vendor: './lib/scripts/vendor.js',
+    vendor: ['./lib/scripts/vendor.js', './public/stylesheets/style.scss'],
     codemirror: {
       import: './lib/scripts/codeMirrorLoader.js',
       dependOn: 'vendor',
@@ -53,7 +55,7 @@ module.exports = {
   },
   output: {
     filename: `[name]${fileSuffix}.js`,
-    path: path.join(__dirname, 'build'),
+    path: path.resolve(__dirname, './build'),
     publicPath: 'public/',
   },
 
@@ -66,6 +68,19 @@ module.exports = {
         options: {
           presets: ['@babel/preset-env'],
         },
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].css',
+              outputPath: 'css',
+            },
+          },
+          'extract-loader', 'css-loader?-url', 'sass-loader',
+        ],
       },
     ],
   },
@@ -81,18 +96,15 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'public/images/*', to: 'img/[name].[ext]' },
-        { from: 'public/stylesheets/*', to: 'css/[name].[ext]' },
 
         { from: path.join(codemirrorPath, '/lib/codemirror.css'), to: 'css/[name].[ext]' },
         { from: path.join(codemirrorPath, '/theme/*'), to: 'css/theme/[name].[ext]' },
 
-        { from: path.join(bootstrapPath, '/dist/fonts/*'), to: 'fonts/[name].[ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap.min.css'), to: 'css/[name].[ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap.min.css.map'), to: 'css/[name].[ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap-theme.min.css'), to: 'css/[name].[ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap-theme.min.css.map'), to: 'css/[name].[ext]' },
+        { from: path.join(lineAwesomePath, '/dist/font-awesome-line-awesome/webfonts/*'), to: 'webfonts/[name].[ext]' },
       ],
     }),
+
+    new OptimizeCSSAssetsPlugin({}),
 
     new AssetsPlugin({ filename: 'build-assets.json' }),
   ].filter((n) => !!n),

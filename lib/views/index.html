@@ -2,72 +2,182 @@
 
 {% block title %}Home{% endblock %}
 
-{% block breadcrumb %}
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
+{% block navigation %}
+<div class="dropdown show">
+  <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownDatabase"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Database
+  </a>
+
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownDatabase">
+    {% for db in databases %}
+    <li class="dropdown-item">
+      <a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    </li>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item active" aria-current="page">Overview</li>
+{% endblock %}
 
 {% block content %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <div style="display: inline-block;">
-      <h4 style="font-weight: bold;">Databases</h4>
-    </div>
-    {% if !settings.read_only %}
-    <form class="form-inline" method="POST" style="float:right;">
-      <div class="input-group">
-        <input class="form-control" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary pull-right">
-            <span class="glyphicon glyphicon-plus"></span>
-            Create Database
-          </button>
-        </span>
-      </div>
-    </form>
-    {% endif %}
-    </div>
-  <div class="panel-body no-padding">
-<table class="table table-bordered table-striped table-condensed no-margin">
-  {% for db in databases %}
-  <tr>
-    <td class="col-md-2">
-      <a href="{{ baseHref }}db/{{ db | url_encode }}/" class="btn btn-success btn-block" >
-        <span class="glyphicon glyphicon-eye-open"></span><br>View
-      </a>
-    </td>
-    <td><h3><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></h3></td>
-    {% if !settings.read_only && !settings.no_delete %}
-    <td class="col-md-2">
-      <form method="POST" action="{{ baseHref }}{{ db | url_encode }}" style="margin: 0px;">
-        <input type="hidden" name="_method" value="delete">
-        <button type="submit" class="hidden"></button>
-        <button type="button" class="btn btn-danger btn-block deleteButton" database-name="{{ db }}" >
-          <span class="glyphicon glyphicon-trash"></span><br>Del
-        </button>
+<div class="card mb-5">
+  <div class="card-header border-bottom-0">
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="card-title text-uppercase small text-muted m-0">Databases</h2>
+      {% if !settings.read_only %}
+      <form class="form-inline" method="POST" style="float:right;">
+        <div class="input-group input-group-sm">
+          <input class="form-control" type="text" id="database" name="database" placeholder="Database Name">
+          <span class="input-group-append">
+            <button type="submit" class="btn btn-primary pull-right">
+              <i class="fas fa-plus"></i>
+              Create Database
+            </button>
+          </span>
+        </div>
       </form>
-    </td>
-    {% endif %}
-  </tr>
-  {% endfor %}
-</table>
-</div>
+      {% endif %}
+    </div>
   </div>
+
+  <div class="card-body p-0">
+    <table class="table table-striped table-sm m-0">
+      <tbody>
+        {% for db in databases %}
+        <tr>
+          <td class="w-100 align-middle pl-3">
+            <a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+          </td>
+          <td>
+            <div class="dropdown show">
+              <a class="btn text-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+    
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">View</a>
+                {% if !settings.read_only && !settings.no_delete %}
+                <form method="POST" action="{{ baseHref }}{{ db | url_encode }}" class="m-0">
+                  <input type="hidden" name="_method" value="delete">
+                  <button type="submit" hidden></button>
+                  <button type="button" class="dropdown-item text-danger deleteButton" database-name="{{ db }}">
+                    Delete
+                  </button>
+                </form>
+                {% endif %}
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header border-bottom-0 py-3">
+    <h3 class="card-title text-uppercase small text-muted m-0">Server Status</h3>
+  </div>
+  <div class="card-body p-0">
+    {% if info == false %}
+    <p class="px-3 pt-3 border-top">
+    Turn on admin in config.js to view server stats!
+    </p>
+    {% else %}
+    <table class="table table-striped m-0">
+      <tbody>
+        <tr>
+          <th>Hostname</th>
+          <td id="dbHost">{{ info.host }}</td>
+          <th>MongoDB Version</th>
+          <td id="dbVersion">{{ info.version }}</td>
+        </tr>
+        <tr>
+          <th>Uptime</th>
+          <td>{{ info.uptime }} seconds {% if info.uptime > 86400 %} ({{ Math.floor( info.uptime/86400 ) }} days)
+            {% endif %}</td>
+          <th>Server Time</th>
+          <td>{{ info.localTime|date('r') }}</td>
+        </tr>
+        <tr>
+          <td colspan="4">&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Current Connections</th>
+          <td>{{ info.connections.current }}</td>
+          <th>Available Connections</th>
+          <td>{{ info.connections.available }}</td>
+        </tr>
+        <tr>
+          <th>Active Clients</th>
+          <td>{{ info.globalLock.activeClients.total }}</td>
+          <th>Queued Operations</th>
+          <td>{{ info.globalLock.currentQueue.total }}</td>
+        </tr>
+        <tr>
+          <th>Clients Reading</th>
+          <td>{{ info.globalLock.activeClients.readers }}</td>
+          <th>Clients Writing</th>
+          <td>{{ info.globalLock.activeClients.writers}}</td>
+        </tr>
+        <tr>
+          <th>Read Lock Queue</th>
+          <td>{{ info.globalLock.currentQueue.readers }}</td>
+          <th>Write Lock Queue</th>
+          <td>{{ info.globalLock.currentQueue.writers}}</td>
+        </tr>
+        <tr>
+          <td colspan="4">&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Disk Flushes</th>
+          <td>{{ info.backgroundFlushing.flushes }}</td>
+          <th>Last Flush</th>
+          <td>{{ info.backgroundFlushing ? info.backgroundFlushing.last_finished|date('r') : '' }}</td>
+        </tr>
+        <tr>
+          <th>Time Spent Flushing</th>
+          <td>{{ info.backgroundFlushing.total_ms }} ms</td>
+          <th>Average Flush Time</th>
+          <td>{{ info.backgroundFlushing.average_ms }} ms</td>
+        </tr>
+        <tr>
+          <td colspan="4">&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Total Inserts</th>
+          <td>{{ info.opcounters.insert }}</td>
+          <th>Total Queries</th>
+          <td>{{ info.opcounters.query}}</td>
+        </tr>
+        <tr>
+          <th>Total Updates</th>
+          <td>{{ info.opcounters.update}}</td>
+          <th>Total Deletes</th>
+          <td>{{ info.opcounters.delete}}</td>
+        </tr>
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+
 {% if !settings.read_only && !settings.no_delete %}
 <div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Delete database</h4>
+        <h5 class="modal-title" id="myModalLabel">Delete database</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
 
       <div class="modal-body">
@@ -76,7 +186,8 @@
         </p>
         <p>
           <label for="confirmation-input">Type the database name to proceed.</label>
-          <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+          <input type="text" id="confirmation-input" class="form-control" name="confirmation-input" shouldbe=""
+            value="" />
         </p>
       </div>
 
@@ -87,98 +198,9 @@
     </div>
   </div>
 </div>
-
-<!--h2>Create Database</h2>
-<form class="well form-inline" method="POST">
-    <div class="form-group">
-      <input class="input-medium" type="text" id="database" name="database" placeholder="Database Name" title="Database Name">
-    </div>
-    <button type="submit" class="btn btn-primary pull-right">
-      <span class="glyphicon glyphicon-plus"></span>
-      Create Database
-    </button>
-</form-->
 {% endif %}
 
-{% if info == false %}
 
-<h2>Server Status</h2>
-<p>
-  Turn on admin in config.js to view server stats!
-</p>
-
-{% else %}
-<div class="panel panel-default stats">
-  <div class="panel-heading">
-    <h4 style="font-weight: bold;">Server Status</h4>
-  </div>
-<table class="table table-bordered table-striped">
-  <tr>
-    <td class="span2"><strong>Hostname</strong></td>
-    <td class="span3" id="dbHost">{{ info.host }}</td>
-    <td class="span2"><strong>MongoDB Version</strong></td>
-    <td class="span3" id="dbVersion">{{ info.version }}</td>
-  </tr>
-  <tr>
-    <td><strong>Uptime</strong></td>
-    <td>{{ info.uptime }} seconds {% if info.uptime > 86400 %} ({{ Math.floor( info.uptime/86400 ) }} days) {% endif %}</td>
-    <td><strong>Server Time</strong></td>
-    <td>{{ info.localTime|date('r') }}</td>
-  </tr>
-  <tr><td colspan="4">&nbsp;</td></tr>
-  <tr>
-    <td><strong>Current Connections</strong></td>
-    <td>{{ info.connections.current }}</td>
-    <td><strong>Available Connections</strong></td>
-    <td>{{ info.connections.available }}</td>
-  </tr>
-  <tr>
-    <td><strong>Active Clients</strong></td>
-    <td>{{ info.globalLock.activeClients.total }}</td>
-    <td><strong>Queued Operations</strong></td>
-    <td>{{ info.globalLock.currentQueue.total }}</td>
-  </tr>
-  <tr>
-    <td><strong>Clients Reading</strong></td>
-    <td>{{ info.globalLock.activeClients.readers }}</td>
-    <td><strong>Clients Writing</strong></td>
-    <td>{{ info.globalLock.activeClients.writers}}</td>
-  </tr>
-  <tr>
-    <td><strong>Read Lock Queue</strong></td>
-    <td>{{ info.globalLock.currentQueue.readers }}</td>
-    <td><strong>Write Lock Queue</strong></td>
-    <td>{{ info.globalLock.currentQueue.writers}}</td>
-  </tr>
-  <tr><td colspan="4">&nbsp;</td></tr>
-  <tr>
-    <td><strong>Disk Flushes</strong></td>
-    <td>{{ info.backgroundFlushing.flushes }}</td>
-    <td><strong>Last Flush</strong></td>
-    <td>{{ info.backgroundFlushing ? info.backgroundFlushing.last_finished|date('r') : '' }}</td>
-  </tr>
-  <tr>
-    <td><strong>Time Spent Flushing</strong></td>
-    <td>{{ info.backgroundFlushing.total_ms }} ms</td>
-    <td><strong>Average Flush Time</strong></td>
-    <td>{{ info.backgroundFlushing.average_ms }} ms</td>
-  </tr>
-  <tr><td colspan="4">&nbsp;</td></tr>
-  <tr>
-    <td><strong>Total Inserts</strong></td>
-    <td>{{ info.opcounters.insert }}</td>
-    <td><strong>Total Queries</strong></td>
-    <td>{{ info.opcounters.query}}</td>
-  </tr>
-  <tr>
-    <td><strong>Total Updates</strong></td>
-    <td>{{ info.opcounters.update}}</td>
-    <td><strong>Total Deletes</strong></td>
-    <td>{{ info.opcounters.delete}}</td>
-  </tr>
-</table>
-</div>
-{% endif %}
 
 {#
   # Still need to add global lock time stats and replica set stats
