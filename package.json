@@ -54,9 +54,9 @@
     "update-notifier": "1.0.2"
   },
   "devDependencies": {
-    "assets-webpack-plugin": "^6.0.3",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
+    "assets-webpack-plugin": "^6.0.3",
     "babel-loader": "^8.1.0",
     "bootstrap": "^3.3.7",
     "chai": "^4.2.0",
