@@ -69,7 +69,7 @@ function getConnectionStringFromEnvVariables() {
       meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]
     ) || mongo.host,
     port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
-    dbName: process.env.ME_CONFIG_MONGODB_PORT || mongo.dbName,
+    dbName: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.dbName,
 
     // >>>> If you are using an admin mongodb account, or no admin account exists, fill out section below
     // >>>> Using an admin account allows you to view and edit all databases, and view stats
