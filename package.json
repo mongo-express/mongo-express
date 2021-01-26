@@ -73,7 +73,7 @@
     "nodemon": "^2.0.0",
     "pre-commit": "1.2.2",
     "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
-    "supertest": "^5.0.0",
+    "supertest": "^6.1.3",
     "webpack": "^5.0.0",
     "webpack-cli": "^4.1.0"
   },
