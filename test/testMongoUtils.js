@@ -1,9 +1,9 @@
 'use strict';
 
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
 
 const mongoConfig = require('./testMongoConfig');
-const asPromise = require('./testUtils').asPromise;
+const { asPromise } = require('./testUtils');
 
 exports.testData = [
   { testItem: 1 },
@@ -20,26 +20,25 @@ exports.testCollectionName = 'test/items';
 exports.testDbName = mongoConfig.dbName;
 exports.testURLCollectionName = encodeURIComponent(exports.testCollectionName);
 
-exports.createConnection = () =>
-  asPromise(cb => MongoClient.connect(mongoConfig.makeConnectionUrl(), cb));
+exports.createConnection = () => asPromise(
+  (cb) => MongoClient.connect(mongoConfig.makeConnectionUrl(), cb),
+);
 
-exports.createTestCollection = client =>
-  asPromise(cb => client.db().collection(exports.testCollectionName).insertMany(exports.testData, cb))
-    .then((results) => {
-      currentTestData = results.ops;
-      return results;
-    });
+exports.createTestCollection = (client) => asPromise(
+  (cb) => client.db().collection(exports.testCollectionName).insertMany(exports.testData, cb),
+).then((results) => {
+  currentTestData = results.ops;
+  return results;
+});
 
-exports.dropTestCollection = client =>
-  asPromise(cb => client.db().collection(exports.testCollectionName).drop(cb));
+exports.dropTestCollection = (client) => asPromise(
+  (cb) => client.db().collection(exports.testCollectionName).drop(cb),
+);
 
-exports.closeDb = client =>
-  asPromise(cb => client.close(cb));
+exports.closeDb = (client) => asPromise((cb) => client.close(cb));
 
-exports.initializeDb = () =>
-  exports.createConnection().then(client =>
-    exports.createTestCollection(client).then(() => client)
-  );
+exports.initializeDb = () => exports.createConnection()
+  .then((client) => exports.createTestCollection(client).then(() => client));
 
-exports.cleanAndCloseDb = client =>
-  exports.dropTestCollection(client).then(() => exports.closeDb(client));
+exports.cleanAndCloseDb = (client) => exports.dropTestCollection(client)
+  .then(() => exports.closeDb(client));
