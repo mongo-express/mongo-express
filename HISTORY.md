@@ -1,5 +1,21 @@
+# 1.0-alpha.2 - Mon Apr 3, 2021
+New:
+- Property to disable delete action [(#608)](https://github.com/mongo-express/mongo-express/pull/#608)
+
+Fix:
+- Fix boolean parameter parsing [(#604)](https://github.com/mongo-express/mongo-express/pull/#604)
+- Fix invalid default values for config [(#614)](https://github.com/mongo-express/mongo-express/pull/#614)
+- Fix query options bug from Mongodb breaking change [(#615)](https://github.com/mongo-express/mongo-express/pull/#615)
+- Fix several XSS vulnerability [(#merge](https://github.com/mongo-express/mongo-express/commit/f5e0d4931f856f032f22664b5e5901d5950cfd4b)
+
+Deps:
+- Update babel to 7 [(#624)](https://github.com/mongo-express/mongo-express/pull/#624)
+- Update webpack to 5 [(#625)](https://github.com/mongo-express/mongo-express/pull/#625)
+- Update eslint [(#626)](https://github.com/mongo-express/mongo-express/pull/#626)
+
+
 # 1.0-alpha.1 - Mon Jun 22, 2020
-Brekaing:
+Breaking:
 - Change mongo-query-parser to 2.0. This changes how parsing works altogether and drop support for some advanced syntax but is safer [(#528)](https://github.com/mongo-express/mongo-express/pull/#528)
 - Rewrite the connection module to use mongo as much as possible and update mongodb to 3.5 [(#528)](https://github.com/mongo-express/mongo-express/pull/#528)
 
