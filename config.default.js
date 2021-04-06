@@ -84,27 +84,36 @@ function getConnectionStringFromEnvVariables() {
 const sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
 const sslCAFromEnv = getBinaryFileEnv(sslCA);
 
+const connectionOptions = {
+  // ssl: connect to the server using secure SSL
+  ssl: process.env.ME_CONFIG_MONGODB_SSL ?
+    process.env.ME_CONFIG_MONGODB_SSL === 'true' : mongo.ssl,
+
+  // sslValidate: validate mongod server certificate against CA
+  sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE ?
+    process.env.ME_CONFIG_MONGODB_SSLVALIDATE === 'true' : true,
+
+  // sslCA: array of valid CA certificates
+  sslCA: sslCAFromEnv ? [sslCAFromEnv] : null,
+
+  // poolSize: size of connection pool (number of connections to use)
+  poolSize: 4,
+}
+
+// Unified topology server discovery engine does not support auto reconnect
+if (process.env.ME_CONFIG_MONGODB_UNIFIEDTOPOLOGY === 'true') {
+  connectionOptions.useUnifiedTopology = true
+  connectionOptions.autoReconnect = false
+} else {
+  connectionOptions.autoReconnect = true
+}
+
 module.exports = {
   mongodb: {
     // if a connection string options such as server/port/etc are ignored
     connectionString: mongo.connectionString || getConnectionStringFromEnvVariables(),
 
-    connectionOptions: {
-      // ssl: connect to the server using secure SSL
-      ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
-
-      // sslValidate: validate mongod server certificate against CA
-      sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
-
-      // sslCA: array of valid CA certificates
-      sslCA: sslCAFromEnv ? [sslCAFromEnv] : [],
-
-      // autoReconnect: automatically reconnect if connection is lost
-      autoReconnect: true,
-
-      // poolSize: size of connection pool (number of connections to use)
-      poolSize: 4,
-    },
+    connectionOptions,
 
     // set admin to true if you want to turn on admin features
     // if admin is true, the auth list below will be ignored
