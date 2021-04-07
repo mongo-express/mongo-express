@@ -86,12 +86,12 @@ const sslCAFromEnv = getBinaryFileEnv(sslCA);
 
 const connectionOptions = {
   // ssl: connect to the server using secure SSL
-  ssl: process.env.ME_CONFIG_MONGODB_SSL ?
-    process.env.ME_CONFIG_MONGODB_SSL === 'true' : mongo.ssl,
+  ssl: process.env.ME_CONFIG_MONGODB_SSL
+    ? process.env.ME_CONFIG_MONGODB_SSL === 'true' : mongo.ssl,
 
   // sslValidate: validate mongod server certificate against CA
-  sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE ?
-    process.env.ME_CONFIG_MONGODB_SSLVALIDATE === 'true' : true,
+  sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE
+    ? process.env.ME_CONFIG_MONGODB_SSLVALIDATE === 'true' : true,
 
   // sslCA: array of valid CA certificates
   sslCA: sslCAFromEnv ? [sslCAFromEnv] : null,
@@ -102,10 +102,10 @@ const connectionOptions = {
 
 // Unified topology server discovery engine does not support auto reconnect
 if (process.env.ME_CONFIG_MONGODB_UNIFIEDTOPOLOGY === 'true') {
-  connectionOptions.useUnifiedTopology = true
-  connectionOptions.autoReconnect = false
+  connectionOptions.useUnifiedTopology = true;
+  connectionOptions.autoReconnect = false;
 } else {
-  connectionOptions.autoReconnect = true
+  connectionOptions.autoReconnect = true;
 }
 
 module.exports = {
