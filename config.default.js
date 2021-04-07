@@ -98,7 +98,7 @@ const connectionOptions = {
 
   // poolSize: size of connection pool (number of connections to use)
   poolSize: 4,
-}
+};
 
 // Unified topology server discovery engine does not support auto reconnect
 if (process.env.ME_CONFIG_MONGODB_UNIFIEDTOPOLOGY === 'true') {
