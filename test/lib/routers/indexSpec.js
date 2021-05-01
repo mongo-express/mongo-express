@@ -22,9 +22,9 @@ describe('Router index', () => {
   it('GET / should return html', () => asPromise((cb) => request.get('/').expect(200).end(cb))
     .then((res) => {
       expect(res.text).to.match(/<title>Home - Mongo Express<\/title>/);
-      expect(res.text).to.match(/<h4 style="font-weight: bold;">Databases<\/h4>/);
+      expect(res.text).to.match(/<h2 class="card-title text-uppercase small text-muted m-0">Databases<\/h2>/);
       const dbName = mongoUtils.testDbName;
-      expect(res.text).to.match(new RegExp(`<a href="/db/${dbName}/">${dbName}</a></h3>`));
+      expect(res.text).to.match(new RegExp(`<a href="/db/${dbName}/">${dbName}</a>`));
     }));
 
   after(() => Promise.all([

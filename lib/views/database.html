@@ -2,105 +2,251 @@
 
 {% block title %}{{ dbName }}{% endblock %}
 
+{% block navigation %}
+<div class="dropdown show">
+  <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownDatabase"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Database: {{ dbName }}
+  </a>
+
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownDatabase">
+    {% for db in databases %}
+    <li class="dropdown-item">
+      <a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    </li>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
 {% block breadcrumb %}
-  <li>
-    <a href="{{ dbUrl }}">Database:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{ baseHref }}">Overview</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ dbName }}</li>
 {% endblock %}
 
 {% block content %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <div style="display: inline-block;">
-    <h4 style="font-weight: bold;">Collections</h4>
-      </div>
-    {% if !settings.read_only %}
-        <form class="form-inline" method="POST" style="float: right;">
-          <div class="input-group">
-            <input class="form-control" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary pull-right">
-                <span class="glyphicon glyphicon-plus"></span>
-                Create collection
-              </button>
-            </span>
-          </div><!-- /input-group -->
-        </form>
-    {% endif %}
 
-  </div>
-  <div class="panel-body no-padding">
-    <table class="table table-bordered table-striped table-condensed no-margin">
-      {% for c in colls %}
-      <tr>
-        <td class="col-md-2">
-          <a href="{{ dbUrl }}/{{ c | url_encode }}" class="btn btn-success btn-block">
-            <span class="glyphicon glyphicon-eye-open"></span><br>View
-          </a>
-        </td>
-        {% if !settings.me_no_export %}
-        <td class="col-md-1">
-          <a href="{{ dbUrl }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block">
-            <span class="glyphicon glyphicon-floppy-save"></span><br>Export
-          </a>
-        </td>
-        {% endif %}
-        <td class="col-md-1">
-          <a href="{{ dbUrl }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block">
-            <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
-          </a>
-        </td>
-        <td class="col-md-1">
-          <a class="btn btn-warning btn-block import-file-link">
-            <span class="glyphicon glyphicon-cloud-upload"></span><br>Import
-          </a>
-          <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ c | url_encode }}"/>
-        </td>
-        <td><h3><a href="{{ dbUrl }}/{{ c | url_encode }}">{{ c }}</a></h3></td>
-        {% if !settings.read_only && !settings.no_delete %}
-        <td class="col-md-1">
-          <form method="POST"
-            action="{{ dbUrl }}/{{ c | url_encode }}"
-            style="margin: 0px;"
-          >
-            <input type="hidden" name="_method" value="delete">
-            <button type="submit" class="hidden"></button>
-            <button type="button" class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}">
-              <span class="glyphicon glyphicon-trash"></span><br>Del
+<div class="card mb-5">
+  <div class="card-header border-bottom-0">
+    <div class="d-flex align-items-center justify-content-between">
+      <h2 class="card-title text-uppercase small text-muted m-0">Collections</h2>
+  
+      {% if !settings.read_only %}
+      <form class="form-inline" method="POST" style="float: right;">
+        <div class="input-group input-group-sm">
+          <input class="form-control" type="text" id="collection" name="collection" placeholder="Collection Name">
+          <span class="input-group-append">
+            <button type="submit" class="btn btn-primary pull-right">
+              <span class="glyphicon glyphicon-plus"></span>
+              Create collection
             </button>
-          </form>
-        </td>
-        {% endif %}
-      </tr>
-      {% endfor %}
+          </span>
+        </div><!-- /input-group -->
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-striped table-sm m-0">
+      <tbody>
+        {% for c in colls %}
+        <tr>
+          <td class="w-100 align-middle pl-3">
+            <a href="{{ dbUrl }}/{{ c | url_encode }}">{{ c }}</a>
+          </td>
+          <td>
+            <div class="dropdown show">
+              <a class="btn text-primary" href="#" role="button" id="dropdownAction" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+  
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAction">
+                <a class="dropdown-item" href="{{ dbUrl }}/{{ c | url_encode }}">View</a>
+                {% if !settings.read_only && !settings.no_delete %}
+                <form method="POST" action="{{ dbUrl }}/{{ c | url_encode }}">
+                  <input type="hidden" name="_method" value="delete">
+                  <button type="submit" hidden></button>
+                  <button type="button" class="dropdown-item text-danger deleteButton" collection-name="{{ c }}">
+                    Delete
+                  </button>
+                </form>
+                {% endif %}
+  
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ dbUrl }}/export/{{ c | url_encode }}">Export</a>
+                <a class="dropdown-item" href="{{ dbUrl }}/expArr/{{ c | url_encode }}">[JSON]</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item import-file-link">Upload</a>
+                <input hidden class="import-input-file" type="file" name="import-file" collection-name="{{ c | url_encode }}"/>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </div>
 </div>
+
+<div class="card mb-5">
+  {% if !settings.read_only %}
+  <!--div class="row">
+    <div class="col-md-6">
+      <h2>Create Collection</h2>
+      <form class="well form-inline" method="POST">
+          <div class="form-group">
+            <span class="add-on">{{ dbName }} . </span>
+            <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
+          </div>
+          <button type="submit" class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create collection
+          </button>
+      </form>
+    </div>
+  </div-->
+  <!--
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Create GridFS Bucket</h2>
+      <form class="well form-inline" method="POST">
+          <div class="form-group">
+            <span class="add-on">{{ dbName }} . </span>
+            <input class="input-medium" type="text" id="bucket" name="bucket" placeholder="Bucket Name" title="Bucket Name">
+          </div>
+          <button type="submit" class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create bucket
+          </button>
+      </form>
+    </div>
+  </div>
+  -->
+  {% endif %}
+
+  <div class="card-header border-bottom-0 py-3">
+    <h3 class="card-title text-uppercase small text-muted m-0">Database Stats</h3>
+  </div>
+
+  <div class="card-body p-0">
+    <table class="table table-striped m-0">
+      <tbody>
+        <tr>
+          <th class="w-50">Collections (incl. system.namespaces)</th>
+          <td>{{ stats.collections }}</td>
+        </tr>
+        <tr>
+          <th>Data Size</th>
+          <td>{{ stats.dataSize }}</td>
+        </tr>
+        <tr>
+          <th>Storage Size</th>
+          <td>{{ stats.storageSize }}</td>
+        </tr>
+        {% if stats.fileSize %}
+        <tr>
+          <th>File Size (on disk)</th>
+          <td>{{ stats.fileSize }}</td>
+        </tr>
+        {% endif %}
+        {% if stats.avgObjSize %}
+        <tr>
+          <th>Avg Obj Size #</th>
+          <td>{{ stats.avgObjSize }}</td>
+        </tr>
+        {% endif %}
+        {% if stats.objects %}
+        <tr>
+          <th>Objects #</th>
+          <td>{{ stats.objects }}</td>
+        </tr>
+        {% endif %}
+        {% if stats.numExtents %}
+        <tr>
+          <th>Extents #</th>
+          <td>{{ stats.numExtents }}</td>
+        </tr>
+        {% endif %}
+        {% if stats.extentFreeListNum %}
+        <tr>
+          <th>Extents Free List</th>
+          <td>{{ stats.extentFreeListNum }}</td>
+        </tr>
+        {% endif %}
+        {% if stats.indexes %}
+        <tr>
+          <th>Indexes #</th>
+          <td>{{ stats.indexes }}</td>
+        </tr>
+        {% endif %}
+        {% if stats.indexSize %}
+        <tr>
+          <th>Index Size</th>
+          <td>{{ stats.indexSize }}</td>
+        </tr>
+        {% endif %}
+        {% if stats.dataFileVersion %}
+        <tr>
+          <th>Data File Version</th>
+          <td>{{ stats.dataFileVersion }}</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% if grids.length && settings.gridFSEnabled %}
+  <div class="card">
+    <div class="card-header py-3">
+      <h3 class="card-title text-uppercase small text-muted m-0">GridFS Buckets</h3>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-striped table-sm m-0">
+        <tbody>
+          {% for b in grids %}
+          <tr>
+            <td class="w-100 align-middle pl-3">
+              <a href="{{ dbUrl }}/gridFS/{{ b }}">{{ b }}</a>
+            </td>
+            <td>
+              <div class="dropdown show">
+                <a class="btn text-primary" href="#" role="button" id="dropdownAction" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+    
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAction">
+                  <a class="dropdown-item" href="{{ dbUrl }}/gridFS/{{ b }}">View</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
 
 <div id="confirm-deletion" class="modal fade" role="dialog" aria-labelledby="confirmDeletionLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Delete collection</h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
       </div>
 
       <div class="modal-body">
         <p>
-          Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong> collection.
+          Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong>
+          collection.
         </p>
         <p>
           <label for="confirmation-input">Type the collection name to proceed.</label>
-          <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+          <input type="text" class="form-control" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
         </p>
       </div>
 
@@ -111,126 +257,6 @@
 
     </div>
   </div>
-</div>
-
-{% if grids.length && settings.gridFSEnabled %}
-  <h2>GridFS Buckets</h2>
-
-<table class="table table-bordered table-striped table-condensed">
-  {% for b in grids %}
-  <tr>
-    <td class="col-md-2">
-      <a href="{{ dbUrl }}/gridFS/{{ b }}" class="btn btn-success btn-block">
-        <span class="glyphicon glyphicon-eye-open"></span><br>View
-      </a>
-    </td>
-    <td><h3><a href="{{ dbUrl }}/gridFS/{{ b }}">{{ b }}</a></h3></td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
-
-{% if !settings.read_only %}
-<!--div class="row">
-  <div class="col-md-6">
-    <h2>Create Collection</h2>
-    <form class="well form-inline" method="POST">
-        <div class="form-group">
-          <span class="add-on">{{ dbName }} . </span>
-          <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
-        </div>
-        <button type="submit" class="btn btn-primary pull-right">
-          <span class="glyphicon glyphicon-plus"></span>
-          Create collection
-        </button>
-    </form>
-  </div>
-</div-->
-<!--
-<div class="row">
-  <div class="col-md-6">
-    <h2>Create GridFS Bucket</h2>
-    <form class="well form-inline" method="POST">
-        <div class="form-group">
-          <span class="add-on">{{ dbName }} . </span>
-          <input class="input-medium" type="text" id="bucket" name="bucket" placeholder="Bucket Name" title="Bucket Name">
-        </div>
-        <button type="submit" class="btn btn-primary pull-right">
-          <span class="glyphicon glyphicon-plus"></span>
-          Create bucket
-        </button>
-    </form>
-  </div>
-</div>
- -->
-{% endif %}
-
-<div class="panel panel-default stats">
-  <div class="panel-heading">
-    <h4 style="font-weight: bold;">Database Stats</h4>
-  </div>
-  <table class="table table-bordered table-striped">
-    <tr>
-      <td><strong>Collections (incl. system.namespaces)</strong></td>
-      <td>{{ stats.collections }}</td>
-    </tr>
-    <tr>
-      <td><strong>Data Size</strong></td>
-      <td>{{ stats.dataSize }}</td>
-    </tr>
-    <tr>
-      <td><strong>Storage Size</strong></td>
-      <td>{{ stats.storageSize }}</td>
-    </tr>
-    {% if stats.fileSize %}
-      <tr>
-      <td><strong>File Size (on disk)</strong></td>
-      <td>{{ stats.fileSize }}</td>
-      </tr>
-    {% endif %}
-    {% if stats.avgObjSize %}
-      <tr>
-      <td><strong>Avg Obj Size #</strong></td>
-      <td>{{ stats.avgObjSize }}</td>
-      </tr>
-    {% endif %}
-    {% if stats.objects %}
-      <tr>
-      <td><strong>Objects #</strong></td>
-      <td>{{ stats.objects }}</td>
-      </tr>
-    {% endif %}
-    {% if stats.numExtents %}
-      <tr>
-      <td><strong>Extents #</strong></td>
-      <td>{{ stats.numExtents }}</td>
-      </tr>
-    {% endif %}
-    {% if stats.extentFreeListNum %}
-      <tr>
-      <td><strong>Extents Free List</strong></td>
-      <td>{{ stats.extentFreeListNum }}</td>
-      </tr>
-    {% endif %}
-    {% if stats.indexes %}
-      <tr>
-      <td><strong>Indexes #</strong></td>
-      <td>{{ stats.indexes }}</td>
-      </tr>
-    {% endif %}
-    {% if stats.indexSize %}
-      <tr>
-      <td><strong>Index Size</strong></td>
-      <td>{{ stats.indexSize }}</td>
-      </tr>
-    {% endif %}
-    {% if stats.dataFileVersion %}
-      <tr>
-      <td><strong>Data File Version</strong></td>
-      <td>{{ stats.dataFileVersion }}</td>
-      </tr>
-    {% endif %}
-  </table>
 </div>
 
 {% endblock %}
