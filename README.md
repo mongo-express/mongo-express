@@ -77,19 +77,15 @@ Fill in your MongoDB connection details and any other options you want to change
 
 If you installed it globally, you can immediately start mongo-express like this:
 
-    mongo-express -u user -p password -d database
-
-You can access a remote database by providing MongoDB Host and Port:
-
-    mongo-express -u user -p password -d database -H mongoDBHost -P mongoDBPort
+    mongo-express --url mongodb://127.0.0.1:27017
 
 Or if you want to use it as an administrator:
 
-    mongo-express -a -u superuser -p password
+    mongo-express --admin --url mongodb://127.0.0.1:27017
 
 For help on configuration options:
 
-    mongo-express -h
+    mongo-express --help
 
 Usage (Express 4 middleware)
 ----------------------------
@@ -104,7 +100,7 @@ Usage (Express 4 middleware)
 Usage (Docker)
 --------------
 
-Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set `ME_CONFIG_MONGODB_SERVER` to the name/alias of your MongoDB container on your Docker network.
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set connection string `ME_CONFIG_MONGODB_URL` to the proper connection for your MongoDB container on your Docker network.
 
 **Use [the Docker Hub image](https://hub.docker.com/_/mongo-express/):**
 
@@ -125,12 +121,8 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
     Name                              | Default         | Description
     ----------------------------------|-----------------|------------
-    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image. If it is a replica set, use a comma delimited list of the host names.
-    `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
     `ME_CONFIG_MONGODB_URL`           | `mongodb://admin:pass@localhost:27017/db?ssl=false`
     `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access. Send strings: `"true"` or `"false"`.
-    `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
-    `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
     `ME_CONFIG_MONGODB_AUTH_DATABASE` | `db`            | Database name (only needed if `ENABLE_ADMIN` is `"false"`).
     `ME_CONFIG_MONGODB_AUTH_USERNAME` | `admin`         | Database username (only needed if `ENABLE_ADMIN` is `"false"`).
     `ME_CONFIG_MONGODB_AUTH_PASSWORD` | `pass`          | Database password (only needed if `ENABLE_ADMIN` is `"false"`).
@@ -167,7 +159,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
         -p 8081:8081 \
         -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
         -e ME_CONFIG_BASICAUTH_USERNAME="" \
-        -e ME_CONFIG_MONGODB_SERVER="db" \
+        -e ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
         mongo-express
 
 This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
