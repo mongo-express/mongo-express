@@ -1,54 +1,63 @@
+# 1.0-alpha.4 - Fri Jun 4, 2021
+Fix:
+- Fix invalid config fallback values [(#710)](https://github.com/mongo-express/mongo-express/pull/710)
+
+Deps:
+- Upgrade to GitHub-native Dependabot [(#682)](https://github.com/mongo-express/mongo-express/pull/682)
+- Bump webpack-cli from 4.1.0 to 4.7.0 [(#695)](https://github.com/mongo-express/mongo-express/pull/695)
+- Bump browserslist from 4.14.5 to 4.16.6 [(#707)](https://github.com/mongo-express/mongo-express/pull/707)
+
 # 1.0-alpha.2 - Mon Apr 3, 2021
 New:
-- Property to disable delete action [(#608)](https://github.com/mongo-express/mongo-express/pull/#608)
+- Property to disable delete action [(#608)](https://github.com/mongo-express/mongo-express/pull/608)
 
 Fix:
-- Fix boolean parameter parsing [(#604)](https://github.com/mongo-express/mongo-express/pull/#604)
-- Fix invalid default values for config [(#614)](https://github.com/mongo-express/mongo-express/pull/#614)
-- Fix query options bug from Mongodb breaking change [(#615)](https://github.com/mongo-express/mongo-express/pull/#615)
+- Fix boolean parameter parsing [(#604)](https://github.com/mongo-express/mongo-express/pull/604)
+- Fix invalid default values for config [(#614)](https://github.com/mongo-express/mongo-express/pull/614)
+- Fix query options bug from Mongodb breaking change [(#615)](https://github.com/mongo-express/mongo-express/pull/615)
 - Fix several XSS vulnerability [(#merge](https://github.com/mongo-express/mongo-express/commit/f5e0d4931f856f032f22664b5e5901d5950cfd4b)
 
 Deps:
-- Update babel to 7 [(#624)](https://github.com/mongo-express/mongo-express/pull/#624)
-- Update webpack to 5 [(#625)](https://github.com/mongo-express/mongo-express/pull/#625)
-- Update eslint [(#626)](https://github.com/mongo-express/mongo-express/pull/#626)
+- Update babel to 7 [(#624)](https://github.com/mongo-express/mongo-express/pull/624)
+- Update webpack to 5 [(#625)](https://github.com/mongo-express/mongo-express/pull/625)
+- Update eslint [(#626)](https://github.com/mongo-express/mongo-express/pull/626)
 
 
 # 1.0-alpha.1 - Mon Jun 22, 2020
 Breaking:
-- Change mongo-query-parser to 2.0. This changes how parsing works altogether and drop support for some advanced syntax but is safer [(#528)](https://github.com/mongo-express/mongo-express/pull/#528)
-- Rewrite the connection module to use mongo as much as possible and update mongodb to 3.5 [(#528)](https://github.com/mongo-express/mongo-express/pull/#528)
+- Change mongo-query-parser to 2.0. This changes how parsing works altogether and drop support for some advanced syntax but is safer [(#528)](https://github.com/mongo-express/mongo-express/pull/528)
+- Rewrite the connection module to use mongo as much as possible and update mongodb to 3.5 [(#528)](https://github.com/mongo-express/mongo-express/pull/528)
 
 New:
-- Add csv extension in file export [(#578)](https://github.com/mongo-express/mongo-express/pull/#578)
-- Don't drop the collection on Delete docs action when no query is provided. [(#502)](https://github.com/mongo-express/mongo-express/pull/#502)
-- Fix broken delete document for UUID (BinData 3 & 4) [(#538)](https://github.com/mongo-express/mongo-express/pull/#538)
+- Add csv extension in file export [(#578)](https://github.com/mongo-express/mongo-express/pull/578)
+- Don't drop the collection on Delete docs action when no query is provided. [(#502)](https://github.com/mongo-express/mongo-express/pull/502)
+- Fix broken delete document for UUID (BinData 3 & 4) [(#538)](https://github.com/mongo-express/mongo-express/pull/538)
 
 Deps:
-- Bump lodash to 4.6.2 [(#525)](https://github.com/mongo-express/mongo-express/pull/#525)
+- Bump lodash to 4.6.2 [(#525)](https://github.com/mongo-express/mongo-express/pull/525)
 
 
 # 0.54 - Tue Dec 24, 2019
 
 Breaking:
-- Change bson parsing to use mongo-query-parser [(#522)](https://github.com/mongo-express/mongo-express/pull/#522)
+- Change bson parsing to use mongo-query-parser [(#522)](https://github.com/mongo-express/mongo-express/pull/522)
 - Drop support for node 6
 
 New:
 - Support playing .wav file inline in collection [(#508)](https://github.com/mongo-express/mongo-express/pull/508)
 - Add node 12, and 13 to CI [(#517)](https://github.com/mongo-express/mongo-express/pull/517)
 - Add yarn.lock [(#515)](https://github.com/mongo-express/mongo-express/pull/515)
-- Fix broken save document for UUID (BinData 3 & 4) [(#537)](https://github.com/mongo-express/mongo-express/pull/#537)
+- Fix broken save document for UUID (BinData 3 & 4) [(#537)](https://github.com/mongo-express/mongo-express/pull/537)
 
 Deps:
 - Pin Event stream to 4.0 [(#514)](https://github.com/mongo-express/mongo-express/pull/514)
-- Bump bootstrap from 3.3.7 to 3.4.1 [(#523)](https://github.com/mongo-express/mongo-express/pull/#523)
-- Bump lodash from 4.17.11 to 4.17.13 [(#532)](https://github.com/mongo-express/mongo-express/pull/#532)
-- Bump jquery from 3.3.1 to 3.4.1 [(#530)](https://github.com/mongo-express/mongo-express/pull/#530)
-- Bump mixin-deep from 1.3.1 to 1.3.2 [(#526)](https://github.com/mongo-express/mongo-express/pull/#526)
-- Bump js-yaml from 3.12.0 to 3.13.1 [(#527)](https://github.com/mongo-express/mongo-express/pull/#527)
-- Bump cross-env from 3.2.4 to 6.0.3 [(#519)](https://github.com/mongo-express/mongo-express/pull/#519)
-- Bump concurrently from 3.6.1 to 5.0.0 [(#507)](https://github.com/mongo-express/mongo-express/pull/#507)
+- Bump bootstrap from 3.3.7 to 3.4.1 [(#523)](https://github.com/mongo-express/mongo-express/pull/523)
+- Bump lodash from 4.17.11 to 4.17.13 [(#532)](https://github.com/mongo-express/mongo-express/pull/532)
+- Bump jquery from 3.3.1 to 3.4.1 [(#530)](https://github.com/mongo-express/mongo-express/pull/530)
+- Bump mixin-deep from 1.3.1 to 1.3.2 [(#526)](https://github.com/mongo-express/mongo-express/pull/526)
+- Bump js-yaml from 3.12.0 to 3.13.1 [(#527)](https://github.com/mongo-express/mongo-express/pull/527)
+- Bump cross-env from 3.2.4 to 6.0.3 [(#519)](https://github.com/mongo-express/mongo-express/pull/519)
+- Bump concurrently from 3.6.1 to 5.0.0 [(#507)](https://github.com/mongo-express/mongo-express/pull/507)
 
 
 # 0.53 - Sat Jul 20, 2019
