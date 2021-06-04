@@ -2400,10 +2400,10 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-ejson-shell-parser@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/ejson-shell-parser/-/ejson-shell-parser-1.0.2.tgz#849742688932e66e877c3d481715b13db6f9eb0d"
-  integrity sha512-cXuXDWSrwsNovV8d1wNDvCifiqsj8vk1EyfusI5pWMTvTSVb195z2GMBQ6bgeoVv0or7yCV6aokLBU2aOIWwog==
+ejson-shell-parser@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ejson-shell-parser/-/ejson-shell-parser-1.1.1.tgz#d4fa04a4042bd1f8aeb4a291bfb1fe9ce271a115"
+  integrity sha512-I+1FreeR4SmuU8aYtQEyQDQIBLu0xGIWEfwoKp7mX891i6QEjxQz/lLFw1eho3IPYBjfmbTES0Jogi2GE+D1rA==
   dependencies:
     acorn "^7.4.0"
 
@@ -4446,20 +4446,19 @@ mongodb-language-model@^1.6.1:
   integrity sha512-hWZ1tZCvZ0YPDIyDhClS6p1RdYJAN2dX8vzAoklWjVlQOEXxjbYEFab6vZ0SgAx+K66bjBh9fp7JTTKiKNLVfA==
 
 mongodb-query-parser@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/mongodb-query-parser/-/mongodb-query-parser-2.1.2.tgz#229db52ea654ab866cb993f9e8bbaf138d905111"
-  integrity sha512-SxzpbwRQ16AgjzVeALz8+MEDILqGALcGbPj+fHmAfJUiQMfWu8zdMb550sMquwGudbgUTuTdjPctHE7NfYzkOA==
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/mongodb-query-parser/-/mongodb-query-parser-2.4.2.tgz#6f73edbf5efac2f87aaeb42a3b953d2e4cc7f0f2"
+  integrity sha512-AHEmmZ2/rDNfywW0GGUP1p2L4iUq4PQ6oqWpK9ny7nw3AnSiLed0LsO6ywHaQGVL/ehK7oUL7Yu3PvTpz/ukdw==
   dependencies:
     bson "^4.0.3"
     debug "^4.1.1"
-    ejson-shell-parser "^1.0.2"
+    ejson-shell-parser "^1.1.1"
     is-json "^2.0.1"
     javascript-stringify "^2.0.1"
     lodash "^4.17.15"
     lru-cache "^5.1.1"
     mongodb-extended-json "^1.10.2"
     mongodb-language-model "^1.6.1"
-    ms "^2.1.2"
 
 mongodb@^3.6.2:
   version "3.6.2"
@@ -4495,7 +4494,7 @@ ms@2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-ms@2.1.2, ms@^2.1.1, ms@^2.1.2:
+ms@2.1.2, ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
