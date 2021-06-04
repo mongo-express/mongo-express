@@ -3,6 +3,8 @@
 let mongo = {
   // Setting the connection string will only give access to that database
   // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
+  // It is RECOMMENDED to use connectionString instead of individual params, other options will be removed later.
+  // More info here: https://docs.mongodb.com/manual/reference/connection-string/
   connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL,
   host: '127.0.0.1',
   port: '27017',
@@ -74,8 +76,8 @@ function getConnectionStringFromEnvVariables() {
     // >>>> If you are using an admin mongodb account, or no admin account exists, fill out section below
     // >>>> Using an admin account allows you to view and edit all databases, and view stats
     // leave username and password empty if no admin account exists
-    username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username || dbAuthUsername,
-    password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password || dbAuthPassword,
+    username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username,
+    password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password,
   };
   const login = infos.username ? `${infos.username}:${infos.password}@` : '';
   return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
