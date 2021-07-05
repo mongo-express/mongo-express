@@ -69,7 +69,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-lodash": "^7.1.0",
     "jquery": "^3.5.1",
-    "mocha": "^8.2.0",
+    "mocha": "^9.0.2",
     "nodemon": "^2.0.0",
     "pre-commit": "1.2.2",
     "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
