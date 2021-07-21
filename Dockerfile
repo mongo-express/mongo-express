@@ -21,7 +21,7 @@ EXPOSE 8081
 
 # override some config defaults with values that will work better for docker
 ENV ME_CONFIG_EDITORTHEME="default" \
-    ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
+    ME_CONFIG_MONGODB_SERVER="mongo" \
     ME_CONFIG_MONGODB_ENABLE_ADMIN="true" \
     ME_CONFIG_BASICAUTH_USERNAME="" \
     ME_CONFIG_BASICAUTH_PASSWORD="" \
