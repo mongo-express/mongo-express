@@ -1,0 +1,41 @@
+
+name: standard-ci
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        node: [12, 14, 16]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    name: Node v${{ matrix.node }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Test
+      run: npm mocha
+
+    - name: Lint
+      run: npm run lint
+
