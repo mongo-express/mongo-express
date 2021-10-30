@@ -28,14 +28,14 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm ci
+      run: yarn install --frozen-lockfile
 
     - name: Build
-      run: npm run build
+      run: yarn build
 
     - name: Test
-      run: npm mocha
+      run: yarn mocha
 
     - name: Lint
-      run: npm run lint
+      run: yarn lint
 
