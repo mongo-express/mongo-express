@@ -47,7 +47,7 @@ if (config.options.console) {
 }
 
 commander
-  .version(require('./package').version)
+  .version(require('./package.json').version)
   .option('-U, --url <url>', 'connection string url')
   .option('-H, --host <host>', 'hostname or address of the db(deprecated)')
   .option('-P, --dbport <host>', 'port of the db(deprecated)')
