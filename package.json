@@ -54,16 +54,16 @@
     "update-notifier": "1.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "assets-webpack-plugin": "^6.0.3",
-    "babel-loader": "^8.1.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "assets-webpack-plugin": "^7.1.1",
+    "babel-loader": "^8.2.3",
     "bootstrap": "^3.3.7",
     "chai": "^4.2.0",
-    "clean-webpack-plugin": "^3.0.0",
+    "clean-webpack-plugin": "^4.0.0",
     "codemirror": "^5.23.0",
     "concurrently": "^5.3.0",
-    "copy-webpack-plugin": "^6.2.1",
+    "copy-webpack-plugin": "^9.0.1",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.22.0",
@@ -74,14 +74,14 @@
     "pre-commit": "1.2.2",
     "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
     "supertest": "^5.0.0",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^4.1.0"
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
   },
   "resolutions": {
     "**/event-stream": "^4.0.1"
   },
   "engines": {
-    "node": ">=10.0.0",
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0",
     "npm": ">=3.0.0"
   },
   "license": "MIT",
