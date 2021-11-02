@@ -95,12 +95,12 @@ module.exports = {
 
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public/images/*', to: 'img/[name].[ext]' },
+        { from: 'public/images/', to: 'img/' },
 
-        { from: path.join(codemirrorPath, '/lib/codemirror.css'), to: 'css/[name][ext]' },
-        { from: path.join(codemirrorPath, '/theme/*'), to: 'css/theme/[name][ext]' },
+        { from: path.join(codemirrorPath, '/lib/codemirror.css'), to: 'css/' },
+        { from: path.join(codemirrorPath, '/theme/'), to: 'css/theme/' },
 
-        { from: path.join(lineAwesomePath, '/dist/font-awesome-line-awesome/webfonts/*'), to: 'webfonts/[name].[ext]' },
+        { from: path.join(lineAwesomePath, '/dist/font-awesome-line-awesome/webfonts/'), to: 'webfonts/' },
       ],
     }),
 
