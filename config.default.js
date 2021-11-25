@@ -83,9 +83,6 @@ function getConnectionStringFromEnvVariables() {
   return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
 }
 
-const sslCA = 'ME_CONFIG_MONGODB_CA_FILE';
-const sslCAFromEnv = getBinaryFileEnv(sslCA);
-
 module.exports = {
   mongodb: {
     // if a connection string options such as server/port/etc are ignored
@@ -98,8 +95,8 @@ module.exports = {
       // sslValidate: validate mongod server certificate against CA
       sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
 
-      // sslCA: array of valid CA certificates
-      sslCA: sslCAFromEnv ? [sslCAFromEnv] : [],
+      // sslCA: single PEM file on disk
+      sslCA: process.env.ME_CONFIG_MONGODB_CA_FILE,
 
       // autoReconnect: automatically reconnect if connection is lost
       autoReconnect: true,
