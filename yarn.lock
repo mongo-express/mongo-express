@@ -1596,10 +1596,10 @@ bson@^1.0.1, bson@^1.1.4:
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.5.tgz#2aaae98fcdf6750c0848b0cba1ddec3c73060a34"
   integrity sha512-kDuEzldR21lHciPQAIulLs1LZlCXdLziXI6Mb/TDkwXhb//UORJNPXgcRs2CuO4H0DcMkpfT3/ySsP3unoZjBg==
 
-bson@^4.0.3, bson@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-4.2.0.tgz#15b5beffed6e44883de9922a2e1896fba4042cd4"
-  integrity sha512-c3MlJqdROnCRvDr/+MLfaDvQ7CvGI4p1hKX45/fvgzSwKRdOjsfRug1NJJ8ty5mXCNtUdjJEWzoZWcBQxV4TyA==
+bson@^4.2.0, bson@^4.6.1:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-4.6.3.tgz#d1a9a0b84b9e84b62390811fc5580f6a8b1d858c"
+  integrity sha512-rAqP5hcUVJhXP2MCSNVsf0oM2OGU1So6A9pVRDYayvJ5+hygXHQApf87wd5NlhPM1J9RJnbqxIG/f8QTzRoQ4A==
   dependencies:
     buffer "^5.6.0"
 
@@ -2113,7 +2113,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@4.3.2:
+debug@4.3.2, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
   integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
@@ -2126,13 +2126,6 @@ debug@^3.1.0, debug@^3.2.6:
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
   dependencies:
     ms "^2.1.1"
-
-debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.2.0.tgz#7f150f93920e94c58f5574c2fd01a3110effe7f1"
-  integrity sha512-IX2ncY78vDTjZMFUdmsvIRFY2Cf4FnD0wRs+nQwJU8Lu99/tPFdb0VybiiMTPe3I6rQmwsqQqRBvxU+bZ/I8sg==
-  dependencies:
-    ms "2.1.2"
 
 decamelize@^1.0.0:
   version "1.2.0"
@@ -2275,10 +2268,10 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-ejson-shell-parser@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/ejson-shell-parser/-/ejson-shell-parser-1.0.2.tgz#849742688932e66e877c3d481715b13db6f9eb0d"
-  integrity sha512-cXuXDWSrwsNovV8d1wNDvCifiqsj8vk1EyfusI5pWMTvTSVb195z2GMBQ6bgeoVv0or7yCV6aokLBU2aOIWwog==
+ejson-shell-parser@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ejson-shell-parser/-/ejson-shell-parser-1.1.1.tgz#d4fa04a4042bd1f8aeb4a291bfb1fe9ce271a115"
+  integrity sha512-I+1FreeR4SmuU8aYtQEyQDQIBLu0xGIWEfwoKp7mX891i6QEjxQz/lLFw1eho3IPYBjfmbTES0Jogi2GE+D1rA==
   dependencies:
     acorn "^7.4.0"
 
@@ -4019,20 +4012,19 @@ mongodb-language-model@^1.6.1:
   integrity sha512-hWZ1tZCvZ0YPDIyDhClS6p1RdYJAN2dX8vzAoklWjVlQOEXxjbYEFab6vZ0SgAx+K66bjBh9fp7JTTKiKNLVfA==
 
 mongodb-query-parser@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/mongodb-query-parser/-/mongodb-query-parser-2.1.2.tgz#229db52ea654ab866cb993f9e8bbaf138d905111"
-  integrity sha512-SxzpbwRQ16AgjzVeALz8+MEDILqGALcGbPj+fHmAfJUiQMfWu8zdMb550sMquwGudbgUTuTdjPctHE7NfYzkOA==
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/mongodb-query-parser/-/mongodb-query-parser-2.4.5.tgz#79e84ca419fa409a5040093259bac83d74f11af3"
+  integrity sha512-KkXZfph8aOvibxP44/7Z7Gv3XUHZ9Wr1AXdgrqzj10oom6/KWKL+GcudwGFh3/0uzV2NNe2qBA7m8AnS/fDT6g==
   dependencies:
-    bson "^4.0.3"
+    bson "^4.6.1"
     debug "^4.1.1"
-    ejson-shell-parser "^1.0.2"
+    ejson-shell-parser "^1.1.1"
     is-json "^2.0.1"
     javascript-stringify "^2.0.1"
     lodash "^4.17.15"
     lru-cache "^5.1.1"
     mongodb-extended-json "^1.10.2"
     mongodb-language-model "^1.6.1"
-    ms "^2.1.2"
 
 mongodb@^3.6.2:
   version "3.6.2"
@@ -4068,7 +4060,7 @@ ms@2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-ms@2.1.2, ms@^2.1.1, ms@^2.1.2:
+ms@2.1.2, ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
