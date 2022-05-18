@@ -54,11 +54,6 @@ function getFileEnv(envVariable) {
   return origVar;
 }
 
-function getBinaryFileEnv(envVariable) {
-  const fileVar = process.env[envVariable];
-  return getFile(fileVar);
-}
-
 const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER
   ? process.env.ME_CONFIG_MONGODB_SERVER.split(',')
   : false;
