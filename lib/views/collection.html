@@ -125,11 +125,17 @@
           <div class="form-group col-sm-6 col-md-5">
             <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="projection" name="projection" placeholder="Projection" title="Projection">{{ projection }}</textarea>
           </div>
-          <div class="form-group col-md-2">
-            <button style="height:150px;" type="submit" class="btn btn-primary btn-block">
+          <div class="col-md-2">
+            <div class="row">
+              <input type="checkbox" id="runAggregate" name="runAggregate" title="Run Aggregate" {% if runAggregate %} checked="checked"{% endif %}/>
+              <label for="runAggregate">Aggregate query</label>
+            </div>
+            <div class="row">
+            <button style="height:120px;" type="submit" class="btn btn-primary btn-block">
               <span class="glyphicon glyphicon-search"></span>
             Find
             </button>
+          </div>
           </div>
         </div>
       </form>
@@ -137,7 +143,7 @@
   </div>
   {% if !settings.read_only && !settings.no_delete && count > 0 %}
   <p>
-    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query|default('{}') }}&projection={{ projection }}">
+    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query|default('{}') }}&projection={{ projection }}&runAggregate={{ runAggregate }}">
       {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want #}
       <input type="hidden" name="_method" value="delete">
       <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
@@ -222,19 +228,19 @@
   {% if pagination %}
     <ul class="pager span7">
       <li class="previous{% if prev.skip < 0 %} disabled{% endif %}">
-        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
+        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
       </li>
 
       <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
+        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
       </li>
 
       <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
+        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
       </li>
 
       <li class="next{% if next.skip >= stats.count %} disabled{% endif %}">
-        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
+        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
       </li>
     </ul>
   {% endif %}
@@ -283,27 +289,27 @@
       <div class="text-center">
       <ul class="pagination">
         {%- if prev2.skip >= 0 %}
-        <li><a href="{{ collectionUrl }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
         {%- if prev.skip >= 0 %}
-        <li><a href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
-        <li class="active"><a href="{{ collectionUrl }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
+        <li class="active"><a href="{{ collectionUrl }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
 
         {%- if next.skip < stats.count %}
-        <li><a href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
 
         {%- if next2.skip < stats.count %}
-        <li><a href="{{ collectionUrl }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
