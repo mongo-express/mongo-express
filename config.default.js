@@ -78,6 +78,10 @@ function getConnectionStringFromEnvVariables() {
   return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
 }
 
+function getBoolean(str, defaultValue = false) {
+  return str ? str.toLowerCase() === 'true' : defaultValue;
+}
+
 module.exports = {
   mongodb: {
     // if a connection string options such as server/port/etc are ignored
@@ -85,10 +89,10 @@ module.exports = {
 
     connectionOptions: {
       // ssl: connect to the server using secure SSL
-      ssl: process.env.ME_CONFIG_MONGODB_SSL || mongo.ssl,
+      ssl: getBoolean(process.env.ME_CONFIG_MONGODB_SSL, mongo.ssl) || mongo.ssl,
 
       // sslValidate: validate mongod server certificate against CA
-      sslValidate: process.env.ME_CONFIG_MONGODB_SSLVALIDATE || true,
+      sslValidate: getBoolean(process.env.ME_CONFIG_MONGODB_SSLVALIDATE, true),
 
       // sslCA: single PEM file on disk
       sslCA: process.env.ME_CONFIG_MONGODB_CA_FILE,
@@ -103,9 +107,7 @@ module.exports = {
     // set admin to true if you want to turn on admin features
     // if admin is true, the auth list below will be ignored
     // if admin is true, you will need to enter an admin username/password below (if it is needed)
-    admin: process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN
-      ? process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN.toLowerCase() === 'true'
-      : false,
+    admin: getBoolean(process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN, false),
 
     // whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
@@ -124,7 +126,7 @@ module.exports = {
     requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '50mb',
     sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
     sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
-    sslEnabled: process.env.ME_CONFIG_SITE_SSL_ENABLED || false,
+    sslEnabled: getBoolean(process.env.ME_CONFIG_SITE_SSL_ENABLED, false),
     sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
   },
 
@@ -166,9 +168,7 @@ module.exports = {
     subprocessTimeout: 300,
 
     // readOnly: if readOnly is true, components of writing are not visible.
-    readOnly: process.env.ME_CONFIG_OPTIONS_READONLY
-      ? process.env.ME_CONFIG_OPTIONS_READONLY.toLowerCase() === 'true'
-      : false,
+    readOnly: getBoolean(process.env.ME_CONFIG_OPTIONS_READONLY, false),
 
     // collapsibleJSON: if set to true, jsons will be displayed collapsible
     collapsibleJSON: true,
@@ -179,9 +179,7 @@ module.exports = {
 
     // gridFSEnabled: if gridFSEnabled is set to 'true', you will be able to manage uploaded files
     // ( ak. grids, gridFS )
-    gridFSEnabled: process.env.ME_CONFIG_SITE_GRIDFS_ENABLED
-      ? process.env.ME_CONFIG_SITE_GRIDFS_ENABLED.toLowerCase() === 'true'
-      : false,
+    gridFSEnabled: getBoolean(process.env.ME_CONFIG_SITE_GRIDFS_ENABLED, false),
 
     // logger: this object will be used to initialize router logger (morgan)
     logger: {},
@@ -194,7 +192,7 @@ module.exports = {
     noExport: false,
 
     // noDelete: if noDelete is set to true, we won't show delete buttons
-    noDelete: process.env.ME_CONFIG_OPTIONS_NO_DELETE || false,
+    noDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_DELETE, false),
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
