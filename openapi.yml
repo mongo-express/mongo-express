@@ -1,0 +1,186 @@
+openapi: 3.0.0
+info:
+  title: mongo-express
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Index
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+
+        default:
+          description: Unexpected Error
+
+    post:
+      summary: Create Database
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                database:
+                  type: string
+                  example: testDatabase
+
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+
+  /{database}:
+    delete:
+      summary: Delete Database
+      parameters:
+        - in: path
+          name: database
+          schema:
+            type: string
+          required: true
+          description: Name of the database to delete
+
+      responses:
+        '200':
+          description: OK
+
+        default:
+          description: Unexpected Error
+
+  /db/{database}:
+    get:
+      summary: Get Database
+      parameters:
+        - in: path
+          name: database
+          schema:
+            type: string
+          required: true
+          description: Name of the database to get
+          example:
+            - test
+
+      responses:
+        '200':
+          description: OK
+
+        default:
+          description: Unexpected Error
+
+    post:
+      summary: Add Collection
+      parameters:
+        - in: path
+          name: database
+          schema:
+            type: string
+          required: true
+          description: Name of the database to add a collection to
+          example:
+            - test
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                collection:
+                  type: "string"
+                  example: "testCollection"
+
+      responses:
+        '200':
+          description: OK
+
+        default:
+          description: Unexpected Error
+
+  /db/{database}/{collection}:
+    get:
+      summary: Get Collection
+      parameters:
+        - in: path
+          name: database
+          schema:
+            type: string
+          required: true
+          description: Name of the database to get
+          example:
+            - test
+        - in: path
+          name: collection
+          schema:
+            type: string
+          required: true
+          description: Name of the collection to get
+          example:
+            - testCollection
+
+      responses:
+        '200':
+          description: OK
+
+        default:
+          description: Unexpected Error
+
+    delete:
+      summary: Delete Collection
+      parameters:
+        - in: path
+          name: database
+          schema:
+            type: string
+          required: true
+          description: Name of the database to delete the collection from
+          example:
+            - test
+        - in: path
+          name: collection
+          schema:
+            type: string
+          required: true
+          description: Name of the collection to delete
+          example:
+            - testCollection
+
+      responses:
+        '200':
+          description: OK
+
+        default:
+          description: Unexpected Error
+
+    
+
+  /checkValid:
+    post:
+      summary: Check Valid
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                document:
+                  type: object
+              required:
+                - document
+
+      responses:
+        '200':
+          description: OK
+
+        default:
+          description: Unexpected Error

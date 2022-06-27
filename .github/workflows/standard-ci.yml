@@ -45,3 +45,41 @@ jobs:
     - name: Lint
       run: yarn lint
 
+  security:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo
+        ports:
+        - 27017:27017
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    - name: Build
+      run: yarn build
+
+    - name: Start server
+      run: yarn start-dev &
+
+    - name: Run Mayhem for API to check for vulnerabilities
+      uses: ForAllSecure/mapi-action@v1
+      with:
+        mapi-token: ${{ secrets.MAPI_TOKEN }}
+        api-url: http://localhost:8081
+        api-spec: openapi.yml
+        target: jamesplace/mongo-express
+        run-args: |
+          --basic-auth
+          admin:pass
+          --ignore-rule
+          InvalidResponseSpec
+
