@@ -86,7 +86,6 @@
   },
   "license": "MIT",
   "scripts": {
-    "postinstall": "patch-package",
     "lint": "eslint .",
     "start": "cross-env NODE_ENV=production node app",
     "start-dev": "concurrently --kill-others \"nodemon app --watch lib\" \"npm run build-dev\"",
