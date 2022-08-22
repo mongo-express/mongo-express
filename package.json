@@ -44,6 +44,7 @@
     "gridfs-stream": "^1.1.1",
     "json2csv": "^3.7.1",
     "lodash": "~4.17.4",
+    "memorystore": "^1.6.7",
     "method-override": "^2.3.10",
     "mongodb": "^3.6.2",
     "mongodb-query-parser": "^2.1.2",
