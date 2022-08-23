@@ -89,7 +89,7 @@ module.exports = {
 
     connectionOptions: {
       // ssl: connect to the server using secure SSL
-      ssl: getBoolean(process.env.ME_CONFIG_MONGODB_SSL, mongo.ssl) || mongo.ssl,
+      ssl: getBoolean(process.env.ME_CONFIG_MONGODB_SSL, mongo.ssl),
 
       // sslValidate: validate mongod server certificate against CA
       sslValidate: getBoolean(process.env.ME_CONFIG_MONGODB_SSLVALIDATE, true),
