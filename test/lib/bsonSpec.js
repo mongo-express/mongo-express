@@ -18,8 +18,8 @@ describe('BSON', function () {
       });
     });
 
-    it('should convert ObjectID to BSON', function () {
-      const test = '{_id: ObjectID(), id2: ObjectId()}';
+    it('should convert ObjectId to BSON', function () {
+      const test = '{_id: ObjectId(), id2: ObjectId()}';
       const result = libBson.toBSON(test);
       expect(result).to.have.property('_id').to.be.an.instanceof(bson.ObjectId);
       expect(result).to.have.property('id2').to.be.an.instanceof(bson.ObjectId);
@@ -102,7 +102,7 @@ describe('BSON', function () {
       expect(test2).to.eql(test);
     });
 
-    it('should convert ObjectID to string', function () {
+    it('should convert ObjectId to string', function () {
       const test = {
         id: new bson.ObjectId(),
         id2: new bson.ObjectId('4fb1299686a989240b000001'),
@@ -177,12 +177,12 @@ describe('BSON', function () {
     it('should convert to a valid JSON string', function () {
       const doc = {
         dateObject: new Date(Date.UTC(2017, 1, 11)),
-        objectID: new mongodb.ObjectId('589f79826ea20d18e06b1c36'),
+        objectId: new mongodb.ObjectId('589f79826ea20d18e06b1c36'),
         someValue: 'someValue',
         nestedObject: { level1: { level2: 2 } },
       };
       const result = libBson.toJsonString(doc);
-      const expected = '{"dateObject":{"$date":"2017-02-11T00:00:00Z"},"objectID":{"$oid":"589f79826ea20d18e06b1c36"},"someValue":"someValue","nestedObject":{"level1":{"level2":2}}}'; // eslint-disable-line max-len
+      const expected = '{"dateObject":{"$date":"2017-02-11T00:00:00Z"},"objectId":{"$oid":"589f79826ea20d18e06b1c36"},"someValue":"someValue","nestedObject":{"level1":{"level2":2}}}'; // eslint-disable-line max-len
       expect(result).to.equal(expected);
       const parsed = JSON.parse(result);
       expect(parsed.someValue).to.equal(doc.someValue);

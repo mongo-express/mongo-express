@@ -239,11 +239,11 @@ All numbers in Javascript are 64-bit floating points.
 
 **ObjectID/ObjectId**
 
-    ObjectID()
+    ObjectId()
 
 Creates a new Object ID type.
 
-    ObjectID(id)
+    ObjectId(id)
 
 Use Object ID with the given 24-digit hexadecimal string.
 
@@ -265,7 +265,7 @@ Uses ISODate object with the given timestamp.
 
     DBRef(collection, objectID, database)
 
-Object ID is the ID string, not the ObjectID type.
+Object ID is the ID string, not the ObjectId type.
 
 The database value is optional.
 
@@ -307,7 +307,7 @@ Example Document
 Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
 
     {
-      "_id": ObjectID(), // or ObjectId()
+      "_id": ObjectId(),
       "dates": {
         "date": ISODate("2012-05-14T16:20:09.314Z"),
         "new_date": ISODate(),
