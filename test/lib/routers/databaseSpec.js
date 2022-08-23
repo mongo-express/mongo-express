@@ -4,7 +4,6 @@ const { expect } = require('chai');
 
 const httpUtils = require('../../testHttpUtils');
 const mongoUtils = require('../../testMongoUtils');
-const { asPromise } = require('../../testUtils');
 
 const dbName = mongoUtils.testDbName;
 const collectionName = mongoUtils.testCollectionName;
@@ -23,7 +22,7 @@ describe('Router database', () => {
       close = server.close;
     }));
 
-  it('GET /db/<dbName> should return html', () => asPromise((cb) => request.get(`/db/${dbName}`).expect(200).end(cb))
+  it('GET /db/<dbName> should return html', () => request.get(`/db/${dbName}`).expect(200)
     .then((res) => {
       expect(res.text).to.match(new RegExp(`<title>${dbName} - Mongo Express</title>`));
       expect(res.text).to.match(new RegExp(`<a href="/db/${dbName}/${urlColName}">${collectionName}</a>`));

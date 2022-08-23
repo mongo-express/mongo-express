@@ -4,7 +4,6 @@ const { expect } = require('chai');
 
 const httpUtils = require('../../testHttpUtils');
 const mongoUtils = require('../../testMongoUtils');
-const { asPromise } = require('../../testUtils');
 
 describe('Router index', () => {
   let request;
@@ -19,7 +18,7 @@ describe('Router index', () => {
       close = server.close;
     }));
 
-  it('GET / should return html', () => asPromise((cb) => request.get('/').expect(200).end(cb))
+  it('GET / should return html', () => request.get('/').expect(200)
     .then((res) => {
       expect(res.text).to.match(/<title>Home - Mongo Express<\/title>/);
       expect(res.text).to.match(/<h4 style="font-weight: bold;">Databases<\/h4>/);
