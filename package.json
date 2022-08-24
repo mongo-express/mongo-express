@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
-    "bluebird": "^3.7.2",
     "body-parser": "^1.18.3",
     "bson": "^4.2.0",
     "busboy": "^1.6.0",
