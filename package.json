@@ -46,7 +46,7 @@
     "lodash": "~4.17.4",
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
-    "mongodb": "^3.6.2",
+    "mongodb": "^4.9.0",
     "mongodb-query-parser": "^2.1.2",
     "morgan": "^1.9.0",
     "patch-package": "^6.4.7",

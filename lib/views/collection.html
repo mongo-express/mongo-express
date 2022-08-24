@@ -101,7 +101,7 @@
             <option value="R" {% if type == 'R' %}selected {% endif %}>Regex</option>
             <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
             <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
-            <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
+            <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectId</option>
           </select>
         </div>
         <div class="form-group col-sm-6 col-md-2">
@@ -161,7 +161,7 @@
       </div>
       <div class="modal-body" id = "document-modal-body">
         <textarea id="document" name="document">{
-        "_id": ObjectID()
+        "_id": ObjectId()
 }</textarea>
       </div>
 
