@@ -1,9 +1,9 @@
 'use strict';
 
 const { MongoClient } = require('mongodb');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
 const mongoConfig = require('./testMongoConfig');
-const { asPromise } = require('./testUtils');
 
 exports.testData = [
   { testItem: 1 },
@@ -12,6 +12,7 @@ exports.testData = [
   { testItem: 4 },
 ];
 
+let mongod;
 let currentTestData;
 exports.getCurrentTestData = () => currentTestData;
 exports.getFirstDocumentId = () => exports.getCurrentTestData()[0]._id.toString();
@@ -20,22 +21,27 @@ exports.testCollectionName = 'test/items';
 exports.testDbName = mongoConfig.dbName;
 exports.testURLCollectionName = encodeURIComponent(exports.testCollectionName);
 
-exports.createConnection = () => asPromise(
-  (cb) => MongoClient.connect(mongoConfig.makeConnectionUrl(), cb),
-);
+exports.createConnection = async () => {
+  if (!mongod) {
+    mongod = await MongoMemoryServer.create();
+    mongoConfig.uri = mongod.getUri();
+  }
 
-exports.createTestCollection = (client) => asPromise(
-  (cb) => client.db().collection(exports.testCollectionName).insertMany(exports.testData, cb),
-).then((results) => {
-  currentTestData = results.ops;
+  return MongoClient.connect(mongoConfig.makeConnectionUrl());
+};
+
+exports.createTestCollection = async (client) => {
+  const insertResults = await client.db().collection(exports.testCollectionName).insertMany(exports.testData);
+  const ids = Object.values(insertResults.insertedIds);
+  const results = await client.db().collection(exports.testCollectionName).find({ _id: { $in: ids } }).toArray();
+  currentTestData = results;
+
   return results;
-});
+};
 
-exports.dropTestCollection = (client) => asPromise(
-  (cb) => client.db().collection(exports.testCollectionName).drop(cb),
-);
+exports.dropTestCollection = (client) => client.db().collection(exports.testCollectionName).drop();
 
-exports.closeDb = (client) => asPromise((cb) => client.close(cb));
+exports.closeDb = (client) => client.close();
 
 exports.initializeDb = () => exports.createConnection()
   .then((client) => exports.createTestCollection(client).then(() => client));

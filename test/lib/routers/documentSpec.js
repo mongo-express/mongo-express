@@ -4,7 +4,6 @@ const { expect } = require('chai');
 
 const httpUtils = require('../../testHttpUtils');
 const mongoUtils = require('../../testMongoUtils');
-const { asPromise } = require('../../testUtils');
 
 const dbName = mongoUtils.testDbName;
 // const collectionName = mongoUtils.testCollectionName;
@@ -25,7 +24,7 @@ describe('Router document', () => {
 
   it('GET /db/<dbName>/<collection>/<document> should return html', () => {
     const docId = mongoUtils.getFirstDocumentId();
-    return asPromise((cb) => request.get(httpUtils.getDocumentUrl(dbName, urlColName, docId)).expect(200).end(cb))
+    return request.get(httpUtils.getDocumentUrl(dbName, urlColName, docId)).expect(200)
       .then((res) => {
         expect(res.text).to.match(new RegExp(`<title>${docId} - Mongo Express</title>`));
       });
