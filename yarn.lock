@@ -1353,7 +1353,7 @@ acorn@^7.4.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-acorn@^8.5.0, acorn@^8.7.1:
+acorn@^8.1.0, acorn@^8.5.0, acorn@^8.7.1:
   version "8.8.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.0.tgz#88c0187620435c7f6015803f5539dae05a9dbea8"
   integrity sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==
@@ -1706,7 +1706,7 @@ bson@^1.0.1:
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.5.tgz#2aaae98fcdf6750c0848b0cba1ddec3c73060a34"
   integrity sha512-kDuEzldR21lHciPQAIulLs1LZlCXdLziXI6Mb/TDkwXhb//UORJNPXgcRs2CuO4H0DcMkpfT3/ySsP3unoZjBg==
 
-bson@^4.0.3, bson@^4.2.0, bson@^4.7.0:
+bson@^4.2.0, bson@^4.6.1, bson@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/bson/-/bson-4.7.0.tgz#7874a60091ffc7a45c5dd2973b5cad7cded9718a"
   integrity sha512-VrlEE4vuiO1WTpfof4VmaVolCVYkYTgB9iWgYNOrVlnifpME/06fhFRmONgBhClD5pFC1t9ZWqFUQEQAzY43bA==
@@ -2414,12 +2414,12 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-ejson-shell-parser@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/ejson-shell-parser/-/ejson-shell-parser-1.0.2.tgz#849742688932e66e877c3d481715b13db6f9eb0d"
-  integrity sha512-cXuXDWSrwsNovV8d1wNDvCifiqsj8vk1EyfusI5pWMTvTSVb195z2GMBQ6bgeoVv0or7yCV6aokLBU2aOIWwog==
+ejson-shell-parser@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/ejson-shell-parser/-/ejson-shell-parser-1.1.3.tgz#2d931c5ee3b89509e9d682b9b595b825b709127c"
+  integrity sha512-orcYkWWPW9OWwQ8wHalCBGLvNchfwlGxge5ueAxrDv90xmf2e7wXuNRYiJvA9gPqwnOXpok9Ka+J0YA9nORFSg==
   dependencies:
-    acorn "^7.4.0"
+    acorn "^8.1.0"
 
 electron-to-chromium@^1.4.202:
   version "1.4.228"
@@ -3923,15 +3923,7 @@ lowercase-keys@^3.0.0:
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-3.0.0.tgz#c5e7d442e37ead247ae9db117a9d0a467c89d4f2"
   integrity sha512-ozCC6gdQ+glXOQsveKD0YsDy8DSQFjDTz4zyzEHNV5+JP5D62LmfDZ6o1cycFx9ouG940M5dE8C8CTewdj2YWQ==
 
-lru-cache@^4.0.1:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
-  integrity sha512-fFEhvcgzuIoJVUF8fYr5KR0YqxD238zgObTps31YdADwPPAp82a4M8TrckkWyx7ekNlf9aBcVn81cFwwXngrJA==
-  dependencies:
-    pseudomap "^1.0.2"
-    yallist "^2.1.2"
-
-lru-cache@^4.0.3:
+lru-cache@^4.0.1, lru-cache@^4.0.3:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
   integrity sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==
@@ -4202,20 +4194,19 @@ mongodb-memory-server@^8.9.0:
     tslib "^2.4.0"
 
 mongodb-query-parser@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/mongodb-query-parser/-/mongodb-query-parser-2.1.2.tgz#229db52ea654ab866cb993f9e8bbaf138d905111"
-  integrity sha512-SxzpbwRQ16AgjzVeALz8+MEDILqGALcGbPj+fHmAfJUiQMfWu8zdMb550sMquwGudbgUTuTdjPctHE7NfYzkOA==
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/mongodb-query-parser/-/mongodb-query-parser-2.4.6.tgz#1fb249061dcd347e93aeb80cafdc48cbdec1c4ee"
+  integrity sha512-R9uU//1IlhPPIGvB4ItMwus3E7nJJtBtrSrTV6wTslwDQfL6bpy9PXcIXVHdDsuJADQZdcvdvpj22VxdfqH2ig==
   dependencies:
-    bson "^4.0.3"
+    bson "^4.6.1"
     debug "^4.1.1"
-    ejson-shell-parser "^1.0.2"
+    ejson-shell-parser "^1.1.3"
     is-json "^2.0.1"
     javascript-stringify "^2.0.1"
     lodash "^4.17.15"
     lru-cache "^5.1.1"
     mongodb-extended-json "^1.10.2"
     mongodb-language-model "^1.6.1"
-    ms "^2.1.2"
 
 mongodb@^4.9.0, mongodb@~4.9.0:
   version "4.9.0"
@@ -4255,7 +4246,7 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-ms@2.1.3, ms@^2.1.1, ms@^2.1.2:
+ms@2.1.3, ms@^2.1.1:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
