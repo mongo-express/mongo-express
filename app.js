@@ -25,7 +25,7 @@ let sslOptions;
 notifier.notify();
 
 try {
-  // eslint-disable-next-line import/no-unresolved
+  // eslint-disable-next-line import/no-unresolved, import/extensions
   config = utils.deepmerge(require('./config.default'), require('./config'));
 } catch (e) {
   if (e.code === 'MODULE_NOT_FOUND') {
@@ -47,7 +47,7 @@ if (config.options.console) {
 }
 
 commander
-  .version(require('./package').version)
+  .version(pkg.version)
   .option('-U, --url <url>', 'connection string url')
   .option('-H, --host <host>', 'hostname or address of the db(deprecated)')
   .option('-P, --dbport <host>', 'port of the db(deprecated)')
