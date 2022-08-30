@@ -22,6 +22,10 @@ const bootstrapPath = resolveModulePath('bootstrap');
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
+  performance: {
+    maxEntrypointSize: 768000,
+    maxAssetSize: 768000,
+  },
   entry: {
     index: {
       import: './lib/scripts/index.js',
