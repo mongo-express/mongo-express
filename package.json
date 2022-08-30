@@ -39,7 +39,7 @@
     "express": "4.18.1",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.15.6",
-    "flat": "^2.0.1",
+    "flat": "^5.0.2",
     "gridfs-stream": "^1.1.1",
     "json2csv": "^3.7.1",
     "lodash": "~4.17.4",
