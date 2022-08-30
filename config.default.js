@@ -168,6 +168,9 @@ module.exports = {
     // readOnly: if readOnly is true, components of writing are not visible.
     readOnly: getBoolean(process.env.ME_CONFIG_OPTIONS_READONLY, false),
 
+    // persistEditMode: if set to true, remain on same page after clicked on Save button
+    persistEditMode: getBoolean(process.env.ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE, false),
+
     // collapsibleJSON: if set to true, jsons will be displayed collapsible
     collapsibleJSON: true,
 
