@@ -24,7 +24,7 @@ module.exports = {
   mode: isProd ? 'production' : 'development',
   performance: {
     maxEntrypointSize: 768000,
-    maxAssetSize: 768000
+    maxAssetSize: 768000,
   },
   entry: {
     index: {
