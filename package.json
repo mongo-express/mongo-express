@@ -48,7 +48,6 @@
     "mongodb": "^4.9.0",
     "mongodb-query-parser": "^2.4.6",
     "morgan": "^1.9.0",
-    "patch-package": "^6.4.7",
     "serve-favicon": "^2.5.0",
     "swig-templates": "2.0.3",
     "update-notifier": "6.0.2"
@@ -87,7 +86,6 @@
   },
   "license": "MIT",
   "scripts": {
-    "postinstall": "patch-package",
     "lint": "eslint .",
     "start": "cross-env NODE_ENV=production node app",
     "start-dev": "concurrently --kill-others \"nodemon app --watch lib\" \"npm run build-dev\"",
