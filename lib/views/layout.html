@@ -62,7 +62,11 @@
 </nav>
 
 
+{% if settings.fullwidth_layout %}
+<div class="container-fluid">
+{% else %}  
 <div class="container">
+{% endif %}
   <div class="row">
     <div class="col-md-12">
       <div class="page-header main-title">

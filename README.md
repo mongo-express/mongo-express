@@ -135,6 +135,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
     `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
     `ME_CONFIG_OPTIONS_READONLY`      | `false`         | if readOnly is true, components of writing are not visible.
+    `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`    | `false`   | if set to true an alternative page layout is used utilizing full window width.
     `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`   | `false`   | if set to true, remain on same page after clicked on Save button
     `ME_CONFIG_OPTIONS_NO_DELETE`      | `false`        | if noDelete is true, components of deleting are not visible.
     `ME_CONFIG_SITE_SSL_ENABLED`      | `false`         | Enable SSL.

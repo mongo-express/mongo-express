@@ -192,6 +192,9 @@ module.exports = {
     // noExport: if noExport is set to true, we won't show export buttons
     noExport: false,
 
+    // fullwidthLayout: if set to true an alternative page layout is used utilizing full window width
+    fullwidthLayout: getBoolean(process.env.ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT, false),
+
     // noDelete: if noDelete is set to true, we won't show delete buttons
     noDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_DELETE, false),
   },
