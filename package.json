@@ -49,8 +49,7 @@
     "mongodb-query-parser": "^2.4.6",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.5.0",
-    "swig-templates": "2.0.3",
-    "update-notifier": "6.0.2"
+    "swig-templates": "2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

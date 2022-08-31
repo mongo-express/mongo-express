@@ -8,21 +8,16 @@ const commander       = require('commander');
 const express         = require('express');
 const fs              = require('fs');
 const https           = require('https');
-const updateNotifier  = require('update-notifier');
 const middleware      = require('./lib/middleware');
 const utils           = require('./lib/utils');
 const pkg             = require('./package.json');
 
 const app               = express();
-const notifier          = updateNotifier({ pkg });
 
 let config;
 let defaultPort = 80;
 let server      = app;
 let sslOptions;
-
-// Notify of any updates
-notifier.notify();
 
 try {
   // eslint-disable-next-line import/no-unresolved, import/extensions

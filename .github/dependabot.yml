@@ -13,6 +13,3 @@ updates:
   - dependency-name: json2csv
     versions:
     - 5.0.5
-  - dependency-name: update-notifier
-    versions:
-    - 5.0.1
