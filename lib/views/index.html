@@ -122,8 +122,14 @@
   <tr>
     <td><strong>Uptime</strong></td>
     <td>{{ info.uptime }} seconds {% if info.uptime > 86400 %} ({{ Math.floor( info.uptime/86400 ) }} days) {% endif %}</td>
+    <td class="span2"><strong>Node Version</strong></td>
+    <td class="span3" id="nodeVersion">{{ process.versions.node }}</td>
+  </tr>
+  <tr>
     <td><strong>Server Time</strong></td>
     <td>{{ info.localTime|date('r') }}</td>
+    <td class="span2"><strong>V8 Version</strong></td>
+    <td class="span3" id="v8Version">{{ process.versions.v8 }}</td>
   </tr>
   <tr><td colspan="4">&nbsp;</td></tr>
   <tr>
