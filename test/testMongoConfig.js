@@ -1,8 +1,12 @@
-'use strict';
+let uri;
+const dbName = 'mongo-express-test-db';
 
-module.exports = {
+export default {
   host: 'localhost',
   port: 27017,
-  dbName: 'mongo-express-test-db',
-  makeConnectionUrl: () => `${module.exports.uri}${module.exports.dbName}`,
+  dbName,
+  makeConnectionUrl: () => `${uri}${dbName}`,
+  setUri: (newUri) => {
+    uri = newUri;
+  },
 };

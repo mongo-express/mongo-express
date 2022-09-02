@@ -1,30 +1,29 @@
-'use strict';
+import { expect } from 'chai';
 
-const { expect } = require('chai');
+import { createServer, getDocumentUrl } from '../../testHttpUtils.js';
+import {
+  cleanAndCloseDb, initializeDb, getFirstDocumentId, testDbName as dbName, testURLCollectionName,
+} from '../../testMongoUtils.js';
 
-const httpUtils = require('../../testHttpUtils');
-const mongoUtils = require('../../testMongoUtils');
-
-const dbName = mongoUtils.testDbName;
 // const collectionName = mongoUtils.testCollectionName;
-const urlColName = mongoUtils.testURLCollectionName;
+const urlColName = testURLCollectionName;
 
 describe('Router document', () => {
   let request;
   let close;
   let db;
-  before(() => mongoUtils.initializeDb()
+  before(() => initializeDb()
     .then((newDb) => {
       db = newDb;
-      return httpUtils.createServer();
+      return createServer();
     }).then((server) => {
       request = server.request;
       close = server.close;
     }));
 
   it('GET /db/<dbName>/<collection>/<document> should return html', () => {
-    const docId = mongoUtils.getFirstDocumentId();
-    return request.get(httpUtils.getDocumentUrl(dbName, urlColName, docId)).expect(200)
+    const docId = getFirstDocumentId();
+    return request.get(getDocumentUrl(dbName, urlColName, docId)).expect(200)
       .then((res) => {
         expect(res.text).to.match(new RegExp(`<title>${docId} - Mongo Express</title>`));
       });
@@ -35,7 +34,7 @@ describe('Router document', () => {
   it('PUT /db/<dbName>/<collection>/<document> should update the document');
 
   after(() => Promise.all([
-    mongoUtils.cleanAndCloseDb(db),
+    cleanAndCloseDb(db),
     close(),
   ]));
 });

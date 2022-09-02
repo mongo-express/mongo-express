@@ -1,11 +1,9 @@
-'use strict';
+import supertest from 'supertest';
 
-const supertest = require('supertest');
+import defaultConf from './testDefaultConfig.js';
+import middleware from '../lib/middleware.js';
 
-const defaultConf = require('./testDefaultConfig');
-const middleware = require('../lib/middleware');
-
-exports.createServer = async () => {
+export const createServer = async () => {
   const app = await middleware(defaultConf());
   const httpServer = app.listen();
   const request = supertest.agent(httpServer);
@@ -13,4 +11,4 @@ exports.createServer = async () => {
   return ({ request, close: () => httpServer.close() });
 };
 
-exports.getDocumentUrl = (db, collection, documentId) => `/db/${db}/${collection}/${JSON.stringify(documentId)}`;
+export const getDocumentUrl = (db, collection, documentId) => `/db/${db}/${collection}/${JSON.stringify(documentId)}`;

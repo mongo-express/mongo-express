@@ -1,11 +1,13 @@
-'use strict';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
+import path from 'path';
+import AssetsPlugin from 'assets-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-const webpack = require('webpack');
-const path = require('path');
-const AssetsPlugin = require('assets-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const require = createRequire(import.meta.url);
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const env = process.env.NODE_ENV || 'development';
 const isDev = env === 'development';
 const isProd = !isDev;
@@ -13,14 +15,13 @@ const isProd = !isDev;
 const fileSuffix = isDev ? '' : '-[chunkhash].min';
 
 function resolveModulePath(name) {
-  const packageJson = '/package.json';
-  return path.dirname(require.resolve(`${name}${packageJson}`));
+  return path.dirname(require.resolve(`${name}/package.json`));
 }
 
 const codemirrorPath = resolveModulePath('codemirror');
 const bootstrapPath = resolveModulePath('bootstrap');
 
-module.exports = {
+export default {
   mode: isProd ? 'production' : 'development',
   performance: {
     maxEntrypointSize: 768000,

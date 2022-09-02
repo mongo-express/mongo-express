@@ -1,4 +1,4 @@
-'use strict';
+import fs from 'fs';
 
 let mongo = {
   // Setting the connection string will only give access to that database
@@ -29,8 +29,6 @@ const dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
 
 function getFile(filePath) {
   if (typeof filePath !== 'undefined' && filePath) {
-    const fs = require('fs');
-
     try {
       if (fs.existsSync(filePath)) {
         return fs.readFileSync(filePath);
@@ -82,7 +80,7 @@ function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
 }
 
-module.exports = {
+export default {
   mongodb: {
     // if a connection string options such as server/port/etc are ignored
     connectionString: mongo.connectionString || getConnectionStringFromEnvVariables(),

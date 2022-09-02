@@ -1,6 +1,8 @@
 extends: airbnb-base
+parser: '@babel/eslint-parser'
 parserOptions:
-  sourceType: script
+  requireConfigFile: false
+  sourceType: module
 env:
   node: true
   es6: true
@@ -30,6 +32,7 @@ rules:
   prefer-template: off
   no-underscore-dangle: off
 
+  import/extensions: [error, always]
   import/no-extraneous-dependencies:
     - error
     - devDependencies:

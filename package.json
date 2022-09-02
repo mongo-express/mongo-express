@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "author": "https://github.com/mongo-express",
   "name": "mongo-express",
+  "type": "module",
   "description": "Web-based admin interface for MongoDB",
   "keywords": [
     "admin",
@@ -42,7 +43,7 @@
     "flat": "^5.0.2",
     "gridfs-stream": "^1.1.1",
     "json2csv": "^3.7.1",
-    "lodash": "~4.17.4",
+    "lodash-es": "^4.17.21",
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
     "mongodb": "^4.9.0",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.18.9",
     "@babel/preset-env": "^7.16.0",
     "assets-webpack-plugin": "^7.1.1",
     "babel-loader": "^8.2.3",
@@ -86,8 +88,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "start": "cross-env NODE_ENV=production node app",
-    "start-dev": "concurrently --kill-others \"nodemon app --watch lib\" \"npm run build-dev\"",
+    "start": "cross-env NODE_ENV=production node app.js",
+    "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"npm run build-dev\"",
     "build-dev": "webpack --watch",
     "build": "cross-env NODE_ENV=production webpack",
     "test": "npm run mocha && npm run lint",
@@ -98,6 +100,6 @@
   "pre-commit": [
     "test"
   ],
-  "main": "./middleware",
+  "exports": "./middleware",
   "browserslist": "defaults"
 }

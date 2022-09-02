@@ -1,11 +1,9 @@
-'use strict';
+import { MongoClient } from 'mongodb';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
-const { MongoClient } = require('mongodb');
-const { MongoMemoryServer } = require('mongodb-memory-server');
+import mongoConfig from './testMongoConfig.js';
 
-const mongoConfig = require('./testMongoConfig');
-
-exports.testData = [
+export const testData = [
   { testItem: 1 },
   { testItem: 2 },
   { testItem: 3 },
@@ -14,37 +12,37 @@ exports.testData = [
 
 let mongod;
 let currentTestData;
-exports.getCurrentTestData = () => currentTestData;
-exports.getFirstDocumentId = () => exports.getCurrentTestData()[0]._id.toString();
+export const getCurrentTestData = () => currentTestData;
+export const getFirstDocumentId = () => getCurrentTestData()[0]._id.toString();
 
-exports.testCollectionName = 'test/items';
-exports.testDbName = mongoConfig.dbName;
-exports.testURLCollectionName = encodeURIComponent(exports.testCollectionName);
+export const testCollectionName = 'test/items';
+export const testDbName = mongoConfig.dbName;
+export const testURLCollectionName = encodeURIComponent(testCollectionName);
 
-exports.createConnection = async () => {
+export const createConnection = async () => {
   if (!mongod) {
     mongod = await MongoMemoryServer.create();
-    mongoConfig.uri = mongod.getUri();
+    mongoConfig.setUri(mongod.getUri());
   }
 
   return MongoClient.connect(mongoConfig.makeConnectionUrl());
 };
 
-exports.createTestCollection = async (client) => {
-  const insertResults = await client.db().collection(exports.testCollectionName).insertMany(exports.testData);
+export const createTestCollection = async (client) => {
+  const insertResults = await client.db().collection(testCollectionName).insertMany(testData);
   const ids = Object.values(insertResults.insertedIds);
-  const results = await client.db().collection(exports.testCollectionName).find({ _id: { $in: ids } }).toArray();
+  const results = await client.db().collection(testCollectionName).find({ _id: { $in: ids } }).toArray();
   currentTestData = results;
 
   return results;
 };
 
-exports.dropTestCollection = (client) => client.db().collection(exports.testCollectionName).drop();
+export const dropTestCollection = (client) => client.db().collection(testCollectionName).drop();
 
-exports.closeDb = (client) => client.close();
+export const closeDb = (client) => client.close();
 
-exports.initializeDb = () => exports.createConnection()
-  .then((client) => exports.createTestCollection(client).then(() => client));
+export const initializeDb = () => createConnection()
+  .then((client) => createTestCollection(client).then(() => client));
 
-exports.cleanAndCloseDb = (client) => exports.dropTestCollection(client)
-  .then(() => exports.closeDb(client));
+export const cleanAndCloseDb = (client) => dropTestCollection(client)
+  .then(() => closeDb(client));
