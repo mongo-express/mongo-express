@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 
 let mongo = {
   // Setting the connection string will only give access to that database

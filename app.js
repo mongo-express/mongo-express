@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
+import fs from 'node:fs';
+import https from 'node:https';
 import clc from 'cli-color';
-import csrf from 'csurf';
 import commander from 'commander';
+import csrf from 'csurf';
 import express from 'express';
-import fs from 'fs';
-import https from 'https';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 
