@@ -7,7 +7,6 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
 
 const require = createRequire(import.meta.url);
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const env = process.env.NODE_ENV || 'development';
 const isDev = env === 'development';
 const isProd = !isDev;
@@ -58,7 +57,7 @@ export default {
   },
   output: {
     filename: `[name]${fileSuffix}.js`,
-    path: path.join(__dirname, 'build'),
+    path: fileURLToPath(new URL('build', import.meta.url)),
     publicPath: 'public/',
   },
 
