@@ -8,6 +8,7 @@ import csrf from 'csurf';
 import express from 'express';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
+import configDefault from './config.default.js';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
@@ -18,7 +19,6 @@ let server = app;
 let sslOptions;
 
 const loadConfig = async () => {
-  const configDefault = (await import('./config.default.js')).default;
   const configExist = fs.existsSync('./config.js');
   if (configExist === true) {
     try {
