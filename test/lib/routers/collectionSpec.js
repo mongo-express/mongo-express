@@ -1,22 +1,18 @@
-'use strict';
+import { expect } from 'chai';
 
-const { expect } = require('chai');
-
-const httpUtils = require('../../testHttpUtils');
-const mongoUtils = require('../../testMongoUtils');
-
-const dbName = mongoUtils.testDbName;
-const collectionName = mongoUtils.testCollectionName;
-const urlColName = mongoUtils.testURLCollectionName;
+import { createServer } from '../../testHttpUtils.js';
+import {
+  cleanAndCloseDb, initializeDb, testCollectionName as collectionName, testDbName as dbName, testURLCollectionName as urlColName,
+} from '../../testMongoUtils.js';
 
 describe('Router collection', () => {
   let request;
   let close;
   let client;
-  before(() => mongoUtils.initializeDb()
+  before(() => initializeDb()
     .then((newClient) => {
       client = newClient;
-      return httpUtils.createServer();
+      return createServer();
     }).then((server) => {
       request = server.request;
       close = server.close;
@@ -42,7 +38,7 @@ describe('Router collection', () => {
   it('GET /db/<dbName>/updateCollections/<collection> should updateCollections');
 
   after(() => Promise.all([
-    mongoUtils.cleanAndCloseDb(client),
+    cleanAndCloseDb(client),
     close(),
   ]));
 });

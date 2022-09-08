@@ -1,22 +1,18 @@
-'use strict';
+import { expect } from 'chai';
 
-const { expect } = require('chai');
-
-const httpUtils = require('../../testHttpUtils');
-const mongoUtils = require('../../testMongoUtils');
-
-const dbName = mongoUtils.testDbName;
-const collectionName = mongoUtils.testCollectionName;
-const urlColName = mongoUtils.testURLCollectionName;
+import { createServer } from '../../testHttpUtils.js';
+import {
+  initializeDb, cleanAndCloseDb, testCollectionName as collectionName, testDbName as dbName, testURLCollectionName as urlColName,
+} from '../../testMongoUtils.js';
 
 describe('Router database', () => {
   let request;
   let close;
   let db;
-  before(() => mongoUtils.initializeDb()
+  before(() => initializeDb()
     .then((newDb) => {
       db = newDb;
-      return httpUtils.createServer();
+      return createServer();
     }).then((server) => {
       request = server.request;
       close = server.close;
@@ -32,7 +28,7 @@ describe('Router database', () => {
   it('DEL /<dbName> should delete the db');
 
   after(() => Promise.all([
-    mongoUtils.cleanAndCloseDb(db),
+    cleanAndCloseDb(db),
     close(),
   ]));
 });
