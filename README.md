@@ -43,6 +43,10 @@ View album for more screenshots: (server status, database views etc..)
 Development
 -----------------
 
+For test or develop with the latest version you can install using this git repository:
+
+    npm i mongo-express@git+https://github.com/mongo-express/mongo-express.git#master
+
 Copy config.default.js to config.js and edit the default property to fit your local environment
 
 **Run the development build using:**
