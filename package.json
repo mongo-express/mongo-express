@@ -42,7 +42,7 @@
     "express-session": "^1.15.6",
     "flat": "^5.0.2",
     "gridfs-stream": "^1.1.1",
-    "json2csv": "^3.7.1",
+    "json2csv": "^5.0.7",
     "lodash-es": "^4.17.21",
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
