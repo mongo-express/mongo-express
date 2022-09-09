@@ -4025,14 +4025,6 @@ methods@^1.1.2, methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
-micromatch@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-4.0.2.tgz#4fcb0999bf9fbc2fcbdd212f6d629b9a56c39259"
-  integrity sha512-y7FpHSbMUMoyPbYUSzO6PaZ6FyRnQOpHuKwbo1G+Knck95XVU4QAiKdGEnj5wwoS7PlOgthX/09u5iFJ+aYf5Q==
-  dependencies:
-    braces "^3.0.1"
-    picomatch "^2.0.5"
-
 micromatch@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-4.0.4.tgz#896d519dfe9db25fce94ceb7a500919bf881ebf9"
@@ -4215,9 +4207,9 @@ mongodb-query-parser@^2.4.6:
     mongodb-language-model "^1.6.1"
 
 mongodb@^4.9.0, mongodb@~4.9.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-4.9.0.tgz#58618439b721f2d6f7d38bb10a4612e29d7f1c8a"
-  integrity sha512-tJJEFJz7OQTQPZeVHZJIeSOjMRqc5eSyXTt86vSQENEErpkiG7279tM/GT5AVZ7TgXNh9HQxoa2ZkbrANz5GQw==
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-4.9.1.tgz#0c769448228bcf9a6aa7d16daa3625b48312479e"
+  integrity sha512-ZhgI/qBf84fD7sI4waZBoLBNJYPQN5IOC++SBCiPiyhzpNKOxN/fi0tBHvH2dEC42HXtNEbFB0zmNz4+oVtorQ==
   dependencies:
     bson "^4.7.0"
     denque "^2.1.0"
@@ -4560,7 +4552,7 @@ picocolors@^1.0.0:
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
   integrity sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==
 
-picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1:
+picomatch@^2.0.4, picomatch@^2.2.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
   integrity sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==
