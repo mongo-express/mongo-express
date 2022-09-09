@@ -2,7 +2,8 @@ mongo-express
 ===
 
 [![npm version](https://badge.fury.io/js/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![npm](https://img.shields.io/npm/dm/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![GitHub stars](https://img.shields.io/github/stars/mongo-express/mongo-express.svg)](https://github.com/mongo-express/mongo-express/stargazers) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
-[![Build Status](https://travis-ci.org/mongo-express/mongo-express.svg?branch=master)](https://travis-ci.org/mongo-express/mongo-express)
+[![Build Status](https://github.com/mongo-express/mongo-express/actions/workflows/standard-ci.yml/badge.svg?branch=master)](https://github.com/mongo-express/mongo-express/actions/workflows/standard-ci.yml)
+
 
 Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
 
@@ -30,9 +31,9 @@ Features
 Screenshots
 -----------
 
-Home Page | Database View | Collection View | Editing A Document
---- | --- | --- | ---
-<img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
+| Home Page                                                                      | Database View                                                                                    | Collection View                                                                       | Editing A Document                                                     |
+|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| <img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" /> |
 
 These screenshots are from version 0.30.40
 View album for more screenshots: (server status, database views etc..)
@@ -41,6 +42,10 @@ View album for more screenshots: (server status, database views etc..)
 
 Development
 -----------------
+
+For test or develop with the latest version you can install using this git repository:
+
+    npm i mongo-express@git+https://github.com/mongo-express/mongo-express.git#master
 
 Copy config.default.js to config.js and edit the default property to fit your local environment
 
@@ -77,19 +82,15 @@ Fill in your MongoDB connection details and any other options you want to change
 
 If you installed it globally, you can immediately start mongo-express like this:
 
-    mongo-express -u user -p password -d database
-
-You can access a remote database by providing MongoDB Host and Port:
-
-    mongo-express -u user -p password -d database -H mongoDBHost -P mongoDBPort
+    mongo-express --url mongodb://127.0.0.1:27017
 
 Or if you want to use it as an administrator:
 
-    mongo-express -a -u superuser -p password
+    mongo-express --admin --url mongodb://127.0.0.1:27017
 
 For help on configuration options:
 
-    mongo-express -h
+    mongo-express --help
 
 Usage (Express 4 middleware)
 ----------------------------
@@ -104,7 +105,7 @@ Usage (Express 4 middleware)
 Usage (Docker)
 --------------
 
-Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set `ME_CONFIG_MONGODB_SERVER` to the name/alias of your MongoDB container on your Docker network.
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set connection string `ME_CONFIG_MONGODB_URL` to the proper connection for your MongoDB container on your Docker network.
 
 **Use [the Docker Hub image](https://hub.docker.com/_/mongo-express/):**
 
@@ -125,12 +126,8 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
     Name                              | Default         | Description
     ----------------------------------|-----------------|------------
-    `ME_CONFIG_MONGODB_SERVER`        |`mongo` or `localhost`| MongoDB host name or IP address. The default is `localhost` in the config file and `mongo` in the docker image. If it is a replica set, use a comma delimited list of the host names.
-    `ME_CONFIG_MONGODB_PORT`          | `27017`         | MongoDB port.
     `ME_CONFIG_MONGODB_URL`           | `mongodb://admin:pass@localhost:27017/db?ssl=false`
     `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access. Send strings: `"true"` or `"false"`.
-    `ME_CONFIG_MONGODB_ADMINUSERNAME` | ` `             | Administrator username.
-    `ME_CONFIG_MONGODB_ADMINPASSWORD` | ` `             | Administrator password.
     `ME_CONFIG_MONGODB_AUTH_DATABASE` | `db`            | Database name (only needed if `ENABLE_ADMIN` is `"false"`).
     `ME_CONFIG_MONGODB_AUTH_USERNAME` | `admin`         | Database username (only needed if `ENABLE_ADMIN` is `"false"`).
     `ME_CONFIG_MONGODB_AUTH_PASSWORD` | `pass`          | Database password (only needed if `ENABLE_ADMIN` is `"false"`).
@@ -142,6 +139,8 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
     `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
     `ME_CONFIG_OPTIONS_READONLY`      | `false`         | if readOnly is true, components of writing are not visible.
+    `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`    | `false`   | if set to true an alternative page layout is used utilizing full window width.
+    `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`   | `false`   | if set to true, remain on same page after clicked on Save button
     `ME_CONFIG_OPTIONS_NO_DELETE`     | `false`         | if noDelete is true, components of deleting are not visible.
     `ME_CONFIG_OPTIONS_NO_RAW_COMMAND`| `false`         | if noRawCommand is true, the Raw tab in collection view is not visible.
     `ME_CONFIG_SITE_SSL_ENABLED`      | `false`         | Enable SSL.
@@ -150,7 +149,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_SITE_SSL_KEY_PATH`     | ` `             | SSL key file.
     `ME_CONFIG_SITE_GRIDFS_ENABLED`   | `false`         | Enable gridFS to manage uploaded files.
     `VCAP_APP_HOST`                   | `localhost`     | address that mongo-express will listen on for incoming connections.
-    `VCAP_APP_PORT`                   | `8081`          | port that mongo-express will run on.
+    `PORT`                            | `8081`          | port that mongo-express will run on.
     `ME_CONFIG_MONGODB_CA_FILE`       | ``              | CA certificate File
     `ME_CONFIG_BASICAUTH_USERNAME_FILE`     | ``        | File version of ME_CONFIG_BASICAUTH_USERNAME
     `ME_CONFIG_BASICAUTH_PASSWORD_FILE`     | ``        | File version of ME_CONFIG_BASICAUTH_PASSWORD
@@ -168,7 +167,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
         -p 8081:8081 \
         -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
         -e ME_CONFIG_BASICAUTH_USERNAME="" \
-        -e ME_CONFIG_MONGODB_SERVER="db" \
+        -e ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
         mongo-express
 
 This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
@@ -247,11 +246,11 @@ All numbers in Javascript are 64-bit floating points.
 
 **ObjectID/ObjectId**
 
-    ObjectID()
+    ObjectId()
 
 Creates a new Object ID type.
 
-    ObjectID(id)
+    ObjectId(id)
 
 Use Object ID with the given 24-digit hexadecimal string.
 
@@ -273,7 +272,7 @@ Uses ISODate object with the given timestamp.
 
     DBRef(collection, objectID, database)
 
-Object ID is the ID string, not the ObjectID type.
+Object ID is the ID string, not the ObjectId type.
 
 The database value is optional.
 
@@ -315,7 +314,7 @@ Example Document
 Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
 
     {
-      "_id": ObjectID(), // or ObjectId()
+      "_id": ObjectId(),
       "dates": {
         "date": ISODate("2012-05-14T16:20:09.314Z"),
         "new_date": ISODate(),

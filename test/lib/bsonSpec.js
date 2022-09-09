@@ -1,10 +1,8 @@
-'use strict';
+import { expect } from 'chai';
+import mongodb from 'mongodb';
+import * as bson from 'bson';
 
-const expect = require('chai').expect;
-const mongodb = require('mongodb');
-const bson = require('bson');
-
-const libBson = require('../../lib/bson');
+import * as libBson from '../../lib/bson.js';
 
 describe('BSON', function () {
   describe('toBSON', function () {
@@ -18,8 +16,8 @@ describe('BSON', function () {
       });
     });
 
-    it('should convert ObjectID to BSON', function () {
-      const test = '{_id: ObjectID(), id2: ObjectId()}';
+    it('should convert ObjectId to BSON', function () {
+      const test = '{_id: ObjectId(), id2: ObjectId()}';
       const result = libBson.toBSON(test);
       expect(result).to.have.property('_id').to.be.an.instanceof(bson.ObjectId);
       expect(result).to.have.property('id2').to.be.an.instanceof(bson.ObjectId);
@@ -102,7 +100,7 @@ describe('BSON', function () {
       expect(test2).to.eql(test);
     });
 
-    it('should convert ObjectID to string', function () {
+    it('should convert ObjectId to string', function () {
       const test = {
         id: new bson.ObjectId(),
         id2: new bson.ObjectId('4fb1299686a989240b000001'),
@@ -139,14 +137,15 @@ describe('BSON', function () {
         ref2: new bson.DBRef('coll', new bson.ObjectId('57b80f922128ccef64333288'), 'db'),
       };
       const result = libBson.toString(test);
-      const expected = `{\n    ref: DBRef('coll', '57b80f922128ccef64333288', ''),\n    ref2: DBRef('coll', '57b80f922128ccef64333288', 'db')\n}`;
+      // eslint-disable-next-line max-len
+      const expected = '{\n    ref: DBRef(\'coll\', \'57b80f922128ccef64333288\'),\n    ref2: DBRef(\'coll\', \'57b80f922128ccef64333288\', \'db\')\n}';
       expect(result).to.eql(expected);
     });
 
     it('should convert Symbol to string', function () {
       const test = { symbol: new bson.BSONSymbol('test') };
       const result = libBson.toString(test);
-      expect(result).to.eql(`{\n    symbol: {\n        value: 'test'\n    }\n}`);
+      expect(result).to.eql('{\n    symbol: {\n        value: \'test\'\n    }\n}');
     });
 
     it('should convert MinKey to string', function () {
@@ -168,7 +167,7 @@ describe('BSON', function () {
     it('should convert Code to string', function () {
       const test = { code: new bson.Code('function() { x; }') };
       const result = libBson.toString(test);
-      expect(result).to.eql(`{\n    code: Code('function() { x; }')\n}`);
+      expect(result).to.eql('{\n    code: Code(\'function() { x; }\')\n}');
     });
   });
 
@@ -176,12 +175,12 @@ describe('BSON', function () {
     it('should convert to a valid JSON string', function () {
       const doc = {
         dateObject: new Date(Date.UTC(2017, 1, 11)),
-        objectID: new mongodb.ObjectId('589f79826ea20d18e06b1c36'),
+        objectId: new mongodb.ObjectId('589f79826ea20d18e06b1c36'),
         someValue: 'someValue',
         nestedObject: { level1: { level2: 2 } },
       };
       const result = libBson.toJsonString(doc);
-      const expected = '{"dateObject":{"$date":"2017-02-11T00:00:00Z"},"objectID":{"$oid":"589f79826ea20d18e06b1c36"},"someValue":"someValue","nestedObject":{"level1":{"level2":2}}}'; // eslint-disable-line max-len
+      const expected = '{"dateObject":{"$date":"2017-02-11T00:00:00Z"},"objectId":{"$oid":"589f79826ea20d18e06b1c36"},"someValue":"someValue","nestedObject":{"level1":{"level2":2}}}'; // eslint-disable-line max-len
       expect(result).to.equal(expected);
       const parsed = JSON.parse(result);
       expect(parsed.someValue).to.equal(doc.someValue);
