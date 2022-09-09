@@ -3,90 +3,62 @@
 {% block title %}{{ collectionName }}{% endblock %}
 
 
-{% block head %}
-<link href="{{ baseHref }}stylesheets/codemirror.css" rel="stylesheet">
-<script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-compressed.js"></script>
-<script type="text/javascript">
-'use strict';
+{% block styles %}
+<link href="{{ baseHref }}public/css/codemirror.css" rel="stylesheet">
 
-function getParameterByName(name) {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-  var results = regex.exec(location.search);
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-}
+{% if editorTheme != "default" %}
+<link href="{{ baseHref }}public/css/theme/{{ editorTheme }}.css" rel="stylesheet">
+{% endif %}
 
-jQuery(document).ready(function ($) {
-  $('#tabs').tab();
-  if (document.location.href.indexOf('query=') >= 0 && getParameterByName('query') !== '') {
-    $('#tabs a[href="#advanced"]').tab('show');
+<style type="text/css">
+  .modal-body .CodeMirror .CodeMirror-scroll {
+    height: 100%;
   }
-});
 
-</script>
+  .tab-pane > form {
+    padding-bottom: 5px;
+  }
 
-  {% if editorTheme != "default" %}
-  <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
-  {% endif %}
+  .sorting-button {
+    white-space: nowrap;
+  }
 
-  <style type="text/css">
-    .CodeMirror-scroll {
-      height: 120px;
-      overflow: auto;
+  @media (min-width: 992px) { /* meduim and up */
+    #advanced .form-group .btn {
+      height: 150px;
     }
+  }
 
-    .modal-body .CodeMirror .CodeMirror-scroll {
-      height: auto;
-      min-height: 200px;
-      overflow-y: hidden;
-      overflow-x: auto;
-      width: 100%;
-    }
-
-    .tab-pane > form {
-      padding-bottom: 5px;
-    }
-
-    .sorting-button {
-      white-space: nowrap;
-    }
-    
-    @media (min-width: 992px) { /* meduim and up */
-      #advanced .form-group .btn {
-        height: 150px;
-      }
-    }
-
-    #indexes td {
-      vertical-align: middle;
-    }
-  </style>
+  #indexes td {
+    vertical-align: middle;
+  }
+</style>
 {% endblock %}
 
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+    <a href="{{ dbUrl }}">Database:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db | url_encode }}</a></li>
       {% endfor %}
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="{{ dbUrl }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">Collection:</a>
+    <a href="{{ collectionUrl }}">Collection:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for collection in collections %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
+      <li><a href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
       {% endfor %}
     </ul>
   </li>
@@ -95,9 +67,13 @@ jQuery(document).ready(function ($) {
 {% block content %}
   {% if !settings.read_only %}
     <p>
-      <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large btn-block">
+      <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large">
         <span class="glyphicon glyphicon-pencil"></span>
         New Document
+      </button>
+      <button type="button" data-toggle="modal" data-target="#addIndex" class="btn btn-success btn-large">
+        <span class="glyphicon glyphicon-pencil"></span>
+        New Index
       </button>
     </p>
   {% endif %}
@@ -108,7 +84,7 @@ jQuery(document).ready(function ($) {
   </ul>
   <div id="my-tab-content" class="tab-content">
     <div class="tab-pane active" id="simple">
-      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="{{ collectionUrl }}">
         {% for column in columns %}
           <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
         {% endfor %}
@@ -125,7 +101,7 @@ jQuery(document).ready(function ($) {
             <option value="R" {% if type == 'R' %}selected {% endif %}>Regex</option>
             <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
             <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
-            <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
+            <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectId</option>
           </select>
         </div>
         <div class="form-group col-sm-6 col-md-2">
@@ -138,7 +114,7 @@ jQuery(document).ready(function ($) {
       </form>
     </div>
     <div class="tab-pane" id="advanced">
-      <form class="well" method="get" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+      <form class="well" method="get" action="{{ collectionUrl }}">
         {% for column in columns %}
           <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
         {% endfor %}
@@ -149,19 +125,25 @@ jQuery(document).ready(function ($) {
           <div class="form-group col-sm-6 col-md-5">
             <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="projection" name="projection" placeholder="Projection" title="Projection">{{ projection }}</textarea>
           </div>
-          <div class="form-group col-md-2">
-            <button style="height:150px;" type="submit" class="btn btn-primary btn-block">
+          <div class="col-md-2">
+            <div class="row">
+              <input type="checkbox" id="runAggregate" name="runAggregate" title="Run Aggregate" {% if runAggregate %} checked="checked"{% endif %}/>
+              <label for="runAggregate">Aggregate query</label>
+            </div>
+            <div class="row">
+            <button style="height:120px;" type="submit" class="btn btn-primary btn-block">
               <span class="glyphicon glyphicon-search"></span>
             Find
             </button>
+          </div>
           </div>
         </div>
       </form>
     </div>
   </div>
-  {% if !settings.read_only && count > 0 %}
+  {% if !settings.read_only && !settings.no_delete && count > 0 %}
   <p>
-    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}">
+    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query|default('{}') }}&projection={{ projection }}&runAggregate={{ runAggregate }}">
       {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want #}
       <input type="hidden" name="_method" value="delete">
       <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
@@ -177,16 +159,15 @@ jQuery(document).ready(function ($) {
   <div class="modal fade" id="addDocument" role="dialog" tabindex="-1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    <form id="addDocumentForm" method="post" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">
+    <form id="addDocumentForm" method="post" action="{{ collectionUrl }}">
 
       <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
         <h2>Add Document</h2>
       </div>
-
-      <div class="modal-body">
+      <div class="modal-body" id = "document-modal-body">
         <textarea id="document" name="document">{
-        "_id": ObjectID()
+        "_id": ObjectId()
 }</textarea>
       </div>
 
@@ -204,52 +185,39 @@ jQuery(document).ready(function ($) {
   </div>
 <!-- End Add Document Modal -->
 
-<script>
-var checkValidJSON = function() {
-  $.ajax({
-    type: 'POST',
-    url: '{{ baseHref }}checkValid',
-    data: {
-      document: addDoc.getValue(),
-    },
-  }).done(function(data) {
-    if (data === 'Valid') {
-      $('#documentInvalidJSON').remove();
-      $('#addDocumentForm').submit();
-    } else if ($('#documentInvalidJSON').length === 0) {
-      $('.modal-body').parent().append('<div id="documentInvalidJSON" class="alert alert-danger"><strong>Invalid JSON</strong></div>');
-    }
-  });
-  return false;
-};
+<!-- Add Index Modal -->
+<div class="modal fade" id="addIndex" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form id="addIndexForm" method="post" action="{{ dbUrl }}/addIndex/{{ collectionName | url_encode }}">
 
-var addDoc = CodeMirror.fromTextArea(document.getElementById('document'), {
-  mode: { name: 'javascript', json: true },
-  indentUnit: 4,
-  electricChars: true,
-  matchBrackets: true,
-  lineNumbers: true,
-  theme: '{{ editorTheme }}',
-});
-$('#addDocument').on('shown.bs.modal', function() {
-  addDoc.refresh();
-  addDoc.focus();
-});
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h2>Add Indexes</h2>
+        <span>
+          A document that contains the field and value pairs where the field
+          is the index key. 1 for an ascending and -1 for a descending index.
+        </span>
+      </div>
+      <div class="modal-body" id = "index-modal-body">
+        <textarea id="index" name="index">{
+        "key": 1
+}</textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-error" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" onclick="return checkValidIndexJSON()">
+             <span class="glyphicon glyphicon-pencil"></span>
+          Save
+        </button>
+      </div>
 
-{% if collapsibleJSON %}
-$(function() {
-  // convert all objects to renderjson elements
-  $('div.tableContent pre').each(function() {
-    var text = $.trim($(this).text());
+    </form>
+    </div>
+    </div>
+  </div>
+<!-- End Add Index Modal -->
 
-    if (text) {
-      $(this).html(renderjson(JSON.parse(text)));
-    }
-  });
-});
-renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
-{% endif %}
-</script>
 
   {% if documents.length == 0 %}
     <p class="well">
@@ -260,19 +228,19 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
   {% if pagination %}
     <ul class="pager span7">
       <li class="previous{% if prev.skip < 0 %} disabled{% endif %}">
-        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
+        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
       </li>
 
       <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-        <a{% if prev.skip >= 0 %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
+        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
       </li>
 
       <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
+        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
       </li>
 
       <li class="next{% if next.skip >= stats.count %} disabled{% endif %}">
-        <a{% if next.skip < stats.count %} href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
+        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
       </li>
     </ul>
   {% endif %}
@@ -293,11 +261,15 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
         {% endfor %}
       </thead>
       {% for document in docs %}
-        <tr>
+        {% if document._id._bsontype == 'Binary' %}
+        <tr onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+        {% else %}
+        <tr onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+        {% endif %}
           {% for column in columns %}
             <td><div class="tableContent">
-              {% if !settings.read_only && column === '_id' && collectionName !== 'system.indexes' %}
-                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
+              {% if !settings.read_only && !settings.no_delete && column === '_id' && collectionName !== 'system.indexes' %}
+                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
                 <input type="hidden" name="_method" value="delete">
 				<button class="btn btn-info" onclick="loadDocument('{{ document._id | json | safe | url_encode }}')">
 					<span class="glyphicon glyphicon-link"></span>
@@ -325,27 +297,27 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
       <div class="text-center">
       <ul class="pagination">
         {%- if prev2.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
         {%- if prev.skip >= 0 %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {%- endif %}
 
-        <li class="active"><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
+        <li class="active"><a href="{{ collectionUrl }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
 
         {%- if next.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
 
         {%- if next2.skip < stats.count %}
-        <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
+        <li><a href="{{ collectionUrl }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
         {% else %}
         <li><a>&nbsp;</a></li>
         {% endif %}
@@ -360,7 +332,7 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     {% if !settings.read_only %}
       <div class="col-md-12">
         <h2>Rename Collection</h2>
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
+        <form method="POST" action="{{ collectionUrl }}" class="well form-inline">
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
             <span class="add-on">{{ dbName }} . </span>
@@ -377,202 +349,67 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
   </div>
   <h2>Tools</h2>
   <div class="row">
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
-      <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/export/{{ collectionName }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
-      </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
-      <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ collectionName }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
-      </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
-      <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/expCsv/{{ collectionName }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-floppy-save"></span><br>Export --csv
-      </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 {% if !settings.read_only %}col-lg-3{% endif %}">
-      <div class="well">
-      <a href="{{ baseHref }}db/{{ dbName }}/reIndex/{{ collectionName }}" class="btn btn-warning btn-block">
-        <span class="glyphicon glyphicon-resize-small"></span><br>Reindex
-      </a>
-      </div>
-    </div>
-
-    {% if !settings.read_only %}
-      <div class="col-sm-6 col-lg-3">
+    {% if !settings.me_no_export %}
+      <div class="col-sm-4 {% if !settings.read_only %}col-lg-3{% endif %}">
         <div class="well">
-          <a href="{{ baseHref }}db/{{ dbName }}/compact/{{ collectionName }}" class="btn btn-danger btn-block">
-            <span class="glyphicon glyphicon-resize-small"></span><br>Compact
+          <a href="{{ dbUrl }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
+          </a>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="well">
+          <a href="{{ dbUrl }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
+          </a>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="well">
+          <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span><br>Export --csv
           </a>
         </div>
       </div>
     {% endif %}
 
+    <div class="col-sm-4">
+      <div class="well">
+        <a href="{{ dbUrl }}/reIndex/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
+          <span class="glyphicon glyphicon-resize-small"></span><br>Reindex
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="well">
+        <a class="btn btn-warning btn-block import-file-link">
+          <span class="glyphicon glyphicon-cloud-upload"></span><br>Import --mongoexport json
+        </a>
+        <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ collectionName | url_encode }}"/>
+      </div>
+    </div>
+
     {% if !settings.read_only %}
-      <div class="col-sm-6 col-lg-3">
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
+      <div class="col-sm-4">
+        <div class="well">
+          <a href="{{ dbUrl }}/compact/{{ collectionName | url_encode }}" class="btn btn-danger btn-block">
+            <span class="glyphicon glyphicon-resize-small"></span><br>Compact
+          </a>
+        </div>
+      </div>
+    {% if !settings.no_delete %}
+      <div class="col-sm-4">
+        <form method="POST" action="{{ collectionUrl }}" class="well">
+        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" class="hidden" />
-          <button class="btn btn-danger deleteButtonCollection btn-block" collection-name="{{ collectionName }}" childof="db-{{ dbName }}-{{ collectionName }}">
+          <button type="button" class="btn btn-danger deleteButtonCollection btn-block" collection-name="{{ collectionName }}">
             <span class="glyphicon glyphicon-trash"></span><br>Delete
           </button>
         </form>
-
-<script type="text/javascript">
-
-function loadDocument(id) {
-  location.href = '{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(id);
-}
-
-$(document).ready(function () {
-
-  if ($('.tableHeaderFooterBars').width() === $('.tableWrapper').width()) {
-    // table wrapper is the same width as the table itself, so not overflowing, so remove the white gradient
-    $('.fadeToWhite').remove();
-  } else {
-    $('.fadeToWhite').height($('.tableWrapper').height()); // limit the height only to the table div
-  }
-
-  $('.deleteButtonCollection').tooltip({
-    title: 'Are you sure you want to delete this collection? All documents will be deleted.',
-  });
-
-  $('.tableWrapper').scroll(function () {
-    var proximityToRightOfTable = $('.tableWrapper table').width() - $('.tableWrapper').scrollLeft() - $('.tableWrapper').width();
-    document.getElementById('fadeToWhiteID').style.opacity = Math.min(Math.max(proximityToRightOfTable - 50, 50) - 50, 100) / 100;
-  });
-
-  $('.tooDamnBig').bind('click', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    var target = $(this);
-    var _id = target.attr('doc_id');
-    var prop = target.attr('doc_prop');
-    var spinner = '<img src="{{ baseHref }}images/gears.gif" />';
-    var leftScroll = $('.tableWrapper').scrollLeft();
-
-    // Set the element with spinner for now
-    target.html(spinner);
-
-    $.get('{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/' + encodeURIComponent(_id) + '/' + prop, function (input) {
-
-      // Images inline
-      if (
-        typeof input === 'string' &&
-        (
-          input.substr(0, 22) === 'data:image/png;base64,' ||
-          input.substr(0, 22) === 'data:image/gif;base64,' ||
-          input.substr(0, 22) === 'data:image/jpg;base64,' ||
-          input.substr(0, 23) === 'data:image/jpeg;base64,'
-        )
-      )  {
-        input = '<img src="' + input + '" style="max-height:100%; max-width:100%; "/>';
-      }
-
-      // Audio inline
-      if (
-        typeof input === 'string' &&
-        (
-          input.substr(0, 22) === 'data:audio/ogg;base64,' ||
-          input.substr(0, 22) === 'data:audio/mp3;base64,'
-        )
-      )  {
-        input = '<audio controls style="width:45px;" src="' + input + '">Your browser does not support the audio element.</audio>';
-      }
-
-      // Video inline
-      if (
-        typeof input === 'string' &&
-        (
-          input.substr(0, 23) === 'data:video/webm;base64,' ||
-          input.substr(0, 22) === 'data:video/mp4;base64,'  ||
-          input.substr(0, 22) === 'data:video/ogv;base64,'
-        )
-      )  {
-        input = '<video controls><source type="' + input.substring(input.indexOf(':') + 1, input.indexOf(';')) + '" src="' + input + '"/>' +
-          'Your browser does not support the video element.</video>';
-      }
-
-      if (typeof input === 'object' && (input.toString() === '[object Object]' || input.toString().substr(0, 7) === '[object')) {
-        input = renderjson(input);
-      }
-
-      // Set the element with gotten datas
-      target.parent().html(input);
-
-      // Set original scroll position
-      $('.tableWrapper').scrollLeft(leftScroll);
-    });
-  });
-
-  $('.deleteButtonDocument').on('click', function (e) {
-    var $form = $(this).closest('form');
-    e.stopPropagation();
-    e.preventDefault();
-
-    $('#confirm-deletion-document').modal({ backdrop: 'static', keyboard: false }).one('click', '#delete', function () {
-      $form.trigger('submit'); // submit the form
-    });
-  });
-
-  $('#deleteListConfirmButton').on('click', function (e) {
-    // we just need to POST the form, as all the query parameters are already embedded in the form action
-    $('#deleteListForm').trigger('submit');
-  });
-
-  $('.deleteButtonCollection').on('click', function (event) {
-
-    $('.deleteButtonCollection').tooltip('hide');
-
-    event.preventDefault();
-
-    var $target = $(this);
-    var $parentForm = $('#' + $target.attr('childof'));
-
-    $('#confirmation-input').attr('shouldbe', $target.attr('collection-name'));
-    $('#modal-collection-name').text($target.attr('collection-name'));
-    $('#confirm-deletion-collection').modal({ backdrop: 'static', keyboard: false })
-      .one('shown.bs.modal', function () {
-        $('#confirmation-input').focus();
-      })
-      .one('click', '#delete', function () {
-        var $input = $('#confirmation-input');
-        if ($input.val().toLowerCase() === $input.attr('shouldbe').toLowerCase()) {
-          $parentForm.trigger('submit');
-        }
-      });
-  });
-
-  var nextSort = {
-    '1': -1,
-    '-1': 0,
-    '0': 1,
-    'undefined': 1
-  };
-  $('.sorting-button').on('click', function(e) {
-    var $this = $(this);
-    var column = $this.data('column');
-    var direction = nextSort[$this.data('direction')];
-
-    $('input.sort-' + column).val(direction).prop('checked', direction!=0);
-
-    var $form = $($('#tabs li.active a').attr('href') + ' form');
-    $form.find('button[type="submit"]').click();
-  });
-});
-</script>
       </div>
 
       <div id="confirm-deletion-document" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
@@ -625,12 +462,12 @@ $(document).ready(function () {
               <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
               <button type="button" data-dismiss="modal" class="btn">Cancel</button>
             </div>
-            
+
           </div>
         </div>
       </div>
     {% endif %}
-
+    {% endif %}
 
   <div class="stats col-md-12">
     <h2>Collection Stats</h2>
@@ -730,13 +567,24 @@ $(document).ready(function () {
           <div>{% if k != 'key' && k != 'v' && k != 'name' && k != 'ns' && k != 'size'%} {{ k }}: &nbsp;{{ v }} {% endif %}</div>
           {% endfor %}
         </td>
+      {% if !settings.read_only && !settings.no_delete %}
         <td>
-          <a class="btn btn-danger" href="{{ baseHref }}db/{{ dbName }}/dropIndex/{{ collectionName }}?name={{ index.name }}">
+          <a class="btn btn-danger" href="{{ dbUrl }}/dropIndex/{{ collectionName | url_encode }}?name={{ index.name }}">
             <span class="glyphicon glyphicon-trash"></span> &nbsp;DEL
           </a>
         </td>
+      {% else %}
+        <td>
+        </td>
+      {% endif %}
       </tr>
     {% endfor %}
     </table>
   </div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{ baseHref }}{{assets.codemirror.js}}"></script>
+<script src="{{ baseHref }}{{assets.collection.js}}"></script>
 {% endblock %}

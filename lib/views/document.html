@@ -1,15 +1,12 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ document._id|to_string }}{% endblock %}
+{% block title %}{{ document._id|stringDocIDs|to_string }}{% endblock %}
 
 
-{% block head %}
-  <link href="{{ baseHref }}stylesheets/codemirror-5.10.css" rel="stylesheet">
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.js"></script>
-  <script type="text/javascript" src="{{ baseHref }}javascripts/codemirror-5.10.javascript.js"></script>
-
+{% block styles %}
+  <link href="{{ baseHref }}public/css/codemirror.css" rel="stylesheet">
   {% if editorTheme != "default" %}
-  <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet">
+  <link href="{{ baseHref }}public/css/theme/{{ editorTheme }}.css" rel="stylesheet">
   {% endif %}
 
   <style type="text/css">
@@ -28,7 +25,7 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+    <a href="{{ dbUrl }}">Database:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
@@ -39,28 +36,41 @@
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="{{ dbUrl }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}">Collection:</a>
+    <a href="{{ collectionUrl }}">Collection:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for collection in collections %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/{{ collection }}">{{ collection }}</a></li>
+      <li><a href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
       {% endfor %}
     </ul>
   </li>
   <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="{{ collectionUrl }}">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
   </li>
-  <li><a>Document {{ document._id|to_string }}</a></li>
+  <li><a>Document {{ document._id|stringDocIDs }}</a></li>
 {% endblock %}
 
 {% block content %}
 
-<form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
+{% if document._id._bsontype == 'Binary' %}
+<form method="POST"
+  id="documentEditForm"
+  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}"
+>
+{% else %}
+<form method="POST"
+  id="documentEditForm"
+  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}"
+>
+{% endif %}
+
   {% if docLength > 10 %}
     <div>
       {% if !settings.read_only %}
@@ -107,71 +117,42 @@
   </div>
 </form>
 
-{% if !settings.read_only %}
+{% if !settings.read_only && !settings.no_delete %}
   <br>
-  <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}">
+
+  {% if document._id._bsontype == 'Binary' %}
+  <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}">
+  {% else %}
+  <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}">
+  {% endif %}
     <input type="hidden" name="_method" value="delete">
-    <button type="submit" class="btn btn-danger">
+    <input type="submit" class="hidden" />
+    <button class="btn btn-danger deleteButtonDocument">
       <span class="glyphicon glyphicon-trash"></span>
       Delete
     </button>
   </form>
+
+  <div id="confirm-document-delete" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          Are you sure?
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+          <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endif %}
 
-<script>
-'use strict';
-  var doc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: {
-      name: 'javascript',
-      json: true,
-    },
-    indentUnit: 4,
-    lineNumbers: true,
-    autoClearEmptyLines: true,
-    matchBrackets: true,
-    {% if settings.read_only %}
-    readOnly: true,
-    {% endif %}
-    theme: "{{ editorTheme }}"
-  });
+{% endblock %}
 
-  function onBackClick() {
-    // "Back" button is clicked
 
-    if (doc.isClean()) {
-      history.back();
-    } else if ($('#discardChanges').length === 0){
-      $('#pageTitle').parent().append('<div id="discardChanges" class="alert alert-warning"><strong>Document has changed! Are you sure you wish to go back?</strong></div>');
-      $('.backButton').text('Back & Discard Changes')
-    } else {
-      history.back();
-    }
-
-    return false;
-  }
-
-  function onSubmitClick() {
-    // Save button is clicked
-
-    $('#discardChanges').remove();
-
-    $.ajax({
-      type: 'POST',
-      url: "{{ baseHref }}checkValid",
-      data: {
-        document: doc.getValue()
-      },
-    }).done(function(data) {
-      if (data === 'Valid') {
-        $('#documentInvalidJSON').remove();
-        $('#documentEditForm').submit();
-      } else if ($('#documentInvalidJSON').length === 0){
-        $('#pageTitle').parent().append('<div id="documentInvalidJSON" class="alert alert-danger"><strong>Invalid JSON</strong></div>');
-      }
-    });
-    return false;
-  }
-
-</script>
-
+{% block scripts %}
+<script src="{{ baseHref }}{{ assets.codemirror.js }}"></script>
+<script src="{{ baseHref }}{{ assets.document.js }}"></script>
 {% endblock %}

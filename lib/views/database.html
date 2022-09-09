@@ -4,13 +4,13 @@
 
 {% block breadcrumb %}
   <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+    <a href="{{ dbUrl }}">Database:</a>
   </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <li><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
       {% endfor %}
     </ul>
   </li>
@@ -42,30 +42,41 @@
       {% for c in colls %}
       <tr>
         <td class="col-md-2">
-          <a href="{{ baseHref }}db/{{ dbName }}/{{ c }}" class="btn btn-success btn-block">
+          <a href="{{ dbUrl }}/{{ c | url_encode }}" class="btn btn-success btn-block">
             <span class="glyphicon glyphicon-eye-open"></span><br>View
           </a>
         </td>
+        {% if !settings.me_no_export %}
         <td class="col-md-1">
-          <a href="{{ baseHref }}db/{{ dbName }}/export/{{ c }}" class="btn btn-warning btn-block">
+          <a href="{{ dbUrl }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>Export
           </a>
         </td>
+        {% endif %}
         <td class="col-md-1">
-          <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning btn-block">
+          <a href="{{ dbUrl }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
           </a>
         </td>
-        <td><h3><a href="{{ baseHref }}db/{{ dbName }}/{{ c }}">{{ c }}</a></h3></td>
-        {% if !settings.read_only %}
         <td class="col-md-1">
-          <form method="POST" id="db-{{ dbName }}-{{ c }}" action="{{ baseHref }}db/{{ dbName }}/{{ c }}" style="margin: 0px;">
+          <a class="btn btn-warning btn-block import-file-link">
+            <span class="glyphicon glyphicon-cloud-upload"></span><br>Import
+          </a>
+          <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ c | url_encode }}"/>
+        </td>
+        <td><h3><a href="{{ dbUrl }}/{{ c | url_encode }}">{{ c }}</a></h3></td>
+        {% if !settings.read_only && !settings.no_delete %}
+        <td class="col-md-1">
+          <form method="POST"
+            action="{{ dbUrl }}/{{ c | url_encode }}"
+            style="margin: 0px;"
+          >
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="hidden"></button>
+            <button type="button" class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}">
+              <span class="glyphicon glyphicon-trash"></span><br>Del
+            </button>
           </form>
-          <button class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}" childof="db-{{ dbName }}-{{ c }}">
-            <span class="glyphicon glyphicon-trash"></span><br>Del
-          </button>
         </td>
         {% endif %}
       </tr>
@@ -97,7 +108,7 @@
         <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
         <button type="button" data-dismiss="modal" class="btn">Cancel</button>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -109,11 +120,11 @@
   {% for b in grids %}
   <tr>
     <td class="col-md-2">
-      <a href="{{ baseHref }}db/{{ dbName }}/gridFS/{{ b }}" class="btn btn-success btn-block">
+      <a href="{{ dbUrl }}/gridFS/{{ b }}" class="btn btn-success btn-block">
         <span class="glyphicon glyphicon-eye-open"></span><br>View
       </a>
     </td>
-    <td><h3><a href="{{ baseHref }}db/{{ dbName }}/gridFS/{{ b }}">{{ b }}</a></h3></td>
+    <td><h3><a href="{{ dbUrl }}/gridFS/{{ b }}">{{ b }}</a></h3></td>
   </tr>
   {% endfor %}
 </table>
@@ -152,41 +163,6 @@
   </div>
 </div>
  -->
-<script>
-'use strict';
-$(document).ready(function() {
-  $('#collection').popover({
-    content: 'Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
-  });
-
-  $('.deleteButton').tooltip({
-    title: 'Warning! Are you sure you want to delete this collection? All documents will be deleted.',
-  });
-
-  $('.deleteButton').on('click', function(event) {
-
-    $('.deleteButton').tooltip('hide');
-
-    event.preventDefault();
-
-    var target = $(this);
-    var parentForm = $('#' + target.attr('childof'));
-
-    $('#confirmation-input').attr('shouldbe', target.attr('collection-name'));
-    $('#modal-collection-name').text(target.attr('collection-name'));
-    $('#confirm-deletion').modal({ backdrop: 'static', keyboard: false })
-      .one('shown.bs.modal', function() {
-        $('#confirmation-input').focus();
-      })
-      .one('click', '#delete', function() {
-        var input = $('#confirmation-input');
-        if (input.val().toLowerCase() === input.attr('shouldbe').toLowerCase()) {
-          parentForm.trigger('submit');
-        }
-      });
-  });
-});
-</script>
 {% endif %}
 
 <div class="panel panel-default stats">
@@ -257,4 +233,10 @@ $(document).ready(function() {
   </table>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+{% if !settings.read_only %}
+<script src="{{ baseHref }}{{ assets.database.js }}"></script>
+{% endif %}
 {% endblock %}

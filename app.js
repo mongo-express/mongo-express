@@ -1,136 +1,148 @@
 #!/usr/bin/env node
 
-'use strict';
+import fs from 'node:fs';
+import https from 'node:https';
+import clc from 'cli-color';
+import commander from 'commander';
+import csrf from 'csurf';
+import express from 'express';
+import middleware from './lib/middleware.js';
+import { deepmerge } from './lib/utils.js';
+import configDefault from './config.default.js';
 
-const clc             = require('cli-color');
-const csrf            = require('csurf');
-const commander       = require('commander');
-const express         = require('express');
-const fs              = require('fs');
-const https           = require('https');
-const middleware      = require('./lib/middleware');
-const utils           = require('./lib/utils');
-const updateNotifier  = require('update-notifier');
-const pkg             = require('./package.json');
+const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
-let app               = express();
-let notifier          = updateNotifier({ pkg });
+const app = express();
 
-let config;
 let defaultPort = 80;
-let server      = app;
+let server = app;
 let sslOptions;
 
-// Notify of any updates
-notifier.notify();
-
-try {
-  // eslint-disable-next-line import/no-unresolved
-  config = utils.deepmerge(require('./config.default'), require('./config'));
-} catch (e) {
-  if (e.code === 'MODULE_NOT_FOUND') {
-    console.log('No custom config.js found, loading config.default.js');
+const loadConfig = async () => {
+  const configExist = fs.existsSync('./config.js');
+  if (configExist === true) {
+    try {
+      return deepmerge(
+        configDefault,
+        // eslint-disable-next-line import/no-unresolved
+        (await import('./config.js')).default,
+      );
+    } catch (e) {
+      console.error(clc.red('Unable to load config.js!'));
+      console.error(clc.red('Error is:'));
+      console.log(clc.red(e));
+      process.exit(1);
+    }
   } else {
-    console.error(clc.red('Unable to load config.js!'));
-    console.error(clc.red('Error is:'));
-    console.log(clc.red(e));
-    process.exit(1);
+    console.log('No custom config.js found, loading config.default.js');
+    return configDefault;
+  }
+};
+
+async function bootstrap(config) {
+  const resolvedMiddleware = await middleware(config);
+  app.use(config.site.baseUrl, resolvedMiddleware);
+  app.use(config.site.baseUrl, csrf());
+
+  if (config.site.sslEnabled) {
+    defaultPort = 443;
+    sslOptions = {
+      key: fs.readFileSync(config.site.sslKey),
+      cert: fs.readFileSync(config.site.sslCert),
+    };
+    server = https.createServer(sslOptions, app);
   }
 
-  config = require('./config.default');
-}
+  const addressString = (config.site.sslEnabled ? 'https://' : 'http://')
+    + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
 
-if (config.options.console) {
-  console.log('Welcome to mongo-express');
-  console.log('------------------------');
-  console.log('\n');
-}
+  server.listen(config.site.port, config.site.host, function () {
+    if (config.options.console) {
+      console.log('Mongo Express server listening', 'at ' + addressString);
 
-commander
-  .version(require('./package').version)
-  .option('-H, --host <host>', 'hostname or adress')
-  .option('-P, --dbport <host>', 'port of the db')
-  .option('-u, --username <username>', 'username for authentication')
-  .option('-p, --password <password>', 'password for authentication')
-  .option('-a, --admin', 'enable authentication as admin')
-  .option('-d, --database <database>', 'authenticate to database')
-  .option('--port <port>', 'listen on specified port')
-.parse(process.argv);
+      if (!config.site.host || config.site.host === '0.0.0.0') {
+        console.error(clc.red('Server is open to allow connections from anyone (0.0.0.0)'));
+      }
 
-if (commander.username && commander.password) {
-  config.mongodb.admin = !!commander.admin;
-  if (commander.admin) {
-    config.mongodb.adminUsername = commander.username;
-    config.mongodb.adminPassword = commander.password;
-  } else {
-    let user = {
-      database: commander.database,
-      username: commander.username,
-      password: commander.password,
-    };
-    for (let key in user) {
-      if (!user[key]) {
-        commander.help();
+      if (config.useBasicAuth !== true) {
+        console.warn(clc.red('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
+      } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+        console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
       }
     }
+  })
+    .on('error', function (e) {
+      if (e.code === 'EADDRINUSE') {
+        console.log();
+        console.error(clc.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
+        console.log('Maybe mongo-express is already running?');
+      }
 
-    config.mongodb.auth[0] = user;
+      console.log();
+      console.log('If you are still having trouble, try Googling for the key parts of the following error object before posting an issue');
+      console.log(JSON.stringify(e));
+      return process.exit(1);
+    });
+}
+
+loadConfig().then(async (config) => {
+  if (config.options.console === true) {
+    console.log('Welcome to mongo-express');
+    console.log('------------------------');
+    console.log('\n');
   }
 
-  config.useBasicAuth = false;
-}
+  commander
+    .version(pkg.version)
+    .option('-U, --url <url>', 'connection string url')
+    .option('-H, --host <host>', 'hostname or address of the db(deprecated)')
+    .option('-P, --dbport <host>', 'port of the db(deprecated)')
+    .option('-u, --username <username>', 'username for authentication(deprecated)')
+    .option('-p, --password <password>', 'password for authentication(deprecated)')
+    .option('-a, --admin', 'enable authentication as admin')
+    .option('-d, --database <database>', 'authenticate to database')
+    .option('--port <port>', 'listen on specified port')
+    .parse(process.argv);
 
-config.mongodb.server = commander.host || config.mongodb.server;
-config.mongodb.port = commander.dbport || config.mongodb.port;
+  if (commander.username && commander.password) {
+    config.mongodb.admin = !!commander.admin;
+    if (commander.admin) {
+      config.mongodb.adminUsername = commander.username;
+      config.mongodb.adminPassword = commander.password;
+    } else {
+      const user = {
+        database: commander.database,
+        username: commander.username,
+        password: commander.password,
+      };
+      for (const key in user) {
+        if (!user[key]) {
+          commander.help();
+        }
+      }
 
-config.site.port = commander.port || config.site.port;
-
-if (!config.site.baseUrl) {
-  console.error('Please specify a baseUrl in your config. Using "/" for now.');
-  config.site.baseUrl = '/';
-}
-
-app.use(config.site.baseUrl, middleware(config));
-app.use(csrf());
-
-app.set('read_only',      config.options.readOnly       || false);
-app.set('gridFSEnabled',  config.options.gridFSEnabled  || false);
-
-if (config.site.sslEnabled) {
-  defaultPort     = 443;
-  sslOptions  = {
-    key:  fs.readFileSync(config.site.sslKey),
-    cert: fs.readFileSync(config.site.sslCert),
-  };
-  server = https.createServer(sslOptions, app);
-}
-
-let addressString = (config.site.sslEnabled ? 'https://' : 'http://') + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
-
-server.listen(config.site.port, config.site.host, function () {
-  if (config.options.console) {
-
-    console.log('Mongo Express server listening', 'at ' + addressString);
-
-    if (!config.site.host || config.site.host === '0.0.0.0') {
-      console.error(clc.red('Server is open to allow connections from anyone (0.0.0.0)'));
+      config.mongodb.auth[0] = user;
     }
 
-    if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-      console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+    config.useBasicAuth = false;
+  }
+
+  if (commander.url) {
+    config.mongodb.connectionString = commander.url;
+    if (commander.admin) {
+      config.mongodb.admin = true;
     }
-
-  }
-})
-.on('error', function (e) {
-  if (e.code === 'EADDRINUSE') {
-    console.log();
-    console.error(clc.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
-    console.log('Maybe mongo-express is already running?');
   }
 
-  console.log();
-  console.log('If you are still having trouble, try Googling for the key parts of the following error object before posting an issue');
-  console.log(JSON.stringify(e));
-  return process.exit(1);
+  config.mongodb.server = commander.host || config.mongodb.server;
+  config.mongodb.port = commander.dbport || config.mongodb.port;
+
+  config.site.port = commander.port || config.site.port;
+
+  if (!config.site.baseUrl) {
+    console.error('Please specify a baseUrl in your config. Using "/" for now.');
+    config.site.baseUrl = '/';
+  }
+
+  await bootstrap(config);
 });
