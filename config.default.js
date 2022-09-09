@@ -126,6 +126,11 @@ export default {
     sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
   },
 
+  healthCheck: {
+    // path: the Path that mongo express healthcheck will be serve - Remember to add the forward slash at the start!
+    path: process.env.ME_CONFIG_HEALTH_CHECK_PATH || '/status',
+  },
+
   // set useBasicAuth to true if you want to authenticate mongo-express logins
   // if admin is false, the basicAuthInfo list below will be ignored
   // this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
