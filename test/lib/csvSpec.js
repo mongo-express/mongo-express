@@ -1,8 +1,6 @@
-'use strict';
-
-const { expect } = require('chai');
-const mongo = require('mongodb');
-const csv = require('../../lib/csv');
+import { expect } from 'chai';
+import mongo from  'mongodb';
+import csv from  '../../lib/csv.js';
 
 const test = function (data, result) {
   expect(csv(data)).to.eql(result);

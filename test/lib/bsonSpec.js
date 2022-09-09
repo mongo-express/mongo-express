@@ -1,10 +1,8 @@
-'use strict';
+import { expect } from 'chai';
+import mongodb from 'mongodb';
+import * as bson from 'bson';
 
-const { expect } = require('chai');
-const mongodb = require('mongodb');
-const bson = require('bson');
-
-const libBson = require('../../lib/bson');
+import * as libBson from '../../lib/bson.js';
 
 describe('BSON', function () {
   describe('toBSON', function () {

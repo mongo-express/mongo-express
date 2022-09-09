@@ -1,4 +1,4 @@
-'use strict';
+import fs from 'node:fs';
 
 let mongo = {
   // Setting the connection string will only give access to that database
@@ -29,8 +29,6 @@ const dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
 
 function getFile(filePath) {
   if (typeof filePath !== 'undefined' && filePath) {
-    const fs = require('fs');
-
     try {
       if (fs.existsSync(filePath)) {
         return fs.readFileSync(filePath);
@@ -82,7 +80,7 @@ function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
 }
 
-module.exports = {
+export default {
   mongodb: {
     // if a connection string options such as server/port/etc are ignored
     connectionString: mongo.connectionString || getConnectionStringFromEnvVariables(),
@@ -191,6 +189,9 @@ module.exports = {
 
     // noExport: if noExport is set to true, we won't show export buttons
     noExport: false,
+
+    // fullwidthLayout: if set to true an alternative page layout is used utilizing full window width
+    fullwidthLayout: getBoolean(process.env.ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT, false),
 
     // noDelete: if noDelete is set to true, we won't show delete buttons
     noDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_DELETE, false),

@@ -62,7 +62,11 @@
 </nav>
 
 
+{% if settings.fullwidth_layout %}
+<div class="container-fluid">
+{% else %}  
 <div class="container">
+{% endif %}
   <div class="row">
     <div class="col-md-12">
       <div class="page-header main-title">
@@ -96,7 +100,7 @@
 
 <script src="{{ baseHref }}{{assets.vendor.js}}"></script>
 <script type="text/javascript">
-'use strict';
+
 window.ME_SETTINGS = {
   readOnly: '{{ !!settings.read_only }}' === 'true',
   noDelete: '{{ !!settings.no_delete }}' === 'true',
