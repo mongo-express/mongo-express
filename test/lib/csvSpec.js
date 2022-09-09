@@ -1,8 +1,6 @@
-'use strict';
-
-const { expect } = require('chai');
-const mongo = require('mongodb');
-const csv = require('../../lib/csv');
+import { expect } from 'chai';
+import mongo from  'mongodb';
+import csv from  '../../lib/csv.js';
 
 const test = function (data, result) {
   expect(csv(data)).to.eql(result);
@@ -21,8 +19,8 @@ describe('CSV', function () {
     test(data, result);
   });
 
-  it('should handle mongo ObjectID', function () {
-    const data = [{ a: { a: mongo.ObjectID('111111111111111111111111') } }];
+  it('should handle mongo ObjectId', function () {
+    const data = [{ a: { a: new mongo.ObjectId('111111111111111111111111') } }];
     const result = '"a.a"\n"ObjectId(""111111111111111111111111"")"';
     test(data, result);
   });

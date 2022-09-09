@@ -1,29 +1,24 @@
-'use strict';
+import { expect } from 'chai';
 
-const { expect } = require('chai');
-
-const httpUtils = require('../../testHttpUtils');
-const mongoUtils = require('../../testMongoUtils');
-const { asPromise } = require('../../testUtils');
-
-const dbName = mongoUtils.testDbName;
-const collectionName = mongoUtils.testCollectionName;
-const urlColName = mongoUtils.testURLCollectionName;
+import { createServer } from '../../testHttpUtils.js';
+import {
+  cleanAndCloseDb, initializeDb, testCollectionName as collectionName, testDbName as dbName, testURLCollectionName as urlColName,
+} from '../../testMongoUtils.js';
 
 describe('Router collection', () => {
   let request;
   let close;
   let client;
-  before(() => mongoUtils.initializeDb()
+  before(() => initializeDb()
     .then((newClient) => {
       client = newClient;
-      return httpUtils.createServer();
+      return createServer();
     }).then((server) => {
       request = server.request;
       close = server.close;
     }));
 
-  it('GET /db/<dbName>/<collection> should return html', () => asPromise((cb) => request.get(`/db/${dbName}/${urlColName}`).expect(200).end(cb))
+  it('GET /db/<dbName>/<collection> should return html', () => request.get(`/db/${dbName}/${urlColName}`).expect(200)
     .then((res) => {
       expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
       expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
@@ -43,7 +38,7 @@ describe('Router collection', () => {
   it('GET /db/<dbName>/updateCollections/<collection> should updateCollections');
 
   after(() => Promise.all([
-    mongoUtils.cleanAndCloseDb(client),
+    cleanAndCloseDb(client),
     close(),
   ]));
 });
