@@ -20,6 +20,10 @@ export default () => ({
     sslKey: '',
   },
 
+  healthCheck: {
+    path: '/status',
+  },
+
   useBasicAuth: false,
 
   options: {
