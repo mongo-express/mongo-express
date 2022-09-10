@@ -246,7 +246,7 @@
   {% endif %}
 
   <div class="fadeToWhite" id="fadeToWhiteID"></div>
-  <div class="table-responsive tableWrapper">
+  <div class="table-responsive tableWrapper" style="cursor:auto">
     <table class="table table-striped tableHeaderFooterBars">
       <thead>
         {% for column in columns %}
@@ -271,12 +271,19 @@
               {% if !settings.read_only && !settings.no_delete && column === '_id' && collectionName !== 'system.indexes' %}
                 <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
                 <input type="hidden" name="_method" value="delete">
+                <button class="btn btn-info" onclick="loadDocument('{{ document._id | json | safe | url_encode }}')">
+                  <span class="glyphicon glyphicon-link"></span>
+                </button>
                 <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-trash"></span>
                 </button>
                 </form>
               {% endif %}
-            {{ document[column] | stringDocIDs | to_display | safe }}
+              {% if document[column] | is_URL %}
+                <a href="{{ document[column] }}" target="_blank">{{ document[column] }}</a>
+              {% else %}
+                {{ document[column] | stringDocIDs | to_display | safe }}
+              {% endif %}
             </div></td>
           {% endfor %}
         </tr>
