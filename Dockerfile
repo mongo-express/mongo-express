@@ -14,6 +14,6 @@ ENV ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
 WORKDIR /opt/mongo-express
 COPY . .
 RUN yarn install
-RUN yarn run build
+# RUN yarn run build	# prepublish already run build
 
 CMD ["/sbin/tini", "--", "yarn", "run", "start"]
