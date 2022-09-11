@@ -1,10 +1,7 @@
-FROM node:18.7.0-slim
+FROM node:18-alpine3.16
 
 # grab tini for signal processing and zombie killing
-RUN set -eux; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends tini; \
-	rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache bash tini
 
 EXPOSE 8081
 
@@ -19,4 +16,4 @@ COPY . .
 RUN yarn install
 RUN yarn run build
 
-CMD ["tini", "--", "yarn", "run", "start"]
+CMD ["/sbin/tini", "--", "yarn", "run", "start"]
