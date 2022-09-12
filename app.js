@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import https from 'node:https';
 import clc from 'cli-color';
-import commander from 'commander';
+import { Command } from 'commander';
 import csrf from 'csurf';
 import express from 'express';
 import middleware from './lib/middleware.js';
@@ -13,6 +13,8 @@ import configDefault from './config.default.js';
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 const app = express();
+
+const commander = new Command();
 
 let defaultPort = 80;
 let server = app;
