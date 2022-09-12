@@ -1,7 +1,7 @@
 FROM node:18-alpine3.16
 
 # grab tini for signal processing and zombie killing
-RUN apk add --no-cache bash tini
+RUN apk -U add --no-cache bash tini
 
 EXPOSE 8081
 
