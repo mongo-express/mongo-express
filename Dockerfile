@@ -16,4 +16,4 @@ COPY . .
 RUN yarn install
 # RUN yarn run build	# prepublish already run build
 
-CMD ["/sbin/tini", "--", "yarn", "run", "start"]
+CMD ["/sbin/tini", "--", "yarn", "start"]
