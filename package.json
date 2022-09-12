@@ -35,7 +35,7 @@
     "commander": "^2.9.0",
     "cookie-parser": "1.4.6",
     "cross-env": "^7.0.3",
-    "csurf": "1.10.0",
+    "csurf": "1.11.0",
     "errorhandler": "1.5.1",
     "express": "4.18.1",
     "express-fileupload": "^1.4.0",
