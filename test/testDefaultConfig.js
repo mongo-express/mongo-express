@@ -1,8 +1,6 @@
-'use strict';
+import mongoConfig from './testMongoConfig.js';
 
-const mongoConfig = require('./testMongoConfig');
-
-module.exports = () => ({
+export default () => ({
   mongodb: {
     connectionString: mongoConfig.makeConnectionUrl(),
 
@@ -20,6 +18,10 @@ module.exports = () => ({
     sslEnabled: false,
     sslCert: '',
     sslKey: '',
+  },
+
+  healthCheck: {
+    path: '/status',
   },
 
   useBasicAuth: false,

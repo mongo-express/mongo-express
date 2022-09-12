@@ -1,29 +1,24 @@
-'use strict';
+import { expect } from 'chai';
 
-const { expect } = require('chai');
-
-const httpUtils = require('../../testHttpUtils');
-const mongoUtils = require('../../testMongoUtils');
-const { asPromise } = require('../../testUtils');
-
-const dbName = mongoUtils.testDbName;
-const collectionName = mongoUtils.testCollectionName;
-const urlColName = mongoUtils.testURLCollectionName;
+import { createServer } from '../../testHttpUtils.js';
+import {
+  initializeDb, cleanAndCloseDb, testCollectionName as collectionName, testDbName as dbName, testURLCollectionName as urlColName,
+} from '../../testMongoUtils.js';
 
 describe('Router database', () => {
   let request;
   let close;
   let db;
-  before(() => mongoUtils.initializeDb()
+  before(() => initializeDb()
     .then((newDb) => {
       db = newDb;
-      return httpUtils.createServer();
+      return createServer();
     }).then((server) => {
       request = server.request;
       close = server.close;
     }));
 
-  it('GET /db/<dbName> should return html', () => asPromise((cb) => request.get(`/db/${dbName}`).expect(200).end(cb))
+  it('GET /db/<dbName> should return html', () => request.get(`/db/${dbName}`).expect(200)
     .then((res) => {
       expect(res.text).to.match(new RegExp(`<title>${dbName} - Mongo Express</title>`));
       expect(res.text).to.match(new RegExp(`<a href="/db/${dbName}/${urlColName}">${collectionName}</a>`));
@@ -33,7 +28,7 @@ describe('Router database', () => {
   it('DEL /<dbName> should delete the db');
 
   after(() => Promise.all([
-    mongoUtils.cleanAndCloseDb(db),
+    cleanAndCloseDb(db),
     close(),
   ]));
 });

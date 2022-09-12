@@ -62,12 +62,12 @@
 {% if document._id._bsontype == 'Binary' %}
 <form method="POST"
   id="documentEditForm"
-  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}"
+  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}"
 >
 {% else %}
 <form method="POST"
   id="documentEditForm"
-  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}"
+  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}"
 >
 {% endif %}
 

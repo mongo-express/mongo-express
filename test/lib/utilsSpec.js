@@ -1,7 +1,5 @@
-'use strict';
-
-const { expect } = require('chai');
-const utils = require('../../lib/utils');
+import { expect } from 'chai';
+import { isValidDatabaseName } from '../../lib/utils.js';
 
 describe('utils', function () {
   describe('isValidDatabaseName', function () {
@@ -13,7 +11,7 @@ describe('utils', function () {
         'SOMEDB&1231',
       ];
       validNames.forEach((n) => {
-        expect(utils.isValidDatabaseName(n)).to.equal(true, `Expected "${n}" to be a valid name`);
+        expect(isValidDatabaseName(n)).to.equal(true, `Expected "${n}" to be a valid name`);
       });
     });
 
@@ -28,7 +26,7 @@ describe('utils', function () {
         'SOMEDB"123',
       ];
       invalidNames.forEach((n) => {
-        expect(utils.isValidDatabaseName(n)).to.equal(false, `Expected "${n}" to be an invalid name`);
+        expect(isValidDatabaseName(n)).to.equal(false, `Expected "${n}" to be an invalid name`);
       });
     });
   });
