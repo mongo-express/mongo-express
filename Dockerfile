@@ -1,10 +1,5 @@
 FROM node:18-alpine3.16
 
-# grab tini for signal processing and zombie killing
-RUN apk -U add --no-cache bash tini
-
-EXPOSE 8081
-
 # "localhost" doesn't mean much in a container, so we adjust our default to the common service name "mongo" instead
 # (and make sure the server listens outside the container, since "localhost" inside the container is usually difficult to access)
 ENV ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
@@ -13,7 +8,13 @@ ENV ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
 
 WORKDIR /opt/mongo-express
 COPY . .
-RUN yarn install
-# RUN yarn run build	# prepublish already run build
 
+RUN apk -U add --no-cache \
+        bash \
+        # grab tini for signal processing and zombie killing
+        tini \
+    && yarn install
+    # && yarn run build     # prepublish already run build
+
+EXPOSE 8081
 CMD ["/sbin/tini", "--", "yarn", "start"]
