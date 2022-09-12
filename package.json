@@ -32,7 +32,7 @@
     "bson": "^4.7.0",
     "busboy": "^1.6.0",
     "cli-color": "^2.0.3",
-    "commander": "^2.9.0",
+    "commander": "^9.4.0",
     "cookie-parser": "1.4.6",
     "cross-env": "^7.0.3",
     "csurf": "1.11.0",
