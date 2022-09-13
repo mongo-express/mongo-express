@@ -122,12 +122,6 @@ loadConfig().then(async (config) => {
           commander.help();
         }
       }
-      config.mongodb.mongo.username = user.username;
-      config.mongodb.mongo.password = user.password;
-      config.mongodb.mongo.dbName = user.database;
-      config.mongodb.mongo.host = user.host;
-      config.mongodb.mongo.port = user.port;
-      config.mongodb.connectionString = config.mongodb.getConnectionStringFromInlineParams();
     }
     config.useBasicAuth = false;
   }
