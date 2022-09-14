@@ -41,6 +41,7 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "flat": "^5.0.2",
+    "free-swig": "^1.5.1",
     "gridfs-stream": "^1.1.1",
     "json2csv": "^5.0.7",
     "lodash-es": "^4.17.21",
@@ -49,8 +50,7 @@
     "mongodb": "^4.9.1",
     "mongodb-query-parser": "^2.4.6",
     "morgan": "^1.10.0",
-    "serve-favicon": "^2.5.0",
-    "swig-templates": "2.0.3"
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
