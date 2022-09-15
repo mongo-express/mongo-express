@@ -70,7 +70,7 @@
     "eslint-plugin-lodash": "^7.4.0",
     "jquery": "^3.6.1",
     "mocha": "^10.0.0",
-    "mongodb-memory-server": "^8.9.1",
+    "mongodb-memory-server": "^8.9.2",
     "nodemon": "^2.0.19",
     "pre-commit": "1.2.2",
     "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
