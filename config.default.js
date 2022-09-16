@@ -20,6 +20,7 @@ if (process.env.VCAP_SERVICES) {
   }
 }
 
+const basicAuth = 'ME_CONFIG_BASICAUTH';
 const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
 const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
 const adminUsername = 'ME_CONFIG_MONGODB_ADMINUSERNAME';
@@ -133,8 +134,8 @@ export default {
 
   // set useBasicAuth to true if you want to authenticate mongo-express logins
   // if admin is false, the basicAuthInfo list below will be ignored
-  // this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
-  useBasicAuth: getFileEnv(basicAuthUsername) !== '',
+  // this will be false unless ME_CONFIG_BASICAUTH is set to the true
+  useBasicAuth: getBoolean(getFileEnv(basicAuth)),
 
   basicAuth: {
     username: getFileEnv(basicAuthUsername) || 'admin',
