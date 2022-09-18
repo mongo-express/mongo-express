@@ -114,16 +114,21 @@ loadConfig().then(async (config) => {
         database: commander.database,
         username: commander.username,
         password: commander.password,
+        host: commander.host,
+        port: commander.dbport,
       };
       for (const key in user) {
         if (!user[key]) {
           commander.help();
         }
       }
-
-      config.mongodb.auth[0] = user;
+      config.mongodb.mongo.username = user.username;
+      config.mongodb.mongo.password = user.password;
+      config.mongodb.mongo.dbName = user.database;
+      config.mongodb.mongo.host = user.host;
+      config.mongodb.mongo.port = user.port;
+      config.mongodb.connectionString = config.mongodb.getConnectionStringFromInlineParams();
     }
-
     config.useBasicAuth = false;
   }
 
