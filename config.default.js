@@ -5,7 +5,7 @@ dotenv.config();
 
 let mongo = {
   // Setting the connection string will only give access to that database
-  // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
+  // to see more databases you need to set mongodb.admin to true
   // As recommended, a connection String is used instead of the individual params.
   // More info here: https://docs.mongodb.com/manual/reference/connection-string/
   connectionString: process.env.ME_CONFIG_MONGODB_URL,
