@@ -269,13 +269,13 @@
           {% for column in columns %}
             <td><div class="tableContent">
               {% if !settings.read_only && !settings.no_delete && column === '_id' && collectionName !== 'system.indexes' %}
-                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
-                <input type="hidden" name="_method" value="delete">
                 <button class="btn btn-info" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}')">
                   <span class="glyphicon glyphicon-link"></span>
                 </button>
+                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
+                <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash"></span>
+                  <span class="glyphicon glyphicon-trash"></span>
                 </button>
                 </form>
               {% endif %}
