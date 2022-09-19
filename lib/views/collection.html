@@ -280,7 +280,7 @@
                 </form>
               {% endif %}
               {% if document[column] | is_URL %}
-                <a href="{{ document[column] }}" target="_blank">{{ document[column] }}</a>
+                <a href="{{ document[column] }}" target="_blank" rel="noopener noreferrer">{{ document[column] }}</a>
               {% else %}
                 {{ document[column] | stringDocIDs | to_display | safe }}
               {% endif %}
