@@ -37,6 +37,7 @@
     "cross-env": "^7.0.3",
     "csurf": "1.11.0",
     "errorhandler": "1.5.1",
+    "escape-html": "^1.0.3",
     "express": "4.18.1",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
