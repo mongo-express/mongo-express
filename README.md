@@ -254,6 +254,20 @@ Creates a new ISODate object with current time.
 
 Uses ISODate object with the given timestamp.
 
+**UUID**
+
+    UUID()
+
+Creates a new UUID v4.
+
+Can also be used `new UUID()` (note the `new` keyword there).
+
+    UUID(uuid)
+
+Uses UUID v4 with the given 24-digit hexadecimal string.
+
+Example: `UUID("dee11d4e-63c6-4d90-983c-5c9f1e79e96c")` or `UUID("dee11d4e63c64d90983c5c9f1e79e96c")`
+
 **DBRef/Dbref**
 
     DBRef(collection, objectID)
