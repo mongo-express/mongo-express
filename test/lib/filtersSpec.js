@@ -13,7 +13,7 @@ describe('filters', function () {
         const hex = UUID.split('-').join('');
         const buffer = new Buffer.from(hex, 'hex');
         const input = new Binary(buffer, Binary.SUBTYPE_UUID);
-        expect(stringDocIDs(input)).to.equal(`UUID("${UUID}")`);
+        expect(stringDocIDs(input)).to.equal(UUID);
       });
     });
     it('should test an ObjectID BSON type', () => {
