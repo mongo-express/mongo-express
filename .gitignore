@@ -52,6 +52,7 @@ pids
 results
 config.js
 admins.json
+.env
 
 # Sublime editor
 # ==============

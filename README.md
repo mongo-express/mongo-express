@@ -1,47 +1,39 @@
-mongo-express
-===
+# mongo-express
 
 [![npm version](https://badge.fury.io/js/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![npm](https://img.shields.io/npm/dm/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![GitHub stars](https://img.shields.io/github/stars/mongo-express/mongo-express.svg)](https://github.com/mongo-express/mongo-express/stargazers) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
 [![Build Status](https://github.com/mongo-express/mongo-express/actions/workflows/standard-ci.yml/badge.svg?branch=master)](https://github.com/mongo-express/mongo-express/actions/workflows/standard-ci.yml)
 
-
 Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
 
+## Features
 
-Features
---------
+- Connect to multiple databases
+- View/add/delete databases
+- View/add/rename/delete collections
+- View/add/update/delete documents
+- Preview audio/video/image assets inline in collection view
+- Nested and/or large objects are collapsible for easy overview
+- Async on-demand loading of big document properties (>100KB default) to keep collection view fast
+- GridFS support - add/get/delete incredibly large files
+- Use BSON data types in documents
+- Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
+- Connect and authenticate to individual databases
+- Authenticate as admin to view all databases
+- Database blacklist/whitelist
+- Custom CA and CA validation disabling
+- Supports replica sets
 
-* Connect to multiple databases
-* View/add/delete databases
-* View/add/rename/delete collections
-* View/add/update/delete documents
-* Preview audio/video/image assets inline in collection view
-* Nested and/or large objects are collapsible for easy overview
-* Async on-demand loading of big document properties (>100KB default) to keep collection view fast
-* GridFS support - add/get/delete incredibly large files
-* Use BSON data types in documents
-* Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
-* Connect and authenticate to individual databases
-* Authenticate as admin to view all databases
-* Database blacklist/whitelist
-* Custom CA and CA validation disabling
-* Supports replica sets
-
-
-Screenshots
------------
+## Screenshots
 
 | Home Page                                                                      | Database View                                                                                    | Collection View                                                                       | Editing A Document                                                     |
-|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | <img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" /> |
 
 These screenshots are from version 0.30.40
 View album for more screenshots: (server status, database views etc..)
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
 
-
-Development
------------------
+## Development
 
 For test or develop with the latest version you can install using this git repository:
 
@@ -53,10 +45,9 @@ Copy config.default.js to config.js and edit the default property to fit your lo
 
     npm run start-dev
 
-Usage (npm / CLI)
------------------
+## Usage (npm / CLI)
 
-*mongo-express* requires Node.js v4 or higher.
+_mongo-express_ requires Node.js v4 or higher.
 
 **To install:**
 
@@ -72,9 +63,14 @@ By default `config.default.js` is used where the basic access authentication is 
 
 Copy `YOUR_PATH/node_modules/mongo-express/config.default.js` into a new file called `YOUR_PATH/node_modules/mongo-express/config.js`.
 
-*Note:* YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
+_Note:_ YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
 
 Fill in your MongoDB connection details and any other options you want to change in `config.js`.
+
+**You will also need to create a .env file with the variables for your cookie and session secrets, these are just default values**
+
+    ME_CONFIG_SITE_COOKIESECRET: 'cookiesecret',
+    ME_CONFIG_SITE_SESSIONSECRET: 'sessionsecret',
 
 **To run:**
 
@@ -92,8 +88,7 @@ For help on configuration options:
 
     mongo-express --help
 
-Usage (Express 4 middleware)
-----------------------------
+## Usage (Express 4 middleware)
 
 **To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
 
@@ -102,8 +97,7 @@ Usage (Express 4 middleware)
 
     app.use('/mongo_express', mongo_express(mongo_express_config))
 
-Usage (Docker)
---------------
+## Usage (Docker)
 
 Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set connection string `ME_CONFIG_MONGODB_URL` to the proper connection for your MongoDB container on your Docker network.
 
@@ -159,7 +153,6 @@ You can use the following [environment variables](https://docs.docker.com/refere
     `ME_CONFIG_MONGODB_AUTH_USERNAME_FILE`  | ``        | File version of ME_CONFIG_MONGODB_AUTH_USERNAME
     `ME_CONFIG_MONGODB_AUTH_PASSWORD_FILE`  | ``        | File version of ME_CONFIG_MONGODB_AUTH_PASSWORD
 
-
 **Example:**
 
     docker run -it --rm \
@@ -177,65 +170,54 @@ This example links to a container name typical of `docker-compose`, changes the 
 
 The default port exposed from the container is 8081, so visit `http://localhost:8081` or whatever URL/port you entered into your config (if running standalone) or whatever `config.site.baseUrl` (if mounting as a middleware).
 
-Usage (Bluemix)
----------------
+## Usage (Bluemix)
 
 **Deploy to Bluemix**
 
 Doing manually:
 
-* Git clone this repository
-* Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
-* Change the file `manifest.yml` to fit your Bluemix app and service environment
-
+- Git clone this repository
+- Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
+- Change the file `manifest.yml` to fit your Bluemix app and service environment
 
 Doing automatically:
 
-* Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
+- Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/mongo-express/mongo-express.git)
 
-
 Then, take the following action to customize to your environment:
 
-* Create your `config.js` file based on `config.default.js`
-  * Check if it is necessary to change the `dbLabel` according to the MongoDB service created
-  * Change the `basicAuth` properties, not to keep the default values
+- Create your `config.js` file based on `config.default.js`
+  - Check if it is necessary to change the `dbLabel` according to the MongoDB service created
+  - Change the `basicAuth` properties, not to keep the default values
 
+## Search
 
-Search
-------
-* *Simple* search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
-* *Advanced* search passes the `find` and `projection` fields/objects straight into MongoDB `db.collection.find(query, projection)`. The `find` object is where your query happens, while the `projection` object determines which columns are returned.
+- _Simple_ search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
+- _Advanced_ search passes the `find` and `projection` fields/objects straight into MongoDB `db.collection.find(query, projection)`. The `find` object is where your query happens, while the `projection` object determines which columns are returned.
 
 See [MongoDB db.collection.find()](https://docs.mongodb.org/manual/reference/method/db.collection.find/) documentation for examples and exact usage.
 
-Planned features
-----------------
+## Planned features
 
 Pull Requests are always welcome! <3
 
+## Limitations
 
-Limitations
------------
+- Documents must have `document._id` property to be edited
+- Binary BSON data type not tested
 
-* Documents must have `document._id` property to be edited
-* Binary BSON data type not tested
+## Not tested
 
-Not tested
-----------
-
-* Binary/BinData
+- Binary/BinData
 
 JSON documents are parsed through a javascript virtual machine, so **the web
 interface can be used for executing malicious javascript on a server**.
 
 **mongo-express should only be used privately for development purposes**.
 
-
-
-BSON Data Types
----------------
+## BSON Data Types
 
 The following BSON data types are supported in the mongo-express document editor/viewer.
 
@@ -309,8 +291,7 @@ Specifying a scope/context is not supported.
 
     Symbol(string)
 
-Example Document
-----------------
+## Example Document
 
 Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
 
@@ -342,13 +323,12 @@ Here is an example of a document which can be read/edited in mongo-express (medi
 
 ---
 
-License
--------
+## License
+
 MIT License
 
 Copyright (c) 2012 Chun-hao Hu
 Copyright (c) 2016-present Multiple Contributors
-
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
