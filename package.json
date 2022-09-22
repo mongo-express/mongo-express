@@ -75,6 +75,7 @@
     "pre-commit": "1.2.2",
     "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
     "supertest": "^6.2.4",
+    "uuid": "^9.0.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   },
