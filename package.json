@@ -61,7 +61,7 @@
     "bootstrap": "^3.3.7",
     "chai": "^4.3.6",
     "clean-webpack-plugin": "^4.0.0",
-    "codemirror": "^5.23.0",
+    "codemirror": "^5.58.2",
     "concurrently": "^7.4.0",
     "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.23.1",
