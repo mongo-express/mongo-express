@@ -7,6 +7,15 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
+# yarn berry
+# ==========================
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 # Node and related ecosystem
 # ==========================
 .nodemonignore

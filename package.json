@@ -19,9 +19,7 @@
     "UI",
     "web-based"
   ],
-  "bin": {
-    "mongo-express": "./app.js"
-  },
+  "bin": "./app.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/mongo-express/mongo-express.git"
@@ -86,9 +84,6 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   },
-  "resolutions": {
-    "**/event-stream": "^4.0.1"
-  },
   "engines": {
     "node": "^14.17.0 || >=16.0.0 || >=18.0.0",
     "npm": ">=3.0.0"
@@ -97,19 +92,20 @@
   "scripts": {
     "postinstall": "patch-package",
     "lint": "eslint .",
-    "start": "cross-env NODE_ENV=production node app.js",
-    "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"npm run build-dev\"",
+    "start": "cross-env NODE_ENV=production yarn node app.js",
+    "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"yarn build-dev\"",
     "build-dev": "webpack --watch",
     "build": "cross-env NODE_ENV=production webpack",
-    "test": "npm run mocha && npm run lint",
+    "test": "yarn mocha && yarn lint",
     "cy:run": "cypress run",
     "mocha": "cross-env NODE_ENV=test mocha",
     "test-watch": "cross-env NODE_ENV=test mocha --watch --reporter spec",
-    "prepublish": "npm run build"
+    "prepublish": "yarn build"
   },
   "pre-commit": [
     "test"
   ],
   "exports": "./middleware",
-  "browserslist": "defaults"
+  "browserslist": "defaults",
+  "packageManager": "yarn@4.0.0-rc.26"
 }
