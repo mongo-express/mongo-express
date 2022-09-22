@@ -32,7 +32,6 @@
     "cli-color": "^2.0.3",
     "commander": "^2.9.0",
     "cookie-parser": "1.4.6",
-    "cross-env": "^7.0.3",
     "csurf": "1.11.0",
     "dotenv": "^16.0.3",
     "errorhandler": "1.5.1",
@@ -92,14 +91,14 @@
   "scripts": {
     "postinstall": "patch-package",
     "lint": "eslint .",
-    "start": "cross-env NODE_ENV=production yarn node app.js",
+    "start": "NODE_ENV=production yarn node app.js",
     "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"yarn build-dev\"",
     "build-dev": "webpack --watch",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack",
     "test": "yarn mocha && yarn lint",
     "cy:run": "cypress run",
-    "mocha": "cross-env NODE_ENV=test mocha",
-    "test-watch": "cross-env NODE_ENV=test mocha --watch --reporter spec",
+    "mocha": "NODE_ENV=test mocha",
+    "test-watch": "NODE_ENV=test mocha --watch --reporter spec",
     "prepublish": "yarn build"
   },
   "pre-commit": [
