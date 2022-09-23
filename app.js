@@ -22,11 +22,9 @@ const loadConfig = async () => {
   const configExist = fs.existsSync('./config.js');
   if (configExist === true) {
     try {
-      return deepmerge(
-        configDefault,
-        // eslint-disable-next-line import/no-unresolved
-        (await import('./config.js')).default,
-      );
+      // eslint-disable-next-line import/no-unresolved
+      const { default: configCustom } = await import('./config.js');
+      return deepmerge(configDefault, configCustom);
     } catch (e) {
       console.error(clc.red('Unable to load config.js!'));
       console.error(clc.red('Error is:'));
