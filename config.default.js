@@ -1,4 +1,7 @@
 import fs from 'node:fs';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 let mongo = {
   // Setting the connection string will only give access to that database
