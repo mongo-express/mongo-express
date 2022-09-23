@@ -107,7 +107,7 @@ window.ME_SETTINGS = {
   codeMirrorEditorTheme: '{{ editorTheme }}',
   baseHref: '{{ baseHref }}',
   collapsibleJSON: '{{ !!settings.me_collapsible_json }}' === 'true',
-  collapsibleJSONDefaultUnfold: parseInt('{{ settings.me_collapsible_json_default_unfold || 0}}', 10),
+  collapsibleJSONDefaultUnfold: Number.parseInt('{{ settings.me_collapsible_json_default_unfold || 0}}', 10),
   confirmDelete: '{{ !!settings.me_confirm_delete }}' === 'true',
   dbName: '{{ dbName | url_encode }}',
   collectionName: '{{ collectionName | url_encode }}',
