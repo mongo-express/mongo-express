@@ -235,7 +235,5 @@ export default {
   //     "city":"name"
   //   }
   // }
-  defaultKeyNames: {
-
-  },
+  defaultKeyNames: {},
 };
