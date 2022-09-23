@@ -37,6 +37,14 @@ export const createTestCollection = async (client) => {
   return results;
 };
 
+/** @typedef {import('mongodb').MongoClient} MongoClient */
+
+/**
+ * Return collection instance
+ * @param {MongoClient} client
+ */
+export const testCollection = (client) => client.db().collection(testCollectionName);
+
 export const dropTestCollection = (client) => client.db().collection(testCollectionName).drop();
 
 export const closeDb = (client) => client.close();
