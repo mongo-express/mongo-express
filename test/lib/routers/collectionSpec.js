@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import htmlParser from 'node-html-parser';
 
 import { createServer } from '../../testHttpUtils.js';
 import {
@@ -6,6 +7,7 @@ import {
 } from '../../testMongoUtils.js';
 
 describe('Router collection', () => {
+  /** @type {import('supertest').SuperAgentTest} */
   let request;
   let close;
   let client;
@@ -18,12 +20,49 @@ describe('Router collection', () => {
       close = server.close;
     }));
 
-  it('GET /db/<dbName>/<collection> should return html', () => request
-    .get(`/db/${dbName}/${urlColName}`).expect(200)
-    .then((res) => {
-      expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
-      expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
-    }));
+  describe('GET /db/<dbName>/<collection> should return html', () => {
+    it('No query - _getQuery.result=nul', () => request
+      .get(`/db/${dbName}/${urlColName}`).expect(200)
+      .then((res) => {
+        expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
+        expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
+        expect(htmlParser.parse(res.text).querySelectorAll('[id^="doc-"]').length).to.equal(4);
+      }));
+
+    it('query={testItem:1} - _getQuery.result={testItem: 1}', () => request
+      .get(`/db/${dbName}/${urlColName}`).expect(200).query({ query: '{testItem:1}' })
+      .then((res) => {
+        expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
+        expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
+        expect(htmlParser.parse(res.text).querySelectorAll('[id^="doc-"]').length).to.equal(1);
+      }));
+
+    describe('runAggregate=on', () => {
+      it('query= - _getQuery.result=null', () => request
+        .get(`/db/${dbName}/${urlColName}`).expect(200).query({ runAggregate: 'on', query: '' })
+        .then((res) => {
+          expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
+          expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
+          expect(htmlParser.parse(res.text).querySelectorAll('[id^="doc-"]').length).to.equal(4);
+        }));
+
+      it('query=[] - _getQuery.result=[]', () => request
+        .get(`/db/${dbName}/${urlColName}`).expect(200).query({ runAggregate: 'on', query: '[]' })
+        .then((res) => {
+          expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
+          expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
+          expect(htmlParser.parse(res.text).querySelectorAll('[id^="doc-"]').length).to.equal(4);
+        }));
+
+      it('query=[{$match:{testItem:1}}] - _getQuery.result=[{$match:{testItem:1}}]', () => request
+        .get(`/db/${dbName}/${urlColName}`).expect(200).query({ runAggregate: 'on', query: '[{$match:{testItem:1}}]' })
+        .then((res) => {
+          expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
+          expect(res.text).to.match(new RegExp(`<h1 id="pageTitle">Viewing Collection: ${collectionName}</h1>`));
+          expect(htmlParser.parse(res.text).querySelectorAll('[id^="doc-"]').length).to.equal(1);
+        }));
+    });
+  });
 
   it('POST /db/<dbName> should add a new collection');
   it('DEL /db/<dbName>/<collection> should delete the collection');
