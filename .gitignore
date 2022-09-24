@@ -85,3 +85,7 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# E2E Testing 
+# =========
+instrumented/

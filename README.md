@@ -208,6 +208,11 @@ Pull Requests are always welcome! <3
 - Documents must have `document._id` property to be edited
 - Binary BSON data type not tested
 
+## E2E Testing
+
+    We are currently trying to use Cypress, to open cypress use the command `cypress open`
+    To instrument the code to allow the E2E coverage to run, please run this command: `yarn nyc instrument --compact=false lib instrumented`
+
 ## Not tested
 
 - Binary/BinData
