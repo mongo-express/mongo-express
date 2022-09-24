@@ -1,4 +1,4 @@
-const { defineConfig } = require('cypress')
+import { defineConfig } from 'cypress'
 
 module.exports = defineConfig({
   // setupNodeEvents can be defined in either
