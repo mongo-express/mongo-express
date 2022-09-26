@@ -3712,10 +3712,10 @@ mongodb-language-model@^1.6.1:
   resolved "https://registry.yarnpkg.com/mongodb-language-model/-/mongodb-language-model-1.6.1.tgz#43d5bea9cae7bb095399e2b26c0cea5d5a1f9c9c"
   integrity sha512-hWZ1tZCvZ0YPDIyDhClS6p1RdYJAN2dX8vzAoklWjVlQOEXxjbYEFab6vZ0SgAx+K66bjBh9fp7JTTKiKNLVfA==
 
-mongodb-memory-server-core@8.9.2:
-  version "8.9.2"
-  resolved "https://registry.yarnpkg.com/mongodb-memory-server-core/-/mongodb-memory-server-core-8.9.2.tgz#560f8fd358463b606f99164e7557707f6d8d9d52"
-  integrity sha512-LG8u8QxPGrozy5UBg9YCh8jvvs5Di93zXrusgwgpj+vKxn+Efa6l1pFnCHNy6SYFydFCpMezilsDIXF0tzbJ6A==
+mongodb-memory-server-core@8.9.3:
+  version "8.9.3"
+  resolved "https://registry.yarnpkg.com/mongodb-memory-server-core/-/mongodb-memory-server-core-8.9.3.tgz#dd9ebf9b8d35c9bb9beacc52fba87e2ca40f3363"
+  integrity sha512-z/UW/fHTDRA+qvcqBxibTonnwuxRPWsphO9BUGKvFweRxT9uj09/hCK96kjBdF9wQj6k7bj/Tqo9gkGG0XbDng==
   dependencies:
     "@types/tmp" "^0.2.3"
     async-mutex "^0.3.2"
@@ -3734,12 +3734,12 @@ mongodb-memory-server-core@8.9.2:
     uuid "^8.3.1"
     yauzl "^2.10.0"
 
-mongodb-memory-server@^8.9.2:
-  version "8.9.2"
-  resolved "https://registry.yarnpkg.com/mongodb-memory-server/-/mongodb-memory-server-8.9.2.tgz#dc95bc46f7494eae90e757b292300be2d85b4d22"
-  integrity sha512-h+u+60C/yYZStKqL13O8EerRyt2gdFg9PLyRSBJr5eJfCr+tVMoMrdCw6Dd6PKlCp5hwq27VpjvtSWAT44bHiA==
+mongodb-memory-server@^8.9.3:
+  version "8.9.3"
+  resolved "https://registry.yarnpkg.com/mongodb-memory-server/-/mongodb-memory-server-8.9.3.tgz#18c23110e0a806ffffcff18e729b35879cd294bb"
+  integrity sha512-k/1tbGmN6Xegj/XoSA4F/PpKpdRHyT/3HMldhGyiOXx8RNAkJdc/Q9N4+1pCK+HKHMk7BInbo42Bn4OUeAT+hw==
   dependencies:
-    mongodb-memory-server-core "8.9.2"
+    mongodb-memory-server-core "8.9.3"
     tslib "^2.4.0"
 
 mongodb-query-parser@^2.4.6:
