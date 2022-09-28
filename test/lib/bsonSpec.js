@@ -123,7 +123,7 @@ describe('BSON', function () {
     it('should convert Timestamp to string', function () {
       const test = {
         ts: new bson.Timestamp(),
-        ts2: new bson.Timestamp(100, 100),
+        ts2: new bson.Timestamp({ t: 100, i: 100 }),
       };
 
       const result = libBson.toString(test);
