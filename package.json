@@ -55,7 +55,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.1",
+    "@babel/core": "^7.19.3",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "assets-webpack-plugin": "^7.1.1",
