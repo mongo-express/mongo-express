@@ -260,11 +260,11 @@
           </th>
         {% endfor %}
       </thead>
-      {% for document in docs %}
+      {% for index, document in docs %}
         {% if document._id._bsontype == 'Binary' %}
-        <tr onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
         {% else %}
-        <tr onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
         {% endif %}
           {% for column in columns %}
             <td><div class="tableContent">
