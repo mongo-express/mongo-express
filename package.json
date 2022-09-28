@@ -100,6 +100,7 @@
     "build-dev": "webpack --watch",
     "build": "cross-env NODE_ENV=production webpack",
     "test": "npm run mocha && npm run lint",
+    "cy:run": "cypress run",
     "mocha": "cross-env NODE_ENV=test mocha",
     "test-watch": "cross-env NODE_ENV=test mocha --watch --reporter spec",
     "prepublish": "npm run build"
