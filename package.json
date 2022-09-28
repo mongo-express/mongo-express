@@ -78,7 +78,7 @@
     "node-html-parser": "^6.1.1",
     "nodemon": "^2.0.20",
     "pre-commit": "1.2.2",
-    "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
+    "renderjson": "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch",
     "supertest": "^6.3.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
