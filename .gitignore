@@ -85,3 +85,9 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# E2E Testing 
+# =========
+instrumented/
+cypress/videos
+cypress/screenshots
