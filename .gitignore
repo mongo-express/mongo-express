@@ -89,3 +89,5 @@ mongod
 # E2E Testing 
 # =========
 instrumented/
+cypress/videos
+cypress/screenshots
