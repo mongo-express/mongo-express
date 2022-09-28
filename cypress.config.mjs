@@ -1,16 +1,18 @@
 import { defineConfig } from 'cypress'
+import cypressCodeCoverageTask from '@cypress/code-coverage/task.js'
+import cypressCodeCoverageUseBabel from '@cypress/code-coverage/use-babelrc.js'
 
-module.exports = defineConfig({
+export default defineConfig({
   // setupNodeEvents can be defined in either
   // the e2e or component configuration
   e2e: {
     setupNodeEvents(on, config) {
-      require('@cypress/code-coverage/task')(on, config)
+      cypressCodeCoverageTask(on, config)
       // tell Cypress to use .babelrc file
       // and instrument the specs files
       // only the extra application files will be instrumented
       // not the spec files themselves
-      on('file:preprocessor', require('@cypress/code-coverage/use-babelrc'))
+      on('file:preprocessor', cypressCodeCoverageUseBabel)
       
       return config
     }
