@@ -39,8 +39,8 @@ function getFile(filePath) {
       if (fs.existsSync(filePath)) {
         return fs.readFileSync(filePath);
       }
-    } catch (err) {
-      console.error('Failed to read file', filePath, err);
+    } catch (error) {
+      console.error('Failed to read file', filePath, error);
     }
   }
   return null;

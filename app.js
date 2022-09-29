@@ -25,10 +25,10 @@ const loadConfig = async () => {
       // eslint-disable-next-line import/no-unresolved
       const { default: configCustom } = await import('./config.js');
       return deepmerge(configDefault, configCustom);
-    } catch (e) {
+    } catch (error) {
       console.error(clc.red('Unable to load config.js!'));
       console.error(clc.red('Error is:'));
-      console.log(clc.red(e));
+      console.log(clc.red(error));
       process.exit(1);
     }
   } else {
