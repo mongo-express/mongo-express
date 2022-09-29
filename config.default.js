@@ -222,6 +222,8 @@ export default {
 
     // noDelete: if noDelete is set to true, we won't show delete buttons
     noDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_DELETE, false),
+
+    noRawCommand: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_RAW_COMMAND, false),
   },
 
   // Specify the default keyname that should be picked from a document to display in collections list.
