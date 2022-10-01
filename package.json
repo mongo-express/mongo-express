@@ -53,6 +53,7 @@
     "mongodb-query-parser": "^2.4.6",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
+    "patch-package": "^6.4.7",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
@@ -95,6 +96,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "postinstall": "patch-package",
     "lint": "eslint .",
     "start": "cross-env NODE_ENV=production node app.js",
     "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"npm run build-dev\"",
