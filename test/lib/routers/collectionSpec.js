@@ -21,7 +21,7 @@ describe('Router collection', () => {
     }));
 
   describe('GET /db/<dbName>/<collection> should return html', () => {
-    it('No query - _getQuery.result=nul', () => request
+    it('No query - _getQuery.result={}', () => request
       .get(`/db/${dbName}/${urlColName}`).expect(200)
       .then((res) => {
         expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
@@ -38,7 +38,7 @@ describe('Router collection', () => {
       }));
 
     describe('runAggregate=on', () => {
-      it('query= - _getQuery.result=null', () => request
+      it('query= - _getQuery.result={}', () => request
         .get(`/db/${dbName}/${urlColName}`).expect(200).query({ runAggregate: 'on', query: '' })
         .then((res) => {
           expect(res.text).to.match(new RegExp(`<title>${collectionName} - Mongo Express</title>`));
