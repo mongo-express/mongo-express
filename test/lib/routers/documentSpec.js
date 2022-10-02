@@ -1,4 +1,4 @@
-import { Binary } from 'bson';
+import { Binary, ObjectId, UUID } from 'bson';
 import { expect } from 'chai';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -44,7 +44,38 @@ describe('Router document', () => {
       .finally(() => testCollection(db).deleteOne({ _id }));
   });
 
-  it('POST /db/<dbName>/<collection> should add a new document');
+  describe('POST /db/<dbName>/<collection> should add a new document', () => {
+    it('ObjectId()', async () => {
+      const testValue = 'ObjectId()';
+      await request.post(`/db/${dbName}/${urlColName}`).send({ document: `{_id:ObjectId(),testValue:"${testValue}"}` }).expect(302);
+      const result = await testCollection(db).findOne({ testValue });
+      expect(result).to.not.equal({ _id: result._id, testValue });
+      expect(ObjectId.isValid(result._id.toString())).to.equal(true);
+      await testCollection(db).deleteOne({ _id: result._id });
+    });
+    it('ObjectId(<object_id>)', async () => {
+      const testValue = new ObjectId();
+      await request.post(`/db/${dbName}/${urlColName}`).send({ document: `{_id:ObjectId("${testValue}"),testValue:"${testValue}"}` }).expect(302);
+      const result = await testCollection(db).findOne({ testValue: testValue.toString() });
+      expect(ObjectId.isValid(result._id.toString())).to.equal(true);
+      await testCollection(db).deleteOne({ _id: result._id });
+    });
+    it('UUID()', async () => {
+      const testValue = 'UUID()';
+      await request.post(`/db/${dbName}/${urlColName}`).send({ document: `{_id:UUID(),testValue:"${testValue}"}` }).expect(302);
+      const result = await testCollection(db).findOne({ testValue });
+      expect(UUID.isValid(result._id.toString())).to.equal(true);
+      await testCollection(db).deleteOne({ _id: result._id });
+    });
+    it('UUID(<uuid>)', async () => {
+      const testUuid = new UUID();
+      const testValue = `UUID("${testUuid}")`;
+      await request.post(`/db/${dbName}/${urlColName}`).send({ document: `{_id:${testValue},testValue:${testValue}}` }).expect(302);
+      const result = await testCollection(db).findOne({ testValue: new UUID(testUuid) });
+      expect(UUID.isValid(result._id.toString())).to.equal(true);
+      await testCollection(db).deleteOne({ _id: result._id });
+    });
+  });
   it('DEL /db/<dbName>/<collection>/<document> should delete the document');
   it('PUT /db/<dbName>/<collection>/<document> should update the document');
 
