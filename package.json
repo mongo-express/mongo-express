@@ -50,7 +50,6 @@
     "mongodb-query-parser": "^2.4.6",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
-    "patch-package": "^6.4.7",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
@@ -89,7 +88,6 @@
   },
   "license": "MIT",
   "scripts": {
-    "postinstall": "patch-package",
     "lint": "eslint .",
     "start": "NODE_ENV=production yarn node app.js",
     "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"yarn build-dev\"",
