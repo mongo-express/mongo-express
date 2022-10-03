@@ -1,13 +1,13 @@
 import { expect } from 'chai';
-import { v4 as uuidv4 } from 'uuid';
+import { UUID } from 'bson';
 import { addHyphensToUUID, isValidDatabaseName } from '../../lib/utils.js';
 
 describe('utils', function () {
   describe('addHyphensToUUID', function () {
     it('should be valid', () => {
-      const UUID = uuidv4();
-      const hex = UUID.split('-').join('');
-      expect(addHyphensToUUID(hex)).to.equal(UUID);
+      const uuid = new UUID().toString();
+      const hex = uuid.split('-').join('');
+      expect(addHyphensToUUID(hex)).to.equal(uuid);
     });
   });
   describe('isValidDatabaseName', function () {

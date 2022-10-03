@@ -1,6 +1,5 @@
-import { Binary, ObjectId } from 'bson';
+import { Binary, ObjectId, UUID } from 'bson';
 import { expect } from 'chai';
-import { v4 as uuidv4 } from 'uuid';
 // eslint-disable-next-line camelcase
 import { stringDocIDs, to_display } from '../../lib/filters.js';
 
@@ -9,11 +8,11 @@ describe('filters', function () {
     describe('should test a Binary BSON type', () => {
       it('not v4');
       it('v4', () => {
-        const UUID = uuidv4();
-        const hex = UUID.split('-').join('');
+        const uuid = new UUID().toString();
+        const hex = uuid.split('-').join('');
         const buffer = new Buffer.from(hex, 'hex');
         const input = new Binary(buffer, Binary.SUBTYPE_UUID);
-        expect(stringDocIDs(input)).to.equal(UUID);
+        expect(stringDocIDs(input)).to.equal(uuid);
       });
     });
     it('should test an ObjectID BSON type', () => {

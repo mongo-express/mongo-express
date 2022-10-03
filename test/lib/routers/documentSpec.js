@@ -1,7 +1,5 @@
 import { Binary, ObjectId, UUID } from 'bson';
 import { expect } from 'chai';
-import { v4 as uuidv4 } from 'uuid';
-
 import { createServer, getDocumentUrl } from '../../testHttpUtils.js';
 import {
   cleanAndCloseDb, initializeDb, getFirstDocumentId, testDbName as dbName, testCollection, testURLCollectionName,
@@ -31,15 +29,15 @@ describe('Router document', () => {
       });
   });
   it('GET /db/<dbName>/<collection>/<document> (_id: UUID) should return html', async () => {
-    const UUID = uuidv4();
-    const hex = UUID.split('-').join('');
+    const uuid = new UUID().toString();
+    const hex = uuid.split('-').join('');
     const buffer = new Buffer.from(hex, 'hex');
     const _id = new Binary(buffer, Binary.SUBTYPE_UUID);
     const doc = { _id };
     await testCollection(db).insertOne(doc);
-    return request.get(getDocumentUrl(dbName, urlColName, UUID)).query({ subtype: Binary.SUBTYPE_UUID }).expect(200)
+    return request.get(getDocumentUrl(dbName, urlColName, uuid)).query({ subtype: Binary.SUBTYPE_UUID }).expect(200)
       .then((res) => {
-        expect(res.text).to.match(new RegExp(`<title>${UUID} - Mongo Express</title>`));
+        expect(res.text).to.match(new RegExp(`<title>${uuid} - Mongo Express</title>`));
       })
       .finally(() => testCollection(db).deleteOne({ _id }));
   });
