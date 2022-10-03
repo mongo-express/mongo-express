@@ -1,0 +1,42 @@
+diff --git a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js
+index dd902df..07db965 100644
+--- a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js
++++ b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js
+@@ -2,6 +2,7 @@
+ 
+ Object.defineProperty(exports, '__esModule', { value: true });
+ 
++var crypto = require('node:crypto');
+ var acorn = require('acorn');
+ var bson = require('bson');
+ 
+@@ -154,7 +155,7 @@ var SCOPE = {
+     return new bson__namespace.Binary(Buffer.from(d, 'base64'), t);
+   },
+   UUID: function UUID(u) {
+-    return new bson__namespace.Binary(Buffer.from(u.replace(/-/g, ''), 'hex'), 4);
++    return new bson__namespace.Binary(Buffer.from((u || crypto.randomUUID()).replace(/-/g, ''), 'hex'), 4);
+   },
+   Code: function Code(c, s) {
+     return new bson__namespace.Code(c, s);
+diff --git a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js
+index dd902df..07db965 100644
+--- a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js
++++ b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js
+@@ -2,6 +2,7 @@
+ 
+ Object.defineProperty(exports, '__esModule', { value: true });
+ 
++var crypto = require('node:crypto');
+ var acorn = require('acorn');
+ var bson = require('bson');
+ 
+@@ -154,7 +155,7 @@ var SCOPE = {
+     return new bson__namespace.Binary(Buffer.from(d, 'base64'), t);
+   },
+   UUID: function UUID(u) {
+-    return new bson__namespace.Binary(Buffer.from(u.replace(/-/g, ''), 'hex'), 4);
++    return new bson__namespace.Binary(Buffer.from((u || crypto.randomUUID()).replace(/-/g, ''), 'hex'), 4);
+   },
+   Code: function Code(c, s) {
+     return new bson__namespace.Code(c, s);

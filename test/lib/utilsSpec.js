@@ -1,7 +1,15 @@
 import { expect } from 'chai';
-import { isValidDatabaseName } from '../../lib/utils.js';
+import { UUID } from 'bson';
+import { addHyphensToUUID, isValidDatabaseName } from '../../lib/utils.js';
 
 describe('utils', function () {
+  describe('addHyphensToUUID', function () {
+    it('should be valid', () => {
+      const uuid = new UUID().toString();
+      const hex = uuid.split('-').join('');
+      expect(addHyphensToUUID(hex)).to.equal(uuid);
+    });
+  });
   describe('isValidDatabaseName', function () {
     it('should be valid', () => {
       const validNames = [
