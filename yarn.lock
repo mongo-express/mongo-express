@@ -3607,7 +3607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ejson-shell-parser@npm:^1.1.3":
+"ejson-shell-parser@npm:1.1.3":
   version: 1.1.3
   resolution: "ejson-shell-parser@npm:1.1.3"
   dependencies:
@@ -3615,6 +3615,17 @@ __metadata:
   peerDependencies:
     bson: ^4.2.3
   checksum: de2a33b649fc34147694d895b96e86af150226b98e8297336af46e8d80d8f1441e7493ef4d0fecf4547a0d1041ec693bfae722da4a75737a0e522b43af715747
+  languageName: node
+  linkType: hard
+
+"ejson-shell-parser@patch:ejson-shell-parser@npm%3A1.1.3#~/.yarn/patches/ejson-shell-parser-npm-1.1.3-6aacdd642d.patch":
+  version: 1.1.3
+  resolution: "ejson-shell-parser@patch:ejson-shell-parser@npm%3A1.1.3#~/.yarn/patches/ejson-shell-parser-npm-1.1.3-6aacdd642d.patch::version=1.1.3&hash=048bca"
+  dependencies:
+    acorn: "npm:^8.1.0"
+  peerDependencies:
+    bson: ^4.2.3
+  checksum: f989ead38ea9b85c6906afc8086d6052a77d791b3d03e274c715c961c046d0610ec6099f6bdb60541e25dac0633612026f7e71432313b7e300cfdbf73ff6cb43
   languageName: node
   linkType: hard
 
