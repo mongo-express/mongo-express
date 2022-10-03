@@ -47,7 +47,6 @@ describe('Router document', () => {
       const testValue = 'ObjectId()';
       await request.post(`/db/${dbName}/${urlColName}`).send({ document: `{_id:ObjectId(),testValue:"${testValue}"}` }).expect(302);
       const result = await testCollection(db).findOne({ testValue });
-      expect(result).to.not.equal({ _id: result._id, testValue });
       expect(ObjectId.isValid(result._id.toString())).to.equal(true);
       await testCollection(db).deleteOne({ _id: result._id });
     });
