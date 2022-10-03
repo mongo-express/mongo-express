@@ -53,6 +53,7 @@
     "mongodb-query-parser": "^2.4.6",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
+    "patch-package": "^6.4.7",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
@@ -82,7 +83,6 @@
     "pre-commit": "1.2.2",
     "renderjson": "dozoisch/renderjson#cd0ef870c1298d53f09555da54e4bf57a0d21414",
     "supertest": "^6.2.4",
-    "uuid": "^9.0.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   },
@@ -95,6 +95,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "postinstall": "patch-package",
     "lint": "eslint .",
     "start": "cross-env NODE_ENV=production node app.js",
     "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"npm run build-dev\"",
