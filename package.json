@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
-    "body-parser": "^1.20.0",
+    "body-parser": "^1.20.1",
     "bson": "^4.7.0",
     "busboy": "^1.6.0",
     "cli-color": "^2.0.3",
