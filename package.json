@@ -76,7 +76,7 @@
     "eslint-plugin-lodash": "^7.4.0",
     "eslint-plugin-unicorn": "^44.0.2",
     "jquery": "^3.6.1",
-    "mocha": "^10.0.0",
+    "mocha": "^10.1.0",
     "mongodb-memory-server": "^8.9.3",
     "node-html-parser": "^6.1.1",
     "nodemon": "^2.0.20",
