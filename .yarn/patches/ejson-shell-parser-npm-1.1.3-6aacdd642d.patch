@@ -1,7 +1,7 @@
-diff --git a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js
-index dd902df..07db965 100644
---- a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js
-+++ b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.dev.js
+diff --git a/dist/ejson-shell-parser.cjs.dev.js b/dist/ejson-shell-parser.cjs.dev.js
+index dd902df0f84ca691a699c867fbd8c723652a3bcd..07db9655afec553fee2ec25b195304417ac00177 100644
+--- a/dist/ejson-shell-parser.cjs.dev.js
++++ b/dist/ejson-shell-parser.cjs.dev.js
 @@ -2,6 +2,7 @@
  
  Object.defineProperty(exports, '__esModule', { value: true });
@@ -19,10 +19,10 @@ index dd902df..07db965 100644
    },
    Code: function Code(c, s) {
      return new bson__namespace.Code(c, s);
-diff --git a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js
-index dd902df..07db965 100644
---- a/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js
-+++ b/node_modules/ejson-shell-parser/dist/ejson-shell-parser.cjs.prod.js
+diff --git a/dist/ejson-shell-parser.cjs.prod.js b/dist/ejson-shell-parser.cjs.prod.js
+index dd902df0f84ca691a699c867fbd8c723652a3bcd..07db9655afec553fee2ec25b195304417ac00177 100644
+--- a/dist/ejson-shell-parser.cjs.prod.js
++++ b/dist/ejson-shell-parser.cjs.prod.js
 @@ -2,6 +2,7 @@
  
  Object.defineProperty(exports, '__esModule', { value: true });
