@@ -6534,7 +6534,7 @@ __metadata:
     pre-commit: "npm:1.2.2"
     renderjson: "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch"
     serve-favicon: "npm:^2.5.0"
-    supertest: "npm:^6.3.0"
+    supertest: "npm:^6.3.1"
     webpack: "npm:^5.74.0"
     webpack-cli: "npm:^4.10.0"
   bin:
@@ -7445,7 +7445,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.11.0, qs@npm:^6.10.3":
+"qs@npm:6.11.0, qs@npm:^6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
@@ -7997,7 +7997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.5":
+"semver@npm:^7.3.5, semver@npm:^7.3.8":
   version: 7.3.8
   resolution: "semver@npm:7.3.8"
   dependencies:
@@ -8518,9 +8518,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"superagent@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "superagent@npm:8.0.0"
+"superagent@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "superagent@npm:8.0.3"
   dependencies:
     component-emitter: "npm:^1.3.0"
     cookiejar: "npm:^2.1.3"
@@ -8530,20 +8530,19 @@ __metadata:
     formidable: "npm:^2.0.1"
     methods: "npm:^1.1.2"
     mime: "npm:2.6.0"
-    qs: "npm:^6.10.3"
-    readable-stream: "npm:^3.6.0"
-    semver: "npm:^7.3.7"
-  checksum: c335ce1382321dc9033a44ce9bb2fd060410763e68673a7c8851214e884a6d85a607fbc0bd6f2b2a6c4e8a00ea429a9df722dc39755d439c8800621af4e35338
+    qs: "npm:^6.11.0"
+    semver: "npm:^7.3.8"
+  checksum: afce5990c2e80cf3f664419c1619fefe632a70634684827d3fe000d781d2c3023f8e9818eac0454cee4011902f347475ad1a265364a4975f7ed74dc97f474e55
   languageName: node
   linkType: hard
 
-"supertest@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "supertest@npm:6.3.0"
+"supertest@npm:^6.3.1":
+  version: 6.3.1
+  resolution: "supertest@npm:6.3.1"
   dependencies:
     methods: "npm:^1.1.2"
-    superagent: "npm:^8.0.0"
-  checksum: bbc4c3dda112f3836d553acba4ad9a6681a5fa92b28e5d7955d58de2f5ef524b6f58de6779a1f29f245bf4d6045ee3f40225a590f1e1accde658625bc94f661a
+    superagent: "npm:^8.0.3"
+  checksum: 118978409b59d12eaaeb7f4fcf2c1e01601d9eb79bad8a3a787559bd7c8e37f8dc2300448477c2f021470c4c6cfc6dc19dee74d19f376e950bf961c566c52fa7
   languageName: node
   linkType: hard
 
