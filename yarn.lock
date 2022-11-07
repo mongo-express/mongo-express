@@ -2634,10 +2634,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^3.3.7":
-  version: 3.4.1
-  resolution: "bootstrap@npm:3.4.1"
-  checksum: 306e725b11e4c060a67a48901b789dd72b92d2e883600a4315b791a4900b177949ac4d6b99f55f9585dc19f9aaf538b93d0a7219d50909d288888ec159ae159e
+"bootstrap@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "bootstrap@npm:5.2.2"
+  peerDependencies:
+    "@popperjs/core": ^2.11.6
+  checksum: 209ec0e1e3c185e5b4b9e9be1e1da0e23574ce7f4c1d15359d1a10cf7429702383bcc301a26e682e38dc399ea86a1e1c41b96dce3a03c5e5d03d60548e639a2a
   languageName: node
   linkType: hard
 
@@ -6592,7 +6594,7 @@ __metadata:
     babel-loader: "npm:^9.1.0"
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.1"
-    bootstrap: "npm:^3.3.7"
+    bootstrap: "npm:^5.2.2"
     bson: "npm:^4.7.0"
     busboy: "npm:^1.6.0"
     chai: "npm:^4.3.7"
