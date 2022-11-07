@@ -60,7 +60,7 @@
     "assets-webpack-plugin": "^7.1.1",
     "babel-loader": "^9.1.0",
     "bootstrap": "^3.3.7",
-    "chai": "^4.3.6",
+    "chai": "^4.3.7",
     "clean-webpack-plugin": "^4.0.0",
     "codemirror": "^5.58.2",
     "concurrently": "^7.5.0",
