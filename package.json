@@ -65,7 +65,7 @@
     "codemirror": "^5.58.2",
     "concurrently": "^7.5.0",
     "copy-webpack-plugin": "^11.0.0",
-    "cypress": "^10.11.0",
+    "cypress": "^11.0.1",
     "eslint": "^8.27.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
