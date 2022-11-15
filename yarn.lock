@@ -7479,7 +7479,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.1.0"
-    mongodb: "npm:^4.10.0"
+    mongodb: "npm:^4.11.0"
     mongodb-memory-server: "npm:^8.10.0"
     mongodb-query-parser: "patch:mongodb-query-parser@npm%3A2.4.6#~/.yarn/patches/mongodb-query-parser-npm-2.4.6-234abad2fc.patch"
     morgan: "npm:^1.10.0"
@@ -7496,16 +7496,6 @@ __metadata:
     mongo-express: ./app.js
   languageName: unknown
   linkType: soft
-
-"mongodb-connection-string-url@npm:^2.5.3":
-  version: 2.5.3
-  resolution: "mongodb-connection-string-url@npm:2.5.3"
-  dependencies:
-    "@types/whatwg-url": "npm:^8.2.1"
-    whatwg-url: "npm:^11.0.0"
-  checksum: a7d9a002323af88a4b43c55ec13cca049dfd2a0b549dfe3d2adb82a89120a8ddb3bff8fa5a7929a9bb5347272069a130402c93d7b3b613ad289f256a95ec887b
-  languageName: node
-  linkType: hard
 
 "mongodb-connection-string-url@npm:^2.5.4":
   version: 2.5.4
@@ -7608,23 +7598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^4.10.0":
-  version: 4.10.0
-  resolution: "mongodb@npm:4.10.0"
-  dependencies:
-    bson: "npm:^4.7.0"
-    denque: "npm:^2.1.0"
-    mongodb-connection-string-url: "npm:^2.5.3"
-    saslprep: "npm:^1.0.3"
-    socks: "npm:^2.7.0"
-  dependenciesMeta:
-    saslprep:
-      optional: true
-  checksum: 935f7dd90d7962daf5bd2718e3472794e043a42252047d140e8173006f8dcb2cabd9d002f6572c61a799e3f979b25776d3bcf2593d1b856e035d9513e6ae9af5
-  languageName: node
-  linkType: hard
-
-"mongodb@npm:~4.11.0":
+"mongodb@npm:^4.11.0, mongodb@npm:~4.11.0":
   version: 4.11.0
   resolution: "mongodb@npm:4.11.0"
   dependencies:
@@ -9186,16 +9160,6 @@ __metadata:
     ip: "npm:^2.0.0"
     smart-buffer: "npm:^4.2.0"
   checksum: a8026d6abfcd168a661240848f6989fbba66276e8fa97ff1cb1079c2f3c6907dcc8284fcbc4f6d3fee8d071afb4fc8313da7e5fbf6d8768f206347a671f1542b
-  languageName: node
-  linkType: hard
-
-"socks@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "socks@npm:2.7.0"
-  dependencies:
-    ip: "npm:^2.0.0"
-    smart-buffer: "npm:^4.2.0"
-  checksum: 50863d0aa15029fbaf164bd5ff78ad87799d4d0f833b42ca3e66ccff8311f6a199e18d496aac07244aeef546ce0c427bf63ca9fa445c0fa6b036e5d054f74ebb
   languageName: node
   linkType: hard
 
