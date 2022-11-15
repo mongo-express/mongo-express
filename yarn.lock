@@ -7483,7 +7483,7 @@ __metadata:
     mongodb-memory-server: "npm:^8.10.0"
     mongodb-query-parser: "patch:mongodb-query-parser@npm%3A2.4.6#~/.yarn/patches/mongodb-query-parser-npm-2.4.6-234abad2fc.patch"
     morgan: "npm:^1.10.0"
-    node-html-parser: "npm:^6.1.3"
+    node-html-parser: "npm:^6.1.4"
     nodemon: "npm:^2.0.20"
     nyc: "npm:^15.1.0"
     pre-commit: "npm:1.2.2"
@@ -7757,13 +7757,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-html-parser@npm:^6.1.3":
-  version: 6.1.3
-  resolution: "node-html-parser@npm:6.1.3"
+"node-html-parser@npm:^6.1.4":
+  version: 6.1.4
+  resolution: "node-html-parser@npm:6.1.4"
   dependencies:
     css-select: "npm:^5.1.0"
     he: "npm:1.2.0"
-  checksum: c2b33298c141261cb687548f3faed7328741be78591b779206dceeac9eaf7f4b41c895a4294756d5b56168e2d53e67cd74c15821ce2d1b896fe65cc20e6b7a30
+  checksum: 4afdb745bf85bd3da3d320c45ceb4d8062ef6c4948cdee9fe5e96e57484a9b8491a40218b53ae050e4530ee9a0e9344ad64160a1a0aa1792ffbb8c3f5864a2a0
   languageName: node
   linkType: hard
 
