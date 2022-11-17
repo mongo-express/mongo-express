@@ -13,7 +13,7 @@ RUN apk -U add --no-cache \
         bash \
         # grab tini for signal processing and zombie killing
         tini \
-    && yarn install
+    && yarn workspaces focus --production
     # && yarn run build     # prepublish already run build
 
 EXPOSE 8081
