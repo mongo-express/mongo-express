@@ -227,23 +227,11 @@
   {% else %}
 
   {% if pagination %}
-    <ul class="pager span7">
-      <li class="previous{% if prev.skip < 0 %} disabled{% endif %}">
-        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip=0&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; First</a>
-      </li>
-
-      <li{% if prev.skip < 0 %} class="disabled"{% endif %}>
-        <a{% if prev.skip >= 0 %} href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>&larr; Prev</a>
-      </li>
-
-      <li{% if next.skip >= stats.count %} class="disabled"{% endif %}>
-        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Next &rarr;</a>
-      </li>
-
-      <li class="next{% if next.skip >= stats.count %} disabled{% endif %}">
-        <a{% if next.skip < stats.count %} href="{{ collectionUrl }}?skip={{ last }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"{% endif %}>Last &rarr;</a>
-      </li>
-    </ul>
+    <nav>
+      <div class="text-center">
+        <div id="paginator-top"></div>
+      </div>
+    </nav>
   {% endif %}
 
   <div class="fadeToWhite" id="fadeToWhiteID"></div>
@@ -295,33 +283,7 @@
   {% if pagination %}
     <nav>
       <div class="text-center">
-      <ul class="pagination">
-        {%- if prev2.skip >= 0 %}
-        <li><a href="{{ collectionUrl }}?skip={{ prev2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev2.page }}</a></li>
-        {% else %}
-        <li><a>&nbsp;</a></li>
-        {%- endif %}
-
-        {%- if prev.skip >= 0 %}
-        <li><a href="{{ collectionUrl }}?skip={{ prev.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ prev.page }}</a></li>
-        {% else %}
-        <li><a>&nbsp;</a></li>
-        {%- endif %}
-
-        <li class="active"><a href="{{ collectionUrl }}?skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ here }}</a></li>
-
-        {%- if next.skip < stats.count %}
-        <li><a href="{{ collectionUrl }}?skip={{ next.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next.page }}</a></li>
-        {% else %}
-        <li><a>&nbsp;</a></li>
-        {% endif %}
-
-        {%- if next2.skip < stats.count %}
-        <li><a href="{{ collectionUrl }}?skip={{ next2.skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">{{ next2.page }}</a></li>
-        {% else %}
-        <li><a>&nbsp;</a></li>
-        {% endif %}
-      </ul>
+        <div id="paginator-bottom"></div>
       </div>
     </nav>
   {% endif %}
