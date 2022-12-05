@@ -7538,7 +7538,7 @@ __metadata:
     pre-commit: "npm:1.2.2"
     renderjson: "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch"
     serve-favicon: "npm:^2.5.0"
-    supertest: "npm:^6.3.1"
+    supertest: "npm:^6.3.2"
     webpack: "npm:^5.75.0"
     webpack-cli: "npm:^4.10.0"
   bin:
@@ -9531,13 +9531,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"supertest@npm:^6.3.1":
-  version: 6.3.1
-  resolution: "supertest@npm:6.3.1"
+"supertest@npm:^6.3.2":
+  version: 6.3.2
+  resolution: "supertest@npm:6.3.2"
   dependencies:
     methods: "npm:^1.1.2"
     superagent: "npm:^8.0.3"
-  checksum: 118978409b59d12eaaeb7f4fcf2c1e01601d9eb79bad8a3a787559bd7c8e37f8dc2300448477c2f021470c4c6cfc6dc19dee74d19f376e950bf961c566c52fa7
+  checksum: 41060603cc0b47f953b28abe8405a9fda7f47f3e16de213b6175ca95c3c54f7e1e11780fc17ba018eb6cb508cafdbccbfc6b422bf6763529e97135d2b10809b8
   languageName: node
   linkType: hard
 
