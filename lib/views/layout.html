@@ -111,7 +111,10 @@ window.ME_SETTINGS = {
   confirmDelete: '{{ !!settings.me_confirm_delete }}' === 'true',
   dbName: '{{ dbName | url_encode }}',
   collectionName: '{{ collectionName | url_encode }}',
-  bucketName: '{{ bucketName }}'
+  bucketName: '{{ bucketName }}',
+  limit: '{{ limit }}',
+  skip: '{{ skip }}',
+  totalPages: Math.round('{{ count }}' / '{{ limit }}')
 };
 </script>
 {% block scripts %}

@@ -3519,6 +3519,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bootstrap-paginator@github:rtritto/bootstrap-paginator#develop":
+  version: 1.0.2
+  resolution: "bootstrap-paginator@https://github.com/rtritto/bootstrap-paginator.git#commit=5a8f6b4f7b33119bd9262cfada058ff8394aac51"
+  checksum: 05b7e6384612a9bf54e8dfce33e24003b959d1b81463c76664d7738cd1f6e097b0b11663200100f63ee43b1ab6fc47a6e086b9f0c4b2bf804b4fd7f766ca3a97
+  languageName: node
+  linkType: hard
+
 "bootstrap@npm:^3.3.7":
   version: 3.4.1
   resolution: "bootstrap@npm:3.4.1"
@@ -7496,6 +7503,7 @@ __metadata:
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.1"
     bootstrap: "npm:^3.3.7"
+    bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
     bson: "npm:^4.7.0"
     busboy: "npm:^1.6.0"
     chai: "npm:^4.3.7"
