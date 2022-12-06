@@ -34,7 +34,7 @@ const dbAuthUsername = 'ME_CONFIG_MONGODB_AUTH_USERNAME';
 const dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
 
 function getFile(filePath) {
-  if (typeof filePath !== 'undefined' && filePath) {
+  if (filePath !== undefined && filePath) {
     try {
       if (fs.existsSync(filePath)) {
         return fs.readFileSync(filePath);
