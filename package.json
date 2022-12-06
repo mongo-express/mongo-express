@@ -81,7 +81,7 @@
     "renderjson": "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch",
     "supertest": "^6.3.2",
     "webpack": "^5.75.0",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^5.0.1"
   },
   "engines": {
     "node": "^14.17.0 || >=16.0.0 || >=18.0.0",
