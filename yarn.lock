@@ -4557,13 +4557,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dezalgo@npm:1.0.3":
-  version: 1.0.3
-  resolution: "dezalgo@npm:1.0.3"
+"dezalgo@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "dezalgo@npm:1.0.4"
   dependencies:
     asap: "npm:^2.0.0"
     wrappy: "npm:1"
-  checksum: 02b5929f357a7b73d10c84e36bb5ecb0e8d06946c56c399fd72d36fba439d0d7f10e36dc79d4e94c8d83d8818f1c8c0ef662441610f146743594fcb51fb3cb2a
+  checksum: fce72b87747ae8626259618bc8e207fbf5c9e0d8a5316954e2d038c809549eb7c631c3da49359de66d58fbcf2d5de530cc7da88a406df2382c24279d99fc5399
   languageName: node
   linkType: hard
 
@@ -5605,15 +5605,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"formidable@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "formidable@npm:2.0.1"
+"formidable@npm:^2.1.1":
+  version: 2.1.2
+  resolution: "formidable@npm:2.1.2"
   dependencies:
-    dezalgo: "npm:1.0.3"
-    hexoid: "npm:1.0.0"
-    once: "npm:1.4.0"
-    qs: "npm:6.9.3"
-  checksum: c5b16649278f4811ac05202f6982929ceb44f52e213231b47485e6c97e351ca674107f6b0475beaa5493a4b2b04459f1410c26c8d739334e453b03d4ff85b17a
+    dezalgo: "npm:^1.0.4"
+    hexoid: "npm:^1.0.0"
+    once: "npm:^1.4.0"
+    qs: "npm:^6.11.0"
+  checksum: 2c86b65600d7ad9e3031bc9b8889d4ba02d72b4d50e52554e0470b067256ef2c73a214d58fec44f3d858cc0e1c8227fd111a74a4f38ccf6b9b469973cd209421
   languageName: node
   linkType: hard
 
@@ -6078,7 +6078,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hexoid@npm:1.0.0":
+"hexoid@npm:^1.0.0":
   version: 1.0.0
   resolution: "hexoid@npm:1.0.0"
   checksum: e64a9e4db1a7c55dcb79555189623580ae73f471539bf03da76247d3945bb8e2639c18037d6ccdf3187d94d713ece3a9f605845ea208d900e32cfad2b8d418b4
@@ -7566,7 +7566,7 @@ __metadata:
     pre-commit: "npm:1.2.2"
     renderjson: "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch"
     serve-favicon: "npm:^2.5.0"
-    supertest: "npm:^6.3.2"
+    supertest: "npm:^6.3.3"
     webpack: "npm:^5.75.0"
     webpack-cli: "npm:^5.0.1"
   bin:
@@ -8060,7 +8060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"once@npm:1.4.0, once@npm:^1.3.0, once@npm:^1.3.1, once@npm:^1.4.0":
+"once@npm:^1.3.0, once@npm:^1.3.1, once@npm:^1.4.0":
   version: 1.4.0
   resolution: "once@npm:1.4.0"
   dependencies:
@@ -8488,13 +8488,6 @@ __metadata:
   dependencies:
     side-channel: "npm:^1.0.4"
   checksum: 337966e2e957a7d2a69821c528f3d18a8b346ddb0f16cc08d11c6206aed3b6624927781ff437aa3909e54ad32ebdee2c5396ad4094b1c722760774f7082f6124
-  languageName: node
-  linkType: hard
-
-"qs@npm:6.9.3":
-  version: 6.9.3
-  resolution: "qs@npm:6.9.3"
-  checksum: b8a327a01e30c0bf37e0e1b4d5fadfd27e691639995376cc958d0735fa852a9cf8549e334e0999fd3783bad9fb1abecfc6524f8ba34406911200fd4520ee4e8a
   languageName: node
   linkType: hard
 
@@ -9532,31 +9525,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"superagent@npm:^8.0.3":
-  version: 8.0.3
-  resolution: "superagent@npm:8.0.3"
+"superagent@npm:^8.0.5":
+  version: 8.0.6
+  resolution: "superagent@npm:8.0.6"
   dependencies:
     component-emitter: "npm:^1.3.0"
     cookiejar: "npm:^2.1.3"
     debug: "npm:^4.3.4"
     fast-safe-stringify: "npm:^2.1.1"
     form-data: "npm:^4.0.0"
-    formidable: "npm:^2.0.1"
+    formidable: "npm:^2.1.1"
     methods: "npm:^1.1.2"
     mime: "npm:2.6.0"
     qs: "npm:^6.11.0"
     semver: "npm:^7.3.8"
-  checksum: afce5990c2e80cf3f664419c1619fefe632a70634684827d3fe000d781d2c3023f8e9818eac0454cee4011902f347475ad1a265364a4975f7ed74dc97f474e55
+  checksum: 51ba0c4b91e27d5aef81cca5fcf4b4eb93f91952573573fe65364e2476cd8b30edf3c5b865d5be8cd411bd0540b61e30789eeaef0b0fb1f2faa41ab3dc395df1
   languageName: node
   linkType: hard
 
-"supertest@npm:^6.3.2":
-  version: 6.3.2
-  resolution: "supertest@npm:6.3.2"
+"supertest@npm:^6.3.3":
+  version: 6.3.3
+  resolution: "supertest@npm:6.3.3"
   dependencies:
     methods: "npm:^1.1.2"
-    superagent: "npm:^8.0.3"
-  checksum: 41060603cc0b47f953b28abe8405a9fda7f47f3e16de213b6175ca95c3c54f7e1e11780fc17ba018eb6cb508cafdbccbfc6b422bf6763529e97135d2b10809b8
+    superagent: "npm:^8.0.5"
+  checksum: d30cf0873e46a2f21f082af61365b74c120072d3cba02b112c8acdaa2c7bb108f6b675eb4d2bee25daa1852f596cf8b01856c843e41c88763c9ab19cc03679bf
   languageName: node
   linkType: hard
 
