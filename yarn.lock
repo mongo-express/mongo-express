@@ -7471,9 +7471,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.1.0":
-  version: 10.1.0
-  resolution: "mocha@npm:10.1.0"
+"mocha@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "mocha@npm:10.2.0"
   dependencies:
     ansi-colors: "npm:4.1.1"
     browser-stdout: "npm:1.3.1"
@@ -7499,7 +7499,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: 94bd32e9793df68868c1f7e3d505024b6612827aa499e22c5fe771a0f105c4fc266e44427e935a96140a1d28cc591cdb9b8f83e2eab1f1ff31368942190cbafa
+  checksum: cb854c0d7c47dc9c17fc92d03d21a86be7dc680e52deb8932df047b4420efe1d4b0b8f2db5127490016c987116c43f728610a679abdcb50f0a5c3cc46b704c87
   languageName: node
   linkType: hard
 
@@ -7555,7 +7555,7 @@ __metadata:
     lodash-es: "npm:^4.17.21"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
-    mocha: "npm:^10.1.0"
+    mocha: "npm:^10.2.0"
     mongodb: "npm:^4.12.1"
     mongodb-memory-server: "npm:^8.10.2"
     mongodb-query-parser: "patch:mongodb-query-parser@npm%3A2.4.6#~/.yarn/patches/mongodb-query-parser-npm-2.4.6-234abad2fc.patch"
