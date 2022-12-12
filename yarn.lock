@@ -7557,7 +7557,7 @@ __metadata:
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.1.0"
     mongodb: "npm:^4.12.1"
-    mongodb-memory-server: "npm:^8.10.1"
+    mongodb-memory-server: "npm:^8.10.2"
     mongodb-query-parser: "patch:mongodb-query-parser@npm%3A2.4.6#~/.yarn/patches/mongodb-query-parser-npm-2.4.6-234abad2fc.patch"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.4"
@@ -7607,9 +7607,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:8.10.1":
-  version: 8.10.1
-  resolution: "mongodb-memory-server-core@npm:8.10.1"
+"mongodb-memory-server-core@npm:8.10.2":
+  version: 8.10.2
+  resolution: "mongodb-memory-server-core@npm:8.10.2"
   dependencies:
     "@types/tmp": "npm:^0.2.3"
     async-mutex: "npm:^0.3.2"
@@ -7627,17 +7627,17 @@ __metadata:
     tslib: "npm:^2.4.1"
     uuid: "npm:^8.3.1"
     yauzl: "npm:^2.10.0"
-  checksum: 37fe68ce2a3aad9db2584026c69dd0fd08921f4a8e061d050674b35cf59181f02eccd28fcbc4ba761cc81c24105e7d7b7f66f6c30ab037c43c095201c612ef29
+  checksum: 895999ff489b9489aaace4fac2adda20d5232f25a3822a781ac8fd4885c962d9f3b85b4e38917d32ebcf42576bfab20a5ad4df7ab0660cbc5d624e13a0753123
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:^8.10.1":
-  version: 8.10.1
-  resolution: "mongodb-memory-server@npm:8.10.1"
+"mongodb-memory-server@npm:^8.10.2":
+  version: 8.10.2
+  resolution: "mongodb-memory-server@npm:8.10.2"
   dependencies:
-    mongodb-memory-server-core: "npm:8.10.1"
+    mongodb-memory-server-core: "npm:8.10.2"
     tslib: "npm:^2.4.1"
-  checksum: ec14975a623eff1e996a61a217a849f85a7a0ab9ac3212fd4f936beb2dbd76a39313302f60677a2510b6a9c133d64dff291355138a77bb737af04418a86f1a7a
+  checksum: a602819aeeec0d58dacf8f35e5675b4177b1c0e37053ee0982ab568cd9433cec52f6f9c5417029de9b988706f2b6d5e5f63eb7ebc265d421aa1c5fdd60cd708c
   languageName: node
   linkType: hard
 
