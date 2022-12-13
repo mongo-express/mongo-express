@@ -6761,10 +6761,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jquery@npm:^3.6.1":
-  version: 3.6.1
-  resolution: "jquery@npm:3.6.1"
-  checksum: 336a913b1308fe8c954a98c556f031861ee34ddf51bf29a833e23059c1d843b734dd75c0a9a1ac170cc58b71bbae6f223625512dc01d4bb960720542f91c8937
+"jquery@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "jquery@npm:3.6.2"
+  checksum: aa1b31bf2895f9270687876b6c6a3b42d7ac0b81a7c3a31d9fd411ec666d9bc60cea5d51d044e04a6b9ec8e3f32b67229fcd68d910cc081d6b454427f47f8507
   languageName: node
   linkType: hard
 
@@ -7550,7 +7550,7 @@ __metadata:
     free-swig: "npm:^1.5.1"
     gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.3.3"
-    jquery: "npm:^3.6.1"
+    jquery: "npm:^3.6.2"
     json2csv: "npm:^5.0.7"
     lodash-es: "npm:^4.17.21"
     memorystore: "npm:^1.6.7"
