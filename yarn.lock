@@ -7556,7 +7556,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.2.0"
-    mongodb: "npm:^4.12.1"
+    mongodb: "npm:^4.13.0"
     mongodb-memory-server: "npm:^8.10.2"
     mongodb-query-parser: "patch:mongodb-query-parser@npm%3A2.4.6#~/.yarn/patches/mongodb-query-parser-npm-2.4.6-234abad2fc.patch"
     morgan: "npm:^1.10.0"
@@ -7675,9 +7675,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^4.12.1":
-  version: 4.12.1
-  resolution: "mongodb@npm:4.12.1"
+"mongodb@npm:^4.13.0":
+  version: 4.13.0
+  resolution: "mongodb@npm:4.13.0"
   dependencies:
     "@aws-sdk/credential-providers": "npm:^3.186.0"
     bson: "npm:^4.7.0"
@@ -7689,7 +7689,7 @@ __metadata:
       optional: true
     saslprep:
       optional: true
-  checksum: bbf38bd9dd72ccca29c6829639a48df4d67cd293c802c14857726b15c692169ca72efa8b04fecfd6b613d23318d0369eee4cd441828b24ec785acdd7b38aace8
+  checksum: d565bfbc2d3e0cddad0fdf31b5abf8874d5f271aa92017a66fde48a4ccf74ce69f496b010c3db62ceba115ebe5d18562d3c2593201141f22bf1fc3cf9df49589
   languageName: node
   linkType: hard
 
