@@ -170,6 +170,17 @@ This example links to a container name typical of `docker-compose`, changes the 
 
 The default port exposed from the container is 8081, so visit `http://localhost:8081` or whatever URL/port you entered into your config (if running standalone) or whatever `config.site.baseUrl` (if mounting as a middleware).
 
+### Using Docker Extensions:
+
+**Pre-requisite:**
+
+- Docker Desktop 4.15
+
+**Usage:**
+
+By using Mongo Express Docker Extension, it's easy to setup Mongo Express on Docker Desktop with [just one click](https://open.docker.com/extensions/marketplace?extensionId=ajeetraina/mongodb-express-docker-extension&tag=1.0).
+
+
 ## Usage (Bluemix)
 
 **Deploy to Bluemix**
