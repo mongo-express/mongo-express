@@ -33,6 +33,4 @@ export default () => ({
     logger: { skip: () => true },
     readOnly: false,
   },
-
-  defaultKeyNames: {},
 });
