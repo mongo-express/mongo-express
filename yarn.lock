@@ -4608,13 +4608,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"denque@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "denque@npm:2.1.0"
-  checksum: 7e1c278144b7c5047ff46783edf7d736193644abbdea1c788e1b686b402b7669fcf417e168c9a9ccd8a346ff0d1e1b15696177e2b231fd1af66ee03c072b4066
-  languageName: node
-  linkType: hard
-
 "depd@npm:2.0.0, depd@npm:~2.0.0":
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
@@ -7796,7 +7789,7 @@ __metadata:
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.2.0"
     mongodb: "npm:^4.13.0"
-    mongodb-memory-server: "npm:^8.10.2"
+    mongodb-memory-server: "npm:^8.11.4"
     mongodb-query-parser: "patch:mongodb-query-parser@npm%3A2.4.6#~/.yarn/patches/mongodb-query-parser-npm-2.4.6-234abad2fc.patch"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.4"
@@ -7846,9 +7839,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:8.10.2":
-  version: 8.10.2
-  resolution: "mongodb-memory-server-core@npm:8.10.2"
+"mongodb-memory-server-core@npm:8.11.4":
+  version: 8.11.4
+  resolution: "mongodb-memory-server-core@npm:8.11.4"
   dependencies:
     "@types/tmp": "npm:^0.2.3"
     async-mutex: "npm:^0.3.2"
@@ -7858,25 +7851,25 @@ __metadata:
     get-port: "npm:^5.1.1"
     https-proxy-agent: "npm:^5.0.1"
     md5-file: "npm:^5.0.0"
-    mongodb: "npm:~4.11.0"
+    mongodb: "npm:^4.13.0"
     new-find-package-json: "npm:^2.0.0"
     semver: "npm:^7.3.8"
     tar-stream: "npm:^2.1.4"
     tmp: "npm:^0.2.1"
     tslib: "npm:^2.4.1"
-    uuid: "npm:^8.3.1"
+    uuid: "npm:^9.0.0"
     yauzl: "npm:^2.10.0"
-  checksum: 895999ff489b9489aaace4fac2adda20d5232f25a3822a781ac8fd4885c962d9f3b85b4e38917d32ebcf42576bfab20a5ad4df7ab0660cbc5d624e13a0753123
+  checksum: da810a21f24eabab38eed10d6586485b9e76234709e25d2204a29f2cac59a1b365995596e279f39a53081d350e3234484a4a99b2bcdaaaa82aab371245643a3b
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:^8.10.2":
-  version: 8.10.2
-  resolution: "mongodb-memory-server@npm:8.10.2"
+"mongodb-memory-server@npm:^8.11.4":
+  version: 8.11.4
+  resolution: "mongodb-memory-server@npm:8.11.4"
   dependencies:
-    mongodb-memory-server-core: "npm:8.10.2"
+    mongodb-memory-server-core: "npm:8.11.4"
     tslib: "npm:^2.4.1"
-  checksum: a602819aeeec0d58dacf8f35e5675b4177b1c0e37053ee0982ab568cd9433cec52f6f9c5417029de9b988706f2b6d5e5f63eb7ebc265d421aa1c5fdd60cd708c
+  checksum: 3e11a5604f3b59ce82df4e024ce0dcce930f69c519dd5eb2b7472ac2259d6e49ef09ed75e288a96efa7f3f2f1fb3ae0c24c42d6f2afe20ea1b3c783869279a70
   languageName: node
   linkType: hard
 
@@ -7929,25 +7922,6 @@ __metadata:
     saslprep:
       optional: true
   checksum: d565bfbc2d3e0cddad0fdf31b5abf8874d5f271aa92017a66fde48a4ccf74ce69f496b010c3db62ceba115ebe5d18562d3c2593201141f22bf1fc3cf9df49589
-  languageName: node
-  linkType: hard
-
-"mongodb@npm:~4.11.0":
-  version: 4.11.0
-  resolution: "mongodb@npm:4.11.0"
-  dependencies:
-    "@aws-sdk/credential-providers": "npm:^3.186.0"
-    bson: "npm:^4.7.0"
-    denque: "npm:^2.1.0"
-    mongodb-connection-string-url: "npm:^2.5.4"
-    saslprep: "npm:^1.0.3"
-    socks: "npm:^2.7.1"
-  dependenciesMeta:
-    "@aws-sdk/credential-providers":
-      optional: true
-    saslprep:
-      optional: true
-  checksum: 6585bb6bc624a5d0a8088b6f5cbed6e85a31ca121b282633da8e01100d69fc903b9cda98f2bf0f32e5429177613dc1c00fcda21bf676a5db2994e902a8cb7d78
   languageName: node
   linkType: hard
 
@@ -10352,12 +10326,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.3.1, uuid@npm:^8.3.2":
+"uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
     uuid: dist/bin/uuid
   checksum: 236a12282c6fa32f326aa1b6d5699a843572e9ab7de84a1507a6b7c315fdcf55bf6ed333fd37d35c5c656f4cb96af998844e1c8cae281c442a1ec3b66df62962
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: e1f76aff372e430bb129157360fd4cd3b393411b245604ea78e178a822ab7874ec2ebecec03ce94422b0b80bbd24733c6fa1df166c9cbad5086ef4b4843140bb
   languageName: node
   linkType: hard
 
