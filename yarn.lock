@@ -881,26 +881,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.20.7":
-  version: 7.20.7
-  resolution: "@babel/core@npm:7.20.7"
+"@babel/core@npm:^7.20.12":
+  version: 7.20.12
+  resolution: "@babel/core@npm:7.20.12"
   dependencies:
     "@ampproject/remapping": "npm:^2.1.0"
     "@babel/code-frame": "npm:^7.18.6"
     "@babel/generator": "npm:^7.20.7"
     "@babel/helper-compilation-targets": "npm:^7.20.7"
-    "@babel/helper-module-transforms": "npm:^7.20.7"
+    "@babel/helper-module-transforms": "npm:^7.20.11"
     "@babel/helpers": "npm:^7.20.7"
     "@babel/parser": "npm:^7.20.7"
     "@babel/template": "npm:^7.20.7"
-    "@babel/traverse": "npm:^7.20.7"
+    "@babel/traverse": "npm:^7.20.12"
     "@babel/types": "npm:^7.20.7"
     convert-source-map: "npm:^1.7.0"
     debug: "npm:^4.1.0"
     gensync: "npm:^1.0.0-beta.2"
-    json5: "npm:^2.2.1"
+    json5: "npm:^2.2.2"
     semver: "npm:^6.3.0"
-  checksum: 8d4a8bec128417f0a3cbcfbfb153855ecd8cae825271ed42a8fd7f0dfdd9f0f24f05ca3b95a897524a445d44a308cd12a521b726c285f5f2a41c343cfdde9f91
+  checksum: 7ab10d7f3045e282786e7ed20b8da220b315b23131713f7fb4f75210110146bae2a5b3a0db36baf375356c1226d8c659d032a031ef129eea85c1dd3884c311c0
   languageName: node
   linkType: hard
 
@@ -1172,9 +1172,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-module-transforms@npm:^7.20.7":
-  version: 7.20.7
-  resolution: "@babel/helper-module-transforms@npm:7.20.7"
+"@babel/helper-module-transforms@npm:^7.20.11":
+  version: 7.20.11
+  resolution: "@babel/helper-module-transforms@npm:7.20.11"
   dependencies:
     "@babel/helper-environment-visitor": "npm:^7.18.9"
     "@babel/helper-module-imports": "npm:^7.18.6"
@@ -1182,9 +1182,9 @@ __metadata:
     "@babel/helper-split-export-declaration": "npm:^7.18.6"
     "@babel/helper-validator-identifier": "npm:^7.19.1"
     "@babel/template": "npm:^7.20.7"
-    "@babel/traverse": "npm:^7.20.7"
+    "@babel/traverse": "npm:^7.20.10"
     "@babel/types": "npm:^7.20.7"
-  checksum: 526bfd74019713febb4e9328fce52ec648af63cb42e68060cffd613a4e09cf3188d15b07bc8d372a94a5f5c14af909cd981f2fca6c94f62742438a3abc37080f
+  checksum: 0647a26f9c91c41d80d7a0c28f1b32a8a70ff59d3e6fdeff29cf6b72d0aa66088f36cf1a87e602f702801ad654623b63070c344d0b883ab7ad2cf8212427cdbb
   languageName: node
   linkType: hard
 
@@ -1368,6 +1368,15 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 304afe764778921145dfb80af312e0682466b0449fc74c87843d04a2a147b91e44ffd3c611e895c14ff7f9d81734cf66ba0b07c194d3400f0291e06487ec370c
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.20.13":
+  version: 7.20.13
+  resolution: "@babel/parser@npm:7.20.13"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 01991ec7420dbdbf323067addd205690e7e599b1ed2c5fd0b6c2a0703b2dde4819828a5dce76e60efc07340470d8471b4122daa711536c44fa2ae0b9bd8a5732
   languageName: node
   linkType: hard
 
@@ -2300,6 +2309,24 @@ __metadata:
     debug: "npm:^4.1.0"
     globals: "npm:^11.1.0"
   checksum: bf0f6f6e5481188632993335e40c70794db9f80d9229316002aad3a0f002d27a5b8de69bcaec07901a670f20aba73ec2a3787d24284c2a8421b979a9f365a654
+  languageName: node
+  linkType: hard
+
+"@babel/traverse@npm:^7.20.10, @babel/traverse@npm:^7.20.12":
+  version: 7.20.13
+  resolution: "@babel/traverse@npm:7.20.13"
+  dependencies:
+    "@babel/code-frame": "npm:^7.18.6"
+    "@babel/generator": "npm:^7.20.7"
+    "@babel/helper-environment-visitor": "npm:^7.18.9"
+    "@babel/helper-function-name": "npm:^7.19.0"
+    "@babel/helper-hoist-variables": "npm:^7.18.6"
+    "@babel/helper-split-export-declaration": "npm:^7.18.6"
+    "@babel/parser": "npm:^7.20.13"
+    "@babel/types": "npm:^7.20.7"
+    debug: "npm:^4.1.0"
+    globals: "npm:^11.1.0"
+  checksum: 24a867dfce429baba697763c033c5103e052348de6405dac3b5b2f0865a0ffed0b035b109d64b14257404f5a3470328d027caeeca3726eca3b85eb10a72fa727
   languageName: node
   linkType: hard
 
@@ -7117,6 +7144,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json5@npm:^2.2.2":
+  version: 2.2.3
+  resolution: "json5@npm:2.2.3"
+  bin:
+    json5: lib/cli.js
+  checksum: e298f92c92197e956eb7a93304f74b5b80b4c3fe412f44a1f3d4c966e5ddf2e8ef2ac7ce0b0c40c78735bf2901c29257a653e1da684dae8e7835932e4904d6a0
+  languageName: node
+  linkType: hard
+
 "jsonfile@npm:^6.0.1":
   version: 6.1.0
   resolution: "jsonfile@npm:6.1.0"
@@ -7717,7 +7753,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mongo-express@workspace:."
   dependencies:
-    "@babel/core": "npm:^7.20.7"
+    "@babel/core": "npm:^7.20.12"
     "@babel/eslint-parser": "npm:^7.19.1"
     "@babel/preset-env": "npm:^7.20.2"
     "@cypress/code-coverage": "npm:^3.10.0"
