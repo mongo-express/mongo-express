@@ -60,7 +60,7 @@
     "@cypress/code-coverage": "^3.10.0",
     "assets-webpack-plugin": "^7.1.1",
     "babel-loader": "^9.1.2",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^5.2.3",
     "chai": "^4.3.7",
     "clean-webpack-plugin": "^4.0.0",
     "codemirror": "^5.58.2",

@@ -3570,10 +3570,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^3.3.7":
-  version: 3.4.1
-  resolution: "bootstrap@npm:3.4.1"
-  checksum: 306e725b11e4c060a67a48901b789dd72b92d2e883600a4315b791a4900b177949ac4d6b99f55f9585dc19f9aaf538b93d0a7219d50909d288888ec159ae159e
+"bootstrap@npm:^5.2.3":
+  version: 5.2.3
+  resolution: "bootstrap@npm:5.2.3"
+  peerDependencies:
+    "@popperjs/core": ^2.11.6
+  checksum: 4f932ad166b04ce475199508301b4f0fb94df41146cf07596834e60af6f229ce0edc701d6c50806988fb5c547f1dadc3ca3372b929ba7eb9e4aba36e5450a013
   languageName: node
   linkType: hard
 
@@ -7555,7 +7557,7 @@ __metadata:
     babel-loader: "npm:^9.1.2"
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.1"
-    bootstrap: "npm:^3.3.7"
+    bootstrap: "npm:^5.2.3"
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
     bson: "npm:^4.7.0"
     busboy: "npm:^1.6.0"
