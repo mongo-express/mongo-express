@@ -3409,16 +3409,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "babel-loader@npm:9.1.0"
+"babel-loader@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "babel-loader@npm:9.1.2"
   dependencies:
     find-cache-dir: "npm:^3.3.2"
     schema-utils: "npm:^4.0.0"
   peerDependencies:
     "@babel/core": ^7.12.0
     webpack: ">=5"
-  checksum: 6e5cd3c28c76fad44ece15f4379e9903e6fb9a5c93b0a4bbdce051c40fbc41c5e834fedc106dd222e50c1fc03448ccd50cc62870b0955bc99ba12fa0083b9256
+  checksum: 24cc50ccb73b24ebdf11924c5204d7133e1a2edc5dfeba3ebb078f5bbd4b5af53f552864b94751633bc1b179f897697a90c3c12d71a103fa446de399770b4dc7
   languageName: node
   linkType: hard
 
@@ -7552,7 +7552,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.2"
     "@cypress/code-coverage": "npm:^3.10.0"
     assets-webpack-plugin: "npm:^7.1.1"
-    babel-loader: "npm:^9.1.0"
+    babel-loader: "npm:^9.1.2"
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.1"
     bootstrap: "npm:^3.3.7"
