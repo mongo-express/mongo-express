@@ -40,7 +40,7 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "flat": "^5.0.2",
-    "free-swig": "^1.5.1",
+    "free-swig": "^1.5.2",
     "gridfs-stream": "^1.1.1",
     "html-entities": "^2.3.3",
     "json2csv": "^5.0.7",
