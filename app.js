@@ -86,7 +86,7 @@ async function bootstrap(config) {
 const config = await loadConfig();
 
 if (config.options.console === true) {
-  console.log('Welcome to mongo-express');
+  console.log(`Welcome to mongo-express ${pkg.version}`);
   console.log('------------------------');
   console.log('\n');
 }
