@@ -5205,9 +5205,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.33.0":
-  version: 8.33.0
-  resolution: "eslint@npm:8.33.0"
+"eslint@npm:^8.34.0":
+  version: 8.34.0
+  resolution: "eslint@npm:8.34.0"
   dependencies:
     "@eslint/eslintrc": "npm:^1.4.1"
     "@humanwhocodes/config-array": "npm:^0.11.8"
@@ -5250,7 +5250,7 @@ __metadata:
     text-table: "npm:^0.2.0"
   bin:
     eslint: bin/eslint.js
-  checksum: 616877cf98325f619070e6c85b1bb4734fe99202871f5f43cbb9c56b13d7cacf8caa499c61c0a112541067be3b6143cd0497d1319950a4a1d355adeff8504596
+  checksum: ec20023e4d680f390b89509f27b40824957d6518ed19c43c52b979e891a3ee225cf09a7fc9e9f882b3636f5cfa34a7a2e20416a2b22047d94db9b1ac3a55e9d9
   languageName: node
   linkType: hard
 
@@ -7770,7 +7770,7 @@ __metadata:
     cypress: "npm:^12.5.1"
     dotenv: "npm:^16.0.3"
     errorhandler: "npm:1.5.1"
-    eslint: "npm:^8.33.0"
+    eslint: "npm:^8.34.0"
     eslint-config-airbnb-base: "npm:^15.0.0"
     eslint-plugin-import: "npm:^2.27.5"
     eslint-plugin-lodash: "npm:^7.4.0"
