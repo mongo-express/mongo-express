@@ -1,5 +1,5 @@
 diff --git a/lib/stringify.js b/lib/stringify.js
-index 93904b0d40f23780be14ed3708a1b5f1285e254c..fbdc7dc738f7f3bb55e176ddd2a321cb09e37a47 100644
+index fdecdcd3f741298a22b240dcdffe792f49b1dee3..351cdbd6495bf225acfd2b09650f534ac3972b26 100644
 --- a/lib/stringify.js
 +++ b/lib/stringify.js
 @@ -49,7 +49,8 @@ const BSON_TO_JS_STRING = {
@@ -7,7 +7,7 @@ index 93904b0d40f23780be14ed3708a1b5f1285e254c..fbdc7dc738f7f3bb55e176ddd2a321cb
      const subType = v.sub_type;
      if (subType === 4) {
 -      return `UUID("${v.buffer.toString('hex')}")`;
-+      const uuidHex = v.buffer.toString('hex')
++      const uuidHex = v.buffer.toString('hex');
 +      return `UUID("${uuidHex.slice(0, 8)}-${uuidHex.slice(8, 12)}-${uuidHex.slice(12, 16)}-${uuidHex.slice(16, 20)}-${uuidHex.slice(20, 32)}")`;
      }
      return `BinData(${subType.toString(16)}, '${v.buffer.toString('base64')}')`;

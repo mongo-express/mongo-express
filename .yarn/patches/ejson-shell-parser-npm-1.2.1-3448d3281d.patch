@@ -1,5 +1,5 @@
 diff --git a/dist/ejson-shell-parser.cjs.dev.js b/dist/ejson-shell-parser.cjs.dev.js
-index dd902df0f84ca691a699c867fbd8c723652a3bcd..07db9655afec553fee2ec25b195304417ac00177 100644
+index 58c2b35e0d56e0d5b58559d41186f6c750f38d05..f5eedbd2fc2eea49e037d67efc89d76a77eb462d 100644
 --- a/dist/ejson-shell-parser.cjs.dev.js
 +++ b/dist/ejson-shell-parser.cjs.dev.js
 @@ -2,6 +2,7 @@
@@ -10,7 +10,7 @@ index dd902df0f84ca691a699c867fbd8c723652a3bcd..07db9655afec553fee2ec25b19530441
  var acorn = require('acorn');
  var bson = require('bson');
  
-@@ -154,7 +155,7 @@ var SCOPE = {
+@@ -153,7 +154,7 @@ var SCOPE = {
      return new bson__namespace.Binary(Buffer.from(d, 'base64'), t);
    },
    UUID: function UUID(u) {
@@ -20,7 +20,7 @@ index dd902df0f84ca691a699c867fbd8c723652a3bcd..07db9655afec553fee2ec25b19530441
    Code: function Code(c, s) {
      return new bson__namespace.Code(c, s);
 diff --git a/dist/ejson-shell-parser.cjs.prod.js b/dist/ejson-shell-parser.cjs.prod.js
-index dd902df0f84ca691a699c867fbd8c723652a3bcd..07db9655afec553fee2ec25b195304417ac00177 100644
+index 58c2b35e0d56e0d5b58559d41186f6c750f38d05..f5eedbd2fc2eea49e037d67efc89d76a77eb462d 100644
 --- a/dist/ejson-shell-parser.cjs.prod.js
 +++ b/dist/ejson-shell-parser.cjs.prod.js
 @@ -2,6 +2,7 @@
@@ -31,7 +31,7 @@ index dd902df0f84ca691a699c867fbd8c723652a3bcd..07db9655afec553fee2ec25b19530441
  var acorn = require('acorn');
  var bson = require('bson');
  
-@@ -154,7 +155,7 @@ var SCOPE = {
+@@ -153,7 +154,7 @@ var SCOPE = {
      return new bson__namespace.Binary(Buffer.from(d, 'base64'), t);
    },
    UUID: function UUID(u) {
