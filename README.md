@@ -20,7 +20,7 @@ Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
 - Connect and authenticate to individual databases
 - Authenticate as admin to view all databases
 - Database blacklist/whitelist
-- Custom CA and CA validation disabling
+- Custom CA/SSL and CA validation disabling
 - Supports replica sets
 
 ## Screenshots
