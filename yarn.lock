@@ -7705,7 +7705,7 @@ __metadata:
     mongodb-memory-server: "npm:^8.11.4"
     mongodb-query-parser: "npm:^2.4.11"
     morgan: "npm:^1.10.0"
-    node-html-parser: "npm:^6.1.4"
+    node-html-parser: "npm:^6.1.5"
     nodemon: "npm:^2.0.20"
     nyc: "npm:^15.1.0"
     pre-commit: "npm:1.2.2"
@@ -7919,13 +7919,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-html-parser@npm:^6.1.4":
-  version: 6.1.4
-  resolution: "node-html-parser@npm:6.1.4"
+"node-html-parser@npm:^6.1.5":
+  version: 6.1.5
+  resolution: "node-html-parser@npm:6.1.5"
   dependencies:
     css-select: "npm:^5.1.0"
     he: "npm:1.2.0"
-  checksum: 4afdb745bf85bd3da3d320c45ceb4d8062ef6c4948cdee9fe5e96e57484a9b8491a40218b53ae050e4530ee9a0e9344ad64160a1a0aa1792ffbb8c3f5864a2a0
+  checksum: ff2385d30fb4f8df18f5f7203b2e588475bc4e693f87777046f2be0df25cc79e9165f45fbdfc043b0d588c9953175272a4caf4c644618ae1bb084aad7e1198e4
   languageName: node
   linkType: hard
 
