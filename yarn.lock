@@ -7709,7 +7709,7 @@ __metadata:
     nodemon: "npm:^2.0.20"
     nyc: "npm:^15.1.0"
     pre-commit: "npm:1.2.2"
-    renderjson: "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch"
+    renderjson: "github:rtritto/renderjson#develop"
     serve-favicon: "npm:^2.5.0"
     supertest: "npm:^6.3.3"
     webpack: "npm:^5.75.0"
@@ -8802,17 +8802,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"renderjson@npm:1.4.0":
+"renderjson@github:rtritto/renderjson#develop":
   version: 1.4.0
-  resolution: "renderjson@npm:1.4.0"
-  checksum: 72f00a1e0550b0f5b60c3c383c5cb1f3d4bfd133e6023b50b03cc51b0985f5c1ecd997207cfb0359eccc331e95f70e8b151328417fab17d5bcb4726b5561f880
-  languageName: node
-  linkType: hard
-
-"renderjson@patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch":
-  version: 1.4.0
-  resolution: "renderjson@patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch::version=1.4.0&hash=5236cb"
-  checksum: 2d9cc7f3d2a49a78e2eaf2ec65aa0c2e6fc5b38bb4fcbc389dc1d494ce0a8d9e4a5bae0bffa2d2f1c1bfd208585d9fc17b1b254a111724a9be6dbf8f6077f891
+  resolution: "renderjson@https://github.com/rtritto/renderjson.git#commit=967fe64a72fab0fef50a90203ad65edaa9e6a50b"
+  checksum: f696e59462cd5978950e4bad1706373c24939609c66fa1b3533693e3091ec2126453ca469f9589dc15c500d44eaac1301de9a20d36564a1c14b00fc04a437536
   languageName: node
   linkType: hard
 
