@@ -1,0 +1,33 @@
+version: '3.8'
+
+volumes:
+  mongo_vol:
+
+
+networks:
+  mongo_net:
+    driver: bridge
+
+services:
+  api:
+    image: mongo-express:latest
+    ports:
+      - 8080:8081
+    networks:
+      - mongo_net
+    depends_on:
+      - mongodb
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongouser:mongopwd@mongodb:27017/admin
+
+  mongodb:
+    image: mongo:4.4.3
+    ports:
+    - 27017:27017
+    networks:
+      - mongo_net
+    volumes:
+      - mongo_vol:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopwd
