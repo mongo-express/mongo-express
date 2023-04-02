@@ -526,7 +526,16 @@
         </td>
         <td>
           {% for k,v in index %}
-          <div>{% if k != 'key' && k != 'v' && k != 'name' && k != 'ns' && k != 'size'%} {{ k }}: &nbsp;{{ v }} {% endif %}</div>
+            <div>
+              {% if k != 'key' && k != 'v' && k != 'name' && k != 'ns' && k != 'size' %}
+                {{ k }}:
+                {% if k == 'partialFilterExpression' %}
+                  <pre>{{ v | json | safe }}</pre>
+                {% else %}
+                  &nbsp;{{ v }}
+                {% endif %}
+              {% endif %}
+            </div>
           {% endfor %}
         </td>
       {% if !settings.read_only && !settings.no_delete %}
