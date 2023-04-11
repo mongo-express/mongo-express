@@ -72,6 +72,14 @@ describe('Router document', () => {
       expect(UUID.isValid(result._id.toString())).to.equal(true);
       await testCollection(db).deleteOne({ _id: result._id });
     });
+    it('Integer', async () => {
+      const testId = 1;
+      const testValue = '1';
+      await request.post(`/db/${dbName}/${urlColName}`).send({ document: `{_id:${testValue},testValue:${testValue}}` }).expect(302);
+      const result = await testCollection(db).findOne({ testValue: testId });
+      expect(Number.isInteger(result._id)).to.equal(true);
+      await testCollection(db).deleteOne({ _id: result._id });
+    });
   });
   it('DEL /db/<dbName>/<collection>/<document> should delete the document');
   it('PUT /db/<dbName>/<collection>/<document> should update the document');
