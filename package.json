@@ -72,7 +72,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-lodash": "^7.4.0",
     "eslint-plugin-unicorn": "^45.0.2",
-    "jquery": "^3.6.3",
+    "jquery": "^3.6.4",
     "mocha": "^10.2.0",
     "mongodb-memory-server": "^8.11.4",
     "node-html-parser": "^6.1.5",
