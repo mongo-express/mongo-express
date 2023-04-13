@@ -72,7 +72,7 @@ function getConnectionStringFromInlineParams() {
     username: mongo.username,
     password: mongo.password,
   };
-  const login = infos.username ? `${infos.username}:${infos.password}@` : '';
+  const login = infos.username ? `${encodeURIComponent(infos.username)}:${encodeURIComponent(infos.password)}@` : '';
   return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
 }
 
@@ -92,7 +92,7 @@ function getConnectionStringFromEnvVariables() {
     username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username,
     password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password,
   };
-  const login = infos.username ? `${infos.username}:${infos.password}@` : '';
+  const login = infos.username ? `${encodeURIComponent(infos.username)}:${encodeURIComponent(infos.password)}@` : '';
   return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
 }
 
