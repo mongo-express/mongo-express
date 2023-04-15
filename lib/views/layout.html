@@ -114,7 +114,7 @@ window.ME_SETTINGS = {
   bucketName: '{{ bucketName }}',
   limit: '{{ limit }}',
   skip: '{{ skip }}',
-  totalPages: Math.round('{{ count }}' / '{{ limit }}')
+  totalPages: Math.ceil('{{ count }}' / '{{ limit }}')
 };
 </script>
 {% block scripts %}
