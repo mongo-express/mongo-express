@@ -4174,14 +4174,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "commander@npm:5.1.0"
-  checksum: 121debda8eeb53f3282c6a1d7995027a88ad4c22f9bd31b27a1350d483fc90dabd6dbf613782921b646e68a20ab45ed82adc3b594dbd42b60345e08059f338e4
-  languageName: node
-  linkType: hard
-
-"commander@npm:^6.1.0":
+"commander@npm:^6.1.0, commander@npm:^6.2.1":
   version: 6.2.1
   resolution: "commander@npm:6.2.1"
   checksum: c52b3cba040d015dc2788bed08041dd2e4734bc79b4ac0e1829544fa09e0844b746b956e9f5f87dee4f62870ab63239f22e2e2d30b242eef392df1501dee319d
@@ -4443,9 +4436,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^12.5.1":
-  version: 12.5.1
-  resolution: "cypress@npm:12.5.1"
+"cypress@npm:^12.12.0":
+  version: 12.12.0
+  resolution: "cypress@npm:12.12.0"
   dependencies:
     "@cypress/request": "npm:^2.88.10"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -4461,10 +4454,10 @@ __metadata:
     check-more-types: "npm:^2.24.0"
     cli-cursor: "npm:^3.1.0"
     cli-table3: "npm:~0.6.1"
-    commander: "npm:^5.1.0"
+    commander: "npm:^6.2.1"
     common-tags: "npm:^1.8.0"
     dayjs: "npm:^1.10.4"
-    debug: "npm:^4.3.2"
+    debug: "npm:^4.3.4"
     enquirer: "npm:^2.3.6"
     eventemitter2: "npm:6.4.7"
     execa: "npm:4.1.0"
@@ -4479,7 +4472,7 @@ __metadata:
     listr2: "npm:^3.8.3"
     lodash: "npm:^4.17.21"
     log-symbols: "npm:^4.0.0"
-    minimist: "npm:^1.2.6"
+    minimist: "npm:^1.2.8"
     ospath: "npm:^1.2.2"
     pretty-bytes: "npm:^5.6.0"
     proxy-from-env: "npm:1.0.0"
@@ -4491,7 +4484,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 0fc2ebe68492e97f461f7049120e1a5c379268378dab88908ed5149c47e7e8ec19d8a241da075c6ded4ae8b65348b427fc3465b03e0d6d700f3641c65520abf3
+  checksum: 40db4e919d5f962433b8373b10b8f8f30d169c9be0bd714fe119d8911175b7969547fa14918d787473f6341f4c7ce6ae35b53a1c886a2c8330a0802d60a41e93
   languageName: node
   linkType: hard
 
@@ -7622,6 +7615,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimist@npm:^1.2.8":
+  version: 1.2.8
+  resolution: "minimist@npm:1.2.8"
+  checksum: 8598f846f2b7546b22b01ce486df27da216a302367afe17f2a032da12fcb8d33bfbf2c523051230864abf0b806748bd60d4cd0863fae35fe104da1ff6194a185
+  languageName: node
+  linkType: hard
+
 "minipass-collect@npm:^1.0.2":
   version: 1.0.2
   resolution: "minipass-collect@npm:1.0.2"
@@ -7758,7 +7758,7 @@ __metadata:
     cookie-parser: "npm:1.4.6"
     copy-webpack-plugin: "npm:^11.0.0"
     csurf: "npm:1.11.0"
-    cypress: "npm:^12.5.1"
+    cypress: "npm:^12.12.0"
     dotenv: "npm:^16.0.3"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.38.0"
