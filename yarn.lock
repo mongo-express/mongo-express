@@ -3748,6 +3748,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bson@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "bson@npm:5.3.0"
+  checksum: a36272185196cca167a74f332029372f2fbac846febb7b3f4400533d0b0a57222226079bec7bd4aad6933a66b6e9ada8a1d375d0e78dd363bba8768db18465be
+  languageName: node
+  linkType: hard
+
 "buffer-crc32@npm:~0.2.3":
   version: 0.2.13
   resolution: "buffer-crc32@npm:0.2.13"
@@ -7747,7 +7754,7 @@ __metadata:
     body-parser: "npm:^1.20.1"
     bootstrap: "npm:^3.3.7"
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
-    bson: "npm:^4.7.0"
+    bson: "npm:^5.3.0"
     busboy: "npm:^1.6.0"
     chai: "npm:^4.3.7"
     clean-webpack-plugin: "npm:^4.0.0"
