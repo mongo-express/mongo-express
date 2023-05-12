@@ -3748,6 +3748,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bson@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "bson@npm:5.3.0"
+  checksum: a36272185196cca167a74f332029372f2fbac846febb7b3f4400533d0b0a57222226079bec7bd4aad6933a66b6e9ada8a1d375d0e78dd363bba8768db18465be
+  languageName: node
+  linkType: hard
+
 "buffer-crc32@npm:~0.2.3":
   version: 0.2.13
   resolution: "buffer-crc32@npm:0.2.13"
@@ -7779,7 +7786,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.2.0"
-    mongodb: "npm:^4.13.0"
+    mongodb: "npm:^5.5.0"
     mongodb-memory-server: "npm:^8.11.4"
     mongodb-query-parser: "npm:^2.4.11"
     morgan: "npm:^1.10.0"
@@ -7804,6 +7811,16 @@ __metadata:
     "@types/whatwg-url": "npm:^8.2.1"
     whatwg-url: "npm:^11.0.0"
   checksum: ed74c7f45a509d5b55a958fda6cebf5ee70d397a537d9f9d44b17381a903afd3714e3886e157b19bfc8134ecb3c9ffcf080e44b4f4694b5c697ea04390884f42
+  languageName: node
+  linkType: hard
+
+"mongodb-connection-string-url@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "mongodb-connection-string-url@npm:2.6.0"
+  dependencies:
+    "@types/whatwg-url": "npm:^8.2.1"
+    whatwg-url: "npm:^11.0.0"
+  checksum: 8a9186dd1b72dfa1ca8e2e7deeec2e412b3682c923d9f887e07a19b2366174e50c1c9f3657353eef62e7acce26f7e6ec16c3cc320fc1c12aab5d4890fa368ce3
   languageName: node
   linkType: hard
 
@@ -7880,6 +7897,32 @@ __metadata:
     saslprep:
       optional: true
   checksum: d565bfbc2d3e0cddad0fdf31b5abf8874d5f271aa92017a66fde48a4ccf74ce69f496b010c3db62ceba115ebe5d18562d3c2593201141f22bf1fc3cf9df49589
+  languageName: node
+  linkType: hard
+
+"mongodb@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "mongodb@npm:5.5.0"
+  dependencies:
+    bson: "npm:^5.3.0"
+    mongodb-connection-string-url: "npm:^2.6.0"
+    saslprep: "npm:^1.0.3"
+    socks: "npm:^2.7.1"
+  peerDependencies:
+    "@aws-sdk/credential-providers": ^3.201.0
+    mongodb-client-encryption: ">=2.3.0 <3"
+    snappy: ^7.2.2
+  dependenciesMeta:
+    saslprep:
+      optional: true
+  peerDependenciesMeta:
+    "@aws-sdk/credential-providers":
+      optional: true
+    mongodb-client-encryption:
+      optional: true
+    snappy:
+      optional: true
+  checksum: ef8c2555c6dab9939774236ba33c66e245820c603a6c1172c4ed3cb874126cac25a91522535cd2dde6ddbfd2bd31476f1a87a7312ea37338fb9657072ba6db3d
   languageName: node
   linkType: hard
 
