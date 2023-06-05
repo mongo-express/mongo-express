@@ -76,7 +76,7 @@
     "mocha": "^10.2.0",
     "mongodb-memory-server": "^8.11.4",
     "node-html-parser": "^6.1.5",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.22",
     "pre-commit": "1.2.2",
     "renderjson": "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch",
     "supertest": "^6.3.3",

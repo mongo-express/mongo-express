@@ -7784,7 +7784,7 @@ __metadata:
     mongodb-query-parser: "npm:^2.4.11"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.5"
-    nodemon: "npm:^2.0.20"
+    nodemon: "npm:^2.0.22"
     nyc: "npm:^15.1.0"
     pre-commit: "npm:1.2.2"
     renderjson: "patch:renderjson@npm%3A1.4.0#~/.yarn/patches/renderjson-npm-1.4.0-b198ae5f7e.patch"
@@ -8023,9 +8023,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^2.0.20":
-  version: 2.0.20
-  resolution: "nodemon@npm:2.0.20"
+"nodemon@npm:^2.0.22":
+  version: 2.0.22
+  resolution: "nodemon@npm:2.0.22"
   dependencies:
     chokidar: "npm:^3.5.2"
     debug: "npm:^3.2.7"
@@ -8039,7 +8039,7 @@ __metadata:
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: 49aaba39d908a24b7b31c6b8ba81c86763ae2606f21b368af7f79bef5211759d7102a527bb34f2c94196f325d91e6327d3dfc045b470f851ac0053a3901c5382
+  checksum: e20edab84eb172fd7a0190c58961e7fb1f3e929a28c525dfafba73ba0ef611333b688abcab4a861cf5c5d4ef209937514d7e7ed131edf87adc60db8ae5cc5dd2
   languageName: node
   linkType: hard
 
