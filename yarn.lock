@@ -7774,7 +7774,7 @@ __metadata:
     mocha: "npm:^10.2.0"
     mongodb: "npm:^4.13.0"
     mongodb-memory-server: "npm:^8.12.2"
-    mongodb-query-parser: "npm:^2.4.11"
+    mongodb-query-parser: "npm:^2.5.0"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.5"
     nodemon: "npm:^2.0.22"
@@ -7839,9 +7839,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@npm:^2.4.11":
-  version: 2.4.11
-  resolution: "mongodb-query-parser@npm:2.4.11"
+"mongodb-query-parser@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "mongodb-query-parser@npm:2.5.0"
   dependencies:
     debug: "npm:^4.1.1"
     ejson-shell-parser: "npm:^1.2.1"
@@ -7852,7 +7852,7 @@ __metadata:
     mongodb-language-model: "npm:^1.6.1"
   peerDependencies:
     bson: ^4.6.1 || ^5
-  checksum: 7cb4cf0a8ba9d7917205e3ac72143a348a1f4f0fca847d28b983ae215880f1eb4b40f32301d20445267775295917eea6f3c08b981db4fbc74d1a266262fb9d0f
+  checksum: c748cf8b12d3a5a9ef5f9afcadfcc0e6b8153486504169fd2bbf1f94094bb209d4adba57895fda3a4fde13abcc914d4a594afb13acb3a3b673246bf2d2260628
   languageName: node
   linkType: hard
 

@@ -48,7 +48,7 @@
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
     "mongodb": "^4.13.0",
-    "mongodb-query-parser": "^2.4.11",
+    "mongodb-query-parser": "^2.5.0",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
     "serve-favicon": "^2.5.0"
