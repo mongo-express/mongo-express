@@ -146,6 +146,10 @@ Name | Default | Description
 `VCAP_APP_HOST` | `localhost` | address that mongo-express will listen on for incoming connections.
 `PORT` | `8081` | port that mongo-express will run on.
 `ME_CONFIG_MONGODB_CA_FILE` | `` | CA certificate File
+`ME_CONFIG_MONGODB_SSL` | `` | Use TLS client certificate
+`ME_CONFIG_MONGODB_CERT_FILE` | `` | TLS client certificate file
+`ME_CONFIG_MONGODB_KEY_FILE` | `` | TLS client key file
+`ME_CONFIG_MONGODB_KEY_PASSWORD` | `` | TLS key password
 `ME_CONFIG_BASICAUTH_USERNAME_FILE` | `` | File version of ME_CONFIG_BASICAUTH_USERNAME
 `ME_CONFIG_BASICAUTH_PASSWORD_FILE` | `` | File version of ME_CONFIG_BASICAUTH_PASSWORD
 `ME_CONFIG_MONGODB_ADMINUSERNAME_FILE` | `` | File version of ME_CONFIG_MONGODB_ADMINUSERNAME
