@@ -115,13 +115,13 @@ export default {
       // sslValidate: validate mongod server certificate against CA
       sslValidate: getBoolean(process.env.ME_CONFIG_MONGODB_SSLVALIDATE, true),
 
-      // tlsCAFile: single PEM file on disk
+      // tlsCAFile: single CA PEM file on disk
       tlsCAFile: process.env.ME_CONFIG_MONGODB_CA_FILE,
       
-      // tlsCertificateFile: client key PEM file on disk
+      // tlsCertificateFile: client certificate PEM file on disk
       tlsCertificateFile: process.env.ME_CONFIG_MONGODB_CERT_FILE,
       
-      // tlsCertificateKeyFile: client certificate PEM file on disk
+      // tlsCertificateKeyFile: client key PEM file on disk
       tlsCertificateKeyFile: process.env.ME_CONFIG_MONGODB_KEY_FILE,
       
       // tlsCertificateKeyFilePassword: password for the client key PEM
