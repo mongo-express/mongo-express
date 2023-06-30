@@ -4539,7 +4539,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.3.4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.0, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4":
+"debug@npm:4, debug@npm:4.3.4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.2.0, debug@npm:^4.3.0, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
   dependencies:
@@ -6667,13 +6667,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-json@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "is-json@npm:2.0.1"
-  checksum: 35f2eff6f29a558d708755b83c71a416c13e954fde4b0ccf1f693add21cf8c9a982906b397c86086bcc03d26ea2023214015dc5e7d4c783dcdc36266ccfccd9f
-  languageName: node
-  linkType: hard
-
 "is-lambda@npm:^1.0.1":
   version: 1.0.1
   resolution: "is-lambda@npm:1.0.1"
@@ -7774,7 +7767,7 @@ __metadata:
     mocha: "npm:^10.2.0"
     mongodb: "npm:^4.13.0"
     mongodb-memory-server: "npm:^8.12.2"
-    mongodb-query-parser: "npm:^2.4.11"
+    mongodb-query-parser: "npm:^3.1.2"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.5"
     nodemon: "npm:^2.0.22"
@@ -7797,13 +7790,6 @@ __metadata:
     "@types/whatwg-url": "npm:^8.2.1"
     whatwg-url: "npm:^11.0.0"
   checksum: ed74c7f45a509d5b55a958fda6cebf5ee70d397a537d9f9d44b17381a903afd3714e3886e157b19bfc8134ecb3c9ffcf080e44b4f4694b5c697ea04390884f42
-  languageName: node
-  linkType: hard
-
-"mongodb-language-model@npm:^1.6.1":
-  version: 1.7.1
-  resolution: "mongodb-language-model@npm:1.7.1"
-  checksum: 849ce96be326a6eeea7194bf0610e3663533f0987e2bc0c01de4aa382aecb0374036f806c1b0130bb675149ab1dd36b8e2f2cea402ff089ed09bc63baacf352e
   languageName: node
   linkType: hard
 
@@ -7839,20 +7825,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@npm:^2.4.11":
-  version: 2.4.11
-  resolution: "mongodb-query-parser@npm:2.4.11"
+"mongodb-query-parser@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "mongodb-query-parser@npm:3.1.2"
   dependencies:
-    debug: "npm:^4.1.1"
+    debug: "npm:^4.2.0"
     ejson-shell-parser: "npm:^1.2.1"
-    is-json: "npm:^2.0.1"
     javascript-stringify: "npm:^2.0.1"
     lodash: "npm:^4.17.15"
-    lru-cache: "npm:^5.1.1"
-    mongodb-language-model: "npm:^1.6.1"
   peerDependencies:
-    bson: ^4.6.1 || ^5
-  checksum: 7cb4cf0a8ba9d7917205e3ac72143a348a1f4f0fca847d28b983ae215880f1eb4b40f32301d20445267775295917eea6f3c08b981db4fbc74d1a266262fb9d0f
+    bson: ^5
+  checksum: d7014d5f9c0fa58b7764cfb8b2a2a9a8cd3c2bb67514850d9e1a1c7a24314cba36cfa897875a0bcd77c8d12e16ddbba4a784a15613c7078b2194151e529f81d2
   languageName: node
   linkType: hard
 
