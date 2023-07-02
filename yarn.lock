@@ -2496,18 +2496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint-community/eslint-utils@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "@eslint-community/eslint-utils@npm:4.1.2"
-  dependencies:
-    eslint-visitor-keys: "npm:^3.3.0"
-  peerDependencies:
-    eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 81a68aaada6fbe216c9e757ae6739940792a0d993ba0b2d35beb4406240a91597f88debac01e76c3d982ed7e820b6f2e62b14650c7b9b07a7ac6a8f1b0185ad7
-  languageName: node
-  linkType: hard
-
-"@eslint-community/eslint-utils@npm:^4.2.0":
+"@eslint-community/eslint-utils@npm:^4.2.0, @eslint-community/eslint-utils@npm:^4.4.0":
   version: 4.4.0
   resolution: "@eslint-community/eslint-utils@npm:4.4.0"
   dependencies:
@@ -3977,10 +3966,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.6.1":
-  version: 3.7.0
-  resolution: "ci-info@npm:3.7.0"
-  checksum: 60d4dcdc63c88a02beff01ec14a733128017d2388f86c5d6a931df7001d4a30f264040f2c6edfd0732fbfa79d624c1b76f6fbdad5e96315d491a1bf60cf424e4
+"ci-info@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "ci-info@npm:3.8.0"
+  checksum: cbde5915261038659da39e508b688acd0baa981a73dc34357865957403383e0475b050c2f44971a3b37523849973af345724feb8f2e4a8eddd6db41be708f4ba
   languageName: node
   linkType: hard
 
@@ -5155,29 +5144,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-unicorn@npm:^45.0.2":
-  version: 45.0.2
-  resolution: "eslint-plugin-unicorn@npm:45.0.2"
+"eslint-plugin-unicorn@npm:^47.0.0":
+  version: 47.0.0
+  resolution: "eslint-plugin-unicorn@npm:47.0.0"
   dependencies:
     "@babel/helper-validator-identifier": "npm:^7.19.1"
-    "@eslint-community/eslint-utils": "npm:^4.1.2"
-    ci-info: "npm:^3.6.1"
+    "@eslint-community/eslint-utils": "npm:^4.4.0"
+    ci-info: "npm:^3.8.0"
     clean-regexp: "npm:^1.0.0"
-    esquery: "npm:^1.4.0"
+    esquery: "npm:^1.5.0"
     indent-string: "npm:^4.0.0"
-    is-builtin-module: "npm:^3.2.0"
+    is-builtin-module: "npm:^3.2.1"
     jsesc: "npm:^3.0.2"
     lodash: "npm:^4.17.21"
     pluralize: "npm:^8.0.0"
     read-pkg-up: "npm:^7.0.1"
     regexp-tree: "npm:^0.1.24"
-    regjsparser: "npm:^0.9.1"
+    regjsparser: "npm:^0.10.0"
     safe-regex: "npm:^2.1.1"
     semver: "npm:^7.3.8"
     strip-indent: "npm:^3.0.0"
   peerDependencies:
-    eslint: ">=8.28.0"
-  checksum: 65e5fa10190376c2b7958767aa79963832a1fad576b8d3ad57d9d579bd788577123c5002c1129f445bba2780deca0b4dd72b0dcb046385b1c6e0f484dcda940b
+    eslint: ">=8.38.0"
+  checksum: c86fae39a4bb9376fae2dc3a62956b7f832e8d85d81539532bf10696d19765bf16b9d153cf4d5bc019371ea28362a988d128eda70d62482cc1b8e1c086cd49e7
   languageName: node
   linkType: hard
 
@@ -5293,16 +5282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esquery@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "esquery@npm:1.4.0"
-  dependencies:
-    estraverse: "npm:^5.1.0"
-  checksum: 7f287f5390f12feed1b2b4dd42f3a4501774effcbcbb76c340e5b9a3c25a133739dc18657c6103cb520dd4a8814d33ff732587c7de42f0ff51a0deaf4c190428
-  languageName: node
-  linkType: hard
-
-"esquery@npm:^1.4.2":
+"esquery@npm:^1.4.2, esquery@npm:^1.5.0":
   version: 1.5.0
   resolution: "esquery@npm:1.5.0"
   dependencies:
@@ -6559,12 +6539,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-builtin-module@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "is-builtin-module@npm:3.2.0"
+"is-builtin-module@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "is-builtin-module@npm:3.2.1"
   dependencies:
     builtin-modules: "npm:^3.3.0"
-  checksum: 5b26848b69b4bfe4d78599fe5ffc60257c039c0908d7e491f1680c7a1f2d74e74e3ce86f44ea772f788a6e49cc4645f47029d0a8136a5281bf10652d2e1fbb1d
+  checksum: 274c84cb1117fab5a439b77aab054c774778324509cbaab40c340a2f81fdd06f08c8599a99fd671e2f6d814a4419e2bf6e2e43fc0e284443f147d176f7733a42
   languageName: node
   linkType: hard
 
@@ -7751,7 +7731,7 @@ __metadata:
     eslint-config-airbnb-base: "npm:^15.0.0"
     eslint-plugin-import: "npm:^2.27.5"
     eslint-plugin-lodash: "npm:^7.4.0"
-    eslint-plugin-unicorn: "npm:^45.0.2"
+    eslint-plugin-unicorn: "npm:^47.0.0"
     express: "npm:^4.18.2"
     express-fileupload: "npm:^1.4.0"
     express-session: "npm:^1.17.3"
@@ -8807,6 +8787,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regjsparser@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "regjsparser@npm:0.10.0"
+  dependencies:
+    jsesc: "npm:~0.5.0"
+  bin:
+    regjsparser: bin/parser
+  checksum: 2ba8c24548b0a69ea1858d2d84c69090a7873e8f9ff3272356fd76e880a20dc8a317730897e864d36999432712819a5551412d8d4e4e8b62210340cbce4a5133
+  languageName: node
+  linkType: hard
+
 "regjsparser@npm:^0.8.2":
   version: 0.8.4
   resolution: "regjsparser@npm:0.8.4"
@@ -8815,17 +8806,6 @@ __metadata:
   bin:
     regjsparser: bin/parser
   checksum: 8d370d309ad77094d5b2fa57d5ccf9e37929f5d1ef7e5374eb233d8e470b5e41bbe150fad9629959393f57855ca0a54ea5472fc91e933f695adb17198382424f
-  languageName: node
-  linkType: hard
-
-"regjsparser@npm:^0.9.1":
-  version: 0.9.1
-  resolution: "regjsparser@npm:0.9.1"
-  dependencies:
-    jsesc: "npm:~0.5.0"
-  bin:
-    regjsparser: bin/parser
-  checksum: c706fb5d31aabd1951c0aa5fdfdb193bac82f9bec0e0ba77ab794e1260ec0589fdb270532387b8831124c9191ffccaf4eaceb7cd7df3f0be9572808d47c44266
   languageName: node
   linkType: hard
 
