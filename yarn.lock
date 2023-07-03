@@ -4645,9 +4645,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^12.13.0":
-  version: 12.13.0
-  resolution: "cypress@npm:12.13.0"
+"cypress@npm:^12.16.0":
+  version: 12.16.0
+  resolution: "cypress@npm:12.16.0"
   dependencies:
     "@cypress/request": "npm:^2.88.10"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -4693,7 +4693,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 2fbd6e3a3b756e9b4032fa6d2d8e2d0a4f41896e1015a0a144d98d719b3b2ce483c255ecbf145113a798681cadb6300438ec6a800012470e63f13be6f0d7f551
+  checksum: f33754ab5dd732c597349e4d26bda6799a91a2ae06377b39f38d06e39be7e23c0d8de601ad3e84f66199bafb02193bebb9e3a37c715d244ed067a29c9d3e86e9
   languageName: node
   linkType: hard
 
@@ -7958,7 +7958,7 @@ __metadata:
     cookie-parser: "npm:1.4.6"
     copy-webpack-plugin: "npm:^11.0.0"
     csurf: "npm:1.11.0"
-    cypress: "npm:^12.13.0"
+    cypress: "npm:^12.16.0"
     dotenv: "npm:^16.3.1"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.38.0"
@@ -9070,6 +9070,17 @@ __metadata:
   bin:
     regjsparser: bin/parser
   checksum: 8d370d309ad77094d5b2fa57d5ccf9e37929f5d1ef7e5374eb233d8e470b5e41bbe150fad9629959393f57855ca0a54ea5472fc91e933f695adb17198382424f
+  languageName: node
+  linkType: hard
+
+"regjsparser@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "regjsparser@npm:0.9.1"
+  dependencies:
+    jsesc: "npm:~0.5.0"
+  bin:
+    regjsparser: bin/parser
+  checksum: c706fb5d31aabd1951c0aa5fdfdb193bac82f9bec0e0ba77ab794e1260ec0589fdb270532387b8831124c9191ffccaf4eaceb7cd7df3f0be9572808d47c44266
   languageName: node
   linkType: hard
 
