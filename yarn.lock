@@ -4645,9 +4645,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^12.13.0":
-  version: 12.13.0
-  resolution: "cypress@npm:12.13.0"
+"cypress@npm:^12.17.0":
+  version: 12.17.0
+  resolution: "cypress@npm:12.17.0"
   dependencies:
     "@cypress/request": "npm:^2.88.10"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -4686,14 +4686,14 @@ __metadata:
     pretty-bytes: "npm:^5.6.0"
     proxy-from-env: "npm:1.0.0"
     request-progress: "npm:^3.0.0"
-    semver: "npm:^7.3.2"
+    semver: "npm:^7.5.3"
     supports-color: "npm:^8.1.1"
     tmp: "npm:~0.2.1"
     untildify: "npm:^4.0.0"
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 2fbd6e3a3b756e9b4032fa6d2d8e2d0a4f41896e1015a0a144d98d719b3b2ce483c255ecbf145113a798681cadb6300438ec6a800012470e63f13be6f0d7f551
+  checksum: e5b4d0f3c782c8dcd1a9b9bd952ba01fd3579baa9d082ba435de0b92accfb499ee95ea0477ca7db148b109eddfc1c24e2395dfdc32ce9a8adfedfb12d249d8b3
   languageName: node
   linkType: hard
 
@@ -7958,7 +7958,7 @@ __metadata:
     cookie-parser: "npm:1.4.6"
     copy-webpack-plugin: "npm:^11.0.0"
     csurf: "npm:1.11.0"
-    cypress: "npm:^12.13.0"
+    cypress: "npm:^12.17.0"
     dotenv: "npm:^16.3.1"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.38.0"
@@ -9073,6 +9073,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regjsparser@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "regjsparser@npm:0.9.1"
+  dependencies:
+    jsesc: "npm:~0.5.0"
+  bin:
+    regjsparser: bin/parser
+  checksum: c706fb5d31aabd1951c0aa5fdfdb193bac82f9bec0e0ba77ab794e1260ec0589fdb270532387b8831124c9191ffccaf4eaceb7cd7df3f0be9572808d47c44266
+  languageName: node
+  linkType: hard
+
 "release-zalgo@npm:^1.0.0":
   version: 1.0.0
   resolution: "release-zalgo@npm:1.0.0"
@@ -9369,17 +9380,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.2":
-  version: 7.3.7
-  resolution: "semver@npm:7.3.7"
-  dependencies:
-    lru-cache: "npm:^6.0.0"
-  bin:
-    semver: bin/semver.js
-  checksum: 67bcf24790dcba9c20b2cd4c8ade19eebbcb10c8868453570749b47b77bd5c7da503478997a7a3f663d5b2976ac39c545f38d2d9e7dfcc693cb87f4068f93f8e
-  languageName: node
-  linkType: hard
-
 "semver@npm:^7.3.5, semver@npm:^7.3.8":
   version: 7.3.8
   resolution: "semver@npm:7.3.8"
@@ -9388,6 +9388,17 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 94ad80ee14889020cb4a14d809fb99d16cbf4ff3dc7f4c564fc72efe2c5763a60090a1c16a9fd18ceeb1e993a1303a4d870c0a22f26adaf435b368b46a7d8462
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.5.3":
+  version: 7.5.3
+  resolution: "semver@npm:7.5.3"
+  dependencies:
+    lru-cache: "npm:^6.0.0"
+  bin:
+    semver: bin/semver.js
+  checksum: 9e949f7d5797373fcd8986b9b667cbd45afd4e95619ef82978d158a50c47579224e8f39badf03f6b9e8f4c80a1c87d6415eb1ee8b476e7bb60e6c7e8f63279be
   languageName: node
   linkType: hard
 
