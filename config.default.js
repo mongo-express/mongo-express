@@ -5,15 +5,11 @@ dotenv.config();
 
 let mongo = {
   // Setting the connection string will only give access to that database
-  // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
-  // It is RECOMMENDED to use connectionString instead of individual params, other options will be removed later.
+  // to see more databases you need to set mongodb.admin to true
+  // As recommended, a connection String is used instead of the individual params.
   // More info here: https://docs.mongodb.com/manual/reference/connection-string/
-  connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL,
-  host: '127.0.0.1',
-  port: '27017',
-  dbName: '',
-  username: '',
-  password: '',
+  connectionString: process.env.ME_CONFIG_MONGODB_URL,
+  ssl: false,
 };
 
 // Accessing Bluemix variable to get MongoDB info
@@ -28,10 +24,6 @@ if (process.env.VCAP_SERVICES) {
 const basicAuth = 'ME_CONFIG_BASICAUTH';
 const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
 const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
-const adminUsername = 'ME_CONFIG_MONGODB_ADMINUSERNAME';
-const adminPassword = 'ME_CONFIG_MONGODB_ADMINPASSWORD';
-const dbAuthUsername = 'ME_CONFIG_MONGODB_AUTH_USERNAME';
-const dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
 
 function getFile(filePath) {
   if (filePath !== undefined && filePath) {
@@ -58,54 +50,14 @@ function getFileEnv(envVariable) {
   return origVar;
 }
 
-const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER
-  ? process.env.ME_CONFIG_MONGODB_SERVER.split(',')
-  : false;
-
-function getConnectionStringFromInlineParams() {
-  const infos = {
-    server: (
-      meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]
-    ) ||  mongo.host || process.env.ME_CONFIG_MONGODB_SERVER || '127.0.0.1',
-    port: mongo.port || process.env.ME_CONFIG_MONGODB_PORT || '27017',
-    dbName: mongo.dbName,
-    username: mongo.username,
-    password: mongo.password,
-  };
-  const login = infos.username ? `${encodeURIComponent(infos.username)}:${encodeURIComponent(infos.password)}@` : '';
-  return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
-}
-
-function getConnectionStringFromEnvVariables() {
-  const infos = {
-    // server: mongodb hostname or IP address
-    // for replica set, use array of string instead
-    server: (
-      meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]
-    ) || mongo.host,
-    port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
-    dbName: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.dbName,
-
-    // >>>> If you are using an admin mongodb account, or no admin account exists, fill out section below
-    // >>>> Using an admin account allows you to view and edit all databases, and view stats
-    // leave username and password empty if no admin account exists
-    username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username,
-    password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password,
-  };
-  const login = infos.username ? `${encodeURIComponent(infos.username)}:${encodeURIComponent(infos.password)}@` : '';
-  return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
-}
-
 function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
 }
 
 export default {
   mongodb: {
-    mongo,
-    getConnectionStringFromInlineParams,
     // if a connection string options such as server/port/etc are ignored
-    connectionString: mongo.connectionString || getConnectionStringFromEnvVariables(),
+    connectionString: mongo.connectionString,
 
     /** @type {import('mongodb').MongoClientOptions} */
     connectionOptions: {
