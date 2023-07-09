@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import https from 'node:https';
 import clc from 'cli-color';
-import commander from 'commander';
+import { program } from 'commander';
 import csrf from 'csurf';
 import express from 'express';
 import middleware from './lib/middleware.js';
@@ -91,21 +91,21 @@ if (config.options.console === true) {
   console.log('\n');
 }
 
-commander
+program
   .version(pkg.version)
   .option('-U, --url <url>', 'connection string url')
   .option('-a, --admin', 'enable authentication as admin')
   .option('--port <port>', 'listen on specified port')
   .parse(process.argv);
 
-if (commander.url) {
-  config.mongodb.connectionString = commander.url;
-  if (commander.admin) {
+if (program.url) {
+  config.mongodb.connectionString = program.url;
+  if (program.admin) {
     config.mongodb.admin = true;
   }
 }
 
-config.site.port = commander.port || config.site.port;
+config.site.port = program.port || config.site.port;
 
 if (!config.site.baseUrl) {
   console.error('Please specify a baseUrl in your config. Using "/" for now.');
