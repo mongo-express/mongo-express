@@ -67,7 +67,7 @@
     "concurrently": "^8.2.0",
     "copy-webpack-plugin": "^11.0.0",
     "cypress": "^12.17.0",
-    "eslint": "^8.38.0",
+    "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-lodash": "^7.4.0",
