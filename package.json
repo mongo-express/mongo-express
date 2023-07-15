@@ -63,7 +63,7 @@
     "bootstrap": "^3.3.7",
     "chai": "^4.3.7",
     "clean-webpack-plugin": "^4.0.0",
-    "codemirror": "^5.58.2",
+    "codemirror": "^6.0.1",
     "concurrently": "^8.2.0",
     "copy-webpack-plugin": "^11.0.0",
     "cypress": "^12.17.0",
