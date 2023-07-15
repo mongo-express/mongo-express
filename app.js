@@ -98,14 +98,16 @@ program
   .option('--port <port>', 'listen on specified port')
   .parse(process.argv);
 
-if (program.url) {
-  config.mongodb.connectionString = program.url;
-  if (program.admin) {
+const options = program.opts();
+
+if (options.url) {
+  config.mongodb.connectionString = options.url;
+  if (options.admin) {
     config.mongodb.admin = true;
   }
 }
 
-config.site.port = program.port || config.site.port;
+config.site.port = options.port || config.site.port;
 
 if (!config.site.baseUrl) {
   console.error('Please specify a baseUrl in your config. Using "/" for now.');
