@@ -3676,16 +3676,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^9.1.2":
-  version: 9.1.2
-  resolution: "babel-loader@npm:9.1.2"
+"babel-loader@npm:^9.1.3":
+  version: 9.1.3
+  resolution: "babel-loader@npm:9.1.3"
   dependencies:
-    find-cache-dir: "npm:^3.3.2"
+    find-cache-dir: "npm:^4.0.0"
     schema-utils: "npm:^4.0.0"
   peerDependencies:
     "@babel/core": ^7.12.0
     webpack: ">=5"
-  checksum: 24cc50ccb73b24ebdf11924c5204d7133e1a2edc5dfeba3ebb078f5bbd4b5af53f552864b94751633bc1b179f897697a90c3c12d71a103fa446de399770b4dc7
+  checksum: 2d38979ce82ff730f81b8ba646ca3ff845bd7a1dda8b14844dc19398e52cfc63ad445c5010b0278e80e0fa54f91a232bc603eae8347a99ff87be67f0344ee4af
   languageName: node
   linkType: hard
 
@@ -4414,6 +4414,13 @@ __metadata:
   version: 9.4.1
   resolution: "commander@npm:9.4.1"
   checksum: 7d4c1f3bd4ad451f43fce51b9c73dc2d61fca00a9249196aa2d3d66fc46f2460c917c73ea9221c278fb8d35f496384f5125806e69108581a8e8bc673752c94e6
+  languageName: node
+  linkType: hard
+
+"common-path-prefix@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "common-path-prefix@npm:3.0.0"
+  checksum: 81d3f07d3a70fc2fffe6c1d3c1a207e84f176ea02ce045d80d08379ecb6cfcd4b285cf2f5dc97244e01fe11610295af3bfea26fae7c9cbc5f81bee3bd02e15ec
   languageName: node
   linkType: hard
 
@@ -5894,6 +5901,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"find-cache-dir@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "find-cache-dir@npm:4.0.0"
+  dependencies:
+    common-path-prefix: "npm:^3.0.0"
+    pkg-dir: "npm:^7.0.0"
+  checksum: e8f9f795782c20d27116ccbf0f0c3599494cc4efbbbe0af7daeeab5354709e55e6be220b4bf5ad1bc8b83e06b22afa25b8c4bc1061df51835a441eb96f2b6d29
+  languageName: node
+  linkType: hard
+
 "find-up@npm:5.0.0, find-up@npm:^5.0.0":
   version: 5.0.0
   resolution: "find-up@npm:5.0.0"
@@ -5911,6 +5928,16 @@ __metadata:
     locate-path: "npm:^5.0.0"
     path-exists: "npm:^4.0.0"
   checksum: ae51bbfc4040bb85937589c31dd5f1ac0e80df18feccabcfbdd78ee7a9fc06b198ae73bb87a9d398ab98314dded1cacebde9f77e1c80195a5a68446ba7ee1ae3
+  languageName: node
+  linkType: hard
+
+"find-up@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "find-up@npm:6.3.0"
+  dependencies:
+    locate-path: "npm:^7.1.0"
+    path-exists: "npm:^5.0.0"
+  checksum: 0615da27dd04f46bb55790ac16dc3235fc34ef948280c461363d4a6ff27ad4d5b5568761007d2dbe9da83e9e732c5b764f2dbbb6e3b674ed7a65d9ffe45c7762
   languageName: node
   linkType: hard
 
@@ -7488,6 +7515,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"locate-path@npm:^7.1.0":
+  version: 7.2.0
+  resolution: "locate-path@npm:7.2.0"
+  dependencies:
+    p-locate: "npm:^6.0.0"
+  checksum: 5137d791489fd403912051d2bfc5a006f2ae177c3e7eb7e224843b358a85f7f5d030253d3e5757f3248cca6af22beb2a910c84d85267e6518436ac9e304b000b
+  languageName: node
+  linkType: hard
+
 "lodash-es@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
@@ -7963,7 +7999,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.22.9"
     "@cypress/code-coverage": "npm:^3.10.0"
     assets-webpack-plugin: "npm:^7.1.1"
-    babel-loader: "npm:^9.1.2"
+    babel-loader: "npm:^9.1.3"
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.2"
     bootstrap: "npm:^3.3.7"
@@ -8536,6 +8572,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"p-limit@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "p-limit@npm:4.0.0"
+  dependencies:
+    yocto-queue: "npm:^1.0.0"
+  checksum: ca073ed51f443fbc8346494b72190944decaeee6f020a977e3370b8072553172cccf5cde2531f3719a82b98eb03abd29111a053c40e57573f3396262e2383997
+  languageName: node
+  linkType: hard
+
 "p-locate@npm:^4.1.0":
   version: 4.1.0
   resolution: "p-locate@npm:4.1.0"
@@ -8551,6 +8596,15 @@ __metadata:
   dependencies:
     p-limit: "npm:^3.0.2"
   checksum: 6f4c66cf65f6f1955de1978a612b3acb94d41663ba72cc6b60ac21b1aa6d7e3e13b2debbef0017b4339e71087c7917f8fd03b6b06db604af74e7eb55347c5206
+  languageName: node
+  linkType: hard
+
+"p-locate@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "p-locate@npm:6.0.0"
+  dependencies:
+    p-limit: "npm:^4.0.0"
+  checksum: 73dff67d528340f69fe72816c3408c8f4d5391293941a8268c1b4f86cf8a9020f3b7b17f01656c39942e3062d43ccf40a4ef9bbf2f988f44b6c532341bb850ba
   languageName: node
   linkType: hard
 
@@ -8630,6 +8684,13 @@ __metadata:
   version: 4.0.0
   resolution: "path-exists@npm:4.0.0"
   checksum: 28623865ba71cdc25d2d80021407b1500d64bb74d5072f03276221b4febedbb543132f5bcc57d7fc42b32b45f4175bbae919e1810535892faa4ba9e8f2edc6dd
+  languageName: node
+  linkType: hard
+
+"path-exists@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "path-exists@npm:5.0.0"
+  checksum: f95aa38276901f0e2ef5d287596a76220f6089dd1b748babab25884ed262ca4214958cfcea102b58ff3083f8fdfabc6a75ac3b4ba42956d11d4bed7c75250e77
   languageName: node
   linkType: hard
 
@@ -8753,6 +8814,15 @@ __metadata:
   dependencies:
     find-up: "npm:^4.0.0"
   checksum: 220ae78b93ef48d6cd81958ff3bdda5f5e6268c9887ca430aa974370499669c72886d85db0a768898a0a09114be14aab9a7171356033c082c0d2e65f384a5886
+  languageName: node
+  linkType: hard
+
+"pkg-dir@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "pkg-dir@npm:7.0.0"
+  dependencies:
+    find-up: "npm:^6.3.0"
+  checksum: 3f83c8b2d9e57bde96f9f88a2d684be40fb0d296211049e793314a064775708194ba0185d7259a1a35b81d50fa49146c7db326214464e828f3fa9ee952ae6d7f
   languageName: node
   linkType: hard
 
@@ -11019,5 +11089,12 @@ __metadata:
     buffer-crc32: "npm:~0.2.3"
     fd-slicer: "npm:~1.1.0"
   checksum: 760a176211c7380f1c62160406dc2b9e1273515c06adef9b52139bf8258b993fbd01dec121b7464204abc8b4735e2a82f746a28c486bf4847b61e39034bed512
+  languageName: node
+  linkType: hard
+
+"yocto-queue@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "yocto-queue@npm:1.0.0"
+  checksum: 4522405d36a190a188112c3bc9ae84ac5eeafee637417ec127c6defc28a75b745a6139f9178107389e5ae57c3a5523b0016aec5a1f23b228c7b17ca8b2869a9c
   languageName: node
   linkType: hard
