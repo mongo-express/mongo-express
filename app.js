@@ -95,7 +95,7 @@ program
   .version(pkg.version)
   .option('-U, --url <url>', 'connection string url')
   .option('-a, --admin', 'enable authentication as admin')
-  .option('--port <port>', 'listen on specified port')
+  .option('-p, --port <port>', 'listen on specified port')
   .parse(process.argv);
 
 const options = program.opts();
