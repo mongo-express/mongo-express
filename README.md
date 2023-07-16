@@ -76,17 +76,26 @@ Fill in your MongoDB connection details and any other options you want to change
 
     cd YOUR_PATH/node_modules/mongo-express/ && node app.js
 
-If you installed it globally, you can immediately start mongo-express like this:
+or if you installed it globally, you can immediately start mongo-express like this:
+
+    mongo-express
+
+You can add some configuration options. Example:
+
+    node app.js --url mongodb://127.0.0.1:27017
+
+or:
 
     mongo-express --url mongodb://127.0.0.1:27017
 
-Or if you want to use it as an administrator:
-
-    mongo-express --admin --url mongodb://127.0.0.1:27017
-
-For help on configuration options:
-
-    mongo-express --help
+Configuration options:
+Option | Short | Description
+| - | - | -
+`--version` | `-V` | output the version number
+`--url <url>` | `-U <url>` | connection string url (`<url>` example: `mongodb://127.0.0.1:27017`)
+`--admin` | `-a` | enable authentication as admin
+`--port <port>` | `-p <port>` | listen on specified port (default `<port>` is `8081`)
+`--help` | `-h` | display help for command options
 
 ## Usage (Express 4 middleware)
 
