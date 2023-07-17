@@ -54,7 +54,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.8",
+    "@babel/core": "^7.22.9",
     "@babel/eslint-parser": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "@cypress/code-coverage": "^3.10.0",
