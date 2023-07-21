@@ -8066,7 +8066,7 @@ __metadata:
     mongodb-query-parser: "npm:^3.1.2"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.5"
-    nodemon: "npm:^2.0.22"
+    nodemon: "npm:^3.0.1"
     nyc: "npm:^15.1.0"
     pre-commit: "npm:1.2.2"
     renderjson: "github:rtritto/renderjson#develop"
@@ -8318,23 +8318,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^2.0.22":
-  version: 2.0.22
-  resolution: "nodemon@npm:2.0.22"
+"nodemon@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "nodemon@npm:3.0.1"
   dependencies:
     chokidar: "npm:^3.5.2"
     debug: "npm:^3.2.7"
     ignore-by-default: "npm:^1.0.1"
     minimatch: "npm:^3.1.2"
     pstree.remy: "npm:^1.1.8"
-    semver: "npm:^5.7.1"
-    simple-update-notifier: "npm:^1.0.7"
+    semver: "npm:^7.5.3"
+    simple-update-notifier: "npm:^2.0.0"
     supports-color: "npm:^5.5.0"
     touch: "npm:^3.1.0"
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: e20edab84eb172fd7a0190c58961e7fb1f3e929a28c525dfafba73ba0ef611333b688abcab4a861cf5c5d4ef209937514d7e7ed131edf87adc60db8ae5cc5dd2
+  checksum: 83317307d93897051770d973aa749a4831f8c7dbe9fa1f6a43f0282a0cdf6693d8489261dfd12913ba7f5b221a4be0fa62088740898bdcb42c3748a12b98c8c7
   languageName: node
   linkType: hard
 
@@ -9530,7 +9530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.7.1":
+"semver@npm:2 || 3 || 4 || 5":
   version: 5.7.2
   resolution: "semver@npm:5.7.2"
   bin:
@@ -9556,15 +9556,6 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: b06b6c19088f1d7c4a21858a432fc31a766d3a3dbcc6638028e2e85de79f5ec87b849b940f03487d4e366616435ba16bf769f558896addb55ba5ec388ca2ed1b
-  languageName: node
-  linkType: hard
-
-"semver@npm:~7.0.0":
-  version: 7.0.0
-  resolution: "semver@npm:7.0.0"
-  bin:
-    semver: bin/semver.js
-  checksum: c0b7fdd720c6ee955cd71172ef8d63f41976d70049f02aa7569edff0ab89846ee035e39c82f3733fd2af3285f6ca6e14c3778e8de84cd8ea6ec1a33c68bf072a
   languageName: node
   linkType: hard
 
@@ -9719,12 +9710,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-update-notifier@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "simple-update-notifier@npm:1.0.7"
+"simple-update-notifier@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "simple-update-notifier@npm:2.0.0"
   dependencies:
-    semver: "npm:~7.0.0"
-  checksum: 7c7053ecefbe2f8ba88af5522e59266de309edf0861320f889ae38676353b52b3e9d15f6e99867fa696eb6e2734d563ae0a910e0e8577c68411a34e969338b16
+    semver: "npm:^7.5.3"
+  checksum: d0bf36fc5789c937a824fd79e1e120ee056b05e29e4feaf1fa21dcd247d5fc1d83656b18a4045f2a71dc6e94f0a0cde5358284a0ee0a2bfdb9d17db8eecba077
   languageName: node
   linkType: hard
 
