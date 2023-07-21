@@ -2606,22 +2606,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.10.0":
-  version: 3.10.0
-  resolution: "@cypress/code-coverage@npm:3.10.0"
+"@cypress/code-coverage@npm:^3.11.0":
+  version: 3.11.0
+  resolution: "@cypress/code-coverage@npm:3.11.0"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^5.11.0"
     chalk: "npm:4.1.2"
-    dayjs: "npm:1.10.7"
+    dayjs: "npm:1.11.9"
     debug: "npm:4.3.4"
     execa: "npm:4.1.0"
     globby: "npm:11.0.4"
     istanbul-lib-coverage: "npm:3.0.0"
-    js-yaml: "npm:3.14.1"
+    js-yaml: "npm:4.1.0"
     nyc: "npm:15.1.0"
   peerDependencies:
     cypress: "*"
-  checksum: f52a9b16678a13356f1db693bef95a0ce17633ff183affa3286352d24df9239c6f6bc65a8024218a4b3d1e3a95cea112483135d7652fc40c3803f992a59332f1
+  checksum: ba72a4bb249199b70fb6e9b30e901acf9bfc05657f4519351cffc5dffb8b26e81988418a4bab2aa728f023837ee49b8d5d2f86c9daaa17e861a0c99b0c4093fc
   languageName: node
   linkType: hard
 
@@ -4786,10 +4786,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.10.7":
-  version: 1.10.7
-  resolution: "dayjs@npm:1.10.7"
-  checksum: 0404850acb36500442425a7814223acbc8d4d09e48a306c021274f22fe639e674cd314553224c12665ee0ba9b1a48211969397c48e529d949a8ee91bbced6be7
+"dayjs@npm:1.11.9":
+  version: 1.11.9
+  resolution: "dayjs@npm:1.11.9"
+  checksum: 97cd8a4a3462281489e5eb67006b42f32c34bb5c23ea4c36856138a2f53076ca12ce46dea6079373d94a768e0277f6e5f561ea3f46d11ba46c1063baf8590e3b
   languageName: node
   linkType: hard
 
@@ -7290,18 +7290,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:3.14.1, js-yaml@npm:^3.13.1":
-  version: 3.14.1
-  resolution: "js-yaml@npm:3.14.1"
-  dependencies:
-    argparse: "npm:^1.0.7"
-    esprima: "npm:^4.0.0"
-  bin:
-    js-yaml: bin/js-yaml.js
-  checksum: 1e0e655c5f9917215112c31302061f425cfd33af0d617e30bb043951226b25f582bcf460b197491966ba1452a98f38bc38accc910b416b9783aa1df99af38df2
-  languageName: node
-  linkType: hard
-
 "js-yaml@npm:4.1.0, js-yaml@npm:^4.1.0":
   version: 4.1.0
   resolution: "js-yaml@npm:4.1.0"
@@ -7310,6 +7298,18 @@ __metadata:
   bin:
     js-yaml: bin/js-yaml.js
   checksum: 03ab64a1008a68bb534a223f855c1dd595c0fc6b2800517f555803ed6e96c1cd365e19088ae46a466329a7b77b1e7951589db76a6ea2d525374a4167f69ac776
+  languageName: node
+  linkType: hard
+
+"js-yaml@npm:^3.13.1":
+  version: 3.14.1
+  resolution: "js-yaml@npm:3.14.1"
+  dependencies:
+    argparse: "npm:^1.0.7"
+    esprima: "npm:^4.0.0"
+  bin:
+    js-yaml: bin/js-yaml.js
+  checksum: 1e0e655c5f9917215112c31302061f425cfd33af0d617e30bb043951226b25f582bcf460b197491966ba1452a98f38bc38accc910b416b9783aa1df99af38df2
   languageName: node
   linkType: hard
 
@@ -8022,7 +8022,7 @@ __metadata:
     "@babel/core": "npm:^7.22.9"
     "@babel/eslint-parser": "npm:^7.22.9"
     "@babel/preset-env": "npm:^7.22.9"
-    "@cypress/code-coverage": "npm:^3.10.0"
+    "@cypress/code-coverage": "npm:^3.11.0"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
     basic-auth-connect: "npm:^1.0.0"
