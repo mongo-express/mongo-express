@@ -71,7 +71,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-lodash": "^7.4.0",
-    "eslint-plugin-unicorn": "^47.0.0",
+    "eslint-plugin-unicorn": "^48.0.0",
     "jquery": "^3.7.0",
     "mocha": "^10.2.0",
     "mongodb-memory-server": "^8.13.0",
