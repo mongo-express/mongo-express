@@ -8071,7 +8071,7 @@ __metadata:
     renderjson: "github:rtritto/renderjson#develop"
     serve-favicon: "npm:^2.5.0"
     supertest: "npm:^6.3.3"
-    webpack: "npm:^5.88.1"
+    webpack: "npm:^5.88.2"
     webpack-cli: "npm:^5.0.1"
   bin:
     mongo-express: ./app.js
@@ -10739,9 +10739,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.88.1":
-  version: 5.88.1
-  resolution: "webpack@npm:5.88.1"
+"webpack@npm:^5.88.2":
+  version: 5.88.2
+  resolution: "webpack@npm:5.88.2"
   dependencies:
     "@types/eslint-scope": "npm:^3.7.3"
     "@types/estree": "npm:^1.0.0"
@@ -10772,7 +10772,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 0aa58c68944a45ec19eefe23bbe52a6fadcb6da6f92a8c70758125f96dcfcc946fdd1fbcc8142d8edbf30dee218c829bf0728cb063fbfad0e88542a15622ac97
+  checksum: e13d84eb63e6db06b940303f2ce6c76270684f2ebe957db4394076f0b2fa4d93c043a580da39fb10f3d9fc7962ff0eeafba6058b98be395fcce5a6a4c17b00c0
   languageName: node
   linkType: hard
 
