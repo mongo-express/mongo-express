@@ -81,7 +81,7 @@
     "renderjson": "github:rtritto/renderjson#develop",
     "supertest": "^6.3.3",
     "webpack": "^5.88.2",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.1.4"
   },
   "engines": {
     "node": ">=16.0.0 || >=18.0.0",
