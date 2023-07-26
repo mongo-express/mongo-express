@@ -5441,9 +5441,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-unicorn@npm:^48.0.0":
-  version: 48.0.0
-  resolution: "eslint-plugin-unicorn@npm:48.0.0"
+"eslint-plugin-unicorn@npm:^48.0.1":
+  version: 48.0.1
+  resolution: "eslint-plugin-unicorn@npm:48.0.1"
   dependencies:
     "@babel/helper-validator-identifier": "npm:^7.22.5"
     "@eslint-community/eslint-utils": "npm:^4.4.0"
@@ -5462,7 +5462,7 @@ __metadata:
     strip-indent: "npm:^3.0.0"
   peerDependencies:
     eslint: ">=8.44.0"
-  checksum: 5068d2ddcc1076475ee88b88d8fdb709d78cff9731d7f04d31f0a92f9d1836ac1b6b36994c902c0ab68b6a9ca7a2044dddee8b57e2d71a9f5ca34e4b98432fbf
+  checksum: 3ba0707e4355839202738183ead9540fd9569fd6d616c0bdc755f7c6f13a480c945048b01f9eda1d82d9e981c41303edc29257b7bc6d3ee6d1d8c9df40268e3d
   languageName: node
   linkType: hard
 
@@ -8046,7 +8046,7 @@ __metadata:
     eslint-config-airbnb-base: "npm:^15.0.0"
     eslint-plugin-import: "npm:^2.27.5"
     eslint-plugin-lodash: "npm:^7.4.0"
-    eslint-plugin-unicorn: "npm:^48.0.0"
+    eslint-plugin-unicorn: "npm:^48.0.1"
     express: "npm:^4.18.2"
     express-fileupload: "npm:^1.4.0"
     express-session: "npm:^1.17.3"
