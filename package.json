@@ -80,7 +80,7 @@
     "pre-commit": "1.2.2",
     "renderjson": "github:rtritto/renderjson#develop",
     "supertest": "^6.3.3",
-    "webpack": "^5.88.1",
+    "webpack": "^5.88.2",
     "webpack-cli": "^5.0.1"
   },
   "engines": {
