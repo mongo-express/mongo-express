@@ -8,7 +8,7 @@ let mongo = {
   // to see more databases you need to set mongodb.admin to true
   // As recommended, a connection String is used instead of the individual params.
   // More info here: https://docs.mongodb.com/manual/reference/connection-string/
-  connectionString: process.env.ME_CONFIG_MONGODB_URL,
+  connectionString: getFileEnv('ME_CONFIG_MONGODB_URL'),
   ssl: false,
 };
 
