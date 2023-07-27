@@ -8207,7 +8207,7 @@ __metadata:
     mocha: "npm:^10.2.0"
     mongodb: "npm:^5.7.0"
     mongodb-memory-server: "npm:^8.13.0"
-    mongodb-query-parser: "patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch"
+    mongodb-query-parser: "github:rtritto/query-parser#develop"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.5"
     nodemon: "npm:^3.0.1"
@@ -8275,9 +8275,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@npm:3.1.2":
+"mongodb-query-parser@github:rtritto/query-parser#develop":
   version: 3.1.2
-  resolution: "mongodb-query-parser@npm:3.1.2"
+  resolution: "mongodb-query-parser@https://github.com/rtritto/query-parser.git#commit=11afe9ad22f229a3f1e6355129c8b26f2b99ba14"
   dependencies:
     debug: "npm:^4.2.0"
     ejson-shell-parser: "npm:^1.2.1"
@@ -8285,21 +8285,7 @@ __metadata:
     lodash: "npm:^4.17.15"
   peerDependencies:
     bson: ^5
-  checksum: d7014d5f9c0fa58b7764cfb8b2a2a9a8cd3c2bb67514850d9e1a1c7a24314cba36cfa897875a0bcd77c8d12e16ddbba4a784a15613c7078b2194151e529f81d2
-  languageName: node
-  linkType: hard
-
-"mongodb-query-parser@patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch":
-  version: 3.1.2
-  resolution: "mongodb-query-parser@patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch::version=3.1.2&hash=df480d"
-  dependencies:
-    debug: "npm:^4.2.0"
-    ejson-shell-parser: "npm:^1.2.1"
-    javascript-stringify: "npm:^2.0.1"
-    lodash: "npm:^4.17.15"
-  peerDependencies:
-    bson: ^5
-  checksum: 354d5e293176a0468d5e4af7f9e5bf6b6e6baab4cdb8f71d034194174aeb311669d11a3f8d27027c313f7458613b720aec011be0fc1eab50bdde5e8e5a3b0231
+  checksum: aa20e459ff3d1451ed573c03ee23ec39039860eda2b24f38c27fc21f3e734decd9d9e2b4b800eb86376bdf1e4b498d6a9916a063a1063ff8d9c0018849c57028
   languageName: node
   linkType: hard
 
