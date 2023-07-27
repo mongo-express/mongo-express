@@ -77,6 +77,14 @@ describe('BSON', function () {
       expect(result).to.have.property('key').to.be.an.instanceof(bson.MaxKey);
     });
 
+    it('should convert BinData to BSON', function () {
+      const test = '{bin: BinData(80, "test")}';
+      const result = libBson.toBSON(test);
+
+      expect(result).to.have.property('bin').to.be.an.instanceof(bson.Binary);
+      expect(result.bin.sub_type).to.equal(80);
+    });
+
     // it('should convert Code to BSON', function () {
     //   const test = '{code: Code(function() { x; }), code2: Code("function() { x; }")}';
     //   const result = libBson.toBSON(test);
@@ -168,6 +176,12 @@ describe('BSON', function () {
       const test = { code: new bson.Code('function() { x; }') };
       const result = libBson.toString(test);
       expect(result).to.eql('{\n    code: Code(\'function() { x; }\')\n}');
+    });
+
+    it('should convert BinData to string', function () {
+      const test = { bin: new bson.Binary('test', 80) };
+      const result = libBson.toString(test);
+      expect(result).to.eql('{\n    bin: BinData(80, \'dGVzdA==\')\n}');
     });
   });
 
