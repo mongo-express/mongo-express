@@ -70,6 +70,18 @@ export default {
       // sslCA: single PEM file on disk
       sslCA: process.env.ME_CONFIG_MONGODB_CA_FILE,
 
+      // SSL Certificate revocation list file path.
+      sslCRL: process.env.ME_CONFIG_MONGODB_SSL_CRL_FILE,
+
+      // SSL Certificate file path.
+      sslCert: process.env.ME_CONFIG_MONGODB_SSL_CERT_FILE,
+
+      // SSL Key file file path.
+      sslKey: process.env.ME_CONFIG_MONGODB_SSL_KEY_FILE,
+
+      // SSL Certificate pass phrase.
+      sslPass: process.env.ME_CONFIG_MONGODB_SSL_PASS,
+
       // maxPoolSize: size of connection pool (number of connections to use)
       maxPoolSize: 4,
     },

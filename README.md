@@ -20,7 +20,7 @@ Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
 - Connect and authenticate to individual databases
 - Authenticate as admin to view all databases
 - Database blacklist/whitelist
-- Custom CA and CA validation disabling
+- Custom CA/SSL and CA validation disabling
 - Supports replica sets
 
 ## Screenshots
@@ -154,6 +154,10 @@ Name | Default | Description
 `VCAP_APP_HOST` | `localhost` | address that mongo-express will listen on for incoming connections.
 `PORT` | `8081` | port that mongo-express will run on.
 `ME_CONFIG_MONGODB_CA_FILE` | `` | CA certificate File
+`ME_CONFIG_MONGODB_SSL_CRL_FILE` | `` | SSL Certificate revocation list file path
+`ME_CONFIG_MONGODB_SSL_CERT_FILE` | `` | SSL Certificate file path
+`ME_CONFIG_MONGODB_SSL_KEY_FILE` | `` | SSL Key file file path
+`ME_CONFIG_MONGODB_SSL_PASS` | `` | SSL Certificate pass phrase
 `ME_CONFIG_BASICAUTH_USERNAME_FILE` | `` | File version of ME_CONFIG_BASICAUTH_USERNAME
 `ME_CONFIG_BASICAUTH_PASSWORD_FILE` | `` | File version of ME_CONFIG_BASICAUTH_PASSWORD
 
