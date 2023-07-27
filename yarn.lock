@@ -3233,36 +3233,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webpack-cli/configtest@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@webpack-cli/configtest@npm:2.0.1"
+"@webpack-cli/configtest@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@webpack-cli/configtest@npm:2.1.1"
   peerDependencies:
     webpack: 5.x.x
     webpack-cli: 5.x.x
-  checksum: 041d0fad6e9b296ceabeba3d4a9074937dcd6172ecc2470f3f8e4f3412b0c30e81e39cf7e2514dcb8551f28e79eef75b8bde9728a5dfb0133a4d32bd4b1ec42a
+  checksum: 6d09369a46eb84f75ec1a21185a65057951b9853215ce177c1ec7d9759eed5df1773e4c8816dbe13c42a77e899faa1e079e2c24f620bbee17525ea0c91e2fa46
   languageName: node
   linkType: hard
 
-"@webpack-cli/info@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@webpack-cli/info@npm:2.0.1"
+"@webpack-cli/info@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@webpack-cli/info@npm:2.0.2"
   peerDependencies:
     webpack: 5.x.x
     webpack-cli: 5.x.x
-  checksum: 773e0212ee14059edc67896dffaf56c307bf3c2365b606dc314142be0b02c4da64c29a2b48b99b715513f8d896b282898ad24200a9b6eced2a3a6f032f5520a0
+  checksum: cc8e0cbbd2170b41a15f618f44e9e9c53f17510e3181f03229333bb34329376e9675e31e586df11e7585dc96c81d82ccf6c85a511ee0d26821918b717b29bae1
   languageName: node
   linkType: hard
 
-"@webpack-cli/serve@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@webpack-cli/serve@npm:2.0.1"
+"@webpack-cli/serve@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@webpack-cli/serve@npm:2.0.5"
   peerDependencies:
     webpack: 5.x.x
     webpack-cli: 5.x.x
   peerDependenciesMeta:
     webpack-dev-server:
       optional: true
-  checksum: 1e2ddd0e6f35be8222c0cd3ccf1acd89684638dea03dddf139d5990afb614b5810720930c21d4c28b2b63ba1a8d14b22fecc6d0026f2c259c7b9663aa8bc3a66
+  checksum: 2819b59e6e12cbc45c3924011729b24c31ae95e690545871aacef48611be52aecd3ef3f42d713a98132b5f582ef3c72a63aa6c4f1b3ae54e734e95e4f4a7106e
   languageName: node
   linkType: hard
 
@@ -4416,6 +4416,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "commander@npm:10.0.1"
+  checksum: b2a03d799104eac407ca031b94126c98198594fcff41554eb253cef748de57fb1a4cdd591baa075de589f2fddf1f968d1ecd1b79e8b47570ee441ab4f3363776
+  languageName: node
+  linkType: hard
+
 "commander@npm:^11.0.0":
   version: 11.0.0
   resolution: "commander@npm:11.0.0"
@@ -4434,13 +4441,6 @@ __metadata:
   version: 6.2.1
   resolution: "commander@npm:6.2.1"
   checksum: c52b3cba040d015dc2788bed08041dd2e4734bc79b4ac0e1829544fa09e0844b746b956e9f5f87dee4f62870ab63239f22e2e2d30b242eef392df1501dee319d
-  languageName: node
-  linkType: hard
-
-"commander@npm:^9.4.1":
-  version: 9.4.1
-  resolution: "commander@npm:9.4.1"
-  checksum: 7d4c1f3bd4ad451f43fce51b9c73dc2d61fca00a9249196aa2d3d66fc46f2460c917c73ea9221c278fb8d35f496384f5125806e69108581a8e8bc673752c94e6
   languageName: node
   linkType: hard
 
@@ -8072,7 +8072,7 @@ __metadata:
     serve-favicon: "npm:^2.5.0"
     supertest: "npm:^6.3.3"
     webpack: "npm:^5.88.2"
-    webpack-cli: "npm:^5.0.1"
+    webpack-cli: "npm:^5.1.4"
   bin:
     mongo-express: ./app.js
   languageName: unknown
@@ -10690,16 +10690,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-cli@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "webpack-cli@npm:5.0.1"
+"webpack-cli@npm:^5.1.4":
+  version: 5.1.4
+  resolution: "webpack-cli@npm:5.1.4"
   dependencies:
     "@discoveryjs/json-ext": "npm:^0.5.0"
-    "@webpack-cli/configtest": "npm:^2.0.1"
-    "@webpack-cli/info": "npm:^2.0.1"
-    "@webpack-cli/serve": "npm:^2.0.1"
+    "@webpack-cli/configtest": "npm:^2.1.1"
+    "@webpack-cli/info": "npm:^2.0.2"
+    "@webpack-cli/serve": "npm:^2.0.5"
     colorette: "npm:^2.0.14"
-    commander: "npm:^9.4.1"
+    commander: "npm:^10.0.1"
     cross-spawn: "npm:^7.0.3"
     envinfo: "npm:^7.7.3"
     fastest-levenshtein: "npm:^1.0.12"
@@ -10718,7 +10718,7 @@ __metadata:
       optional: true
   bin:
     webpack-cli: bin/cli.js
-  checksum: d8b36fcf7d3e39963fdeddc0de5566839fc5b524176f34a3dfe7bbf346e8deb5b9bc46785a75f9eb905916bb97a4a19da20dbe3aabdd74cf304d771070f322dc
+  checksum: 374f4a43c9ac4f4df5301e73f2e1cf1e6147b35a9385743d0009b505384f7821a82fa75c48967aca11d9ec837a8b3215855c4dc0ea02c9d6cad45c89fd7674c1
   languageName: node
   linkType: hard
 
