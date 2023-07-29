@@ -3,28 +3,6 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-let mongo = {
-  // Setting the connection string will only give access to that database
-  // to see more databases you need to set mongodb.admin to true
-  // As recommended, a connection String is used instead of the individual params.
-  // More info here: https://docs.mongodb.com/manual/reference/connection-string/
-  connectionString: process.env.ME_CONFIG_MONGODB_URL,
-  ssl: false,
-};
-
-// Accessing Bluemix variable to get MongoDB info
-if (process.env.VCAP_SERVICES) {
-  const dbLabel = 'mongodb-2.4';
-  const env = JSON.parse(process.env.VCAP_SERVICES);
-  if (env[dbLabel]) {
-    mongo = env[dbLabel][0].credentials;
-  }
-}
-
-const basicAuth = 'ME_CONFIG_BASICAUTH';
-const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
-const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
-
 function getFile(filePath) {
   if (filePath !== undefined && filePath) {
     try {
@@ -49,6 +27,28 @@ function getFileEnv(envVariable) {
   }
   return origVar;
 }
+
+let mongo = {
+  // Setting the connection string will only give access to that database
+  // to see more databases you need to set mongodb.admin to true
+  // As recommended, a connection String is used instead of the individual params.
+  // More info here: https://docs.mongodb.com/manual/reference/connection-string/
+  connectionString: getFileEnv('ME_CONFIG_MONGODB_URL'),
+  ssl: false,
+};
+
+// Accessing Bluemix variable to get MongoDB info
+if (process.env.VCAP_SERVICES) {
+  const dbLabel = 'mongodb-2.4';
+  const env = JSON.parse(process.env.VCAP_SERVICES);
+  if (env[dbLabel]) {
+    mongo = env[dbLabel][0].credentials;
+  }
+}
+
+const basicAuth = 'ME_CONFIG_BASICAUTH';
+const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
+const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
 
 function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
