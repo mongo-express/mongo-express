@@ -17,7 +17,7 @@ describe('filters', function () {
         expect(stringDocIDs(input)).to.equal(uuid);
       });
     });
-    it('should test an ObjectID BSON type', () => {
+    it('should test an ObjectId BSON type', () => {
       const input = new ObjectId();
       expect(stringDocIDs(input)).to.equal(input.toString());
     });
