@@ -3998,21 +3998,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "bson@npm:4.7.0"
-  dependencies:
-    buffer: "npm:^5.6.0"
-  checksum: c0e2feb3af3a789e29af88b07abc50d9fcdb511065ab38936741b446a23982ba999a6a8023c756ffa67d550376187f77c24a6179793d8ac7035807c5e51a3367
-  languageName: node
-  linkType: hard
-
 "bson@npm:^4.7.2":
   version: 4.7.2
   resolution: "bson@npm:4.7.2"
   dependencies:
     buffer: "npm:^5.6.0"
   checksum: 383269897f4dfa34202886eec417ab011b14aeaea5ee97afc8e62ba51645a207d828d035ea1296b3be640fa82f949ed8f7884b8c1a4d0a23a88eb7d699e8b492
+  languageName: node
+  linkType: hard
+
+"bson@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "bson@npm:5.4.0"
+  checksum: 2c913a45c05bf8f1f8120c05e0e4ac9a864928853193c4794634b0c941a7d64397b9cbfe9fa9aba7249eb89d075911c5953efbb1be6b4e0848a0760660dca628
   languageName: node
   linkType: hard
 
@@ -8175,7 +8173,7 @@ __metadata:
     body-parser: "npm:^1.20.2"
     bootstrap: "npm:^3.3.7"
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
-    bson: "npm:^4.7.0"
+    bson: "npm:^5.4.0"
     busboy: "npm:^1.6.0"
     chai: "npm:^4.3.7"
     clean-webpack-plugin: "npm:^4.0.0"
@@ -8207,7 +8205,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.2.0"
-    mongodb: "npm:^4.13.0"
+    mongodb: "npm:^5.7.0"
     mongodb-memory-server: "npm:^8.13.0"
     mongodb-query-parser: "patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch"
     morgan: "npm:^1.10.0"
@@ -8232,6 +8230,16 @@ __metadata:
     "@types/whatwg-url": "npm:^8.2.1"
     whatwg-url: "npm:^11.0.0"
   checksum: ed74c7f45a509d5b55a958fda6cebf5ee70d397a537d9f9d44b17381a903afd3714e3886e157b19bfc8134ecb3c9ffcf080e44b4f4694b5c697ea04390884f42
+  languageName: node
+  linkType: hard
+
+"mongodb-connection-string-url@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "mongodb-connection-string-url@npm:2.6.0"
+  dependencies:
+    "@types/whatwg-url": "npm:^8.2.1"
+    whatwg-url: "npm:^11.0.0"
+  checksum: 8a9186dd1b72dfa1ca8e2e7deeec2e412b3682c923d9f887e07a19b2366174e50c1c9f3657353eef62e7acce26f7e6ec16c3cc320fc1c12aab5d4890fa368ce3
   languageName: node
   linkType: hard
 
@@ -8295,24 +8303,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^4.13.0":
-  version: 4.13.0
-  resolution: "mongodb@npm:4.13.0"
-  dependencies:
-    "@aws-sdk/credential-providers": "npm:^3.186.0"
-    bson: "npm:^4.7.0"
-    mongodb-connection-string-url: "npm:^2.5.4"
-    saslprep: "npm:^1.0.3"
-    socks: "npm:^2.7.1"
-  dependenciesMeta:
-    "@aws-sdk/credential-providers":
-      optional: true
-    saslprep:
-      optional: true
-  checksum: d565bfbc2d3e0cddad0fdf31b5abf8874d5f271aa92017a66fde48a4ccf74ce69f496b010c3db62ceba115ebe5d18562d3c2593201141f22bf1fc3cf9df49589
-  languageName: node
-  linkType: hard
-
 "mongodb@npm:^4.16.0":
   version: 4.16.0
   resolution: "mongodb@npm:4.16.0"
@@ -8328,6 +8318,38 @@ __metadata:
     saslprep:
       optional: true
   checksum: c06a87e9c6aaf88b78864ef184549d216a3044bc8567c948ffcaf979a155e9f8c3d204a12a8723610301947f32fd201a439fbb8ba9dcb6a6fbe46c986544d5e0
+  languageName: node
+  linkType: hard
+
+"mongodb@npm:^5.7.0":
+  version: 5.7.0
+  resolution: "mongodb@npm:5.7.0"
+  dependencies:
+    bson: "npm:^5.4.0"
+    mongodb-connection-string-url: "npm:^2.6.0"
+    saslprep: "npm:^1.0.3"
+    socks: "npm:^2.7.1"
+  peerDependencies:
+    "@aws-sdk/credential-providers": ^3.201.0
+    "@mongodb-js/zstd": ^1.1.0
+    kerberos: ^2.0.1
+    mongodb-client-encryption: ">=2.3.0 <3"
+    snappy: ^7.2.2
+  dependenciesMeta:
+    saslprep:
+      optional: true
+  peerDependenciesMeta:
+    "@aws-sdk/credential-providers":
+      optional: true
+    "@mongodb-js/zstd":
+      optional: true
+    kerberos:
+      optional: true
+    mongodb-client-encryption:
+      optional: true
+    snappy:
+      optional: true
+  checksum: 23a291ffe7e990f25b527f2d4bd1a848b866211596cc30a36cbe86d773f3bcd74d688aa0a7158b35e24271264d15c35832fcced639b81df4cab7303cdd8442c0
   languageName: node
   linkType: hard
 

@@ -1,9 +1,11 @@
-import { Binary, ObjectId, UUID } from 'bson';
+import { BSON, Binary, ObjectId } from 'mongodb';
 import { expect } from 'chai';
 import { createServer, getDocumentUrl } from '../../testHttpUtils.js';
 import {
   cleanAndCloseDb, initializeDb, getFirstDocumentId, testDbName as dbName, testCollection, testURLCollectionName,
 } from '../../testMongoUtils.js';
+
+const { UUID } = BSON;
 
 // const collectionName = mongoUtils.testCollectionName;
 const urlColName = testURLCollectionName;

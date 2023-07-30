@@ -1,6 +1,8 @@
 import { expect } from 'chai';
-import { UUID } from 'bson';
+import { BSON } from 'mongodb';
 import { addHyphensToUUID, isValidDatabaseName } from '../../lib/utils.js';
+
+const { UUID } = BSON;
 
 describe('utils', function () {
   describe('addHyphensToUUID', function () {
