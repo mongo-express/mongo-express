@@ -56,6 +56,10 @@ function getBoolean(str, defaultValue = false) {
 
 export default {
   mongodb: {
+    // set allowDiskUse to true to remove the limit of 100 MB of RAM on each aggregation pipeline stage
+    // https://www.mongodb.com/docs/v5.0/core/aggregation-pipeline-limits/#memory-restrictions
+    allowDiskUse: getBoolean(process.env.ME_CONFIG_MONGODB_ALLOW_DISK_USE, false),
+
     // if a connection string options such as server/port/etc are ignored
     connectionString: mongo.connectionString,
 
