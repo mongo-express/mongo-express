@@ -25,6 +25,7 @@
     "url": "git://github.com/mongo-express/mongo-express.git"
   },
   "dependencies": {
+    "@json2csv/plainjs": "^7.0.1",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.20.2",
     "bootstrap-paginator": "github:rtritto/bootstrap-paginator#develop",
@@ -43,7 +44,6 @@
     "free-swig": "^1.5.2",
     "gridfs-stream": "^1.1.1",
     "html-entities": "^2.4.0",
-    "json2csv": "^5.0.7",
     "lodash-es": "^4.17.21",
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
