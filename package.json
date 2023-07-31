@@ -48,7 +48,7 @@
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
     "mongodb": "^5.7.0",
-    "mongodb-query-parser": "patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch",
+    "mongodb-query-parser": "github:rtritto/query-parser#develop",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
     "serve-favicon": "^2.5.0"

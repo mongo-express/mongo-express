@@ -3315,21 +3315,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.1.0, acorn@npm:^8.5.0, acorn@npm:^8.7.1":
-  version: 8.8.2
-  resolution: "acorn@npm:8.8.2"
-  bin:
-    acorn: bin/acorn
-  checksum: 5a47325f0aa08202080cb167d5b8103720d8a1d199f57988afa48bdfbc3c9973270b00e38c2c874240a49929625beaaae8c4ec683f5272b5f07f1119a457e5d0
-  languageName: node
-  linkType: hard
-
-"acorn@npm:^8.9.0":
+"acorn@npm:^8.1.0, acorn@npm:^8.9.0":
   version: 8.10.0
   resolution: "acorn@npm:8.10.0"
   bin:
     acorn: bin/acorn
   checksum: 5de0f8f7507bdd36c764431cb91c97d99ba15b6f04dbfe4375151aff3caf9566e3c98d340f128a56a5fa930164d7be12c93d8f0f0fe795b9b310888a781c789c
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.5.0, acorn@npm:^8.7.1":
+  version: 8.8.2
+  resolution: "acorn@npm:8.8.2"
+  bin:
+    acorn: bin/acorn
+  checksum: 5a47325f0aa08202080cb167d5b8103720d8a1d199f57988afa48bdfbc3c9973270b00e38c2c874240a49929625beaaae8c4ec683f5272b5f07f1119a457e5d0
   languageName: node
   linkType: hard
 
@@ -5099,13 +5099,13 @@ __metadata:
   linkType: hard
 
 "ejson-shell-parser@npm:^1.2.1":
-  version: 1.2.2
-  resolution: "ejson-shell-parser@npm:1.2.2"
+  version: 1.2.4
+  resolution: "ejson-shell-parser@npm:1.2.4"
   dependencies:
     acorn: "npm:^8.1.0"
   peerDependencies:
-    bson: ^4.2.3 || ^5.0.0
-  checksum: b8917a48c0594201292729ff03acade8fb5f34588aeec6558e336ddbadc8c8e947d62f6fa6bdb702cde000e2cb4c2256cec6d4bfb15a946ad74989148a0b6de8
+    bson: ^4.6.3 || ^5.0.0
+  checksum: 570eaae3346fbdeac1012bd6f5a6bb7002cf1e5d56300098c2de01fbd621f43e6c8c5f7ea3fe7fa376748b602f1525eaa33cadb080b4d143ab430209d5204993
   languageName: node
   linkType: hard
 
@@ -8225,7 +8225,7 @@ __metadata:
     mocha: "npm:^10.2.0"
     mongodb: "npm:^5.7.0"
     mongodb-memory-server: "npm:^8.13.0"
-    mongodb-query-parser: "patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch"
+    mongodb-query-parser: "github:rtritto/query-parser#develop"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.5"
     nodemon: "npm:^3.0.1"
@@ -8293,9 +8293,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@npm:3.1.2":
+"mongodb-query-parser@github:rtritto/query-parser#develop":
   version: 3.1.2
-  resolution: "mongodb-query-parser@npm:3.1.2"
+  resolution: "mongodb-query-parser@https://github.com/rtritto/query-parser.git#commit=277d8c16375826396406be9e008072ee01254431"
   dependencies:
     debug: "npm:^4.2.0"
     ejson-shell-parser: "npm:^1.2.1"
@@ -8303,21 +8303,7 @@ __metadata:
     lodash: "npm:^4.17.15"
   peerDependencies:
     bson: ^5
-  checksum: d7014d5f9c0fa58b7764cfb8b2a2a9a8cd3c2bb67514850d9e1a1c7a24314cba36cfa897875a0bcd77c8d12e16ddbba4a784a15613c7078b2194151e529f81d2
-  languageName: node
-  linkType: hard
-
-"mongodb-query-parser@patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch":
-  version: 3.1.2
-  resolution: "mongodb-query-parser@patch:mongodb-query-parser@npm%3A3.1.2#~/.yarn/patches/mongodb-query-parser-npm-3.1.2-a9264cfd1f.patch::version=3.1.2&hash=df480d"
-  dependencies:
-    debug: "npm:^4.2.0"
-    ejson-shell-parser: "npm:^1.2.1"
-    javascript-stringify: "npm:^2.0.1"
-    lodash: "npm:^4.17.15"
-  peerDependencies:
-    bson: ^5
-  checksum: 354d5e293176a0468d5e4af7f9e5bf6b6e6baab4cdb8f71d034194174aeb311669d11a3f8d27027c313f7458613b720aec011be0fc1eab50bdde5e8e5a3b0231
+  checksum: 6ebc9d54e172bfd1a587f7ef97f0b33531253e14ab1fed7cb7e2e5f842158aea6ad25cac4431bba9d2db6dfacd9ee820f7e58be852eaf26057901b4ae711ca58
   languageName: node
   linkType: hard
 
