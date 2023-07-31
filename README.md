@@ -133,6 +133,7 @@ Name | Default | Description
 `ME_CONFIG_MONGODB_ENABLE_ADMIN` | `false` | Enable administrator access. Send strings: `"true"` or `"false"`.
 `ME_CONFIG_MONGODB_AUTH_USERNAME` | `admin` | Database username (only needed if `ENABLE_ADMIN` is `"false"`).
 `ME_CONFIG_MONGODB_AUTH_PASSWORD` | `pass` | Database password (only needed if `ENABLE_ADMIN` is `"false"`).
+`ME_CONFIG_MONGODB_ALLOW_DISK_USE` | `false` | Remove the limit of 100 MB of RAM on each aggragation pipeline stage.
 `ME_CONFIG_SITE_BASEURL` | `/` | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.
 `ME_CONFIG_HEALTH_CHECK_PATH` | `/status` | Set the mongo express healthcheck path. Remember to add the forward slash at the start.
 `ME_CONFIG_SITE_COOKIESECRET` | `cookiesecret` | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
