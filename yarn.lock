@@ -3053,10 +3053,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^14.14.31":
+"@types/node@npm:*":
   version: 14.18.30
   resolution: "@types/node@npm:14.18.30"
   checksum: 3ae46b1f69fd7a6c0ae1e34660dde553b4c70a9d90783f54d8af3b750d963943d55772c93db7ad740cdaabaf62ec44260b8eb97134a212244e7104a5dd874c40
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^16.18.39":
+  version: 16.18.39
+  resolution: "@types/node@npm:16.18.39"
+  checksum: 3e347a016b2d14249d5da14323a70602857751fd982d0857aeff9627fdf885bdecaf7c27bbaf1e8cef38e9b618c687466c6c533abab77a2f7ea4cd9d7fb24d83
   languageName: node
   linkType: hard
 
@@ -4766,13 +4773,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^12.17.2":
-  version: 12.17.2
-  resolution: "cypress@npm:12.17.2"
+"cypress@npm:^12.17.3":
+  version: 12.17.3
+  resolution: "cypress@npm:12.17.3"
   dependencies:
     "@cypress/request": "npm:^2.88.11"
     "@cypress/xvfb": "npm:^1.2.4"
-    "@types/node": "npm:^14.14.31"
+    "@types/node": "npm:^16.18.39"
     "@types/sinonjs__fake-timers": "npm:8.1.1"
     "@types/sizzle": "npm:^2.3.2"
     arch: "npm:^2.2.0"
@@ -4814,7 +4821,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 411eb967099d0df386a10dfa10abd24fd2f07291494d6a18bbc3edad70a6cd5eff32b4b5cadcac77b5d616812233ec4d395ee256b0057b33f23e98567a569e55
+  checksum: 9c0d344493a8eac3b6298a4e2f849ec76a587c615b5037570a92abc9e3e2c87f5a12f7952cfd1d726d49c87fe8d9ffa566607347668fa6c247f9a826f3776e08
   languageName: node
   linkType: hard
 
@@ -8208,7 +8215,7 @@ __metadata:
     cookie-parser: "npm:1.4.6"
     copy-webpack-plugin: "npm:^11.0.0"
     csurf: "npm:1.11.0"
-    cypress: "npm:^12.17.2"
+    cypress: "npm:^12.17.3"
     dotenv: "npm:^16.3.1"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.46.0"
