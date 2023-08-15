@@ -6143,6 +6143,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.15.2":
+  version: 1.15.2
+  resolution: "follow-redirects@npm:1.15.2"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 930171f8b81bf00e9368df4b17f3b835934762d51192632af53a51a8a608d5510a1ffbc6da5761dce9996cdbd750740490ca844320e5ff11cdaf2329a5a69647
+  languageName: node
+  linkType: hard
+
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
@@ -8236,7 +8246,7 @@ __metadata:
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.2.0"
     mongodb: "npm:^5.7.0"
-    mongodb-memory-server: "npm:^8.13.0"
+    mongodb-memory-server: "npm:^8.15.0"
     mongodb-query-parser: "github:rtritto/query-parser#develop"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.5"
@@ -8273,35 +8283,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:8.13.0":
-  version: 8.13.0
-  resolution: "mongodb-memory-server-core@npm:8.13.0"
+"mongodb-memory-server-core@npm:8.15.0":
+  version: 8.15.0
+  resolution: "mongodb-memory-server-core@npm:8.15.0"
   dependencies:
     async-mutex: "npm:^0.3.2"
     camelcase: "npm:^6.3.0"
     debug: "npm:^4.3.4"
     find-cache-dir: "npm:^3.3.2"
+    follow-redirects: "npm:^1.15.2"
     get-port: "npm:^5.1.1"
     https-proxy-agent: "npm:^5.0.1"
     md5-file: "npm:^5.0.0"
     mongodb: "npm:^4.16.0"
     new-find-package-json: "npm:^2.0.0"
-    semver: "npm:^7.5.1"
+    semver: "npm:^7.5.4"
     tar-stream: "npm:^2.1.4"
-    tslib: "npm:^2.5.3"
+    tslib: "npm:^2.6.1"
     uuid: "npm:^9.0.0"
     yauzl: "npm:^2.10.0"
-  checksum: a9e7390560c2a35f204c6889ac4d8240043a69cafdcf26a77cbfd68b3dbd590f74e126f33eb236812ebb43b1551471712d785f8826219c96544f395367efa23d
+  checksum: 2ec8ea20145ee4c116a60608e0045f416480390f7cd25dfe72e42ca58e984b1874c6b5c1da7afaff46c8914af26d5255c7ce74680d3c076b5df1c72e21eb0afa
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:^8.13.0":
-  version: 8.13.0
-  resolution: "mongodb-memory-server@npm:8.13.0"
+"mongodb-memory-server@npm:^8.15.0":
+  version: 8.15.0
+  resolution: "mongodb-memory-server@npm:8.15.0"
   dependencies:
-    mongodb-memory-server-core: "npm:8.13.0"
-    tslib: "npm:^2.5.3"
-  checksum: e084fd2f7dadadbaf13830ca11eff11587080466cd4a43024a11d1943d182c884fda20518c55104b3faf7ae6247fb1e96c82439f0e376f39ea58a200005dcf4a
+    mongodb-memory-server-core: "npm:8.15.0"
+    tslib: "npm:^2.6.1"
+  checksum: 3fb1149ad82a1984484453f6f2f6e260bb3b2b89a3967d86fdda2866c3dc460df2436769ec4e2bb9e434139561729fe8911728bd549c116e78c515454a502556
   languageName: node
   linkType: hard
 
@@ -9809,7 +9820,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.5, semver@npm:^7.3.8, semver@npm:^7.5.1, semver@npm:^7.5.3, semver@npm:^7.5.4":
+"semver@npm:^7.3.5, semver@npm:^7.3.8, semver@npm:^7.5.3, semver@npm:^7.5.4":
   version: 7.5.4
   resolution: "semver@npm:7.5.4"
   dependencies:
@@ -10619,10 +10630,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.5.3":
-  version: 2.6.0
-  resolution: "tslib@npm:2.6.0"
-  checksum: 702dfe42c86eb380ff985fd76ddf7f10375a2f9d0c2a3aae2a5553a74e0720f49899c9ba145152ccc02efbb6c5272a62b2913ee29a994d59749117c2193b9cfb
+"tslib@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "tslib@npm:2.6.1"
+  checksum: 401069a2e407204fb442e3367efd49ed8698a93a6ce998d8fae5764439d3e395550f036426a22e7b024b4b8593728044bef79187c97df321718631c71664aa5a
   languageName: node
   linkType: hard
 
