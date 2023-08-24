@@ -4213,9 +4213,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:^4.3.7":
-  version: 4.3.7
-  resolution: "chai@npm:4.3.7"
+"chai@npm:^4.3.8":
+  version: 4.3.8
+  resolution: "chai@npm:4.3.8"
   dependencies:
     assertion-error: "npm:^1.1.0"
     check-error: "npm:^1.0.2"
@@ -4224,7 +4224,7 @@ __metadata:
     loupe: "npm:^2.3.1"
     pathval: "npm:^1.1.1"
     type-detect: "npm:^4.0.5"
-  checksum: 07600143d9c0530811acf71e3fe3d613b13c627d19890e220a01064d9187c49ccd6be76e572a90e061f010f940ca380e9364b383e8a8a3f83313890986f49414
+  checksum: 99029db7179ccc1fd48b28bd75c17751c2de2a2cb39318164d5d06a208f3f03198c8f27660c69375a84baa334ca489546f6293585e78ee121790d9af69a7de2d
   languageName: node
   linkType: hard
 
@@ -8233,7 +8233,7 @@ __metadata:
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
     bson: "npm:^5.4.0"
     busboy: "npm:^1.6.0"
-    chai: "npm:^4.3.7"
+    chai: "npm:^4.3.8"
     clean-webpack-plugin: "npm:^4.0.0"
     cli-color: "npm:^2.0.3"
     codemirror: "npm:^5.58.2"
