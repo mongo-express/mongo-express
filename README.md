@@ -158,6 +158,7 @@ Name | Default | Description
 `ME_CONFIG_MONGODB_URL_FILE` | `` | File version of ME_CONFIG_MONGODB_URL
 `ME_CONFIG_BASICAUTH_USERNAME_FILE` | `` | File version of ME_CONFIG_BASICAUTH_USERNAME
 `ME_CONFIG_BASICAUTH_PASSWORD_FILE` | `` | File version of ME_CONFIG_BASICAUTH_PASSWORD
+`ME_CONFIG_DOCUMENTS_PER_PAGE` | `10` | How many documents you want to see at once in collection view
 
 **Example:**
 
