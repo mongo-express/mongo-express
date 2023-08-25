@@ -2866,21 +2866,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@json2csv/formatters@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@json2csv/formatters@npm:7.0.1"
-  checksum: abd7d6486eb0de8387a3b6f41fa47cd3d863fb3fb0bddaf968eba2d53ff5cb6d93b4504b6bbf01030559c0ffdaf7733ae49523fa0de6ff7fed7b915eef5c6161
+"@json2csv/formatters@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@json2csv/formatters@npm:7.0.3"
+  checksum: c70e0b98ffcdc9a708bce7d9f9f4c3ef5a50959eca482e18ed8b68b60adafca3e7dcc20b0593a0b83259e3bf97277204609ccfe8070f16141c942e6001a961fc
   languageName: node
   linkType: hard
 
-"@json2csv/plainjs@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@json2csv/plainjs@npm:7.0.1"
+"@json2csv/plainjs@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@json2csv/plainjs@npm:7.0.3"
   dependencies:
-    "@json2csv/formatters": "npm:^7.0.1"
-    "@streamparser/json": "npm:^0.0.15"
+    "@json2csv/formatters": "npm:^7.0.3"
+    "@streamparser/json": "npm:^0.0.17"
     lodash.get: "npm:^4.4.2"
-  checksum: 704cdee5255380c2c6cd248787780d0f8fafeec71be423f86a587f1d98599109418451294bfbae5bf96d18df090eb1278393fc4620d478cb7cea2b40a1b392a6
+  checksum: f19847159c3b602ed74270cb341c5e949c48bd6ac1335941ca0cdf9b2240bce16ea5bec3ca7df001e1194b014ed6a6201dc19b9483e1c333bb152b6d76a0a7e4
   languageName: node
   linkType: hard
 
@@ -2976,10 +2976,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@streamparser/json@npm:^0.0.15":
-  version: 0.0.15
-  resolution: "@streamparser/json@npm:0.0.15"
-  checksum: 552ab992ca3d3e680e06a15e46e5438eebb0b0f88de0094ac78a19917180d68a8fda6e8542844dffc3b02587fcee81463e6236cb9ecd910e590219c762d1b2a1
+"@streamparser/json@npm:^0.0.17":
+  version: 0.0.17
+  resolution: "@streamparser/json@npm:0.0.17"
+  checksum: 0485d6cf3c82c2e90a4e4e54d0aaf75a3fe828ac1d28ce961768516c9d73f6ee01843ae996ccb20a895fccadea35fb45ee17b63bae54e8129abd426a250301c7
   languageName: node
   linkType: hard
 
@@ -8224,7 +8224,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.22.10"
     "@babel/preset-env": "npm:^7.22.10"
     "@cypress/code-coverage": "npm:^3.11.0"
-    "@json2csv/plainjs": "npm:^7.0.1"
+    "@json2csv/plainjs": "npm:^7.0.3"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
     basic-auth-connect: "npm:^1.0.0"
