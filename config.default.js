@@ -34,7 +34,7 @@ let mongo = {
   // As recommended, a connection String is used instead of the individual params.
   // More info here: https://docs.mongodb.com/manual/reference/connection-string/
   connectionString: getFileEnv('ME_CONFIG_MONGODB_URL'),
-  ssl: false,
+  tls: false,
 };
 
 // Accessing Bluemix variable to get MongoDB info
@@ -65,14 +65,14 @@ export default {
 
     /** @type {import('mongodb').MongoClientOptions} */
     connectionOptions: {
-      // ssl: connect to the server using secure SSL
-      ssl: getBoolean(process.env.ME_CONFIG_MONGODB_SSL, mongo.ssl),
+      // tls: connect to the server using secure SSL
+      tls: getBoolean(process.env.ME_CONFIG_MONGODB_TLS, mongo.tls),
 
-      // sslValidate: validate mongod server certificate against CA
-      sslValidate: getBoolean(process.env.ME_CONFIG_MONGODB_SSLVALIDATE, true),
+      // tlsAllowInvalidCertificates: validate mongod server certificate against CA
+      tlsAllowInvalidCertificates: getBoolean(process.env.ME_CONFIG_MONGODB_TLS_ALLOW_CERTS, true),
 
-      // sslCA: single PEM file on disk
-      sslCA: process.env.ME_CONFIG_MONGODB_CA_FILE,
+      // tlsCAFile: single PEM file on disk
+      tlsCAFile: process.env.ME_CONFIG_MONGODB_TLS_CA_FILE,
 
       // maxPoolSize: size of connection pool (number of connections to use)
       maxPoolSize: 4,
