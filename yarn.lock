@@ -2735,10 +2735,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:^8.47.0":
-  version: 8.47.0
-  resolution: "@eslint/js@npm:8.47.0"
-  checksum: 41a44936e74628f718ed5f88ac0570b2456fce6c3648982e42b10c6e7ea99217f2be1b42bc8fed61407e3a0701e64d53e0594380d1db39b1ae975107d57a62cd
+"@eslint/js@npm:8.49.0":
+  version: 8.49.0
+  resolution: "@eslint/js@npm:8.49.0"
+  checksum: 4b0151e373a143db9991241c9ef00c5c4a059d2c590e7ac238485dda7a153c45c11a48b24c81c317726ad5a24493f25732d6716f0a4d1f8ca12a0a2bcee1b282
   languageName: node
   linkType: hard
 
@@ -2749,14 +2749,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/config-array@npm:^0.11.10":
-  version: 0.11.10
-  resolution: "@humanwhocodes/config-array@npm:0.11.10"
+"@humanwhocodes/config-array@npm:^0.11.11":
+  version: 0.11.11
+  resolution: "@humanwhocodes/config-array@npm:0.11.11"
   dependencies:
     "@humanwhocodes/object-schema": "npm:^1.2.1"
     debug: "npm:^4.1.1"
     minimatch: "npm:^3.0.5"
-  checksum: d8b3afa90dc46f4cbad48dd54e9bb39918a01fbfb16cc931fb55db8c967c1575fc21d4a5f8055f4728697246eafafc95e23c97370ff30ada621f4b581bed3f9d
+  checksum: b2b683f167939feb13cc2424e1c69317be872ffa03946b85e8296e70de0933f26fb845b25e70c895545f010caae7444e48e9de42e1eb856740f914d7da7e1476
   languageName: node
   linkType: hard
 
@@ -5658,15 +5658,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.47.0":
-  version: 8.47.0
-  resolution: "eslint@npm:8.47.0"
+"eslint@npm:^8.49.0":
+  version: 8.49.0
+  resolution: "eslint@npm:8.49.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@eslint-community/regexpp": "npm:^4.6.1"
     "@eslint/eslintrc": "npm:^2.1.2"
-    "@eslint/js": "npm:^8.47.0"
-    "@humanwhocodes/config-array": "npm:^0.11.10"
+    "@eslint/js": "npm:8.49.0"
+    "@humanwhocodes/config-array": "npm:^0.11.11"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
     "@nodelib/fs.walk": "npm:^1.2.8"
     ajv: "npm:^6.12.4"
@@ -5701,7 +5701,7 @@ __metadata:
     text-table: "npm:^0.2.0"
   bin:
     eslint: bin/eslint.js
-  checksum: 8d018cf4d1e69517c8085d9d1fbc7d90bcb254282f5b9957f63523cad60438d6bfb40cac0d4d659677ed9619b5f0077d28f203514da1e62727eaa3c8cbb09741
+  checksum: 7f51a47291af0e762f5f7499b55554ee496a5866d7dcea2a703f0b897feea70014d3d267a89e6187977de739dc7cadb7f79c115fa965c13d14ca88704d225b1f
   languageName: node
   linkType: hard
 
@@ -8245,7 +8245,7 @@ __metadata:
     cypress: "npm:^12.17.4"
     dotenv: "npm:^16.3.1"
     errorhandler: "npm:1.5.1"
-    eslint: "npm:^8.47.0"
+    eslint: "npm:^8.49.0"
     eslint-config-airbnb-base: "npm:^15.0.0"
     eslint-plugin-import: "npm:^2.28.0"
     eslint-plugin-lodash: "npm:^7.4.0"
