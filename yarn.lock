@@ -4213,18 +4213,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:^4.3.7":
-  version: 4.3.7
-  resolution: "chai@npm:4.3.7"
+"chai@npm:^4.3.9":
+  version: 4.3.9
+  resolution: "chai@npm:4.3.9"
   dependencies:
     assertion-error: "npm:^1.1.0"
-    check-error: "npm:^1.0.2"
+    check-error: "npm:^1.0.3"
     deep-eql: "npm:^4.1.2"
     get-func-name: "npm:^2.0.0"
     loupe: "npm:^2.3.1"
     pathval: "npm:^1.1.1"
     type-detect: "npm:^4.0.5"
-  checksum: 07600143d9c0530811acf71e3fe3d613b13c627d19890e220a01064d9187c49ccd6be76e572a90e061f010f940ca380e9364b383e8a8a3f83313890986f49414
+  checksum: 6c4e202da181585f57600419c94657ad26b6bbb7224af9f354b7bc02cea6b14c330e11c45fce6aea3b50a6471126a3255eae339330115d4d4e631974756ca500
   languageName: node
   linkType: hard
 
@@ -4249,10 +4249,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"check-error@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "check-error@npm:1.0.2"
-  checksum: 5ef1bce78b7105bd5b3f2e7d80a2c2d405a52c3f53d8c48da34d4b8d05f2a63cda26a66e058c4bcc4111be79246ba9ba93074bc4d8e2a65fe3566f8a3f2f7851
+"check-error@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "check-error@npm:1.0.3"
+  dependencies:
+    get-func-name: "npm:^2.0.2"
+  checksum: 9056c0085d3b82b5d67297637a7de10af04ec7d6053719a4da1b8314de011ccca0f5aed059b248379d4b4d70966ec583b02125e2ebc9efc097013ef73f8bfaef
   languageName: node
   linkType: hard
 
@@ -6380,6 +6382,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-func-name@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "get-func-name@npm:2.0.2"
+  checksum: 6926926a03b5424ebb23360a842f4bd8fcde7e9238f4ee08d8786b7fc8c38ce842b17fb2c260b9b2bdf0aea6fef69c2d306144379c5000db2500cf5db59ef343
+  languageName: node
+  linkType: hard
+
 "get-intrinsic@npm:^1.0.2, get-intrinsic@npm:^1.1.0, get-intrinsic@npm:^1.1.1":
   version: 1.1.2
   resolution: "get-intrinsic@npm:1.1.2"
@@ -8233,7 +8242,7 @@ __metadata:
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
     bson: "npm:^5.4.0"
     busboy: "npm:^1.6.0"
-    chai: "npm:^4.3.7"
+    chai: "npm:^4.3.9"
     clean-webpack-plugin: "npm:^4.0.0"
     cli-color: "npm:^2.0.3"
     codemirror: "npm:^5.58.2"
