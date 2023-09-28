@@ -4213,18 +4213,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:^4.3.7":
-  version: 4.3.7
-  resolution: "chai@npm:4.3.7"
+"chai@npm:^4.3.10":
+  version: 4.3.10
+  resolution: "chai@npm:4.3.10"
   dependencies:
     assertion-error: "npm:^1.1.0"
-    check-error: "npm:^1.0.2"
-    deep-eql: "npm:^4.1.2"
-    get-func-name: "npm:^2.0.0"
-    loupe: "npm:^2.3.1"
+    check-error: "npm:^1.0.3"
+    deep-eql: "npm:^4.1.3"
+    get-func-name: "npm:^2.0.2"
+    loupe: "npm:^2.3.6"
     pathval: "npm:^1.1.1"
-    type-detect: "npm:^4.0.5"
-  checksum: 07600143d9c0530811acf71e3fe3d613b13c627d19890e220a01064d9187c49ccd6be76e572a90e061f010f940ca380e9364b383e8a8a3f83313890986f49414
+    type-detect: "npm:^4.0.8"
+  checksum: 1f6346c1a1f2970e6c5a372a9675f6fad33c3cd0f8ac98875b28c6d80df1512cf4b498c8cacbc1fa19bf6e264413708d57ae03ecd9729a1e56504e9bb77e10f7
   languageName: node
   linkType: hard
 
@@ -4249,10 +4249,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"check-error@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "check-error@npm:1.0.2"
-  checksum: 5ef1bce78b7105bd5b3f2e7d80a2c2d405a52c3f53d8c48da34d4b8d05f2a63cda26a66e058c4bcc4111be79246ba9ba93074bc4d8e2a65fe3566f8a3f2f7851
+"check-error@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "check-error@npm:1.0.3"
+  dependencies:
+    get-func-name: "npm:^2.0.2"
+  checksum: 9056c0085d3b82b5d67297637a7de10af04ec7d6053719a4da1b8314de011ccca0f5aed059b248379d4b4d70966ec583b02125e2ebc9efc097013ef73f8bfaef
   languageName: node
   linkType: hard
 
@@ -4937,12 +4939,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deep-eql@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "deep-eql@npm:4.1.2"
+"deep-eql@npm:^4.1.3":
+  version: 4.1.3
+  resolution: "deep-eql@npm:4.1.3"
   dependencies:
     type-detect: "npm:^4.0.0"
-  checksum: 62e7861c491b606203aaf4d15d2f1f1c84852f41d54ee25eadb03b438b940ea364a0c08d06a97a04863145cbc183b53a5bec5fe88355c65bc3113ee45d475cea
+  checksum: b70d39de74834eaa065651e347c41fa3c824f92f52b8c37298ad327e04776f0dfc3f45d8516dc92189f2f493c95b6bae7f91257f350408dc41b8943a7bba9adb
   languageName: node
   linkType: hard
 
@@ -6377,6 +6379,13 @@ __metadata:
   version: 2.0.0
   resolution: "get-func-name@npm:2.0.0"
   checksum: e56bed23b2160cf3aeedb2677ca019334543dd49790c1976e44d168b5f83283747b1a41675706bc114b7a1563da978dbdf6d2b5e9282534dbdeaa2c1184cae6a
+  languageName: node
+  linkType: hard
+
+"get-func-name@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "get-func-name@npm:2.0.2"
+  checksum: 6926926a03b5424ebb23360a842f4bd8fcde7e9238f4ee08d8786b7fc8c38ce842b17fb2c260b9b2bdf0aea6fef69c2d306144379c5000db2500cf5db59ef343
   languageName: node
   linkType: hard
 
@@ -7821,12 +7830,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loupe@npm:^2.3.1":
-  version: 2.3.4
-  resolution: "loupe@npm:2.3.4"
+"loupe@npm:^2.3.6":
+  version: 2.3.6
+  resolution: "loupe@npm:2.3.6"
   dependencies:
     get-func-name: "npm:^2.0.0"
-  checksum: 2b55151a85163147adcb7e656d34cb3eafde4831566671fa046bb6c2cc4fc0d577451609a65b8ff3c9f2a36c7f06c70bce4df19db9da517eec28f8a9262c46ff
+  checksum: 5a74e2ed6e6578fc03d5a9a119382e74ad1c442445c7ffa27e88b51b4637ede09eb5b216a6a771781f3201c8e4fcd64dd55392c69bbd35f1d0b6b1f1f7501863
   languageName: node
   linkType: hard
 
@@ -8233,7 +8242,7 @@ __metadata:
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
     bson: "npm:^5.4.0"
     busboy: "npm:^1.6.0"
-    chai: "npm:^4.3.7"
+    chai: "npm:^4.3.10"
     clean-webpack-plugin: "npm:^4.0.0"
     cli-color: "npm:^2.0.3"
     codemirror: "npm:^5.58.2"
@@ -10709,7 +10718,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-detect@npm:^4.0.0, type-detect@npm:^4.0.5":
+"type-detect@npm:^4.0.0, type-detect@npm:^4.0.8":
   version: 4.0.8
   resolution: "type-detect@npm:4.0.8"
   checksum: 2d2111a44529a381e9be7090066cc89b60ac2c822194e3d213a0d5f630e81abfd07d2b91a324ef4a173973c5b0c68b0bdf29ac6896459cf819914a6f56199e0f
