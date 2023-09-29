@@ -2622,9 +2622,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.11.0":
-  version: 3.11.0
-  resolution: "@cypress/code-coverage@npm:3.11.0"
+"@cypress/code-coverage@npm:^3.12.1":
+  version: 3.12.1
+  resolution: "@cypress/code-coverage@npm:3.12.1"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^5.11.0"
     chalk: "npm:4.1.2"
@@ -2636,8 +2636,12 @@ __metadata:
     js-yaml: "npm:4.1.0"
     nyc: "npm:15.1.0"
   peerDependencies:
+    "@babel/core": ^7.0.1
+    "@babel/preset-env": ^7.0.0
+    babel-loader: ^8.3 || ^9
     cypress: "*"
-  checksum: ba72a4bb249199b70fb6e9b30e901acf9bfc05657f4519351cffc5dffb8b26e81988418a4bab2aa728f023837ee49b8d5d2f86c9daaa17e861a0c99b0c4093fc
+    webpack: ^4 || ^5
+  checksum: 2ef35c1cfbe85e893ccf64b134449fc6800359dfc756e23a721f6ecdb5f1bb9dfa668630098ce47acf6e9208bc88e832e1e7b0dd40617a5cc712590d873b127c
   languageName: node
   linkType: hard
 
@@ -8223,7 +8227,7 @@ __metadata:
     "@babel/core": "npm:^7.22.10"
     "@babel/eslint-parser": "npm:^7.22.10"
     "@babel/preset-env": "npm:^7.22.10"
-    "@cypress/code-coverage": "npm:^3.11.0"
+    "@cypress/code-coverage": "npm:^3.12.1"
     "@json2csv/plainjs": "npm:^7.0.1"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
