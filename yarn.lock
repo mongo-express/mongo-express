@@ -970,9 +970,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/eslint-parser@npm:^7.22.10":
-  version: 7.22.10
-  resolution: "@babel/eslint-parser@npm:7.22.10"
+"@babel/eslint-parser@npm:^7.22.15":
+  version: 7.22.15
+  resolution: "@babel/eslint-parser@npm:7.22.15"
   dependencies:
     "@nicolo-ribaudo/eslint-scope-5-internals": "npm:5.1.1-v1"
     eslint-visitor-keys: "npm:^2.1.0"
@@ -980,7 +980,7 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.11.0
     eslint: ^7.5.0 || ^8.0.0
-  checksum: b2a7a542c577a6537b0fc36e00e5d78e0798a372b3a09a73bf9440e922be310f65105e841b66aa4bb009793412ac23959adca439206a3454ecc4c6227565d5a8
+  checksum: d6009635feb601c92bddf08117fa7c0290443b25ce9f9b39279e214a83b2089a4fdb82c5294df671906456d4d3e2557d1c211bf2315a8b6ab97c43df4e4f704a
   languageName: node
   linkType: hard
 
@@ -8225,7 +8225,7 @@ __metadata:
   resolution: "mongo-express@workspace:."
   dependencies:
     "@babel/core": "npm:^7.22.10"
-    "@babel/eslint-parser": "npm:^7.22.10"
+    "@babel/eslint-parser": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.22.10"
     "@cypress/code-coverage": "npm:^3.12.1"
     "@json2csv/plainjs": "npm:^7.0.1"
