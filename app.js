@@ -111,7 +111,7 @@ if (options.url) {
 if (typeof config.mongodb === 'object'
   && config.mongodb !== null
   && !config.mongodb.connectionString) {
-  configDefault.mongodb.connectionString = await promptForConnectionString();
+  config.mongodb.connectionString = await promptForConnectionString();
 }
 
 config.site.port = options.port || config.site.port;
