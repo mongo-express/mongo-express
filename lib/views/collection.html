@@ -251,9 +251,9 @@
       </thead>
       {% for index, document in docs %}
         {% if document._id._bsontype == 'Binary' %}
-        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}')">
         {% else %}
-        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}')">
         {% endif %}
           {% for column in columns %}
             <td><div class="tableContent">
