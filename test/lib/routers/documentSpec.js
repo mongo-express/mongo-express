@@ -1,4 +1,6 @@
-import { BSON, Binary, ObjectId } from 'mongodb';
+import {
+  BSON, Binary, Long, ObjectId,
+} from 'mongodb';
 import { expect } from 'chai';
 import { createServer, getDocumentUrl } from '../../testHttpUtils.js';
 import {
@@ -29,6 +31,28 @@ describe('Router document', () => {
       .then((res) => {
         expect(res.text).to.match(new RegExp(`<title>${docId} - Mongo Express</title>`));
       });
+  });
+  it('GET /db/<dbName>/<collection>/<document> (_id: Long - positive) should return html', async () => {
+    const long = '0';
+    const _id = new Long(long);
+    const doc = { _id };
+    await testCollection(db).insertOne(doc);
+    return request.get(`/db/${dbName}/${urlColName}/${long}`).query({ type: 'L' }).expect(200)
+      .then((res) => {
+        expect(res.text).to.match(new RegExp(`<title>${long} - Mongo Express</title>`));
+      })
+      .finally(() => testCollection(db).deleteOne({ _id }));
+  });
+  it('GET /db/<dbName>/<collection>/<document> (_id: Long - negative) should return html', async () => {
+    const long = '-1';
+    const _id = new Long(long);
+    const doc = { _id };
+    await testCollection(db).insertOne(doc);
+    return request.get(`/db/${dbName}/${urlColName}/${long}`).query({ type: 'L' }).expect(200)
+      .then((res) => {
+        expect(res.text).to.match(new RegExp(`<title>${long} - Mongo Express</title>`));
+      })
+      .finally(() => testCollection(db).deleteOne({ _id }));
   });
   it('GET /db/<dbName>/<collection>/<document> (_id: UUID) should return html', async () => {
     const uuid = new UUID().toString();
