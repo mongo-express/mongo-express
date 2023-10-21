@@ -100,14 +100,7 @@
 </form-->
 {% endif %}
 
-{% if info == false %}
-
-<h2>Server Status</h2>
-<p>
-  Turn on admin in config.js to view server stats!
-</p>
-
-{% else %}
+{% if info != false %}
 <div class="panel panel-default stats">
   <div class="panel-heading">
     <h4 style="font-weight: bold;">Server Status</h4>
