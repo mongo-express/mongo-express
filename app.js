@@ -5,14 +5,14 @@ import https from 'node:https';
 import clc from 'cli-color';
 import { program } from 'commander';
 import csrf from 'csurf';
-import express from 'express';
+import fastify from 'fastify';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
-const app = express();
+const app = fastify();
 
 let defaultPort = 80;
 let server = app;
@@ -54,7 +54,7 @@ async function bootstrap(config) {
   const addressString = (config.site.sslEnabled ? 'https://' : 'http://')
     + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
 
-  server.listen(config.site.port, config.site.host, function () {
+  server.listen({ port: config.site.port }, config.site.host, function () {
     if (config.options.console) {
       console.log('Mongo Express server listening', 'at ' + addressString);
 
