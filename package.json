@@ -105,5 +105,5 @@
   ],
   "exports": "./middleware",
   "browserslist": "defaults",
-  "packageManager": "yarn@4.0.0-rc.26"
+  "packageManager": "yarn@4.0.2"
 }
