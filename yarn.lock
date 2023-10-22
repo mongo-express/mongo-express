@@ -2832,6 +2832,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fastify/busboy@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@fastify/busboy@npm:2.0.0"
+  checksum: 1a75091e120f019fce0c74e4a9f6cf7d65802d32e2e967ed79e9ae6d174498cdd1ef03ed6e7738be563cb8b1337f660fdc4a7890daa3f1fcfc2e354e665aab9e
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -8359,6 +8366,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.22.15"
     "@babel/preset-env": "npm:^7.23.2"
     "@cypress/code-coverage": "npm:^3.12.4"
+    "@fastify/busboy": "npm:^2.0.0"
     "@json2csv/plainjs": "npm:^7.0.3"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
@@ -8367,7 +8375,6 @@ __metadata:
     bootstrap: "npm:^3.3.7"
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
     bson: "npm:^5.4.0"
-    busboy: "npm:^1.6.0"
     chai: "npm:^4.3.10"
     clean-webpack-plugin: "npm:^4.0.0"
     cli-color: "npm:^2.0.3"
