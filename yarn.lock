@@ -2731,9 +2731,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:2.88.12":
-  version: 2.88.12
-  resolution: "@cypress/request@npm:2.88.12"
+"@cypress/request@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "@cypress/request@npm:3.0.1"
   dependencies:
     aws-sign2: "npm:~0.7.0"
     aws4: "npm:^1.8.0"
@@ -2748,12 +2748,12 @@ __metadata:
     json-stringify-safe: "npm:~5.0.1"
     mime-types: "npm:~2.1.19"
     performance-now: "npm:^2.1.0"
-    qs: "npm:~6.10.3"
+    qs: "npm:6.10.4"
     safe-buffer: "npm:^5.1.2"
     tough-cookie: "npm:^4.1.3"
     tunnel-agent: "npm:^0.6.0"
     uuid: "npm:^8.3.2"
-  checksum: 0bce42552920c031cfd6baf1655e4dbcb8ff7685d07c9e87fe9f3c60ae1e9c8b186fba791db2162097b051f64b390c77874571cecfafd4cd40d989b52d23552c
+  checksum: 6a36a197451e395663a2e1b9c75f8613a6ef7bc65e5625625e0a2e6b48bf10c06242dcf4ef532d60c333d387ec1ccc88c81fb20a32c5a410f60c0e5396cff2f7
   languageName: node
   linkType: hard
 
@@ -3166,10 +3166,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.18.39":
-  version: 16.18.58
-  resolution: "@types/node@npm:16.18.58"
-  checksum: 2d2cb0021c6c0c9eb8d2291c8f29cf9f3c1fdeb440b93e05d13c2650e0fbd8162e976b2615bce4183cad29ada7bddb54bad9f97fcaa47058eb100b18af93ef9f
+"@types/node@npm:^18.17.5":
+  version: 18.18.9
+  resolution: "@types/node@npm:18.18.9"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: a650a17b46bd83e0caa15fb733969f183df3e23ad4378443076f7dc8be2fa61c85dc98be9afff73d5c383dbae464bd8d2c14e9afa3761625dae1a232c0e541dc
   languageName: node
   linkType: hard
 
@@ -4918,13 +4920,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^12.17.4":
-  version: 12.17.4
-  resolution: "cypress@npm:12.17.4"
+"cypress@npm:^13.5.0":
+  version: 13.5.0
+  resolution: "cypress@npm:13.5.0"
   dependencies:
-    "@cypress/request": "npm:2.88.12"
+    "@cypress/request": "npm:^3.0.0"
     "@cypress/xvfb": "npm:^1.2.4"
-    "@types/node": "npm:^16.18.39"
+    "@types/node": "npm:^18.17.5"
     "@types/sinonjs__fake-timers": "npm:8.1.1"
     "@types/sizzle": "npm:^2.3.2"
     arch: "npm:^2.2.0"
@@ -4967,7 +4969,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 3e1fe8bd282a031e857410bc01fef0c41f0ab6fbe82f9784b6fdda84ed70d2b55f0cff1da5d867f4fd6039ebb088e5f5af210ab28f0c8ec589bba30019ec2e94
+  checksum: 26dcdf4956eb45ad3be5c0e0455a3a8a497e4a3d0521bcec8aa54adc140eb7526c543b0df5508d98747779278f2299a2a9963684e536a7e4e58ca6a71b6e5505
   languageName: node
   linkType: hard
 
@@ -8377,7 +8379,7 @@ __metadata:
     cookie-parser: "npm:1.4.6"
     copy-webpack-plugin: "npm:^11.0.0"
     csurf: "npm:1.11.0"
-    cypress: "npm:^12.17.4"
+    cypress: "npm:^13.5.0"
     dotenv: "npm:^16.3.1"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.51.0"
@@ -9369,21 +9371,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.10.4":
+  version: 6.10.4
+  resolution: "qs@npm:6.10.4"
+  dependencies:
+    side-channel: "npm:^1.0.4"
+  checksum: 204e68ccccfc4b66027f0982d578fd2752772b60ff442354177aec2dbea62695cec8177cc908dd41f6205657ca3fcbfb536ca4a88a22bd50aedc351d12aa76eb
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.11.0, qs@npm:^6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
     side-channel: "npm:^1.0.4"
   checksum: 337966e2e957a7d2a69821c528f3d18a8b346ddb0f16cc08d11c6206aed3b6624927781ff437aa3909e54ad32ebdee2c5396ad4094b1c722760774f7082f6124
-  languageName: node
-  linkType: hard
-
-"qs@npm:~6.10.3":
-  version: 6.10.4
-  resolution: "qs@npm:6.10.4"
-  dependencies:
-    side-channel: "npm:^1.0.4"
-  checksum: 204e68ccccfc4b66027f0982d578fd2752772b60ff442354177aec2dbea62695cec8177cc908dd41f6205657ca3fcbfb536ca4a88a22bd50aedc351d12aa76eb
   languageName: node
   linkType: hard
 
@@ -10981,6 +10983,13 @@ __metadata:
   version: 2.0.5
   resolution: "undefsafe@npm:2.0.5"
   checksum: ae6c8e9192b85698bbdc7f1e2127c13b9fc6344b6d51ccd13ea98b349e8f36d9fef3f13125a50fa135d3dc14d6bd190b566f0cc515f89a76e36a6d05d5d724b6
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 7f556493e22e9023f1f9be0d516f5c3cf74d1d6a090c2701ada5117e99900e8cdf8b5540ad3ceed1a672d3532bdfcd0149c444b980731aacc840eb0660ba8587
   languageName: node
   linkType: hard
 
