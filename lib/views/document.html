@@ -62,7 +62,7 @@
 {% if document._id._bsontype == 'Binary' %}
 <form method="POST"
   id="documentEditForm"
-  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}"
+  action="{{ collectionUrl }}/{{ document._id | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}"
 >
 {% elseif document._id._bsontype == 'Long' %}
 <form method="POST"
@@ -72,7 +72,7 @@
 {% else %}
 <form method="POST"
   id="documentEditForm"
-  action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}"
+  action="{{ collectionUrl }}/{{ document._id | safe | url_encode }}?skip={{skip}}"
 >
 {% endif %}
 
@@ -126,11 +126,11 @@
   <br>
 
   {% if document._id._bsontype == 'Binary' %}
-  <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}">
+  <form method="POST" action="{{ collectionUrl }}/{{ document._id | safe | url_encode }}?subtype={{ document._id.sub_type }}">
   {% elseif document._id._bsontype == 'Long' %}
   <form method="POST" action="{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}">
   {% else %}
-  <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}">
+  <form method="POST" action="{{ collectionUrl }}/{{ document._id | safe | url_encode }}">
   {% endif %}
     <input type="hidden" name="_method" value="delete">
     <input type="submit" class="hidden" />
