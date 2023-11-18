@@ -64,7 +64,7 @@
     "chai": "^4.3.10",
     "clean-webpack-plugin": "^4.0.0",
     "codemirror": "^5.58.2",
-    "concurrently": "^8.2.1",
+    "concurrently": "^8.2.2",
     "copy-webpack-plugin": "^11.0.0",
     "cypress": "^13.5.1",
     "eslint": "^8.53.0",
