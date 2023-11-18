@@ -48,7 +48,7 @@
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
     "mongodb": "^6.0.0",
-    "mongodb-query-parser": "github:rtritto/query-parser#develop",
+    "mongodb-query-parser": "github:rtritto/query-parser#4.0.0-fix-bindata",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
     "serve-favicon": "^2.5.0"
