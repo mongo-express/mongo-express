@@ -137,6 +137,9 @@ Name | Default | Description
 `ME_CONFIG_MONGODB_TLS` | `false` | Use TLS client certificate
 `ME_CONFIG_MONGODB_TLS_ALLOW_CERTS` | `true` | Validate mongod server certificate against CA
 `ME_CONFIG_MONGODB_TLS_CA_FILE` | `` | CA certificate File
+`ME_CONFIG_MONGODB_TLS_CERT_FILE` | `` | TLS client certificate file
+`ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE` | `` | TLS client certificate key file
+`ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD` | `` | TLS client certificate key file password
 `ME_CONFIG_MONGODB_URL_FILE` | `` | File version of ME_CONFIG_MONGODB_URL
 `ME_CONFIG_SITE_BASEURL` | `/` | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.
 `ME_CONFIG_HEALTH_CHECK_PATH` | `/status` | Set the mongo express healthcheck path. Remember to add the forward slash at the start.
