@@ -4135,7 +4135,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^6.0.0, bson@npm:^6.2.0":
+"bson@npm:^6.2.0":
   version: 6.2.0
   resolution: "bson@npm:6.2.0"
   checksum: 6e079d1cafabda340a34ed2f496e20770abdee96e076ff23de810b36531dc75ac41fbe9a7d4644a9fbeae3dfd32bf2973465058fcdbe8601c7783b4b42c5ba61
@@ -8344,7 +8344,7 @@ __metadata:
     body-parser: "npm:^1.20.2"
     bootstrap: "npm:^3.3.7"
     bootstrap-paginator: "github:rtritto/bootstrap-paginator#develop"
-    bson: "npm:^6.0.0"
+    bson: "npm:^6.2.0"
     chai: "npm:^4.3.10"
     clean-webpack-plugin: "npm:^4.0.0"
     cli-color: "npm:^2.0.3"
@@ -8374,7 +8374,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.2.0"
-    mongodb: "npm:^6.0.0"
+    mongodb: "npm:^6.3.0"
     mongodb-memory-server: "npm:^8.15.1"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
@@ -8477,7 +8477,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.0.0":
+"mongodb@npm:^6.3.0":
   version: 6.3.0
   resolution: "mongodb@npm:6.3.0"
   dependencies:
