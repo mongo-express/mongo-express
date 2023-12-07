@@ -20,7 +20,7 @@ A web-based MongoDB admin interface written with Node.js, Express, and Bootstrap
 - Connect and authenticate to individual databases
 - Authenticate as admin to view all databases
 - Database blacklist/whitelist
-- Custom CA and CA validation disabling
+- Custom CA/TLS/SSL and CA validation disabling
 - Supports replica sets
 
 ## Screenshots
@@ -133,7 +133,14 @@ Name | Default | Description
 `ME_CONFIG_MONGODB_ENABLE_ADMIN` | `false` | Enable administrator access. Send strings: `"true"` or `"false"`.
 `ME_CONFIG_MONGODB_AUTH_USERNAME` | `admin` | Database username (only needed if `ENABLE_ADMIN` is `"false"`).
 `ME_CONFIG_MONGODB_AUTH_PASSWORD` | `pass` | Database password (only needed if `ENABLE_ADMIN` is `"false"`).
-`ME_CONFIG_MONGODB_ALLOW_DISK_USE` | `false` | Remove the limit of 100 MB of RAM on each aggragation pipeline stage.
+`ME_CONFIG_MONGODB_ALLOW_DISK_USE` | `false` | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.
+`ME_CONFIG_MONGODB_TLS` | `false` | Use TLS client certificate
+`ME_CONFIG_MONGODB_TLS_ALLOW_CERTS` | `true` | Validate mongod server certificate against CA
+`ME_CONFIG_MONGODB_TLS_CA_FILE` | `` | CA certificate File
+`ME_CONFIG_MONGODB_TLS_CERT_FILE` | `` | TLS client certificate file
+`ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE` | `` | TLS client certificate key file
+`ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD` | `` | TLS client certificate key file password
+`ME_CONFIG_MONGODB_URL_FILE` | `` | File version of ME_CONFIG_MONGODB_URL
 `ME_CONFIG_SITE_BASEURL` | `/` | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.
 `ME_CONFIG_HEALTH_CHECK_PATH` | `/status` | Set the mongo express healthcheck path. Remember to add the forward slash at the start.
 `ME_CONFIG_SITE_COOKIESECRET` | `cookiesecret` | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
@@ -148,17 +155,14 @@ Name | Default | Description
 `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE` | `false` | If set to true, remain on the same page after clicking on the Save button
 `ME_CONFIG_OPTIONS_NO_DELETE` | `false` | If noDelete is true, components of deleting are not visible.
 `ME_CONFIG_SITE_SSL_ENABLED` | `false` | Enable SSL.
-`ME_CONFIG_MONGODB_SSLVALIDATE` | `true` | Validate mongod server certificate against CA
 `ME_CONFIG_SITE_SSL_CRT_PATH` | ` ` | SSL certificate file.
 `ME_CONFIG_SITE_SSL_KEY_PATH` | ` ` | SSL key file.
 `ME_CONFIG_SITE_GRIDFS_ENABLED` | `false` | Enable gridFS to manage uploaded files.
-`VCAP_APP_HOST` | `localhost` | address that mongo-express will listen on for incoming connections.
-`PORT` | `8081` | port that mongo-express will run on.
-`ME_CONFIG_MONGODB_CA_FILE` | `` | CA certificate File
-`ME_CONFIG_MONGODB_URL_FILE` | `` | File version of ME_CONFIG_MONGODB_URL
 `ME_CONFIG_BASICAUTH_USERNAME_FILE` | `` | File version of ME_CONFIG_BASICAUTH_USERNAME
 `ME_CONFIG_BASICAUTH_PASSWORD_FILE` | `` | File version of ME_CONFIG_BASICAUTH_PASSWORD
 `ME_CONFIG_DOCUMENTS_PER_PAGE` | `10` | How many documents you want to see at once in collection view
+`PORT` | `8081` | port that mongo-express will run on.
+`VCAP_APP_HOST` | `localhost` | address that mongo-express will listen on for incoming connections.
 
 **Example:**
 

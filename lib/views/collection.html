@@ -252,6 +252,8 @@
       {% for index, document in docs %}
         {% if document._id._bsontype == 'Binary' %}
         <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+        {% elseif document._id._bsontype == 'Long' %}
+        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}')">
         {% else %}
         <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
         {% endif %}
@@ -431,6 +433,7 @@
     {% endif %}
     {% endif %}
 
+  {% if stats != false %}
   <div class="stats col-md-12">
     <h2>Collection Stats</h2>
     <table class="table table-bordered table-striped">
@@ -552,6 +555,7 @@
     {% endfor %}
     </table>
   </div>
+  {% endif %}
 {% endblock %}
 
 
