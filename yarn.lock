@@ -2641,17 +2641,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.12.4":
-  version: 3.12.4
-  resolution: "@cypress/code-coverage@npm:3.12.4"
+"@cypress/code-coverage@npm:^3.12.13":
+  version: 3.12.13
+  resolution: "@cypress/code-coverage@npm:3.12.13"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
     dayjs: "npm:1.11.10"
     debug: "npm:4.3.4"
     execa: "npm:4.1.0"
-    globby: "npm:11.0.4"
-    istanbul-lib-coverage: "npm:3.0.0"
+    globby: "npm:11.1.0"
+    istanbul-lib-coverage: "npm:^3.0.0"
     js-yaml: "npm:4.1.0"
     nyc: "npm:15.1.0"
   peerDependencies:
@@ -2660,7 +2660,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: b3b75d347109189029274f148437225a4a2860c86d0346629c644745063da801ac8e117aeb7af0f8982a11e6b2688176e405e6591c220ea4ff3850ef34dad3fc
+  checksum: f7c0efa7244d47c18caf9e53bdea51666ddbe59d382fb3dd340ba373615fb8905837f784982122d68935db7f3d3bc329d3db32bfae9bbd0135713c87616d2607
   languageName: node
   linkType: hard
 
@@ -6036,19 +6036,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.1.1":
-  version: 3.2.12
-  resolution: "fast-glob@npm:3.2.12"
-  dependencies:
-    "@nodelib/fs.stat": "npm:^2.0.2"
-    "@nodelib/fs.walk": "npm:^1.2.3"
-    glob-parent: "npm:^5.1.2"
-    merge2: "npm:^1.3.0"
-    micromatch: "npm:^4.0.4"
-  checksum: 641e748664ae0fdc4dadd23c812fd7d6c80cd92d451571cb1f81fa87edb750e917f25abf74fc9503c97438b0b67ecf75b738bb8e50a83b16bd2a88b4d64e81fa
-  languageName: node
-  linkType: hard
-
 "fast-glob@npm:^3.2.11":
   version: 3.2.11
   resolution: "fast-glob@npm:3.2.11"
@@ -6059,6 +6046,19 @@ __metadata:
     merge2: "npm:^1.3.0"
     micromatch: "npm:^4.0.4"
   checksum: 6b736d92a47f27218a85bf184a4ccab9f707398f86711bf84d730243b10a999a85f79afc526133c044ebebfcb42a68d09f769fdbedcc00680ddd56e56a56483a
+  languageName: node
+  linkType: hard
+
+"fast-glob@npm:^3.2.9":
+  version: 3.3.2
+  resolution: "fast-glob@npm:3.3.2"
+  dependencies:
+    "@nodelib/fs.stat": "npm:^2.0.2"
+    "@nodelib/fs.walk": "npm:^1.2.3"
+    glob-parent: "npm:^5.1.2"
+    merge2: "npm:^1.3.0"
+    micromatch: "npm:^4.0.4"
+  checksum: 222512e9315a0efca1276af9adb2127f02105d7288fa746145bf45e2716383fb79eb983c89601a72a399a56b7c18d38ce70457c5466218c5f13fad957cee16df
   languageName: node
   linkType: hard
 
@@ -6650,17 +6650,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:11.0.4":
-  version: 11.0.4
-  resolution: "globby@npm:11.0.4"
+"globby@npm:11.1.0":
+  version: 11.1.0
+  resolution: "globby@npm:11.1.0"
   dependencies:
     array-union: "npm:^2.1.0"
     dir-glob: "npm:^3.0.1"
-    fast-glob: "npm:^3.1.1"
-    ignore: "npm:^5.1.4"
-    merge2: "npm:^1.3.0"
+    fast-glob: "npm:^3.2.9"
+    ignore: "npm:^5.2.0"
+    merge2: "npm:^1.4.1"
     slash: "npm:^3.0.0"
-  checksum: 118c5ac92c2914342dec05648d217c8f31b0ccbfd3eb24d8722d350aa3003200dd4ae1b573b894cc4759e85156eb3bab35c5873f98ae9301572e22f656641964
+  checksum: 288e95e310227bbe037076ea81b7c2598ccbc3122d87abc6dab39e1eec309aa14f0e366a98cdc45237ffcfcbad3db597778c0068217dcb1950fef6249104e1b1
   languageName: node
   linkType: hard
 
@@ -6958,7 +6958,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^5.1.4, ignore@npm:^5.2.0":
+"ignore@npm:^5.2.0":
   version: 5.2.0
   resolution: "ignore@npm:5.2.0"
   checksum: 30283f05fb7d867ee0e08faebb3e69caba2c6c55092042cd061eac1b37a3e78db72bfcfbb08b3598999344fba3d93a9c693b5401da5faaecc0fb7c2dce87beb4
@@ -7480,13 +7480,6 @@ __metadata:
   version: 0.1.2
   resolution: "isstream@npm:0.1.2"
   checksum: 22d9c181015226d4534a227539256897bbbcb7edd1066ca4fc4d3a06dbd976325dfdd16b3983c7d236a89f256805c1a685a772e0364e98873d3819b064ad35a1
-  languageName: node
-  linkType: hard
-
-"istanbul-lib-coverage@npm:3.0.0":
-  version: 3.0.0
-  resolution: "istanbul-lib-coverage@npm:3.0.0"
-  checksum: eb0ba205890ee02ea9d76b31d6adf196f532b28a158c0c4db0db6ee6b60de476aca7bba34a9321d17fc396853db758d9430f1202ed28a7a6060e9d1cc8f555c0
   languageName: node
   linkType: hard
 
@@ -8308,7 +8301,7 @@ __metadata:
     "@babel/core": "npm:^7.23.2"
     "@babel/eslint-parser": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.2"
-    "@cypress/code-coverage": "npm:^3.12.4"
+    "@cypress/code-coverage": "npm:^3.12.13"
     "@fastify/busboy": "npm:^2.0.0"
     "@json2csv/plainjs": "npm:^7.0.3"
     assets-webpack-plugin: "npm:^7.1.1"
