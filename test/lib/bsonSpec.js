@@ -180,7 +180,7 @@ describe('BSON', function () {
     });
 
     it('should convert BinData to string', function () {
-      const test = { bin: new Binary('test', 80) };
+      const test = { bin: new Binary(new TextEncoder().encode('test'), 80) };
       const result = libBson.toString(test);
       expect(result).to.eql('{\n    bin: BinData(80, \'dGVzdA==\')\n}');
     });
