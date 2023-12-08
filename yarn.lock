@@ -7626,7 +7626,7 @@ __metadata:
     mongodb-memory-server: "npm:^9.1.1"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
-    node-html-parser: "npm:^6.1.10"
+    node-html-parser: "npm:^6.1.11"
     nodemon: "npm:^3.0.1"
     nyc: "npm:^15.1.0"
     pre-commit: "npm:1.2.2"
@@ -7884,13 +7884,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-html-parser@npm:^6.1.10":
-  version: 6.1.10
-  resolution: "node-html-parser@npm:6.1.10"
+"node-html-parser@npm:^6.1.11":
+  version: 6.1.11
+  resolution: "node-html-parser@npm:6.1.11"
   dependencies:
     css-select: "npm:^5.1.0"
     he: "npm:1.2.0"
-  checksum: 3b618a7616eeba4c4ecdcd023232baf7f22e22726db0592fe4d85817401be51e62646e6f75eacb361936209afc42318b0bc0978cf7f8b9cdf3a4642a19ad5883
+  checksum: 090be2781cbe6f9475a4ee9151a67af9635179ce9bccc77ec8218a455665078fa9ba939db073f750dd26eb94e0a907079b8ff9a3c1a90c406425e8ab42e448ce
   languageName: node
   linkType: hard
 
