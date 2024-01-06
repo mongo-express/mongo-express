@@ -2053,21 +2053,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@json2csv/formatters@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "@json2csv/formatters@npm:7.0.3"
-  checksum: ed9068f9a6ae08462ddaed4b9cba3adaf241c47aff05949dadf2f99ca62a495f1a9cd556b39a8201ae8a4a5ecf7ad358dc194939af8f3637aba7d0a9fe1b26ea
+"@json2csv/formatters@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@json2csv/formatters@npm:7.0.4"
+  checksum: c38025be52786c612b2a8852f9a5e3e8600f8d39e4bd2ca88d9eca2febdcc7fa30a1119ff29b53d34257d537314f1dc70fc872db80a5e6c3de1e6d190c74e7d8
   languageName: node
   linkType: hard
 
-"@json2csv/plainjs@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "@json2csv/plainjs@npm:7.0.3"
+"@json2csv/plainjs@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@json2csv/plainjs@npm:7.0.4"
   dependencies:
-    "@json2csv/formatters": "npm:^7.0.3"
+    "@json2csv/formatters": "npm:^7.0.4"
     "@streamparser/json": "npm:^0.0.17"
-    lodash.get: "npm:^4.4.2"
-  checksum: 27c234f64de1902249f5a096e7053c50287acbc48eb2eefea2a59ea2e191085d93e5d5dfe9c253abe839ea1013ae9f7097a0a7bd2e1e3ee52cb2f9577d0cac75
+  checksum: e13f5969c06a59eec465f8182cbd0a0105751c3b78cde8473e59b980ec9cfe8b78203ab0a3fcf2acbd23ef5a23cee9b3e2c73faccd18fbe9b041ce0e43359312
   languageName: node
   linkType: hard
 
@@ -7040,13 +7039,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.get@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "lodash.get@npm:4.4.2"
-  checksum: 2a4925f6e89bc2c010a77a802d1ba357e17ed1ea03c2ddf6a146429f2856a216663e694a6aa3549a318cbbba3fd8b7decb392db457e6ac0b83dc745ed0a17380
-  languageName: node
-  linkType: hard
-
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -7485,7 +7477,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.23.7"
     "@cypress/code-coverage": "npm:^3.12.13"
     "@fastify/busboy": "npm:^2.1.0"
-    "@json2csv/plainjs": "npm:^7.0.3"
+    "@json2csv/plainjs": "npm:^7.0.4"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
     basic-auth-connect: "npm:^1.0.0"
