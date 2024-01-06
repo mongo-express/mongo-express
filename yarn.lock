@@ -1922,10 +1922,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/busboy@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@fastify/busboy@npm:2.0.0"
-  checksum: 6a2366d06b82aac1069b8323792f76f7a8fca02533cb3745fcd218d8f0f953dc4dbef057287237414658cd43f8dede0846ef33398999e3dbe54ddaeefec71c0a
+"@fastify/busboy@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@fastify/busboy@npm:2.1.0"
+  checksum: f22c1e5c52dc350ddf9ba8be9f87b48d3ea5af00a37fd0a0d1e3e4b37f94d96763e514c68a350c7f570260fdd2f08b55ee090cdd879f92a03249eb0e3fd19113
   languageName: node
   linkType: hard
 
@@ -7484,7 +7484,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.23.3"
     "@babel/preset-env": "npm:^7.23.7"
     "@cypress/code-coverage": "npm:^3.12.13"
-    "@fastify/busboy": "npm:^2.0.0"
+    "@fastify/busboy": "npm:^2.1.0"
     "@json2csv/plainjs": "npm:^7.0.3"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
