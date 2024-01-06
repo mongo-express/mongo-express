@@ -5479,15 +5479,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"free-swig@npm:^1.5.3":
-  version: 1.5.3
-  resolution: "free-swig@npm:1.5.3"
+"free-swig@npm:^1.5.4":
+  version: 1.5.4
+  resolution: "free-swig@npm:1.5.4"
   dependencies:
     uglify-js: "npm:3.15.5"
     yargs: "npm:^17.5.0"
   bin:
     swig: bin/swig.js
-  checksum: 609137d1c3032426808a3da8ffe12c04fdb449ed20e11e051e5090891816d72d7210905769aa6f0593823d935819ba334194a286ed2355ce68dbec4805b74d91
+  checksum: e1cab20fe1f540044122083bef8376b774076ed0d8c620dcab793e5486a02b3472b2ad73a4f665e2226315713560454c485ed8d27a44c6b800742a88196338fa
   languageName: node
   linkType: hard
 
@@ -7514,7 +7514,7 @@ __metadata:
     express-fileupload: "npm:^1.4.3"
     express-session: "npm:^1.17.3"
     flat: "npm:^5.0.2"
-    free-swig: "npm:^1.5.3"
+    free-swig: "npm:^1.5.4"
     gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.4.0"
     jquery: "npm:^3.7.1"

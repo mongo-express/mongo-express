@@ -41,7 +41,7 @@
     "express-fileupload": "^1.4.3",
     "express-session": "^1.17.3",
     "flat": "^5.0.2",
-    "free-swig": "^1.5.3",
+    "free-swig": "^1.5.4",
     "gridfs-stream": "^1.1.1",
     "html-entities": "^2.4.0",
     "lodash-es": "^4.17.21",
