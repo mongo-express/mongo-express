@@ -7,6 +7,7 @@ import { program } from 'commander';
 import csrf from 'csurf';
 import express from 'express';
 import middleware from './lib/middleware.js';
+import { promptForConnectionString } from './lib/prompt.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
 
@@ -105,6 +106,12 @@ if (options.url) {
   if (options.admin) {
     config.mongodb.admin = true;
   }
+}
+
+if (typeof config.mongodb === 'object'
+  && config.mongodb !== null
+  && !config.mongodb.connectionString) {
+  config.mongodb.connectionString = await promptForConnectionString();
 }
 
 config.site.port = options.port || config.site.port;
