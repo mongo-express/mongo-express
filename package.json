@@ -76,7 +76,7 @@
     "mocha": "^10.2.0",
     "mongodb-memory-server": "^9.1.6",
     "node-html-parser": "^6.1.12",
-    "nodemon": "^3.0.1",
+    "nodemon": "^3.0.3",
     "pre-commit": "1.2.2",
     "renderjson": "github:rtritto/renderjson#develop",
     "supertest": "^6.3.3",
