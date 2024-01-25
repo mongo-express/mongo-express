@@ -7511,7 +7511,7 @@ __metadata:
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.2.0"
     mongodb: "npm:^6.3.0"
-    mongodb-memory-server: "npm:^9.1.1"
+    mongodb-memory-server: "npm:^9.1.6"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.12"
@@ -7548,9 +7548,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:9.1.1":
-  version: 9.1.1
-  resolution: "mongodb-memory-server-core@npm:9.1.1"
+"mongodb-memory-server-core@npm:9.1.6":
+  version: 9.1.6
+  resolution: "mongodb-memory-server-core@npm:9.1.6"
   dependencies:
     async-mutex: "npm:^0.4.0"
     camelcase: "npm:^6.3.0"
@@ -7564,17 +7564,17 @@ __metadata:
     tar-stream: "npm:^3.0.0"
     tslib: "npm:^2.6.2"
     yauzl: "npm:^2.10.0"
-  checksum: b6f759e0d8e9375273da33a90e0446ba842518593941bb25abe51dc773d494684be6bd7d99488e74f02c2053bfb3a2f235752a39ac3dca7970852bab8d913f77
+  checksum: 264b3dca8677afad498847170b411ffcb2fa3ffd5f9b6d202a04644854d0c392b07cbc951bdffa021fcc9e7a11faac49076819c7ff725da0db740d48034680e7
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:^9.1.1":
-  version: 9.1.1
-  resolution: "mongodb-memory-server@npm:9.1.1"
+"mongodb-memory-server@npm:^9.1.6":
+  version: 9.1.6
+  resolution: "mongodb-memory-server@npm:9.1.6"
   dependencies:
-    mongodb-memory-server-core: "npm:9.1.1"
+    mongodb-memory-server-core: "npm:9.1.6"
     tslib: "npm:^2.6.2"
-  checksum: 69b46af596c2d4a86f96fb3dd75f45ce788ab42f7b10c85376a3481d3ebef5745c1c23e523bb025ebf05e8fb68b49e66e7ddb867d0e96b8d341f56ad0b18a3b0
+  checksum: cd671420ad4ce731c357d5117ad44b9e777de21c34ffd757265acedadf6e1a56a49c43bd647d3147aa3346007fccded0220d1a5d7eed7d7dee0b8752a11d2278
   languageName: node
   linkType: hard
 
