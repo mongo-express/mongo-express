@@ -10,552 +10,543 @@
 <link href="{{ baseHref }}public/css/theme/{{ editorTheme }}.css" rel="stylesheet">
 {% endif %}
 
-<style type="text/css">
-  .modal-body .CodeMirror .CodeMirror-scroll {
-    height: 100%;
-  }
-
-  .tab-pane > form {
-    padding-bottom: 5px;
-  }
-
-  .sorting-button {
-    white-space: nowrap;
-  }
-
-  @media (min-width: 992px) { /* meduim and up */
-    #advanced .form-group .btn {
-      height: 150px;
-    }
-  }
-
-  #indexes td {
-    vertical-align: middle;
-  }
-</style>
 {% endblock %}
 
 
 {% block breadcrumb %}
-  <li>
-    <a href="{{ dbUrl }}">Database:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db | url_encode }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
-  <li>
-    <a href="{{ dbUrl }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
-  </li>
-  <li>
-    <a href="{{ collectionUrl }}">Collection:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for collection in collections %}
-      <li><a href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+    Database: {{ dbName }}
+  </a>
+  <ul class="dropdown-menu">
+    {% for db in databases %}
+    <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    {% endfor %}
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+    Collection: {{ collectionName }}
+  </a>
+  <ul class="dropdown-menu">
+    {% for collection in collections %}
+    <a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a>
+    {% endfor %}
+  </ul>
+</li>
 {% endblock %}
 
 {% block content %}
-  {% if !settings.read_only %}
-    <p>
-      <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large">
-        <span class="glyphicon glyphicon-pencil"></span>
-        New Document
-      </button>
-      <button type="button" data-toggle="modal" data-target="#addIndex" class="btn btn-success btn-large">
-        <span class="glyphicon glyphicon-pencil"></span>
-        New Index
-      </button>
-    </p>
-  {% endif %}
+{% if !settings.read_only %}
+<div class="btn-toolbar my-3" role="toolbar">
+  <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large mr-1">
+    <i class="fas fa-plus"></i>
+    New Document
+  </button>
+  <button type="button" data-toggle="modal" data-target="#addIndex" class="btn btn-success btn-large">
+    <i class="fas fa-plus"></i>
+    New Index
+  </button>
+</div>
+{% endif %}
 
-  <ul id="tabs" class="nav nav-pills nav-justified" data-tabs="tabs">
-    <li class="active"><a href="#simple" data-toggle="tab"><span class="glyphicon glyphicon-tag"></span>  Simple</a></li>
-    <li><a href="#advanced" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>  Advanced</a></li>
-  </ul>
-  <div id="my-tab-content" class="tab-content">
-    <div class="tab-pane active" id="simple">
-      <form class="well" method="get" action="{{ collectionUrl }}">
-        {% for column in columns %}
-          <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
-        {% endfor %}
+<ul id="tabs" class="nav nav-pills nav-fill" role="tablist">
+  <li class="nav-item">
+    <a href="#simple" class="nav-link active" data-toggle="tab"><i class="fa fa-tag"></i> Simple</a>
+  </li>
+  <li class="nav-item">
+    <a href="#advanced" class="nav-link" data-toggle="tab"><i class="fa fa-tag"></i> Advanced</a>
+  </li>
+</ul>
+<div id="my-tab-content" class="tab-content bg-light p-3">
+  <div class="tab-pane active" id="simple">
+    <form method="get" action="{{ collectionUrl }}">
+      {% for column in columns %}
+      <input type="checkbox" name="sort[{{column}}]" class="d-none sort-{{column}}" {% if sort[column]
+        %}value="{{sort[column]}}" checked="checked" {% endif %} />
+      {% endfor %}
       <div class="row">
-        <div class="form-group col-sm-6 col-md-4">
-          <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
+        <div class="col-sm-6 col-md-4">
+          <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key"
+            title="Key" value="{{ key }}">
         </div>
-        <div class="form-group col-sm-6 col-md-4">
-          <input style="width:100%;" class="input-medium form-control" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
+        <div class="col-sm-6 col-md-4">
+          <input style="width:100%;" class="input-medium form-control" type="text" id="value" name="value"
+            placeholder="Value" title="Value" value="{{ value }}">
         </div>
-        <div class="form-group col-sm-6 col-md-2">
+        <div class="col-sm-6 col-md-2">
           <select name="type" class="form-control">
-            <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
-            <option value="R" {% if type == 'R' %}selected {% endif %}>Regex</option>
-            <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
-            <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
-            <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectId</option>
-            <option value="U" {% if type == 'U' %}selected {% endif %}>UUID (v4)</option>
+            <option value="S" {% if type=='S' %}selected {% endif %}>String</option>
+            <option value="R" {% if type=='R' %}selected {% endif %}>Regex</option>
+            <option value="J" {% if type=='J' %}selected {% endif %}>JSON, bool</option>
+            <option value="N" {% if type=='N' %}selected {% endif %}>Number</option>
+            <option value="O" {% if type=='O' %}selected {% endif %}>ObjectId</option>
+            <option value="U" {% if type=='U' %}selected {% endif %}>UUID (v4)</option>
           </select>
         </div>
-        <div class="form-group col-sm-6 col-md-2">
+        <div class="col-sm-6 col-md-2">
           <button type="submit" class="btn btn-primary btn-block">
-            <span class="glyphicon glyphicon-search"></span>
+            <i class="fa fa-search"></i>
             Find
           </button>
         </div>
       </div>
-      </form>
-    </div>
-    <div class="tab-pane" id="advanced">
-      <form class="well" method="get" action="{{ collectionUrl }}">
-        {% for column in columns %}
-          <input type="checkbox" name="sort[{{column}}]" class="hide sort-{{column}}" {% if sort[column] %}value="{{sort[column]}}" checked="checked"{% endif %}/>
-        {% endfor %}
-        <div class="row">
-          <div class="form-group col-sm-6 col-md-5">
-            <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="query" name="query" placeholder="Query" title="Query">{{ query }}</textarea>
+    </form>
+  </div>
+  <div class="tab-pane" id="advanced">
+    <form method="get" action="{{ collectionUrl }}">
+      {% for column in columns %}
+      <input type="checkbox" name="sort[{{column}}]" class="d-none sort-{{column}}" {% if sort[column]
+        %}value="{{sort[column]}}" checked="checked" {% endif %} />
+      {% endfor %}
+      <div class="row">
+        <div class="col-sm-6 col-md-5">
+          <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="query" name="query"
+            placeholder="Query" title="Query">{{ query }}</textarea>
+        </div>
+        <div class="col-sm-6 col-md-5">
+          <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="projection"
+            name="projection" placeholder="Projection" title="Projection">{{ projection }}</textarea>
+        </div>
+        <div class="col-md-2">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="runAggregate" name="runAggregate" title="Run Aggregate"
+              {% if runAggregate %} checked="checked" {% endif %}>
+            <label class="form-check-label" for="runAggregate">Aggregate query</label>
           </div>
-          <div class="form-group col-sm-6 col-md-5">
-            <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="projection" name="projection" placeholder="Projection" title="Projection">{{ projection }}</textarea>
-          </div>
-          <div class="col-md-2">
-            <div class="row">
-              <input type="checkbox" id="runAggregate" name="runAggregate" title="Run Aggregate" {% if runAggregate %} checked="checked"{% endif %}/>
-              <label for="runAggregate">Aggregate query</label>
-            </div>
-            <div class="row">
-            <button style="height:120px;" type="submit" class="btn btn-primary btn-block">
-              <span class="glyphicon glyphicon-search"></span>
+          <button style="height:120px;" type="submit" class="btn btn-primary btn-block">
+            <i class="fa fa-search"></i>
             Find
-            </button>
-          </div>
-          </div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% if !settings.read_only && !settings.no_delete && count > 0 %}
+<form id="deleteListForm" method="POST" class="my-3"
+  action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query|default('{}') }}&projection={{ projection }}&runAggregate={{ runAggregate }}">
+  {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want
+  #}
+  <input type="hidden" name="_method" value="delete">
+  <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
+    <i class="fa fa-trash"></i>
+    Delete all {{count}} documents retrieved
+  </button>
+</form>
+{% endif %}
+<br />
+
+{% if !settings.read_only %}
+<!-- Add Document Modal -->
+<div class="modal fade" id="addDocument" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="addDocumentForm" method="post" action="{{ collectionUrl }}">
+        <div class="modal-header">
+          <h2 class="modal-title">Add Document</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="document-modal-body">
+          <textarea id="document" name="document">{
+    "_id": ObjectId()
+}
+          </textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" onclick="return checkValidJSON()">
+            <i class="fa fa-save"></i>
+            Save
+          </button>
         </div>
       </form>
     </div>
   </div>
-  {% if !settings.read_only && !settings.no_delete && count > 0 %}
-  <p>
-    <form id="deleteListForm" method="POST" style="display:inline;" action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query|default('{}') }}&projection={{ projection }}&runAggregate={{ runAggregate }}">
-      {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want #}
-      <input type="hidden" name="_method" value="delete">
-      <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
-        <span class="glyphicon glyphicon-trash"></span>
-        Delete all {{count}} documents retrieved
-      </button>
-    </form>
-  </p>
-  {% endif %}
-  <br/>
-
-<!-- Add Document Modal -->
-  <div class="modal fade" id="addDocument" role="dialog" tabindex="-1">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <form id="addDocumentForm" method="post" action="{{ collectionUrl }}">
-
-      <div class="modal-header">
-        <button class="close" data-dismiss="modal">×</button>
-        <h2>Add Document</h2>
-      </div>
-      <div class="modal-body" id = "document-modal-body">
-        <textarea id="document" name="document">{
-        "_id": ObjectId()
-}</textarea>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-error" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" onclick="return checkValidJSON()">
-          <span class="glyphicon glyphicon-pencil"></span>
-          Save
-        </button>
-      </div>
-
-    </form>
-    </div>
-    </div>
-  </div>
+</div>
 <!-- End Add Document Modal -->
 
 <!-- Add Index Modal -->
-<div class="modal fade" id="addIndex" role="dialog" tabindex="-1">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="addIndex" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-    <form id="addIndexForm" method="post" action="{{ dbUrl }}/addIndex/{{ collectionName | url_encode }}">
-
-      <div class="modal-header">
-        <button class="close" data-dismiss="modal">×</button>
-        <h2>Add Indexes</h2>
-        <span>
-          A document that contains the field and value pairs where the field
-          is the index key. 1 for an ascending and -1 for a descending index.
-        </span>
-      </div>
-      <div class="modal-body" id = "index-modal-body">
-        <textarea id="index" name="index">{
-        "key": 1
-}</textarea>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-error" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" onclick="return checkValidIndexJSON()">
-             <span class="glyphicon glyphicon-pencil"></span>
-          Save
-        </button>
-      </div>
-
-    </form>
-    </div>
+      <form id="addIndexForm" method="post" action="{{ dbUrl }}/addIndex/{{ collectionName | url_encode }}">
+        <div class="modal-header">
+          <h2 class="modal-title">Add Indexes</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="index-modal-body">
+          <p>
+            A document that contains the field and value pairs where the field
+            is the index key. 1 for an ascending and -1 for a descending index.
+          </p>
+          <textarea id="index" name="index">{
+    "key": 1
+}
+          </textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" onclick="return checkValidIndexJSON()">
+            <i class="fa fa-save"></i>
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
 <!-- End Add Index Modal -->
+{% endif %}
 
+{% if documents.length == 0 %}
+<p class="card">
+  No documents found.
+</p>
+{% else %}
 
-  {% if documents.length == 0 %}
-    <p class="well">
-      No documents found.
-    </p>
-  {% else %}
+{% if pagination %}
+<nav aria-label="Page navigation mx-auto">
+  <ul class="pagination" id="pagination"></ul>
+</nav>
+{% endif %}
 
-  {% if pagination %}
-    <nav>
-      <div class="text-center">
-        <div id="paginator-top"></div>
-      </div>
-    </nav>
-  {% endif %}
-
-  <div class="fadeToWhite" id="fadeToWhiteID"></div>
-  <div class="table-responsive tableWrapper" style="cursor:auto">
-    <table class="table table-striped tableHeaderFooterBars">
-      <thead>
-        {% for column in columns %}
-          <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}" title="Sort by {{column}}">
-            {{column}}
-            {% if sort[column] == 1 %}
-              <span class="glyphicon glyphicon-triangle-top"></span>
-            {% elseif sort[column] == -1 %}
-              <span class="glyphicon glyphicon-triangle-bottom"></span>
-            {% endif %}
-          </th>
-        {% endfor %}
-      </thead>
-      {% for index, document in docs %}
-        {% if document._id._bsontype == 'Binary' %}
-        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
-        {% elseif document._id._bsontype == 'Long' %}
-        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}')">
-        {% else %}
-        <tr id="doc-{{ index }}" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+<div class="fadeToWhite" id="fadeToWhiteID"></div>
+<div class="table-responsive tableWrapper">
+  <table class="table table-striped tableHeaderFooterBars">
+    <thead>
+      {% for column in columns %}
+      <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}" title="Sort by {{column}}">
+        {{column}}
+        {% if sort[column] == 1 %}
+        <i class="fas fa-sort-up"></i>
+        {% elseif sort[column] == -1 %}
+        <i class="fas fa-sort-down"></i>
         {% endif %}
-          {% for column in columns %}
-            <td><div class="tableContent">
-              {% if !settings.read_only && !settings.no_delete && column === '_id' && collectionName !== 'system.indexes' %}
-                <button class="btn btn-info" onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}')">
-                  <span class="glyphicon glyphicon-link"></span>
-                </button>
-                <form class="deleteButtonDocument" method="POST" style="display:inline;" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
-                <input type="hidden" name="_method" value="delete">
-                <button type="submit" class="btn btn-danger">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-                </form>
-              {% endif %}
-              {% if document[column] | is_URL %}
-                <a href="{{ document[column] }}" target="_blank" rel="noopener noreferrer">{{ document[column] }}</a>
-              {% else %}
-                {{ document[column] | stringDocIDs | to_display | safe }}
-              {% endif %}
-            </div></td>
-          {% endfor %}
-        </tr>
+      </th>
       {% endfor %}
-    </table>
-  </div>
+    </thead>
+    {% for index, document in docs %}
+    {% if document._id._bsontype == 'Binary' %}
+    <tr id="doc-{{ index }}"
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+      {% elseif document._id._bsontype == 'Long' %}
+    <tr id="doc-{{ index }}"
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}')">
+      {% else %}
+    <tr id="doc-{{ index }}"
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+      {% endif %}
+      {% for column in columns %}
+      <td>
+        <div class="tableContent">
+          {% if !settings.read_only && !settings.no_delete && column === '_id' && collectionName !== 'system.indexes'
+          %}
+          <button class="btn btn-info"
+            onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}')">
+            <i class="fa fa-link"></i>
+          </button>
+          <form class="deleteButtonDocument" method="POST" style="display:inline;"
+            action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger">
+              <i class="fa fa-trash"></i>
+            </button>
+          </form>
+          {% endif %}
+          {% if document[column] | is_URL %}
+          <a href="{{ document[column] }}" target="_blank" rel="noopener noreferrer">{{ document[column] }}</a>
+          {% else %}
+          {{ document[column] | stringDocIDs | to_display | safe }}
+          {% endif %}
+        </div>
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 
-  {% if pagination %}
-    <nav>
-      <div class="text-center">
-        <div id="paginator-bottom"></div>
-      </div>
-    </nav>
-  {% endif %}
+{% if pagination %}
+<nav aria-label="Page navigation">
+  <ul class="pagination" id="pagination"></ul>
+</nav>
+{% endif %}
 
-  {% endif %}
+{% endif %}
 
-  <div class="row">
-    {% if !settings.read_only %}
-      <div class="col-md-12">
-        <h2>Rename Collection</h2>
-        <form method="POST" action="{{ collectionUrl }}" class="well form-inline">
-          <input type="hidden" name="_method" value="put">
-          <div class="form-group">
-            <span class="add-on">{{ dbName }} . </span>
-            <input class="form-control" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
-          </div>
-          <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-pencil"></span>
+{% if !settings.read_only %}
+<div class="card mb-3">
+  <h2 class="card-header">Rename Collection</h2>
+  <div class="card-body">
+    <form method="POST" action="{{ collectionUrl }}" class="form-inline">
+      <input type="hidden" name="_method" value="put">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">{{ dbName }} . </span>
+        </div>
+        <input type="text" class="form-control" id="collection" name="collection" placeholder="{{ collectionName }}">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button">
+            <i class="fa fa-pen"></i>
             Rename
           </button>
-        </form>
+        </div>
       </div>
-    {% endif %}
-
+    </form>
   </div>
-  <h2>Tools</h2>
-  <div class="row">
-    {% if !settings.me_no_export %}
-      <div class="col-sm-4">
-        <div class="well">
-          <a href="{{ dbUrl }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
-            <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
-          </a>
-        </div>
-      </div>
+</div>
+{% endif %}
 
-      <div class="col-sm-4">
-        <div class="well">
-          <a href="{{ dbUrl }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
-            <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
-          </a>
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="well">
-          <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}" class="btn btn-warning btn-block">
-            <span class="glyphicon glyphicon-floppy-save"></span><br>Export --csv
-          </a>
-        </div>
-      </div>
-    {% endif %}
-
-    <div class="col-sm-4">
-      <div class="well">
-        <a href="{{ dbUrl }}/reIndex/{{ collectionName | url_encode }}" class="btn btn-warning btn-block">
-          <span class="glyphicon glyphicon-resize-small"></span><br>Reindex
+<div class="card mb-3">
+  <h2 class="card-header">Tools</h2>
+  <div class="card-body">
+    <div class="row">
+      {% if !settings.me_no_export %}
+      <div class="col-sm-4 p-2">
+        <a href="{{ dbUrl }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
+          class="btn btn-warning btn-block text-white">
+          <i class="fa fa-download d-block"></i>Export Standard
         </a>
       </div>
-    </div>
 
-    <div class="col-sm-4">
-      <div class="well">
-        <a class="btn btn-warning btn-block import-file-link">
-          <span class="glyphicon glyphicon-cloud-upload"></span><br>Import --mongoexport json
+      <div class="col-sm-4 p-2">
+        <a href="{{ dbUrl }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
+          class="btn btn-warning btn-block text-white">
+          <i class="fa fa-download d-block"></i>Export --jsonArray
         </a>
-        <input class="input-hidden import-input-file" type="file" name="import-file" collection-name="{{ collectionName | url_encode }}"/>
       </div>
-    </div>
 
-    {% if !settings.read_only %}
-      <div class="col-sm-4">
-        <div class="well">
-          <a href="{{ dbUrl }}/compact/{{ collectionName | url_encode }}" class="btn btn-danger btn-block">
-            <span class="glyphicon glyphicon-resize-small"></span><br>Compact
-          </a>
-        </div>
+      <div class="col-sm-4 p-2">
+        <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
+          class="btn btn-warning btn-block text-white">
+          <i class="fa fa-download d-block"></i>Export --csv
+        </a>
       </div>
-    {% if !settings.no_delete %}
-      <div class="col-sm-4">
-        <form method="POST" action="{{ collectionUrl }}" class="well">
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}" id="db-{{ dbName }}-{{ collectionName }}" class="well">
+      {% endif %}
+
+      <div class="col-sm-4 p-2">
+        <a href="{{ dbUrl }}/reIndex/{{ collectionName | url_encode }}" class="btn btn-warning btn-block text-white">
+          <i class="fa fa-sync d-block"></i>Reindex
+        </a>
+      </div>
+
+      <div class="col-sm-4 p-2">
+        <a class="btn btn-warning btn-block text-white import-file-link">
+          <i class="fa fa-upload d-block"></i>Import --mongoexport json
+        </a>
+        <input class="d-none import-input-file" type="file" name="import-file"
+          collection-name="{{ collectionName | url_encode }}" />
+      </div>
+
+      {% if !settings.read_only %}
+      <div class="col-sm-4 p-2">
+        <a href="{{ dbUrl }}/compact/{{ collectionName | url_encode }}" class="btn btn-danger btn-block">
+          <i class="fa fa-compress d-block"></i>Compact
+        </a>
+      </div>
+      {% if !settings.no_delete %}
+      <div class="col-sm-4 p-2">
+        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}"
+          id="db-{{ dbName }}-{{ collectionName }}">
           <input type="hidden" name="_method" value="delete">
-          <input type="submit" class="hidden" />
-          <button type="button" class="btn btn-danger deleteButtonCollection btn-block" collection-name="{{ collectionName }}">
-            <span class="glyphicon glyphicon-trash"></span><br>Delete
+          <button type="submit" class="btn btn-danger deleteButtonCollection btn-block"
+            collection-name="{{ collectionName }}">
+            <i class="fa fa-trash d-block"></i>Delete
           </button>
         </form>
       </div>
-
-      <div id="confirm-deletion-document" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              Are you sure?
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
-              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="deleteListModal" class="modal fade" role="dialog" aria-labelledby="confirmDeletionListLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              Are you sure you want to delete all {{count}} documents?
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-danger" id="deleteListConfirmButton">Delete</button>
-              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div id="confirm-deletion-collection" class="modal fade" role="dialog" aria-labelledby="confirmDeletionCollectionLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Delete collection</h4>
-            </div>
-            <div class="modal-body">
-              <p>
-                Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong> collection.
-              </p>
-              <p>
-                <label for="confirmation-input">Type the collection name to proceed.</label>
-                <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
-              </p>
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
-              <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    {% endif %}
-    {% endif %}
-
-  {% if stats != false %}
-  <div class="stats col-md-12">
-    <h2>Collection Stats</h2>
-    <table class="table table-bordered table-striped">
-      <tr>
-        <td>
-          <strong>Documents</strong>
-        </td>
-        <td>
-          {{ stats.count }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Total doc size</strong>
-        </td>
-        <td>
-          {{ stats.size|convertBytes }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Average doc size</strong>
-        </td>
-        <td>
-          {{ stats.avgObjSize|convertBytes }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Pre-allocated size</strong>
-        </td>
-        <td>
-          {{ stats.storageSize|convertBytes }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Indexes</strong>
-        </td>
-        <td>
-          {{ stats.nindexes }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Total index size</strong>
-        </td>
-        <td>
-          {{ stats.totalIndexSize|convertBytes }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Padding factor</strong>
-        </td>
-        <td>
-          {{ stats.paddingFactor }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong>Extents</strong>
-        </td>
-        <td>
-          {{ stats.numExtents }}
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="col-md-12">
-    <h2>Indexes</h2>
-    <table id="indexes" class="table table-bordered table-striped">
-      <tr>
-        <th>Name</th>
-        <th>Columns</th>
-        <th>Size</th>
-        <th>Attributes</th>
-        <th>Actions</th>
-      </tr>
-    {% for index in indexes %}
-      <tr>
-        <td>
-          {{ index.name }}
-        </td>
-        <td>
-          {% for sort in index.key %}
-          <div>{{ loop.key }} &nbsp; {% if sort == 1 %} ASC {% else %} DSC {% endif %}</div>
-          {% endfor %}
-        </td>
-        <td>
-          {{ index.size|convertBytes }}
-        </td>
-        <td>
-          {% for k,v in index %}
-            <div>
-              {% if k != 'key' && k != 'v' && k != 'name' && k != 'ns' && k != 'size' %}
-                {{ k }}:
-                {% if k == 'partialFilterExpression' %}
-                  <pre>{{ v | json | safe }}</pre>
-                {% else %}
-                  &nbsp;{{ v }}
-                {% endif %}
-              {% endif %}
-            </div>
-          {% endfor %}
-        </td>
-      {% if !settings.read_only && !settings.no_delete %}
-        <td>
-          <a class="btn btn-danger" href="{{ dbUrl }}/dropIndex/{{ collectionName | url_encode }}?name={{ index.name }}">
-            <span class="glyphicon glyphicon-trash"></span> &nbsp;DEL
-          </a>
-        </td>
-      {% else %}
-        <td>
-        </td>
       {% endif %}
-      </tr>
-    {% endfor %}
-    </table>
+      {% endif %}
+    </div>
   </div>
-  {% endif %}
+</div>
+
+{% if !settings.no_delete %}
+<div class="modal fade" id="confirm-deletion-document" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteListModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        Are you sure you want to delete all {{count}} documents?
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn btn-danger"
+          id="deleteListConfirmButton">Delete</button>
+        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirm-deletion-collection" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete collection</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Be careful! You are about to delete whole <strong><span id="modal-collection-name"></span></strong>
+          collection.
+        </p>
+        <p>
+          <label for="confirmation-input">Type the database name to proceed:</label>
+          <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn btn-danger" id="delete">Delete</button>
+        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if stats != false %}
+<div class="card mb-3">
+  <h2 class="card-header">Collection stats</h2>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <td>
+        <strong>Documents</strong>
+      </td>
+      <td>
+        {{ stats.count }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Total doc size</strong>
+      </td>
+      <td>
+        {{ stats.size|convertBytes }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Average doc size</strong>
+      </td>
+      <td>
+        {{ stats.avgObjSize|convertBytes }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Pre-allocated size</strong>
+      </td>
+      <td>
+        {{ stats.storageSize|convertBytes }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Indexes</strong>
+      </td>
+      <td>
+        {{ stats.nindexes }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Total index size</strong>
+      </td>
+      <td>
+        {{ stats.totalIndexSize|convertBytes }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Padding factor</strong>
+      </td>
+      <td>
+        {{ stats.paddingFactor }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Extents</strong>
+      </td>
+      <td>
+        {{ stats.numExtents }}
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="card mb-3">
+  <h2 class="card-header">Indexes</h2>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Columns</th>
+      <th>Size</th>
+      <th>Attributes</th>
+      <th>Actions</th>
+    </tr>
+    {% for index in indexes %}
+    <tr>
+      <td>
+        {{ index.name }}
+      </td>
+      <td>
+        {% for sort in index.key %}
+        <div>{{ loop.key }} &nbsp; {% if sort == 1 %} ASC {% else %} DSC {% endif %}</div>
+        {% endfor %}
+      </td>
+      <td>
+        {{ index.size|convertBytes }}
+      </td>
+      <td>
+        {% for k,v in index %}
+        <div>
+          {% if k != 'key' && k != 'v' && k != 'name' && k != 'ns' && k != 'size' %}
+          {{ k }}:
+          {% if k == 'partialFilterExpression' %}
+          <pre>{{ v | json | safe }}</pre>
+          {% else %}
+          &nbsp;{{ v }}
+          {% endif %}
+          {% endif %}
+        </div>
+        {% endfor %}
+      </td>
+      {% if !settings.read_only && !settings.no_delete %}
+      <td>
+        <a class="btn btn-danger" href="{{ dbUrl }}/dropIndex/{{ collectionName | url_encode }}?name={{ index.name }}">
+          <i class="fa fa-trash"></i> Delete
+        </a>
+      </td>
+      {% else %}
+      <td>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
 {% endblock %}
 
 

@@ -4,71 +4,68 @@
 
 
 {% block breadcrumb %}
-  <li>
-    <a href="{{ dbUrl }}">Database:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
-  <li>
-    <a href="{{ dbUrl }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
-  </li>
-  <li>
-    <a href="{{ dbUrl }}/{{ bucketName }}">Bucket:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ bucketName }}<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for bucket in buckets %}
-      <li><a href="{{ dbUrl }}/gridFS/{{ bucket }}">{{ bucket }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+    Database: {{ dbName }}
+  </a>
+  <ul class="dropdown-menu">
+    {% for db in databases %}
+    <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    {% endfor %}
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+    Bucket: {{ bucketName }}
+  </a>
+  <ul class="dropdown-menu">
+    {% for bucket in buckets %}
+    <a class="dropdown-item" href="{{ dbUrl }}/gridFS/{{ bucket }}">{{ bucket }}</a>
+    {% endfor %}
+  </ul>
+</li>
 {% endblock %}
 
 {% block content %}
-  {% if files.length == 0 %}
-    <p class="well">
-      No files found.
-    </p>
-  {% else %}
+{% if files.length == 0 %}
+<div class="alert alert-info" role="alert">
+  No files found.
+</div>
+{% else %}
 
-  <div class="table-responsive tableWrapper">
-    <table class="table table-striped">
-      <thead>
-        {% for column in columns %}
-          <th>{{ column }}</th>
-        {% endfor %}
-        <th>Delete</th>
-      </thead>
-      {% for file in files %}
-        <tr onclick="loadFile('{{ file._id | json | safe | url_encode }}')">
-        {% for column in columns %}
-          <td><div class="tableContent">{{ file[column] | to_display | safe }}</div></td>
-        {% endfor %}
-          {% if !settings.read_only && !settings.no_delete %}
-            <td>
-              <div class="col-md-1">
-                <form method="POST" action="{{ dbUrl }}/gridFS/{{ bucketName }}/{{ file._id | json | safe | url_encode }}">
-                <input type="hidden" name="_method" value="delete">
-                <button type="submit" class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash"></span>
-                </button>
-                </form>
-              </div>
-            </td>
-          {% endif %}
-        </tr>
+<div class="table-responsive tableWrapper">
+  <table class="table table-striped">
+    <thead>
+      {% for column in columns %}
+      <th>{{ column }}</th>
       {% endfor %}
-    </table>
-  </div>
+      <th>Delete</th>
+    </thead>
+    {% for file in files %}
+    <tr onclick="loadFile('{{ file._id | json | safe | url_encode }}')">
+      {% for column in columns %}
+      <td>
+        <div class="tableContent">{{ file[column] | to_display | safe }}</div>
+      </td>
+      {% endfor %}
+      {% if !settings.read_only && !settings.no_delete %}
+      <td>
+        <div class="col-md-1">
+          <form method="POST" action="{{ dbUrl }}/gridFS/{{ bucketName }}/{{ file._id | json | safe | url_encode }}">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger">
+              <i class="fa fa-trash"></i>
+            </button>
+          </form>
+        </div>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 
-  {% endif %}
+{% endif %}
 
 {% if !settings.read_only %}
 <!--
@@ -80,7 +77,7 @@
           <div class="form-group">
             <input class="input-medium span7" type="text" id="bucket" name="bucket" placeholder="{{ bucketName }}">
           </div>
-          <button type="submit" class="btn btn-primary pull-right">
+          <button type="submit" class="btn btn-primary float-right">
             <span class="glyphicon glyphicon-pencil"></span>
             Rename
           </button>
@@ -91,14 +88,15 @@
 <div class="row">
   <div class="col-md-12">
     <h2>Add File</h2>
-    <form method="POST" action="{{ dbUrl }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data" class="well form-inline">
+    <form method="POST" action="{{ dbUrl }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data"
+      class="form-inline">
 
       <div class="form-group">
-        <input type="file" class="input-medium span7" name="filefield">
+        <input type="file" class="form-control-file" name="filefield">
       </div>
 
-      <button type="submit" class="btn btn-success pull-right">
-        <span class="glyphicon glyphicon-upload"></span>
+      <button type="submit" class="btn btn-success float-right">
+        <i class="fa fa-upload"></i>
         Upload
       </button>
     </form>
