@@ -2053,20 +2053,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@json2csv/formatters@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "@json2csv/formatters@npm:7.0.4"
-  checksum: c38025be52786c612b2a8852f9a5e3e8600f8d39e4bd2ca88d9eca2febdcc7fa30a1119ff29b53d34257d537314f1dc70fc872db80a5e6c3de1e6d190c74e7d8
+"@json2csv/formatters@npm:^7.0.5":
+  version: 7.0.5
+  resolution: "@json2csv/formatters@npm:7.0.5"
+  checksum: 52346fd588e863d338a0f09c360c947f9ce9b18ee49884b5d5233883279c2e3bd5c8d2f2db9456e1f00414396ac57818bd012d34cb53d67e026406d34d45db1c
   languageName: node
   linkType: hard
 
-"@json2csv/plainjs@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "@json2csv/plainjs@npm:7.0.4"
+"@json2csv/plainjs@npm:^7.0.5":
+  version: 7.0.5
+  resolution: "@json2csv/plainjs@npm:7.0.5"
   dependencies:
-    "@json2csv/formatters": "npm:^7.0.4"
-    "@streamparser/json": "npm:^0.0.17"
-  checksum: e13f5969c06a59eec465f8182cbd0a0105751c3b78cde8473e59b980ec9cfe8b78203ab0a3fcf2acbd23ef5a23cee9b3e2c73faccd18fbe9b041ce0e43359312
+    "@json2csv/formatters": "npm:^7.0.5"
+    "@streamparser/json": "npm:^0.0.19"
+  checksum: 0bfc3767e92e78c1e92f936f6b65aff93832aed84626a3a53baab34393ae00e0e88f9cf21d7be9b1e810d103b36429d4bb12ce2a8d1eaba7908cd803f0faed70
   languageName: node
   linkType: hard
 
@@ -2171,10 +2171,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@streamparser/json@npm:^0.0.17":
-  version: 0.0.17
-  resolution: "@streamparser/json@npm:0.0.17"
-  checksum: 29eff1034c49548116b567a6320e97f6cb26efd7bc151cde1a520fc7dc0c31b218d3f61008382a745a407433dc6516890839516ab7d0d53ceb2fb7ee38f4d063
+"@streamparser/json@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "@streamparser/json@npm:0.0.19"
+  checksum: 09cdf2c0329a30f9318e62657213f6fe49c69dc34b72562cb502b219b1ac14f81bc423d4280551b377727f4dd8afc0c6a580ab0e2c71389d37c1a5c7ea88fa07
   languageName: node
   linkType: hard
 
@@ -7542,7 +7542,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.23.7"
     "@cypress/code-coverage": "npm:^3.12.19"
     "@fastify/busboy": "npm:^2.1.0"
-    "@json2csv/plainjs": "npm:^7.0.4"
+    "@json2csv/plainjs": "npm:^7.0.5"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
     basic-auth-connect: "npm:^1.0.0"
