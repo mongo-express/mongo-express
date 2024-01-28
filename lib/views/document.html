@@ -24,37 +24,29 @@
 
 
 {% block breadcrumb %}
-  <li>
-    <a href="{{ dbUrl }}">Database:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+      Database: {{ dbName }}
+    </a>
     <ul class="dropdown-menu">
       {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
+      <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
       {% endfor %}
     </ul>
   </li>
-  <li>
-    <a href="{{ dbUrl }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
-  </li>
-  <li>
-    <a href="{{ collectionUrl }}">Collection:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ collectionName }}<span class="caret"></span></a>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+      Collection: {{ collectionName }}
+    </a>
     <ul class="dropdown-menu">
       {% for collection in collections %}
-      <li><a href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
+      <a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a>
       {% endfor %}
     </ul>
   </li>
-  <li>
-    <a href="{{ collectionUrl }}">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
+  <li class="nav-item">
+    <a class="nav-link disabled">Document {{ document._id|stringDocIDs }}</a>
   </li>
-  <li><a>Document {{ document._id|stringDocIDs }}</a></li>
 {% endblock %}
 
 {% block content %}
@@ -81,16 +73,16 @@
       {% if !settings.read_only %}
         <input type="hidden" name="_method" value="put">
         <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
-         <span class="glyphicon glyphicon-arrow-left"></span>
+         <i class="fa fa-arrow-left"></i>
           Back
         </button>
-        <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
-          <span class="glyphicon glyphicon-pencil"></span>
+        <button type="submit" class="btn btn-success btn-large float-right" onclick="return onSubmitClick()">
+          <i class="fa fa-save"></i>
           Save
         </button>
       {% else %}
         <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-         <span class="glyphicon glyphicon-arrow-left"></span>
+          <i class="fa fa-arrow-left"></i>
           Back
         </button>
       {% endif %}
@@ -105,17 +97,17 @@
     {% if !settings.read_only %}
       <input type="hidden" name="_method" value="put">
       <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
-       <span class="glyphicon glyphicon-arrow-left"></span>
+        <i class="fa fa-arrow-left"></i>
         Back
       </button>
 
-      <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
-        <span class="glyphicon glyphicon-pencil"></span>
+      <button type="submit" class="btn btn-success btn-large float-right" onclick="return onSubmitClick()">
+        <i class="fa fa-save"></i>
         Save
       </button>
     {% else %}
       <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-       <span class="glyphicon glyphicon-arrow-left"></span>
+        <i class="fa fa-arrow-left"></i>
         Back
       </button>
     {% endif %}
@@ -133,15 +125,14 @@
   <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}">
   {% endif %}
     <input type="hidden" name="_method" value="delete">
-    <input type="submit" class="hidden" />
-    <button class="btn btn-danger deleteButtonDocument">
-      <span class="glyphicon glyphicon-trash"></span>
+    <button type="submit" class="btn btn-danger deleteButtonDocument">
+      <i class="fa fa-trash"></i>
       Delete
     </button>
   </form>
 
-  <div id="confirm-document-delete" class="modal fade" role="dialog" aria-labelledby="confirmDeletionDocumentLabel">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="confirm-document-delete" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
           Are you sure?

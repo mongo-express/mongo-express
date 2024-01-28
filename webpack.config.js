@@ -18,7 +18,6 @@ function resolveModulePath(name) {
 }
 
 const codemirrorPath = resolveModulePath('codemirror');
-const bootstrapPath = resolveModulePath('bootstrap');
 
 export default {
   mode: isProd ? 'production' : 'development',
@@ -71,6 +70,14 @@ export default {
           presets: ['@babel/preset-env'],
         },
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
+      },
     ],
   },
 
@@ -89,12 +96,6 @@ export default {
 
         { from: path.join(codemirrorPath, '/lib/codemirror.css'), to: 'css/[name][ext]' },
         { from: path.join(codemirrorPath, '/theme'), to: 'css/theme/[name][ext]' },
-
-        { from: path.join(bootstrapPath, '/dist/fonts'), to: 'fonts/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap.min.css'), to: 'css/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap.min.css.map'), to: 'css/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap-theme.min.css'), to: 'css/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap-theme.min.css.map'), to: 'css/[name][ext]' },
       ],
     }),
 
