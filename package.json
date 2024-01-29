@@ -39,7 +39,7 @@
     "errorhandler": "1.5.1",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.3",
-    "express-session": "^1.17.3",
+    "express-session": "^1.18.0",
     "flat": "^5.0.2",
     "free-swig": "^1.5.4",
     "gridfs-stream": "^1.1.1",
