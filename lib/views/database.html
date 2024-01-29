@@ -3,9 +3,12 @@
 {% block title %}{{ dbName }}{% endblock %}
 
 {% block breadcrumb %}
+<li class="nav-item">
+  <a class="nav-link" href="{{ dbUrl }}">Database:</a>
+</li>
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-    Database: {{ dbName }}
+    {{ dbName }}
   </a>
   <ul class="dropdown-menu">
     {% for db in databases %}
