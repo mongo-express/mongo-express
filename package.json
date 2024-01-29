@@ -29,6 +29,7 @@
     "@json2csv/plainjs": "^7.0.5",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.20.2",
+    "bootstrap-paginator-2": "^2.0.0",
     "bson": "^6.2.0",
     "cli-color": "^2.0.3",
     "commander": "^11.1.0",

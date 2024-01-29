@@ -210,8 +210,10 @@
 {% else %}
 
 {% if pagination %}
-<nav aria-label="Page navigation mx-auto">
-  <ul class="pagination" id="pagination"></ul>
+<nav class="navbar" aria-label="Page navigation">
+  <div class="nav navbar-nav mx-auto">
+    <div id="paginator-top"></div>
+  </div>
 </nav>
 {% endif %}
 
@@ -272,8 +274,10 @@
 </div>
 
 {% if pagination %}
-<nav aria-label="Page navigation">
-  <ul class="pagination" id="pagination"></ul>
+<nav class="navbar" aria-label="Page navigation">
+  <div class="nav navbar-nav mx-auto">
+    <div id="paginator-bottom"></div>
+  </div>
 </nav>
 {% endif %}
 

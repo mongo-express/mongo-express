@@ -3230,6 +3230,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bootstrap-paginator-2@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "bootstrap-paginator-2@npm:2.0.0"
+  checksum: a8d354af644473e395f66f8136494b6c4ac81ab55536cff7a89bdbd494775909159a92e8fc3c6da745a7a9bc1d659464909869da24d4c20a1a7fe775766658ff
+  languageName: node
+  linkType: hard
+
 "bootstrap@npm:^4.6.2":
   version: 4.6.2
   resolution: "bootstrap@npm:4.6.2"
@@ -7609,6 +7616,7 @@ __metadata:
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.2"
     bootstrap: "npm:^4.6.2"
+    bootstrap-paginator-2: "npm:^2.0.0"
     bson: "npm:^6.2.0"
     chai: "npm:^5.0.3"
     clean-webpack-plugin: "npm:^4.0.0"
