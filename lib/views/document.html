@@ -24,29 +24,35 @@
 
 
 {% block breadcrumb %}
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-      Database: {{ dbName }}
-    </a>
-    <ul class="dropdown-menu">
-      {% for db in databases %}
-      <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
-      {% endfor %}
-    </ul>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-      Collection: {{ collectionName }}
-    </a>
-    <ul class="dropdown-menu">
-      {% for collection in collections %}
-      <a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a>
-      {% endfor %}
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">Document {{ document._id|stringDocIDs }}</a>
-  </li>
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+    {{ dbName }}
+  </a>
+  <ul class="dropdown-menu">
+    {% for db in databases %}
+    <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    {% endfor %}
+  </ul>
+</li>
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ collectionUrl }}">Collection:</a>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+    {{ collectionName }}
+  </a>
+  <ul class="dropdown-menu">
+    {% for collection in collections %}
+    <a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a>
+    {% endfor %}
+  </ul>
+</li>
+<li class="nav-item">
+  <a class="nav-link disabled">Document {{ document._id|stringDocIDs }}</a>
+</li>
 {% endblock %}
 
 {% block content %}

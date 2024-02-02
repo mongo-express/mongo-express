@@ -4,9 +4,12 @@
 
 
 {% block breadcrumb %}
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-    Database: {{ dbName }}
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+    {{ dbName }}
   </a>
   <ul class="dropdown-menu">
     {% for db in databases %}
@@ -14,9 +17,12 @@
     {% endfor %}
   </ul>
 </li>
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ dbUrl }}/{{ bucketName }}">Bucket:</a>
+</li>
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-    Bucket: {{ bucketName }}
+    {{ bucketName }}
   </a>
   <ul class="dropdown-menu">
     {% for bucket in buckets %}
