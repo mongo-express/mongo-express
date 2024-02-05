@@ -32,7 +32,7 @@
     "bootstrap-paginator-2": "^2.0.0",
     "bson": "^6.2.0",
     "cli-color": "^2.0.3",
-    "commander": "^11.1.0",
+    "commander": "^12.0.0",
     "cookie-parser": "1.4.6",
     "csurf": "1.11.0",
     "dotenv": "^16.4.1",
