@@ -72,7 +72,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-lodash": "^7.4.0",
-    "eslint-plugin-unicorn": "^50.0.1",
+    "eslint-plugin-unicorn": "^51.0.0",
     "file-loader": "^6.2.0",
     "jquery": "^3.7.1",
     "mocha": "^10.2.0",
