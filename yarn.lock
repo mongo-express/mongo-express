@@ -1820,9 +1820,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.12.19":
-  version: 3.12.19
-  resolution: "@cypress/code-coverage@npm:3.12.19"
+"@cypress/code-coverage@npm:^3.12.22":
+  version: 3.12.22
+  resolution: "@cypress/code-coverage@npm:3.12.22"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -1839,7 +1839,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: be53ebaedc85622791c929f5c252fedff065d7cecd8f1e0e863306ee6199cc165639a47d8de534c2193389b0982ed14d5f25f0e246cde3727739fa7ecdc77ea6
+  checksum: f6465a4bc461a386c5d72d6455e8c087e4a750aae2ec2ede0cf8218ff121256a6e61e9dcf2f10d7eba0f1968de12110f57ca116fbe51d063b83fad6445defb32
   languageName: node
   linkType: hard
 
@@ -7641,7 +7641,7 @@ __metadata:
     "@babel/core": "npm:^7.23.9"
     "@babel/eslint-parser": "npm:^7.23.10"
     "@babel/preset-env": "npm:^7.23.7"
-    "@cypress/code-coverage": "npm:^3.12.19"
+    "@cypress/code-coverage": "npm:^3.12.22"
     "@fastify/busboy": "npm:^2.1.0"
     "@json2csv/plainjs": "npm:^7.0.5"
     assets-webpack-plugin: "npm:^7.1.1"
