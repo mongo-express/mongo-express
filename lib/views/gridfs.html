@@ -58,6 +58,7 @@
       <td>
         <div class="col-md-1">
           <form method="POST" action="{{ dbUrl }}/gridFS/{{ bucketName }}/{{ file._id | json | safe | url_encode }}">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger">
               <i class="fa fa-trash"></i>
@@ -79,6 +80,7 @@
       <div class="col-md-12">
         <h2>Rename Bucket</h2>
         <form method="POST" action="{{ dbUrl }}/{{ bucketName }}" class="well form-inline">
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}">
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
             <input class="input-medium span7" type="text" id="bucket" name="bucket" placeholder="{{ bucketName }}">
@@ -96,7 +98,7 @@
     <h2>Add File</h2>
     <form method="POST" action="{{ dbUrl }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data"
       class="form-inline">
-
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
       <div class="form-group">
         <input type="file" class="form-control-file" name="filefield">
       </div>
