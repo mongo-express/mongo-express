@@ -56,7 +56,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/eslint-parser": "^7.23.10",
-    "@babel/preset-env": "^7.23.7",
+    "@babel/preset-env": "^7.23.9",
     "@cypress/code-coverage": "^3.12.22",
     "assets-webpack-plugin": "^7.1.1",
     "babel-loader": "^9.1.3",
