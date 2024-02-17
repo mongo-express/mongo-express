@@ -15,13 +15,13 @@
 </li>
 {% endblock %}
 
-
 {% block content %}
 <div class="card mb-3">
   <div class="card-header">
     <h4 class="d-inline-block">Databases</h4>
     {% if !settings.read_only %}
     <form class="form-inline float-right" method="POST">
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
       <div class="input-group">
         <input type="text" class="form-control" id="database" name="database" placeholder="Database name" />
         <div class="input-group-append">
@@ -49,6 +49,7 @@
         {% if !settings.read_only && !settings.no_delete %}
         <div class="col-md-2">
           <form method="POST" action="{{ baseHref }}{{ db | url_encode }}">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger btn-block deleteButton" database-name="{{ db }}">
               <i class="fa fa-trash d-block"></i>Delete

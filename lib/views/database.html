@@ -24,6 +24,7 @@
     <h4 class="d-inline-block">Collections</h4>
     {% if !settings.read_only %}
     <form class="form-inline float-right" method="POST">
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
       <div class="input-group">
         <input type="text" class="form-control" id="collection" name="collection" placeholder="Collection name" />
         <div class="input-group-append">
@@ -70,6 +71,7 @@
         {% if !settings.read_only && !settings.no_delete %}
         <div class="col-md-1 px-1">
           <form method="POST" action="{{ dbUrl }}/{{ c | url_encode }}">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}">
               <i class="fa fa-trash d-block"></i>Delete

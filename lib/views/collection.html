@@ -134,6 +134,7 @@
   action="{{ collectionUrl }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query|default('{}') }}&projection={{ projection }}&runAggregate={{ runAggregate }}">
   {# Router is smart enough to transform method=POST + _method=delete into actual HTTP DELETE, which is what we want
   #}
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
   <input type="hidden" name="_method" value="delete">
   <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
     <i class="fa fa-trash"></i>
@@ -149,6 +150,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="addDocumentForm" method="post" action="{{ collectionUrl }}">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="modal-header">
           <h2 class="modal-title">Add Document</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -162,7 +164,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success" onclick="return checkValidJSON()">
+          <button type="submit" class="btn btn-success" onclick="return checkValidJSON({{ csrfToken }})">
             <i class="fa fa-save"></i>
             Save
           </button>
@@ -178,6 +180,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="addIndexForm" method="post" action="{{ dbUrl }}/addIndex/{{ collectionName | url_encode }}">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="modal-header">
           <h2 class="modal-title">Add Indexes</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -259,6 +262,7 @@
           <form class="deleteButtonDocument" method="POST" style="display:inline;"
             action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
             <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <button type="submit" class="btn btn-danger">
               <i class="fa fa-trash"></i>
             </button>
@@ -292,6 +296,7 @@
   <h2 class="card-header">Rename Collection</h2>
   <div class="card-body">
     <form method="POST" action="{{ collectionUrl }}" class="form-inline">
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
       <input type="hidden" name="_method" value="put">
       <div class="input-group">
         <div class="input-group-prepend">
@@ -361,6 +366,7 @@
       <div class="col-sm-4 p-2">
         <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}"
           id="db-{{ dbName }}-{{ collectionName }}">
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}">
           <input type="hidden" name="_method" value="delete">
           <button type="submit" class="btn btn-danger deleteButtonCollection btn-block"
             collection-name="{{ collectionName }}">

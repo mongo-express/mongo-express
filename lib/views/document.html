@@ -73,7 +73,7 @@
   action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}"
 >
 {% endif %}
-
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
   {% if docLength > 10 %}
     <div>
       {% if !settings.read_only %}
@@ -130,6 +130,7 @@
   {% else %}
   <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}">
   {% endif %}
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
     <input type="hidden" name="_method" value="delete">
     <button type="submit" class="btn btn-danger deleteButtonDocument">
       <i class="fa fa-trash"></i>
