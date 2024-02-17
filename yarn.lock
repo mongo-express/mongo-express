@@ -5886,17 +5886,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:7.2.0":
-  version: 7.2.0
-  resolution: "glob@npm:7.2.0"
+"glob@npm:8.1.0":
+  version: 8.1.0
+  resolution: "glob@npm:8.1.0"
   dependencies:
     fs.realpath: "npm:^1.0.0"
     inflight: "npm:^1.0.4"
     inherits: "npm:2"
-    minimatch: "npm:^3.0.4"
+    minimatch: "npm:^5.0.1"
     once: "npm:^1.3.0"
-    path-is-absolute: "npm:^1.0.0"
-  checksum: bc78b6ea0735b6e23d20678aba4ae6a4760e8c9527e3c4683ac25b14e70f55f9531245dcf25959b70cbc4aa3dcce1fc37ab65fd026a4cbd70aa3a44880bd396b
+  checksum: 9aab1c75eb087c35dbc41d1f742e51d0507aa2b14c910d96fb8287107a10a22f4bbdce26fc0a3da4c69a20f7b26d62f1640b346a4f6e6becfff47f335bb1dc5e
   languageName: node
   linkType: hard
 
@@ -7602,9 +7601,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "mocha@npm:10.2.0"
+"mocha@npm:^10.3.0":
+  version: 10.3.0
+  resolution: "mocha@npm:10.3.0"
   dependencies:
     ansi-colors: "npm:4.1.1"
     browser-stdout: "npm:1.3.1"
@@ -7613,13 +7612,12 @@ __metadata:
     diff: "npm:5.0.0"
     escape-string-regexp: "npm:4.0.0"
     find-up: "npm:5.0.0"
-    glob: "npm:7.2.0"
+    glob: "npm:8.1.0"
     he: "npm:1.2.0"
     js-yaml: "npm:4.1.0"
     log-symbols: "npm:4.1.0"
     minimatch: "npm:5.0.1"
     ms: "npm:2.1.3"
-    nanoid: "npm:3.3.3"
     serialize-javascript: "npm:6.0.0"
     strip-json-comments: "npm:3.1.1"
     supports-color: "npm:8.1.1"
@@ -7630,7 +7628,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: f7362898ae65e8fe716cfe62fd014b432d100c9611aaf5abe85ed14efcbfdd82f3bdf32c44bccf00c9059a264c7e8d93a69dd5b830652109052a92beffb7ea35
+  checksum: 8b30b3fdb3f365fca7e069fce732e13db4192e1bf8f49e63ec67a3b7857c41cbcd162289ad22178db6ef405fb251b8a0dbb54e942d08c72abf45e1ec3fcdd052
   languageName: node
   linkType: hard
 
@@ -7681,7 +7679,7 @@ __metadata:
     lodash-es: "npm:^4.17.21"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
-    mocha: "npm:^10.2.0"
+    mocha: "npm:^10.3.0"
     mongodb: "npm:^6.3.0"
     mongodb-memory-server: "npm:^9.1.6"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
@@ -7870,15 +7868,6 @@ __metadata:
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:3.3.3":
-  version: 3.3.3
-  resolution: "nanoid@npm:3.3.3"
-  bin:
-    nanoid: bin/nanoid.cjs
-  checksum: c703ed58a234b68245a8a4826dd25c1453a9017d34fa28bc58e7aa8247de87d854582fa2209d7aee04084cff9ce150be8fd30300abe567dc615d4e8e735f2d99
   languageName: node
   linkType: hard
 
