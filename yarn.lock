@@ -3268,13 +3268,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^4.6.2":
-  version: 4.6.2
-  resolution: "bootstrap@npm:4.6.2"
+"bootstrap@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "bootstrap@npm:5.3.2"
   peerDependencies:
-    jquery: 1.9.1 - 3
-    popper.js: ^1.16.1
-  checksum: 28a66f1d869a21208c09245fc349540deda96db02005d9c3dfd3405399eb2775733e55c74aca14697898efadfe88718fe56832ff7da718e7eb4d73c9968f668c
+    "@popperjs/core": ^2.11.8
+  checksum: 5c3eb0634218d206bc2518154432bc80f7eec225db9c0dcb04b80353ba5cb121b8e6d12993ffe025d32ffe511051290461d8ca0adcae7971d82d329025bd16ab
   languageName: node
   linkType: hard
 
@@ -7651,7 +7650,7 @@ __metadata:
     babel-loader: "npm:^9.1.3"
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.2"
-    bootstrap: "npm:^4.6.2"
+    bootstrap: "npm:^5.3.2"
     bootstrap-paginator-2: "npm:^2.0.0"
     bson: "npm:^6.2.0"
     chai: "npm:^5.0.3"
