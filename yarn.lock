@@ -3559,16 +3559,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:^5.0.3":
-  version: 5.0.3
-  resolution: "chai@npm:5.0.3"
+"chai@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "chai@npm:5.1.0"
   dependencies:
     assertion-error: "npm:^2.0.1"
     check-error: "npm:^2.0.0"
     deep-eql: "npm:^5.0.1"
     loupe: "npm:^3.1.0"
     pathval: "npm:^2.0.0"
-  checksum: d9b2bb0e4591b4a73ea98bb7a6423c4e50dd35f43ce4404be26126796af970d844269bb0b07b21866620c542f07957003b34c5cf60095e5a84878af6b120cc2d
+  checksum: 4d4eee5ec61eeff9e9dfe05ae49ef4b48f1cc8e14e4d4c72476482cea85d824aff0e76d5c4d357026fb276870d705341068eef98d240cd90f008b9bd250e7a69
   languageName: node
   linkType: hard
 
@@ -7654,7 +7654,7 @@ __metadata:
     bootstrap: "npm:^4.6.2"
     bootstrap-paginator-2: "npm:^2.0.0"
     bson: "npm:^6.2.0"
-    chai: "npm:^5.0.3"
+    chai: "npm:^5.1.0"
     clean-webpack-plugin: "npm:^4.0.0"
     cli-color: "npm:^2.0.3"
     codemirror: "npm:^5.58.2"
