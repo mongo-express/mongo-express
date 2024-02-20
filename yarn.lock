@@ -7698,7 +7698,7 @@ __metadata:
     serve-favicon: "npm:^2.5.0"
     style-loader: "npm:^3.3.4"
     supertest: "npm:^6.3.4"
-    webpack: "npm:^5.90.1"
+    webpack: "npm:^5.90.3"
     webpack-cli: "npm:^5.1.4"
   bin:
     mongo-express: ./app.js
@@ -10736,9 +10736,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.90.1":
-  version: 5.90.1
-  resolution: "webpack@npm:5.90.1"
+"webpack@npm:^5.90.3":
+  version: 5.90.3
+  resolution: "webpack@npm:5.90.3"
   dependencies:
     "@types/eslint-scope": "npm:^3.7.3"
     "@types/estree": "npm:^1.0.5"
@@ -10769,7 +10769,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 6ad23518123f1742238177920cefa61152d981f986adac5901236845c86ba9bb375a3ba75e188925c856c3d2a76a2ba119e95b8a608a51424968389041089075
+  checksum: 48c9696eca950bfa7c943a24b8235fdf0575acd73a8eb1661f8189d3d1f431362f3a0e158e2941a7e4f0852ea6e32d7d4e89283149247e4389a8aad0fe6c247e
   languageName: node
   linkType: hard
 
