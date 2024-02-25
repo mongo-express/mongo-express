@@ -28,8 +28,6 @@ export default () => ({
 
   options: {
     documentsPerPage: 10,
-    editorTheme: 'rubyblue',
-
     logger: { skip: () => true },
     readOnly: false,
   },
