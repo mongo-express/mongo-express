@@ -24,6 +24,10 @@ export default {
       import: './lib/scripts/index.js',
       dependOn: 'vendor',
     },
+    login: {
+      import: './lib/scripts/login.js',
+      dependOn: 'vendor',
+    },
     database: {
       import: './lib/scripts/database.js',
       dependOn: 'vendor',
