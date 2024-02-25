@@ -40,7 +40,7 @@ rules:
     - devDependencies:
       - '**/test/**/*.js'
       - '**/scripts/*.js'
-      - '**/webpack.config.js'
+      - '**/webpack.config.mjs'
 
   lodash/callback-binding: error
   lodash/collection-method-value: error

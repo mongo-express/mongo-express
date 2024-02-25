@@ -13,12 +13,6 @@ const isProd = !isDev;
 
 const fileSuffix = isDev ? '' : '-[chunkhash].min';
 
-function resolveModulePath(name) {
-  return path.dirname(require.resolve(`${name}/package.json`));
-}
-
-const codemirrorPath = resolveModulePath('codemirror');
-
 export default {
   mode: isProd ? 'production' : 'development',
   performance: {
@@ -50,7 +44,7 @@ export default {
     // Shared
     vendor: './lib/scripts/vendor.js',
     codemirror: {
-      import: './lib/scripts/codeMirrorLoader.js',
+      import: './lib/scripts/editor.js',
       dependOn: 'vendor',
     },
   },
@@ -93,9 +87,6 @@ export default {
       patterns: [
         { from: 'public/images/*', to: 'img/[name][ext]' },
         { from: 'public/stylesheets/*', to: 'css/[name][ext]' },
-
-        { from: path.join(codemirrorPath, '/lib/codemirror.css'), to: 'css/[name][ext]' },
-        { from: path.join(codemirrorPath, '/theme'), to: 'css/theme/[name][ext]' },
       ],
     }),
 
