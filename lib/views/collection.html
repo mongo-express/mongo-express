@@ -2,17 +2,6 @@
 
 {% block title %}{{ collectionName }}{% endblock %}
 
-
-{% block styles %}
-<link href="{{ baseHref }}public/css/codemirror.css" rel="stylesheet">
-
-{% if editorTheme != "default" %}
-<link href="{{ baseHref }}public/css/theme/{{ editorTheme }}.css" rel="stylesheet">
-{% endif %}
-
-{% endblock %}
-
-
 {% block breadcrumb %}
 <li class="nav-item">
   <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
