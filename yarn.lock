@@ -5691,6 +5691,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flat@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "flat@npm:6.0.1"
+  bin:
+    flat: cli.js
+  checksum: c7a5f2e7e3ba0bec28b9c3aca27e68ff74df446df15cdb77ddef9e3d4fd0e9321ca52e49ca8b861c46157215006666b0dad25457f231083fc7bd2f7fcb67d7eb
+  languageName: node
+  linkType: hard
+
 "flatted@npm:^3.1.0":
   version: 3.2.7
   resolution: "flatted@npm:3.2.7"
@@ -7843,7 +7852,7 @@ __metadata:
     express-fileupload: "npm:^1.4.3"
     express-session: "npm:^1.18.0"
     file-loader: "npm:^6.2.0"
-    flat: "npm:^5.0.2"
+    flat: "npm:^6.0.1"
     free-swig: "npm:^1.5.4"
     gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.4.0"
