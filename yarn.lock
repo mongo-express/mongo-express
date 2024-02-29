@@ -2053,10 +2053,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/busboy@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@fastify/busboy@npm:2.1.0"
-  checksum: f22c1e5c52dc350ddf9ba8be9f87b48d3ea5af00a37fd0a0d1e3e4b37f94d96763e514c68a350c7f570260fdd2f08b55ee090cdd879f92a03249eb0e3fd19113
+"@fastify/busboy@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@fastify/busboy@npm:2.1.1"
+  checksum: 2bb8a7eca8289ed14c9eb15239bc1019797454624e769b39a0b90ed204d032403adc0f8ed0d2aef8a18c772205fa7808cf5a1b91f21c7bfc7b6032150b1062c5
   languageName: node
   linkType: hard
 
@@ -7801,7 +7801,7 @@ __metadata:
     "@codemirror/theme-one-dark": "npm:^6.1.2"
     "@codemirror/view": "npm:^6.24.1"
     "@cypress/code-coverage": "npm:^3.12.26"
-    "@fastify/busboy": "npm:^2.1.0"
+    "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
