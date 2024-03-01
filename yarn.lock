@@ -3516,6 +3516,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bson@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "bson@npm:6.4.0"
+  checksum: 929e3315bbbff06a652a589594e58f47b37354da9f9f4669614f2e13d5f3e6593ffe8363e72501a1c4f8f6cdefd6228d816e51d1cc3c2782ba38be2af6808258
+  languageName: node
+  linkType: hard
+
 "buffer-crc32@npm:~0.2.3":
   version: 0.2.13
   resolution: "buffer-crc32@npm:0.2.13"
@@ -7861,7 +7868,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.3.0"
-    mongodb: "npm:^6.3.0"
+    mongodb: "npm:^6.4.0"
     mongodb-memory-server: "npm:^9.1.6"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
@@ -7977,12 +7984,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "mongodb@npm:6.3.0"
+"mongodb@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "mongodb@npm:6.4.0"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.1.0"
-    bson: "npm:^6.2.0"
+    bson: "npm:^6.4.0"
     mongodb-connection-string-url: "npm:^3.0.0"
   peerDependencies:
     "@aws-sdk/credential-providers": ^3.188.0
@@ -8007,7 +8014,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 3b52734e6439c87098976d10a4ca342b60b66dd295877dce47355114efa88ea7322b853a398ef529be3693b37b73acda29886b2428d69649823128ab3fb995ab
+  checksum: a275d860db6836b696785214bfd73affe2a81318ae5186995de74d1e591385361ca586f730eee0da3d5ad13c77fb2c0f52efedbe0a60e84e5708dec63241467e
   languageName: node
   linkType: hard
 
