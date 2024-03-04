@@ -6338,10 +6338,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-entities@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "html-entities@npm:2.4.0"
-  checksum: 646f2f19214bad751e060ceef4df98520654a1d0cd631b55d45504df2f0aaf8a14d8c0a5a4f92b353be298774d856157ac2d04a031d78889c9011892078ca157
+"html-entities@npm:^2.5.2":
+  version: 2.5.2
+  resolution: "html-entities@npm:2.5.2"
+  checksum: 4ec12ebdf2d5ba8192c68e1aef3c1e4a4f36b29246a0a88464fe278a54517d0196d3489af46a3145c7ecacb4fc5fd50497be19eb713b810acab3f0efcf36fdc2
   languageName: node
   linkType: hard
 
@@ -7867,7 +7867,7 @@ __metadata:
     flat: "npm:^6.0.1"
     free-swig: "npm:^1.5.4"
     gridfs-stream: "npm:^1.1.1"
-    html-entities: "npm:^2.4.0"
+    html-entities: "npm:^2.5.2"
     jquery: "npm:^3.7.1"
     lodash-es: "npm:^4.17.21"
     memorystore: "npm:^1.6.7"
