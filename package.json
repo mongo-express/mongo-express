@@ -30,7 +30,7 @@
     "@codemirror/language": "^6.10.1",
     "@codemirror/state": "^6.4.1",
     "@codemirror/theme-one-dark": "^6.1.2",
-    "@codemirror/view": "^6.24.1",
+    "@codemirror/view": "^6.25.1",
     "@fastify/busboy": "^2.1.1",
     "@json2csv/plainjs": "^7.0.6",
     "basic-auth-connect": "^1.0.0",
