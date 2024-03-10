@@ -3,29 +3,23 @@
 {% block title %}{{ collectionName }}{% endblock %}
 
 {% block breadcrumb %}
-<li class="nav-item">
-  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
-</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle px-1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-    {{ dbName }}
+  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
+    Database: {{ dbName }}
   </a>
-  <ul class="dropdown-menu">
+  <ul id="navbarDatabaseDropdown" class="dropdown-menu">
     {% for db in databases %}
-    <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    <li><a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
     {% endfor %}
   </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link px-1" href="{{ collectionUrl }}">Collection:</a>
-</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle px-1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-    {{ collectionName }}
+  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarCollectionDropdown" data-bs-target="#navbarCollectionDropdown" data-bs-toggle="collapse" aria-expanded="false">
+    Collection: {{ collectionName }}
   </a>
-  <ul class="dropdown-menu">
+  <ul id="navbarCollectionDropdown" class="dropdown-menu">
     {% for collection in collections %}
-    <a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a>
+    <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
     {% endfor %}
   </ul>
 </li>
@@ -34,11 +28,11 @@
 {% block content %}
 {% if !settings.read_only %}
 <div class="btn-toolbar my-3" role="toolbar">
-  <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large mr-1">
+  <button type="button" data-bs-toggle="modal" data-bs-target="#addDocument" class="btn btn-success btn-large me-1">
     <i class="fas fa-plus"></i>
     New Document
   </button>
-  <button type="button" data-toggle="modal" data-target="#addIndex" class="btn btn-success btn-large">
+  <button type="button" data-bs-toggle="modal" data-bs-target="#addIndex" class="btn btn-success btn-large">
     <i class="fas fa-plus"></i>
     New Index
   </button>
@@ -47,10 +41,10 @@
 
 <ul id="tabs" class="nav nav-pills nav-fill" role="tablist">
   <li class="nav-item">
-    <a href="#simple" class="nav-link active" data-toggle="tab"><i class="fa fa-tag"></i> Simple</a>
+    <a href="#simple" class="nav-link active" data-bs-toggle="tab"><i class="fa fa-tag"></i> Simple</a>
   </li>
   <li class="nav-item">
-    <a href="#advanced" class="nav-link" data-toggle="tab"><i class="fa fa-tag"></i> Advanced</a>
+    <a href="#advanced" class="nav-link" data-bs-toggle="tab"><i class="fa fa-tag"></i> Advanced</a>
   </li>
 </ul>
 <div id="my-tab-content" class="tab-content bg-light p-3">
@@ -103,7 +97,7 @@
           <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="projection"
             name="projection" placeholder="Projection" title="Projection">{{ projection }}</textarea>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 d-grid">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="runAggregate" name="runAggregate" title="Run Aggregate"
               {% if runAggregate %} checked="checked" {% endif %}>
@@ -125,7 +119,7 @@
   #}
   <input type="hidden" name="_csrf" value="{{ csrfToken }}">
   <input type="hidden" name="_method" value="delete">
-  <button type="button" data-toggle="modal" data-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
+  <button type="button" data-bs-toggle="modal" data-bs-target="#deleteListModal" class="btn btn-danger btn-large btn-block">
     <i class="fa fa-trash"></i>
     Delete all {{count}} documents retrieved
   </button>
@@ -142,9 +136,7 @@
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="modal-header">
           <h2 class="modal-title">Add Document</h2>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="document-modal-body">
           <textarea id="document" name="document">{
@@ -152,7 +144,6 @@
 }</textarea>
         </div>
         <div class="modal-footer">
-          <button class="btn" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" onclick="return checkValidJSON({{ csrfToken }})">
             <i class="fa fa-save"></i>
             Save
@@ -172,9 +163,7 @@
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <div class="modal-header">
           <h2 class="modal-title">Add Indexes</h2>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="index-modal-body">
           <p>
@@ -186,7 +175,6 @@
 }</textarea>
         </div>
         <div class="modal-footer">
-          <button class="btn" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-success" onclick="return checkValidIndexJSON()">
             <i class="fa fa-save"></i>
             Save
@@ -309,21 +297,21 @@
   <div class="card-body">
     <div class="row">
       {% if !settings.me_no_export %}
-      <div class="col-sm-4 p-2">
+      <div class="col-sm-4 p-2 d-grid ">
         <a href="{{ dbUrl }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
           class="btn btn-warning btn-block text-white">
           <i class="fa fa-download d-block"></i>Export Standard
         </a>
       </div>
 
-      <div class="col-sm-4 p-2">
+      <div class="col-sm-4 p-2 d-grid ">
         <a href="{{ dbUrl }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
           class="btn btn-warning btn-block text-white">
           <i class="fa fa-download d-block"></i>Export --jsonArray
         </a>
       </div>
 
-      <div class="col-sm-4 p-2">
+      <div class="col-sm-4 p-2 d-grid ">
         <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
           class="btn btn-warning btn-block text-white">
           <i class="fa fa-download d-block"></i>Export --csv
@@ -331,13 +319,13 @@
       </div>
       {% endif %}
 
-      <div class="col-sm-4 p-2">
+      <div class="col-sm-4 p-2 d-grid ">
         <a href="{{ dbUrl }}/reIndex/{{ collectionName | url_encode }}" class="btn btn-warning btn-block text-white">
           <i class="fa fa-sync d-block"></i>Reindex
         </a>
       </div>
 
-      <div class="col-sm-4 p-2">
+      <div class="col-sm-4 p-2 d-grid ">
         <a class="btn btn-warning btn-block text-white import-file-link">
           <i class="fa fa-upload d-block"></i>Import --mongoexport json
         </a>
@@ -346,19 +334,19 @@
       </div>
 
       {% if !settings.read_only %}
-      <div class="col-sm-4 p-2">
+      <div class="col-sm-4 p-2 d-grid ">
         <a href="{{ dbUrl }}/compact/{{ collectionName | url_encode }}" class="btn btn-danger btn-block">
           <i class="fa fa-compress d-block"></i>Compact
         </a>
       </div>
       {% if !settings.no_delete %}
-      <div class="col-sm-4 p-2">
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}"
+      <div class="col-sm-4 p-2 d-grid ">
+        <form method="POST" class="d-grid" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName | url_encode }}"
           id="db-{{ dbName }}-{{ collectionName }}">
           <input type="hidden" name="_csrf" value="{{ csrfToken }}">
           <input type="hidden" name="_method" value="delete">
-          <button type="submit" class="btn btn-danger deleteButtonCollection btn-block"
-            collection-name="{{ collectionName }}">
+          <button type="submit" class="btn btn-danger d-grid  deleteButtonCollection btn-block"
+            data-collection-name="{{ collectionName }}">
             <i class="fa fa-trash d-block"></i>Delete
           </button>
         </form>
@@ -377,8 +365,8 @@
         Are you sure?
       </div>
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
-        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+        <button type="button" data-bs-dismiss="modal" class="btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -391,9 +379,9 @@
         Are you sure you want to delete all {{count}} documents?
       </div>
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn btn-danger"
+        <button type="button" data-bs-dismiss="modal" class="btn btn btn-danger"
           id="deleteListConfirmButton">Delete</button>
-        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+        <button type="button" data-bs-dismiss="modal" class="btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -404,9 +392,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Delete collection</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -419,8 +405,8 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn btn-danger" id="delete">Delete</button>
-        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn btn-danger" id="deleteCollectionConfirmation">Delete</button>
+        <button type="button" data-bs-dismiss="modal" class="btn">Cancel</button>
       </div>
     </div>
   </div>

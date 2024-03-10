@@ -2380,6 +2380,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@popperjs/core@npm:^2.11.8":
+  version: 2.11.8
+  resolution: "@popperjs/core@npm:2.11.8"
+  checksum: ddd16090cde777aaf102940f05d0274602079a95ad9805bd20bc55dcc7c3a2ba1b99dd5c73e5cc2753c3d31250ca52a67d58059459d7d27debb983a9f552936c
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/merge-streams@npm:^1.0.0":
   version: 1.0.0
   resolution: "@sindresorhus/merge-streams@npm:1.0.0"
@@ -3412,13 +3419,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^4.6.2":
-  version: 4.6.2
-  resolution: "bootstrap@npm:4.6.2"
+"bootstrap@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "bootstrap@npm:5.3.3"
   peerDependencies:
-    jquery: 1.9.1 - 3
-    popper.js: ^1.16.1
-  checksum: 28a66f1d869a21208c09245fc349540deda96db02005d9c3dfd3405399eb2775733e55c74aca14697898efadfe88718fe56832ff7da718e7eb4d73c9968f668c
+    "@popperjs/core": ^2.11.8
+  checksum: f05183948b00b496400cc13df5798ecab7a85975e7d9a77b314a763b574a990aec0f1bbf1913c648a93b5d8cc82e73bc05f5ec1161d2932aad7ef7f316d9c82d
   languageName: node
   linkType: hard
 
@@ -7846,11 +7852,12 @@ __metadata:
     "@cypress/code-coverage": "npm:^3.12.28"
     "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
+    "@popperjs/core": "npm:^2.11.8"
     assets-webpack-plugin: "npm:^7.1.1"
     babel-loader: "npm:^9.1.3"
     basic-auth-connect: "npm:^1.0.0"
     body-parser: "npm:^1.20.2"
-    bootstrap: "npm:^4.6.2"
+    bootstrap: "npm:^5.3.3"
     bootstrap-paginator-2: "npm:^2.0.0"
     bson: "npm:^6.4.0"
     chai: "npm:^5.1.0"

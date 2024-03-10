@@ -4,12 +4,12 @@
 
 {% block breadcrumb %}
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
     Database
   </a>
-  <ul class="dropdown-menu">
+  <ul id="navbarDatabaseDropdown" class="dropdown-menu">
     {% for db in databases %}
-    <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    <li><a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
     {% endfor %}
   </ul>
 </li>
@@ -20,7 +20,7 @@
   <div class="card-header">
     <h4 class="d-inline-block">Databases</h4>
     {% if !settings.read_only %}
-    <form class="form-inline float-right" method="POST">
+    <form class="form-inline float-end" method="POST">
       <input type="hidden" name="_csrf" value="{{ csrfToken }}">
       <div class="input-group">
         <input type="text" class="form-control" id="database" name="database" placeholder="Database name" />
@@ -38,7 +38,7 @@
     {% for db in databases %}
     <li class="list-group-item p-1">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 d-grid">
           <a href="{{ baseHref }}db/{{ db | url_encode }}/" class="btn btn-success btn-block">
             <i class="fa fa-eye d-block"></i>View
           </a>
@@ -47,11 +47,11 @@
           <h3 class="align-self-center m-0"><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></h3>
         </div>
         {% if !settings.read_only && !settings.no_delete %}
-        <div class="col-md-2">
-          <form method="POST" action="{{ baseHref }}{{ db | url_encode }}">
+        <div class="col-md-2 d-grid">
+          <form method="POST" class="d-grid" action="{{ baseHref }}{{ db | url_encode }}">
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="_method" value="delete">
-            <button type="submit" class="btn btn-danger btn-block deleteButton" database-name="{{ db }}">
+            <button type="submit" class="btn btn-danger btn-block deleteButton" data-database-name="{{ db }}">
               <i class="fa fa-trash d-block"></i>Delete
             </button>
           </form>
@@ -69,9 +69,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Delete database</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -83,8 +81,8 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn btn-danger" id="delete">Delete</button>
-        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn btn-danger" id="delete">Delete</button>
+        <button type="button" data-bs-dismiss="modal" class="btn">Cancel</button>
       </div>
     </div>
   </div>

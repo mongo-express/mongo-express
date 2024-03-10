@@ -3,16 +3,13 @@
 {% block title %}{{ dbName }}{% endblock %}
 
 {% block breadcrumb %}
-<li class="nav-item">
-  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
-</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle px-1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-    {{ dbName }}
+  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
+    Database: {{ dbName }}
   </a>
-  <ul class="dropdown-menu">
+  <ul id="navbarDatabaseDropdown" class="dropdown-menu">
     {% for db in databases %}
-    <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    <li><a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
     {% endfor %}
   </ul>
 </li>
@@ -23,7 +20,7 @@
   <div class="card-header">
     <h4 class="d-inline-block">Collections</h4>
     {% if !settings.read_only %}
-    <form class="form-inline float-right" method="POST">
+    <form class="form-inline float-end" method="POST">
       <input type="hidden" name="_csrf" value="{{ csrfToken }}">
       <div class="input-group">
         <input type="text" class="form-control" id="collection" name="collection" placeholder="Collection name" />
@@ -41,39 +38,39 @@
     {% for c in colls %}
     <li class="list-group-item p-1">
       <div class="row m-0">
-        <div class="col-md-2 px-1">
+        <div class="col-md-2 px-1 d-grid">
           <a href="{{ dbUrl }}/{{ c | url_encode }}" class="btn btn-success btn-block">
             <i class="fa fa-eye d-block"></i>View
           </a>
         </div>
         {% if !settings.me_no_export %}
-        <div class="col-md-1 px-1">
+        <div class="col-md-1 px-1 d-grid" >
           <a href="{{ dbUrl }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block text-white">
             <i class="fa fa-download d-block"></i>Export
           </a>
         </div>
         {% endif %}
-        <div class="col-md-1 px-1">
+        <div class="col-md-1 px-1 d-grid">
           <a href="{{ dbUrl }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block text-white">
             <i class="fa fa-download d-block"></i>[JSON]
           </a>
         </div>
-        <div class="col-md-1 px-1">
+        <div class="col-md-1 px-1 d-grid">
           <a class="btn btn-warning btn-block text-white import-file-link">
             <i class="fa fa-upload d-block"></i>Import
           </a>
           <input class="d-none import-input-file" type="file" name="import-file"
-            collection-name="{{ c | url_encode }}" />
+            data-collection-name="{{ c | url_encode }}" />
         </div>
         <div class="col-md px-1 d-flex">
           <h3 class="align-self-center m-0"><a href="{{ dbUrl }}/{{ c | url_encode }}">{{ c }}</a></h3>
         </div>
         {% if !settings.read_only && !settings.no_delete %}
-        <div class="col-md-1 px-1">
-          <form method="POST" action="{{ dbUrl }}/{{ c | url_encode }}">
+        <div class="col-md-1 px-1 d-grid">
+          <form method="POST" class="d-grid" action="{{ dbUrl }}/{{ c | url_encode }}">
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="_method" value="delete">
-            <button type="submit" class="btn btn-danger btn-block deleteButton" collection-name="{{ c }}">
+            <button type="submit" class="btn btn-danger btn-block deleteButton" data-collection-name="{{ c }}">
               <i class="fa fa-trash d-block"></i>Delete
             </button>
           </form>
@@ -91,9 +88,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Delete collection</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>
@@ -102,12 +97,12 @@
         </p>
         <p>
           <label for="confirmation-input">Type the database name to proceed:</label>
-          <input type="text" id="confirmation-input" name="confirmation-input" shouldbe="" value="" />
+          <input type="text" id="confirmation-input" name="confirmation-input" data-shouldbe="" value="" />
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn btn-danger" id="delete">Delete</button>
-        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn btn-danger" id="delete">Delete</button>
+        <button type="button" data-bs-dismiss="modal" class="btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -133,40 +128,6 @@
 </table>
 {% endif %}
 
-{% if !settings.read_only %}
-<!--div class="row">
-  <div class="col-md-6">
-    <h2>Create Collection</h2>
-    <form class="well form-inline" method="POST">
-        <div class="form-group">
-          <span class="add-on">{{ dbName }} . </span>
-          <input class="input-medium" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name">
-        </div>
-        <button type="submit" class="btn btn-primary float-right">
-          <span class="glyphicon glyphicon-plus"></span>
-          Create collection
-        </button>
-    </form>
-  </div>
-</div-->
-<!--
-<div class="row">
-  <div class="col-md-6">
-    <h2>Create GridFS Bucket</h2>
-    <form class="well form-inline" method="POST">
-        <div class="form-group">
-          <span class="add-on">{{ dbName }} . </span>
-          <input class="input-medium" type="text" id="bucket" name="bucket" placeholder="Bucket Name" title="Bucket Name">
-        </div>
-        <button type="submit" class="btn btn-primary float-right">
-          <span class="glyphicon glyphicon-plus"></span>
-          Create bucket
-        </button>
-    </form>
-  </div>
-</div>
- -->
-{% endif %}
 
 {% if stats != false %}
 <div class="card mb-3">
