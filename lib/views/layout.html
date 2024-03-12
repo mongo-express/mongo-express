@@ -18,7 +18,7 @@
 
 <body class="pb-3">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top p-0">
+  <nav class="navbar navbar-expand-lg navbar sticky-top p-0">
   <div class="{% if settings.fullwidth_layout %}container-fluid{% else %}container{% endif %}">
       <a class="navbar-brand" href="{{ baseHref }}">
         <img src="{{ baseHref }}public/img/mongo-express-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
@@ -33,6 +33,9 @@
           {% block breadcrumb %}
           {% endblock %}
         </ul>
+        <div class="dark-mode-toggle">
+          <i id="darkModeIcon" class="fa fa-moon"></i>
+        </div>
       </div>
   </div>
 </nav>
