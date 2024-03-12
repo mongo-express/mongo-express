@@ -2288,6 +2288,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mongodb-js/saslprep@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "@mongodb-js/saslprep@npm:1.1.5"
+  dependencies:
+    sparse-bitfield: "npm:^3.0.3"
+  checksum: 675ab9d0f414d714172e71ca88ab6e7a3b1b1a7c25a590955ba4fe67d3adb1b0c7304d2b7ba4be016b3c2a4b66fbd0bde3bd9fbe68e927811de2f8a567f0bb49
+  languageName: node
+  linkType: hard
+
 "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1":
   version: 5.1.1-v1
   resolution: "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1"
@@ -7891,7 +7900,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.3.0"
-    mongodb: "npm:^6.4.0"
+    mongodb: "npm:^6.5.0"
     mongodb-memory-server: "npm:^9.1.6"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
@@ -8007,11 +8016,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "mongodb@npm:6.4.0"
+"mongodb@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "mongodb@npm:6.5.0"
   dependencies:
-    "@mongodb-js/saslprep": "npm:^1.1.0"
+    "@mongodb-js/saslprep": "npm:^1.1.5"
     bson: "npm:^6.4.0"
     mongodb-connection-string-url: "npm:^3.0.0"
   peerDependencies:
@@ -8037,7 +8046,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: a275d860db6836b696785214bfd73affe2a81318ae5186995de74d1e591385361ca586f730eee0da3d5ad13c77fb2c0f52efedbe0a60e84e5708dec63241467e
+  checksum: 537fcb59035c907b5e0a85f806893c4a0936e8d04a0cf788f0720b539195160036d6c43e40bdc0c48432d24c42e969c296adcb1eabbf70a2c5a7aafe5459e800
   languageName: node
   linkType: hard
 
