@@ -82,10 +82,10 @@
     "file-loader": "^6.2.0",
     "jquery": "^3.7.1",
     "mocha": "^10.3.0",
-    "nyc": "^15.1.0",
     "mongodb-memory-server": "^9.1.7",
     "node-html-parser": "^6.1.12",
     "nodemon": "^3.1.0",
+    "nyc": "^15.1.0",
     "popper.js": "^1.16.1",
     "pre-commit": "1.2.2",
     "renderjson": "github:rtritto/renderjson#develop",
@@ -116,5 +116,5 @@
   ],
   "exports": "./middleware",
   "browserslist": "defaults",
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.1.1"
 }
