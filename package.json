@@ -83,7 +83,7 @@
     "jquery": "^3.7.1",
     "mocha": "^10.3.0",
     "nyc": "^15.1.0",
-    "mongodb-memory-server": "^9.1.6",
+    "mongodb-memory-server": "^9.1.7",
     "node-html-parser": "^6.1.12",
     "nodemon": "^3.1.0",
     "popper.js": "^1.16.1",
