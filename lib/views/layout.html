@@ -18,25 +18,25 @@
 
 <body class="pb-3">
 
-  <nav class="navbar navbar-expand-lg navbar sticky-top p-0">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light sticky-top p-0">
   <div class="{% if settings.fullwidth_layout %}container-fluid{% else %}container{% endif %}">
-      <a class="navbar-brand" href="{{ baseHref }}">
-        <img src="{{ baseHref }}public/img/mongo-express-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
-        Mongo Express
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto">
-          {% block breadcrumb %}
-          {% endblock %}
-        </ul>
-        <div class="dark-mode-toggle">
-          <i id="darkModeIcon" class="fa fa-moon"></i>
-        </div>
+    <a class="navbar-brand" href="{{ baseHref }}">
+      <img src="{{ baseHref }}public/img/mongo-express-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+      Mongo Express
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        {% block breadcrumb %}
+        {% endblock %}
+      </ul>
+      <div class="dark-mode-toggle">
+        <i id="darkModeIcon" class="fa fa-moon"></i>
       </div>
+    </div>
   </div>
 </nav>
 
@@ -70,20 +70,20 @@
 <script src="{{ baseHref }}{{assets.vendor.js}}"></script>
 <script type="text/javascript">
 
-window.ME_SETTINGS = {
-  readOnly: '{{ !!settings.read_only }}' === 'true',
-  noDelete: '{{ !!settings.no_delete }}' === 'true',
-  baseHref: '{{ baseHref }}',
-  collapsibleJSON: '{{ !!settings.me_collapsible_json }}' === 'true',
-  collapsibleJSONDefaultUnfold: Number.parseInt('{{ settings.me_collapsible_json_default_unfold || 0}}', 10),
-  confirmDelete: '{{ !!settings.me_confirm_delete }}' === 'true',
-  dbName: '{{ dbName | url_encode }}',
-  collectionName: '{{ collectionName | url_encode }}',
-  bucketName: '{{ bucketName }}',
-  limit: '{{ limit }}',
-  skip: '{{ skip }}',
-  totalPages: Math.ceil('{{ count }}' / '{{ limit }}')
-};
+  window.ME_SETTINGS = {
+    readOnly: '{{ !!settings.read_only }}' === 'true',
+    noDelete: '{{ !!settings.no_delete }}' === 'true',
+    baseHref: '{{ baseHref }}',
+    collapsibleJSON: '{{ !!settings.me_collapsible_json }}' === 'true',
+    collapsibleJSONDefaultUnfold: Number.parseInt('{{ settings.me_collapsible_json_default_unfold || 0}}', 10),
+    confirmDelete: '{{ !!settings.me_confirm_delete }}' === 'true',
+    dbName: '{{ dbName | url_encode }}',
+    collectionName: '{{ collectionName | url_encode }}',
+    bucketName: '{{ bucketName }}',
+    limit: '{{ limit }}',
+    skip: '{{ skip }}',
+    totalPages: Math.ceil('{{ count }}' / '{{ limit }}')
+  };
 </script>
 {% block scripts %}
 {% endblock %}
