@@ -4196,13 +4196,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.5.0":
-  version: 0.5.0
-  resolution: "cookie@npm:0.5.0"
-  checksum: 10/aae7911ddc5f444a9025fbd979ad1b5d60191011339bce48e555cb83343d0f98b865ff5c4d71fecdfb8555a5cafdc65632f6fce172f32aaf6936830a883a0380
-  languageName: node
-  linkType: hard
-
 "cookie@npm:0.6.0":
   version: 0.6.0
   resolution: "cookie@npm:0.6.0"
@@ -5446,16 +5439,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^4.18.3":
-  version: 4.18.3
-  resolution: "express@npm:4.18.3"
+"express@npm:^4.19.0":
+  version: 4.19.0
+  resolution: "express@npm:4.19.0"
   dependencies:
     accepts: "npm:~1.3.8"
     array-flatten: "npm:1.1.1"
     body-parser: "npm:1.20.2"
     content-disposition: "npm:0.5.4"
     content-type: "npm:~1.0.4"
-    cookie: "npm:0.5.0"
+    cookie: "npm:0.6.0"
     cookie-signature: "npm:1.0.6"
     debug: "npm:2.6.9"
     depd: "npm:2.0.0"
@@ -5481,7 +5474,7 @@ __metadata:
     type-is: "npm:~1.6.18"
     utils-merge: "npm:1.0.1"
     vary: "npm:~1.1.2"
-  checksum: 10/0bf4656d0020cdc477aec884c6245dceea78992f6c747c899c87dbb0598474658d4130a29c80f02c99d1f0d6ebef706e7131c70c5454c3e07aba761c5bd3d627
+  checksum: 10/13989b1bd5a6b8e77d83fa5d7ce7eaf1128b400156ed81d353f7660bb553e9990e1f5e93eb028677525a80773ebcead1da262aa4bfbd947cc25ab46f349cc47c
   languageName: node
   linkType: hard
 
@@ -7887,7 +7880,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.29.1"
     eslint-plugin-lodash: "npm:^7.4.0"
     eslint-plugin-unicorn: "npm:^51.0.1"
-    express: "npm:^4.18.3"
+    express: "npm:^4.19.0"
     express-fileupload: "npm:^1.4.3"
     express-session: "npm:^1.18.0"
     file-loader: "npm:^6.2.0"

@@ -45,7 +45,7 @@
     "csurf": "1.11.0",
     "dotenv": "^16.4.5",
     "errorhandler": "1.5.1",
-    "express": "^4.18.3",
+    "express": "^4.19.0",
     "express-fileupload": "^1.4.3",
     "express-session": "^1.18.0",
     "flat": "^6.0.1",
