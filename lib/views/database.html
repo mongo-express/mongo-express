@@ -37,36 +37,36 @@
   <ul class="list-group list-group-flush">
     {% for c in colls %}
     <li class="list-group-item p-1">
-      <div class="row m-0">
-        <div class="col-md-2 px-1 d-grid">
+      <div class="row row-cols-md-auto row-cols-1 m-0">
+        <div class="col px-0 px-md-1 py-1 py-md-0 d-grid">
           <a href="{{ dbUrl }}/{{ c | url_encode }}" class="btn btn-success btn-block">
             <i class="fa fa-eye d-block"></i>View
           </a>
         </div>
         {% if !settings.me_no_export %}
-        <div class="col-md-1 px-1 d-grid" >
+        <div class="col px-0 px-md-1 py-1 py-md-0 d-grid" >
           <a href="{{ dbUrl }}/export/{{ c | url_encode }}" class="btn btn-warning btn-block text-white">
             <i class="fa fa-download d-block"></i>Export
           </a>
         </div>
         {% endif %}
-        <div class="col-md-1 px-1 d-grid">
+        <div class="col px-0 px-md-1 py-1 py-md-0 d-grid">
           <a href="{{ dbUrl }}/expArr/{{ c | url_encode }}" class="btn btn-warning btn-block text-white">
             <i class="fa fa-download d-block"></i>[JSON]
           </a>
         </div>
-        <div class="col-md-1 px-1 d-grid">
+        <div class="col px-0 px-md-1 py-1 py-md-0 d-grid">
           <a class="btn btn-warning btn-block text-white import-file-link">
             <i class="fa fa-upload d-block"></i>Import
           </a>
           <input class="d-none import-input-file" type="file" name="import-file"
             data-collection-name="{{ c | url_encode }}" />
         </div>
-        <div class="col-md px-1 d-flex">
+        <div class="col-md-5 px-0 px-md-1 py-1 py-md-0 d-grid">
           <h3 class="align-self-center m-0"><a href="{{ dbUrl }}/{{ c | url_encode }}">{{ c }}</a></h3>
         </div>
         {% if !settings.read_only && !settings.no_delete %}
-        <div class="col-md-1 px-1 d-grid">
+        <div class="col px-0 px-md-1 py-1 py-md-0 d-grid ms-auto">
           <form method="POST" class="d-grid" action="{{ dbUrl }}/{{ c | url_encode }}">
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="_method" value="delete">
