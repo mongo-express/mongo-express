@@ -28,11 +28,11 @@
 {% block content %}
 {% if !settings.read_only %}
 <div class="btn-toolbar my-3" role="toolbar">
-  <button type="button" data-bs-toggle="modal" data-bs-target="#addDocument" class="btn btn-success btn-large me-1">
+  <button type="button" data-bs-toggle="modal" data-bs-target="#addDocument" class="btn btn-success btn-large me-1 m-1">
     <i class="fas fa-plus"></i>
     New Document
   </button>
-  <button type="button" data-bs-toggle="modal" data-bs-target="#addIndex" class="btn btn-success btn-large">
+  <button type="button" data-bs-toggle="modal" data-bs-target="#addIndex" class="btn btn-success btn-large m-1">
     <i class="fas fa-plus"></i>
     New Index
   </button>
@@ -55,15 +55,15 @@
         %}value="{{sort[column]}}" checked="checked" {% endif %} />
       {% endfor %}
       <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-4 py-1">
           <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key"
             title="Key" value="{{ key }}">
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-4 py-1">
           <input style="width:100%;" class="input-medium form-control" type="text" id="value" name="value"
             placeholder="Value" title="Value" value="{{ value }}">
         </div>
-        <div class="col-sm-6 col-md-2">
+        <div class="col-sm-6 col-md-2 py-1">
           <select name="type" class="form-control">
             <option value="S" {% if type=='S' %}selected {% endif %}>String</option>
             <option value="R" {% if type=='R' %}selected {% endif %}>Regex</option>
@@ -73,7 +73,7 @@
             <option value="U" {% if type=='U' %}selected {% endif %}>UUID (v4)</option>
           </select>
         </div>
-        <div class="col-sm-6 col-md-2">
+        <div class="col-sm-6 col-md-2 d-grid py-1">
           <button type="submit" class="btn btn-primary btn-block">
             <i class="fa fa-search"></i>
             Find
@@ -89,21 +89,21 @@
         %}value="{{sort[column]}}" checked="checked" {% endif %} />
       {% endfor %}
       <div class="row">
-        <div class="col-sm-6 col-md-5">
+        <div class="col-sm-6 col-md-5 py-1">
           <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="query" name="query"
             placeholder="Query" title="Query">{{ query }}</textarea>
         </div>
-        <div class="col-sm-6 col-md-5">
+        <div class="col-sm-6 col-md-5 py-1">
           <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="projection"
             name="projection" placeholder="Projection" title="Projection">{{ projection }}</textarea>
         </div>
-        <div class="col-md-2 d-grid">
+        <div class="col-md-2 d-grid py-1">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="runAggregate" name="runAggregate" title="Run Aggregate"
               {% if runAggregate %} checked="checked" {% endif %}>
             <label class="form-check-label" for="runAggregate">Aggregate query</label>
           </div>
-          <button style="height:120px;" type="submit" class="btn btn-primary btn-block">
+          <button type="submit" class="btn btn-primary btn-block">
             <i class="fa fa-search"></i>
             Find
           </button>
