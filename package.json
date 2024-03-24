@@ -46,7 +46,7 @@
     "dotenv": "^16.4.5",
     "errorhandler": "1.5.1",
     "express": "^4.18.3",
-    "express-fileupload": "^1.4.3",
+    "express-fileupload": "^1.5.0",
     "express-session": "^1.18.0",
     "flat": "^6.0.1",
     "free-swig": "^1.5.4",
