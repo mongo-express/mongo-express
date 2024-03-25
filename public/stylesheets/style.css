@@ -20,7 +20,6 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
   z-index: 10;
   position: absolute;
-  opacity: 0.5;
   width: 75px;
   right: 0;
   height: 100%;
