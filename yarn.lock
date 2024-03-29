@@ -7904,7 +7904,7 @@ __metadata:
     mongodb-memory-server: "npm:^9.1.7"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
-    node-html-parser: "npm:^6.1.12"
+    node-html-parser: "npm:^6.1.13"
     nodemon: "npm:^3.1.0"
     nyc: "npm:^15.1.0"
     popper.js: "npm:^1.16.1"
@@ -8164,13 +8164,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-html-parser@npm:^6.1.12":
-  version: 6.1.12
-  resolution: "node-html-parser@npm:6.1.12"
+"node-html-parser@npm:^6.1.13":
+  version: 6.1.13
+  resolution: "node-html-parser@npm:6.1.13"
   dependencies:
     css-select: "npm:^5.1.0"
     he: "npm:1.2.0"
-  checksum: 10/83e6b8bc2921522ca0eba7f2bdaad6d4a182cb3e578444504e2603fb35604a95a5787430be04066799669a27c6d3886a89c792b1848307bfad9028b9483752a0
+  checksum: 10/f5ebc5cea22e819e7b726b483e12241039ebdeac6eba198ebdb55a0921536798c1acd9c6f543e82f77542dc44fb2230f55891b1baae218c17969dd08f7295d14
   languageName: node
   linkType: hard
 
