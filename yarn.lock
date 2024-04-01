@@ -3542,6 +3542,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bson@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "bson@npm:6.5.0"
+  checksum: 10/52454e4af16942d130ccc2c7dc3b4db9e78f8103bd9cd73210bc010583adf0bc1892d944085ed1d0ac8388483ce17e2dd2e016f0749f27b1fcbeebae158e2e38
+  languageName: node
+  linkType: hard
+
 "buffer-crc32@npm:~0.2.3":
   version: 0.2.13
   resolution: "buffer-crc32@npm:0.2.13"
@@ -7868,7 +7875,7 @@ __metadata:
     body-parser: "npm:^1.20.2"
     bootstrap: "npm:^5.3.3"
     bootstrap-paginator-2: "npm:^2.0.0"
-    bson: "npm:^6.4.0"
+    bson: "npm:^6.5.0"
     chai: "npm:^5.1.0"
     clean-webpack-plugin: "npm:^4.0.0"
     cli-color: "npm:^2.0.4"
