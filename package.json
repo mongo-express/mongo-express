@@ -81,7 +81,7 @@
     "eslint-plugin-unicorn": "^51.0.1",
     "file-loader": "^6.2.0",
     "jquery": "^3.7.1",
-    "mocha": "^10.3.0",
+    "mocha": "^10.4.0",
     "mongodb-memory-server": "^9.1.7",
     "node-html-parser": "^6.1.13",
     "nodemon": "^3.1.0",
