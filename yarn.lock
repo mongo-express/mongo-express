@@ -7894,9 +7894,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.3.0":
-  version: 10.3.0
-  resolution: "mocha@npm:10.3.0"
+"mocha@npm:^10.4.0":
+  version: 10.4.0
+  resolution: "mocha@npm:10.4.0"
   dependencies:
     ansi-colors: "npm:4.1.1"
     browser-stdout: "npm:1.3.1"
@@ -7921,7 +7921,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: 10/8b30b3fdb3f365fca7e069fce732e13db4192e1bf8f49e63ec67a3b7857c41cbcd162289ad22178db6ef405fb251b8a0dbb54e942d08c72abf45e1ec3fcdd052
+  checksum: 10/0147b2a86c8a3b134b3bda949006aa5f2b08db606b9394e38eb3fa0d97dd2f54f06eb4afb270d4ae08aa6fb7674282737ed556b9a8bc407f9b8488380852eca4
   languageName: node
   linkType: hard
 
@@ -7979,7 +7979,7 @@ __metadata:
     lodash-es: "npm:^4.17.21"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
-    mocha: "npm:^10.3.0"
+    mocha: "npm:^10.4.0"
     mongodb: "npm:^6.5.0"
     mongodb-memory-server: "npm:^9.1.7"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
