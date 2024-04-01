@@ -5428,12 +5428,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-fileupload@npm:^1.4.3":
-  version: 1.4.3
-  resolution: "express-fileupload@npm:1.4.3"
+"express-fileupload@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "express-fileupload@npm:1.5.0"
   dependencies:
     busboy: "npm:^1.6.0"
-  checksum: 10/25ff544e7a1c59e5299061c9a75d4eb50983d82cd1a6d299195a0fd1f1c9bb46a23fda8a8c2c924b578b9a7894da90fe000a9785add7b3c2fbf0166f8ee5b6aa
+  checksum: 10/08ed9aa710b49c51ac6ba8b688424ed3e93b8155fd0450471a00348cccf599b08bd17a5fa132c3f4d44c0054aaeec19b307a4c80b2a0768a73693624b0b2d763
   languageName: node
   linkType: hard
 
@@ -7895,7 +7895,7 @@ __metadata:
     eslint-plugin-lodash: "npm:^7.4.0"
     eslint-plugin-unicorn: "npm:^51.0.1"
     express: "npm:^4.18.3"
-    express-fileupload: "npm:^1.4.3"
+    express-fileupload: "npm:^1.5.0"
     express-session: "npm:^1.18.0"
     file-loader: "npm:^6.2.0"
     flat: "npm:^6.0.1"
