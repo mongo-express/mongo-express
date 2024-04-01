@@ -3545,7 +3545,7 @@ __metadata:
 "bson@npm:^6.5.0":
   version: 6.5.0
   resolution: "bson@npm:6.5.0"
-  checksum: 52454e4af16942d130ccc2c7dc3b4db9e78f8103bd9cd73210bc010583adf0bc1892d944085ed1d0ac8388483ce17e2dd2e016f0749f27b1fcbeebae158e2e38
+  checksum: 10/52454e4af16942d130ccc2c7dc3b4db9e78f8103bd9cd73210bc010583adf0bc1892d944085ed1d0ac8388483ce17e2dd2e016f0749f27b1fcbeebae158e2e38
   languageName: node
   linkType: hard
 

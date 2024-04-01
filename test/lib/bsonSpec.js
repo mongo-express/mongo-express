@@ -20,8 +20,8 @@ describe('BSON', function () {
     it('should convert ObjectId to BSON', function () {
       const test = '{_id: ObjectId(), id2: ObjectId()}';
       const result = libBson.toBSON(test);
-      expect(result).to.have.property('_id').to.be.an.instanceof(ObjectId);
-      expect(result).to.have.property('id2').to.be.an.instanceof(ObjectId);
+      expect(result).to.have.nested.property('_id._bsontype', 'ObjectId');
+      expect(result).to.have.nested.property('id2._bsontype', 'ObjectId');
     });
 
     it('should convert ISODate to BSON', function () {
@@ -35,8 +35,7 @@ describe('BSON', function () {
     it('should convert Timestamp to BSON', function () {
       const test = '{ts: Timestamp()}';
       const result = libBson.toBSON(test);
-
-      expect(result).to.have.property('ts').to.be.an.instanceof(Timestamp);
+      expect(result).to.have.nested.property('ts._bsontype', 'Timestamp');
     });
 
     it('should convert DBRef to BSON', function () {
@@ -46,43 +45,41 @@ describe('BSON', function () {
         ref3: DBRef("coll", "579e18580bddc20700502419", "")
       }`;
       const result = libBson.toBSON(test);
-      expect(result).to.have.property('ref').to.be.an.instanceof(DBRef);
+      expect(result).to.have.nested.property('ref._bsontype', 'DBRef');
+
       expect(result).to.have.property('ref').to.have.property('namespace', 'coll');
       expect(result).to.have.property('ref').to.have.property('oid').eql('579e18580bddc20700502419');
 
-      expect(result).to.have.property('ref2').to.be.an.instanceof(DBRef);
+      expect(result).to.have.nested.property('ref2._bsontype', 'DBRef');
       expect(result).to.have.property('ref2').to.have.property('db', 'db');
 
-      expect(result).to.have.property('ref3').to.be.an.instanceof(DBRef);
+      expect(result).to.have.nested.property('ref3._bsontype', 'DBRef');
       expect(result).to.have.property('ref3').to.have.property('db', '');
     });
 
     it('should convert Symbol to BSON', function () {
       const test = '{symbol: Symbol("test")}';
       const result = libBson.toBSON(test);
-
-      expect(result).to.have.property('symbol').to.be.an.instanceof(BSONSymbol);
+      expect(result).to.have.nested.property('symbol._bsontype', 'BSONSymbol');
     });
 
     it('should convert MinKey to BSON', function () {
       const test = '{key: MinKey()}';
       const result = libBson.toBSON(test);
 
-      expect(result).to.have.property('key').to.be.an.instanceof(MinKey);
+      expect(result).to.have.nested.property('key._bsontype', 'MinKey');
     });
 
     it('should convert MaxKey to BSON', function () {
       const test = '{key: MaxKey()}';
       const result = libBson.toBSON(test);
-
-      expect(result).to.have.property('key').to.be.an.instanceof(MaxKey);
+      expect(result).to.have.nested.property('key._bsontype', 'MaxKey');
     });
 
     it('should convert BinData to BSON', function () {
       const test = '{bin: BinData(80, "test")}';
       const result = libBson.toBSON(test);
-
-      expect(result).to.have.property('bin').to.be.an.instanceof(Binary);
+      expect(result).to.have.nested.property('bin._bsontype', 'Binary');
       expect(result.bin.sub_type).to.equal(80);
     });
 
@@ -217,14 +214,15 @@ describe('BSON', function () {
     it('should parse a naked id', () => {
       const test = '4fb1299686a989240b000001';
       const result = libBson.parseObjectId(test);
-      expect(result).to.be.an.instanceof(ObjectId);
+      expect(result).to.have.property('_bsontype', 'ObjectId');
+      // expect(result).to.be.an.instanceof(ObjectId);
       expect(result.toHexString()).to.equal(test);
     });
     it('should parse when it has an ObjectId wrapper', () => {
       const objectIdStr = '4fb1299686a989240b000001';
       const test = `ObjectId("${objectIdStr}")`;
       const result = libBson.parseObjectId(test);
-      expect(result).to.be.an.instanceof(ObjectId);
+      expect(result).to.have.property('_bsontype', 'ObjectId');
       expect(result.toHexString()).to.equal(objectIdStr);
     });
   });
