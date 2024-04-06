@@ -200,12 +200,6 @@ Doing manually:
 - Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
 - Change the file `manifest.yml` to fit your Bluemix app and service environment
 
-Doing automatically:
-
-- Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/mongo-express/mongo-express.git)
-
 Then, take the following action to customize to your environment:
 
 - Create your `config.js` file based on `config.default.js`
