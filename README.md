@@ -197,7 +197,7 @@ By using Mongo Express Docker Extension, it's easy to setup Mongo Express on Doc
 Doing manually:
 
 - Git clone this repository
-- Create a new or use already created [MongoDB experimental service](https://www.ibm.com/products/databases-for-mongodb)
+- Create a new or use already created [MongoDB service](https://www.ibm.com/products/databases-for-mongodb)
 - Change the file `manifest.yml` to fit your IBM Cloud app and service environment
 
 Doing automatically:
