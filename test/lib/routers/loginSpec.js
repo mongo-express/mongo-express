@@ -18,7 +18,5 @@ describe('Router login', () => {
       expect(res.text).to.match(/<h3 class="card-title text-center">Auth<\/h3>/);
     }));
 
-  after(() => Promise.all([
-    close(),
-  ]));
+  after(() => close());
 });

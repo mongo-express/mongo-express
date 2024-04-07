@@ -1,6 +1,6 @@
 import mongoConfig from './testMongoConfig.js';
 
-export default () => ({
+const bsonSpec = () => ({
   mongodb: {
     connectionString: mongoConfig.makeConnectionUrl(),
 
@@ -32,3 +32,5 @@ export default () => ({
     readOnly: false,
   },
 });
+
+export default bsonSpec;
