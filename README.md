@@ -190,27 +190,27 @@ The default port exposed from the container is 8081, so visit `http://localhost:
 By using Mongo Express Docker Extension, it's easy to setup Mongo Express on Docker Desktop with [just one click](https://open.docker.com/extensions/marketplace?extensionId=ajeetraina/mongodb-express-docker-extension&tag=1.0).
 
 
-## Usage (Bluemix)
+## Usage (IBM Cloud)
 
-**Deploy to Bluemix**
+**Deploy to IBM Cloud**
 
 Doing manually:
 
 - Git clone this repository
-- Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
-- Change the file `manifest.yml` to fit your Bluemix app and service environment
+- Create a new or use already created [MongoDB service](https://www.ibm.com/products/databases-for-mongodb)
+- Change the file `manifest.yml` to fit your IBM Cloud app and service environment
 
 Doing automatically:
 
-- Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
+- Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on IBM Cloud
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/mongo-express/mongo-express.git)
+[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button_x2.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/mongo-express/mongo-express.git)
 
 Then, take the following action to customize to your environment:
 
 - Create your `config.js` file based on `config.default.js`
   - Check if it is necessary to change the `dbLabel` according to the MongoDB service created
-  - Change the `basicAuth` properties, not to keep the default values
+  - Change the `basicAuth` properties, do not to keep the default values
 
 ## Search
 
