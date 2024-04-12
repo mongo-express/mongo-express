@@ -1937,14 +1937,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.26.1":
-  version: 6.26.1
-  resolution: "@codemirror/view@npm:6.26.1"
+"@codemirror/view@npm:^6.26.3":
+  version: 6.26.3
+  resolution: "@codemirror/view@npm:6.26.3"
   dependencies:
     "@codemirror/state": "npm:^6.4.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10/6d2b19b2439c36b2712d3560eeb0c198ad2ee442ad22641c2b4bce94077812cffbb52ca12328219d3b9663b2dd0ffc63481432a2550839e5c7a7a53704e82a9a
+  checksum: 10/fa7cb5aa37db2d252ffd7cdbfb858b23a525ce9835648070b3c99eaaa361f686fa1997576bb258b7c34b6d6bd7a251a2294158e952239616102f783da1025fe4
   languageName: node
   linkType: hard
 
@@ -7937,7 +7937,7 @@ __metadata:
     "@codemirror/language": "npm:^6.10.1"
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.26.1"
+    "@codemirror/view": "npm:^6.26.3"
     "@cypress/code-coverage": "npm:^3.12.33"
     "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
