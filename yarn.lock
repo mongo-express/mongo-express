@@ -4429,9 +4429,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^13.7.1":
-  version: 13.7.1
-  resolution: "cypress@npm:13.7.1"
+"cypress@npm:^13.7.3":
+  version: 13.7.3
+  resolution: "cypress@npm:13.7.3"
   dependencies:
     "@cypress/request": "npm:^3.0.0"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -4477,7 +4477,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/897abf011156af85fae617b20177ed945fb76c78ac9bfad10af870e62181f9d56fdc886e00602e576cfbc79cc97230dc20c7bd5b4b87a4ada7ed83025fb147d3
+  checksum: 10/eca6f204b59523fb22c6e55811e8506ff22559f01d6bc3aafa4c4fcda1613518f895169c480b5a53910878549143d9b9529cc4ce6f2948d5e6c233683ca360ec
   languageName: node
   linkType: hard
 
@@ -7959,7 +7959,7 @@ __metadata:
     copy-webpack-plugin: "npm:^12.0.2"
     css-loader: "npm:^6.10.0"
     csurf: "npm:1.11.0"
-    cypress: "npm:^13.7.1"
+    cypress: "npm:^13.7.3"
     dotenv: "npm:^16.4.5"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.57.0"
