@@ -1955,9 +1955,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.12.33":
-  version: 3.12.33
-  resolution: "@cypress/code-coverage@npm:3.12.33"
+"@cypress/code-coverage@npm:^3.12.37":
+  version: 3.12.37
+  resolution: "@cypress/code-coverage@npm:3.12.37"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -1974,7 +1974,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/4502b4dc7c406a13524b4a551b0fe9494df307e6fd4ca4cf0ad59d9268f1591a5f4c0a8b1557e6a5e31bb1319dc85a19e1c9077208729dc89654c9f5da0666ce
+  checksum: 10/9a264569eadc9ea843a3c01d0c1e002b20a6a29e8080270834baa7af7132589a0b9696a3723ad7326854cef6066408e5b078fb6cdbcd0418dec5952f038c8b3f
   languageName: node
   linkType: hard
 
@@ -7938,7 +7938,7 @@ __metadata:
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
     "@codemirror/view": "npm:^6.26.1"
-    "@cypress/code-coverage": "npm:^3.12.33"
+    "@cypress/code-coverage": "npm:^3.12.37"
     "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@popperjs/core": "npm:^2.11.8"
