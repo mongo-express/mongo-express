@@ -1,4 +1,6 @@
 version: 2
+groups:
+- update-types: ["minor", "patch"]
 updates:
 - package-ecosystem: npm
   directory: "/"
