@@ -1,6 +1,4 @@
 version: 2
-groups:
-- update-types: ["minor", "patch"]
 updates:
 - package-ecosystem: npm
   directory: "/"
@@ -8,3 +6,8 @@ updates:
     interval: daily
   versioning-strategy: increase # Update package.json too
   open-pull-requests-limit: 10
+  groups:
+    patterns:
+     update-types: 
+        - "patch"
+        - "minor"
