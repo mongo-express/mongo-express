@@ -90,7 +90,7 @@
     "pre-commit": "1.2.2",
     "renderjson": "github:rtritto/renderjson#develop",
     "style-loader": "^4.0.0",
-    "supertest": "^6.3.4",
+    "supertest": "^7.0.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   },
