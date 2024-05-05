@@ -100,3 +100,5 @@ mongod
 instrumented/
 cypress/videos
 cypress/screenshots
+package-lock.json
+yarn.lock
