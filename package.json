@@ -55,7 +55,7 @@
     "lodash-es": "^4.17.21",
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
-    "mongodb": "^6.5.0",
+    "mongodb": "^6.6.0",
     "mongodb-query-parser": "github:rtritto/query-parser#4.0.0-fix-bindata",
     "morgan": "^1.10.0",
     "serve-favicon": "^2.5.0"
