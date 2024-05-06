@@ -100,20 +100,19 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "start": "NODE_ENV=production yarn node app.js",
-    "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"yarn build-dev\"",
+    "start": "NODE_ENV=production node app.js",
+    "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"npm run build-dev\"",
     "build-dev": "webpack --watch",
     "build": "NODE_ENV=production webpack",
     "test": "yarn mocha && yarn lint",
     "cy:run": "cypress run",
     "mocha": "NODE_ENV=test mocha",
     "test-watch": "NODE_ENV=test mocha --watch --reporter spec",
-    "prepublish": "yarn build"
+    "prepublish": "npm run build"
   },
   "pre-commit": [
     "test"
   ],
   "exports": "./middleware",
-  "browserslist": "defaults",
-  "packageManager": "yarn@4.1.1"
+  "browserslist": "defaults"
 }
