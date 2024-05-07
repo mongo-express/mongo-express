@@ -2086,9 +2086,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.12.38":
-  version: 3.12.38
-  resolution: "@cypress/code-coverage@npm:3.12.38"
+"@cypress/code-coverage@npm:^3.12.39":
+  version: 3.12.39
+  resolution: "@cypress/code-coverage@npm:3.12.39"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -2105,7 +2105,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/9ab38647496a70ffc39448ff19d627fa05d8bffee98f3bdb50b8efec402a84757347f8547c6d8992921eb149e4c638cc76d237d9b60cd9229b36d4b5e395e089
+  checksum: 10/f045265ab942aa6f48d9ecedc4626f85f8db863b7e52edc699f07276c4acf89eb619fbf2472ef2e12028dba21b743f8984bf41568cdc0ad1eff75387ba9afe65
   languageName: node
   linkType: hard
 
@@ -3713,13 +3713,6 @@ __metadata:
   version: 5.5.1
   resolution: "bson@npm:5.5.1"
   checksum: 10/4f72f0e68694cf422e990d301594e1eb81300ad7bd547244bbd5c2d12ec721cf4765a254376dd21e922b0ac8b5f89549d37423bdea11d5e645afbd37b433dc90
-  languageName: node
-  linkType: hard
-
-"bson@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "bson@npm:6.4.0"
-  checksum: 10/929e3315bbbff06a652a589594e58f47b37354da9f9f4669614f2e13d5f3e6593ffe8363e72501a1c4f8f6cdefd6228d816e51d1cc3c2782ba38be2af6808258
   languageName: node
   linkType: hard
 
@@ -8075,7 +8068,7 @@ __metadata:
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
     "@codemirror/view": "npm:^6.26.3"
-    "@cypress/code-coverage": "npm:^3.12.38"
+    "@cypress/code-coverage": "npm:^3.12.39"
     "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@popperjs/core": "npm:^2.11.8"
@@ -8117,7 +8110,7 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.4.0"
-    mongodb: "npm:^6.5.0"
+    mongodb: "npm:^6.6.1"
     mongodb-memory-server: "npm:^9.2.0"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
@@ -8233,12 +8226,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.5.0":
-  version: 6.5.0
-  resolution: "mongodb@npm:6.5.0"
+"mongodb@npm:^6.6.1":
+  version: 6.6.1
+  resolution: "mongodb@npm:6.6.1"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.1.5"
-    bson: "npm:^6.4.0"
+    bson: "npm:^6.7.0"
     mongodb-connection-string-url: "npm:^3.0.0"
   peerDependencies:
     "@aws-sdk/credential-providers": ^3.188.0
@@ -8263,7 +8256,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 10/537fcb59035c907b5e0a85f806893c4a0936e8d04a0cf788f0720b539195160036d6c43e40bdc0c48432d24c42e969c296adcb1eabbf70a2c5a7aafe5459e800
+  checksum: 10/0107bb35147e60a1aa06319983fdde3ba34f2d786a72e80cb6493002f8298c3e474cd5b831cf98669abf9942f35cbea520a1854c91d26b89a152c73ead0bbf5a
   languageName: node
   linkType: hard
 
