@@ -7936,12 +7936,12 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.4.0"
-    mongodb: "npm:^6.6.2"
-    mongodb-memory-server: "npm:^9.2.0"
+    mongodb: "npm:^6.7.0"
+    mongodb-memory-server: "npm:^9.3.0"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
-    nodemon: "npm:^3.1.1"
+    nodemon: "npm:^3.1.2"
     nyc: "npm:^15.1.0"
     popper.js: "npm:^1.16.1"
     pre-commit: "npm:1.2.2"
@@ -7976,9 +7976,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:9.2.0":
-  version: 9.2.0
-  resolution: "mongodb-memory-server-core@npm:9.2.0"
+"mongodb-memory-server-core@npm:9.3.0":
+  version: 9.3.0
+  resolution: "mongodb-memory-server-core@npm:9.3.0"
   dependencies:
     async-mutex: "npm:^0.4.0"
     camelcase: "npm:^6.3.0"
@@ -7988,21 +7988,21 @@ __metadata:
     https-proxy-agent: "npm:^7.0.4"
     mongodb: "npm:^5.9.1"
     new-find-package-json: "npm:^2.0.0"
-    semver: "npm:^7.6.0"
+    semver: "npm:^7.6.2"
     tar-stream: "npm:^3.1.7"
     tslib: "npm:^2.6.2"
     yauzl: "npm:^3.1.3"
-  checksum: 10/41fcad2f938d63dc059627fdcc0f5ddcfc21bb5387c1d729ea41a27a28c3b8e168e7770be96ce520b0b02b3639b6529a4a05ed497a030ca8b6ef3ec3d8107336
+  checksum: 10/80a69c65c74151205372fe0b78d63f74ad5e87c474c95879c7801ccee7fed8594f9f247a469f6df00ea2742f7c90c3b851f227e0ca1b7b1e9275d30995efe61b
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "mongodb-memory-server@npm:9.2.0"
+"mongodb-memory-server@npm:^9.3.0":
+  version: 9.3.0
+  resolution: "mongodb-memory-server@npm:9.3.0"
   dependencies:
-    mongodb-memory-server-core: "npm:9.2.0"
+    mongodb-memory-server-core: "npm:9.3.0"
     tslib: "npm:^2.6.2"
-  checksum: 10/7d8926b36416033faf8a452685a5b02b0500b3f1c2e413a2d8d9141a3619446eeb5899d15078f80aa3289302f72dc94ecd7febb1fd558708b7ec518a6d74826f
+  checksum: 10/36dfece22f16186372f547a7330ff8d524fb14f128f7b82ceb5fbaa5d69670f939a98409caaafedc8bc1e95df692919c04dddd89cec39124a5dd495b60086f2a
   languageName: node
   linkType: hard
 
@@ -8052,9 +8052,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.6.2":
-  version: 6.6.2
-  resolution: "mongodb@npm:6.6.2"
+"mongodb@npm:^6.7.0":
+  version: 6.7.0
+  resolution: "mongodb@npm:6.7.0"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.1.5"
     bson: "npm:^6.7.0"
@@ -8082,7 +8082,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 10/ccc4c952970c6f626d69396dcca07ee5f5b58871555e28b563a38c5cd2147b3d2844254f6e0aaffc7d807efa6a8a7ab7dbade41e83aa2de35bea18876ea426db
+  checksum: 10/47695b6668098e3e468446ecf070c5bf823b1c3a769e99e5659aa949575c36cb488fff4a05c7fd00cece2cd19ceda1e7f2862fc68631cc77d98d2b116a24a82d
   languageName: node
   linkType: hard
 
@@ -8240,9 +8240,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "nodemon@npm:3.1.1"
+"nodemon@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "nodemon@npm:3.1.2"
   dependencies:
     chokidar: "npm:^3.5.2"
     debug: "npm:^4"
@@ -8256,7 +8256,7 @@ __metadata:
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: 10/644708d64db4a9805b82f7d6324f359612e91be8389d7f3d6cd3d9f13750a0bc06e9ce5b66c0f67e828d7a5e280b9c070ab7e8882d2f1cc1593fd8300c2e6d59
+  checksum: 10/e5a87e42c874f9504fa5740c65692978c1f8444e9250598f167a3d55a90d3189a91790d35b4a2a0991b05d574f2679978449c6190b698a5c6e3f0343b5dfcac0
   languageName: node
   linkType: hard
 
@@ -9656,14 +9656,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.0":
-  version: 7.6.0
-  resolution: "semver@npm:7.6.0"
-  dependencies:
-    lru-cache: "npm:^6.0.0"
+"semver@npm:^7.6.2":
+  version: 7.6.2
+  resolution: "semver@npm:7.6.2"
   bin:
     semver: bin/semver.js
-  checksum: 10/1b41018df2d8aca5a1db4729985e8e20428c650daea60fcd16e926e9383217d00f574fab92d79612771884a98d2ee2a1973f49d630829a8d54d6570defe62535
+  checksum: 10/296b17d027f57a87ef645e9c725bff4865a38dfc9caf29b26aa084b85820972fbe7372caea1ba6857162fa990702c6d9c1d82297cecb72d56c78ab29070d2ca2
   languageName: node
   linkType: hard
 
