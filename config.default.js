@@ -135,6 +135,10 @@ export default {
     // documentsPerPage: how many documents you want to see at once in collection view
     documentsPerPage: process.env.ME_CONFIG_DOCUMENTS_PER_PAGE || 10,
 
+    // editorTheme: Name of the theme you want to use for displaying documents
+    // See https://github.com/vadimdemedes/thememirror for all examples
+    editorTheme: process.env.ME_CONFIG_OPTIONS_EDITORTHEME || 'dracula',
+
     // Maximum size of a single property & single row
     // Reduces the risk of sending a huge amount of data when viewing collections
     maxPropSize: (100 * 1000), // default 100KB

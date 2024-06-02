@@ -7949,6 +7949,7 @@ __metadata:
     serve-favicon: "npm:^2.5.0"
     style-loader: "npm:^4.0.0"
     supertest: "npm:^7.0.0"
+    thememirror: "npm:^2.0.1"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
   bin:
@@ -10390,6 +10391,17 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: 10/4383b5baaeffa9bb4cda2ac33a4aa2e6d1f8aaf811848bf73513a9b88fd76372dc461f6fd6d2e9cb5100f48b473be32c6f95bd983509b7d92bb4d92c10747452
+  languageName: node
+  linkType: hard
+
+"thememirror@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "thememirror@npm:2.0.1"
+  peerDependencies:
+    "@codemirror/language": ^6.0.0
+    "@codemirror/state": ^6.0.0
+    "@codemirror/view": ^6.0.0
+  checksum: 10/b873021cea6e5c31e0e980cf4f98af238a5149c2aa5676098eb8110f993865881e70064f9834b01852e75ca837ce5b2667862d2d700d67e3e7d44acb9bcf8734
   languageName: node
   linkType: hard
 

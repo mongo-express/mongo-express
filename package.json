@@ -58,7 +58,8 @@
     "mongodb": "^6.6.2",
     "mongodb-query-parser": "github:rtritto/query-parser#4.0.0-fix-bindata",
     "morgan": "^1.10.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "thememirror": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.6",
