@@ -1801,15 +1801,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/commands@npm:^6.5.0":
-  version: 6.5.0
-  resolution: "@codemirror/commands@npm:6.5.0"
+"@codemirror/commands@npm:^6.6.0":
+  version: 6.6.0
+  resolution: "@codemirror/commands@npm:6.6.0"
   dependencies:
     "@codemirror/language": "npm:^6.0.0"
     "@codemirror/state": "npm:^6.4.0"
-    "@codemirror/view": "npm:^6.0.0"
+    "@codemirror/view": "npm:^6.27.0"
     "@lezer/common": "npm:^1.1.0"
-  checksum: 10/2fa3e42e02e50a02cbf55c48c3f3f7891453c841b6399834a2898f4f3a286074ef13646341a60a89b53bd8372ed5885740ced869b9482e115a73305f792971fe
+  checksum: 10/e984511b8ac06a1afe01005a50af7a0b6765cf350547d281a13aedbcccbc8620187c6dce55caa0f7c8ba409771e4abb4aa3bae824b6870249c8176b57cc4a42e
   languageName: node
   linkType: hard
 
@@ -1828,7 +1828,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/language@npm:^6.0.0, @codemirror/language@npm:^6.10.1, @codemirror/language@npm:^6.6.0":
+"@codemirror/language@npm:^6.0.0, @codemirror/language@npm:^6.6.0":
   version: 6.10.1
   resolution: "@codemirror/language@npm:6.10.1"
   dependencies:
@@ -1839,6 +1839,20 @@ __metadata:
     "@lezer/lr": "npm:^1.0.0"
     style-mod: "npm:^4.0.0"
   checksum: 10/14bd54aec51a36945e176ebf0e85377be498b69c4056bdca7e2eeedeea1bcc9d644a7c9d55b7340101d6e895bdbef8bc2f3ed17daa4e53a9d1ec13c4be72b0b7
+  languageName: node
+  linkType: hard
+
+"@codemirror/language@npm:^6.10.2":
+  version: 6.10.2
+  resolution: "@codemirror/language@npm:6.10.2"
+  dependencies:
+    "@codemirror/state": "npm:^6.0.0"
+    "@codemirror/view": "npm:^6.23.0"
+    "@lezer/common": "npm:^1.1.0"
+    "@lezer/highlight": "npm:^1.0.0"
+    "@lezer/lr": "npm:^1.0.0"
+    style-mod: "npm:^4.0.0"
+  checksum: 10/ac78c639d2696a2d1f29b934c623fa599f5e32a64affb0a35526822dcbec22adb80fe4891d9c90e5a2cb5d56ed1578e97860050561d3aee6ee029f8af3c7f925
   languageName: node
   linkType: hard
 
@@ -1894,14 +1908,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.26.3":
-  version: 6.26.3
-  resolution: "@codemirror/view@npm:6.26.3"
+"@codemirror/view@npm:^6.27.0":
+  version: 6.27.0
+  resolution: "@codemirror/view@npm:6.27.0"
   dependencies:
     "@codemirror/state": "npm:^6.4.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10/fa7cb5aa37db2d252ffd7cdbfb858b23a525ce9835648070b3c99eaaa361f686fa1997576bb258b7c34b6d6bd7a251a2294158e952239616102f783da1025fe4
+  checksum: 10/dc57315690cd575897a69e3d64fc84d7268a5181fd9e7770d3cfda1c287352f818c667e44c88b2a7368c222d27f5ad0ee60c544dd3a35078217188a7bb10990d
   languageName: node
   linkType: hard
 
@@ -7888,12 +7902,12 @@ __metadata:
     "@babel/core": "npm:^7.24.6"
     "@babel/eslint-parser": "npm:^7.24.6"
     "@babel/preset-env": "npm:^7.24.6"
-    "@codemirror/commands": "npm:^6.5.0"
+    "@codemirror/commands": "npm:^6.6.0"
     "@codemirror/lang-javascript": "npm:^6.2.2"
-    "@codemirror/language": "npm:^6.10.1"
+    "@codemirror/language": "npm:^6.10.2"
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.26.3"
+    "@codemirror/view": "npm:^6.27.0"
     "@cypress/code-coverage": "npm:^3.12.39"
     "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
@@ -7936,12 +7950,12 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.4.0"
-    mongodb: "npm:^6.6.2"
-    mongodb-memory-server: "npm:^9.2.0"
+    mongodb: "npm:^6.7.0"
+    mongodb-memory-server: "npm:^9.3.0"
     mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
-    nodemon: "npm:^3.1.1"
+    nodemon: "npm:^3.1.3"
     nyc: "npm:^15.1.0"
     popper.js: "npm:^1.16.1"
     pre-commit: "npm:1.2.2"
@@ -7976,9 +7990,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:9.2.0":
-  version: 9.2.0
-  resolution: "mongodb-memory-server-core@npm:9.2.0"
+"mongodb-memory-server-core@npm:9.3.0":
+  version: 9.3.0
+  resolution: "mongodb-memory-server-core@npm:9.3.0"
   dependencies:
     async-mutex: "npm:^0.4.0"
     camelcase: "npm:^6.3.0"
@@ -7988,21 +8002,21 @@ __metadata:
     https-proxy-agent: "npm:^7.0.4"
     mongodb: "npm:^5.9.1"
     new-find-package-json: "npm:^2.0.0"
-    semver: "npm:^7.6.0"
+    semver: "npm:^7.6.2"
     tar-stream: "npm:^3.1.7"
     tslib: "npm:^2.6.2"
     yauzl: "npm:^3.1.3"
-  checksum: 10/41fcad2f938d63dc059627fdcc0f5ddcfc21bb5387c1d729ea41a27a28c3b8e168e7770be96ce520b0b02b3639b6529a4a05ed497a030ca8b6ef3ec3d8107336
+  checksum: 10/80a69c65c74151205372fe0b78d63f74ad5e87c474c95879c7801ccee7fed8594f9f247a469f6df00ea2742f7c90c3b851f227e0ca1b7b1e9275d30995efe61b
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "mongodb-memory-server@npm:9.2.0"
+"mongodb-memory-server@npm:^9.3.0":
+  version: 9.3.0
+  resolution: "mongodb-memory-server@npm:9.3.0"
   dependencies:
-    mongodb-memory-server-core: "npm:9.2.0"
+    mongodb-memory-server-core: "npm:9.3.0"
     tslib: "npm:^2.6.2"
-  checksum: 10/7d8926b36416033faf8a452685a5b02b0500b3f1c2e413a2d8d9141a3619446eeb5899d15078f80aa3289302f72dc94ecd7febb1fd558708b7ec518a6d74826f
+  checksum: 10/36dfece22f16186372f547a7330ff8d524fb14f128f7b82ceb5fbaa5d69670f939a98409caaafedc8bc1e95df692919c04dddd89cec39124a5dd495b60086f2a
   languageName: node
   linkType: hard
 
@@ -8052,9 +8066,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.6.2":
-  version: 6.6.2
-  resolution: "mongodb@npm:6.6.2"
+"mongodb@npm:^6.7.0":
+  version: 6.7.0
+  resolution: "mongodb@npm:6.7.0"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.1.5"
     bson: "npm:^6.7.0"
@@ -8082,7 +8096,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 10/ccc4c952970c6f626d69396dcca07ee5f5b58871555e28b563a38c5cd2147b3d2844254f6e0aaffc7d807efa6a8a7ab7dbade41e83aa2de35bea18876ea426db
+  checksum: 10/47695b6668098e3e468446ecf070c5bf823b1c3a769e99e5659aa949575c36cb488fff4a05c7fd00cece2cd19ceda1e7f2862fc68631cc77d98d2b116a24a82d
   languageName: node
   linkType: hard
 
@@ -8240,9 +8254,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "nodemon@npm:3.1.1"
+"nodemon@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "nodemon@npm:3.1.3"
   dependencies:
     chokidar: "npm:^3.5.2"
     debug: "npm:^4"
@@ -8256,7 +8270,7 @@ __metadata:
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: 10/644708d64db4a9805b82f7d6324f359612e91be8389d7f3d6cd3d9f13750a0bc06e9ce5b66c0f67e828d7a5e280b9c070ab7e8882d2f1cc1593fd8300c2e6d59
+  checksum: 10/ad55e76bb755c07b07c05b1b4ea7aca7bdf71bf8c7bfbf2db95e8ddcc964dde5eab9599c9de0db6899db9f2b98e573220f2d3c0796b41865ae754409e557cf50
   languageName: node
   linkType: hard
 
@@ -9656,14 +9670,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.0":
-  version: 7.6.0
-  resolution: "semver@npm:7.6.0"
-  dependencies:
-    lru-cache: "npm:^6.0.0"
+"semver@npm:^7.6.2":
+  version: 7.6.2
+  resolution: "semver@npm:7.6.2"
   bin:
     semver: bin/semver.js
-  checksum: 10/1b41018df2d8aca5a1db4729985e8e20428c650daea60fcd16e926e9383217d00f574fab92d79612771884a98d2ee2a1973f49d630829a8d54d6570defe62535
+  checksum: 10/296b17d027f57a87ef645e9c725bff4865a38dfc9caf29b26aa084b85820972fbe7372caea1ba6857162fa990702c6d9c1d82297cecb72d56c78ab29070d2ca2
   languageName: node
   linkType: hard
 
