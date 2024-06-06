@@ -42,6 +42,7 @@
     "codemirror": "^6.0.1",
     "commander": "^12.1.0",
     "cookie-parser": "1.4.6",
+    "cross-env": "^7.0.3",
     "csurf": "1.11.0",
     "dotenv": "^16.4.5",
     "errorhandler": "1.5.1",
@@ -100,19 +101,20 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "start": "NODE_ENV=production node app.js",
-    "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"npm run build-dev\"",
+    "start": "cross-env NODE_ENV=production node app.js",
+    "start-dev": "concurrently --kill-others \"nodemon app.js --watch lib\" \"webpack --watch\"",
     "build-dev": "webpack --watch",
-    "build": "NODE_ENV=production webpack",
-    "test": "yarn mocha && yarn lint",
+    "build": "cross-env NODE_ENV=production webpack",
+    "test": "cross-env NODE_ENV=test mocha && eslint .",
     "cy:run": "cypress run",
-    "mocha": "NODE_ENV=test mocha",
-    "test-watch": "NODE_ENV=test mocha --watch --reporter spec",
-    "prepublish": "npm run build"
+    "mocha": "cross-env NODE_ENV=test mocha",
+    "test-watch": "cross-env NODE_ENV=test mocha --watch --reporter spec",
+    "prepublish": "cross-env NODE_ENV=production webpack"
   },
   "pre-commit": [
     "test"
   ],
   "exports": "./middleware",
-  "browserslist": "defaults"
+  "browserslist": "defaults",
+  "packageManager": "yarn@4.1.1"
 }
