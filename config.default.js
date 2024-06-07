@@ -111,6 +111,7 @@ export default {
     sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
     sslEnabled: getBoolean(process.env.ME_CONFIG_SITE_SSL_ENABLED, false),
     sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
+    assets: process.env.ME_CONFIG_SITE_ASSETS_PATH || './build-assets.json',
   },
 
   healthCheck: {
