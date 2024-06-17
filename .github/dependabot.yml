@@ -3,9 +3,8 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
   versioning-strategy: increase # Update package.json too
-  open-pull-requests-limit: 10
   groups:
     patterns:
      update-types: 
