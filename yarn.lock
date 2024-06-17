@@ -5171,17 +5171,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-lodash@npm:^7.4.0":
-  version: 7.4.0
-  resolution: "eslint-plugin-lodash@npm:7.4.0"
-  dependencies:
-    lodash: "npm:^4.17.21"
-  peerDependencies:
-    eslint: ">=2"
-  checksum: 10/32093e260a7be14f64e8baf86d1dc15771d302a34dc0e7c700c3b4d2c7ea684274056241c99caf86ca34813fa8b6982e09902d26242b6fc346ad3c4719557777
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-unicorn@npm:^52.0.0":
   version: 52.0.0
   resolution: "eslint-plugin-unicorn@npm:52.0.0"
@@ -7425,13 +7414,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.21":
-  version: 4.17.21
-  resolution: "lodash-es@npm:4.17.21"
-  checksum: 10/03f39878ea1e42b3199bd3f478150ab723f93cc8730ad86fec1f2804f4a07c6e30deaac73cad53a88e9c3db33348bb8ceeb274552390e7a75d7849021c02df43
-  languageName: node
-  linkType: hard
-
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -7921,7 +7903,6 @@ __metadata:
     eslint: "npm:^8.57.0"
     eslint-config-airbnb-base: "npm:^15.0.0"
     eslint-plugin-import: "npm:^2.29.1"
-    eslint-plugin-lodash: "npm:^7.4.0"
     eslint-plugin-unicorn: "npm:^52.0.0"
     express: "npm:^4.19.2"
     express-fileupload: "npm:^1.5.0"
@@ -7932,7 +7913,6 @@ __metadata:
     gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.5.2"
     jquery: "npm:^3.7.1"
-    lodash-es: "npm:^4.17.21"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^10.4.0"
