@@ -2815,11 +2815,11 @@ __metadata:
   linkType: hard
 
 "acorn@npm:^8.1.0":
-  version: 8.11.2
-  resolution: "acorn@npm:8.11.2"
+  version: 8.12.0
+  resolution: "acorn@npm:8.12.0"
   bin:
     acorn: bin/acorn
-  checksum: 10/ff559b891382ad4cd34cc3c493511d0a7075a51f5f9f02a03440e92be3705679367238338566c5fbd3521ecadd565d29301bc8e16cb48379206bffbff3d72500
+  checksum: 10/550cc5033184eb98f7fbe2e9ddadd0f47f065734cc682f25db7a244f52314eb816801b64dec7174effd978045bd1754892731a90b1102b0ede9d17a15cfde138
   languageName: node
   linkType: hard
 
@@ -4513,7 +4513,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.3.4, debug@npm:^4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.2.0, debug@npm:^4.3.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4":
+"debug@npm:4, debug@npm:4.3.4, debug@npm:^4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
   dependencies:
@@ -4768,13 +4768,13 @@ __metadata:
   linkType: hard
 
 "ejson-shell-parser@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ejson-shell-parser@npm:2.0.0"
+  version: 2.0.1
+  resolution: "ejson-shell-parser@npm:2.0.1"
   dependencies:
     acorn: "npm:^8.1.0"
   peerDependencies:
     bson: ^4.6.3 || ^5 || ^6
-  checksum: 10/40aad66f6ec606bba48389ca4858318a9c9d6230291f6b45f1f2b2625dc0e06fcfbcb0f115129a22c9802cc915bf07e652f84b26256f683ab6c32bc60bc6f936
+  checksum: 10/6b60524f2eeafdec8e228d134f52e2e15050f60ba2059ac643230ccc5857ef680b3499c1b9bd9e66855a3aae9b478f87ed88caa1a2e5de6c76fd7b0105edbc7c
   languageName: node
   linkType: hard
 
@@ -7154,7 +7154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"javascript-stringify@npm:^2.0.1":
+"javascript-stringify@npm:^2.1.0":
   version: 2.1.0
   resolution: "javascript-stringify@npm:2.1.0"
   checksum: 10/721236ccec826c77167fec024b9ea1da7462690cf857bebfcc67a6fb346392d45cdce278e25e86b312ddeecdab1678a0f9fcc7f2c6e2883fbaaac3c735a237fd
@@ -7464,7 +7464,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
+"lodash@npm:^4.17.20, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10/c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
@@ -7940,7 +7940,7 @@ __metadata:
     mocha: "npm:^10.4.0"
     mongodb: "npm:^6.7.0"
     mongodb-memory-server: "npm:^9.3.0"
-    mongodb-query-parser: "github:rtritto/query-parser#4.0.0-fix-bindata"
+    mongodb-query-parser: "npm:^4.1.3"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
     nodemon: "npm:^3.1.3"
@@ -8008,17 +8008,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@github:rtritto/query-parser#4.0.0-fix-bindata":
-  version: 4.0.0
-  resolution: "mongodb-query-parser@https://github.com/rtritto/query-parser.git#commit=f7492af590475e27231a757d04492e8dec1d75ee"
+"mongodb-query-parser@npm:^4.1.3":
+  version: 4.1.3
+  resolution: "mongodb-query-parser@npm:4.1.3"
   dependencies:
-    debug: "npm:^4.2.0"
+    debug: "npm:^4.3.4"
     ejson-shell-parser: "npm:^2.0.0"
-    javascript-stringify: "npm:^2.0.1"
-    lodash: "npm:^4.17.15"
-  peerDependencies:
-    bson: ^5 || ^6
-  checksum: 10/0d3b913440b2aac4ae8e1ea506e779c83939022e9430202c239ce93b26f931c9fc2cb77cb1a0b12526936a85fc9cafc52bebe0f3e72407e398d5ddc17f360409
+    javascript-stringify: "npm:^2.1.0"
+    lodash: "npm:^4.17.21"
+  checksum: 10/e5b2bcc57b965c038923c8ede8085bbf0a1dcd91a4370eb03a857556f3b7fe354c05cb03c4a2e86f49b3892660d6616f9b140b0050cb4c441db8c375117987e7
   languageName: node
   linkType: hard
 
