@@ -7986,7 +7986,6 @@ __metadata:
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
     nodemon: "npm:^3.1.3"
-    nyc: "npm:^15.1.0"
     pre-commit: "npm:1.2.2"
     renderjson: "github:rtritto/renderjson#develop"
     serve-favicon: "npm:^2.5.0"
@@ -8372,7 +8371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nyc@npm:15.1.0, nyc@npm:^15.1.0":
+"nyc@npm:15.1.0":
   version: 15.1.0
   resolution: "nyc@npm:15.1.0"
   dependencies:
