@@ -1,12 +1,9 @@
-import { createRequire } from 'node:module';
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import AssetsPlugin from 'assets-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
 
-const require = createRequire(import.meta.url);
 const env = process.env.NODE_ENV || 'development';
 const isDev = env === 'development';
 const isProd = !isDev;
