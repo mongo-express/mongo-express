@@ -10,7 +10,6 @@ env:
   es6: true
 plugins:
   - import
-  - lodash
 rules:
   strict: [error, global]
   global-require: off
@@ -41,14 +40,6 @@ rules:
       - '**/test/**/*.js'
       - '**/scripts/*.js'
       - '**/webpack.config.mjs'
-
-  lodash/callback-binding: error
-  lodash/collection-method-value: error
-  lodash/collection-return: error
-  lodash/no-double-unwrap: error
-  lodash/no-extra-args: error
-  lodash/no-unbound-this: error
-  lodash/unwrap: error
 
   unicorn/filename-case: off
   unicorn/no-array-callback-reference: off
