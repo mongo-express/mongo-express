@@ -2,7 +2,7 @@
 
 import fs from 'node:fs';
 import https from 'node:https';
-import clc from 'cli-color';
+import pico from 'picocolors';
 import { program } from 'commander';
 import csrf from 'csurf';
 import express from 'express';
@@ -26,9 +26,9 @@ const loadConfig = async () => {
       const { default: configCustom } = await import('./config.js');
       return deepmerge(configDefault, configCustom);
     } catch (error) {
-      console.error(clc.red('Unable to load config.js!'));
-      console.error(clc.red('Error is:'));
-      console.log(clc.red(error));
+      console.error(pico.red('Unable to load config.js!'));
+      console.error(pico.red('Error is:'));
+      console.log(pico.red(error));
       process.exit(1);
     }
   } else {
@@ -60,20 +60,20 @@ async function bootstrap(config) {
       console.log('Mongo Express server listening', 'at ' + addressString);
 
       if (!config.site.host || config.site.host === '0.0.0.0') {
-        console.error(clc.red('Server is open to allow connections from anyone (0.0.0.0)'));
+        console.error(pico.red('Server is open to allow connections from anyone (0.0.0.0)'));
       }
 
       if (config.useBasicAuth !== true) {
-        console.warn(clc.red('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
+        console.warn(pico.red('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
       } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-        console.error(clc.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+        console.error(pico.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
       }
     }
   })
     .on('error', function (e) {
       if (e.code === 'EADDRINUSE') {
         console.log();
-        console.error(clc.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
+        console.error(pico.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
         console.log('Maybe mongo-express is already running?');
       }
 
