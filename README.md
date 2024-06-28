@@ -149,6 +149,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_BASICAUTH_USERNAME`                 | ``                                                  | mongo-express web login name. Sending an empty string will disable basic authentication.                                                                                        |
 | `ME_CONFIG_BASICAUTH_PASSWORD`                 | ``                                                  | mongo-express web login password.                                                                                                                                               |
 | `ME_CONFIG_REQUEST_SIZE`                       | `100kb`                                             | Used to configure maximum Mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser). |
+| `ME_CONFIG_OPTIONS_EDITORTHEME`                | `dracula`                                           | Web editor color theme, [more here](https://github.com/vadimdemedes/thememirror).                                                                                               |
 | `ME_CONFIG_OPTIONS_READONLY`                   | `false`                                             | if readOnly is true, components of writing are not visible.                                                                                                                     |
 | `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.                                                                                                  |
 | `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`          | `false`                                             | If set to true, remain on the same page after clicking on the Save button                                                                                                       |
@@ -170,6 +171,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
         --network web_default \
         -p 8081:8081 \
         -e ME_CONFIG_BASICAUTH_USERNAME="" \
+        -e ME_CONFIG_OPTIONS_EDITORTHEME="dracula" \
         -e ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
         mongo-express
 

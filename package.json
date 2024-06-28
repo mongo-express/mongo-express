@@ -60,7 +60,8 @@
     "morgan": "^1.10.0",
     "picocolors": "^1.0.1",
     "renderjson": "github:rtritto/renderjson#develop",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "thememirror": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",

@@ -2832,11 +2832,11 @@ __metadata:
   linkType: hard
 
 "acorn@npm:^8.1.0":
-  version: 8.12.0
-  resolution: "acorn@npm:8.12.0"
+  version: 8.11.2
+  resolution: "acorn@npm:8.11.2"
   bin:
     acorn: bin/acorn
-  checksum: 10/550cc5033184eb98f7fbe2e9ddadd0f47f065734cc682f25db7a244f52314eb816801b64dec7174effd978045bd1754892731a90b1102b0ede9d17a15cfde138
+  checksum: 10/ff559b891382ad4cd34cc3c493511d0a7075a51f5f9f02a03440e92be3705679367238338566c5fbd3521ecadd565d29301bc8e16cb48379206bffbff3d72500
   languageName: node
   linkType: hard
 
@@ -3489,11 +3489,11 @@ __metadata:
   linkType: hard
 
 "braces@npm:^3.0.1, braces@npm:~3.0.2":
-  version: 3.0.3
-  resolution: "braces@npm:3.0.3"
+  version: 3.0.2
+  resolution: "braces@npm:3.0.2"
   dependencies:
-    fill-range: "npm:^7.1.1"
-  checksum: 10/fad11a0d4697a27162840b02b1fad249c1683cbc510cd5bf1a471f2f8085c046d41094308c577a50a03a579dd99d5a6b3724c4b5e8b14df2c4443844cfcda2c6
+    fill-range: "npm:^7.0.1"
+  checksum: 10/966b1fb48d193b9d155f810e5efd1790962f2c4e0829f8440b8ad236ba009222c501f70185ef732fef17a4c490bb33a03b90dab0631feafbdf447da91e8165b1
   languageName: node
   linkType: hard
 
@@ -4739,13 +4739,13 @@ __metadata:
   linkType: hard
 
 "ejson-shell-parser@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "ejson-shell-parser@npm:2.0.1"
+  version: 2.0.0
+  resolution: "ejson-shell-parser@npm:2.0.0"
   dependencies:
     acorn: "npm:^8.1.0"
   peerDependencies:
     bson: ^4.6.3 || ^5 || ^6
-  checksum: 10/6b60524f2eeafdec8e228d134f52e2e15050f60ba2059ac643230ccc5857ef680b3499c1b9bd9e66855a3aae9b478f87ed88caa1a2e5de6c76fd7b0105edbc7c
+  checksum: 10/40aad66f6ec606bba48389ca4858318a9c9d6230291f6b45f1f2b2625dc0e06fcfbcb0f115129a22c9802cc915bf07e652f84b26256f683ab6c32bc60bc6f936
   languageName: node
   linkType: hard
 
@@ -5570,12 +5570,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fill-range@npm:^7.1.1":
-  version: 7.1.1
-  resolution: "fill-range@npm:7.1.1"
+"fill-range@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "fill-range@npm:7.0.1"
   dependencies:
     to-regex-range: "npm:^5.0.1"
-  checksum: 10/a7095cb39e5bc32fada2aa7c7249d3f6b01bd1ce461a61b0adabacccabd9198500c6fb1f68a7c851a657e273fce2233ba869638897f3d7ed2e87a2d89b4436ea
+  checksum: 10/e260f7592fd196b4421504d3597cc76f4a1ca7a9488260d533b611fc3cefd61e9a9be1417cb82d3b01ad9f9c0ff2dbf258e1026d2445e26b0cf5148ff4250429
   languageName: node
   linkType: hard
 
@@ -7817,6 +7817,7 @@ __metadata:
     serve-favicon: "npm:^2.5.0"
     style-loader: "npm:^4.0.0"
     supertest: "npm:^7.0.0"
+    thememirror: "npm:^2.0.1"
     webpack: "npm:^5.92.0"
     webpack-cli: "npm:^5.1.4"
   bin:
@@ -10165,6 +10166,17 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: 10/4383b5baaeffa9bb4cda2ac33a4aa2e6d1f8aaf811848bf73513a9b88fd76372dc461f6fd6d2e9cb5100f48b473be32c6f95bd983509b7d92bb4d92c10747452
+  languageName: node
+  linkType: hard
+
+"thememirror@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "thememirror@npm:2.0.1"
+  peerDependencies:
+    "@codemirror/language": ^6.0.0
+    "@codemirror/state": ^6.0.0
+    "@codemirror/view": ^6.0.0
+  checksum: 10/b873021cea6e5c31e0e980cf4f98af238a5149c2aa5676098eb8110f993865881e70064f9834b01852e75ca837ce5b2667862d2d700d67e3e7d44acb9bcf8734
   languageName: node
   linkType: hard
 
