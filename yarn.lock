@@ -1916,7 +1916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.28.1":
+"@codemirror/view@npm:^6.27.0":
   version: 6.28.1
   resolution: "@codemirror/view@npm:6.28.1"
   dependencies:
@@ -1924,6 +1924,17 @@ __metadata:
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
   checksum: 10/0c029d422209d632c568e39e11e02e5ea1fb74cab526354622d807c4c12ac9757b70a4594e553ccec59a3f6f5c89fafa6c4d199d9a771a27f12d6534b618e05b
+  languageName: node
+  linkType: hard
+
+"@codemirror/view@npm:^6.28.2":
+  version: 6.28.2
+  resolution: "@codemirror/view@npm:6.28.2"
+  dependencies:
+    "@codemirror/state": "npm:^6.4.0"
+    style-mod: "npm:^4.1.0"
+    w3c-keyname: "npm:^2.2.4"
+  checksum: 10/c4221d6e47112ec3ec20c954deecab4565a8023dfeefabff8ba1801fb67d2965d49c27853310618fd723077ca86564b4bbefa36f0839d9430518f7d0a1cc3e84
   languageName: node
   linkType: hard
 
@@ -3245,12 +3256,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-mutex@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "async-mutex@npm:0.4.0"
+"async-mutex@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "async-mutex@npm:0.4.1"
   dependencies:
     tslib: "npm:^2.4.0"
-  checksum: 10/4a55065aae8c7283e45e2a8ac38ba9812f030696640d650c4ec62cfd67e5d61bd698e67b758a81fcb845e2d5ea1d857106f9235cc4282ad40cd1944b26fde1b2
+  checksum: 10/7e9f77b112b8545beb6612493fae4a8d9d1d6c3f24fc22f4d6d05ce96d1e8d326ac3e743a804cc6d7bf24e7ef0267afb65bb127f99b2e433609684b38933ff1c
   languageName: node
   linkType: hard
 
@@ -3588,6 +3599,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bson@npm:^6.8.0":
+  version: 6.8.0
+  resolution: "bson@npm:6.8.0"
+  checksum: 10/e73784ae891a30388e69e6f7a5b5962c34c180e0c1dc570c1e13815cdb1076d2253362f6e20e24a419bd1aa2aaf9f388a51049a1fcd19e8b947faec90edd2979
+  languageName: node
+  linkType: hard
+
 "buffer-crc32@npm:~0.2.3":
   version: 0.2.13
   resolution: "buffer-crc32@npm:0.2.13"
@@ -3819,7 +3837,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:3.5.3, chokidar@npm:^3.5.2":
+"chokidar@npm:^3.5.2":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -3835,6 +3853,25 @@ __metadata:
     fsevents:
       optional: true
   checksum: 10/863e3ff78ee7a4a24513d2a416856e84c8e4f5e60efbe03e8ab791af1a183f569b62fc6f6b8044e2804966cb81277ddbbc1dc374fba3265bd609ea8efd62f5b3
+  languageName: node
+  linkType: hard
+
+"chokidar@npm:^3.5.3":
+  version: 3.6.0
+  resolution: "chokidar@npm:3.6.0"
+  dependencies:
+    anymatch: "npm:~3.1.2"
+    braces: "npm:~3.0.2"
+    fsevents: "npm:~2.3.2"
+    glob-parent: "npm:~5.1.2"
+    is-binary-path: "npm:~2.1.0"
+    is-glob: "npm:~4.0.1"
+    normalize-path: "npm:~3.0.0"
+    readdirp: "npm:~3.6.0"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  checksum: 10/c327fb07704443f8d15f7b4a7ce93b2f0bc0e6cea07ec28a7570aa22cd51fcf0379df589403976ea956c369f25aa82d84561947e227cd925902e1751371658df
   languageName: node
   linkType: hard
 
@@ -4382,9 +4419,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^13.11.0":
-  version: 13.11.0
-  resolution: "cypress@npm:13.11.0"
+"cypress@npm:^13.12.0":
+  version: 13.12.0
+  resolution: "cypress@npm:13.12.0"
   dependencies:
     "@cypress/request": "npm:^3.0.0"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -4430,7 +4467,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/3890f8db0ad91b5ff103dde4e7a8f47575bf55c3304ce3aa44776596580463fb2eead56f1b8ae29ebb2592879ffbccca158ae67a7db33dabdeb818c619bb5c2d
+  checksum: 10/cf25219d336669a93541f4df5f415ad35fa944014157c12793db359c48946f0843fd6499315deb5b95f095a5319086df21fe2870461944931d0bca1e6cfcce77
   languageName: node
   linkType: hard
 
@@ -4502,6 +4539,18 @@ __metadata:
   dependencies:
     ms: "npm:^2.1.1"
   checksum: 10/d86fd7be2b85462297ea16f1934dc219335e802f629ca9a69b63ed8ed041dda492389bb2ee039217c02e5b54792b1c51aa96ae954cf28634d363a2360c7a1639
+  languageName: node
+  linkType: hard
+
+"debug@npm:^4.3.5":
+  version: 4.3.5
+  resolution: "debug@npm:4.3.5"
+  dependencies:
+    ms: "npm:2.1.2"
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 10/cb6eab424c410e07813ca1392888589972ce9a32b8829c6508f5e1f25f3c3e70a76731610ae55b4bbe58d1a2fffa1424b30e97fa8d394e49cd2656a9643aedd2
   languageName: node
   linkType: hard
 
@@ -7722,13 +7771,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.4.0":
-  version: 10.4.0
-  resolution: "mocha@npm:10.4.0"
+"mocha@npm:^10.5.2":
+  version: 10.5.2
+  resolution: "mocha@npm:10.5.2"
   dependencies:
     ansi-colors: "npm:4.1.1"
     browser-stdout: "npm:1.3.1"
-    chokidar: "npm:3.5.3"
+    chokidar: "npm:^3.5.3"
     debug: "npm:4.3.4"
     diff: "npm:5.0.0"
     escape-string-regexp: "npm:4.0.0"
@@ -7749,7 +7798,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: 10/0147b2a86c8a3b134b3bda949006aa5f2b08db606b9394e38eb3fa0d97dd2f54f06eb4afb270d4ae08aa6fb7674282737ed556b9a8bc407f9b8488380852eca4
+  checksum: 10/5d14c91597d2eaa86b2b900b53babcfa351b9efdeb8d84fd6f953a7d270bf7f387718f25cbd31dd7b72c626001c56ef3caf8aeb87f04fa0ea8e499db5f7905bf
   languageName: node
   linkType: hard
 
@@ -7765,7 +7814,7 @@ __metadata:
     "@codemirror/language": "npm:^6.10.2"
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.28.1"
+    "@codemirror/view": "npm:^6.28.2"
     "@cypress/code-coverage": "npm:^3.12.39"
     "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
@@ -7776,7 +7825,7 @@ __metadata:
     body-parser: "npm:^1.20.2"
     bootstrap: "npm:^5.3.3"
     bootstrap-paginator-2: "npm:^2.0.0"
-    bson: "npm:^6.7.0"
+    bson: "npm:^6.8.0"
     chai: "npm:^5.1.1"
     clean-webpack-plugin: "npm:^4.0.0"
     codemirror: "npm:^6.0.1"
@@ -7786,7 +7835,7 @@ __metadata:
     copy-webpack-plugin: "npm:^12.0.2"
     css-loader: "npm:^7.1.2"
     csurf: "npm:1.11.0"
-    cypress: "npm:^13.11.0"
+    cypress: "npm:^13.12.0"
     dotenv: "npm:^16.4.5"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.57.0"
@@ -7805,19 +7854,19 @@ __metadata:
     jquery: "npm:^3.7.1"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
-    mocha: "npm:^10.4.0"
-    mongodb: "npm:^6.7.0"
-    mongodb-memory-server: "npm:^9.3.0"
+    mocha: "npm:^10.5.2"
+    mongodb: "npm:^6.8.0"
+    mongodb-memory-server: "npm:^9.4.0"
     mongodb-query-parser: "npm:^4.1.3"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
-    nodemon: "npm:^3.1.3"
+    nodemon: "npm:^3.1.4"
     picocolors: "npm:^1.0.1"
     renderjson: "github:rtritto/renderjson#develop"
     serve-favicon: "npm:^2.5.0"
     style-loader: "npm:^4.0.0"
     supertest: "npm:^7.0.0"
-    webpack: "npm:^5.92.0"
+    webpack: "npm:^5.92.1"
     webpack-cli: "npm:^5.1.4"
   bin:
     mongo-express: ./app.js
@@ -7844,33 +7893,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-memory-server-core@npm:9.3.0":
-  version: 9.3.0
-  resolution: "mongodb-memory-server-core@npm:9.3.0"
+"mongodb-memory-server-core@npm:9.4.0":
+  version: 9.4.0
+  resolution: "mongodb-memory-server-core@npm:9.4.0"
   dependencies:
-    async-mutex: "npm:^0.4.0"
+    async-mutex: "npm:^0.4.1"
     camelcase: "npm:^6.3.0"
-    debug: "npm:^4.3.4"
+    debug: "npm:^4.3.5"
     find-cache-dir: "npm:^3.3.2"
     follow-redirects: "npm:^1.15.6"
     https-proxy-agent: "npm:^7.0.4"
-    mongodb: "npm:^5.9.1"
+    mongodb: "npm:^5.9.2"
     new-find-package-json: "npm:^2.0.0"
     semver: "npm:^7.6.2"
     tar-stream: "npm:^3.1.7"
-    tslib: "npm:^2.6.2"
+    tslib: "npm:^2.6.3"
     yauzl: "npm:^3.1.3"
-  checksum: 10/80a69c65c74151205372fe0b78d63f74ad5e87c474c95879c7801ccee7fed8594f9f247a469f6df00ea2742f7c90c3b851f227e0ca1b7b1e9275d30995efe61b
+  checksum: 10/15ed1ff4f4968600d6f80f1a3b6ec7068cf3e88f3c2c8c63c545f70a78acb5604167d9063c039a7db994865fac2cb194be50a6f790e8fd7255288c71a7bd7a77
   languageName: node
   linkType: hard
 
-"mongodb-memory-server@npm:^9.3.0":
-  version: 9.3.0
-  resolution: "mongodb-memory-server@npm:9.3.0"
+"mongodb-memory-server@npm:^9.4.0":
+  version: 9.4.0
+  resolution: "mongodb-memory-server@npm:9.4.0"
   dependencies:
-    mongodb-memory-server-core: "npm:9.3.0"
-    tslib: "npm:^2.6.2"
-  checksum: 10/36dfece22f16186372f547a7330ff8d524fb14f128f7b82ceb5fbaa5d69670f939a98409caaafedc8bc1e95df692919c04dddd89cec39124a5dd495b60086f2a
+    mongodb-memory-server-core: "npm:9.4.0"
+    tslib: "npm:^2.6.3"
+  checksum: 10/77836268e1fbc20ea4376c7c7a767189cb75b02c9557c5e75e2f4c85067f0286bdfdb9ff58f3505e7887ee4b9462e738a153962d0ddb6076a5b67ae3eaebcc05
   languageName: node
   linkType: hard
 
@@ -7886,7 +7935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^5.9.1":
+"mongodb@npm:^5.9.2":
   version: 5.9.2
   resolution: "mongodb@npm:5.9.2"
   dependencies:
@@ -7918,9 +7967,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.7.0":
-  version: 6.7.0
-  resolution: "mongodb@npm:6.7.0"
+"mongodb@npm:^6.8.0":
+  version: 6.8.0
+  resolution: "mongodb@npm:6.8.0"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.1.5"
     bson: "npm:^6.7.0"
@@ -7948,7 +7997,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 10/47695b6668098e3e468446ecf070c5bf823b1c3a769e99e5659aa949575c36cb488fff4a05c7fd00cece2cd19ceda1e7f2862fc68631cc77d98d2b116a24a82d
+  checksum: 10/c9adf8b694e8e510421c8e6e44c337fe6d58e7d33374dc28b355095df92a807fb5a3c691eaf376a87ae693f6ec0779e8aae41a32bbdc63f2961289c616bcbb9a
   languageName: node
   linkType: hard
 
@@ -8092,9 +8141,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^3.1.3":
-  version: 3.1.3
-  resolution: "nodemon@npm:3.1.3"
+"nodemon@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "nodemon@npm:3.1.4"
   dependencies:
     chokidar: "npm:^3.5.2"
     debug: "npm:^4"
@@ -8108,7 +8157,7 @@ __metadata:
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: 10/ad55e76bb755c07b07c05b1b4ea7aca7bdf71bf8c7bfbf2db95e8ddcc964dde5eab9599c9de0db6899db9f2b98e573220f2d3c0796b41865ae754409e557cf50
+  checksum: 10/2e54d3d7b8522d46b27c2537361c57a1b29ae01d1b67e558d316d284c5fc319b5267a0dcaa10821a6533a4b6ff604ac66d37e192ed4a89e794cb441b7d5a2fe1
   languageName: node
   linkType: hard
 
@@ -10297,10 +10346,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.4.0, tslib@npm:^2.6.2":
+"tslib@npm:^2.4.0":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 10/bd26c22d36736513980091a1e356378e8b662ded04204453d353a7f34a4c21ed0afc59b5f90719d4ba756e581a162ecbf93118dc9c6be5acf70aa309188166ca
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "tslib@npm:2.6.3"
+  checksum: 10/52109bb681f8133a2e58142f11a50e05476de4f075ca906d13b596ae5f7f12d30c482feb0bff167ae01cfc84c5803e575a307d47938999246f5a49d174fc558c
   languageName: node
   linkType: hard
 
@@ -10743,9 +10799,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.92.0":
-  version: 5.92.0
-  resolution: "webpack@npm:5.92.0"
+"webpack@npm:^5.92.1":
+  version: 5.92.1
+  resolution: "webpack@npm:5.92.1"
   dependencies:
     "@types/eslint-scope": "npm:^3.7.3"
     "@types/estree": "npm:^1.0.5"
@@ -10776,7 +10832,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 10/1d5e7e881615df05af7e58bd7ce872495cf6361f345f2b2a7dcbd8febd8761b68b7567e14f9ebbf1d666b6c78cc90c3f304fb10b8a457ab71aa7015116a7d6d9
+  checksum: 10/76fcfbebcc0719c4734c65a01dcef7a0f18f3f2647484e8a7e8606adbd128ac42756bb3a8b7e2d486fe97f6286ebdc7b937ccdf3cf1d21b4684134bb89bbed89
   languageName: node
   linkType: hard
 
