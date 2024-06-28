@@ -52,3 +52,12 @@
   border-radius: 4px; /* future proofing */
   -khtml-border-radius: 4px; /* for old Konqueror browsers */
 }
+
+.btn {
+  padding: 8px !important;
+  display: flex !important;
+  width: fit-content !important;
+  justify-content: center !important;
+  align-items: center !important;;
+  gap: 10px !important;
+}
