@@ -1459,14 +1459,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.28.2":
-  version: 6.28.2
-  resolution: "@codemirror/view@npm:6.28.2"
+"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.28.3":
+  version: 6.28.3
+  resolution: "@codemirror/view@npm:6.28.3"
   dependencies:
     "@codemirror/state": "npm:^6.4.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10/c4221d6e47112ec3ec20c954deecab4565a8023dfeefabff8ba1801fb67d2965d49c27853310618fd723077ca86564b4bbefa36f0839d9430518f7d0a1cc3e84
+  checksum: 10/4732786b1afa3730a2c08b3711b335b8da2cb76318c9c4b2aeafd868bb36bfaeec826a18669b3d2d0f408e8012734689085633e4b6c3609cd2385838d79e5bc6
   languageName: node
   linkType: hard
 
@@ -6696,7 +6696,7 @@ __metadata:
     "@codemirror/language": "npm:^6.10.2"
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.28.2"
+    "@codemirror/view": "npm:^6.28.3"
     "@cypress/code-coverage": "npm:^3.12.39"
     "@fastify/busboy": "npm:^2.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
