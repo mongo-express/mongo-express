@@ -144,7 +144,7 @@ $ docker run -it --rm -p 8081:8081 --network some-network mongo-express
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
 | Name                                           | Default                                             | Description                                                                                                                                                                     |
-|------------------------------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ME_CONFIG_MONGODB_URL`                        | `mongodb://admin:pass@localhost:27017/db?ssl=false` |                                                                                                                                                                                 |
 | `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable administrator access. Send strings: `"true"` or `"false"`.                                                                                                               |
 | `ME_CONFIG_MONGODB_AUTH_USERNAME`              | `admin`                                             | Database username (only needed if `ENABLE_ADMIN` is `"false"`).                                                                                                                 |
@@ -214,7 +214,7 @@ Doing manually:
 
 - Git clone this repository
 - Create a new or use already created [MongoDB service](https://www.ibm.com/products/databases-for-mongodb)
-- Change the file `manifest.yml` to fit your IBM Cloud app and service environment
+- Change the file `examples/ibm-cloud/manifest.yml` to fit your IBM Cloud app and service environment
 
 Doing automatically:
 

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+  labels:
+    app.kubernetes.io/name: mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mongo-express
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mongo-express
+    spec:
+      containers:
+        - image: mongo-express
+          name: mongo-express
+          command: ["/sbin/tini"]
+          args:
+            - "--"
+            - "yarn"
+            - "start"
+            - "--url"
+            - "mongodb://$(MONGODB_ADMINUSERNAME):$(MONGODB_ADMINPASSWORD)@$(MONGODB_SERVER):$(MONGODB_PORT)"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
+          env:
+            - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
+              value: "true"
+            - name: MONGODB_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: "mongo-express"
+                  key: db-server-url
+            - name: MONGODB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: "mongo-express"
+                  key: db-server-port
+            - name: MONGODB_ADMINUSERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: "mongo-express"
+                  key: mongodb-admin-username
+            - name: MONGODB_ADMINPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "mongo-express"
+                  key: mongodb-admin-password
