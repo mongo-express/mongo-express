@@ -35,27 +35,43 @@ View the album for more screenshots: (server status, database views, etc..)
 
 ## Development
 
-To test or develop with the latest version you can install using this git repository:
+To test or develop with the latest version (_master_ branch) you can install using this git repository:
 
-    npm i mongo-express@git+https://github.com/mongo-express/mongo-express.git#master
+    npm i mongo-express@github:mongo-express/mongo-express
+    OR
+    yarn add mongo-express@github:mongo-express/mongo-express
+    OR
+    pnpm add mongo-express@github:mongo-express/mongo-express
 
 Copy config.default.js to config.js and edit the default property to fit your local environment
 
 **Run the development build using:**
 
     npm run start-dev
+    OR
+    yarn start-dev
+    OR
+    pnpm run start-dev
 
-## Usage (npm / CLI)
+## Usage (npm / yarn / pnpm / CLI)
 
 _mongo-express_ requires Node.js v4 or higher.
 
 **To install:**
 
-    npm install -g mongo-express
+    npm i -g mongo-express
+    OR
+    yarn add -g mongo-express
+    OR
+    pnpm add -g mongo-express
 
 Or if you want to install a non-global copy:
 
-    npm install mongo-express
+    npm i mongo-express
+    OR
+    yarn add mongo-express
+    OR
+    pnpm add mongo-express
 
 By default `config.default.js` is used where the basic access authentication is `admin`:`pass`. This is obviously not safe, and there are warnings in the console.
 
