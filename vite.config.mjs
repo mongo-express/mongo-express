@@ -1,7 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import inject from '@rollup/plugin-inject';
 import { defineConfig } from 'vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = env === 'development';
@@ -9,18 +8,11 @@ const isProd = !isDev;
 
 export default defineConfig({
   mode: isProd ? 'production' : 'development',
-  root: 'lib',
   plugins: [
     inject({  // => that should be first under plugins array
       $: 'jquery',
       jQuery: 'jquery',
     }),
-    viteStaticCopy({
-      targets: [
-        { src: 'public/images/*', dest: 'img/[name][ext]' },
-        { src: 'public/stylesheets/*', dest: 'css/[name][ext]' },
-      ]
-    })
   ],
   build: {
     outDir: fileURLToPath(new URL('build', import.meta.url)),

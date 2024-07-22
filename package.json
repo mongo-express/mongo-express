@@ -85,7 +85,6 @@
     "node-html-parser": "^6.1.13",
     "nodemon": "^3.1.4",
     "supertest": "^7.0.0",
-    "vite-plugin-static-copy": "^1.0.6",
     "webpack": "^5.93.0"
   },
   "engines": {
