@@ -31,7 +31,7 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@codemirror/view": "^6.28.4",
-    "@fastify/busboy": "^2.1.1",
+    "@fastify/busboy": "^3.0.0",
     "@json2csv/plainjs": "^7.0.6",
     "@popperjs/core": "^2.11.8",
     "basic-auth-connect": "^1.0.0",
