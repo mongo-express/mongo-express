@@ -6,6 +6,7 @@ import pico from 'picocolors';
 import { program } from 'commander';
 import csrf from 'csurf';
 import express from 'express';
+import ViteExpress from 'vite-express';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
@@ -13,10 +14,6 @@ import configDefault from './config.default.js';
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 const app = express();
-
-let defaultPort = 80;
-let server = app;
-let sslOptions;
 
 const loadConfig = async () => {
   const configExist = fs.existsSync('./config.js');
@@ -43,19 +40,24 @@ async function bootstrap(config) {
   app.use(config.site.baseUrl, process.env.NODE_ENV === 'test' ? csrf({ ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'] })
     : csrf({ cookie: true }));
 
+  let server;
+  let defaultPort;
   if (config.site.sslEnabled) {
     defaultPort = 443;
-    sslOptions = {
+    const sslOptions = {
       key: fs.readFileSync(config.site.sslKey),
       cert: fs.readFileSync(config.site.sslCert),
     };
-    server = https.createServer(sslOptions, app);
+    server = https.createServer(sslOptions, app).listen(config.site.port, config.site.host);
+  } else {
+    defaultPort = 80;
+    server = app.listen(config.site.port, config.site.host);
   }
 
   const addressString = (config.site.sslEnabled ? 'https://' : 'http://')
     + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
 
-  server.listen(config.site.port, config.site.host, function () {
+  await ViteExpress.bind(app, server, function () {
     if (config.options.console) {
       console.log('Mongo Express server listening', 'at ' + addressString);
 
@@ -70,18 +72,18 @@ async function bootstrap(config) {
       }
     }
   })
-    .on('error', function (e) {
-      if (e.code === 'EADDRINUSE') {
-        console.log();
-        console.error(pico.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
-        console.log('Maybe mongo-express is already running?');
-      }
+    // .on('error', function (e) {
+    //   if (e.code === 'EADDRINUSE') {
+    //     console.log();
+    //     console.error(pico.red('Address ' + addressString + ' already in use! You need to pick a different host and/or port.'));
+    //     console.log('Maybe mongo-express is already running?');
+    //   }
 
-      console.log();
-      console.log('If you are still having trouble, try Googling for the key parts of the following error object before posting an issue');
-      console.log(JSON.stringify(e));
-      return process.exit(1);
-    });
+    //   console.log();
+    //   console.log('If you are still having trouble, try Googling for the key parts of the following error object before posting an issue');
+    //   console.log(JSON.stringify(e));
+    //   return process.exit(1);
+    // });
 }
 
 const config = await loadConfig();
