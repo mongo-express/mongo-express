@@ -1459,14 +1459,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.28.4":
-  version: 6.28.4
-  resolution: "@codemirror/view@npm:6.28.4"
+"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.28.6":
+  version: 6.28.6
+  resolution: "@codemirror/view@npm:6.28.6"
   dependencies:
     "@codemirror/state": "npm:^6.4.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10/3effc92732e9fb25f32fe04a8e651202dbf453c3694adda4ff9666bd2b65d5ec4aef5288ab94932a26c03f5b27a6f5873b0d5fe6eb71051c912bb9ba1f1ae931
+  checksum: 10/be4a524bf3a78b71474a8e51554deaa8f4a1fd576b579dbadb25b61eb6182fe760be076b599ea9d6549fcb3f0a3d3502b324ac4752fa3330a9528f3fa0e1aad2
   languageName: node
   linkType: hard
 
@@ -1477,14 +1477,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.12.41":
-  version: 3.12.41
-  resolution: "@cypress/code-coverage@npm:3.12.41"
+"@cypress/code-coverage@npm:^3.12.44":
+  version: 3.12.44
+  resolution: "@cypress/code-coverage@npm:3.12.44"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
-    dayjs: "npm:1.11.10"
-    debug: "npm:4.3.4"
+    dayjs: "npm:1.11.12"
+    debug: "npm:4.3.5"
     execa: "npm:4.1.0"
     globby: "npm:11.1.0"
     istanbul-lib-coverage: "npm:^3.0.0"
@@ -1496,7 +1496,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/2a805ca1ef6f873eabb06356c835685ec7943853c94184a52eca7b137b9b1b16a29b65f47fc9b98bf716d70065f9fbaa322d2e7ecf97fcb489543b29df17ffe4
+  checksum: 10/154a7002ac5ffa2dd1341789b619c9206b15bf66fbfcb7099b578b160b97989540263d985f3e8c93a5bb6ad0fc352cad0a4299fd38bd7c861ebe031a12d9104d
   languageName: node
   linkType: hard
 
@@ -3631,9 +3631,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^13.13.0":
-  version: 13.13.0
-  resolution: "cypress@npm:13.13.0"
+"cypress@npm:^13.13.1":
+  version: 13.13.1
+  resolution: "cypress@npm:13.13.1"
   dependencies:
     "@cypress/request": "npm:^3.0.0"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -3679,7 +3679,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/8d92fa511dbfe5429b119827f3eec0043d23861a814e307b53da3a885efc8495de789c44fd57da6a4d69390ffa5306ba181ec42f784afdbd1a78d14591d2f7c3
+  checksum: 10/bdf940b544e4eef624455f7a6f6ecfb609203a50e89728b1e52b6241c9f31dc9ec35e3f177bd4328969fc0f72a8020a815097101b0f993d39bd3f2c6aa2a91da
   languageName: node
   linkType: hard
 
@@ -3701,10 +3701,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.11.10, dayjs@npm:^1.10.4":
-  version: 1.11.10
-  resolution: "dayjs@npm:1.11.10"
-  checksum: 10/27e8f5bc01c0a76f36c656e62ab7f08c2e7b040b09e613cd4844abf03fb258e0350f0a83b02c887b84d771c1f11e092deda0beef8c6df2a1afbc3f6c1fade279
+"dayjs@npm:1.11.12, dayjs@npm:^1.10.4":
+  version: 1.11.12
+  resolution: "dayjs@npm:1.11.12"
+  checksum: 10/8ee7c1e14961fd08d40b788d0c0e930dc6288b3d32911bb911b2fb31bb703c262788164fbe678ee9e50e2a35268d667b8c8ba43fd1806771c1f404c300a2b428
   languageName: node
   linkType: hard
 
@@ -3726,7 +3726,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4, debug@npm:^4.3.5":
+"debug@npm:4, debug@npm:4.3.5, debug@npm:^4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.0, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.3, debug@npm:^4.3.4, debug@npm:^4.3.5":
   version: 4.3.5
   resolution: "debug@npm:4.3.5"
   dependencies:
@@ -3735,18 +3735,6 @@ __metadata:
     supports-color:
       optional: true
   checksum: 10/cb6eab424c410e07813ca1392888589972ce9a32b8829c6508f5e1f25f3c3e70a76731610ae55b4bbe58d1a2fffa1424b30e97fa8d394e49cd2656a9643aedd2
-  languageName: node
-  linkType: hard
-
-"debug@npm:4.3.4":
-  version: 4.3.4
-  resolution: "debug@npm:4.3.4"
-  dependencies:
-    ms: "npm:2.1.2"
-  peerDependenciesMeta:
-    supports-color:
-      optional: true
-  checksum: 10/0073c3bcbd9cb7d71dd5f6b55be8701af42df3e56e911186dfa46fac3a5b9eb7ce7f377dd1d3be6db8977221f8eb333d945216f645cf56f6b688cd484837d255
   languageName: node
   linkType: hard
 
@@ -5477,12 +5465,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^9.0.11":
-  version: 9.0.11
-  resolution: "husky@npm:9.0.11"
+"husky@npm:^9.1.1":
+  version: 9.1.1
+  resolution: "husky@npm:9.1.1"
   bin:
-    husky: bin.mjs
-  checksum: 10/8a9b7cb9dc8494b470b3b47b386e65d579608c6206da80d3cc8b71d10e37947264af3dfe00092368dad9673b51d2a5ee87afb4b2291e77ba9e7ec1ac36e56cd1
+    husky: bin.js
+  checksum: 10/c3be0392071b78c680fc6b9fd7978f52c26e18238a2840c6eabfc0db395e19fcd798da8eff0e31a9e76c479d6019a567d83a8de80f360d28552bc83bd1839b7c
   languageName: node
   linkType: hard
 
@@ -6649,9 +6637,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.6.0":
-  version: 10.6.0
-  resolution: "mocha@npm:10.6.0"
+"mocha@npm:^10.7.0":
+  version: 10.7.0
+  resolution: "mocha@npm:10.7.0"
   dependencies:
     ansi-colors: "npm:^4.1.3"
     browser-stdout: "npm:^1.3.1"
@@ -6676,7 +6664,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: 10/8e9901f4c8a3299c3e1b65821778915622aa0b5758acbe6d5b96f142843e23562b6aa3c87c2baa8626640ecb7e6b956d7a6cdb622ac8422d43a13558cb748e42
+  checksum: 10/dc97c37b1f42d4aa9a6e0fb67752e46d2496519efe229712a5dd4d117edad05022d4dec35d3a6167a609b97092e295cba90c6c7a86fad66470afdf42beb6ff18
   languageName: node
   linkType: hard
 
@@ -6692,8 +6680,8 @@ __metadata:
     "@codemirror/language": "npm:^6.10.2"
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.28.4"
-    "@cypress/code-coverage": "npm:^3.12.41"
+    "@codemirror/view": "npm:^6.28.6"
+    "@cypress/code-coverage": "npm:^3.12.44"
     "@fastify/busboy": "npm:^3.0.0"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@popperjs/core": "npm:^2.11.8"
@@ -6714,7 +6702,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     css-loader: "npm:^7.1.2"
     csurf: "npm:1.11.0"
-    cypress: "npm:^13.13.0"
+    cypress: "npm:^13.13.1"
     dotenv: "npm:^16.4.5"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.57.0"
@@ -6729,14 +6717,14 @@ __metadata:
     free-swig: "npm:^1.5.5"
     gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.5.2"
-    husky: "npm:^9.0.11"
+    husky: "npm:^9.1.1"
     jquery: "npm:^3.7.1"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
-    mocha: "npm:^10.6.0"
+    mocha: "npm:^10.7.0"
     mongodb: "npm:^6.8.0"
     mongodb-memory-server: "npm:^9.4.1"
-    mongodb-query-parser: "npm:^4.2.0"
+    mongodb-query-parser: "npm:^4.2.1"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
     nodemon: "npm:^3.1.4"
@@ -6802,15 +6790,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "mongodb-query-parser@npm:4.2.0"
+"mongodb-query-parser@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "mongodb-query-parser@npm:4.2.1"
   dependencies:
     "@mongodb-js/shell-bson-parser": "npm:^1.1.0"
     debug: "npm:^4.3.4"
     javascript-stringify: "npm:^2.1.0"
     lodash: "npm:^4.17.21"
-  checksum: 10/6cabd6dee11524cc7da378ae924affb648e8801e3a13d168bee23059189dbe1a4b448457cd418d80aaa66a63e06e98ef312abfaf800016a2a57cc9518804e094
+  checksum: 10/a17f51cb196dee15c9572bb03e237f267026dd5d47eabe18ae78c06144ebb3d7a23050405dcee2334dab37cb9247f048c77da2f80327a3c98eb1e7dd9f2a6438
   languageName: node
   linkType: hard
 
