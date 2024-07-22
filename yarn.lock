@@ -1618,10 +1618,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/busboy@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@fastify/busboy@npm:2.1.1"
-  checksum: 10/2bb8a7eca8289ed14c9eb15239bc1019797454624e769b39a0b90ed204d032403adc0f8ed0d2aef8a18c772205fa7808cf5a1b91f21c7bfc7b6032150b1062c5
+"@fastify/busboy@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@fastify/busboy@npm:3.0.0"
+  checksum: 10/238ce60bffecdefc55524d2b0826fe7a225635a2e0f3af832fe48801d96f9f521cb11bbd0ed3391b017c1f2580501845ee42f153fa6204b4c758214128a67ee7
   languageName: node
   linkType: hard
 
@@ -6694,7 +6694,7 @@ __metadata:
     "@codemirror/theme-one-dark": "npm:^6.1.2"
     "@codemirror/view": "npm:^6.28.4"
     "@cypress/code-coverage": "npm:^3.12.41"
-    "@fastify/busboy": "npm:^2.1.1"
+    "@fastify/busboy": "npm:^3.0.0"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@popperjs/core": "npm:^2.11.8"
     assets-webpack-plugin: "npm:^7.1.1"
