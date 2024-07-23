@@ -15,6 +15,8 @@ export default defineConfig({
     }),
   ],
   build: {
+    // generate .vite/manifest.json in outDir
+    manifest: true,
     outDir: fileURLToPath(new URL('build', import.meta.url)),
     emptyOutDir: true, // also necessary for outDir
     rollupOptions: {
