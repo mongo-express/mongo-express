@@ -122,8 +122,9 @@ export default {
 
   // set useBasicAuth to true if you want to authenticate mongo-express logins
   // this will be false unless ME_CONFIG_BASICAUTH_ENABLED is set to the true
-  useBasicAuth: getFileEnv(basicAuthEnabled) ? getBoolean(getFileEnv(basicAuthEnabled))
-                                             : getBoolean(getFileEnv(basicAuth)),
+  useBasicAuth: getFileEnv(basicAuthEnabled)
+    ? getBoolean(getFileEnv(basicAuthEnabled))
+    : getBoolean(getFileEnv(basicAuth)),
 
   basicAuth: {
     username: getFileEnv(basicAuthUsername) || 'admin',
