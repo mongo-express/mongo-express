@@ -88,7 +88,7 @@
     "nodemon": "^3.1.4",
     "style-loader": "^4.0.0",
     "supertest": "^7.0.0",
-    "webpack": "^5.93.0",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
   },
   "engines": {
