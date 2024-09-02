@@ -25,7 +25,7 @@
     "url": "git://github.com/mongo-express/mongo-express.git"
   },
   "dependencies": {
-    "@codemirror/commands": "^6.6.0",
+    "@codemirror/commands": "^6.6.1",
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/language": "^6.10.2",
     "@codemirror/state": "^6.4.1",
@@ -57,7 +57,7 @@
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
     "mongodb": "^6.8.0",
-    "mongodb-query-parser": "^4.2.2",
+    "mongodb-query-parser": "^4.2.4",
     "morgan": "^1.10.0",
     "picocolors": "^1.0.1",
     "renderjson": "github:rtritto/renderjson#develop",
@@ -75,7 +75,7 @@
     "concurrently": "^8.2.2",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
-    "cypress": "^13.13.3",
+    "cypress": "^13.14.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
