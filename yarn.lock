@@ -1358,15 +1358,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.6.0":
-  version: 6.6.0
-  resolution: "@codemirror/commands@npm:6.6.0"
+"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.6.1":
+  version: 6.6.1
+  resolution: "@codemirror/commands@npm:6.6.1"
   dependencies:
     "@codemirror/language": "npm:^6.0.0"
     "@codemirror/state": "npm:^6.4.0"
     "@codemirror/view": "npm:^6.27.0"
     "@lezer/common": "npm:^1.1.0"
-  checksum: 10/e984511b8ac06a1afe01005a50af7a0b6765cf350547d281a13aedbcccbc8620187c6dce55caa0f7c8ba409771e4abb4aa3bae824b6870249c8176b57cc4a42e
+  checksum: 10/533f33db08a4ff7e400ff61e48d34525afdc894f92442a5bf469ed24b1992a61bf726b61647e2faa552a2f4703c149c92026d9a1f9169f615582cdfc36fcb010
   languageName: node
   linkType: hard
 
@@ -1755,14 +1755,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mongodb-js/shell-bson-parser@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@mongodb-js/shell-bson-parser@npm:1.1.1"
+"@mongodb-js/shell-bson-parser@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@mongodb-js/shell-bson-parser@npm:1.1.3"
   dependencies:
     acorn: "npm:^8.1.0"
   peerDependencies:
     bson: ^4.6.3 || ^5 || ^6
-  checksum: 10/0015bca141d929c30839de83affbdb5dfc0f4a2a958d8085d9f9b9846a09f71b5d94e3419e2caf87aba00b56b4745243b0feae08a406372d0e31c8a5195ba133
+  checksum: 10/46af9c731f28c6eeab561c21ac11e84c92b3377d8ea0a7f66fa8401c73f19a4a4bc3cf95fad34ab7f13f0572fc0d1fb3f35dd29c06b45995e26169cc19fd0fbe
   languageName: node
   linkType: hard
 
@@ -3558,9 +3558,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^13.13.3":
-  version: 13.13.3
-  resolution: "cypress@npm:13.13.3"
+"cypress@npm:^13.14.1":
+  version: 13.14.1
+  resolution: "cypress@npm:13.14.1"
   dependencies:
     "@cypress/request": "npm:^3.0.1"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -3606,7 +3606,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/8f4a7f27f4f3374247ef39be52027c1614f0447993d50dd83b98c4e5f1903fd9b506164cd5614bd03f2b5b1e604fb3bdb646530002bafda01e0510480530415f
+  checksum: 10/e91e824a3e717f3f6bdd91b38905d54b68fbe41adc8b94e53181c10f8575a4bf7ea932322d728773435cc9c82f7ba3437810316a726835f31c59d529a678190f
   languageName: node
   linkType: hard
 
@@ -6584,7 +6584,7 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@babel/eslint-parser": "npm:^7.25.1"
     "@babel/preset-env": "npm:^7.25.4"
-    "@codemirror/commands": "npm:^6.6.0"
+    "@codemirror/commands": "npm:^6.6.1"
     "@codemirror/lang-javascript": "npm:^6.2.2"
     "@codemirror/language": "npm:^6.10.2"
     "@codemirror/state": "npm:^6.4.1"
@@ -6611,7 +6611,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     css-loader: "npm:^7.1.2"
     csurf: "npm:1.11.0"
-    cypress: "npm:^13.13.3"
+    cypress: "npm:^13.14.1"
     dotenv: "npm:^16.4.5"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.57.0"
@@ -6633,7 +6633,7 @@ __metadata:
     mocha: "npm:^10.7.3"
     mongodb: "npm:^6.8.0"
     mongodb-memory-server: "npm:^10.0.0"
-    mongodb-query-parser: "npm:^4.2.2"
+    mongodb-query-parser: "npm:^4.2.4"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
     nodemon: "npm:^3.1.4"
@@ -6689,15 +6689,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "mongodb-query-parser@npm:4.2.2"
+"mongodb-query-parser@npm:^4.2.4":
+  version: 4.2.4
+  resolution: "mongodb-query-parser@npm:4.2.4"
   dependencies:
-    "@mongodb-js/shell-bson-parser": "npm:^1.1.1"
+    "@mongodb-js/shell-bson-parser": "npm:^1.1.3"
     debug: "npm:^4.3.4"
     javascript-stringify: "npm:^2.1.0"
     lodash: "npm:^4.17.21"
-  checksum: 10/22cee5d755a324754317a8f9cd1bc8feace82a2f6b8203c3445cb908e6b31cd3f5638aa9d0ec754b2373b49cfcd5c16af63b1c895bf140066da58541ba1cebe5
+  checksum: 10/c3131861e1a2b347218e6ac6c19274cf47b2587ac98851ccf08df4bf213f7b1f42fe9d0f061834d50bea1f33e2b092b5bfe834845857254bbbbf046a2645c4fa
   languageName: node
   linkType: hard
 
