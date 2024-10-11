@@ -29,7 +29,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            import release from import('./scripts/release')
+            import release from import('./scripts/release.js')
             const defaultBranch = "${{ github.event.repository.default_branch }}"
             const { owner, repo } = context.repo
             const version = require("./package.json").version
