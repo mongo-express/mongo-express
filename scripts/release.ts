@@ -24,20 +24,6 @@ const generateReleaseNotes = async ({ github, owner, repo, versionTag, defaultBr
   return bodyWithoutReleasePr
 }
 
-const generatePr = async ({ github, context, defaultBranch, versionTag }) => {
-  const { owner, repo } = context.repo
-  const releaseNotes = await generateReleaseNotes({ github, owner, repo, versionTag, defaultBranch })
-
-  await github.rest.pulls.create({
-    owner,
-    repo,
-    head: `release/${versionTag}`,
-    base: defaultBranch,
-    title: `[Release] ${versionTag}`,
-    body: releaseNotes
-  })
-}
-
 const release = async ({ github, context, defaultBranch, versionTag }) => {
   const { owner, repo } = context.repo
   const releaseNotes = await generateReleaseNotes({ github, owner, repo, versionTag, defaultBranch })
@@ -66,7 +52,4 @@ const release = async ({ github, context, defaultBranch, versionTag }) => {
   }
 }
 
-module.exports = {
-  generatePr,
-  release
-}
+export default release
