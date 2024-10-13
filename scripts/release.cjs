@@ -1,5 +1,4 @@
-// @ts-nocheck: ignore this file
-// Called from .github/workflows
+// Called from .github/workflows/publish.yml
 
 const generateReleaseNotes = async ({
   github,
@@ -69,4 +68,4 @@ const release = async ({
   }
 };
 
-export default release;
+module.exports = release;
