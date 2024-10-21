@@ -25,7 +25,7 @@
     "url": "git://github.com/mongo-express/mongo-express.git"
   },
   "dependencies": {
-    "@codemirror/commands": "^6.7.0",
+    "@codemirror/commands": "^6.7.1",
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/language": "^6.10.3",
     "@codemirror/state": "^6.4.1",
@@ -59,7 +59,7 @@
     "mongodb": "^6.9.0",
     "mongodb-query-parser": "^4.2.6",
     "morgan": "^1.10.0",
-    "picocolors": "^1.1.0",
+    "picocolors": "^1.1.1",
     "renderjson": "github:rtritto/renderjson#develop",
     "serve-favicon": "^2.5.0"
   },

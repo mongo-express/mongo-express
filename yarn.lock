@@ -1159,15 +1159,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.7.0":
-  version: 6.7.0
-  resolution: "@codemirror/commands@npm:6.7.0"
+"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.7.1":
+  version: 6.7.1
+  resolution: "@codemirror/commands@npm:6.7.1"
   dependencies:
     "@codemirror/language": "npm:^6.0.0"
     "@codemirror/state": "npm:^6.4.0"
     "@codemirror/view": "npm:^6.27.0"
     "@lezer/common": "npm:^1.1.0"
-  checksum: 10/3f331b4c2f4e3cc029cbfd75946d85bf82b403dcaf4b0dd317ad0fff1018b872378adaae5d9f1c66a3a470f376fb270ea8578264b77d70b6aadeb545c984cb02
+  checksum: 10/d742bc5976f7bab81695b9fc10d103b7cc9933fce3cc90fdd8e1d060ff480efd65d8fac3ee17f500869d323ea00c4da200d022619888da15fd65aa40e0958c93
   languageName: node
   linkType: hard
 
@@ -6457,7 +6457,7 @@ __metadata:
     "@babel/core": "npm:^7.25.8"
     "@babel/eslint-parser": "npm:^7.25.8"
     "@babel/preset-env": "npm:^7.25.8"
-    "@codemirror/commands": "npm:^6.7.0"
+    "@codemirror/commands": "npm:^6.7.1"
     "@codemirror/lang-javascript": "npm:^6.2.2"
     "@codemirror/language": "npm:^6.10.3"
     "@codemirror/state": "npm:^6.4.1"
@@ -6510,7 +6510,7 @@ __metadata:
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
     nodemon: "npm:^3.1.7"
-    picocolors: "npm:^1.1.0"
+    picocolors: "npm:^1.1.1"
     renderjson: "github:rtritto/renderjson#develop"
     serve-favicon: "npm:^2.5.0"
     style-loader: "npm:^4.0.0"
@@ -7209,10 +7209,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picocolors@npm:^1.0.0, picocolors@npm:^1.0.1, picocolors@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "picocolors@npm:1.1.0"
-  checksum: 10/a2ad60d94d185c30f2a140b19c512547713fb89b920d32cc6cf658fa786d63a37ba7b8451872c3d9fc34883971fb6e5878e07a20b60506e0bb2554dce9169ccb
+"picocolors@npm:^1.0.0, picocolors@npm:^1.0.1, picocolors@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "picocolors@npm:1.1.1"
+  checksum: 10/e1cf46bf84886c79055fdfa9dcb3e4711ad259949e3565154b004b260cd356c5d54b31a1437ce9782624bf766272fe6b0154f5f0c744fb7af5d454d2b60db045
   languageName: node
   linkType: hard
 
