@@ -109,7 +109,7 @@
   },
   "exports": "./middleware",
   "browserslist": "defaults",
-  "packageManager": "yarn@4.3.1",
+  "packageManager": "yarn@4.5.1",
   "files": [
     ".yarn",
     ".yarnrc.yml",
