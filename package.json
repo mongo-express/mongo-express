@@ -109,5 +109,15 @@
   },
   "exports": "./middleware",
   "browserslist": "defaults",
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "yarn@4.3.1",
+  "files": [
+    ".yarn",
+    ".yarnrc.yml",
+    "app.js",
+    "config.default.js",
+    "lib",
+    "public",
+    "webpack.config.js",
+    "yarn.lock"
+  ]
 }
