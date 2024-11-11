@@ -107,7 +107,7 @@
     "test-watch": "cross-env NODE_ENV=test mocha --watch --reporter spec",
     "prepublish": "cross-env NODE_ENV=production webpack"
   },
-  "exports": "./middleware",
+  "exports": "./lib/middleware",
   "browserslist": "defaults",
   "packageManager": "yarn@4.5.1",
   "files": [
