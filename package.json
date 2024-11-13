@@ -79,7 +79,7 @@
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-unicorn": "^55.0.0",
+    "eslint-plugin-unicorn": "^56.0.0",
     "file-loader": "^6.2.0",
     "husky": "^9.1.6",
     "mocha": "^10.8.2",
