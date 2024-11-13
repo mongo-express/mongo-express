@@ -6511,7 +6511,7 @@ __metadata:
     node-html-parser: "npm:^6.1.13"
     nodemon: "npm:^3.1.7"
     picocolors: "npm:^1.1.0"
-    renderjson: "github:rtritto/renderjson#develop"
+    renderjson-2: "npm:^2.0.1"
     serve-favicon: "npm:^2.5.0"
     style-loader: "npm:^4.0.0"
     supertest: "npm:^7.0.0"
@@ -7674,10 +7674,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"renderjson@github:rtritto/renderjson#develop":
-  version: 1.4.0
-  resolution: "renderjson@https://github.com/rtritto/renderjson.git#commit=967fe64a72fab0fef50a90203ad65edaa9e6a50b"
-  checksum: 10/cf418883edccaf31254b0eaaabf734f79344381ffd8dad6611764d1ab06e5793d694c43f4ea0a37311dc1b06828725426eef8d85c39d1e7e5ee12627ef7cf088
+"renderjson-2@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "renderjson-2@npm:2.0.1"
+  checksum: 10/7322dda7af964982104a43063449a55020f31ec5363614d1a9cdf49d51cf4b835c66e28b41d0c7fd20617e0de77def61c2cd632f629786ab769a9b4ff5421736
   languageName: node
   linkType: hard
 
