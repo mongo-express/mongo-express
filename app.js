@@ -63,10 +63,12 @@ async function bootstrap(config) {
         console.error(pico.red('Server is open to allow connections from anyone (0.0.0.0)'));
       }
 
-      if (config.useBasicAuth !== true) {
-        console.warn(pico.red('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
-      } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-        console.error(pico.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+      if(config.useOidcAuth !== true) {
+        if (config.useBasicAuth !== true) {
+          console.warn(pico.red('Basic and OIDC authentication are disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
+        } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+          console.error(pico.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+        }
       }
     }
   })

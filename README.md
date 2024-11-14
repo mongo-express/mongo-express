@@ -22,6 +22,7 @@ A web-based MongoDB admin interface written with Node.js, Express, and Bootstrap
 - Database blacklist/whitelist
 - Custom CA/TLS/SSL and CA validation disabling
 - Supports replica sets
+- OpenIdConnect Authentication
 
 ## Screenshots
 
@@ -167,6 +168,17 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_BASICAUTH_USERNAME_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_USERNAME`                                                                                                                                  |
 | `ME_CONFIG_BASICAUTH_PASSWORD`                 | ``                                                  | mongo-express web login password. If not defined, `pass` is the password.                                                                                                       |
 | `ME_CONFIG_BASICAUTH_PASSWORD_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_PASSWORD`                                                                                                                                  |
+| `ME_CONFIG_OIDCAUTH_ENABLED`                   | `false`                                             | Enable OpenIdConnect Authentication. Send strings: `"true"` or `"false"`.                                                                                                       |
+| `ME_CONFIG_OIDCAUTH_ISSUER`                    | ``                                                  | OAuth2 [Issuer](https://datatracker.ietf.org/doc/html/rfc8414#section-2). Root URL to the openidconnect metadata eg. `"<issuer>/.well-known/openid-configuration"`              |
+| `ME_CONFIG_OIDCAUTH_ISSUER_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_ISSUER`                                                                                                                                     |
+| `ME_CONFIG_OIDCAUTH_CLIENTID`                  | ``                                                  | OAuth2 ClientId. The client must be private and allowed to perform the Authorization Code Flow grant.                                                                           |
+| `ME_CONFIG_OIDCAUTH_CLIENTID_FILE`             | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTID`                                                                                                                                   |
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET`              | ``                                                  | OAuth2 Client Secret.                                                                                                                                                           |
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET_FILE`         | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTSECRET`                                                                                                                               |
+| `ME_CONFIG_OIDCAUTH_SECRET`                    | ``                                                  | A random secret used by the library to init the Authorization Code Flow (required)                                                                                              |
+| `ME_CONFIG_OIDCAUTH_SECRET_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_SECRET_FILE`                                                                                                                                |
+| `ME_CONFIG_OIDCAUTH_BASEURL`                   | ``                                                  | OAuth2 base url. It's used to build the redirect URL eg. `"<base-url>/callback"`. If not specified `ME_CONFIG_SITE_BASEURL` will be used.                                       |
+| `ME_CONFIG_OIDCAUTH_BASEURL_FILE`              | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_BASEURL`                                                                                                                                    |
 | `ME_CONFIG_REQUEST_SIZE`                       | `100kb`                                             | Used to configure maximum Mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser). |
 | `ME_CONFIG_OPTIONS_READONLY`                   | `false`                                             | if readOnly is true, components of writing are not visible.                                                                                                                     |
 | `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.                                                                                                  |

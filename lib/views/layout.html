@@ -36,6 +36,13 @@
       <div class="dark-mode-toggle">
         <i id="darkModeIcon" class="fa fa-moon"></i>
       </div>
+      {% if enableLogout %}
+      <div class="logout">
+        <a href="/logout" class="btn">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </div>
+      {% endif %}
     </div>
   </div>
 </nav>

@@ -56,6 +56,13 @@ const basicAuthEnabled = 'ME_CONFIG_BASICAUTH_ENABLED';
 const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
 const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
 
+const oidcAuthEnabled = 'ME_CONFIG_OIDCAUTH_ENABLED';
+const oidcAuthBaseUrl = 'ME_CONFIG_OIDCAUTH_BASEURL';
+const oidcAuthIssuer = 'ME_CONFIG_OIDCAUTH_ISSUER';
+const oidcAuthClientId = 'ME_CONFIG_OIDCAUTH_CLIENTID';
+const oidcAuthClientSecret = 'ME_CONFIG_OIDCAUTH_CLIENTSECRET';
+const oidcAuthSecret = 'ME_CONFIG_OIDCAUTH_SECRET';
+
 export default {
   mongodb: {
     // set allowDiskUse to true to remove the limit of 100 MB of RAM on each aggregation pipeline stage
@@ -127,6 +134,20 @@ export default {
   basicAuth: {
     username: getFileEnv(basicAuthUsername) || 'admin',
     password: getFileEnv(basicAuthPassword) || 'pass',
+  },
+
+  useOidcAuth: getBoolean(getFileEnv(oidcAuthEnabled)),
+  oidcAuth: {
+    issuerBaseURL: getFileEnv(oidcAuthIssuer),
+    baseURL: getFileEnv(oidcAuthBaseUrl) || process.env.ME_CONFIG_SITE_BASEURL || '/',
+    clientAuthMethod: 'client_secret_basic',
+    clientSecret: getFileEnv(oidcAuthClientSecret),
+    clientID: getFileEnv(oidcAuthClientId),
+    secret: getFileEnv(oidcAuthSecret),
+    idpLogout: true,    
+    authorizationParams: {
+      response_type: 'code',
+    },
   },
 
   options: {
