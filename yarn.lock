@@ -1242,14 +1242,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.34.2":
-  version: 6.34.2
-  resolution: "@codemirror/view@npm:6.34.2"
+"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.34.3":
+  version: 6.34.3
+  resolution: "@codemirror/view@npm:6.34.3"
   dependencies:
     "@codemirror/state": "npm:^6.4.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10/3ed42621c1e604b77488d28b2601e2131624497d33460c6fc0e5f74b1ec51842ca2490806fd105ba09f08ccfc4ce37c803e9ca43c5a2641335bb899cb3cd3088
+  checksum: 10/8b1dd29b91b2ef8bbe94370a7ca9077c8a02a246e39f3449ff333f2ede041212c486366dd1edce6c5f4fb9317a8355dfda02440313d2550415eb902d403dc7e7
   languageName: node
   linkType: hard
 
@@ -1260,9 +1260,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.13.6":
-  version: 3.13.6
-  resolution: "@cypress/code-coverage@npm:3.13.6"
+"@cypress/code-coverage@npm:^3.13.7":
+  version: 3.13.7
+  resolution: "@cypress/code-coverage@npm:3.13.7"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -1279,7 +1279,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/47271faf6fd9fb1e16bf59c38edee2f62340e3e99f11c719573bb8aae37553a2e184d8a285b59dcffc3fd397663a2563446ce778ea74ccf430c7615ebd014362
+  checksum: 10/9f69d36462bbe6b88c4db3f9f514b71e332cd86241a59f8b04221d18491ac3103cbb6e78ac172f3e85c7755a9c92ce823fd946404b29f20c4838a9fe16dced89
   languageName: node
   linkType: hard
 
@@ -5218,12 +5218,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^9.1.6":
-  version: 9.1.6
-  resolution: "husky@npm:9.1.6"
+"husky@npm:^9.1.7":
+  version: 9.1.7
+  resolution: "husky@npm:9.1.7"
   bin:
     husky: bin.js
-  checksum: 10/421ccd8850378231aaefd70dbe9e4f1549b84ffe3a6897f93a202242bbc04e48bd498169aef43849411105d9fcf7c192b757d42661e28d06b934a609a4eb8771
+  checksum: 10/c2412753f15695db369634ba70f50f5c0b7e5cb13b673d0826c411ec1bd9ddef08c1dad89ea154f57da2521d2605bd64308af748749b27d08c5f563bcd89975f
   languageName: node
   linkType: hard
 
@@ -6421,8 +6421,8 @@ __metadata:
     "@codemirror/language": "npm:^6.10.3"
     "@codemirror/state": "npm:^6.4.1"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.34.2"
-    "@cypress/code-coverage": "npm:^3.13.6"
+    "@codemirror/view": "npm:^6.34.3"
+    "@cypress/code-coverage": "npm:^3.13.7"
     "@fastify/busboy": "npm:^3.0.0"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@popperjs/core": "npm:^2.11.8"
@@ -6458,7 +6458,7 @@ __metadata:
     free-swig: "npm:^1.5.5"
     gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.5.2"
-    husky: "npm:^9.1.6"
+    husky: "npm:^9.1.7"
     jquery: "npm:^3.7.1"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
