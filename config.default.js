@@ -144,7 +144,7 @@ export default {
     clientSecret: getFileEnv(oidcAuthClientSecret),
     clientID: getFileEnv(oidcAuthClientId),
     secret: getFileEnv(oidcAuthSecret),
-    idpLogout: true,    
+    idpLogout: true,
     authorizationParams: {
       response_type: 'code',
     },
