@@ -49,7 +49,6 @@
     "errorhandler": "1.5.1",
     "express": "^4.21.1",
     "express-fileupload": "^1.5.1",
-    "express-openid-connect": "^2.17.1",
     "express-session": "^1.18.1",
     "flat": "^6.0.1",
     "free-swig": "^1.5.5",
@@ -92,6 +91,9 @@
     "supertest": "^7.0.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
+  },
+  "peerDependencies": {
+    "express-openid-connect": "^2.17.1"
   },
   "engines": {
     "node": ">=18.18"
