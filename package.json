@@ -95,6 +95,11 @@
   "peerDependencies": {
     "express-openid-connect": "^2.17.1"
   },
+  "peerDependenciesMeta": {
+    "express-openid-connect": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">=18.18"
   },
