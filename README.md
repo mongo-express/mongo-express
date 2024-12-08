@@ -241,6 +241,34 @@ Then, take the following action to customize to your environment:
   - Check if it is necessary to change the `dbLabel` according to the MongoDB service created
   - Change the `basicAuth` properties, do not to keep the default values
 
+## Usage (OpenIdConnect Authentication)
+
+**Install the required peerDependency**
+
+```bash
+# First, remove the library from the peer dependencies section
+yarn remove express-openid-connect
+# Then, add it as a standard production dependency
+yarn add express-openid-connect@2.17.1
+```
+
+**Setup the OAuth2 application**
+
+The current implementation supports OAuth2 Authorization Code Flow Grant, to make it work you need to setup a client on your Identity Provider, and pass the parameters to the application:
+
+```bash
+export ME_CONFIG_OIDCAUTH_ENABLED=true
+export ME_CONFIG_OIDCAUTH_BASEURL=https://<domain>/<base-url>
+export ME_CONFIG_OIDCAUTH_ISSUER=<authority>
+export ME_CONFIG_OIDCAUTH_CLIENTID=<client-id>
+export ME_CONFIG_OIDCAUTH_CLIENTSECRET=<client-secret> # Optional
+export ME_CONFIG_OIDCAUTH_SECRET=<random-generated-string>
+export ME_CONFIG_SITE_COOKIESECRET=<client-secret>
+export ME_CONFIG_SITE_BASEURL=/<base-url>
+```
+
+To register your client, you will need the application's redirect URI, which can be obtained by appending `/callback` to the application base URL: Eg. https://example.com/mongo-express/callback
+
 ## Search
 
 - _Simple_ search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
