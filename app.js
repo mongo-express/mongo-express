@@ -65,7 +65,7 @@ async function bootstrap(config) {
 
       if (config.useOidcAuth !== true) {
         if (config.useBasicAuth !== true) {
-          console.warn(pico.red('Basic and OIDC authentication are disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
+          console.warn(pico.red('Basic and OIDC authentications are disabled. It\'s recommended to set the useBasicAuth to true in the config.js.'));
         } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
           console.error(pico.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
         }
