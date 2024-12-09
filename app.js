@@ -64,9 +64,9 @@ async function bootstrap(config) {
       }
 
       if (config.useBasicAuth !== true) {
-        console.warn(pico.red('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
+        console.warn(pico.yellow('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
       } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-        console.error(pico.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+        console.warn(pico.yellow('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
       }
     }
   })
