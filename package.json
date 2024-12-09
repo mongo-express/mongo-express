@@ -94,7 +94,7 @@
     "webpack-cli": "^5.1.4"
   },
   "peerDependencies": {
-    "express-openid-connect": "^2.17.1"
+    "express-openid-connect": "^2"
   },
   "peerDependenciesMeta": {
     "express-openid-connect": {

@@ -243,13 +243,12 @@ Then, take the following action to customize to your environment:
 
 ## Usage (OpenIdConnect Authentication)
 
-**Install the required peerDependency**
+**Install**
+
+`express-openid-connect` package (listed as peerDependency) needs to be installed:
 
 ```bash
-# First, remove the library from the peer dependencies section
-yarn remove express-openid-connect
-# Then, add it as a standard production dependency
-yarn add express-openid-connect@2.17.1
+yarn add express-openid-connect
 ```
 
 **Setup the OAuth2 application**
