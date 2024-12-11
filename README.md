@@ -243,9 +243,9 @@ Then, take the following action to customize to your environment:
 
 ## Usage (OpenIdConnect Authentication)
 
-**Install**
+**Usage with the `mongo-express` package**
 
-`express-openid-connect` package (listed as peerDependency) needs to be installed:
+If you install `mongo-express` as a *package*, install the `express-openid-connect` dependency:
 
 ```bash
 yarn add express-openid-connect
