@@ -101,6 +101,9 @@ export default {
     // if admin is true, you will need to enter an admin username/password below (if it is needed)
     admin: getBoolean(process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN, false),
 
+    // This flag enhance AWS DocumentDB compatibility
+    awsDocumentDb: getBoolean(process.env.ME_CONFIG_MONGODB_AWS_DOCUMENTDB, false),
+
     // whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
 
