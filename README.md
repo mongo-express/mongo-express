@@ -22,6 +22,7 @@ A web-based MongoDB admin interface written with Node.js, Express, and Bootstrap
 - Database blacklist/whitelist
 - Custom CA/TLS/SSL and CA validation disabling
 - Supports replica sets
+- OpenIdConnect Authentication
 
 ## Screenshots
 
@@ -168,6 +169,17 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_BASICAUTH_USERNAME_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_USERNAME`                                                                                                                                  |
 | `ME_CONFIG_BASICAUTH_PASSWORD`                 | ``                                                  | mongo-express web login password. If not defined, `pass` is the password.                                                                                                       |
 | `ME_CONFIG_BASICAUTH_PASSWORD_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_PASSWORD`                                                                                                                                  |
+| `ME_CONFIG_OIDCAUTH_ENABLED`                   | `false`                                             | Enable OpenIdConnect Authentication. Send strings: `"true"` or `"false"`.                                                                                                       |
+| `ME_CONFIG_OIDCAUTH_ISSUER`                    | ``                                                  | OAuth2 [Issuer](https://datatracker.ietf.org/doc/html/rfc8414#section-2). Root URL to the openidconnect metadata eg. `"<issuer>/.well-known/openid-configuration"`              |
+| `ME_CONFIG_OIDCAUTH_ISSUER_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_ISSUER`                                                                                                                                     |
+| `ME_CONFIG_OIDCAUTH_CLIENTID`                  | ``                                                  | OAuth2 ClientId. The client must be private and allowed to perform the Authorization Code Flow grant.                                                                           |
+| `ME_CONFIG_OIDCAUTH_CLIENTID_FILE`             | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTID`                                                                                                                                   |
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET`              | ``                                                  | OAuth2 Client Secret.                                                                                                                                                           |
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET_FILE`         | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTSECRET`                                                                                                                               |
+| `ME_CONFIG_OIDCAUTH_SECRET`                    | ``                                                  | A random secret used by the library to init the Authorization Code Flow (required)                                                                                              |
+| `ME_CONFIG_OIDCAUTH_SECRET_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_SECRET_FILE`                                                                                                                                |
+| `ME_CONFIG_OIDCAUTH_BASEURL`                   | ``                                                  | OAuth2 base url. It's used to build the redirect URL eg. `"<base-url>/callback"`. If not specified `ME_CONFIG_SITE_BASEURL` will be used.                                       |
+| `ME_CONFIG_OIDCAUTH_BASEURL_FILE`              | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_BASEURL`                                                                                                                                    |
 | `ME_CONFIG_REQUEST_SIZE`                       | `100kb`                                             | Used to configure maximum Mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser). |
 | `ME_CONFIG_OPTIONS_READONLY`                   | `false`                                             | if readOnly is true, components of writing are not visible.                                                                                                                     |
 | `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.                                                                                                  |
@@ -229,6 +241,33 @@ Then, take the following action to customize to your environment:
 - Create your `config.js` file based on `config.default.js`
   - Check if it is necessary to change the `dbLabel` according to the MongoDB service created
   - Change the `basicAuth` properties, do not to keep the default values
+
+## Usage (OpenIdConnect Authentication)
+
+**Usage with the `mongo-express` package**
+
+If you install `mongo-express` as a *package*, install the `express-openid-connect` dependency:
+
+```bash
+yarn add express-openid-connect
+```
+
+**Setup the OAuth2 application**
+
+The current implementation supports OAuth2 Authorization Code Flow Grant, to make it work you need to setup a client on your Identity Provider, and pass the parameters to the application:
+
+```bash
+export ME_CONFIG_OIDCAUTH_ENABLED=true
+export ME_CONFIG_OIDCAUTH_BASEURL=https://<domain>/<base-url>
+export ME_CONFIG_OIDCAUTH_ISSUER=<authority>
+export ME_CONFIG_OIDCAUTH_CLIENTID=<client-id>
+export ME_CONFIG_OIDCAUTH_CLIENTSECRET=<client-secret> # Optional
+export ME_CONFIG_OIDCAUTH_SECRET=<random-generated-string>
+export ME_CONFIG_SITE_COOKIESECRET=<client-secret>
+export ME_CONFIG_SITE_BASEURL=/<base-url>
+```
+
+To register your client, you will need the application's redirect URI, which can be obtained by appending `/callback` to the application base URL: Eg. https://example.com/mongo-express/callback
 
 ## Search
 
