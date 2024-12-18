@@ -56,7 +56,7 @@ Copy config.default.js to config.js and edit the default property to fit your lo
 
 ## Usage (npm / yarn / pnpm / CLI)
 
-_mongo-express_ requires Node.js v4 or higher.
+_mongo-express_ requires Node.js v18.18 or higher.
 
 **To install:**
 
