@@ -257,14 +257,14 @@ yarn add express-openid-connect
 The current implementation supports OAuth2 Authorization Code Flow Grant, to make it work you need to setup a client on your Identity Provider, and pass the parameters to the application:
 
 ```bash
-export ME_CONFIG_OIDCAUTH_ENABLED=true
-export ME_CONFIG_OIDCAUTH_BASEURL=https://<domain>/<base-url>
-export ME_CONFIG_OIDCAUTH_ISSUER=<authority>
-export ME_CONFIG_OIDCAUTH_CLIENTID=<client-id>
-export ME_CONFIG_OIDCAUTH_CLIENTSECRET=<client-secret> # Optional
-export ME_CONFIG_OIDCAUTH_SECRET=<random-generated-string>
-export ME_CONFIG_SITE_COOKIESECRET=<client-secret>
-export ME_CONFIG_SITE_BASEURL=/<base-url>
+ME_CONFIG_OIDCAUTH_ENABLED=true
+ME_CONFIG_OIDCAUTH_BASEURL=https://<domain>/<base-url>
+ME_CONFIG_OIDCAUTH_ISSUER=<authority>
+ME_CONFIG_OIDCAUTH_CLIENTID=<client-id>
+ME_CONFIG_OIDCAUTH_CLIENTSECRET=<client-secret> # Optional
+ME_CONFIG_OIDCAUTH_SECRET=<random-generated-string>
+ME_CONFIG_SITE_COOKIESECRET=<client-secret>
+ME_CONFIG_SITE_BASEURL=/<base-url>
 ```
 
 To register your client, you will need the application's redirect URI, which can be obtained by appending `/callback` to the application base URL: Eg. https://example.com/mongo-express/callback
