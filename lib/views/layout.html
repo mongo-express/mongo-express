@@ -77,7 +77,7 @@
 <script src="{{ baseHref }}{{assets.vendor.js}}"></script>
 <script type="text/javascript">
 
-  window.ME_SETTINGS = {
+  globalThis.ME_SETTINGS = {
     readOnly: '{{ !!settings.read_only }}' === 'true',
     noDelete: '{{ !!settings.no_delete }}' === 'true',
     baseHref: '{{ baseHref }}',
