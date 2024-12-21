@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import https from 'node:https';
+import path from 'node:path';
 import pico from 'picocolors';
 import { program } from 'commander';
 import csrf from 'csurf';
@@ -10,7 +11,7 @@ import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
 
-const pkg = JSON.parse(fs.readFileSync('./package.json'));
+const pkg = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, './package.json')));
 
 const app = express();
 
