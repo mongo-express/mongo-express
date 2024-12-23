@@ -1187,9 +1187,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/language@npm:^6.0.0, @codemirror/language@npm:^6.10.6, @codemirror/language@npm:^6.6.0":
-  version: 6.10.6
-  resolution: "@codemirror/language@npm:6.10.6"
+"@codemirror/language@npm:^6.0.0, @codemirror/language@npm:^6.10.7, @codemirror/language@npm:^6.6.0":
+  version: 6.10.7
+  resolution: "@codemirror/language@npm:6.10.7"
   dependencies:
     "@codemirror/state": "npm:^6.0.0"
     "@codemirror/view": "npm:^6.23.0"
@@ -1197,7 +1197,7 @@ __metadata:
     "@lezer/highlight": "npm:^1.0.0"
     "@lezer/lr": "npm:^1.0.0"
     style-mod: "npm:^4.0.0"
-  checksum: 10/7fc7019ae1ed956b40dd4c6bacd96558d4f5477a072d4ae73eace5faddf0c898cfa3bb75c8881a28f6e683179086a576a25e6d6c619c67b1de2d1ceb88287212
+  checksum: 10/9a58ceec7a9f5ac9b11a3bff841c751067e3fa0d9b39a1ab585a40ed5f6188d611d8ec8d1c60a4f1ea96485234b71d43176594da95d90e879e41a81340a120b0
   languageName: node
   linkType: hard
 
@@ -1244,14 +1244,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.35.3":
-  version: 6.35.3
-  resolution: "@codemirror/view@npm:6.35.3"
+"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.36.1":
+  version: 6.36.1
+  resolution: "@codemirror/view@npm:6.36.1"
   dependencies:
     "@codemirror/state": "npm:^6.5.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10/d971df96cd8fa5336378b4780f986fcd73c0bf5c76bf8cc5f0212666ed582a1b55469808a455fac76afea339dfbae246acec96bed559527212ce4d1196cce578
+  checksum: 10/a6af511852910a4e741ed5e470efe532b52c379d6f12b442556bc114064da0d4d9f98e56491fb7ee36ae9a51e33ccf0bc553c5d47f0ca76a40b21a3844d0145c
   languageName: node
   linkType: hard
 
@@ -1262,9 +1262,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.13.8":
-  version: 3.13.8
-  resolution: "@cypress/code-coverage@npm:3.13.8"
+"@cypress/code-coverage@npm:^3.13.9":
+  version: 3.13.9
+  resolution: "@cypress/code-coverage@npm:3.13.9"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -1281,7 +1281,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/9bbf5f1e328b92e29152cc3967d9bf74227d6a75969328951ea5f0ab17137cd82a2b4a0f6092c19073d21bae3467bc79e5467a8dc7a67c0b068b8d6a48d24a2c
+  checksum: 10/5c6fedd2e4e2ff4e221d440832cc00a9d7a420f2ada1a93ce1f68991397900f6179aa11730de018b785a452fdad18b4b69e6d695e1f2bfcbaa14e0b33dc3f8a3
   languageName: node
   linkType: hard
 
@@ -1386,10 +1386,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/busboy@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@fastify/busboy@npm:3.1.0"
-  checksum: 10/b8e06f4521effc0ea1648a81580c36f8b27c8a7927db32469feb533b3cc1d61fe0f7f36c116d75753b099673b522f9e2e321ff7c8f10c2d4c38a6206f1ac6df9
+"@fastify/busboy@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@fastify/busboy@npm:3.1.1"
+  checksum: 10/3d67fe6c6fbd9bace81f45d932809ea6b0c20da030315ac961e43a788f0a235380883c14c6c789d5ff6d099d0aca6561d540cac83c08e9bba3e7952d8814e0a4
   languageName: node
   linkType: hard
 
@@ -2790,7 +2790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^6.10.0, bson@npm:^6.10.1":
+"bson@npm:^6.10.1":
   version: 6.10.1
   resolution: "bson@npm:6.10.1"
   checksum: 10/7b6d2a4c877bbe27d9e7fa0cd31e6b446ba08c5d70927403a6d42abf6e354fd12e79daf562fa5cc36e85cb8e701edc2ebdc2381c75c2376dde0f5e8d7ee3fd1b
@@ -3537,9 +3537,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^13.16.1":
-  version: 13.16.1
-  resolution: "cypress@npm:13.16.1"
+"cypress@npm:^13.17.0":
+  version: 13.17.0
+  resolution: "cypress@npm:13.17.0"
   dependencies:
     "@cypress/request": "npm:^3.0.6"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -3586,7 +3586,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/b79835cf5c6bf22a67b4469dc08c805ab3a469d3ea25ff19f700b344b2e790a44462dc2ccdd2c0679f902a44fcbb1efec0b1e9b5ce44be7e99548ce3b9af5cf8
+  checksum: 10/6c548e2adf7ae127365570680aa32015dbeb94cad30ce4f8a92e2e58d8ef7033b7f0ece50579a0a13eb07061feede0c813ff8d1e50e0feb87520dece5be4ba95
   languageName: node
   linkType: hard
 
@@ -6839,12 +6839,12 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@codemirror/commands": "npm:^6.7.1"
     "@codemirror/lang-javascript": "npm:^6.2.2"
-    "@codemirror/language": "npm:^6.10.6"
+    "@codemirror/language": "npm:^6.10.7"
     "@codemirror/state": "npm:^6.5.0"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.35.3"
-    "@cypress/code-coverage": "npm:^3.13.8"
-    "@fastify/busboy": "npm:^3.1.0"
+    "@codemirror/view": "npm:^6.36.1"
+    "@cypress/code-coverage": "npm:^3.13.9"
+    "@fastify/busboy": "npm:^3.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@lezer/highlight": "npm:^1.2.1"
     "@popperjs/core": "npm:^2.11.8"
@@ -6865,7 +6865,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     css-loader: "npm:^7.1.2"
     csurf: "npm:1.11.0"
-    cypress: "npm:^13.16.1"
+    cypress: "npm:^13.17.0"
     dotenv: "npm:^16.4.7"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.57.0"
@@ -6886,12 +6886,12 @@ __metadata:
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
     mocha: "npm:^11.0.1"
-    mongodb: "npm:^6.11.0"
+    mongodb: "npm:^6.12.0"
     mongodb-memory-server: "npm:^10.1.2"
     mongodb-query-parser: "npm:^4.2.6"
     morgan: "npm:^1.10.0"
     node-html-parser: "npm:^6.1.13"
-    nodemon: "npm:^3.1.7"
+    nodemon: "npm:^3.1.9"
     picocolors: "npm:^1.1.1"
     renderjson-2: "npm:^2.0.1"
     serve-favicon: "npm:^2.5.0"
@@ -6963,16 +6963,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.11.0, mongodb@npm:^6.9.0":
-  version: 6.11.0
-  resolution: "mongodb@npm:6.11.0"
+"mongodb@npm:^6.12.0, mongodb@npm:^6.9.0":
+  version: 6.12.0
+  resolution: "mongodb@npm:6.12.0"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.1.9"
-    bson: "npm:^6.10.0"
+    bson: "npm:^6.10.1"
     mongodb-connection-string-url: "npm:^3.0.0"
   peerDependencies:
     "@aws-sdk/credential-providers": ^3.188.0
-    "@mongodb-js/zstd": ^1.1.0
+    "@mongodb-js/zstd": ^1.1.0 || ^2.0.0
     gcp-metadata: ^5.2.0
     kerberos: ^2.0.1
     mongodb-client-encryption: ">=6.0.0 <7"
@@ -6993,7 +6993,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 10/e7836e5843e9f6790973d7c81faec8e93441299f7b3d26861ea982b89094af7903806cd11a66b449c07b693a0656692f327b4a0e6becdd5d287b1e84011b07f8
+  checksum: 10/482c00f12ddc87a48a6e0d1e0f0d7cda7b4e3e95b016dea06e052cfe0cdbca0064ff78646440f6312f8030eb193d114dc4470ebe89ba1864638e322a003d65e3
   languageName: node
   linkType: hard
 
@@ -7116,9 +7116,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^3.1.7":
-  version: 3.1.7
-  resolution: "nodemon@npm:3.1.7"
+"nodemon@npm:^3.1.9":
+  version: 3.1.9
+  resolution: "nodemon@npm:3.1.9"
   dependencies:
     chokidar: "npm:^3.5.2"
     debug: "npm:^4"
@@ -7132,7 +7132,7 @@ __metadata:
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: 10/07c6b14e4915bfe11abd0ee95bdfd96087dcdb7a37f9d1a57d9526f5f564268432556aa726a4019abf7e48deeff4628a5b34e88ccba8bf46c310c5910ad4a075
+  checksum: 10/7c01ddfa30815f4147006f5b7c015a1f75017118cf398ee8c4ba3ac904667f4555b91cca6b7b191e0f6ccf5072727aa20224a1456d5446f3f6053e15132068a2
   languageName: node
   linkType: hard
 
