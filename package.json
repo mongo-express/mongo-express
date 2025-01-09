@@ -25,12 +25,12 @@
     "url": "git://github.com/mongo-express/mongo-express.git"
   },
   "dependencies": {
-    "@codemirror/commands": "^6.7.1",
+    "@codemirror/commands": "^6.8.0",
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/language": "^6.10.8",
     "@codemirror/state": "^6.5.0",
     "@codemirror/theme-one-dark": "^6.1.2",
-    "@codemirror/view": "^6.36.1",
+    "@codemirror/view": "^6.36.2",
     "@fastify/busboy": "^3.1.1",
     "@json2csv/plainjs": "^7.0.6",
     "@lezer/highlight": "^1.2.1",
@@ -68,7 +68,7 @@
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
-    "@cypress/code-coverage": "^3.13.9",
+    "@cypress/code-coverage": "^3.13.10",
     "assets-webpack-plugin": "^7.1.1",
     "babel-loader": "^9.2.1",
     "chai": "^5.1.2",

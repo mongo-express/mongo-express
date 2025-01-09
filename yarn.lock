@@ -1160,15 +1160,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.7.1":
-  version: 6.7.1
-  resolution: "@codemirror/commands@npm:6.7.1"
+"@codemirror/commands@npm:^6.0.0, @codemirror/commands@npm:^6.8.0":
+  version: 6.8.0
+  resolution: "@codemirror/commands@npm:6.8.0"
   dependencies:
     "@codemirror/language": "npm:^6.0.0"
     "@codemirror/state": "npm:^6.4.0"
     "@codemirror/view": "npm:^6.27.0"
     "@lezer/common": "npm:^1.1.0"
-  checksum: 10/d742bc5976f7bab81695b9fc10d103b7cc9933fce3cc90fdd8e1d060ff480efd65d8fac3ee17f500869d323ea00c4da200d022619888da15fd65aa40e0958c93
+  checksum: 10/0c7991736bc84d0a7f8e49c311c78a78def84fca36ff61c2f9887067e2c06b1b232711cb99282cd410527ddbe0671d2b9aff93e0848fa731a2014c3691c737ea
   languageName: node
   linkType: hard
 
@@ -1244,14 +1244,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.36.1":
-  version: 6.36.1
-  resolution: "@codemirror/view@npm:6.36.1"
+"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0, @codemirror/view@npm:^6.27.0, @codemirror/view@npm:^6.36.2":
+  version: 6.36.2
+  resolution: "@codemirror/view@npm:6.36.2"
   dependencies:
     "@codemirror/state": "npm:^6.5.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10/a6af511852910a4e741ed5e470efe532b52c379d6f12b442556bc114064da0d4d9f98e56491fb7ee36ae9a51e33ccf0bc553c5d47f0ca76a40b21a3844d0145c
+  checksum: 10/9ef7fcf4f9d9b6e66645ae65da1bf0c90e08f6ba786de0373b9f3644632066b91b8ea20faf67bb81eb9adf310ae76888cc7fd0901e2bb4821193f5427455c137
   languageName: node
   linkType: hard
 
@@ -1262,9 +1262,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.13.9":
-  version: 3.13.9
-  resolution: "@cypress/code-coverage@npm:3.13.9"
+"@cypress/code-coverage@npm:^3.13.10":
+  version: 3.13.10
+  resolution: "@cypress/code-coverage@npm:3.13.10"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -1281,7 +1281,7 @@ __metadata:
     babel-loader: ^8.3 || ^9
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/5c6fedd2e4e2ff4e221d440832cc00a9d7a420f2ada1a93ce1f68991397900f6179aa11730de018b785a452fdad18b4b69e6d695e1f2bfcbaa14e0b33dc3f8a3
+  checksum: 10/1eb5449e16e33531c4470b925ad1c44f49962d34b03b6275fff833e24c453b739b24ea3311f28045ae83ce9727abcac04d02e8c59b958bd54d9d425fc360b335
   languageName: node
   linkType: hard
 
@@ -6826,13 +6826,13 @@ __metadata:
     "@babel/core": "npm:^7.26.0"
     "@babel/eslint-parser": "npm:^7.25.9"
     "@babel/preset-env": "npm:^7.26.0"
-    "@codemirror/commands": "npm:^6.7.1"
+    "@codemirror/commands": "npm:^6.8.0"
     "@codemirror/lang-javascript": "npm:^6.2.2"
     "@codemirror/language": "npm:^6.10.8"
     "@codemirror/state": "npm:^6.5.0"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
-    "@codemirror/view": "npm:^6.36.1"
-    "@cypress/code-coverage": "npm:^3.13.9"
+    "@codemirror/view": "npm:^6.36.2"
+    "@cypress/code-coverage": "npm:^3.13.10"
     "@fastify/busboy": "npm:^3.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@lezer/highlight": "npm:^1.2.1"
