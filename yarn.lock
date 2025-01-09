@@ -6879,7 +6879,7 @@ __metadata:
     mongodb-memory-server: "npm:^10.1.3"
     mongodb-query-parser: "npm:^4.2.6"
     morgan: "npm:^1.10.0"
-    node-html-parser: "npm:^6.1.13"
+    node-html-parser: "npm:^7.0.1"
     nodemon: "npm:^3.1.9"
     picocolors: "npm:^1.1.1"
     renderjson-2: "npm:^2.0.1"
@@ -7079,13 +7079,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-html-parser@npm:^6.1.13":
-  version: 6.1.13
-  resolution: "node-html-parser@npm:6.1.13"
+"node-html-parser@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "node-html-parser@npm:7.0.1"
   dependencies:
     css-select: "npm:^5.1.0"
     he: "npm:1.2.0"
-  checksum: 10/f5ebc5cea22e819e7b726b483e12241039ebdeac6eba198ebdb55a0921536798c1acd9c6f543e82f77542dc44fb2230f55891b1baae218c17969dd08f7295d14
+  checksum: 10/726db99091551ab3620f001892d6afb4c87b505ffc8fc6b8cd7bb225701a805b85615504dd93a0d4ee095ef46d2ec4dabc9b61165d8034704b191601f5bf6936
   languageName: node
   linkType: hard
 
