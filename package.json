@@ -41,7 +41,7 @@
     "bootstrap-paginator-2": "^2.0.0",
     "bson": "^6.10.1",
     "codemirror": "^6.0.1",
-    "commander": "^12.1.0",
+    "commander": "^13.0.0",
     "cookie-parser": "1.4.7",
     "cross-env": "^7.0.3",
     "csurf": "1.11.0",
