@@ -1,4 +1,4 @@
-FROM node:18-alpine3.16 AS build
+FROM node:20-alpine3.21 AS build
 
 WORKDIR /dockerbuild
 COPY . .
@@ -7,7 +7,7 @@ RUN yarn install \
     && yarn build \
     && rm -rf /dockerbuild/lib/scripts
 
-FROM node:18-alpine3.16
+FROM node:20-alpine3.21
 
 # "localhost" doesn't mean much in a container, so we adjust our default to the common service name "mongo" instead
 # (and make sure the server listens outside the container, since "localhost" inside the container is usually difficult to access)
