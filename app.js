@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import https from 'node:https';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import pico from 'picocolors';
 import { program } from 'commander';
 import csrf from 'csurf';
@@ -11,7 +12,10 @@ import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
 
-const pkg = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, './package.json')));
+// TODO replace with import.meta.dirname if minimum Node.js version is >= 20.11.0
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, './package.json')));
 
 const app = express();
 
