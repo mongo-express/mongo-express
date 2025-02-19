@@ -183,7 +183,7 @@ export default {
     persistEditMode: getBoolean(process.env.ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE, false),
 
     // collapsibleJSON: if set to true, jsons will be displayed collapsible
-    collapsibleJSON: true,
+    collapsibleJSON: getBoolean(process.env.ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON, true),
 
     // collapsibleJSONDefaultUnfold: if collapsibleJSON is set to `true`, this defines default level
     //  to which JSONs are displayed unfolded; use number or "all" to unfold all levels
@@ -198,10 +198,10 @@ export default {
 
     // confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is
     // displayed before deleting a document/collection
-    confirmDelete: false,
+    confirmDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_CONFIRM_DELETE, false),
 
     // noExport: if noExport is set to true, we won't show export buttons
-    noExport: false,
+    noExport: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_EXPORT, false),
 
     // fullwidthLayout: if set to true an alternative page layout is used utilizing full window width
     fullwidthLayout: getBoolean(process.env.ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT, false),
