@@ -1252,7 +1252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^3.0.6":
+"@cypress/request@npm:^3.0.7":
   version: 3.0.7
   resolution: "@cypress/request@npm:3.0.7"
   dependencies:
@@ -3459,11 +3459,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^13.17.0":
-  version: 13.17.0
-  resolution: "cypress@npm:13.17.0"
+"cypress@npm:^14.0.3":
+  version: 14.0.3
+  resolution: "cypress@npm:14.0.3"
   dependencies:
-    "@cypress/request": "npm:^3.0.6"
+    "@cypress/request": "npm:^3.0.7"
     "@cypress/xvfb": "npm:^1.2.4"
     "@types/sinonjs__fake-timers": "npm:8.1.1"
     "@types/sizzle": "npm:^2.3.2"
@@ -3508,7 +3508,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/6c548e2adf7ae127365570680aa32015dbeb94cad30ce4f8a92e2e58d8ef7033b7f0ece50579a0a13eb07061feede0c813ff8d1e50e0feb87520dece5be4ba95
+  checksum: 10/a3ce943f21dd3e3a0a138dbb6789ed1228c8fe81ad8c98d37c362414c37b64d2ab3de23cc31e1c4cc52fbfd1f941a481ece6d157c2736798a428a309778aeded
   languageName: node
   linkType: hard
 
@@ -6842,7 +6842,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     css-loader: "npm:^7.1.2"
     csurf: "npm:1.11.0"
-    cypress: "npm:^13.17.0"
+    cypress: "npm:^14.0.3"
     dotenv: "npm:^16.4.7"
     errorhandler: "npm:1.5.1"
     eslint: "npm:^8.57.0"
