@@ -27,7 +27,7 @@
   "dependencies": {
     "@codemirror/commands": "^6.8.0",
     "@codemirror/lang-javascript": "^6.2.3",
-    "@codemirror/language": "^6.10.8",
+    "@codemirror/language": "^6.11.0",
     "@codemirror/state": "^6.5.2",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@codemirror/view": "^6.36.4",
@@ -65,8 +65,8 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.9",
-    "@babel/eslint-parser": "^7.26.8",
+    "@babel/core": "^7.26.10",
+    "@babel/eslint-parser": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@cypress/code-coverage": "^3.13.12",
     "assets-webpack-plugin": "^7.1.1",
