@@ -52,3 +52,8 @@
   border-radius: 4px; /* future proofing */
   -khtml-border-radius: 4px; /* for old Konqueror browsers */
 }
+
+.scrollable-ul {
+  overflow-y: auto;
+  max-height: 90vh;
+}
