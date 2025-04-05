@@ -272,6 +272,10 @@ ME_CONFIG_SITE_BASEURL=/<base-url>
 
 To register your client, you will need the application's redirect URI, which can be obtained by appending `/callback` to the application base URL: Eg. https://example.com/mongo-express/callback
 
+## Usage (ClawCloud Run)
+
+[![Run on ClawCloud](https://raw.githubusercontent.com/ClawCloud/Run-Template/refs/heads/main/Run-on-ClawCloud.svg)](https://template.run.claw.cloud/?referralCode=UHUQEOZWVLB4&openapp=system-fastdeploy%3FtemplateName%3Dmongo-express)
+
 ## Search
 
 - _Simple_ search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
