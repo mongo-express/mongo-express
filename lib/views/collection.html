@@ -7,7 +7,7 @@
   <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
     Database: {{ dbName }}
   </a>
-  <ul id="navbarDatabaseDropdown" class="dropdown-menu">
+  <ul id="navbarDatabaseDropdown" class="dropdown-menu scrollable-ul">
     {% for db in databases %}
     <li><a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
     {% endfor %}
@@ -17,11 +17,12 @@
   <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarCollectionDropdown" data-bs-target="#navbarCollectionDropdown" data-bs-toggle="collapse" aria-expanded="false">
     Collection: {{ collectionName }}
   </a>
-  <ul id="navbarCollectionDropdown" class="dropdown-menu">
-    {% for collection in collections %}
-    <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
-    {% endfor %}
-  </ul>
+    <ul id="navbarCollectionDropdown" class="dropdown-menu scrollable-ul">
+      {% for collection in collections %}
+      <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
+      {% endfor %}
+    </ul>
+
 </li>
 {% endblock %}
 
