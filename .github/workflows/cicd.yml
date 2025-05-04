@@ -26,8 +26,7 @@ jobs:
       
       - name: Validate Docker Hub credentials
         run: |
-          echo ${{ env.TEST }}
-          echo ${{ TEST }}
+          echo ${{ env.TEST }}          
           if [ -z "${{ secrets.dockerhub.DOCKERHUB_USER }}" ] || [ -z "${{ secrets.dockerhub.DOCKERHUB_TOKEN }}" ]; then
             echo "::error::Docker Hub credentials not set!"
             exit 1
