@@ -9,11 +9,13 @@ on:
       - master
     paths-ignore:
       - '**.md'
+      
 env:
   REGISTRY: docker.io    
 
 jobs:
   build-and-push:
+    if: true == false
     runs-on: ubuntu-latest
     permissions:
       contents: read
