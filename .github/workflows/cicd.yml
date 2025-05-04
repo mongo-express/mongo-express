@@ -11,7 +11,8 @@ on:
       - '**.md'
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: metaller000/me-netology
+  DOCKERHUB_USER: metaller000
+  IMAGE_NAME: env.DOCKERHUB_USER/me-netology
 
 jobs:
   build-and-push:
@@ -27,7 +28,7 @@ jobs:
       - name: Validate Docker Hub credentials
         run: |
           echo ${{ env.TEST }}          
-          if [ -z "${{ secrets.DOCKERHUB_USER }}" ] || [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
+          if [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
             echo "::error::Docker Hub credentials not set!"
             exit 1
           fi
@@ -35,7 +36,7 @@ jobs:
       - name: Log in to Docker Hub        
         uses: docker/login-action@v3
         with:
-          username: secrets.DOCKERHUB_USER
+          username: env.DOCKERHUB_USER
           password: secrets.DOCKERHUB_TOKEN
 
       - name: Extract commit SHA
