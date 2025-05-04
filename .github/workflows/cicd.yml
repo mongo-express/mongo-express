@@ -28,11 +28,7 @@ jobs:
       - name: Run Semgrep scan
         id: semgrep-scan
         run: |
-          semgrep ci \
-            --config=auto \
-            --sarif \  
-            --output=semgrep-results.sarif \
-            --error  
+          semgrep ci --config=auto --sarif --output=semgrep-results.sarif --error  
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
