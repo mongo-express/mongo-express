@@ -10,8 +10,7 @@ on:
     paths-ignore:
       - '**.md'
 env:
-  REGISTRY: docker.io  
-  IMAGE_NAME: metaller000/me-netology
+  REGISTRY: docker.io    
 
 jobs:
   build-and-push:
@@ -27,7 +26,7 @@ jobs:
       - name: Validate Docker Hub credentials
         run: |
           echo ${{ env.TEST }}          
-          if [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
+          if [ -z "${{ secrets.DOCKERHUB_REPO }}" || -z "${{ secrets.DOCKERHUB_USER }}" || -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
             echo "::error::Docker Hub credentials not set!"
             exit 1
           fi
@@ -35,8 +34,8 @@ jobs:
       - name: Log in to Docker Hub        
         uses: docker/login-action@v3
         with:
-          username: metaller000
-          password: secrets.DOCKERHUB_TOKEN
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract commit SHA
         id: sha
@@ -48,5 +47,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.short_sha }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest          
+            ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}
+            ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
