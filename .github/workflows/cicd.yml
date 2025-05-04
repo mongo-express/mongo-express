@@ -10,9 +10,6 @@ on:
     paths-ignore:
       - '**.md'
       
-env:
-  REGISTRY: docker.io    
-
 jobs:
   semgrep:
     name: semgrep/ci
@@ -25,9 +22,22 @@ jobs:
       image: semgrep/semgrep
     if: (github.actor != 'dependabot[bot]')
     steps:
+      - name: Run Semgrep skan
       - uses: actions/checkout@v4
       - run: semgrep ci
       
+      - name: Run Semgrep and upload SARIF
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: "p/ci"  
+          output-format: "sarif"  
+          output-file: "semgrep-results.sarif"  
+          
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "semgrep-results.sarif"
+     
   test:
     if: true == false
     strategy:
@@ -68,7 +78,8 @@ jobs:
     permissions:
       contents: read
       packages: write
-
+    env:
+      REGISTRY: docker.io   
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
