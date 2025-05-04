@@ -12,7 +12,7 @@ on:
       
 jobs:
   semgrep:
-    name: semgrep/ci
+    name: SAST
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -30,18 +30,18 @@ jobs:
       - run: semgrep ci
        
       - name: Upload SARIF to GitHub
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "semgrep-results.sarif"
       
      
   test:
+    name: tests
     if: true == false
     strategy:
       matrix:
         node: [18, 20, 22.4.1]
-        os: [ubuntu-latest]
-    name: Node v${{ matrix.node }} - ${{ matrix.os }}
+        os: [ubuntu-latest]    
     runs-on: ${{ matrix.os }}
 
     services:
@@ -70,6 +70,7 @@ jobs:
       run: yarn lint
 
   build-and-push:
+    name: push
     if: true == false
     runs-on: ubuntu-latest
     permissions:
@@ -109,6 +110,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
             
   deploy:
+    name: deploy
     if: true == false
     runs-on: ubuntu-latest
     steps:
