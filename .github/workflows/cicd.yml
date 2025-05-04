@@ -51,3 +51,18 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}
             ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
+            
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}    
+      
+      - name: Run remote script directly
+        run: |
+          ssh -t secrets.SSH_HOST "bash -s" < secrets.SSH_SCRIPT
