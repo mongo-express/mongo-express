@@ -38,11 +38,9 @@ jobs:
           username: metaller000
           password: dckr_pat_ru3Z3PQ5BXAVXvOLNOqR0SGxB-Y
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Extract commit SHA
+        id: sha
+        run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
          
       - name: Build and push
         uses: docker/build-push-action@v5
