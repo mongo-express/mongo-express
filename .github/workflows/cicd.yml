@@ -24,8 +24,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Log in to Docker Hub
-        if: steps.validate.outcome == 'success'
+      - name: Validate Docker Hub credentials
+        run: |
+          if [ -z "${{ secrets.DOCKERHUB_USER }}" ] || [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
+            echo "::error::Docker Hub credentials not set!"
+            exit 1
+          fi
+      
+      - name: Log in to Docker Hub        
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
