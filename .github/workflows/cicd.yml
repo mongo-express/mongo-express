@@ -66,4 +66,4 @@ jobs:
       
       - name: Run remote script directly
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa secrets.SSH_HOST secrets.SSH_SCRIPT
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_HOST }} ${{ secrets.SSH_SCRIPT }}
