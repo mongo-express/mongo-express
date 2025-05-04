@@ -23,7 +23,7 @@ jobs:
     if: (github.actor != 'dependabot[bot]')
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Perform Semgrep Analysis
         run: semgrep scan -q --sarif --config auto ./vulnerable-source-code > semgrep-results.sarif
