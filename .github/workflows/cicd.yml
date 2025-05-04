@@ -24,19 +24,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      # - name: Validate Docker Hub credentials
-      #   run: |
-      #     echo ${{ env.TEST }}          
-      #     if [ -z "${{ secrets.dockerhub.DOCKERHUB_USER }}" ] || [ -z "${{ secrets.dockerhub.DOCKERHUB_TOKEN }}" ]; then
-      #       echo "::error::Docker Hub credentials not set!"
-      #       exit 1
-      #     fi
+      - name: Validate Docker Hub credentials
+        run: |
+          echo ${{ env.TEST }}          
+          if [ -z "${{ secrets.DOCKERHUB_USER }}" ] || [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
+            echo "::error::Docker Hub credentials not set!"
+            exit 1
+          fi
       
       - name: Log in to Docker Hub        
         uses: docker/login-action@v3
         with:
-          username: metaller000
-          password: dckr_pat_ru3Z3PQ5BXAVXvOLNOqR0SGxB-Y
+          username: secrets.DOCKERHUB_USER
+          password: secrets.DOCKERHUB_TOKEN
 
       - name: Extract commit SHA
         id: sha
