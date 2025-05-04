@@ -65,4 +65,4 @@ jobs:
       
       - name: Run remote script directly
         run: |
-          ssh -t secrets.SSH_HOST "bash -s" < secrets.SSH_SCRIPT
+          ssh -o StrictHostKeyChecking=no -t secrets.SSH_HOST secrets.SSH_SCRIPT
