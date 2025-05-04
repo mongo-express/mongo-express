@@ -22,18 +22,18 @@ jobs:
       image: semgrep/semgrep
     if: (github.actor != 'dependabot[bot]')
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run Semgrep scan
-        id: semgrep-scan
-        run: |
-          semgrep ci --config=auto --sarif --output=semgrep-results.sarif
-
-      - name: Upload SARIF to GitHub Code Scanning
+      - uses: actions/checkout@v4
+        with:
+          config: "p/ci"  # Использует стандартные правила Semgrep
+          output-format: "sarif"  # Формат отчета
+          output-file: "semgrep-results.sarif"  # Файл для сохранения результатов
+      - run: semgrep ci
+       
+      - name: Upload SARIF to GitHub
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: semgrep-results.sarif
+          sarif_file: "semgrep-results.sarif"
+      
      
   test:
     if: true == false
