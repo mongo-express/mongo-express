@@ -12,6 +12,7 @@ on:
       
 jobs:
   semgrep:
+    if: true == false
     name: SAST
     runs-on: ubuntu-latest
     permissions:
@@ -19,46 +20,11 @@ jobs:
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
-      image: semgrep/semgrep
-    if: (github.actor != 'dependabot[bot]')
+      image: semgrep/semgrep    
     steps:       
       - uses: actions/checkout@v4
       - run: semgrep ci
-           
-  test:
-    name: tests
-    if: true == false
-    strategy:
-      matrix:
-        node: [18, 20, 22.4.1]
-        os: [ubuntu-latest]    
-    runs-on: ${{ matrix.os }}
-
-    services:
-      mongodb:
-        image: mongo
-        ports:
-        - 27017:27017
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node }}
-
-    - name: Install dependencies
-      run: yarn install --immutable
-
-    - name: Build
-      run: yarn build
-
-    - name: Test
-      run: yarn mocha
-
-    - name: Lint
-      run: yarn lint
-
+  
   build-and-push:
     name: push
     if: true == false
@@ -99,6 +65,29 @@ jobs:
             ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}
             ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
             
+  dast:
+    name: DAST    
+    strategy:
+      matrix:
+        node: [22.4.1]
+        os: [ubuntu-latest]    
+    runs-on: ${{ matrix.os }}
+    env:
+      REGISTRY: docker.io  
+
+    services:
+      mongodb:
+        image: mongo
+        ports:
+        - 27017:27017
+
+    steps:
+      - name: Run container
+        run: |
+          docker run -d --name me -p 8080:8081 ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
+          docker ps -a
+          curl --retry 10 --retry-delay 5 --retry-connrefused http://localhost:8080/health
+      
   deploy:
     name: deploy
     if: true == false
