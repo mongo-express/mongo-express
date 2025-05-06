@@ -49,6 +49,9 @@ jobs:
     env:
       REGISTRY: docker.io   
     steps:     
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
       - name: Validate Docker Hub credentials
         run: |                 
           if [ -z "${{ secrets.DOCKERHUB_REPO }}" || -z "${{ secrets.DOCKERHUB_USER }}" || -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
