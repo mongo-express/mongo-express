@@ -84,7 +84,7 @@ jobs:
     steps:
       - name: Run container
         run: |
-          docker run -d --name me -p 8081:8081 -e mongodb://mongo:27017/ ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
+          docker run -d --network host --name me -p 8081:8081 -e mongodb://mongo:27017/ ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
           docker ps -a
           curl --retry 10 --retry-delay 5 --retry-connrefused http://localhost:8081
                 
