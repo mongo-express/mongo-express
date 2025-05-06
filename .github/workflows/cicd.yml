@@ -84,10 +84,10 @@ jobs:
     steps:
       - name: Run container
         run: |
-          docker run -d --name me -p 8080:8081 ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
+          docker run -d --name me -p 8081:8081 ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
           docker ps -a
-          curl --retry 10 --retry-delay 5 --retry-connrefused http://localhost:8080/health
-      
+          curl --retry 10 --retry-delay 5 --retry-connrefused http://localhost:8081
+                
   deploy:
     name: deploy
     if: true == false
