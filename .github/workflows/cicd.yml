@@ -83,17 +83,16 @@ jobs:
           output: 'trivy-results.sarif'
           severity: 'CRITICAL'
       
-      - name: Upload Trivy report
-        uses: actions/upload-artifact@v4
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          name: trivy-security-report
-          path: trivy-results.sarif
+          sarif_file: trivy-results.sarif
       
       - name: Push to Docker Hub
         if: success()  
         run: |
-            docker push -a
-
+            docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} 
+            docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest
           
   dast:
     if: true == false
