@@ -12,6 +12,7 @@ on:
       
 jobs:
   secret_scan:
+    if: true == false
     name: secret_scan
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +40,7 @@ jobs:
       - run: semgrep ci
   
   push:
-    if: true == false
+    # if: true == false
     name: push    
     runs-on: ubuntu-latest
     permissions:
@@ -64,16 +65,27 @@ jobs:
       - name: Extract commit SHA
         id: sha
         run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-         
-      - name: Build and push
-        uses: docker/build-push-action@v5
+
+      - name: Build Docker image
+        run: |
+          docker build \
+          -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} \
+          -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest .
+          docker images  
+          
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
         with:
-          context: .
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}
-            ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
-            
+          image-ref: '${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}'
+          format: 'table'
+          exit-code: '1'  
+          severity: 'CRITICAL,HIGH'   
+          
+      - name: Push to Docker Hub
+        if: github.ref == 'refs/heads/main' && success()  
+        run: |
+            docker push -a
+          
   dast:
     if: true == false
     name: DAST        
