@@ -80,11 +80,14 @@ jobs:
         image: mongo
         ports:
         - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGO_USER }}
+          MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_PASS }}
 
     steps:
       - name: Run container
         run: |
-          docker run -d --network host --name me -e ME_CONFIG_SITE_COOKIESECRET=cookiesecret -e ME_CONFIG_SITE_SESSIONSECRET=sessionsecret -e ME_CONFIG_MONGODB_URL=mongodb://localhost:27017/ ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
+          docker run -d --network host --name me -e ME_CONFIG_SITE_COOKIESECRET=cookiesecret -e ME_CONFIG_SITE_SESSIONSECRET=sessionsecret -e ME_CONFIG_MONGODB_URL=mongodb://${{ secrets.MONGO_USER }}:${{ secrets.MONGO_pass }}@localhost:27017/ ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
           docker ps
           curl -LI --retry 10 --retry-delay 5 --retry-connrefused http://localhost:8081
           docker logs me
@@ -103,8 +106,8 @@ jobs:
   
       - name: Stop containers
         run: |
-          docker stop my-app-container || true
-          docker rm my-app-container || true
+          docker stop me || true
+          docker rm me || true
           
   deploy:
     name: deploy
