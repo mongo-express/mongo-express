@@ -18,7 +18,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: gitleaks/gitleaks-action@v2
+      - name: Scan for secrets using Gitleaks
+        uses: gitleaks/gitleaks-action@v2
         with:
           redact: true 
             
@@ -47,8 +48,7 @@ jobs:
       REGISTRY: docker.io   
     steps:     
       - name: Validate Docker Hub credentials
-        run: |
-          echo ${{ env.TEST }}          
+        run: |                 
           if [ -z "${{ secrets.DOCKERHUB_REPO }}" || -z "${{ secrets.DOCKERHUB_USER }}" || -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
             echo "::error::Docker Hub credentials not set!"
             exit 1
