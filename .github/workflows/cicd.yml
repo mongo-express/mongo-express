@@ -23,8 +23,7 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         with:
           redact: true 
-          fail-on-leak: false
-            
+              
   sast:
     if: true == false
     name: SAST
@@ -39,9 +38,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: semgrep ci
   
-  push:
+  check-push:
     # if: true == false
-    name: push    
+    name: check push    
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -51,7 +50,9 @@ jobs:
     steps:     
       - name: Checkout code
         uses: actions/checkout@v4
-        
+        with:
+          persist-credentials: false
+          
       - name: Validate Docker Hub credentials
         run: |                 
           if [ -z "${{ secrets.DOCKERHUB_REPO }}" || -z "${{ secrets.DOCKERHUB_USER }}" || -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
