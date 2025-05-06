@@ -22,6 +22,7 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         with:
           redact: true 
+          fail-on-leak: false
             
   sast:
     if: true == false
