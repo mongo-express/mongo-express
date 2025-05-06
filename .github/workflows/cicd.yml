@@ -42,9 +42,11 @@ jobs:
     # if: true == false
     name: check push    
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    permissions:      
+      packages: write      
+      contents: write  # Needed to upload results
+      security-events: write  # Required for code scanning
+      actions: read  # May be needed for some operations
     env:
       REGISTRY: docker.io   
     steps:     
