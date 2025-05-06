@@ -66,12 +66,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
             
   dast:
-    name: DAST    
-    strategy:
-      matrix:
-        node: [22.4.1]
-        os: [ubuntu-latest]    
-    runs-on: ${{ matrix.os }}
+    name: DAST        
+    runs-on: ubuntu-latest
     env:
       REGISTRY: docker.io  
 
