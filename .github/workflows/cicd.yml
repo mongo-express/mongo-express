@@ -68,9 +68,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build \
-          -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} \
-          -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest .
+          docker build -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest .
           docker images  
           
       - name: Scan Docker image with Trivy
