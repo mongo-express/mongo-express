@@ -11,7 +11,18 @@ on:
       - '**.md'
       
 jobs:
-  semgrep:
+  secret_scan:
+    name: secret_scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: gitleaks/gitleaks-action@v2
+        with:
+          redact: true 
+            
+  sast:
     if: true == false
     name: SAST
     runs-on: ubuntu-latest
@@ -25,19 +36,16 @@ jobs:
       - uses: actions/checkout@v4
       - run: semgrep ci
   
-  build-and-push:
-    name: push
+  push:
     if: true == false
+    name: push    
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     env:
       REGISTRY: docker.io   
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
+    steps:     
       - name: Validate Docker Hub credentials
         run: |
           echo ${{ env.TEST }}          
@@ -66,6 +74,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest          
             
   dast:
+    if: true == false
     name: DAST        
     runs-on: ubuntu-latest
     env:
@@ -104,9 +113,6 @@ jobs:
     if: true == false
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
