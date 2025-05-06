@@ -77,15 +77,23 @@ jobs:
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: '${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}'
-          format: 'table'
-          exit-code: '1'  
-          severity: 'CRITICAL'   
-          
+          image-ref: '${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}'          
+          format: 'template'
+          template: '@/contrib/sarif.tpl'  
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL'
+      
+      - name: Upload Trivy report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-security-report
+          path: trivy-results.sarif
+      
       - name: Push to Docker Hub
-        if: github.ref == 'refs/heads/main' && success()  
+        if: success()  
         run: |
             docker push -a
+
           
   dast:
     if: true == false
