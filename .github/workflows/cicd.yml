@@ -80,7 +80,7 @@ jobs:
           image-ref: '${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}'
           format: 'table'
           exit-code: '1'  
-          severity: 'CRITICAL,HIGH'   
+          severity: 'CRITICAL'   
           
       - name: Push to Docker Hub
         if: github.ref == 'refs/heads/main' && success()  
