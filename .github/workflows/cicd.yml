@@ -12,7 +12,7 @@ on:
       
 jobs:
   secret_scan:
-    # if: true == false
+    if: true == false
     name: secret_scan
     runs-on: ubuntu-latest
     steps:
@@ -23,16 +23,9 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         with:
           redact: true
-          sarif-report: gitleaks-report.csv
-
-      - name: Upload CSV report as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gitleaks-csv-report
-          path: gitleaks-report.csv
         
   sast:
-    if: true == false
+    # if: true == false
     name: SAST
     runs-on: ubuntu-latest
     permissions:
@@ -43,8 +36,21 @@ jobs:
       image: semgrep/semgrep    
     steps:       
       - uses: actions/checkout@v4
-      - run: semgrep ci
-  
+      
+      - name: Run Semgrep scan and generate reports
+        run:  semgrep ci --sarif --output semgrep-results.sarif
+          
+      - name: Upload SARIF report to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: semgrep-results.sarif
+          
+      - name: Upload JSON report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-report
+          path: semgrep-results.sarif
+                    
   check-push:
     if: true == false
     name: check push    
