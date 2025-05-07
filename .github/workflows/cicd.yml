@@ -12,18 +12,30 @@ on:
       
 jobs:
   secret_scan:
-    if: true == false
+    # if: true == false
     name: secret_scan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
       - name: Scan for secrets using Gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
-          redact: true 
-              
+          redact: true
+          sarif-report: gitleaks-report.sarif  
+  
+      - name: Upload Gitleaks report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.sarif
+  
+      - name: Upload SARIF report to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: gitleaks-report.sarif
+        
   sast:
     if: true == false
     name: SAST
@@ -39,14 +51,14 @@ jobs:
       - run: semgrep ci
   
   check-push:
-    # if: true == false
+    if: true == false
     name: check push    
     runs-on: ubuntu-latest
     permissions:      
       packages: write      
-      contents: write  # Needed to upload results
-      security-events: write  # Required for code scanning
-      actions: read  # May be needed for some operations
+      contents: write  
+      security-events: write  
+      actions: read  
     env:
       REGISTRY: docker.io   
     steps:     
