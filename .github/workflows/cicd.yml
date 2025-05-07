@@ -147,13 +147,7 @@ jobs:
         uses: zaproxy/action-baseline@v0.14.0
         with:
           target: 'http://localhost:8081'
-          cmd_options: '-t http://localhost:8081 -J zap-report.json'
-      
-      - name: Upload raw reports as artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: zap-security-reports
-          path: zap-report.json
+          cmd_options: '-t http://localhost:8081'
           
       - name: Stop containers
         run: |
