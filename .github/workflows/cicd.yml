@@ -12,7 +12,7 @@ on:
       
 jobs:
   secret_scan:
-    if: github.base_ref != 'master'
+    if: github.event_name == 'pull_request'
     name: secret_scan
     runs-on: ubuntu-latest
     steps:
