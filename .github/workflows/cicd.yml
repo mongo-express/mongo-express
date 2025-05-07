@@ -29,7 +29,7 @@ jobs:
     name: SAST
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
@@ -41,7 +41,7 @@ jobs:
         run:  semgrep ci --sarif --output semgrep-results.sarif
           
       - name: Upload SARIF report to GitHub Security
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: semgrep-results.sarif
           
