@@ -26,7 +26,7 @@ jobs:
           sarif-report: gitleaks-report.csv
 
       - name: Upload CSV report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: gitleaks-csv-report
           path: gitleaks-report.csv
