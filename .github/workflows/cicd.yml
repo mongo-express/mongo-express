@@ -23,13 +23,13 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         with:
           redact: true
-          sarif-report: gitleaks-report.sarif
-          exit-code: 0
-  
-      - name: Upload SARIF report to GitHub
-        uses: github/codeql-action/upload-sarif@v3
+          sarif-report: gitleaks-report.csv
+
+      - name: Upload CSV report as artifact
+        uses: actions/upload-artifact@v3
         with:
-          sarif_file: gitleaks-report.sarif
+          name: gitleaks-csv-report
+          path: gitleaks-report.csv
         
   sast:
     if: true == false
