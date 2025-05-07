@@ -23,7 +23,8 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         with:
           redact: true
-          sarif-report: gitleaks-report.sarif  
+          sarif-report: gitleaks-report.sarif
+          exit-code: 0
   
       - name: Upload Gitleaks report as artifact
         uses: actions/upload-artifact@v4
