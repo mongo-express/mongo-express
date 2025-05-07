@@ -25,7 +25,7 @@ jobs:
           redact: true
         
   sast:
-    # if: true == false
+    if: true == false
     name: SAST
     runs-on: ubuntu-latest
     permissions:
@@ -55,7 +55,7 @@ jobs:
           path: semgrep-results.sarif
                     
   check-push:
-    if: true == false
+    # if: true == false
     name: check push    
     runs-on: ubuntu-latest
     permissions:      
@@ -107,6 +107,12 @@ jobs:
         with:
           sarif_file: trivy-results.sarif
       
+      - name: Upload JSON report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-results
+          path: trivy-results.sarif
+          
       - name: Push to Docker Hub
         if: success()  
         run: |
