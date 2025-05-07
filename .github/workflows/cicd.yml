@@ -12,7 +12,7 @@ on:
       
 jobs:
   secret_scan:
-    if: github.event_name == 'pull_request'
+    # if: github.event_name == 'pull_request'
     name: secret_scan
     runs-on: ubuntu-latest
     steps:
@@ -24,8 +24,7 @@ jobs:
         with:
           redact: true
         
-  sast:
-    if: true == false
+  sast:    
     name: SAST
     runs-on: ubuntu-latest
     permissions:
@@ -54,8 +53,7 @@ jobs:
           name: semgrep-report
           path: semgrep-results.sarif
                     
-  check-push:
-    if: true == false
+  check-push:    
     name: check push    
     runs-on: ubuntu-latest
     permissions:      
@@ -119,8 +117,7 @@ jobs:
             docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} 
             docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest
           
-  dast:
-    if: true == false
+  dast:    
     name: DAST        
     runs-on: ubuntu-latest
     env:
@@ -154,8 +151,7 @@ jobs:
           docker stop me || true
           docker rm me || true
           
-  deploy:
-    if: true == false
+  deploy:    
     name: deploy    
     runs-on: ubuntu-latest
     steps:
