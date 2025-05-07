@@ -24,7 +24,7 @@ jobs:
         with:
           redact: true
         
-  sast:    
+  sast:
     name: SAST
     runs-on: ubuntu-latest
     permissions:
@@ -54,6 +54,7 @@ jobs:
           path: semgrep-results.sarif
                     
   check-push:    
+    needs: sast
     name: check push    
     runs-on: ubuntu-latest
     permissions:      
@@ -118,6 +119,7 @@ jobs:
             docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest
           
   dast:    
+    needs: check-push
     name: DAST        
     runs-on: ubuntu-latest
     env:
@@ -151,7 +153,8 @@ jobs:
           docker stop me || true
           docker rm me || true
           
-  deploy:    
+  deploy:
+    needs: check-push
     name: deploy    
     runs-on: ubuntu-latest
     steps:
