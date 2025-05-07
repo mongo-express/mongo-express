@@ -12,7 +12,7 @@ on:
       
 jobs:
   secret_scan:
-    if: true == false
+    if: github.base_ref != 'master'
     name: secret_scan
     runs-on: ubuntu-latest
     steps:
@@ -120,7 +120,7 @@ jobs:
             docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest
           
   dast:
-    # if: true == false
+    if: true == false
     name: DAST        
     runs-on: ubuntu-latest
     env:
