@@ -100,7 +100,7 @@ jobs:
           format: 'template'
           template: '@/contrib/sarif.tpl'  
           output: 'trivy-results.sarif'
-          severity: 'CRITICAL'
+          severity: 'CRITICAL, HIGH'
       
       - name: Upload SARIF to GitHub
         uses: github/codeql-action/upload-sarif@v3
