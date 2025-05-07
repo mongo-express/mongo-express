@@ -149,22 +149,11 @@ jobs:
           target: 'http://localhost:8081'
           cmd_options: '-t http://localhost:8081 -J zap-report.json'
       
-      - name: Convert ZAP JSON to SARIF
-        run: |          
-          pip install zaproxy-sarif-converter          
-          zap-json-to-sarif zap-report.json -o zap-results.sarif 
-        if: always()
-      
-      - name: Upload SARIF to GitHub
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: zap-results.sarif
-      
       - name: Upload raw reports as artifacts
         uses: actions/upload-artifact@v4
         with:
           name: zap-security-reports
-          path: zap-results.sarif
+          path: zap-report.json
           
       - name: Stop containers
         run: |
