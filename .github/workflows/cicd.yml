@@ -55,7 +55,7 @@ jobs:
           path: semgrep-results.sarif
                     
   check-push:
-    # if: true == false
+    if: true == false
     name: check push    
     runs-on: ubuntu-latest
     permissions:      
@@ -107,7 +107,7 @@ jobs:
         with:
           sarif_file: trivy-results.sarif
       
-      - name: Upload JSON report as artifact
+      - name: Upload report as artifact
         uses: actions/upload-artifact@v4
         with:
           name: trivy-results
@@ -120,7 +120,7 @@ jobs:
             docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest
           
   dast:
-    if: true == false
+    # if: true == false
     name: DAST        
     runs-on: ubuntu-latest
     env:
@@ -147,16 +147,33 @@ jobs:
         uses: zaproxy/action-baseline@v0.14.0
         with:
           target: 'http://localhost:8081'
-          cmd_options: '-t http://localhost:8081'
+          cmd_options: '-t http://localhost:8081 -J zap-report.json'
       
+      - name: Convert ZAP JSON to SARIF
+        run: |          
+          pip install zaproxy-sarif-converter          
+          zap-json-to-sarif zap-report.json -o zap-results.sarif 
+        if: always()
+      
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: zap-results.sarif
+      
+      - name: Upload raw reports as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-security-reports
+          path: zap-results.sarif
+          
       - name: Stop containers
         run: |
           docker stop me || true
           docker rm me || true
           
   deploy:
-    name: deploy
     if: true == false
+    name: deploy    
     runs-on: ubuntu-latest
     steps:
       - name: Install SSH key
