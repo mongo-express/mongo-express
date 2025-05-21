@@ -171,7 +171,7 @@ jobs:
   security-report:
     needs: [sast, check-push] 
     runs-on: ubuntu-latest
-    steps:
+    steps:          
       - uses: actions/download-artifact@v4
         with:
           name: semgrep-report
@@ -183,16 +183,17 @@ jobs:
           path: reports/trivy
   
       - name: Извлечь Critical/High
-        run: |
+        run: |         
+          # Semgrep
+          jq '.runs[0].results[] | select(.severity == "ERROR" or .severity == "WARNING") | {rule: .ruleId, message: .message.text, severity: .severity}' reports/semgrep/semgrep-results.sarif > critical-high.json
+          echo "🔍 **Critical/High Issues (Semgrep):**" >> report.md
+          jq -r '"### \(.severity): \(.rule)\n\(.message)\n"' critical-high.json >> report.md
+          
           # Trivy
           jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
-          echo "🔴 **Critical/High Issues (Trivy):**" > report.md
+          echo "🔍 **Critical/High Issues (Trivy):**" > report.md
           jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\n"' critical-high.json >> report.md
-  
-          # Semgrep
-          jq '.runs[0].results[] | select(.severity == "ERROR" or .severity == "WARNING") | {rule: .ruleId, message: .message.text, severity: .severity}' reports/semgrep/semgrep-results.sarif >> critical-high.json
-          echo "\n🔍 **Critical/High Issues (Semgrep):**" >> report.md
-          jq -r '"### \(.severity): \(.rule)\n\(.message)\n"' critical-high.json >> report.md
+           
   
       - name: Отправить отчет
         uses: dawidd6/action-send-mail@v5
