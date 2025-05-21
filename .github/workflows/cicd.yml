@@ -205,6 +205,6 @@ jobs:
           body: |
             В PR обнаружены уязвимости:
             Ссылка: ${{ github.event.pull_request.html_url }} 
-            # file://report.md
+            file://report.md
           to: ${{ secrets.EMAIL_USER }}
           from: "CI Security <noreply@github.com>"
