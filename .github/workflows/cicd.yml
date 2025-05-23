@@ -147,6 +147,9 @@ jobs:
         with:
           target: 'http://localhost:8081'
           cmd_options: '-t http://localhost:8081'
+          report_html: 'zap-report.html'
+          report_md: 'zap-report.md'
+          report_json: 'zap-report.json'
           
       - name: Stop containers
         run: |
