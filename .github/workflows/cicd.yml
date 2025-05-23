@@ -152,7 +152,6 @@ jobs:
         with:
           target: 'http://localhost:8081'
           cmd_options: '-t http://localhost:8081'
-          report_json: 'zap-report.json'
           
       - name: Upload report as artifact
         uses: actions/upload-artifact@v4
