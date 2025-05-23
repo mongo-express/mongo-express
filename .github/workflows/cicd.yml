@@ -152,12 +152,17 @@ jobs:
         with:
           target: 'http://localhost:8081'
           cmd_options: '-t http://localhost:8081'
-          
+
+      - name: Verify ZAP reports exist
+        run: ls -l
+        
       - name: Upload report as artifact
         uses: actions/upload-artifact@v4
         with:
           name: zap-reports
           path: zap-report.json
+          if-no-files-found: error
+          include-hidden-files: true
           
       - name: Stop containers
         run: |
