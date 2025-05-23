@@ -210,15 +210,15 @@ jobs:
           echo "**Commit:** ${{ github.event.head_commit.message }}" >> report.md
           echo "**Date:** $(date)\n" >> report.md
           
-          # Semgrep
-          jq '.runs[0].tool[].rules[] | select(.defaultConfiguration.level == "error") | {rule: .properties.tags, message: .help.markdown, severity: .defaultConfiguration.level}' reports/semgrep/semgrep-results.sarif > critical-high.json
-          echo "🔍 **Error Issues (Semgrep):**" >> report.md
-          jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n \(.rule[2]) \n \(.message)\n"' critical-high.json >> report.md
+          # # Semgrep
+          # jq '.runs[0].tool[].rules[] | select(.defaultConfiguration.level == "error") | {rule: .properties.tags, message: .help.markdown, severity: .defaultConfiguration.level}' reports/semgrep/semgrep-results.sarif > critical-high.json
+          # echo "🔍 **Error Issues (Semgrep):**" >> report.md
+          # jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n \(.rule[2]) \n \(.message)\n"' critical-high.json >> report.md
           
-          # Trivy
-          jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, uri: .locations[0].physicalLocation.artifactLocation.uri, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
-          echo "🔍 **Critical/High Issues (Trivy):**" >> report.md
-          jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
+          # # Trivy
+          # jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, uri: .locations[0].physicalLocation.artifactLocation.uri, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
+          # echo "🔍 **Critical/High Issues (Trivy):**" >> report.md
+          # jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
           
           # ZAP 
           echo "\n **DAST High/Medium Issues (ZAP):**" >> report.md
