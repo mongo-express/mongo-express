@@ -191,7 +191,7 @@ jobs:
           
           # Trivy
           jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, uri: .locations[0].physicalLocation.artifactLocation.uri, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
-          echo "🔍 **Critical/High Issues (Trivy):**" > report.md
+          echo "🔍 **Critical/High Issues (Trivy):**" >> report.md
           jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
            
   
