@@ -11,115 +11,115 @@ on:
       - '**.md'
       
 jobs:
-  # secret_scan:
-  #   # if: github.event_name == 'pull_request'
-  #   name: secret_scan
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  secret_scan:
+    # if: github.event_name == 'pull_request'
+    name: secret_scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       
-  #     - name: Scan for secrets using Gitleaks
-  #       uses: gitleaks/gitleaks-action@v2
-  #       with:
-  #         redact: true
+      - name: Scan for secrets using Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          redact: true
         
-  # sast:
-  #   name: SAST
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #     packages: write            
-  #     security-events: write  
-  #     actions: read  
-  #   env:
-  #     SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-  #   container:
-  #     image: semgrep/semgrep    
-  #   steps:       
-  #     - uses: actions/checkout@v4
+  sast:
+    name: SAST
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write            
+      security-events: write  
+      actions: read  
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    container:
+      image: semgrep/semgrep    
+    steps:       
+      - uses: actions/checkout@v4
       
-  #     - name: Run Semgrep scan and generate reports
-  #       run:  semgrep ci --sarif --output semgrep-results.sarif
+      - name: Run Semgrep scan and generate reports
+        run:  semgrep ci --sarif --output semgrep-results.sarif
           
-  #     - name: Upload SARIF report to GitHub Security
-  #       uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: semgrep-results.sarif
+      - name: Upload SARIF report to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep-results.sarif
           
-  #     - name: Upload JSON report as artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: semgrep-report
-  #         path: semgrep-results.sarif
+      - name: Upload JSON report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-report
+          path: semgrep-results.sarif
                     
-  # check-push:    
-  #   needs: sast
-  #   name: check push    
-  #   runs-on: ubuntu-latest
-  #   permissions:      
-  #     packages: write      
-  #     contents: write  
-  #     security-events: write  
-  #     actions: read  
-  #   env:
-  #     REGISTRY: docker.io   
-  #   steps:     
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #       with:
-  #         persist-credentials: false
+  check-push:    
+    needs: sast
+    name: check push    
+    runs-on: ubuntu-latest
+    permissions:      
+      packages: write      
+      contents: write  
+      security-events: write  
+      actions: read  
+    env:
+      REGISTRY: docker.io   
+    steps:     
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
           
-  #     - name: Validate Docker Hub credentials
-  #       run: |                 
-  #         if [ -z "${{ secrets.DOCKERHUB_REPO }}" || -z "${{ secrets.DOCKERHUB_USER }}" || -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
-  #           echo "::error::Docker Hub credentials not set!"
-  #           exit 1
-  #         fi
+      - name: Validate Docker Hub credentials
+        run: |                 
+          if [ -z "${{ secrets.DOCKERHUB_REPO }}" || -z "${{ secrets.DOCKERHUB_USER }}" || -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
+            echo "::error::Docker Hub credentials not set!"
+            exit 1
+          fi
       
-  #     - name: Log in to Docker Hub        
-  #       uses: docker/login-action@v3
-  #       with:
-  #         username: ${{ secrets.DOCKERHUB_USER }}
-  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Log in to Docker Hub        
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-  #     - name: Extract commit SHA
-  #       id: sha
-  #       run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Extract commit SHA
+        id: sha
+        run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-  #     - name: Build Docker image
-  #       run: |
-  #         docker build -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest .
-  #         docker images  
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} -t ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest .
+          docker images  
           
-  #     - name: Scan Docker image with Trivy
-  #       uses: aquasecurity/trivy-action@master
-  #       with:
-  #         image-ref: '${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}'          
-  #         format: 'template'
-  #         template: '@/contrib/sarif.tpl'  
-  #         output: 'trivy-results.sarif'
-  #         severity: 'CRITICAL,HIGH'
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }}'          
+          format: 'template'
+          template: '@/contrib/sarif.tpl'  
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
       
-  #     - name: Upload SARIF to GitHub
-  #       uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: trivy-results.sarif
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-results.sarif
       
-  #     - name: Upload report as artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: trivy-results
-  #         path: trivy-results.sarif
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-results
+          path: trivy-results.sarif
           
-  #     - name: Push to Docker Hub
-  #       if: success()  
-  #       run: |
-  #           docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} 
-  #           docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest
+      - name: Push to Docker Hub
+        if: success()  
+        run: |
+            docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.sha.outputs.short_sha }} 
+            docker push ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_REPO }}:latest
           
   dast:    
-    # needs: check-push
+    needs: check-push
     name: DAST        
     runs-on: ubuntu-latest
     permissions:      
@@ -164,34 +164,34 @@ jobs:
           docker stop me || true
           docker rm me || true
           
-  # deploy:
-  #   needs: check-push
-  #   name: deploy    
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Install SSH key
-  #       uses: shimataro/ssh-key-action@v2
-  #       with:
-  #         key: ${{ secrets.SSH_KEY }}    
-  #         known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+  deploy:
+    needs: check-push
+    name: deploy    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}    
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
       
-  #     - name: Run remote script directly
-  #       run: |
-  #         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_HOST }} ${{ secrets.SSH_SCRIPT }}
+      - name: Run remote script directly
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_HOST }} ${{ secrets.SSH_SCRIPT }}
 
   security-report:
     needs: [dast] 
     runs-on: ubuntu-latest
     steps:          
-      # - uses: actions/download-artifact@v4
-      #   with:
-      #     name: semgrep-report
-      #     path: reports/semgrep
+      - uses: actions/download-artifact@v4
+        with:
+          name: semgrep-report
+          path: reports/semgrep
   
-      # - uses: actions/download-artifact@v4
-      #   with:
-      #     name: trivy-results
-      #     path: reports/trivy
+      - uses: actions/download-artifact@v4
+        with:
+          name: trivy-results
+          path: reports/trivy
       
       - uses: actions/download-artifact@v4
         with:
@@ -204,20 +204,24 @@ jobs:
           echo "# Security Scan Report" > report.md
           echo "**Commit:** ${{ github.event.head_commit.message }}" >> report.md
           echo "**Date:** $(date)\n" >> report.md
+          echo "" >> report.md
+                    
+          # Semgrep
+          jq '.runs[0].tool[].rules[] | select(.defaultConfiguration.level == "error") | {rule: .properties.tags, message: .help.markdown, severity: .defaultConfiguration.level}' reports/semgrep/semgrep-results.sarif > critical-high.json
+          echo "**Error Issues (Semgrep):**" >> report.md
+          jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n \(.rule[2]) \n \(.message)\n"' critical-high.json >> report.md
+          echo "" >> report.md
           
-          # # Semgrep
-          # jq '.runs[0].tool[].rules[] | select(.defaultConfiguration.level == "error") | {rule: .properties.tags, message: .help.markdown, severity: .defaultConfiguration.level}' reports/semgrep/semgrep-results.sarif > critical-high.json
-          # echo "🔍 **Error Issues (Semgrep):**" >> report.md
-          # jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n \(.rule[2]) \n \(.message)\n"' critical-high.json >> report.md
-          
-          # # Trivy
-          # jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, uri: .locations[0].physicalLocation.artifactLocation.uri, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
-          # echo "🔍 **Critical/High Issues (Trivy):**" >> report.md
-          # jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
+          # Trivy
+          jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, uri: .locations[0].physicalLocation.artifactLocation.uri, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
+          echo "**Critical/High Issues (Trivy):**" >> report.md
+          jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
+          echo "" >> report.md
           
           # ZAP 
-          echo "\n **DAST (ZAP):**" >> report.md
+          echo "**DAST (ZAP):**" >> report.md
           cat reports/zap/report_md.md >> report.md
+          echo "" >> report.md
   
       - name: Отправить отчет
         uses: dawidd6/action-send-mail@v5
