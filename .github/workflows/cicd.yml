@@ -190,9 +190,9 @@ jobs:
           jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n<br> \(.rule[2]) \n<br> \(.message)\n"' critical-high.json >> report.md
           
           # Trivy
-          jq '.runs[0].results[] | select(.severity == "ERROR" or .severity == "WARNING") | {rule: .ruleId, message: .message.text, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
+          jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, uri: .locations[0].physicalLocation.artifactLocation.uri, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
           echo "🔍 **Critical/High Issues (Trivy):**" > report.md
-          jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\n"' critical-high.json >> report.md
+          jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
            
   
       - name: Отправить отчет
