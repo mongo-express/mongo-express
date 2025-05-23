@@ -169,7 +169,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_HOST }} ${{ secrets.SSH_SCRIPT }}
 
   security-report:
-    needs: [sast, check-push] 
+    needs: [dast] 
     runs-on: ubuntu-latest
     steps:          
       - uses: actions/download-artifact@v4
@@ -181,19 +181,32 @@ jobs:
         with:
           name: trivy-results
           path: reports/trivy
-  
-      - name: Извлечь Critical/High
+      
+      - uses: actions/download-artifact@v4
+        with:
+          name: zap-reports
+          path: reports/zap
+
+      - name: Generate security report
         run: |
+          # Create report header
+          echo "# Security Scan Report" > report.md
+          echo "**Commit:** ${{ github.event.head_commit.message }}" >> report.md
+          echo "**Date:** $(date)\n" >> report.md
+          
           # Semgrep
           jq '.runs[0].tool[].rules[] | select(.defaultConfiguration.level == "error") | {rule: .properties.tags, message: .help.markdown, severity: .defaultConfiguration.level}' reports/semgrep/semgrep-results.sarif > critical-high.json
           echo "🔍 **Error Issues (Semgrep):**" >> report.md
-          jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n<br> \(.rule[2]) \n<br> \(.message)\n"' critical-high.json >> report.md
+          jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n \(.rule[2]) \n \(.message)\n"' critical-high.json >> report.md
           
           # Trivy
           jq '.runs[0].results[] | select(.level == "error" or .level == "warning") | {rule: .ruleId, message: .message.text, uri: .locations[0].physicalLocation.artifactLocation.uri, severity: .level}' reports/trivy/trivy-results.sarif > critical-high.json
           echo "🔍 **Critical/High Issues (Trivy):**" >> report.md
           jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
-           
+          
+          # ZAP 
+          echo "\n **DAST High/Medium Issues (ZAP):**" >> report.md
+          jq -r '.[] | select(.risk == "High" | .risk == "Medium") | "- **\(.name)**\n  - URL: \(.url)\n  - Description: \(.description)\n  - Solution: \(.solution)\n"' reports/zap/zap-report.json >> report.md
   
       - name: Отправить отчет
         uses: dawidd6/action-send-mail@v5
