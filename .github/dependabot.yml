@@ -10,3 +10,12 @@ updates:
       update-types:
         - patch
         - minor
+        
+notifications:
+  - type: "email"
+    recipients:
+      - "${{ secrets.EMAIL_USER }}"
+    on:
+      - "update-failure"
+      - "security-update-available"
+      - "pull-request-created"
