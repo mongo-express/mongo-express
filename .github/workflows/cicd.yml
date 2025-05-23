@@ -185,7 +185,7 @@ jobs:
       - name: Извлечь Critical/High
         run: |
           # Semgrep
-          jq '.runs[0].tool[].rules[] | select(.defaultConfiguration.level == "error") | {rule: .properties.tags, message: .help.markdown, severity: .defaultConfiguration.level}' semgrep-results.sarif > critical-high.json
+          jq '.runs[0].tool[].rules[] | select(.defaultConfiguration.level == "error") | {rule: .properties.tags, message: .help.markdown, severity: .defaultConfiguration.level}' reports/semgrep/semgrep-results.sarif > critical-high.json
           echo "🔍 **Error Issues (Semgrep):**" >> report.md
           jq -r '"### \(.severity): \(.rule[0]) \n \(.rule[1]) \n<br> \(.rule[2]) \n<br> \(.message)\n"' critical-high.json >> report.md
           
