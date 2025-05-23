@@ -152,18 +152,13 @@ jobs:
         with:
           target: 'http://localhost:8081'
           cmd_options: '-t http://localhost:8081'
-
-      - name: Verify ZAP reports exist
-        run: ls -l
         
       - name: Upload report as artifact
         uses: actions/upload-artifact@v4
         with:
           name: zap-reports
-          path: report_json.json
-          if-no-files-found: error
-          include-hidden-files: true
-          
+          path: report_md.md
+                 
       - name: Stop containers
         run: |
           docker stop me || true
@@ -221,8 +216,8 @@ jobs:
           # jq -r '"### \(.severity | ascii_upcase): \(.rule)\n\(.message)\nURI: \(.uri)\n"' critical-high.json >> report.md
           
           # ZAP 
-          echo "\n **DAST High/Medium Issues (ZAP):**" >> report.md
-          jq -r '.[] | select(.risk == "High" | .risk == "Medium") | "- **\(.name)**\n  - URL: \(.url)\n  - Description: \(.description)\n  - Solution: \(.solution)\n"' reports/zap/report_json.json >> report.md
+          echo "\n **DAST (ZAP):**" >> report.md
+          cat report_md.md >> report.md
   
       - name: Отправить отчет
         uses: dawidd6/action-send-mail@v5
