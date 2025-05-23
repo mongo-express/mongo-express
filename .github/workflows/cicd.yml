@@ -122,6 +122,11 @@ jobs:
     needs: check-push
     name: DAST        
     runs-on: ubuntu-latest
+    permissions:      
+      packages: write      
+      contents: write  
+      security-events: write  
+      actions: read 
     env:
       REGISTRY: docker.io  
 
