@@ -151,6 +151,12 @@ jobs:
           report_md: 'zap-report.md'
           report_json: 'zap-report.json'
           
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-reports
+          path: zap-results.json
+          
       - name: Stop containers
         run: |
           docker stop me || true
