@@ -217,7 +217,7 @@ jobs:
           
           # ZAP 
           echo "\n **DAST (ZAP):**" >> report.md
-          cat report_md.md >> report.md
+          cat reports/zap/report_md.md >> report.md
   
       - name: Отправить отчет
         uses: dawidd6/action-send-mail@v5
