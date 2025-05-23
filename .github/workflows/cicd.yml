@@ -160,7 +160,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: zap-reports
-          path: zap-report.json
+          path: report_json.json
           if-no-files-found: error
           include-hidden-files: true
           
@@ -222,7 +222,7 @@ jobs:
           
           # ZAP 
           echo "\n **DAST High/Medium Issues (ZAP):**" >> report.md
-          jq -r '.[] | select(.risk == "High" | .risk == "Medium") | "- **\(.name)**\n  - URL: \(.url)\n  - Description: \(.description)\n  - Solution: \(.solution)\n"' reports/zap/zap-report.json >> report.md
+          jq -r '.[] | select(.risk == "High" | .risk == "Medium") | "- **\(.name)**\n  - URL: \(.url)\n  - Description: \(.description)\n  - Solution: \(.solution)\n"' reports/zap/report_json.json >> report.md
   
       - name: Отправить отчет
         uses: dawidd6/action-send-mail@v5
