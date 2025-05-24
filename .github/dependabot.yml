@@ -4,11 +4,11 @@ updates:
   directory: '/'
   schedule:    
     interval: "daily"  
-    time: "09:00"
-    timezone: "Europe/Moscow"    
+    time: "09:00" 
   versioning-strategy: increase # Update package.json too
   groups:
     patterns:
       update-types:
         - patch
         - minor
+ 
