@@ -2,11 +2,10 @@ version: 2
 updates:
 - package-ecosystem: npm
   directory: '/'
-  schedule:
-    - cron: "*/10 * * * *" 
-    # interval: "daily"  
-    # time: "09:00"
-    # timezone: "Europe/Moscow"    
+  schedule:    
+    interval: "daily"  
+    time: "09:00"
+    timezone: "Europe/Moscow"    
   workflow_dispatch:  
   versioning-strategy: increase # Update package.json too
   groups:
