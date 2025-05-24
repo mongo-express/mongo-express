@@ -6,7 +6,6 @@ updates:
     interval: "daily"  
     time: "09:00"
     timezone: "Europe/Moscow"    
-  workflow_dispatch:  
   versioning-strategy: increase # Update package.json too
   groups:
     patterns:
