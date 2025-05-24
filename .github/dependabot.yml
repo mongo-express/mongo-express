@@ -13,12 +13,3 @@ updates:
       update-types:
         - patch
         - minor
-        
-notifications:
-  - type: "email"
-    recipients:
-      - metaller7440326@gmail.com
-    on:
-      - "update-failure"
-      - "security-update-available"
-      - "pull-request-created"
