@@ -3,9 +3,11 @@ updates:
 - package-ecosystem: npm
   directory: '/'
   schedule:
-    interval: "daily"  
-    time: "09:00"
-    timezone: "Europe/Moscow"
+    - cron: "*/10 * * * *" 
+    # interval: "daily"  
+    # time: "09:00"
+    # timezone: "Europe/Moscow"    
+  workflow_dispatch:  
   versioning-strategy: increase # Update package.json too
   groups:
     patterns:
