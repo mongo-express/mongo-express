@@ -6,7 +6,6 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
-    if: steps.check-dependabot.outputs.is_dependabot == 'true'
     steps:
       - name: Send email
         uses: dawidd6/action-send-mail@v3
