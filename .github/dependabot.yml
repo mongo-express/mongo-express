@@ -16,7 +16,7 @@ updates:
 notifications:
   - type: "email"
     recipients:
-      - "${{ secrets.EMAIL_USER }}"
+      - metaller7440326@gmail.com
     on:
       - "update-failure"
       - "security-update-available"
