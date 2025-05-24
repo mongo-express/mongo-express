@@ -1,0 +1,23 @@
+name: Dependabot Notifications
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: steps.check-dependabot.outputs.is_dependabot == 'true'
+    steps:
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Dependabot Update: ${{ github.event.pull_request.title }}"
+          body: |
+            Новые обновления зависимостей:
+            ${{ github.event.pull_request.html_url }}
+          to:  ${{ secrets.EMAIL_USER }}
+          from: "CI Security <noreply@github.com>"
