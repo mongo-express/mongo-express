@@ -4,7 +4,7 @@ updates:
   directory: '/'
   schedule:    
     interval: "daily"  
-    time: "09:00" 
+    time: "08:00" 
   versioning-strategy: increase # Update package.json too
   groups:
     patterns:
