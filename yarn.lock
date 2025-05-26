@@ -1129,9 +1129,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/lang-javascript@npm:^6.2.3":
-  version: 6.2.3
-  resolution: "@codemirror/lang-javascript@npm:6.2.3"
+"@codemirror/lang-javascript@npm:^6.2.4":
+  version: 6.2.4
+  resolution: "@codemirror/lang-javascript@npm:6.2.4"
   dependencies:
     "@codemirror/autocomplete": "npm:^6.0.0"
     "@codemirror/language": "npm:^6.6.0"
@@ -1140,7 +1140,7 @@ __metadata:
     "@codemirror/view": "npm:^6.17.0"
     "@lezer/common": "npm:^1.0.0"
     "@lezer/javascript": "npm:^1.0.0"
-  checksum: 10/dcc42629eb587e46aaadcd0dea6ea333ea97cfb45aa83362ae98b0f9d7c8d89c1620f6bfbba87d4fd8b59c24f49856b389ba28cf0b7ab96e97435ea49895b0fe
+  checksum: 10/7d0b7fdacc90f89d1a5f2b9c575c61b6ee7813005cde32c1f35aedb0da71ad298998e116126ba19ca0bb02cdb14064945c31e24c57ef60bcbd5c19dae955ccb6
   languageName: node
   linkType: hard
 
@@ -1219,9 +1219,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/code-coverage@npm:^3.14.2":
-  version: 3.14.2
-  resolution: "@cypress/code-coverage@npm:3.14.2"
+"@cypress/code-coverage@npm:^3.14.3":
+  version: 3.14.3
+  resolution: "@cypress/code-coverage@npm:3.14.3"
   dependencies:
     "@cypress/webpack-preprocessor": "npm:^6.0.0"
     chalk: "npm:4.1.2"
@@ -1235,10 +1235,10 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.1
     "@babel/preset-env": ^7.0.0
-    babel-loader: ^8.3 || ^9
+    babel-loader: ^8.3 || ^9 || ^10
     cypress: "*"
     webpack: ^4 || ^5
-  checksum: 10/a24a14c3c38cf4b2a545327322a5491729e65267c306911a3b4119f358af1f540bec8bbf2c7185f985eda266ba0c059079607b8d6d7eb594abfa24b0bf8c6882
+  checksum: 10/8dc34febf93f32ad314a8b58eeaaead28c146a4948135c34cd3cb0dc5f5e702feff1b94e006be26d759430731a878e420ad8b776397d6ec8b83b5512a528bd97
   languageName: node
   linkType: hard
 
@@ -3721,10 +3721,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "diff@npm:5.2.0"
-  checksum: 10/01b7b440f83a997350a988e9d2f558366c0f90f15be19f4aa7f1bb3109a4e153dfc3b9fbf78e14ea725717017407eeaa2271e3896374a0181e8f52445740846d
+"diff@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "diff@npm:7.0.0"
+  checksum: 10/e9b8e48d054c9c0c093c65ce8e2637af94b35f2427001607b14e5e0589e534ea3413a7f91ebe6d7c5a1494ace49cb7c7c3972f442ddd96a4767ff091999a082e
   languageName: node
   linkType: hard
 
@@ -6649,16 +6649,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^5.1.6":
-  version: 5.1.6
-  resolution: "minimatch@npm:5.1.6"
-  dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: 10/126b36485b821daf96d33b5c821dac600cc1ab36c87e7a532594f9b1652b1fa89a1eebcaad4dff17c764dce1a7ac1531327f190fed5f97d8f6e5f889c116c429
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^9.0.4":
+"minimatch@npm:^9.0.4, minimatch@npm:^9.0.5":
   version: 9.0.5
   resolution: "minimatch@npm:9.0.5"
   dependencies:
@@ -6760,21 +6751,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^11.2.2":
-  version: 11.2.2
-  resolution: "mocha@npm:11.2.2"
+"mocha@npm:^11.5.0":
+  version: 11.5.0
+  resolution: "mocha@npm:11.5.0"
   dependencies:
     browser-stdout: "npm:^1.3.1"
     chokidar: "npm:^4.0.1"
     debug: "npm:^4.3.5"
-    diff: "npm:^5.2.0"
+    diff: "npm:^7.0.0"
     escape-string-regexp: "npm:^4.0.0"
     find-up: "npm:^5.0.0"
     glob: "npm:^10.4.5"
     he: "npm:^1.2.0"
     js-yaml: "npm:^4.1.0"
     log-symbols: "npm:^4.1.0"
-    minimatch: "npm:^5.1.6"
+    minimatch: "npm:^9.0.5"
     ms: "npm:^2.1.3"
     picocolors: "npm:^1.1.1"
     serialize-javascript: "npm:^6.0.2"
@@ -6787,7 +6778,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: 10/adb5fbb95658f56cc4a41f45c29ade01674281cbd4ff06920216f3a663cb572e1fbb098ef6fd76335d1690d30eb20733946dc3211338a2b48afcaa7da2bbb068
+  checksum: 10/b0cd3be7c2721904f843c1ba8c283c45b38831a1cd9627b0f9a90b7581c8715c5d1f6c432c6771c4f8b150f70b8283288d4c9489469ef5599fe93ab11bd145f2
   languageName: node
   linkType: hard
 
@@ -6799,12 +6790,12 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.27.1"
     "@babel/preset-env": "npm:^7.27.2"
     "@codemirror/commands": "npm:^6.8.1"
-    "@codemirror/lang-javascript": "npm:^6.2.3"
+    "@codemirror/lang-javascript": "npm:^6.2.4"
     "@codemirror/language": "npm:^6.11.0"
     "@codemirror/state": "npm:^6.5.2"
     "@codemirror/theme-one-dark": "npm:^6.1.2"
     "@codemirror/view": "npm:^6.36.8"
-    "@cypress/code-coverage": "npm:^3.14.2"
+    "@cypress/code-coverage": "npm:^3.14.3"
     "@fastify/busboy": "npm:^3.1.1"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@lezer/highlight": "npm:^1.2.1"
@@ -6846,7 +6837,7 @@ __metadata:
     jquery: "npm:^3.7.1"
     memorystore: "npm:^1.6.7"
     method-override: "npm:^3.0.0"
-    mocha: "npm:^11.2.2"
+    mocha: "npm:^11.5.0"
     mongodb: "npm:^6.16.0"
     mongodb-memory-server: "npm:^10.1.4"
     mongodb-query-parser: "npm:^4.3.2"
@@ -6858,7 +6849,7 @@ __metadata:
     serve-favicon: "npm:^2.5.0"
     style-loader: "npm:^4.0.0"
     supertest: "npm:^7.1.1"
-    webpack: "npm:^5.99.8"
+    webpack: "npm:^5.99.9"
     webpack-cli: "npm:^6.0.1"
   peerDependencies:
     express-openid-connect: "*"
@@ -9644,9 +9635,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.99.8":
-  version: 5.99.8
-  resolution: "webpack@npm:5.99.8"
+"webpack@npm:^5.99.9":
+  version: 5.99.9
+  resolution: "webpack@npm:5.99.9"
   dependencies:
     "@types/eslint-scope": "npm:^3.7.7"
     "@types/estree": "npm:^1.0.6"
@@ -9677,7 +9668,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 10/e66b9bcc0ae2ea7fd08b90a551ecf066bf71841923d744edc83713a7fdacd0c121a1f6236164d1d18fce6d44642f2960cee2a102e5445c2ef7634c457334c9ae
+  checksum: 10/cf4a217239bcaa892f93702639ac837a16510edb7a1326955fb042d499d297cbdb16f20a81f3be6ec041b22ab47c599c757e505fdee1dd89b7f7a1ce4337fbf3
   languageName: node
   linkType: hard
 
