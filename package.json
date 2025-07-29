@@ -36,7 +36,7 @@
     "@lezer/highlight": "^1.2.1",
     "@popperjs/core": "^2.11.8",
     "basic-auth-connect": "^1.1.0",
-    "body-parser": "^1.20.2",
+    "body-parser": "^2.2.0",
     "bootstrap": "^5.3.7",
     "bootstrap-paginator-2": "^2.0.0",
     "bson": "^6.10.4",
