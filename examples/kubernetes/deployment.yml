@@ -14,43 +14,45 @@ spec:
       labels:
         app.kubernetes.io/name: mongo-express
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
-        - image: mongo-express
+        - image: mongo-express:latest
           name: mongo-express
-          command: ["/sbin/tini"]
-          args:
-            - "--"
-            - "yarn"
-            - "start"
-            - "--url"
-            - "mongodb://$(MONGODB_ADMINUSERNAME):$(MONGODB_ADMINPASSWORD)@$(MONGODB_SERVER):$(MONGODB_PORT)"
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1001
           ports:
             - containerPort: 8081
               name: http
-              protocol: TCP
+          startupProbe:
+            httpGet:
+              port: http
+              path: /status
+            periodSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /status
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /status
           env:
-            - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
-              value: "true"
-            - name: MONGODB_SERVER
+            - name: ME_CONFIG_BASICAUTH_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: "mongo-express"
-                  key: db-server-url
-            - name: MONGODB_PORT
+                  name: mongo-express-basicauth
+                  key: username
+            - name: ME_CONFIG_BASICAUTH_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: "mongo-express"
-                  key: db-server-port
-            - name: MONGODB_ADMINUSERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: "mongo-express"
-                  key: mongodb-admin-username
-            - name: MONGODB_ADMINPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: "mongo-express"
-                  key: mongodb-admin-password
+                  name: mongo-express-basicauth
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: mongo-express-config
+            - secretRef:
+                name: mongo-express-url
+          securityContext:
+            allowPrivilegeEscalation: false

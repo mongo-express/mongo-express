@@ -7,6 +7,5 @@ spec:
     app.kubernetes.io/name: mongo-express
   ports:
     - name: http
-      port: 8080
-      protocol: TCP
-      targetPort: 8081
+      port: 8081
+      targetPort: http
