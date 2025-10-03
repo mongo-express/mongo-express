@@ -7,7 +7,7 @@ A web-based admin interface for MongoDB or compatible services (FerretDB, Amazon
 
 ## Features
 
-- Connect to multiple databases
+- Connect to multiple databases (see [Multiple Database Configuration](#multiple-database-configuration))
 - View/add/delete databases
 - View/add/rename/delete collections
 - View/add/update/delete documents
@@ -110,7 +110,7 @@ Option | Short | Description
 | - | - | -
 `--version` | `-V` | output the version number
 `--url <url>` | `-U <url>` | connection string url (`<url>` example: `mongodb://127.0.0.1:27017`)
-`--admin` | `-a` | enable authentication as admin
+`--admin` | `-a` | enable admin mode for multiple database access (see [Multiple Database Configuration](#multiple-database-configuration))
 `--port <port>` | `-p <port>` | listen on specified port (default `<port>` is `8081`)
 `--help` | `-h` | display help for command options
 
@@ -147,7 +147,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | Name                                           | Default                                             | Description                                                                                                                                                                     |
 | ---------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ME_CONFIG_MONGODB_URL`                        | `mongodb://admin:pass@localhost:27017/db?ssl=false` |                                                                                                                                                                                 |
-| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable administrator access. Send strings: `"true"` or `"false"`.                                                                                                               |
+| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable admin mode for multiple database access. Send strings: `"true"` or `"false"`. See [Multiple Database Configuration](#multiple-database-configuration).                  |
 | `ME_CONFIG_MONGODB_AUTH_USERNAME`              | `admin`                                             | Database username (only needed if `ENABLE_ADMIN` is `"false"`).                                                                                                                 |
 | `ME_CONFIG_MONGODB_AUTH_PASSWORD`              | `pass`                                              | Database password (only needed if `ENABLE_ADMIN` is `"false"`).                                                                                                                 |
 | `ME_CONFIG_MONGODB_ALLOW_DISK_USE`             | `false`                                             | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.                                                                                                           |
@@ -198,15 +198,28 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
 **Example:**
 
-    docker run -it --rm \
-        --name mongo-express \
-        --network web_default \
-        -p 8081:8081 \
-        -e ME_CONFIG_BASICAUTH_ENABLED="false" \
-        -e ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
-        mongo-express
+```bash
+# Single database access
+docker run -it --rm \
+    --name mongo-express \
+    --network web_default \
+    -p 8081:8081 \
+    -e ME_CONFIG_BASICAUTH_ENABLED="false" \
+    -e ME_CONFIG_MONGODB_URL="mongodb://user:pass@mongo:27017/mydb" \
+    mongo-express
 
-This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
+# Multiple database access (admin mode)
+docker run -it --rm \
+    --name mongo-express \
+    --network web_default \
+    -p 8081:8081 \
+    -e ME_CONFIG_BASICAUTH_ENABLED="false" \
+    -e ME_CONFIG_MONGODB_URL="mongodb://admin:pass@mongo:27017/admin" \
+    -e ME_CONFIG_MONGODB_ENABLE_ADMIN="true" \
+    mongo-express
+```
+
+This example shows both single database mode and admin mode for accessing multiple databases.
 
 **To use:**
 
@@ -271,6 +284,102 @@ ME_CONFIG_SITE_BASEURL=/<base-url>
 ```
 
 To register your client, you will need the application's redirect URI, which can be obtained by appending `/callback` to the application base URL: Eg. https://example.com/mongo-express/callback
+
+## Multiple Database Configuration
+
+mongo-express supports connecting to multiple databases through two different approaches:
+
+### Single Database Connection (Default)
+When `admin` is set to `false` (default), mongo-express connects to a specific database defined in your connection string:
+
+```javascript
+// config.js
+export default {
+  mongodb: {
+    connectionString: 'mongodb://username:password@localhost:27017/myspecificdb',
+    admin: false, // Only access to 'myspecificdb'
+  }
+}
+```
+
+### Multiple Database Access with Admin Mode
+When `admin` is set to `true`, mongo-express can access **all databases** on the MongoDB server that the user has permissions to view:
+
+```javascript
+// config.js
+export default {
+  mongodb: {
+    connectionString: 'mongodb://admin:password@localhost:27017/admin',
+    admin: true, // Access to all databases
+    
+    // Optional: Filter visible databases
+    whitelist: [], // Empty = show all, or specify: ['db1', 'db2']
+    blacklist: [], // Hide specific databases: ['logs', 'temp']
+  }
+}
+```
+
+### Environment Variables for Docker
+
+```bash
+# Single database mode
+ME_CONFIG_MONGODB_URL="mongodb://user:pass@mongo:27017/mydb"
+ME_CONFIG_MONGODB_ENABLE_ADMIN="false"
+
+# Multiple database mode (admin required)
+ME_CONFIG_MONGODB_URL="mongodb://admin:pass@mongo:27017/admin"
+ME_CONFIG_MONGODB_ENABLE_ADMIN="true"
+```
+
+### Multiple MongoDB Server Connections
+
+You can also connect to multiple different MongoDB servers by providing an array of configurations:
+
+```javascript
+// config.js
+export default {
+  mongodb: [
+    {
+      connectionString: 'mongodb://user1:pass1@server1:27017/admin',
+      connectionName: 'Production',
+      admin: true,
+      whitelist: ['prod_db1', 'prod_db2'],
+    },
+    {
+      connectionString: 'mongodb://user2:pass2@server2:27017/admin', 
+      connectionName: 'Development',
+      admin: true,
+      blacklist: ['temp_logs'],
+    }
+  ]
+}
+```
+
+### Database Filtering Options
+
+- **whitelist**: When populated, only databases in this array will be visible
+- **blacklist**: Databases in this array will be hidden from view
+- Both options work only when `admin: true`
+
+### Command Line Usage
+
+```bash
+# Enable admin mode via command line
+mongo-express --url mongodb://admin:pass@localhost:27017/admin --admin
+
+# Or with short flags
+mongo-express -U mongodb://admin:pass@localhost:27017/admin -a
+```
+
+### Important Notes
+
+1. **Admin privileges required**: To access multiple databases, your MongoDB user must have administrative privileges (e.g., `dbAdminAnyDatabase`, `readWriteAnyDatabase`, or `root` role).
+
+2. **Security considerations**: Admin mode provides broader access - ensure proper authentication and network security.
+
+3. **Connection string database**: When using admin mode, it's recommended to connect to the `admin` database in your connection string.
+
+4. **Authentication source**: For admin users, make sure your connection string includes the correct authentication database (usually `admin`).
 
 ## Search
 
