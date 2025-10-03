@@ -147,7 +147,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | Name                                           | Default                                             | Description                                                                                                                                                                     |
 | ---------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ME_CONFIG_MONGODB_URL`                        | `mongodb://admin:pass@localhost:27017/db?ssl=false` |                                                                                                                                                                                 |
-| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable admin mode for multiple database access. Send strings: `"true"` or `"false"`. See [Multiple Database Configuration](#multiple-database-configuration).                  |
+| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable admin mode for multiple database access. Send strings: `"true"` or `"false"`. See [Multiple Database Configuration](#multiple-database-configuration).                   |
 | `ME_CONFIG_MONGODB_AUTH_USERNAME`              | `admin`                                             | Database username (only needed if `ENABLE_ADMIN` is `"false"`).                                                                                                                 |
 | `ME_CONFIG_MONGODB_AUTH_PASSWORD`              | `pass`                                              | Database password (only needed if `ENABLE_ADMIN` is `"false"`).                                                                                                                 |
 | `ME_CONFIG_MONGODB_ALLOW_DISK_USE`             | `false`                                             | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.                                                                                                           |
@@ -185,9 +185,9 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.                                                                                                  |
 | `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`          | `false`                                             | If set to true, remain on the same page after clicking on the Save button                                                                                                       |
 | `ME_CONFIG_OPTIONS_NO_DELETE`                  | `false`                                             | If noDelete is true, components of deleting are not visible.                                                                                                                    |
-| `ME_CONFIG_OPTIONS_NO_EXPORT`                  | `false`                                             | If noExport is true, components of exporting are not visible.                                                                                                                    |
-| `ME_CONFIG_OPTIONS_CONFIRM_DELETE`             | `false`                                             | If confirmDelete is set to 'true', a modal for confirming deletion is displayed                                                                                                                   |
-| `ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON`           | `true`                                              | If set to true, jsons will be displayed collapsible                                                                                                                 |
+| `ME_CONFIG_OPTIONS_NO_EXPORT`                  | `false`                                             | If noExport is true, components of exporting are not visible.                                                                                                                   |
+| `ME_CONFIG_OPTIONS_CONFIRM_DELETE`             | `false`                                             | If confirmDelete is set to 'true', a modal for confirming deletion is displayed                                                                                                 |
+| `ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON`           | `true`                                              | If set to true, jsons will be displayed collapsible                                                                                                                             |
 | `ME_CONFIG_SITE_SSL_ENABLED`                   | `false`                                             | Enable SSL.                                                                                                                                                                     |
 | `ME_CONFIG_SITE_SSL_CRT_PATH`                  | ` `                                                 | SSL certificate file.                                                                                                                                                           |
 | `ME_CONFIG_SITE_SSL_KEY_PATH`                  | ` `                                                 | SSL key file.                                                                                                                                                                   |
@@ -235,7 +235,6 @@ The default port exposed from the container is 8081, so visit `http://localhost:
 
 By using Mongo Express Docker Extension, it's easy to setup Mongo Express on Docker Desktop with [just one click](https://open.docker.com/extensions/marketplace?extensionId=ajeetraina/mongodb-express-docker-extension&tag=1.0).
 
-
 ## Usage (IBM Cloud)
 
 **Deploy to IBM Cloud**
@@ -262,7 +261,7 @@ Then, take the following action to customize to your environment:
 
 **Usage with the `mongo-express` package**
 
-If you install `mongo-express` as a *package*, install the `express-openid-connect` dependency:
+If you install `mongo-express` as a _package_, install the `express-openid-connect` dependency:
 
 ```bash
 yarn add express-openid-connect
@@ -287,36 +286,105 @@ To register your client, you will need the application's redirect URI, which can
 
 ## Multiple Database Configuration
 
-mongo-express supports connecting to multiple databases through two different approaches:
+mongo-express supports connecting to multiple databases through three different approaches:
+
+> **Note**: The configuration examples below show the structure for creating a `config.js` file. You can copy `config.default.js` as a starting point and modify it according to your needs.
+
+## Understanding MongoDB Instances vs Databases
+
+**Important distinction:**
+
+- **MongoDB Instance/Server**: A running MongoDB process (e.g., `mongodb://172.17.0.1:27017/`)
+- **Database**: A logical database within a MongoDB instance (e.g., `myapp`, `users`, `logs`)
+
+**Connection scenarios:**
+
+1. **Multiple MongoDB instances** → Use array of connections (each with different host/port)
+2. **Multiple databases in one instance** → Use single connection with `admin: true`
+3. **Specific databases across instances** → Use array of connections targeting specific databases
 
 ### Single Database Connection (Default)
+
 When `admin` is set to `false` (default), mongo-express connects to a specific database defined in your connection string:
 
 ```javascript
 // config.js
 export default {
   mongodb: {
-    connectionString: 'mongodb://username:password@localhost:27017/myspecificdb',
+    connectionString:
+      "mongodb://username:password@localhost:27017/myspecificdb",
     admin: false, // Only access to 'myspecificdb'
-  }
-}
+
+    // Optional: other connection options
+    connectionOptions: {
+      maxPoolSize: 4,
+    },
+
+    whitelist: [],
+    blacklist: [],
+  },
+
+  site: {
+    baseUrl: "/",
+    cookieSecret: "your-cookie-secret",
+    sessionSecret: "your-session-secret",
+    host: "localhost",
+    port: 8081,
+  },
+
+  useBasicAuth: true,
+  basicAuth: {
+    username: "admin",
+    password: "your-secure-password",
+  },
+
+  options: {
+    console: true,
+    documentsPerPage: 10,
+  },
+};
 ```
 
 ### Multiple Database Access with Admin Mode
+
 When `admin` is set to `true`, mongo-express can access **all databases** on the MongoDB server that the user has permissions to view:
 
 ```javascript
 // config.js
 export default {
   mongodb: {
-    connectionString: 'mongodb://admin:password@localhost:27017/admin',
+    connectionString: "mongodb://admin:password@localhost:27017/admin",
     admin: true, // Access to all databases
-    
+
     // Optional: Filter visible databases
     whitelist: [], // Empty = show all, or specify: ['db1', 'db2']
     blacklist: [], // Hide specific databases: ['logs', 'temp']
-  }
-}
+
+    // Connection options
+    connectionOptions: {
+      maxPoolSize: 4,
+    },
+  },
+
+  site: {
+    baseUrl: "/",
+    cookieSecret: "your-cookie-secret",
+    sessionSecret: "your-session-secret",
+    host: "localhost",
+    port: 8081,
+  },
+
+  useBasicAuth: true,
+  basicAuth: {
+    username: "admin",
+    password: "your-secure-password",
+  },
+
+  options: {
+    console: true,
+    documentsPerPage: 10,
+  },
+};
 ```
 
 ### Environment Variables for Docker
@@ -331,29 +399,141 @@ ME_CONFIG_MONGODB_URL="mongodb://admin:pass@mongo:27017/admin"
 ME_CONFIG_MONGODB_ENABLE_ADMIN="true"
 ```
 
+> **Note**: For multiple specific databases without admin privileges, you'll need to use the configuration file approach with an array of connections rather than environment variables.
+
 ### Multiple MongoDB Server Connections
 
-You can also connect to multiple different MongoDB servers by providing an array of configurations:
+You can connect to multiple different **MongoDB servers/instances** by providing an array of configurations. Each connection targets a different MongoDB server:
 
 ```javascript
-// config.js
+// config.js - Multiple MongoDB instances/servers
 export default {
   mongodb: [
     {
-      connectionString: 'mongodb://user1:pass1@server1:27017/admin',
-      connectionName: 'Production',
-      admin: true,
-      whitelist: ['prod_db1', 'prod_db2'],
+      connectionString: "mongodb://172.17.0.1:27017/", // Your original instance
+      connectionName: "MongoDB Instance 1",
+      admin: true, // Access all databases on this instance
+      connectionOptions: {
+        maxPoolSize: 4,
+      },
     },
     {
-      connectionString: 'mongodb://user2:pass2@server2:27017/admin', 
-      connectionName: 'Development',
+      connectionString: "mongodb://172.17.0.1:27018/", // Second instance
+      connectionName: "MongoDB Instance 2",
+      admin: true, // Access all databases on this instance
+      connectionOptions: {
+        maxPoolSize: 4,
+      },
+    },
+    {
+      connectionString: "mongodb://192.168.1.100:27019/", // Third instance (different server)
+      connectionName: "Remote MongoDB Server",
       admin: true,
-      blacklist: ['temp_logs'],
-    }
-  ]
-}
+      connectionOptions: {
+        maxPoolSize: 2,
+      },
+    },
+    {
+      connectionString: "mongodb://user:pass@prod-server:27020/admin", // Fourth instance with auth
+      connectionName: "Production Server",
+      admin: true,
+      connectionOptions: {
+        maxPoolSize: 4,
+      },
+    },
+  ],
+
+  // Required: other configuration sections
+  site: {
+    baseUrl: "/",
+    cookieSecret: "your-cookie-secret",
+    sessionSecret: "your-session-secret",
+    host: "localhost",
+    port: 8081,
+  },
+
+  useBasicAuth: true,
+  basicAuth: {
+    username: "admin",
+    password: "your-secure-password",
+  },
+
+  options: {
+    console: true,
+    documentsPerPage: 10,
+  },
+};
 ```
+
+### Multiple Database Access Without Admin Privileges
+
+**Important**: You can connect to multiple specific databases without admin privileges by using an array of connections, each targeting a specific database:
+
+```javascript
+// config.js - Multiple databases without admin privileges
+export default {
+  mongodb: [
+    {
+      connectionString: "mongodb://user1:pass1@localhost:27017/database1",
+      connectionName: "Database 1",
+      admin: false, // No admin required
+      connectionOptions: {
+        maxPoolSize: 4,
+      },
+    },
+    {
+      connectionString: "mongodb://user2:pass2@localhost:27017/database2",
+      connectionName: "Database 2",
+      admin: false, // No admin required
+      connectionOptions: {
+        maxPoolSize: 4,
+      },
+    },
+    {
+      connectionString: "mongodb://user3:pass3@remoteserver:27017/database3",
+      connectionName: "Remote Database",
+      admin: false, // No admin required
+      connectionOptions: {
+        maxPoolSize: 2,
+      },
+    },
+  ],
+
+  // Required: other configuration sections
+  site: {
+    baseUrl: "/",
+    cookieSecret: "your-cookie-secret",
+    sessionSecret: "your-session-secret",
+    host: "localhost",
+    port: 8081,
+  },
+
+  useBasicAuth: true,
+  basicAuth: {
+    username: "admin",
+    password: "your-secure-password",
+  },
+
+  options: {
+    console: true,
+    documentsPerPage: 10,
+  },
+};
+```
+
+This approach allows you to:
+
+- Connect to multiple databases on the same or different MongoDB servers
+- Use different user credentials for each database
+- Access only the databases you have specific permissions for
+- **No admin privileges required** - just regular database user permissions
+
+**How it works:**
+
+- Each connection string points to a different MongoDB instance (different port)
+- Each instance will show all its databases in the mongo-express UI
+- You'll see databases prefixed with the connection name (e.g., "Database 1")
+- You can browse and manage all databases across all MongoDB instances from one interface
 
 ### Database Filtering Options
 
