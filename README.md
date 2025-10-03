@@ -399,6 +399,20 @@ ME_CONFIG_MONGODB_URL="mongodb://admin:pass@mongo:27017/admin"
 ME_CONFIG_MONGODB_ENABLE_ADMIN="true"
 ```
 
+> **Important for Docker/Docker-Compose Users**:
+>
+> - `ME_CONFIG_MONGODB_URL` **must always have a valid connection string**, even when using `config.js` with multiple connections
+> - For multiple MongoDB instances, set `ME_CONFIG_MONGODB_URL` to one of your MongoDB instances and use `config.js` for the full array configuration
+> - Example Docker-Compose setup:
+>
+> ```yaml
+> environment:
+>   ME_CONFIG_MONGODB_URL: "mongodb://172.17.0.1:27017/"
+>   ME_CONFIG_SITE_BASEURL: "/mongoexpress/"
+>   ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+> # Then use config.js for multiple instance configuration
+> ```
+
 > **Note**: For multiple specific databases without admin privileges, you'll need to use the configuration file approach with an array of connections rather than environment variables.
 
 ### Multiple MongoDB Server Connections
@@ -416,6 +430,8 @@ export default {
       connectionOptions: {
         maxPoolSize: 4,
       },
+      whitelist: [], // Required: even if empty
+      blacklist: [], // Required: even if empty
     },
     {
       connectionString: "mongodb://172.17.0.1:27018/", // Second instance
@@ -424,6 +440,8 @@ export default {
       connectionOptions: {
         maxPoolSize: 4,
       },
+      whitelist: [], // Required: even if empty
+      blacklist: [], // Required: even if empty
     },
     {
       connectionString: "mongodb://192.168.1.100:27019/", // Third instance (different server)
@@ -432,6 +450,8 @@ export default {
       connectionOptions: {
         maxPoolSize: 2,
       },
+      whitelist: [], // Required: even if empty
+      blacklist: [], // Required: even if empty
     },
     {
       connectionString: "mongodb://user:pass@prod-server:27020/admin", // Fourth instance with auth
@@ -440,6 +460,8 @@ export default {
       connectionOptions: {
         maxPoolSize: 4,
       },
+      whitelist: [], // Required: even if empty
+      blacklist: [], // Required: even if empty
     },
   ],
 
@@ -480,6 +502,8 @@ export default {
       connectionOptions: {
         maxPoolSize: 4,
       },
+      whitelist: [], // Required: even if empty
+      blacklist: [], // Required: even if empty
     },
     {
       connectionString: "mongodb://user2:pass2@localhost:27017/database2",
@@ -488,6 +512,8 @@ export default {
       connectionOptions: {
         maxPoolSize: 4,
       },
+      whitelist: [], // Required: even if empty
+      blacklist: [], // Required: even if empty
     },
     {
       connectionString: "mongodb://user3:pass3@remoteserver:27017/database3",
@@ -496,6 +522,8 @@ export default {
       connectionOptions: {
         maxPoolSize: 2,
       },
+      whitelist: [], // Required: even if empty
+      blacklist: [], // Required: even if empty
     },
   ],
 
@@ -540,6 +568,7 @@ This approach allows you to:
 - **whitelist**: When populated, only databases in this array will be visible
 - **blacklist**: Databases in this array will be hidden from view
 - Both options work only when `admin: true`
+- **Important**: When using array configurations, `whitelist` and `blacklist` are **required fields** for each connection, even if empty (`[]`)
 
 ### Command Line Usage
 
@@ -560,6 +589,22 @@ mongo-express -U mongodb://admin:pass@localhost:27017/admin -a
 3. **Connection string database**: When using admin mode, it's recommended to connect to the `admin` database in your connection string.
 
 4. **Authentication source**: For admin users, make sure your connection string includes the correct authentication database (usually `admin`).
+
+### Troubleshooting
+
+**Common Issues:**
+
+1. **"whitelist is not defined" error** when using array configurations:
+
+   - **Solution**: Always include `whitelist: []` and `blacklist: []` in each connection object, even if empty
+
+2. **Docker/Docker-Compose startup errors**:
+
+   - **Solution**: Always set a valid `ME_CONFIG_MONGODB_URL` environment variable, even when using `config.js`
+   - The environment variable serves as a fallback during initial startup
+
+3. **Can't see databases from multiple instances**:
+   - **Solution**: Ensure each connection has `admin: true` and valid credentials with proper permissions
 
 ## Search
 
