@@ -84,10 +84,10 @@ _Note:_ YOUR_PATH will depend on your current OS user and system configuration. 
 
 Fill in your MongoDB connection details and any other options you want to change in `config.js`.
 
-**You will also need to create a .env file with the variables for your cookie and session secrets, these are just default values**
+**You will also need to create a .env file with the variables for your cookie and session secrets. Replace these values with randomly generated secrets:**
 
-    ME_CONFIG_SITE_COOKIESECRET: 'cookiesecret',
-    ME_CONFIG_SITE_SESSIONSECRET: 'sessionsecret',
+    ME_CONFIG_SITE_COOKIESECRET: 'yourcookiesecret',
+    ME_CONFIG_SITE_SESSIONSECRET: 'yoursessionsecret',
 
 **To run:**
 
@@ -144,57 +144,55 @@ $ docker run -it --rm -p 8081:8081 --network some-network mongo-express
 
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
-| Name                                           | Default                                             | Description                                                                                                                                                                     |
-| ---------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ME_CONFIG_MONGODB_URL`                        | `mongodb://admin:pass@localhost:27017/db?ssl=false` |                                                                                                                                                                                 |
-| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable administrator access. Send strings: `"true"` or `"false"`.                                                                                                               |
-| `ME_CONFIG_MONGODB_AUTH_USERNAME`              | `admin`                                             | Database username (only needed if `ENABLE_ADMIN` is `"false"`).                                                                                                                 |
-| `ME_CONFIG_MONGODB_AUTH_PASSWORD`              | `pass`                                              | Database password (only needed if `ENABLE_ADMIN` is `"false"`).                                                                                                                 |
-| `ME_CONFIG_MONGODB_ALLOW_DISK_USE`             | `false`                                             | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.                                                                                                           |
-| `ME_CONFIG_MONGODB_TLS`                        | `false`                                             | Use TLS client certificate                                                                                                                                                      |
-| `ME_CONFIG_MONGODB_TLS_ALLOW_CERTS`            | `true`                                              | Validate mongod server certificate against CA                                                                                                                                   |
-| `ME_CONFIG_MONGODB_TLS_CA_FILE`                | ``                                                  | CA certificate File                                                                                                                                                             |
-| `ME_CONFIG_MONGODB_TLS_CERT_FILE`              | ``                                                  | TLS client certificate file                                                                                                                                                     |
-| `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE`          | ``                                                  | TLS client certificate key file                                                                                                                                                 |
-| `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD` | ``                                                  | TLS client certificate key file password                                                                                                                                        |
-| `ME_CONFIG_MONGODB_URL_FILE`                   | ``                                                  | File version of ME_CONFIG_MONGODB_URL                                                                                                                                           |
-| `ME_CONFIG_MONGODB_AWS_DOCUMENTDB`             | `false`                                             | This allow AWS DocumentDB compatibility (experimental)                                                                                                                          |
-| `ME_CONFIG_SITE_BASEURL`                       | `/`                                                 | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.                                                                     |
-| `ME_CONFIG_HEALTH_CHECK_PATH`                  | `/status`                                           | Set the mongo express healthcheck path. Remember to add the forward slash at the start.                                                                                         |
-| `ME_CONFIG_SITE_COOKIESECRET`                  | `cookiesecret`                                      | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.                                                                         |
-| `ME_CONFIG_SITE_SESSIONSECRET`                 | `sessionsecret`                                     | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).                                                       |
-| `ME_CONFIG_BASICAUTH`                          | `false`                                             | Deprecated, use `ME_CONFIG_BASICAUTH_ENABLED` instead.                                                                                                                          |
-| `ME_CONFIG_BASICAUTH_ENABLED`                  | `false`                                             | Enable Basic Authentication. Send strings: `"true"` or `"false"`.                                                                                                               |
-| `ME_CONFIG_BASICAUTH_USERNAME`                 | ``                                                  | mongo-express web login name. If not defined, `admin` is the username.                                                                                                          |
-| `ME_CONFIG_BASICAUTH_USERNAME_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_USERNAME`                                                                                                                                  |
-| `ME_CONFIG_BASICAUTH_PASSWORD`                 | ``                                                  | mongo-express web login password. If not defined, `pass` is the password.                                                                                                       |
-| `ME_CONFIG_BASICAUTH_PASSWORD_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_PASSWORD`                                                                                                                                  |
-| `ME_CONFIG_OIDCAUTH_ENABLED`                   | `false`                                             | Enable OpenIdConnect Authentication. Send strings: `"true"` or `"false"`.                                                                                                       |
-| `ME_CONFIG_OIDCAUTH_ISSUER`                    | ``                                                  | OAuth2 [Issuer](https://datatracker.ietf.org/doc/html/rfc8414#section-2). Root URL to the openidconnect metadata eg. `"<issuer>/.well-known/openid-configuration"`              |
-| `ME_CONFIG_OIDCAUTH_ISSUER_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_ISSUER`                                                                                                                                     |
-| `ME_CONFIG_OIDCAUTH_CLIENTID`                  | ``                                                  | OAuth2 ClientId. The client must be private and allowed to perform the Authorization Code Flow grant.                                                                           |
-| `ME_CONFIG_OIDCAUTH_CLIENTID_FILE`             | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTID`                                                                                                                                   |
-| `ME_CONFIG_OIDCAUTH_CLIENTSECRET`              | ``                                                  | OAuth2 Client Secret.                                                                                                                                                           |
-| `ME_CONFIG_OIDCAUTH_CLIENTSECRET_FILE`         | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTSECRET`                                                                                                                               |
-| `ME_CONFIG_OIDCAUTH_SECRET`                    | ``                                                  | A random secret used by the library to init the Authorization Code Flow (required)                                                                                              |
-| `ME_CONFIG_OIDCAUTH_SECRET_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_SECRET_FILE`                                                                                                                                |
-| `ME_CONFIG_OIDCAUTH_BASEURL`                   | ``                                                  | OAuth2 base url. It's used to build the redirect URL eg. `"<base-url>/callback"`. If not specified `ME_CONFIG_SITE_BASEURL` will be used.                                       |
-| `ME_CONFIG_OIDCAUTH_BASEURL_FILE`              | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_BASEURL`                                                                                                                                    |
-| `ME_CONFIG_REQUEST_SIZE`                       | `100kb`                                             | Used to configure maximum Mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser). |
-| `ME_CONFIG_OPTIONS_READONLY`                   | `false`                                             | if readOnly is true, components of writing are not visible.                                                                                                                     |
-| `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.                                                                                                  |
-| `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`          | `false`                                             | If set to true, remain on the same page after clicking on the Save button                                                                                                       |
-| `ME_CONFIG_OPTIONS_NO_DELETE`                  | `false`                                             | If noDelete is true, components of deleting are not visible.                                                                                                                    |
-| `ME_CONFIG_OPTIONS_NO_EXPORT`                  | `false`                                             | If noExport is true, components of exporting are not visible.                                                                                                                    |
-| `ME_CONFIG_OPTIONS_CONFIRM_DELETE`             | `false`                                             | If confirmDelete is set to 'true', a modal for confirming deletion is displayed                                                                                                                   |
-| `ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON`           | `true`                                              | If set to true, jsons will be displayed collapsible                                                                                                                 |
-| `ME_CONFIG_SITE_SSL_ENABLED`                   | `false`                                             | Enable SSL.                                                                                                                                                                     |
-| `ME_CONFIG_SITE_SSL_CRT_PATH`                  | ` `                                                 | SSL certificate file.                                                                                                                                                           |
-| `ME_CONFIG_SITE_SSL_KEY_PATH`                  | ` `                                                 | SSL key file.                                                                                                                                                                   |
-| `ME_CONFIG_SITE_GRIDFS_ENABLED`                | `false`                                             | Enable gridFS to manage uploaded files.                                                                                                                                         |
-| `ME_CONFIG_DOCUMENTS_PER_PAGE`                 | `10`                                                | How many documents you want to see at once in collection view                                                                                                                   |
-| `PORT`                                         | `8081`                                              | port that mongo-express will run on.                                                                                                                                            |
-| `VCAP_APP_HOST`                                | `localhost`                                         | address that mongo-express will listen on for incoming connections.                                                                                                             |
+| Name                                           | Default                  | Description                                                                                                                                                                     |
+| ---------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ME_CONFIG_MONGODB_URL`                        | `mongodb://mongo:27017`  | MongoDB connection string. Should include admin username and password if you want to enable admin access to all databases and see server statistics. If admin access is not enabled, it should also include database name ([/defaultauthdb](https://www.mongodb.com/docs/manual/reference/connection-string/#connection-string-components)) to connect to. |
+| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                  | Enable administrator access. Send strings: `"true"` or `"false"`.                                                                                                               |
+| `ME_CONFIG_MONGODB_ALLOW_DISK_USE`             | `false`                  | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.                                                                                                           |
+| `ME_CONFIG_MONGODB_TLS`                        | `false`                  | Use TLS client certificate                                                                                                                                                      |
+| `ME_CONFIG_MONGODB_TLS_ALLOW_CERTS`            | `true`                   | Validate mongod server certificate against CA                                                                                                                                   |
+| `ME_CONFIG_MONGODB_TLS_CA_FILE`                | ``                       | CA certificate File                                                                                                                                                             |
+| `ME_CONFIG_MONGODB_TLS_CERT_FILE`              | ``                       | TLS client certificate file                                                                                                                                                     |
+| `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE`          | ``                       | TLS client certificate key file                                                                                                                                                 |
+| `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD` | ``                       | TLS client certificate key file password                                                                                                                                        |
+| `ME_CONFIG_MONGODB_URL_FILE`                   | ``                       | File version of ME_CONFIG_MONGODB_URL                                                                                                                                           |
+| `ME_CONFIG_MONGODB_AWS_DOCUMENTDB`             | `false`                  | This allow AWS DocumentDB compatibility (experimental)                                                                                                                          |
+| `ME_CONFIG_SITE_BASEURL`                       | `/`                      | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.                                                                     |
+| `ME_CONFIG_HEALTH_CHECK_PATH`                  | `/status`                | Set the mongo express healthcheck path. Remember to add the forward slash at the start.                                                                                         |
+| `ME_CONFIG_SITE_COOKIESECRET`                  | ``                       | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.                                                                         |
+| `ME_CONFIG_SITE_SESSIONSECRET`                 | ``                       | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).                                                       |
+| `ME_CONFIG_BASICAUTH`                          | `false`                  | Deprecated, use `ME_CONFIG_BASICAUTH_ENABLED` instead.                                                                                                                          |
+| `ME_CONFIG_BASICAUTH_ENABLED`                  | `false`                  | Enable Basic Authentication. Send strings: `"true"` or `"false"`.                                                                                                               |
+| `ME_CONFIG_BASICAUTH_USERNAME`                 | `admin`                  | mongo-express web login name.                                                                                                                                                   |
+| `ME_CONFIG_BASICAUTH_USERNAME_FILE`            | ``                       | File version of `ME_CONFIG_BASICAUTH_USERNAME`                                                                                                                                  |
+| `ME_CONFIG_BASICAUTH_PASSWORD`                 | `pass`                   | mongo-express web login password.                                                                                                                                               |
+| `ME_CONFIG_BASICAUTH_PASSWORD_FILE`            | ``                       | File version of `ME_CONFIG_BASICAUTH_PASSWORD`                                                                                                                                  |
+| `ME_CONFIG_OIDCAUTH_ENABLED`                   | `false`                  | Enable OpenIdConnect Authentication. Send strings: `"true"` or `"false"`.                                                                                                       |
+| `ME_CONFIG_OIDCAUTH_ISSUER`                    | ``                       | OAuth2 [Issuer](https://datatracker.ietf.org/doc/html/rfc8414#section-2). Root URL to the openidconnect metadata eg. `"<issuer>/.well-known/openid-configuration"`              |
+| `ME_CONFIG_OIDCAUTH_ISSUER_FILE`               | ``                       | File version of `ME_CONFIG_OIDCAUTH_ISSUER`                                                                                                                                     |
+| `ME_CONFIG_OIDCAUTH_CLIENTID`                  | ``                       | OAuth2 ClientId. The client must be private and allowed to perform the Authorization Code Flow grant.                                                                           |
+| `ME_CONFIG_OIDCAUTH_CLIENTID_FILE`             | ``                       | File version of `ME_CONFIG_OIDCAUTH_CLIENTID`                                                                                                                                   |
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET`              | ``                       | OAuth2 Client Secret.                                                                                                                                                           |
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET_FILE`         | ``                       | File version of `ME_CONFIG_OIDCAUTH_CLIENTSECRET`                                                                                                                               |
+| `ME_CONFIG_OIDCAUTH_SECRET`                    | ``                       | A random secret used by the library to init the Authorization Code Flow (required)                                                                                              |
+| `ME_CONFIG_OIDCAUTH_SECRET_FILE`               | ``                       | File version of `ME_CONFIG_OIDCAUTH_SECRET_FILE`                                                                                                                                |
+| `ME_CONFIG_OIDCAUTH_BASEURL`                   | ``                       | OAuth2 base url. It's used to build the redirect URL eg. `"<base-url>/callback"`. If not specified `ME_CONFIG_SITE_BASEURL` will be used.                                       |
+| `ME_CONFIG_OIDCAUTH_BASEURL_FILE`              | ``                       | File version of `ME_CONFIG_OIDCAUTH_BASEURL`                                                                                                                                    |
+| `ME_CONFIG_REQUEST_SIZE`                       | `50mb`                   | Used to configure maximum Mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser). |
+| `ME_CONFIG_OPTIONS_READONLY`                   | `false`                  | if readOnly is true, components of writing are not visible.                                                                                                                     |
+| `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                  | If set to true an alternative page layout is used utilizing full window width.                                                                                                  |
+| `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`          | `false`                  | If set to true, remain on the same page after clicking on the Save button                                                                                                       |
+| `ME_CONFIG_OPTIONS_NO_DELETE`                  | `false`                  | If noDelete is true, components of deleting are not visible.                                                                                                                    |
+| `ME_CONFIG_OPTIONS_NO_EXPORT`                  | `false`                  | If noExport is true, components of exporting are not visible.                                                                                                                   |
+| `ME_CONFIG_OPTIONS_CONFIRM_DELETE`             | `false`                  | If confirmDelete is set to 'true', a modal for confirming deletion is displayed                                                                                                 |
+| `ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON`           | `true`                   | If set to true, jsons will be displayed collapsible                                                                                                                             |
+| `ME_CONFIG_SITE_SSL_ENABLED`                   | `false`                  | Enable SSL.                                                                                                                                                                     |
+| `ME_CONFIG_SITE_SSL_CRT_PATH`                  | ` `                      | SSL certificate file.                                                                                                                                                           |
+| `ME_CONFIG_SITE_SSL_KEY_PATH`                  | ` `                      | SSL key file.                                                                                                                                                                   |
+| `ME_CONFIG_SITE_GRIDFS_ENABLED`                | `false`                  | Enable gridFS to manage uploaded files.                                                                                                                                         |
+| `ME_CONFIG_DOCUMENTS_PER_PAGE`                 | `10`                     | How many documents you want to see at once in collection view                                                                                                                   |
+| `PORT`                                         | `8081`                   | port that mongo-express will run on.                                                                                                                                            |
+| `VCAP_APP_HOST`                                | `localhost`              | address that mongo-express will listen on for incoming connections.                                                                                                             |
 
 **Example:**
 
@@ -202,11 +200,13 @@ You can use the following [environment variables](https://docs.docker.com/refere
         --name mongo-express \
         --network web_default \
         -p 8081:8081 \
-        -e ME_CONFIG_BASICAUTH_ENABLED="false" \
-        -e ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
+        -e ME_CONFIG_BASICAUTH_ENABLED="true" \
+        -e ME_CONFIG_BASICAUTH_USERNAME="mongo-express-user" \
+        -e ME_CONFIG_BASICAUTH_PASSWORD="fairly-long-password" \
+        -e ME_CONFIG_MONGODB_URL="mongodb://some-mongo:27017" \
         mongo-express
 
-This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
+This example links to a container name typical of `docker-compose` and enables basic authentication in the UI.
 
 **To use:**
 
@@ -220,7 +220,7 @@ The default port exposed from the container is 8081, so visit `http://localhost:
 
 **Usage:**
 
-By using Mongo Express Docker Extension, it's easy to setup Mongo Express on Docker Desktop with [just one click](https://open.docker.com/extensions/marketplace?extensionId=ajeetraina/mongodb-express-docker-extension&tag=1.0).
+By using Mongo Express Docker Extension, it's easy to setup Mongo Express on Docker Desktop with [just one click](https://open.docker.com/extensions/marketplace?extensionId=saniewski/mongo-express-docker-extension).
 
 
 ## Usage (IBM Cloud)
@@ -277,7 +277,7 @@ To register your client, you will need the application's redirect URI, which can
 - _Simple_ search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
 - _Advanced_ search passes the `find` and `projection` fields/objects straight into MongoDB `db.collection.find(query, projection)`. The `find` object is where your query happens, while the `projection` object determines which columns are returned.
 
-See [MongoDB db.collection.find()](https://docs.mongodb.org/manual/reference/method/db.collection.find/) documentation for examples and exact usage.
+See [MongoDB db.collection.find()](https://www.mongodb.com/docs/manual/reference/method/db.collection.find/) documentation for examples and exact usage.
 
 ## Planned features
 
@@ -368,7 +368,7 @@ Creates a new Timestamp object with a value of 0.
 
 Example: `Timestamp(ISODate(), 0)`.
 
-See [http://www.mongodb.org/display/DOCS/Timestamp+data+type](http://www.mongodb.org/display/DOCS/Timestamp+data+type) for more info about the Timestamp data type.
+See [https://www.mongodb.com/docs/mongodb-shell/reference/data-types/#timestamp](https://www.mongodb.com/docs/mongodb-shell/reference/data-types/#timestamp) for more info about the Timestamp data type.
 
 **Code**
 
