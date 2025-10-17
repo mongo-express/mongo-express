@@ -8,12 +8,12 @@
   <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
 </li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle px-1" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="dropdown" aria-expanded="false">
     {{ dbName }}
   </a>
-  <ul class="dropdown-menu">
+  <ul id="navbarDatabaseDropdown" class="dropdown-menu">
     {% for db in databases %}
-    <a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a>
+    <li><a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
     {% endfor %}
   </ul>
 </li>
@@ -21,12 +21,12 @@
   <a class="nav-link px-1" href="{{ dbUrl }}/{{ bucketName }}">Bucket:</a>
 </li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" aria-controls="navbarBucketDropdown" data-bs-target="#navbarBucketDropdown" data-bs-toggle="dropdown" aria-expanded="false">
     {{ bucketName }}
   </a>
-  <ul class="dropdown-menu">
+  <ul id="navbarBucketDropdown" class="dropdown-menu">
     {% for bucket in buckets %}
-    <a class="dropdown-item" href="{{ dbUrl }}/gridFS/{{ bucket }}">{{ bucket }}</a>
+    <li><a class="dropdown-item" href="{{ dbUrl }}/gridFS/{{ bucket }}">{{ bucket }}</a></li>
     {% endfor %}
   </ul>
 </li>

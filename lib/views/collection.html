@@ -3,9 +3,12 @@
 {% block title %}{{ collectionName }}{% endblock %}
 
 {% block breadcrumb %}
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
-    Database: {{ dbName }}
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ dbName }}
   </a>
   <ul id="navbarDatabaseDropdown" class="dropdown-menu scrollable-ul">
     {% for db in databases %}
@@ -13,16 +16,18 @@
     {% endfor %}
   </ul>
 </li>
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ collectionUrl }}">Collection:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarCollectionDropdown" data-bs-target="#navbarCollectionDropdown" data-bs-toggle="collapse" aria-expanded="false">
-    Collection: {{ collectionName }}
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" aria-controls="navbarCollectionDropdown" data-bs-target="#navbarCollectionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ collectionName }}
   </a>
-    <ul id="navbarCollectionDropdown" class="dropdown-menu scrollable-ul">
-      {% for collection in collections %}
-      <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
-      {% endfor %}
-    </ul>
-
+  <ul id="navbarCollectionDropdown" class="dropdown-menu scrollable-ul">
+    {% for collection in collections %}
+    <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
+    {% endfor %}
+  </ul>
 </li>
 {% endblock %}
 
