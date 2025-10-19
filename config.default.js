@@ -83,10 +83,7 @@ export default {
       // tlsCAFile: single PEM file on disk
       tlsCAFile: process.env.ME_CONFIG_MONGODB_TLS_CA_FILE,
 
-      // tlsCertificateFile: client certificate PEM file on disk
-      tlsCertificateFile: process.env.ME_CONFIG_MONGODB_TLS_CERT_FILE,
-
-      // tlsCertificateKeyFile: client key PEM file on disk
+      // tlsCertificateKeyFile: client cert+key PEM file on disk
       tlsCertificateKeyFile: process.env.ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE,
 
       // tlsCertificateKeyFilePassword: password for the client key PEM
