@@ -1,6 +1,6 @@
-const assert = require('assert');
-const request = require('supertest');
-const express = require('express');
+import assert from 'assert';
+import request from 'supertest';
+import express from 'express';
 
 describe('Health route', function () {
   const app = express();
