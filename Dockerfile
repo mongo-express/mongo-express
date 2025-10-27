@@ -1,21 +1,20 @@
-# Dockerfile
-FROM node:20-alpine
+# Use official Node image
+FROM node:20
 
-# Create app directory
+# Set working directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
-COPY package*.json ./
-RUN npm ci --production
-
-# Bundle app source
+# Copy all files first so webpack finds everything
 COPY . .
 
-# Build/prepare (if you have build steps, e.g. front-end or transpile)
-# RUN npm run build   # uncomment if applicable
+# Set environment
+ENV NODE_ENV=development
 
-ENV PORT=8081
+# Install dependencies
+RUN npm install
+
+# Expose port for app
 EXPOSE 8081
 
-# start command (ensure it matches package.json "start")
+# Start the app
 CMD ["npm", "start"]

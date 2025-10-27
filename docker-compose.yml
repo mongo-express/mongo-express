@@ -1,44 +1,43 @@
 version: "3.9"
-services:
-  app:
-    container_name: app
-    build:
-      context: .
-      dockerfile: Dockerfile
-    env_file:
-      - .env
-    ports:
-      - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017
-      ME_CONFIG_SITE_SESSIONSECRET: ${ME_CONFIG_SITE_SESSIONSECRET:-localsecret}
-    depends_on:
-      - mongo
-    networks:
-      - internal
 
-  mongo:
-    image: mongo:7
-    container_name: mongo
+services:
+  my_mongo:
+    image: mongo:6.0
+    container_name: my_mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
     volumes:
       - mongo_data:/data/db
-    networks:
-      - internal
 
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
+  my_app:
+    image: mongo-express:1.0.0
+    container_name: my_app
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_SERVER: my_mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin   # set login
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    depends_on:
+      - my_mongo
+    expose:
+      - "8081"  # expose internally to nginx
+
+  my_nginx:
+    image: nginx:latest
+    container_name: my_nginx
     ports:
       - "8080:80"
-    depends_on:
-      - app
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    networks:
-      - internal
-
-networks:
-  internal:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - my_app
 
 volumes:
   mongo_data:

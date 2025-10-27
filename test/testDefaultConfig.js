@@ -21,7 +21,7 @@ const bsonSpec = () => ({
   },
 
   healthCheck: {
-    path: '/status',
+    path: '/health',
   },
 
   useBasicAuth: false,
