@@ -70,7 +70,7 @@
     "@babel/preset-env": "^7.28.3",
     "@cypress/code-coverage": "^3.14.6",
     "assets-webpack-plugin": "^7.1.1",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "chai": "^5.2.1",
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^9.2.1",
