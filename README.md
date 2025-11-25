@@ -142,6 +142,17 @@ $ docker build -t mongo-express .
 $ docker run -it --rm -p 8081:8081 --network some-network mongo-express
 ```
 
+**Building with OIDC support:**
+
+To enable OIDC (OpenID Connect) authentication support in the Docker image, use the `ENABLE_OIDC` build argument:
+
+```console
+$ docker build -t mongo-express --build-arg ENABLE_OIDC=true .
+$ docker run -it --rm -p 8081:8081 --network some-network mongo-express
+```
+
+When `ENABLE_OIDC=true` is set, the `express-openid-connect` package will be installed during the build process, enabling OIDC authentication features.
+
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
 | Name                                           | Default                                             | Description                                                                                                                                                                     |
