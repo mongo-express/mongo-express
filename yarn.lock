@@ -1349,13 +1349,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/busboy@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@fastify/busboy@npm:3.2.0"
-  checksum: 10/7d42b23eed18b1aaf2d2b1c77a5b76ec3606d59f5ddec31c04b144536be57478ed0c73e04768f11535b11a37b48aaaa0aed4904d5f18391ff90045c258e41acc
-  languageName: node
-  linkType: hard
-
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -4807,13 +4800,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flushwritable@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "flushwritable@npm:1.0.0"
-  checksum: 10/3e94480c1f47d531807c0f1e6cb171f58c1dd213b0365e1d11bf475a9d3a4dc7cdf77d7a9c03f4c41855fd7b494428b7a03df0f1ddb0d30e134ca817df2516c3
-  languageName: node
-  linkType: hard
-
 "follow-redirects@npm:^1.15.9":
   version: 1.15.9
   resolution: "follow-redirects@npm:1.15.9"
@@ -5240,15 +5226,6 @@ __metadata:
   version: 1.4.0
   resolution: "graphemer@npm:1.4.0"
   checksum: 10/6dd60dba97007b21e3a829fab3f771803cc1292977fe610e240ea72afd67e5690ac9eeaafc4a99710e78962e5936ab5a460787c2a1180f1cb0ccfac37d29f897
-  languageName: node
-  linkType: hard
-
-"gridfs-stream@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "gridfs-stream@npm:1.1.1"
-  dependencies:
-    flushwritable: "npm:^1.0.0"
-  checksum: 10/4f9e37db8c8fdcadea3b1c3dfc8df329d064123fb1b195a1a2280deb902bb17ad11799ec5d68bb6449a5ea592a10e95af29e559910cddb6800d36bd6f67fa4b4
   languageName: node
   linkType: hard
 
@@ -6840,7 +6817,6 @@ __metadata:
     "@codemirror/theme-one-dark": "npm:^6.1.3"
     "@codemirror/view": "npm:^6.38.2"
     "@cypress/code-coverage": "npm:^3.14.6"
-    "@fastify/busboy": "npm:^3.2.0"
     "@json2csv/plainjs": "npm:^7.0.6"
     "@lezer/highlight": "npm:^1.2.1"
     "@popperjs/core": "npm:^2.11.8"
@@ -6875,7 +6851,6 @@ __metadata:
     file-loader: "npm:^6.2.0"
     flat: "npm:^6.0.1"
     free-swig: "npm:^1.5.5"
-    gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.6.0"
     husky: "npm:^9.1.7"
     jquery: "npm:^3.7.1"
