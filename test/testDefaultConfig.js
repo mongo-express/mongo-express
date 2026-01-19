@@ -25,6 +25,7 @@ const bsonSpec = () => ({
   },
 
   useBasicAuth: false,
+  authStrategy: 'none', // Disable authentication for tests
 
   options: {
     documentsPerPage: 10,

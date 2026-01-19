@@ -49,6 +49,7 @@
     "errorhandler": "1.5.1",
     "express": "^4.21.2",
     "express-fileupload": "^1.5.2",
+    "express-rate-limit": "7.5.0",
     "express-session": "^1.18.2",
     "flat": "^6.0.1",
     "free-swig": "^1.5.5",
@@ -60,6 +61,10 @@
     "mongodb": "^6.19.0",
     "mongodb-query-parser": "^4.4.2",
     "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "passport-openidconnect": "^0.1.2",
     "picocolors": "^1.1.1",
     "renderjson-2": "^2.0.1",
     "serve-favicon": "^2.5.1"

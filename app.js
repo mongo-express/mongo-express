@@ -67,11 +67,40 @@ async function bootstrap(config) {
         console.error(pico.red('Server is open to allow connections from anyone (0.0.0.0)'));
       }
 
-      if (config.useOidcAuth !== true) {
-        if (config.useBasicAuth !== true) {
-          console.warn(pico.yellow('Basic and OIDC authentications are disabled, it\'s recommended to set the useBasicAuth to true in the config.js.'));
-        } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-          console.warn(pico.yellow('basicAuth credentials are "admin:pass", it\'s recommended to set them in your config.js!'));
+      // Determine auth strategy (with backward compatibility)
+      const authStrategy = config.authStrategy || (config.useOidcAuth ? 'oidc' : (config.useBasicAuth ? 'basic' : 'none'));
+
+      switch (authStrategy) {
+        case 'none': {
+          console.warn(pico.yellow('Authentication is disabled! It is strongly recommended to enable authentication in production.'));
+          console.warn(pico.yellow('Set authStrategy to "basic" or "oidc" in config.js, or set ME_CONFIG_AUTH_STRATEGY environment variable.'));
+
+          break;
+        }
+        case 'basic': {
+          if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+            console.warn(pico.yellow('Using default Basic Auth credentials (admin:pass). Please change these in config.js!'));
+            console.warn(pico.yellow('Set ME_CONFIG_BASICAUTH_USERNAME and ME_CONFIG_BASICAUTH_PASSWORD environment variables.'));
+          }
+
+          break;
+        }
+        case 'form':
+        case 'local': {
+          if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+            console.warn(pico.yellow('Using default credentials (admin:pass). Please change these in config.js!'));
+          }
+
+          break;
+        }
+        case 'oidc': {
+          console.log('Using OIDC authentication');
+
+          break;
+        }
+        default: {
+          // Unknown strategy will be handled by auth module
+          break;
         }
       }
     }

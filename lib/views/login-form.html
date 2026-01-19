@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+
+{% block title %}Login - Mongo Express{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 100px;">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">
+                        <i class="fa fa-database"></i> Mongo Express
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Sign In</h5>
+                    
+                    {% if messageError %}
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fa fa-exclamation-circle"></i> {{ messageError }}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" action="/login" autocomplete="on">
+                        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                        
+                        <div class="form-group mb-3">
+                            <label for="username">
+                                <i class="fa fa-user"></i> Username
+                            </label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="username" 
+                                name="username" 
+                                placeholder="Enter username" 
+                                required
+                                autofocus
+                                autocomplete="username"
+                            >
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label for="password">
+                                <i class="fa fa-lock"></i> Password
+                            </label>
+                            <div class="input-group">
+                                <input 
+                                    type="password" 
+                                    class="form-control" 
+                                    id="password" 
+                                    name="password" 
+                                    placeholder="Enter password" 
+                                    required
+                                    autocomplete="current-password"
+                                >
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fa fa-eye" id="toggleIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fa fa-sign-in"></i> Sign In
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center text-muted">
+                    <small>
+                        <i class="fa fa-shield"></i> Secured with password manager support
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Toggle password visibility
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.getElementById('toggleIcon');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+    }
+});
+
+// Auto-focus on username field
+document.getElementById('username').focus();
+</script>
+
+<style>
+.card {
+    border-radius: 10px;
+}
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+</style>
+{% endblock %}

@@ -112,11 +112,11 @@ export default {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the start and end!
     baseUrl: process.env.ME_CONFIG_SITE_BASEURL || '/',
     cookieKeyName: 'mongo-express',
-    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET,
+    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
     host: process.env.VCAP_APP_HOST || 'localhost',
     port: process.env.PORT || 8081,
     requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '50mb',
-    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET,
+    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
     sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
     sslEnabled: getBoolean(process.env.ME_CONFIG_SITE_SSL_ENABLED, false),
     sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
@@ -127,8 +127,25 @@ export default {
     path: process.env.ME_CONFIG_HEALTH_CHECK_PATH || '/status',
   },
 
+  // Authentication Strategy Configuration
+  // Determines which authentication method to use
+  //
+  // Options:
+  //   - 'basic': HTTP Basic Auth (browser popup, legacy default)
+  //   - 'form': Form-based login (password manager compatible) - Solves Issue #1733
+  //   - 'oidc': OpenID Connect (enterprise SSO, with safe-load for Issue #1766)
+  //   - 'none': No authentication (development only, NOT recommended for production)
+  //
+  // Default: 'basic' (for backward compatibility with existing deployments)
+  //
+  // Recommended: Use 'form' for better UX and password manager support
+  // Environment Variable: ME_CONFIG_AUTH_STRATEGY
+  authStrategy: process.env.ME_CONFIG_AUTH_STRATEGY || (getBoolean(getFileEnv(oidcAuthEnabled)) ? 'oidc'
+    : (getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)) ? 'basic' : 'basic')),
+
   // set useBasicAuth to true if you want to authenticate mongo-express logins
   // this will be false unless ME_CONFIG_BASICAUTH_ENABLED is set to the true
+  // DEPRECATED: Use authStrategy: 'basic' instead
   useBasicAuth: getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)),
 
   basicAuth: {
@@ -136,6 +153,7 @@ export default {
     password: getFileEnv(basicAuthPassword) || 'pass',
   },
 
+  // DEPRECATED: Use authStrategy: 'oidc' instead
   useOidcAuth: getBoolean(getFileEnv(oidcAuthEnabled)),
   oidcAuth: {
     issuerBaseURL: getFileEnv(oidcAuthIssuer),
@@ -144,6 +162,7 @@ export default {
     clientSecret: getFileEnv(oidcAuthClientSecret),
     clientID: getFileEnv(oidcAuthClientId),
     secret: getFileEnv(oidcAuthSecret),
+    scope: ['openid', 'profile', 'email'],
     idpLogout: true,
     authorizationParams: {
       response_type: 'code',
