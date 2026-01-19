@@ -60,6 +60,10 @@
     "mongodb": "^6.19.0",
     "mongodb-query-parser": "^4.4.2",
     "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "passport-openidconnect": "^0.1.2",
     "picocolors": "^1.1.1",
     "renderjson-2": "^2.0.1",
     "serve-favicon": "^2.5.1"
