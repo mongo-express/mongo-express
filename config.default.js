@@ -1,7 +1,5 @@
+import 'dotenv/config.js';
 import fs from 'node:fs';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
