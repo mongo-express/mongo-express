@@ -1,16 +1,17 @@
 # Kubernetes example
 
 This example shows how to run mongo-express in a Kubernetes cluster.
-The manifests in the example don't include the Mongodb installation.
+The manifests in the example don't include MongoDB installation.
 
-In [deployment.yml](./deployment.yml) the mongo-express command is overwritten so the `--url` flag can be added.
-But the application is started the same as normal using Tini and Yarn.
+In [deployment.yml](./deployment.yml) the [official mongo-express Docker image](https://hub.docker.com/_/mongo-express) is used and preconfigured for basic authentication and admin access.
+
+## ConfigMap
+
+Environment variables are configured in [configmap.yml](./configmap.yml).
 
 ## Secrets
 
-This example uses different environment variables read from a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) 
-defined in [secret.yml](./secret.yml) to create the connection URL. Even though taking these values from a secret is 
-technically optional, it is often a requirement in realistic situations.
-
-The values in the secret are base64 encoded as required by Kubernetes.
+Additional environment variables are read from [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) 
+defined in [url-secret.yml](./url-secret.yml) and [basicauth-secret.yml](./basicauth.yml). Even though taking credential values from a secret is 
+technically optional, it is often a recommended approach.
 
