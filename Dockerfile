@@ -1,9 +1,17 @@
 FROM node:18-alpine3.16 AS build
 
+# Build argument for enabling OIDC support
+ARG ENABLE_OIDC=false
+
 WORKDIR /dockerbuild
 COPY . .
 
-RUN yarn install \
+RUN if [ "$ENABLE_OIDC" = "true" ]; then \
+        apk add --no-cache jq \
+        && jq '.dependencies["express-openid-connect"] = "^2.19.2" | del(.peerDependencies["express-openid-connect"]) | del(.peerDependenciesMeta["express-openid-connect"])' package.json > package.tmp.json \
+        && mv package.tmp.json package.json; \
+    fi \
+    && yarn install \
     && yarn build \
     && rm -rf /dockerbuild/lib/scripts
 

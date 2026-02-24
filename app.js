@@ -24,8 +24,7 @@ let server = app;
 let sslOptions;
 
 const loadConfig = async () => {
-  const configExist = fs.existsSync('./config.js');
-  if (configExist === true) {
+  if (fs.existsSync('./config.js')) {
     try {
       // eslint-disable-next-line import/no-unresolved
       const { default: configCustom } = await import('./config.js');
