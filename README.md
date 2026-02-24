@@ -169,13 +169,13 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_MONGODB_AWS_DOCUMENTDB`             | `false`                                             | This allow AWS DocumentDB compatibility (experimental)
 | `ME_CONFIG_SITE_BASEURL`                       | `/`                                                 | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.
 | `ME_CONFIG_HEALTH_CHECK_PATH`                  | `/status`                                           | Set the mongo express healthcheck path. Remember to add the forward slash at the start.
-| `ME_CONFIG_SITE_COOKIESECRET`                  | `cookiesecret`                                      | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
-| `ME_CONFIG_SITE_SESSIONSECRET`                 | `sessionsecret`                                     | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
+| `ME_CONFIG_SITE_COOKIESECRET`                  | ``                                                  | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
+| `ME_CONFIG_SITE_SESSIONSECRET`                 | ``                                                  | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
 | `ME_CONFIG_BASICAUTH`                          | `false`                                             | Deprecated, use `ME_CONFIG_BASICAUTH_ENABLED` instead.
 | `ME_CONFIG_BASICAUTH_ENABLED`                  | `false`                                             | Enable Basic Authentication. Send strings: `"true"` or `"false"`.
-| `ME_CONFIG_BASICAUTH_USERNAME`                 | ``                                                  | mongo-express web login name. If not defined, `admin` is the username.
+| `ME_CONFIG_BASICAUTH_USERNAME`                 | `admin`                                             | mongo-express web login name.
 | `ME_CONFIG_BASICAUTH_USERNAME_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_USERNAME`
-| `ME_CONFIG_BASICAUTH_PASSWORD`                 | ``                                                  | mongo-express web login password. If not defined, `pass` is the password.
+| `ME_CONFIG_BASICAUTH_PASSWORD`                 | `pass`                                              | mongo-express web login password.
 | `ME_CONFIG_BASICAUTH_PASSWORD_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_PASSWORD`
 | `ME_CONFIG_OIDCAUTH_ENABLED`                   | `false`                                             | Enable OpenIdConnect Authentication. Send strings: `"true"` or `"false"`.
 | `ME_CONFIG_OIDCAUTH_ISSUER`                    | ``                                                  | OAuth2 [Issuer](https://datatracker.ietf.org/doc/html/rfc8414#section-2). Root URL to the openidconnect metadata eg. `"<issuer>/.well-known/openid-configuration"`
@@ -188,7 +188,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_OIDCAUTH_SECRET_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_SECRET_FILE`
 | `ME_CONFIG_OIDCAUTH_BASEURL`                   | ``                                                  | OAuth2 base url. It's used to build the redirect URL eg. `"<base-url>/callback"`. If not specified `ME_CONFIG_SITE_BASEURL` will be used.
 | `ME_CONFIG_OIDCAUTH_BASEURL_FILE`              | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_BASEURL`
-| `ME_CONFIG_REQUEST_SIZE`                       | `100kb`                                             | Used to configure maximum Mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
+| `ME_CONFIG_REQUEST_SIZE`                       | `50`                                                | Used to configure maximum Mongo update payload size in MB. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
 | `ME_CONFIG_OPTIONS_READONLY`                   | `false`                                             | if readOnly is true, components of writing are not visible.
 | `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.
 | `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`          | `false`                                             | If set to true, remain on the same page after clicking on the Save button
