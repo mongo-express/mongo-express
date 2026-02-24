@@ -26,9 +26,9 @@ A web-based admin interface for MongoDB or compatible services (FerretDB, Amazon
 
 ## Screenshots
 
-| Home Page                                                                      | Database View                                                                                    | Collection View                                                                       | Editing A Document                                                     |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| <img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" /> |
+| Home Page | Database View | Collection View | Editing A Document
+| - | - | - | -
+| <img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
 
 These screenshots are from version 0.30.40
 View the album for more screenshots: (server status, database views, etc..)
@@ -157,7 +157,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
 | Name                                           | Default                                             | Description
 | ---------------------------------------------- | --------------------------------------------------- | -
-| `ME_CONFIG_MONGODB_URL`                        | `mongodb://admin:pass@localhost:27017/db?ssl=false` | MongoDB connection string. Should include admin username and password if you want to enable admin access to all databases and see server statistics. If admin access is not enabled, it should also include database name ([/defaultauthdb](https://www.mongodb.com/docs/manual/reference/connection-string/#connection-string-components)) to connect to. |                                                                                                                                                                                |
+| `ME_CONFIG_MONGODB_URL`                        | `mongodb://admin:pass@localhost:27017/db?ssl=false` | MongoDB connection string. Should include admin username and password if you want to enable admin access to all databases and see server statistics. If admin access is not enabled, it should also include database name ([/defaultauthdb](https://www.mongodb.com/docs/manual/reference/connection-string/#connection-string-components)) to connect to.
 | `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable administrator access. Send strings: `"true"` or `"false"`.
 | `ME_CONFIG_MONGODB_ALLOW_DISK_USE`             | `false`                                             | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.
 | `ME_CONFIG_MONGODB_TLS`                        | `false`                                             | Use TLS client certificate
