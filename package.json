@@ -68,7 +68,7 @@
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/preset-env": "^7.29.0",
-    "@cypress/code-coverage": "^3.14.6",
+    "@cypress/code-coverage": "^4.0.1",
     "assets-webpack-plugin": "^7.1.1",
     "babel-loader": "^10.0.0",
     "chai": "^5.2.1",
