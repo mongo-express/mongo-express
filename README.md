@@ -114,9 +114,9 @@ Option | Short | Description
 `--port <port>` | `-p <port>` | listen on specified port (default `<port>` is `8081`)
 `--help` | `-h` | display help for command options
 
-## Usage (Express 4 middleware)
+## Usage (Express middleware)
 
-**To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
+**To mount as Express middleware (see `node_modules/mongo-express/app.js`):**
 
     var mongo_express = require('mongo-express/lib/middleware')
     var mongo_express_config = require('./mongo_express_config')
