@@ -62,6 +62,8 @@ const oidcAuthIssuer = 'ME_CONFIG_OIDCAUTH_ISSUER';
 const oidcAuthClientId = 'ME_CONFIG_OIDCAUTH_CLIENTID';
 const oidcAuthClientSecret = 'ME_CONFIG_OIDCAUTH_CLIENTSECRET';
 const oidcAuthSecret = 'ME_CONFIG_OIDCAUTH_SECRET';
+const oidcAuthAcrValues = 'ME_CONFIG_OIDCAUTH_ACRVALUES';
+const oidcAuthScope = 'ME_CONFIG_OIDCAUTH_AUTHORIZATION_PARAMS_SCOPE';
 
 export default {
   mongodb: {
@@ -147,6 +149,12 @@ export default {
     idpLogout: true,
     authorizationParams: {
       response_type: 'code',
+      // set default scopes, can be overridden by setting
+      // ME_CONFIG_OIDCAUTH_AUTHORIZATION_PARAMS_SCOPE with a space separated
+      // list of scopes
+      scope: getFileEnv(oidcAuthScope) || 'openid profile email',
+      // send the acr_values param if ME_CONFIG_OIDCAUTH_ACRVALUES is set, otherwise don't send it
+      ...(getFileEnv(oidcAuthAcrValues) && { acr_values: getFileEnv(oidcAuthAcrValues) }),
     },
   },
 
