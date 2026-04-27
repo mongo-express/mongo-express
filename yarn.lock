@@ -1564,14 +1564,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mongodb-js/shell-bson-parser@npm:^1.5.8":
-  version: 1.5.8
-  resolution: "@mongodb-js/shell-bson-parser@npm:1.5.8"
+"@mongodb-js/shell-bson-parser@npm:^1.5.10":
+  version: 1.5.10
+  resolution: "@mongodb-js/shell-bson-parser@npm:1.5.10"
   dependencies:
-    acorn: "npm:^8.14.1"
+    acorn: "npm:^8.16.0"
   peerDependencies:
     bson: ^4.6.3 || ^5 || ^6.10.3 || ^7.0.0
-  checksum: 10/83c520b4faf7f4a13faa03d2dc2b79c8a37cfcbff673a3bd0d2f07a79810e489c98bd8884a6cd83f8d4604c70fa46a6082b5c9a7c4238699b6d80917205322d6
+  checksum: 10/af3f55f47172c177c79e6a33b8fca46afd71c01aebddcb432b38ae3adfac9c21bd63c774767f07d044cc66642829ce477d58fb663a70414cabb839c25f0513e4
   languageName: node
   linkType: hard
 
@@ -2139,7 +2139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.14.1, acorn@npm:^8.15.0, acorn@npm:^8.16.0, acorn@npm:^8.9.0":
+"acorn@npm:^8.15.0, acorn@npm:^8.16.0, acorn@npm:^8.9.0":
   version: 8.16.0
   resolution: "acorn@npm:8.16.0"
   bin:
@@ -3533,9 +3533,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^15.14.0":
-  version: 15.14.0
-  resolution: "cypress@npm:15.14.0"
+"cypress@npm:^15.14.1":
+  version: 15.14.1
+  resolution: "cypress@npm:15.14.1"
   dependencies:
     "@cypress/request": "npm:^3.0.10"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -3582,7 +3582,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/a49de9b3af2bca33e1895262a466745f65697f744aefe59c994c3929aa03f185eb3d4b61aa9c751aec4eb19a6cda2b9f1988f1d367700ba0303bdb5bec31691b
+  checksum: 10/e896f5f3b08b90ce121ed71a7d8974dd6fff31aed2448c80ae624d469b6716b6e9626a6757e8ca0ef6113e679a3e632cdd93a9879c55e5bc37434395c1bf0be6
   languageName: node
   linkType: hard
 
@@ -6837,7 +6837,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     css-loader: "npm:^7.1.4"
     csurf: "npm:1.11.0"
-    cypress: "npm:^15.14.0"
+    cypress: "npm:^15.14.1"
     dotenv: "npm:^17.4.2"
     errorhandler: "npm:1.5.2"
     eslint: "npm:^8.57.0"
@@ -6860,7 +6860,7 @@ __metadata:
     mocha: "npm:^11.7.5"
     mongodb: "npm:^6.19.0"
     mongodb-memory-server: "npm:^11.0.1"
-    mongodb-query-parser: "npm:^4.7.8"
+    mongodb-query-parser: "npm:^4.7.10"
     morgan: "npm:^1.10.1"
     node-html-parser: "npm:^7.1.0"
     nodemon: "npm:^3.1.11"
@@ -6931,17 +6931,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb-query-parser@npm:^4.7.8":
-  version: 4.7.8
-  resolution: "mongodb-query-parser@npm:4.7.8"
+"mongodb-query-parser@npm:^4.7.10":
+  version: 4.7.10
+  resolution: "mongodb-query-parser@npm:4.7.10"
   dependencies:
-    "@mongodb-js/shell-bson-parser": "npm:^1.5.8"
+    "@mongodb-js/shell-bson-parser": "npm:^1.5.10"
     debug: "npm:^4.4.0"
     javascript-stringify: "npm:^2.1.0"
     lodash: "npm:^4.17.21"
   peerDependencies:
     bson: ^4.6.3 || ^5 || ^6.10.3 || ^7.0.0
-  checksum: 10/7a7e8c15e127ee596a5f6e54a4f53021ff7f7157149d1d364c94b497de5fc0c8c1c5ce9b84be5d35ee087c155446ce9d5af27004068c07d9fc0ff7b644811c3f
+  checksum: 10/4436f07e989f05ef0f0db3cc8f73a25fa341ff959925d229ee619b56f567898d67e436e1d0d18295d6a55a1ccf79c9c74a73991afc8a88e5c77cede02b3b5505
   languageName: node
   linkType: hard
 
