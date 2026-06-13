@@ -226,13 +226,13 @@
     {% for index, document in docs %}
     {% if document._id._bsontype == 'Binary' %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}', event)">
       {% elseif document._id._bsontype == 'Long' %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}', event)">
       {% else %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}', event)">
       {% endif %}
       {% for column in columns %}
       <td>
@@ -240,7 +240,7 @@
           {% if !settings.read_only && !settings.no_delete && column === '_id' && collectionName !== 'system.indexes'
           %}
           <button class="btn btn-info"
-            onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}')">
+            onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}', event)">
             <i class="fa fa-link"></i>
           </button>
           <form class="deleteButtonDocument" method="POST" style="display:inline;"
