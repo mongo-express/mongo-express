@@ -214,9 +214,11 @@
       <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}" title="Sort by {{column}}">
         {{column}}
         {% if sort[column] == 1 %}
-        <i class="fas fa-sort-up"></i>
+        <i class="fas fa-sort-up sort-icon active"></i>
         {% elseif sort[column] == -1 %}
-        <i class="fas fa-sort-down"></i>
+        <i class="fas fa-sort-down sort-icon active"></i>
+        {% else %}
+        <i class="fas fa-sort sort-icon"></i>
         {% endif %}
       </th>
       {% endfor %}
