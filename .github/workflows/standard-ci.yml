@@ -15,7 +15,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node: [18, 20, 22.4.1]
+        node: [18, 20, 22.5.0]
         os: [ubuntu-latest]
     name: Node v${{ matrix.node }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
