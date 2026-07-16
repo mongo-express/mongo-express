@@ -9040,11 +9040,11 @@ __metadata:
   linkType: hard
 
 "systeminformation@npm:^5.31.1":
-  version: 5.31.6
-  resolution: "systeminformation@npm:5.31.6"
+  version: 5.31.17
+  resolution: "systeminformation@npm:5.31.17"
   bin:
     systeminformation: lib/cli.js
-  checksum: 10/42c986adc6af3dc296458177a5bb79922d7892a684b8271bce6dfaf9d40285330606a36dbb0b41f3b76fd745b6658a92bf5c62d6d56d4a746d64bb45be81b394
+  checksum: 10/dde6f4ed8ba189bb7c004b62fe20b542f510b6bef420211458fafd86dd41a7c0c7fc4a56209a5a851d768d47504006bdcd2deab3678824a84c03a18fec6770f3
   conditions: (os=darwin | os=linux | os=win32 | os=freebsd | os=openbsd | os=netbsd | os=sunos | os=android)
   languageName: node
   linkType: hard
