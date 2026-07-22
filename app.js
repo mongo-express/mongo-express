@@ -11,6 +11,7 @@ import express from 'express';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
+import { promptForConnectionString } from './lib/prompt.js';
 
 // TODO replace with import.meta.dirname if minimum Node.js version is >= 20.11.0
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -42,6 +43,12 @@ const loadConfig = async () => {
 };
 
 async function bootstrap(config) {
+  // Inject this right at the start of the bootstrap function:
+  if (!config.mongodb.connectionString) {
+    console.log('\n[!] Missing MongoDB credentials.');
+    config.mongodb.connectionString = await promptForConnectionString();
+  }
+
   const resolvedMiddleware = await middleware(config);
   app.use(config.site.baseUrl, resolvedMiddleware);
   app.use(config.site.baseUrl, process.env.NODE_ENV === 'test' ? csrf({ ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'] })
