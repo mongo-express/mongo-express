@@ -125,7 +125,9 @@ Option | Short | Description
 
 ## Usage (Docker)
 
-Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set the connection string `ME_CONFIG_MONGODB_URL` to the proper connection for your MongoDB container on your Docker network.
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on the same Docker network (`--network some-network` below). The Docker image defaults to `mongodb://mongo:27017`, so the MongoDB container must be reachable from the mongo-express container as `mongo` unless you set `ME_CONFIG_MONGODB_URL` to a different hostname.
+
+If MongoDB was initialized with `MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD`, include those credentials in `ME_CONFIG_MONGODB_URL` and authenticate against the `admin` database, for example `mongodb://root:password@mongo:27017/?authSource=admin`. `ME_CONFIG_BASICAUTH_USERNAME` and `ME_CONFIG_BASICAUTH_PASSWORD` only control the mongo-express web login; they are not used to authenticate to MongoDB.
 
 **Use [the Docker Hub image](https://hub.docker.com/_/mongo-express/):**
 
@@ -157,8 +159,8 @@ You can use the following [environment variables](https://docs.docker.com/refere
 
 | Name                                           | Default                                             | Description
 | ---------------------------------------------- | --------------------------------------------------- | -
-| `ME_CONFIG_MONGODB_URL`                        | `mongodb://admin:pass@localhost:27017/db?ssl=false` | MongoDB connection string. Should include admin username and password if you want to enable admin access to all databases and see server statistics. If admin access is not enabled, it should also include database name ([/defaultauthdb](https://www.mongodb.com/docs/manual/reference/connection-string/#connection-string-components)) to connect to.
-| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `false`                                             | Enable administrator access. Send strings: `"true"` or `"false"`.
+| `ME_CONFIG_MONGODB_URL`                        | `mongodb://mongo:27017`                             | MongoDB connection string. Should include admin username and password if you want to enable admin access to all databases and see server statistics. When using the root user created by the official MongoDB image, add `authSource=admin`, for example `mongodb://root:password@mongo:27017/?authSource=admin`. If admin access is not enabled, it should also include database name ([/defaultauthdb](https://www.mongodb.com/docs/manual/reference/connection-string/#connection-string-components)) to connect to.
+| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `true`                                              | Enable administrator access. Send strings: `"true"` or `"false"`.
 | `ME_CONFIG_MONGODB_ALLOW_DISK_USE`             | `false`                                             | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.
 | `ME_CONFIG_MONGODB_TLS`                        | `false`                                             | Use TLS client certificate
 | `ME_CONFIG_MONGODB_TLS_ALLOW_CERTS`            | `true`                                              | Validate mongod server certificate against CA
@@ -213,10 +215,10 @@ You can use the following [environment variables](https://docs.docker.com/refere
         -e ME_CONFIG_BASICAUTH_ENABLED="true" \
         -e ME_CONFIG_BASICAUTH_USERNAME="mongo-express-user" \
         -e ME_CONFIG_BASICAUTH_PASSWORD="fairly-long-password" \
-        -e ME_CONFIG_MONGODB_URL="mongodb://some-mongo:27017" \
+        -e ME_CONFIG_MONGODB_URL="mongodb://root:password@some-mongo:27017/?authSource=admin" \
         mongo-express
 
-This example links to a container name typical of `docker-compose` and enables basic authentication in the UI.
+This example connects to a MongoDB container reachable as `some-mongo` on the Docker network and enables basic authentication in the mongo-express UI.
 
 **To use:**
 
