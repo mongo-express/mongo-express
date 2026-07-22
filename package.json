@@ -54,7 +54,7 @@
     "free-swig": "^1.5.5",
     "gridfs-stream": "^1.1.1",
     "html-entities": "^2.6.0",
-    "jquery": "^3.7.1",
+    "jquery": "^4.0.0",
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
     "mongodb": "^6.19.0",
