@@ -244,7 +244,7 @@
             <i class="fa fa-link"></i>
           </button>
           <form class="deleteButtonDocument" method="POST" style="display:inline;"
-            action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
+            action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">
             <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <button type="submit" class="btn btn-danger">
