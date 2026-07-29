@@ -12,6 +12,44 @@
   border-bottom-style: solid;
 }
 
+.tableHeaderFooterBars thead th {
+  white-space: nowrap;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.tableHeaderFooterBars thead th .sort-icon {
+  opacity: 0.25;
+  font-size: 0.8em;
+  margin-left: 2px;
+}
+
+.tableHeaderFooterBars thead th .sort-icon.active {
+  opacity: 1;
+  color: #337ab7;
+}
+
+.column-drop-target {
+  outline: 2px dashed #0d6efd;
+  outline-offset: -2px;
+}
+
+.column-drag-handle {
+  cursor: grab;
+  color: #adb5bd;
+  margin-right: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+th:hover .column-drag-handle {
+  opacity: 1;
+}
+
+.column-drag-handle:hover {
+  color: #0d6efd;
+}
+
 .fadeToWhite {
   background: -moz-linear-gradient(left, rgba(83, 80, 86, 0) 0%, rgba(83, 80, 86, 0.6) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left, rgba(83, 80, 86, 0) 0%, rgba(83, 80, 86, 0.6) 100%); /* Chrome10-25,Safari5.1-6 */

@@ -11,6 +11,7 @@ import express from 'express';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
+import { promptForConnectionString } from './lib/prompt.js';
 
 // TODO replace with import.meta.dirname if minimum Node.js version is >= 20.11.0
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -42,6 +43,24 @@ const loadConfig = async () => {
 };
 
 async function bootstrap(config) {
+  if (!config.mongodb.connectionString) {
+    // Only prompt when someone is there to answer. Under Docker, systemd or CI stdin is not
+    // a TTY, and blocking on it would hang the process instead of reporting the problem.
+    if (!process.stdin.isTTY) {
+      console.error(pico.red('No MongoDB connection string configured.'));
+      console.error('Set ME_CONFIG_MONGODB_URL, pass --url <uri>, or define mongodb.connectionString in config.js.');
+      return process.exit(1);
+    }
+
+    console.log(pico.yellow('\nNo MongoDB connection string configured.'));
+    try {
+      config.mongodb.connectionString = await promptForConnectionString();
+    } catch (error) {
+      console.error(pico.red(`\n${error.message}`));
+      return process.exit(1);
+    }
+  }
+
   const resolvedMiddleware = await middleware(config);
   app.use(config.site.baseUrl, resolvedMiddleware);
   app.use(config.site.baseUrl, process.env.NODE_ENV === 'test' ? csrf({ ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'] })
