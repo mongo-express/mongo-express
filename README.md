@@ -125,7 +125,7 @@ Option | Short | Description
 
 ## Usage (Docker)
 
-Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on the same Docker network (`--network some-network` below). The Docker image defaults to `mongodb://mongo:27017`, so the MongoDB container must be reachable from the mongo-express container as `mongo` unless you set `ME_CONFIG_MONGODB_URL` to a different hostname.
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on the same Docker network (`--network some-network` below). The Docker image defaults to `mongodb://mongo:27017`, so the MongoDB container must be reachable from the mongo-express container as `mongo` — start it with `--name mongo` or `--network-alias mongo` — unless you set `ME_CONFIG_MONGODB_URL` to a different hostname.
 
 If MongoDB was initialized with `MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD`, include those credentials in `ME_CONFIG_MONGODB_URL` and authenticate against the `admin` database, for example `mongodb://root:password@mongo:27017/?authSource=admin`. `ME_CONFIG_BASICAUTH_USERNAME` and `ME_CONFIG_BASICAUTH_PASSWORD` only control the mongo-express web login; they are not used to authenticate to MongoDB.
 
