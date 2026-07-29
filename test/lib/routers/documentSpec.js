@@ -107,8 +107,60 @@ describe('Router document', () => {
       await testCollection(db).deleteOne({ _id: result._id });
     });
   });
-  it('DEL /db/<dbName>/<collection>/<document> should delete the document');
-  it('PUT /db/<dbName>/<collection>/<document> should update the document');
+  describe('DEL /db/<dbName>/<collection>/<document>', () => {
+    it('should delete the document', async () => {
+      const _id = new ObjectId();
+      await testCollection(db).insertOne({ _id, testValue: 'toDelete' });
+
+      await request.delete(getDocumentUrl(dbName, urlColName, _id.toString())).expect(302);
+
+      expect(await testCollection(db).findOne({ _id })).to.equal(null);
+    });
+
+    it('should preserve the collection view params in the redirect', async () => {
+      const _id = new ObjectId();
+      await testCollection(db).insertOne({ _id, testValue: 'toDelete' });
+
+      const res = await request.delete(getDocumentUrl(dbName, urlColName, _id.toString()))
+        .query({ skip: 10, 'sort[testValue]': -1, query: '{}' })
+        .expect(302);
+
+      const location = decodeURIComponent(res.headers.location);
+      expect(location).to.contain('sort[testValue]=-1');
+      expect(location).to.contain('skip=10');
+      expect(location).to.contain('query={}');
+    });
+  });
+
+  describe('PUT /db/<dbName>/<collection>/<document>', () => {
+    it('should update the document', async () => {
+      const _id = new ObjectId();
+      await testCollection(db).insertOne({ _id, testValue: 'before' });
+
+      await request.put(getDocumentUrl(dbName, urlColName, _id.toString()))
+        .send({ document: `{_id:ObjectId("${_id}"),testValue:"after"}` })
+        .expect(302);
+
+      const result = await testCollection(db).findOne({ _id });
+      expect(result.testValue).to.equal('after');
+      await testCollection(db).deleteOne({ _id });
+    });
+
+    it('should preserve the collection view params in the redirect', async () => {
+      const _id = new ObjectId();
+      await testCollection(db).insertOne({ _id, testValue: 'before' });
+
+      const res = await request.put(getDocumentUrl(dbName, urlColName, _id.toString()))
+        .query({ skip: 10, 'sort[testValue]': -1 })
+        .send({ document: `{_id:ObjectId("${_id}"),testValue:"after"}` })
+        .expect(302);
+
+      const location = decodeURIComponent(res.headers.location);
+      expect(location).to.contain('sort[testValue]=-1');
+      expect(location).to.contain('skip=10');
+      await testCollection(db).deleteOne({ _id });
+    });
+  });
 
   after(() => Promise.all([
     cleanAndCloseDb(db),
