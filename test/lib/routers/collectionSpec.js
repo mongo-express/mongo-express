@@ -39,6 +39,19 @@ describe('Router collection', () => {
         expect(htmlParser.parse(res.text).querySelectorAll('[id^="doc-"]').length).to.equal(1);
       }));
 
+    // Regression: `sort[testItem]=-1` only reaches _getSort() as a nested object when the
+    // 'extended' query parser is enabled. With Express 5's 'simple' default it arrives as the
+    // flat key 'sort[testItem]' and sorting is silently ignored.
+    it('sort[testItem]=-1 - documents are sorted descending', () => request
+      .get(`/db/${dbName}/${urlColName}`).expect(200).query('sort[testItem]=-1')
+      .then((res) => {
+        const root = htmlParser.parse(res.text);
+        expect(root.querySelector('[data-column="testItem"]').attributes['data-direction']).to.equal('-1');
+        const values = root.querySelectorAll('[id^="doc-"]')
+          .map((row) => row.querySelectorAll('.tableContent')[1].text.trim());
+        expect(values).to.deep.equal(['4', '3', '2', '1']);
+      }));
+
     describe('runAggregate=on', () => {
       it('query= - _getQuery.result={}', () => request
         .get(`/db/${dbName}/${urlColName}`).expect(200).query({ runAggregate: 'on', query: '' })
