@@ -43,10 +43,22 @@ const loadConfig = async () => {
 };
 
 async function bootstrap(config) {
-  // Inject this right at the start of the bootstrap function:
   if (!config.mongodb.connectionString) {
-    console.log('\n[!] Missing MongoDB credentials.');
-    config.mongodb.connectionString = await promptForConnectionString();
+    // Only prompt when someone is there to answer. Under Docker, systemd or CI stdin is not
+    // a TTY, and blocking on it would hang the process instead of reporting the problem.
+    if (!process.stdin.isTTY) {
+      console.error(pico.red('No MongoDB connection string configured.'));
+      console.error('Set ME_CONFIG_MONGODB_URL, pass --url <uri>, or define mongodb.connectionString in config.js.');
+      return process.exit(1);
+    }
+
+    console.log(pico.yellow('\nNo MongoDB connection string configured.'));
+    try {
+      config.mongodb.connectionString = await promptForConnectionString();
+    } catch (error) {
+      console.error(pico.red(`\n${error.message}`));
+      return process.exit(1);
+    }
   }
 
   const resolvedMiddleware = await middleware(config);
