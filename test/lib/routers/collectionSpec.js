@@ -1,10 +1,20 @@
+import { BSON, Binary, ObjectId } from 'mongodb';
 import { expect } from 'chai';
 import htmlParser from 'node-html-parser';
 
 import { createServer } from '../../testHttpUtils.js';
 import {
-  cleanAndCloseDb, initializeDb, testCollectionName as collectionName, testDbName as dbName, testURLCollectionName as urlColName,
+  cleanAndCloseDb, initializeDb, testCollection, testCollectionName as collectionName, testDbName as dbName, testURLCollectionName as urlColName,
 } from '../../testMongoUtils.js';
+
+const { UUID } = BSON;
+
+const toBinaryUUID = (uuid) => new Binary(Buffer.from(uuid.replaceAll('-', ''), 'hex'), Binary.SUBTYPE_UUID);
+
+// Run a simple search with the default String type and report how many rows came back.
+const countStringSearch = (request, dbName, urlColName, key, value) => request
+  .get(`/db/${dbName}/${urlColName}`).query({ key, value, type: 'S' }).expect(200)
+  .then((res) => htmlParser.parse(res.text).querySelectorAll('[id^="doc-"]').length);
 
 describe('Router collection', () => {
   /** @type {import('supertest').SuperAgentTest} */
@@ -51,6 +61,51 @@ describe('Router collection', () => {
           .map((row) => row.querySelectorAll('.tableContent')[1].text.trim());
         expect(values).to.deep.equal(['4', '3', '2', '1']);
       }));
+
+    // The default search type is String. Pasting an _id, a UUID or a boolean used to return
+    // nothing unless the user also switched the type dropdown; the S converter now queries
+    // both the raw string and the typed BSON value with $in.
+    describe('type=S auto-detects typed values', () => {
+      const objectId = new ObjectId();
+      const uuid = new UUID().toString();
+      const inserted = [];
+
+      before(async () => {
+        const documents = [
+          { probe: 'objectid-typed', ref: objectId },
+          { probe: 'objectid-string', ref: objectId.toString() },
+          { probe: 'uuid-typed', uid: toBinaryUUID(uuid) },
+          { probe: 'uuid-string', uid: uuid },
+          { probe: 'bool-typed', flag: true },
+          { probe: 'bool-string', flag: 'true' },
+        ];
+        const { insertedIds } = await testCollection(client).insertMany(documents);
+        inserted.push(...Object.values(insertedIds));
+      });
+
+      after(() => testCollection(client).deleteMany({ _id: { $in: inserted } }));
+
+      it('finds both the ObjectId and the string form of an _id', async () => {
+        expect(await countStringSearch(request, dbName, urlColName, 'ref', objectId.toString())).to.equal(2);
+      });
+
+      it('finds both the Binary and the string form of a UUID', async () => {
+        expect(await countStringSearch(request, dbName, urlColName, 'uid', uuid)).to.equal(2);
+      });
+
+      it('finds both the boolean and the string form of true', async () => {
+        expect(await countStringSearch(request, dbName, urlColName, 'flag', 'true')).to.equal(2);
+      });
+
+      it('leaves an ordinary string search untouched', async () => {
+        expect(await countStringSearch(request, dbName, urlColName, 'probe', 'bool-string')).to.equal(1);
+      });
+
+      // Regression: the 'extended' query parser can deliver value as an object, and calling
+      // .toLowerCase() on it threw instead of falling back to a plain search.
+      it('does not throw when value is not a string', () => request
+        .get(`/db/${dbName}/${urlColName}`).query('key=probe&value[a]=b&type=S').expect(200));
+    });
 
     describe('runAggregate=on', () => {
       it('query= - _getQuery.result={}', () => request
