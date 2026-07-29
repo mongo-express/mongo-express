@@ -36,7 +36,7 @@
     "@lezer/highlight": "^1.2.3",
     "@popperjs/core": "^2.11.8",
     "basic-auth-connect": "^1.1.0",
-    "body-parser": "^2.2.2",
+    "body-parser": "^2.3.0",
     "bootstrap": "^5.3.8",
     "bootstrap-paginator-2": "^2.0.0",
     "bson": "^6.10.4",
@@ -59,13 +59,14 @@
     "method-override": "^3.0.0",
     "mongodb": "^6.19.0",
     "mongodb-query-parser": "^4.7.8",
-    "morgan": "^1.10.1",
+    "morgan": "^1.11.0",
     "picocolors": "^1.1.1",
+    "qs": "^6.15.3",
     "renderjson-2": "^2.0.1",
     "serve-favicon": "^2.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^7.29.6",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/preset-env": "^7.29.2",
     "@cypress/code-coverage": "^4.0.3",
@@ -73,7 +74,7 @@
     "babel-loader": "^10.1.1",
     "chai": "^5.2.1",
     "clean-webpack-plugin": "^4.0.0",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.4",
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.4",
     "cypress": "^15.14.0",
@@ -100,6 +101,12 @@
     "express-openid-connect": {
       "optional": true
     }
+  },
+  "resolutions": {
+    "csurf/cookie": "^0.7.2",
+    "@cypress/request/qs": "^6.15.2",
+    "serialize-javascript": "^7.0.5",
+    "uuid": "^11.1.1"
   },
   "engines": {
     "node": ">=18.18"
