@@ -1,6 +1,9 @@
 recursive: true
 reporter: dot
 exit: true
+# Root hooks that stop the ephemeral MongoDB servers, so `exit: true` does not kill the
+# process before their data directories are removed.
+require: ./test/rootHooks.js
 # The router specs spin up a mongodb-memory-server in their before hook, which can take
 # well over mocha's 2s default on a cold or loaded CI runner (it may still be fetching the
 # binary). A too-tight timeout made the whole suite fail on unrelated changes.
