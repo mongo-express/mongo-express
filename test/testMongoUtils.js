@@ -45,7 +45,12 @@ export const createConnectionWithWrongAuth = async () => {
 };
 
 export const createTestCollection = async (client) => {
-  const insertResults = await client.db().collection(testCollectionName).insertMany(testData);
+  // insertMany assigns _id onto the objects it is given. Passing `testData` directly meant
+  // the module-level fixture kept the ids from the first spec file, so as soon as one spec
+  // failed to drop the collection every later spec died with E11000 instead of just the
+  // culprit. Insert a fresh copy each time.
+  const documents = testData.map((document) => ({ ...document }));
+  const insertResults = await client.db().collection(testCollectionName).insertMany(documents);
   const ids = Object.values(insertResults.insertedIds);
   const results = await client.db().collection(testCollectionName).find({ _id: { $in: ids } }).toArray();
   currentTestData = results;
