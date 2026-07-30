@@ -2,6 +2,8 @@
 
 import fs from 'node:fs';
 import https from 'node:https';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import pico from 'picocolors';
 import { program } from 'commander';
 import csrf from 'csurf';
@@ -9,8 +11,12 @@ import express from 'express';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
+import { promptForConnectionString } from './lib/prompt.js';
 
-const pkg = JSON.parse(fs.readFileSync('./package.json'));
+// TODO replace with import.meta.dirname if minimum Node.js version is >= 20.11.0
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, './package.json')));
 
 const app = express();
 
@@ -19,8 +25,7 @@ let server = app;
 let sslOptions;
 
 const loadConfig = async () => {
-  const configExist = fs.existsSync('./config.js');
-  if (configExist === true) {
+  if (fs.existsSync('./config.js')) {
     try {
       // eslint-disable-next-line import/no-unresolved
       const { default: configCustom } = await import('./config.js');
@@ -38,6 +43,24 @@ const loadConfig = async () => {
 };
 
 async function bootstrap(config) {
+  if (!config.mongodb.connectionString) {
+    // Only prompt when someone is there to answer. Under Docker, systemd or CI stdin is not
+    // a TTY, and blocking on it would hang the process instead of reporting the problem.
+    if (!process.stdin.isTTY) {
+      console.error(pico.red('No MongoDB connection string configured.'));
+      console.error('Set ME_CONFIG_MONGODB_URL, pass --url <uri>, or define mongodb.connectionString in config.js.');
+      return process.exit(1);
+    }
+
+    console.log(pico.yellow('\nNo MongoDB connection string configured.'));
+    try {
+      config.mongodb.connectionString = await promptForConnectionString();
+    } catch (error) {
+      console.error(pico.red(`\n${error.message}`));
+      return process.exit(1);
+    }
+  }
+
   const resolvedMiddleware = await middleware(config);
   app.use(config.site.baseUrl, resolvedMiddleware);
   app.use(config.site.baseUrl, process.env.NODE_ENV === 'test' ? csrf({ ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'] })
@@ -63,10 +86,12 @@ async function bootstrap(config) {
         console.error(pico.red('Server is open to allow connections from anyone (0.0.0.0)'));
       }
 
-      if (config.useBasicAuth !== true) {
-        console.warn(pico.red('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
-      } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-        console.error(pico.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+      if (config.useOidcAuth !== true) {
+        if (config.useBasicAuth !== true) {
+          console.warn(pico.yellow('Basic and OIDC authentications are disabled, it\'s recommended to set the useBasicAuth to true in the config.js.'));
+        } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+          console.warn(pico.yellow('basicAuth credentials are "admin:pass", it\'s recommended to set them in your config.js!'));
+        }
       }
     }
   })

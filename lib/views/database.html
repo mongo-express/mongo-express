@@ -3,9 +3,12 @@
 {% block title %}{{ dbName }}{% endblock %}
 
 {% block breadcrumb %}
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
-    Database: {{ dbName }}
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ dbName }}
   </a>
   <ul id="navbarDatabaseDropdown" class="dropdown-menu">
     {% for db in databases %}

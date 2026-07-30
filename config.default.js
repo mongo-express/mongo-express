@@ -1,7 +1,9 @@
+import 'dotenv/config.js';
 import fs from 'node:fs';
-import * as dotenv from 'dotenv';
 
-dotenv.config();
+function getBoolean(str, defaultValue = false) {
+  return str ? str.toLowerCase() === 'true' : defaultValue;
+}
 
 function getFile(filePath) {
   if (filePath !== undefined && filePath) {
@@ -46,13 +48,18 @@ if (process.env.VCAP_SERVICES) {
   }
 }
 
+// ME_CONFIG_BASICAUTH deprecated, to be removed in next releases
 const basicAuth = 'ME_CONFIG_BASICAUTH';
+const basicAuthEnabled = 'ME_CONFIG_BASICAUTH_ENABLED';
 const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
 const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
 
-function getBoolean(str, defaultValue = false) {
-  return str ? str.toLowerCase() === 'true' : defaultValue;
-}
+const oidcAuthEnabled = 'ME_CONFIG_OIDCAUTH_ENABLED';
+const oidcAuthBaseUrl = 'ME_CONFIG_OIDCAUTH_BASEURL';
+const oidcAuthIssuer = 'ME_CONFIG_OIDCAUTH_ISSUER';
+const oidcAuthClientId = 'ME_CONFIG_OIDCAUTH_CLIENTID';
+const oidcAuthClientSecret = 'ME_CONFIG_OIDCAUTH_CLIENTSECRET';
+const oidcAuthSecret = 'ME_CONFIG_OIDCAUTH_SECRET';
 
 export default {
   mongodb: {
@@ -74,10 +81,7 @@ export default {
       // tlsCAFile: single PEM file on disk
       tlsCAFile: process.env.ME_CONFIG_MONGODB_TLS_CA_FILE,
 
-      // tlsCertificateFile: client certificate PEM file on disk
-      tlsCertificateFile: process.env.ME_CONFIG_MONGODB_TLS_CERT_FILE,
-
-      // tlsCertificateKeyFile: client key PEM file on disk
+      // tlsCertificateKeyFile: client cert+key PEM file on disk
       tlsCertificateKeyFile: process.env.ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE,
 
       // tlsCertificateKeyFilePassword: password for the client key PEM
@@ -91,6 +95,9 @@ export default {
     // if admin is true, the auth list below will be ignored
     // if admin is true, you will need to enter an admin username/password below (if it is needed)
     admin: getBoolean(process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN, false),
+
+    // This flag enhance AWS DocumentDB compatibility
+    awsDocumentDb: getBoolean(process.env.ME_CONFIG_MONGODB_AWS_DOCUMENTDB, false),
 
     // whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
@@ -119,13 +126,26 @@ export default {
   },
 
   // set useBasicAuth to true if you want to authenticate mongo-express logins
-  // if admin is false, the basicAuthInfo list below will be ignored
-  // this will be false unless ME_CONFIG_BASICAUTH is set to the true
-  useBasicAuth: getBoolean(getFileEnv(basicAuth)),
+  // this will be false unless ME_CONFIG_BASICAUTH_ENABLED is set to the true
+  useBasicAuth: getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)),
 
   basicAuth: {
     username: getFileEnv(basicAuthUsername) || 'admin',
     password: getFileEnv(basicAuthPassword) || 'pass',
+  },
+
+  useOidcAuth: getBoolean(getFileEnv(oidcAuthEnabled)),
+  oidcAuth: {
+    issuerBaseURL: getFileEnv(oidcAuthIssuer),
+    baseURL: getFileEnv(oidcAuthBaseUrl) || process.env.ME_CONFIG_SITE_BASEURL || '/',
+    clientAuthMethod: 'client_secret_basic',
+    clientSecret: getFileEnv(oidcAuthClientSecret),
+    clientID: getFileEnv(oidcAuthClientId),
+    secret: getFileEnv(oidcAuthSecret),
+    idpLogout: true,
+    authorizationParams: {
+      response_type: 'code',
+    },
   },
 
   options: {
@@ -158,7 +178,7 @@ export default {
     persistEditMode: getBoolean(process.env.ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE, false),
 
     // collapsibleJSON: if set to true, jsons will be displayed collapsible
-    collapsibleJSON: true,
+    collapsibleJSON: getBoolean(process.env.ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON, true),
 
     // collapsibleJSONDefaultUnfold: if collapsibleJSON is set to `true`, this defines default level
     //  to which JSONs are displayed unfolded; use number or "all" to unfold all levels
@@ -173,10 +193,10 @@ export default {
 
     // confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is
     // displayed before deleting a document/collection
-    confirmDelete: false,
+    confirmDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_CONFIRM_DELETE, false),
 
     // noExport: if noExport is set to true, we won't show export buttons
-    noExport: false,
+    noExport: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_EXPORT, false),
 
     // fullwidthLayout: if set to true an alternative page layout is used utilizing full window width
     fullwidthLayout: getBoolean(process.env.ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT, false),

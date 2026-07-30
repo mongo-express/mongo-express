@@ -29,7 +29,7 @@ rules:
   no-continue: off
 
   no-multi-spaces: off
-  max-len: [error, 150, 2]
+  max-len: [error, 155, 2]
   prefer-template: off
   no-underscore-dangle: off
 

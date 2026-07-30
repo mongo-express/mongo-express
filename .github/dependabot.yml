@@ -1,12 +1,12 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/"
+  directory: '/'
   schedule:
     interval: weekly
   versioning-strategy: increase # Update package.json too
   groups:
     patterns:
-     update-types: 
-        - "patch"
-        - "minor"
+      update-types:
+        - patch
+        - minor

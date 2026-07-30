@@ -3,21 +3,27 @@
 {% block title %}{{ collectionName }}{% endblock %}
 
 {% block breadcrumb %}
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
-    Database: {{ dbName }}
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ dbName }}
   </a>
-  <ul id="navbarDatabaseDropdown" class="dropdown-menu">
+  <ul id="navbarDatabaseDropdown" class="dropdown-menu scrollable-ul">
     {% for db in databases %}
     <li><a class="dropdown-item" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></li>
     {% endfor %}
   </ul>
 </li>
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ collectionUrl }}">Collection:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarCollectionDropdown" data-bs-target="#navbarCollectionDropdown" data-bs-toggle="collapse" aria-expanded="false">
-    Collection: {{ collectionName }}
+  <a class="nav-link dropdown-toggle px-1" href="#" role="button" aria-controls="navbarCollectionDropdown" data-bs-target="#navbarCollectionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ collectionName }}
   </a>
-  <ul id="navbarCollectionDropdown" class="dropdown-menu">
+  <ul id="navbarCollectionDropdown" class="dropdown-menu scrollable-ul">
     {% for collection in collections %}
     <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
     {% endfor %}
@@ -127,7 +133,6 @@
 {% endif %}
 <br />
 
-{% if !settings.read_only %}
 <!-- Add Document Modal -->
 <div class="modal fade" id="addDocument" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
@@ -185,7 +190,6 @@
   </div>
 </div>
 <!-- End Add Index Modal -->
-{% endif %}
 
 {% if documents.length == 0 %}
 <p class="card">
@@ -210,9 +214,11 @@
       <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}" title="Sort by {{column}}">
         {{column}}
         {% if sort[column] == 1 %}
-        <i class="fas fa-sort-up"></i>
+        <i class="fas fa-sort-up sort-icon active"></i>
         {% elseif sort[column] == -1 %}
-        <i class="fas fa-sort-down"></i>
+        <i class="fas fa-sort-down sort-icon active"></i>
+        {% else %}
+        <i class="fas fa-sort sort-icon"></i>
         {% endif %}
       </th>
       {% endfor %}
@@ -220,13 +226,13 @@
     {% for index, document in docs %}
     {% if document._id._bsontype == 'Binary' %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}', event)">
       {% elseif document._id._bsontype == 'Long' %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}', event)">
       {% else %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}', event)">
       {% endif %}
       {% for column in columns %}
       <td>
@@ -234,11 +240,11 @@
           {% if !settings.read_only && !settings.no_delete && column === '_id' && collectionName !== 'system.indexes'
           %}
           <button class="btn btn-info"
-            onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}')">
+            onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}', event)">
             <i class="fa fa-link"></i>
           </button>
           <form class="deleteButtonDocument" method="POST" style="display:inline;"
-            action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection= {{ projection }}">
+            action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">
             <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <button type="submit" class="btn btn-danger">
@@ -300,21 +306,21 @@
     <div class="row">
       {% if !settings.me_no_export %}
       <div class="col-sm-4 p-2 d-grid ">
-        <a href="{{ dbUrl }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
+        <a href="{{ dbUrl }}/export/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection={{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
           class="btn btn-warning btn-block text-white">
           <i class="fa fa-download d-block"></i>Export Standard
         </a>
       </div>
 
       <div class="col-sm-4 p-2 d-grid ">
-        <a href="{{ dbUrl }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
+        <a href="{{ dbUrl }}/expArr/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection={{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
           class="btn btn-warning btn-block text-white">
           <i class="fa fa-download d-block"></i>Export --jsonArray
         </a>
       </div>
 
       <div class="col-sm-4 p-2 d-grid ">
-        <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
+        <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection={{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
           class="btn btn-warning btn-block text-white">
           <i class="fa fa-download d-block"></i>Export --csv
         </a>
