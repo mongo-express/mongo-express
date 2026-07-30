@@ -76,3 +76,17 @@ export const initializeDb = () => createConnection()
 export const initializeDbWithWrongAuth = () => createConnectionWithWrongAuth();
 export const cleanAndCloseDb = (client) => dropTestCollection(client)
   .then(() => closeDb(client));
+
+/**
+ * Shut the ephemeral MongoDB servers down and delete their data directories.
+ *
+ * Without this, `exit: true` tears the process down before mongodb-memory-server can clean
+ * up, leaving a ~200 MB dbpath under the temp dir on every run. On a developer machine
+ * those pile up until the disk (a 15 GB tmpfs here) is full and mongod starts failing to
+ * boot with an opaque `fassert() failure`.
+ */
+export const stopMemoryServers = async () => {
+  await Promise.all([mongod?.stop(), mongoauthd?.stop()]);
+  mongod = undefined;
+  mongoauthd = undefined;
+};
