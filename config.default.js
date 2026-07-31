@@ -1,7 +1,5 @@
+import 'dotenv/config.js';
 import fs from 'node:fs';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
@@ -26,7 +24,7 @@ function getFileEnv(envVariable) {
   if (fileVar) {
     const file = getFile(fileVar);
     if (file) {
-      return file.toString().split(/\r?\n/)[0].trim();
+      return file.toString().split(/\r?\n/, 1)[0].trim();
     }
   }
   return origVar;
@@ -88,6 +86,9 @@ export default {
 
       // tlsCertificateKeyFilePassword: password for the client key PEM
       tlsCertificateKeyFilePassword: process.env.ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD,
+
+      // tlsCRLFile: certificate revocation list, so revoked server certs are rejected
+      tlsCRLFile: process.env.ME_CONFIG_MONGODB_TLS_CRL_FILE,
 
       // maxPoolSize: size of connection pool (number of connections to use)
       maxPoolSize: 4,
