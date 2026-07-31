@@ -4803,13 +4803,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flushwritable@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "flushwritable@npm:1.0.0"
-  checksum: 10/3e94480c1f47d531807c0f1e6cb171f58c1dd213b0365e1d11bf475a9d3a4dc7cdf77d7a9c03f4c41855fd7b494428b7a03df0f1ddb0d30e134ca817df2516c3
-  languageName: node
-  linkType: hard
-
 "follow-redirects@npm:^1.16.0":
   version: 1.16.0
   resolution: "follow-redirects@npm:1.16.0"
@@ -5232,15 +5225,6 @@ __metadata:
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: 10/bf152d0ed1dc159239db1ba1f74fdbc40cb02f626770dcd5815c427ce0688c2635a06ed69af364396da4636d0408fcf7d4afdf7881724c3307e46aff30ca49e2
-  languageName: node
-  linkType: hard
-
-"gridfs-stream@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "gridfs-stream@npm:1.1.1"
-  dependencies:
-    flushwritable: "npm:^1.0.0"
-  checksum: 10/4f9e37db8c8fdcadea3b1c3dfc8df329d064123fb1b195a1a2280deb902bb17ad11799ec5d68bb6449a5ea592a10e95af29e559910cddb6800d36bd6f67fa4b4
   languageName: node
   linkType: hard
 
@@ -6865,7 +6849,6 @@ __metadata:
     flat: "npm:^6.0.1"
     free-swig: "npm:^1.5.5"
     globals: "npm:^17.8.0"
-    gridfs-stream: "npm:^1.1.1"
     html-entities: "npm:^2.6.0"
     husky: "npm:^9.1.7"
     jquery: "npm:^4.0.0"
