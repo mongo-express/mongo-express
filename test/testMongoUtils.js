@@ -45,7 +45,12 @@ export const createConnectionWithWrongAuth = async () => {
 };
 
 export const createTestCollection = async (client) => {
-  const insertResults = await client.db().collection(testCollectionName).insertMany(testData);
+  // insertMany assigns _id onto the objects it is given. Passing `testData` directly meant
+  // the module-level fixture kept the ids from the first spec file, so as soon as one spec
+  // failed to drop the collection every later spec died with E11000 instead of just the
+  // culprit. Insert a fresh copy each time.
+  const documents = testData.map((document) => ({ ...document }));
+  const insertResults = await client.db().collection(testCollectionName).insertMany(documents);
   const ids = Object.values(insertResults.insertedIds);
   const results = await client.db().collection(testCollectionName).find({ _id: { $in: ids } }).toArray();
   currentTestData = results;
@@ -71,3 +76,17 @@ export const initializeDb = () => createConnection()
 export const initializeDbWithWrongAuth = () => createConnectionWithWrongAuth();
 export const cleanAndCloseDb = (client) => dropTestCollection(client)
   .then(() => closeDb(client));
+
+/**
+ * Shut the ephemeral MongoDB servers down and delete their data directories.
+ *
+ * Without this, `exit: true` tears the process down before mongodb-memory-server can clean
+ * up, leaving a ~200 MB dbpath under the temp dir on every run. On a developer machine
+ * those pile up until the disk (a 15 GB tmpfs here) is full and mongod starts failing to
+ * boot with an opaque `fassert() failure`.
+ */
+export const stopMemoryServers = async () => {
+  await Promise.all([mongod?.stop(), mongoauthd?.stop()]);
+  mongod = undefined;
+  mongoauthd = undefined;
+};
