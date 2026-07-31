@@ -1,7 +1,5 @@
+import 'dotenv/config.js';
 import fs from 'node:fs';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
@@ -26,7 +24,7 @@ function getFileEnv(envVariable) {
   if (fileVar) {
     const file = getFile(fileVar);
     if (file) {
-      return file.toString().split(/\r?\n/)[0].trim();
+      return file.toString().split(/\r?\n/, 1)[0].trim();
     }
   }
   return origVar;
@@ -89,6 +87,9 @@ export default {
       // tlsCertificateKeyFilePassword: password for the client key PEM
       tlsCertificateKeyFilePassword: process.env.ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD,
 
+      // tlsCRLFile: certificate revocation list, so revoked server certs are rejected
+      tlsCRLFile: process.env.ME_CONFIG_MONGODB_TLS_CRL_FILE,
+
       // maxPoolSize: size of connection pool (number of connections to use)
       maxPoolSize: 4,
     },
@@ -112,11 +113,11 @@ export default {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the start and end!
     baseUrl: process.env.ME_CONFIG_SITE_BASEURL || '/',
     cookieKeyName: 'mongo-express',
-    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
+    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET,
     host: process.env.VCAP_APP_HOST || 'localhost',
     port: process.env.PORT || 8081,
     requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '50mb',
-    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
+    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET,
     sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
     sslEnabled: getBoolean(process.env.ME_CONFIG_SITE_SSL_ENABLED, false),
     sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
@@ -127,25 +128,8 @@ export default {
     path: process.env.ME_CONFIG_HEALTH_CHECK_PATH || '/status',
   },
 
-  // Authentication Strategy Configuration
-  // Determines which authentication method to use
-  //
-  // Options:
-  //   - 'basic': HTTP Basic Auth (browser popup, legacy default)
-  //   - 'form': Form-based login (password manager compatible) - Solves Issue #1733
-  //   - 'oidc': OpenID Connect (enterprise SSO, with safe-load for Issue #1766)
-  //   - 'none': No authentication (development only, NOT recommended for production)
-  //
-  // Default: 'basic' (for backward compatibility with existing deployments)
-  //
-  // Recommended: Use 'form' for better UX and password manager support
-  // Environment Variable: ME_CONFIG_AUTH_STRATEGY
-  authStrategy: process.env.ME_CONFIG_AUTH_STRATEGY || (getBoolean(getFileEnv(oidcAuthEnabled)) ? 'oidc'
-    : (getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)) ? 'basic' : 'basic')),
-
   // set useBasicAuth to true if you want to authenticate mongo-express logins
   // this will be false unless ME_CONFIG_BASICAUTH_ENABLED is set to the true
-  // DEPRECATED: Use authStrategy: 'basic' instead
   useBasicAuth: getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)),
 
   basicAuth: {
@@ -153,7 +137,6 @@ export default {
     password: getFileEnv(basicAuthPassword) || 'pass',
   },
 
-  // DEPRECATED: Use authStrategy: 'oidc' instead
   useOidcAuth: getBoolean(getFileEnv(oidcAuthEnabled)),
   oidcAuth: {
     issuerBaseURL: getFileEnv(oidcAuthIssuer),
@@ -162,7 +145,6 @@ export default {
     clientSecret: getFileEnv(oidcAuthClientSecret),
     clientID: getFileEnv(oidcAuthClientId),
     secret: getFileEnv(oidcAuthSecret),
-    scope: ['openid', 'profile', 'email'],
     idpLogout: true,
     authorizationParams: {
       response_type: 'code',
@@ -224,5 +206,7 @@ export default {
 
     // noDelete: if noDelete is set to true, we won't show delete buttons
     noDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_DELETE, false),
+
+    noRawCommand: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_RAW_COMMAND, false),
   },
 };

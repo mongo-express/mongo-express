@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-express-config
+data:
+  ME_CONFIG_BASICAUTH_ENABLED: "true"
+  ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"

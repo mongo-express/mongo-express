@@ -1,6 +1,0 @@
-node_modules/**
-build/**
-lib/views/**
-instrumented/**
-coverage/**
-cypress/**

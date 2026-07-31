@@ -3,7 +3,6 @@
 import fs from 'node:fs';
 import https from 'node:https';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import pico from 'picocolors';
 import { program } from 'commander';
 import csrf from 'csurf';
@@ -11,11 +10,11 @@ import express from 'express';
 import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
+import { promptForConnectionString } from './lib/prompt.js';
 
-// TODO replace with import.meta.dirname if minimum Node.js version is >= 20.11.0
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
 
-const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, './package.json')));
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, './package.json'), 'utf8'));
 
 const app = express();
 
@@ -26,7 +25,7 @@ let sslOptions;
 const loadConfig = async () => {
   if (fs.existsSync('./config.js')) {
     try {
-      // eslint-disable-next-line import/no-unresolved
+
       const { default: configCustom } = await import('./config.js');
       return deepmerge(configDefault, configCustom);
     } catch (error) {
@@ -42,10 +41,29 @@ const loadConfig = async () => {
 };
 
 async function bootstrap(config) {
+  if (!config.mongodb.connectionString) {
+    // Only prompt when someone is there to answer. Under Docker, systemd or CI stdin is not
+    // a TTY, and blocking on it would hang the process instead of reporting the problem.
+    if (!process.stdin.isTTY) {
+      console.error(pico.red('No MongoDB connection string configured.'));
+      console.error('Set ME_CONFIG_MONGODB_URL, pass --url <uri>, or define mongodb.connectionString in config.js.');
+      return process.exit(1);
+    }
+
+    console.log(pico.yellow('\nNo MongoDB connection string configured.'));
+    try {
+      config.mongodb.connectionString = await promptForConnectionString();
+    } catch (error) {
+      console.error(pico.red(`\n${error.message}`));
+      return process.exit(1);
+    }
+  }
+
   const resolvedMiddleware = await middleware(config);
   app.use(config.site.baseUrl, resolvedMiddleware);
-  app.use(config.site.baseUrl, process.env.NODE_ENV === 'test' ? csrf({ ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'] })
-    : csrf({ cookie: true }));
+  app.use(config.site.baseUrl, csrf(process.env.NODE_ENV === 'test'
+    ? { ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'] }
+    : { cookie: true }));
 
   if (config.site.sslEnabled) {
     defaultPort = 443;
@@ -60,48 +78,21 @@ async function bootstrap(config) {
     + (config.site.host || '0.0.0.0') + ':' + (config.site.port || defaultPort);
 
   server.listen(config.site.port, config.site.host, function () {
-    if (config.options.console) {
-      console.log('Mongo Express server listening', 'at ' + addressString);
+    if (!config.options.console) {
+      return;
+    }
 
-      if (!config.site.host || config.site.host === '0.0.0.0') {
-        console.error(pico.red('Server is open to allow connections from anyone (0.0.0.0)'));
-      }
+    console.log('Mongo Express server listening', 'at ' + addressString);
 
-      // Determine auth strategy (with backward compatibility)
-      const authStrategy = config.authStrategy || (config.useOidcAuth ? 'oidc' : (config.useBasicAuth ? 'basic' : 'none'));
+    if (!config.site.host || config.site.host === '0.0.0.0') {
+      console.error(pico.red('Server is open to allow connections from anyone (0.0.0.0)'));
+    }
 
-      switch (authStrategy) {
-        case 'none': {
-          console.warn(pico.yellow('Authentication is disabled! It is strongly recommended to enable authentication in production.'));
-          console.warn(pico.yellow('Set authStrategy to "basic" or "oidc" in config.js, or set ME_CONFIG_AUTH_STRATEGY environment variable.'));
-
-          break;
-        }
-        case 'basic': {
-          if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-            console.warn(pico.yellow('Using default Basic Auth credentials (admin:pass). Please change these in config.js!'));
-            console.warn(pico.yellow('Set ME_CONFIG_BASICAUTH_USERNAME and ME_CONFIG_BASICAUTH_PASSWORD environment variables.'));
-          }
-
-          break;
-        }
-        case 'form':
-        case 'local': {
-          if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-            console.warn(pico.yellow('Using default credentials (admin:pass). Please change these in config.js!'));
-          }
-
-          break;
-        }
-        case 'oidc': {
-          console.log('Using OIDC authentication');
-
-          break;
-        }
-        default: {
-          // Unknown strategy will be handled by auth module
-          break;
-        }
+    if (config.useOidcAuth !== true) {
+      if (config.useBasicAuth !== true) {
+        console.warn(pico.yellow('Basic and OIDC authentications are disabled, it\'s recommended to set the useBasicAuth to true in the config.js.'));
+      } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+        console.warn(pico.yellow('basicAuth credentials are "admin:pass", it\'s recommended to set them in your config.js!'));
       }
     }
   })
