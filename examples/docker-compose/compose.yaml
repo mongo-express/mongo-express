@@ -1,0 +1,55 @@
+# mongo-express behind nginx, building the image from this repository.
+#
+#   docker compose -f examples/docker-compose/compose.yaml up --build
+#
+# Then open http://localhost:8080. Run it from the repository root: the build context
+# below is relative to this file and points back at it.
+
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', 'db.adminCommand("ping")']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongo-express:
+    build:
+      context: ../..
+    restart: unless-stopped
+    environment:
+      # authSource=admin is required for the root user the official image creates.
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/?authSource=admin
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+      # Signs the session cookie. Replace this before using the stack for anything real.
+      ME_CONFIG_SITE_SESSIONSECRET: change-me
+      # Gates the web interface only; MongoDB credentials come from the URL above.
+      ME_CONFIG_BASICAUTH_ENABLED: 'true'
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: change-me-too
+    depends_on:
+      mongo:
+        condition: service_healthy
+    # Not published: nginx is the only way in.
+    expose:
+      - '8081'
+
+  nginx:
+    image: nginx:1-alpine
+    restart: unless-stopped
+    ports:
+      - '8080:80'
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - mongo-express
+
+volumes:
+  mongo-data:
