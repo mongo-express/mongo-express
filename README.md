@@ -167,6 +167,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_MONGODB_TLS_CA_FILE`                | ``                                                  | CA certificate File (.pem)
 | `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE`          | ``                                                  | TLS client certificate+key file (.pem)
 | `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD` | ``                                                  | TLS client certificate key file password (.pem)
+| `ME_CONFIG_MONGODB_TLS_CRL_FILE`               | ``                                                  | TLS certificate revocation list file (.pem)
 | `ME_CONFIG_MONGODB_URL_FILE`                   | ``                                                  | File version of ME_CONFIG_MONGODB_URL
 | `ME_CONFIG_MONGODB_AWS_DOCUMENTDB`             | `false`                                             | This allow AWS DocumentDB compatibility (experimental)
 | `ME_CONFIG_SITE_BASEURL`                       | `/`                                                 | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.

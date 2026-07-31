@@ -87,6 +87,9 @@ export default {
       // tlsCertificateKeyFilePassword: password for the client key PEM
       tlsCertificateKeyFilePassword: process.env.ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD,
 
+      // tlsCRLFile: certificate revocation list, so revoked server certs are rejected
+      tlsCRLFile: process.env.ME_CONFIG_MONGODB_TLS_CRL_FILE,
+
       // maxPoolSize: size of connection pool (number of connections to use)
       maxPoolSize: 4,
     },
