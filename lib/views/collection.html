@@ -52,6 +52,11 @@
   <li class="nav-item">
     <a href="#advanced" class="nav-link" data-bs-toggle="tab"><i class="fa fa-tag"></i> Advanced</a>
   </li>
+  {% if !settings.read_only && !settings.no_raw_command %}
+  <li class="nav-item">
+    <a href="#raw" class="nav-link" data-bs-toggle="tab"><i class="fa fa-play"></i> Raw</a>
+  </li>
+  {% endif %}
 </ul>
 <div id="my-tab-content" class="tab-content p-3">
   <div class="tab-pane active" id="simple">
@@ -117,6 +122,24 @@
       </div>
     </form>
   </div>
+  {% if !settings.read_only && !settings.no_raw_command %}
+  <div class="tab-pane" id="raw">
+    <form method="get" action="{{ collectionUrl }}">
+      <div class="row">
+        <div class="col-sm-9 col-md-10 py-1">
+          <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="command" name="command"
+            placeholder="updateOne({name: &quot;a&quot;}, {$set: {name: &quot;b&quot;}})" title="Command">{{ command }}</textarea>
+        </div>
+        <div class="col-sm-3 col-md-2 d-grid py-1">
+          <button type="submit" class="btn btn-primary btn-block">
+            <i class="fa fa-play"></i>
+            Run
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  {% endif %}
 </div>
 {% if !settings.read_only && !settings.no_delete && count > 0 %}
 <form id="deleteListForm" method="POST" class="my-3"
