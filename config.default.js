@@ -24,7 +24,7 @@ function getFileEnv(envVariable) {
   if (fileVar) {
     const file = getFile(fileVar);
     if (file) {
-      return file.toString().split(/\r?\n/)[0].trim();
+      return file.toString().split(/\r?\n/, 1)[0].trim();
     }
   }
   return origVar;

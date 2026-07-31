@@ -143,7 +143,7 @@ describe('BSON', function () {
         ref2: new DBRef('coll', new ObjectId('57b80f922128ccef64333288'), 'db'),
       };
       const result = libBson.toString(test);
-      // eslint-disable-next-line max-len
+
       const expected = '{\n    ref: DBRef(\'coll\', \'57b80f922128ccef64333288\'),\n    ref2: DBRef(\'coll\', \'57b80f922128ccef64333288\', \'db\')\n}';
       expect(result).to.eql(expected);
     });
@@ -192,7 +192,7 @@ describe('BSON', function () {
         nestedObject: { level1: { level2: 2 } },
       };
       const result = libBson.toJsonString(doc);
-      const expected = '{"dateObject":{"$date":"2017-02-11T00:00:00Z"},"objectId":{"$oid":"589f79826ea20d18e06b1c36"},"someValue":"someValue","nestedObject":{"level1":{"level2":2}}}'; // eslint-disable-line max-len
+      const expected = '{"dateObject":{"$date":"2017-02-11T00:00:00Z"},"objectId":{"$oid":"589f79826ea20d18e06b1c36"},"someValue":"someValue","nestedObject":{"level1":{"level2":2}}}';
       expect(result).to.equal(expected);
       const parsed = JSON.parse(result);
       expect(parsed.someValue).to.equal(doc.someValue);
