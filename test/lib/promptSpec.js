@@ -8,7 +8,7 @@ const collectingOutput = () => {
   const output = new PassThrough();
   output.setEncoding('utf8');
   const chunks = [];
-  output.on('data', (c) => chunks.push(c));
+  output.on('data', (c) => { chunks.push(c); });
   output.text = () => chunks.join('');
   return output;
 };

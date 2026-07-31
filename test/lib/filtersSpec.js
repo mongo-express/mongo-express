@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Binary, BSON, ObjectId } from 'mongodb';
-// eslint-disable-next-line camelcase
+
 import { stringDocIDs, to_display } from '../../lib/filters.js';
 
 const { UUID } = BSON;
