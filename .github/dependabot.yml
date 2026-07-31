@@ -1,8 +1,12 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/"
+  directory: '/'
   schedule:
-    interval: daily
+    interval: weekly
   versioning-strategy: increase # Update package.json too
-  open-pull-requests-limit: 10
+  groups:
+    patterns:
+      update-types:
+        - patch
+        - minor

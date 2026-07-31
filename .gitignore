@@ -100,3 +100,7 @@ mongod
 instrumented/
 cypress/videos
 cypress/screenshots
+
+# nyc test coverage
+# =========
+.nyc_output/

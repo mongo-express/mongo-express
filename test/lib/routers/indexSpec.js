@@ -19,7 +19,7 @@ describe('Router index', () => {
   it('GET / should return html', () => request.get('/').expect(200)
     .then((res) => {
       expect(res.text).to.match(/<title>Home - Mongo Express<\/title>/);
-      expect(res.text).to.match(/<h4 style="font-weight: bold;">Databases<\/h4>/);
+      expect(res.text).to.match(/<h4 class="d-inline-block">Databases<\/h4>/);
       const dbName = testDbName;
       expect(res.text).to.match(new RegExp(`<a href="/db/${dbName}/">${dbName}</a></h3>`));
     }));
