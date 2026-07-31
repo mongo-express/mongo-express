@@ -23,8 +23,12 @@ export const testURLCollectionName = encodeURIComponent(testCollectionName);
 export const createConnection = async () => {
   if (!mongod) {
     mongod = await MongoMemoryServer.create();
-    mongoConfig.setUri(mongod.getUri());
   }
+
+  // Point the shared URI back at the plain server on every call. createConnectionWithWrongAuth
+  // swaps it for the auth-enabled one and never restores it, so without this any spec that
+  // happens to run after loginSpec fails with "Command insert requires authentication".
+  mongoConfig.setUri(mongod.getUri());
 
   return MongoClient.connect(mongoConfig.makeConnectionUrl());
 };
