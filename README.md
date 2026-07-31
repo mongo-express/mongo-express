@@ -196,6 +196,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.
 | `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`          | `false`                                             | If set to true, remain on the same page after clicking on the Save button
 | `ME_CONFIG_OPTIONS_NO_DELETE`                  | `false`                                             | If noDelete is true, components of deleting are not visible.
+| `ME_CONFIG_OPTIONS_NO_RAW_COMMAND`             | `false`                                             | If noRawCommand is true, the Raw tab in the collection view is not visible.
 | `ME_CONFIG_OPTIONS_NO_EXPORT`                  | `false`                                             | If noExport is true, components of exporting are not visible.
 | `ME_CONFIG_OPTIONS_CONFIRM_DELETE`             | `false`                                             | If confirmDelete is set to 'true', a modal for confirming deletion is displayed
 | `ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON`           | `true`                                              | If set to true, jsons will be displayed collapsible
