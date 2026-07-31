@@ -128,6 +128,15 @@ export default {
     path: process.env.ME_CONFIG_HEALTH_CHECK_PATH || '/status',
   },
 
+  // authStrategy: how visitors authenticate to mongo-express itself.
+  //   'basic' - HTTP Basic Auth, the browser's own prompt
+  //   'form'  - a sign-in page, which password managers can store and fill
+  //   'oidc'  - OpenID Connect
+  // Left unset it follows useBasicAuth / useOidcAuth below. There is no 'off' value on
+  // purpose: authentication is disabled by not configuring it, so a typo here cannot
+  // silently expose an instance.
+  authStrategy: process.env.ME_CONFIG_AUTH_STRATEGY,
+
   // set useBasicAuth to true if you want to authenticate mongo-express logins
   // this will be false unless ME_CONFIG_BASICAUTH_ENABLED is set to the true
   useBasicAuth: getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)),

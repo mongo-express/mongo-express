@@ -176,6 +176,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_SITE_SESSIONSECRET`                 | ``                                                  | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
 | `ME_CONFIG_BASICAUTH`                          | `false`                                             | Deprecated, use `ME_CONFIG_BASICAUTH_ENABLED` instead.
 | `ME_CONFIG_BASICAUTH_ENABLED`                  | `false`                                             | Enable Basic Authentication. Send strings: `"true"` or `"false"`.
+| `ME_CONFIG_AUTH_STRATEGY`                      | ``                                                  | How visitors sign in: `basic` (browser prompt), `form` (sign-in page, works with password managers) or `oidc`. Unset, follows the flags below.
 | `ME_CONFIG_BASICAUTH_USERNAME`                 | `admin`                                             | mongo-express web login name.
 | `ME_CONFIG_BASICAUTH_USERNAME_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_USERNAME`
 | `ME_CONFIG_BASICAUTH_PASSWORD`                 | `pass`                                              | mongo-express web login password.

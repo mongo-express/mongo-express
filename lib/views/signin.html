@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Sign in</h3>
+
+          {# A real form, rather than the browser's basic-auth prompt, so password managers
+             can store and fill these credentials. That is the whole point of #1733. #}
+          <form method="POST" action="{{ loginUrl }}" autocomplete="on">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" id="username" name="username" class="form-control"
+                autocomplete="username" autofocus required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" name="password" class="form-control"
+                autocomplete="current-password" required>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
