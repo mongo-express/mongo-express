@@ -103,7 +103,7 @@ describe('Router document', () => {
       const testValue = '1';
       await request.post(`/db/${dbName}/${urlColName}`).send({ document: `{_id:${testValue},testValue:${testValue}}` }).expect(302);
       const result = await testCollection(db).findOne({ testValue: testId });
-      expect(Number.isInteger(result._id)).to.equal(true);
+      expect(Number.isSafeInteger(result._id)).to.equal(true);
       await testCollection(db).deleteOne({ _id: result._id });
     });
   });
