@@ -1,40 +1,18 @@
+import 'dotenv/config.js';
 import fs from 'node:fs';
 
-let mongo = {
-  // Setting the connection string will only give access to that database
-  // to see more databases you need to set mongodb.admin to true or add databases to the mongodb.auth list
-  // It is RECOMMENDED to use connectionString instead of individual params, other options will be removed later.
-  // More info here: https://docs.mongodb.com/manual/reference/connection-string/
-  connectionString: process.env.ME_CONFIG_MONGODB_SERVER ? '' : process.env.ME_CONFIG_MONGODB_URL,
-  host: '127.0.0.1',
-  port: '27017',
-  dbName: '',
-};
-
-// Accessing Bluemix variable to get MongoDB info
-if (process.env.VCAP_SERVICES) {
-  const dbLabel = 'mongodb-2.4';
-  const env = JSON.parse(process.env.VCAP_SERVICES);
-  if (env[dbLabel]) {
-    mongo = env[dbLabel][0].credentials;
-  }
+function getBoolean(str, defaultValue = false) {
+  return str ? str.toLowerCase() === 'true' : defaultValue;
 }
 
-const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
-const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
-const adminUsername = 'ME_CONFIG_MONGODB_ADMINUSERNAME';
-const adminPassword = 'ME_CONFIG_MONGODB_ADMINPASSWORD';
-const dbAuthUsername = 'ME_CONFIG_MONGODB_AUTH_USERNAME';
-const dbAuthPassword = 'ME_CONFIG_MONGODB_AUTH_PASSWORD';
-
 function getFile(filePath) {
-  if (typeof filePath !== 'undefined' && filePath) {
+  if (filePath !== undefined && filePath) {
     try {
       if (fs.existsSync(filePath)) {
         return fs.readFileSync(filePath);
       }
-    } catch (err) {
-      console.error('Failed to read file', filePath, err);
+    } catch (error) {
+      console.error('Failed to read file', filePath, error);
     }
   }
   return null;
@@ -46,55 +24,71 @@ function getFileEnv(envVariable) {
   if (fileVar) {
     const file = getFile(fileVar);
     if (file) {
-      return file.toString().split(/\r?\n/)[0].trim();
+      return file.toString().split(/\r?\n/, 1)[0].trim();
     }
   }
   return origVar;
 }
 
-const meConfigMongodbServer = process.env.ME_CONFIG_MONGODB_SERVER
-  ? process.env.ME_CONFIG_MONGODB_SERVER.split(',')
-  : false;
+let mongo = {
+  // Setting the connection string will only give access to that database
+  // to see more databases you need to set mongodb.admin to true
+  // As recommended, a connection String is used instead of the individual params.
+  // More info here: https://docs.mongodb.com/manual/reference/connection-string/
+  connectionString: getFileEnv('ME_CONFIG_MONGODB_URL'),
+  tls: false,
+};
 
-function getConnectionStringFromEnvVariables() {
-  const infos = {
-    // server: mongodb hostname or IP address
-    // for replica set, use array of string instead
-    server: (
-      meConfigMongodbServer.length > 1 ? meConfigMongodbServer : meConfigMongodbServer[0]
-    ) || mongo.host,
-    port: process.env.ME_CONFIG_MONGODB_PORT || mongo.port,
-    dbName: process.env.ME_CONFIG_MONGODB_AUTH_DATABASE || mongo.dbName,
-
-    // >>>> If you are using an admin mongodb account, or no admin account exists, fill out section below
-    // >>>> Using an admin account allows you to view and edit all databases, and view stats
-    // leave username and password empty if no admin account exists
-    username: getFileEnv(adminUsername) || getFileEnv(dbAuthUsername) || mongo.username,
-    password: getFileEnv(adminPassword) || getFileEnv(dbAuthPassword) || mongo.password,
-  };
-  const login = infos.username ? `${infos.username}:${infos.password}@` : '';
-  return `mongodb://${login}${infos.server}:${infos.port}/${infos.dbName}`;
+// Accessing Bluemix variable to get MongoDB info
+if (process.env.VCAP_SERVICES) {
+  const dbLabel = 'mongodb-2.4';
+  const env = JSON.parse(process.env.VCAP_SERVICES);
+  if (env[dbLabel]) {
+    mongo = env[dbLabel][0].credentials;
+  }
 }
 
-function getBoolean(str, defaultValue = false) {
-  return str ? str.toLowerCase() === 'true' : defaultValue;
-}
+// ME_CONFIG_BASICAUTH deprecated, to be removed in next releases
+const basicAuth = 'ME_CONFIG_BASICAUTH';
+const basicAuthEnabled = 'ME_CONFIG_BASICAUTH_ENABLED';
+const basicAuthUsername = 'ME_CONFIG_BASICAUTH_USERNAME';
+const basicAuthPassword = 'ME_CONFIG_BASICAUTH_PASSWORD';
+
+const oidcAuthEnabled = 'ME_CONFIG_OIDCAUTH_ENABLED';
+const oidcAuthBaseUrl = 'ME_CONFIG_OIDCAUTH_BASEURL';
+const oidcAuthIssuer = 'ME_CONFIG_OIDCAUTH_ISSUER';
+const oidcAuthClientId = 'ME_CONFIG_OIDCAUTH_CLIENTID';
+const oidcAuthClientSecret = 'ME_CONFIG_OIDCAUTH_CLIENTSECRET';
+const oidcAuthSecret = 'ME_CONFIG_OIDCAUTH_SECRET';
 
 export default {
   mongodb: {
+    // set allowDiskUse to true to remove the limit of 100 MB of RAM on each aggregation pipeline stage
+    // https://www.mongodb.com/docs/v5.0/core/aggregation-pipeline-limits/#memory-restrictions
+    allowDiskUse: getBoolean(process.env.ME_CONFIG_MONGODB_ALLOW_DISK_USE, false),
+
     // if a connection string options such as server/port/etc are ignored
-    connectionString: mongo.connectionString || getConnectionStringFromEnvVariables(),
+    connectionString: mongo.connectionString,
 
     /** @type {import('mongodb').MongoClientOptions} */
     connectionOptions: {
-      // ssl: connect to the server using secure SSL
-      ssl: getBoolean(process.env.ME_CONFIG_MONGODB_SSL, mongo.ssl),
+      // tls: connect to the server using secure SSL
+      tls: getBoolean(process.env.ME_CONFIG_MONGODB_TLS, mongo.tls),
 
-      // sslValidate: validate mongod server certificate against CA
-      sslValidate: getBoolean(process.env.ME_CONFIG_MONGODB_SSLVALIDATE, true),
+      // tlsAllowInvalidCertificates: validate mongod server certificate against CA
+      tlsAllowInvalidCertificates: getBoolean(process.env.ME_CONFIG_MONGODB_TLS_ALLOW_CERTS, true),
 
-      // sslCA: single PEM file on disk
-      sslCA: process.env.ME_CONFIG_MONGODB_CA_FILE,
+      // tlsCAFile: single PEM file on disk
+      tlsCAFile: process.env.ME_CONFIG_MONGODB_TLS_CA_FILE,
+
+      // tlsCertificateKeyFile: client cert+key PEM file on disk
+      tlsCertificateKeyFile: process.env.ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE,
+
+      // tlsCertificateKeyFilePassword: password for the client key PEM
+      tlsCertificateKeyFilePassword: process.env.ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD,
+
+      // tlsCRLFile: certificate revocation list, so revoked server certs are rejected
+      tlsCRLFile: process.env.ME_CONFIG_MONGODB_TLS_CRL_FILE,
 
       // maxPoolSize: size of connection pool (number of connections to use)
       maxPoolSize: 4,
@@ -104,6 +98,9 @@ export default {
     // if admin is true, the auth list below will be ignored
     // if admin is true, you will need to enter an admin username/password below (if it is needed)
     admin: getBoolean(process.env.ME_CONFIG_MONGODB_ENABLE_ADMIN, false),
+
+    // This flag enhance AWS DocumentDB compatibility
+    awsDocumentDb: getBoolean(process.env.ME_CONFIG_MONGODB_AWS_DOCUMENTDB, false),
 
     // whitelist: hide all databases except the ones in this list  (empty list for no whitelist)
     whitelist: [],
@@ -116,24 +113,42 @@ export default {
     // baseUrl: the URL that mongo express will be located at - Remember to add the forward slash at the start and end!
     baseUrl: process.env.ME_CONFIG_SITE_BASEURL || '/',
     cookieKeyName: 'mongo-express',
-    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET || 'cookiesecret',
+    cookieSecret: process.env.ME_CONFIG_SITE_COOKIESECRET,
     host: process.env.VCAP_APP_HOST || 'localhost',
     port: process.env.PORT || 8081,
     requestSizeLimit: process.env.ME_CONFIG_REQUEST_SIZE || '50mb',
-    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET || 'sessionsecret',
+    sessionSecret: process.env.ME_CONFIG_SITE_SESSIONSECRET,
     sslCert: process.env.ME_CONFIG_SITE_SSL_CRT_PATH || '',
     sslEnabled: getBoolean(process.env.ME_CONFIG_SITE_SSL_ENABLED, false),
     sslKey: process.env.ME_CONFIG_SITE_SSL_KEY_PATH || '',
   },
 
+  healthCheck: {
+    // path: the Path that mongo express healthcheck will be serve - Remember to add the forward slash at the start!
+    path: process.env.ME_CONFIG_HEALTH_CHECK_PATH || '/status',
+  },
+
   // set useBasicAuth to true if you want to authenticate mongo-express logins
-  // if admin is false, the basicAuthInfo list below will be ignored
-  // this will be true unless ME_CONFIG_BASICAUTH_USERNAME is set and is the empty string
-  useBasicAuth: getFileEnv(basicAuthUsername) !== '',
+  // this will be false unless ME_CONFIG_BASICAUTH_ENABLED is set to the true
+  useBasicAuth: getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)),
 
   basicAuth: {
     username: getFileEnv(basicAuthUsername) || 'admin',
     password: getFileEnv(basicAuthPassword) || 'pass',
+  },
+
+  useOidcAuth: getBoolean(getFileEnv(oidcAuthEnabled)),
+  oidcAuth: {
+    issuerBaseURL: getFileEnv(oidcAuthIssuer),
+    baseURL: getFileEnv(oidcAuthBaseUrl) || process.env.ME_CONFIG_SITE_BASEURL || '/',
+    clientAuthMethod: 'client_secret_basic',
+    clientSecret: getFileEnv(oidcAuthClientSecret),
+    clientID: getFileEnv(oidcAuthClientId),
+    secret: getFileEnv(oidcAuthSecret),
+    idpLogout: true,
+    authorizationParams: {
+      response_type: 'code',
+    },
   },
 
   options: {
@@ -141,11 +156,7 @@ export default {
     console: true,
 
     // documentsPerPage: how many documents you want to see at once in collection view
-    documentsPerPage: 10,
-
-    // editorTheme: Name of the theme you want to use for displaying documents
-    // See http://codemirror.net/demo/theme.html for all examples
-    editorTheme: process.env.ME_CONFIG_OPTIONS_EDITORTHEME || 'rubyblue',
+    documentsPerPage: process.env.ME_CONFIG_DOCUMENTS_PER_PAGE || 10,
 
     // Maximum size of a single property & single row
     // Reduces the risk of sending a huge amount of data when viewing collections
@@ -170,7 +181,7 @@ export default {
     persistEditMode: getBoolean(process.env.ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE, false),
 
     // collapsibleJSON: if set to true, jsons will be displayed collapsible
-    collapsibleJSON: true,
+    collapsibleJSON: getBoolean(process.env.ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON, true),
 
     // collapsibleJSONDefaultUnfold: if collapsibleJSON is set to `true`, this defines default level
     //  to which JSONs are displayed unfolded; use number or "all" to unfold all levels
@@ -185,10 +196,10 @@ export default {
 
     // confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is
     // displayed before deleting a document/collection
-    confirmDelete: false,
+    confirmDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_CONFIRM_DELETE, false),
 
     // noExport: if noExport is set to true, we won't show export buttons
-    noExport: false,
+    noExport: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_EXPORT, false),
 
     // fullwidthLayout: if set to true an alternative page layout is used utilizing full window width
     fullwidthLayout: getBoolean(process.env.ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT, false),
@@ -197,20 +208,5 @@ export default {
     noDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_DELETE, false),
 
     noRawCommand: getBoolean(process.env.ME_CONFIG_OPTIONS_NO_RAW_COMMAND, false),
-  },
-
-  // Specify the default keyname that should be picked from a document to display in collections list.
-  // Keynames can be specified for every database and collection.
-  // If no keyname is specified, it defaults to '_id', which is a mandatory field.
-  // For Example :
-  // defaultKeyNames{
-  //   "world_db":{  //Database Name
-  //     "continent":"cont_name", // collection:field
-  //     "country":"country_name",
-  //     "city":"name"
-  //   }
-  // }
-  defaultKeyNames: {
-
   },
 };

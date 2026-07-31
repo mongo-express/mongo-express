@@ -1,24 +1,14 @@
-import { createRequire } from 'node:module';
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import AssetsPlugin from 'assets-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
 
-const require = createRequire(import.meta.url);
 const env = process.env.NODE_ENV || 'development';
 const isDev = env === 'development';
 const isProd = !isDev;
 
 const fileSuffix = isDev ? '' : '-[chunkhash].min';
-
-function resolveModulePath(name) {
-  return path.dirname(require.resolve(`${name}/package.json`));
-}
-
-const codemirrorPath = resolveModulePath('codemirror');
-const bootstrapPath = resolveModulePath('bootstrap');
 
 export default {
   mode: isProd ? 'production' : 'development',
@@ -29,6 +19,10 @@ export default {
   entry: {
     index: {
       import: './lib/scripts/index.js',
+      dependOn: 'vendor',
+    },
+    login: {
+      import: './lib/scripts/login.js',
       dependOn: 'vendor',
     },
     database: {
@@ -51,7 +45,7 @@ export default {
     // Shared
     vendor: './lib/scripts/vendor.js',
     codemirror: {
-      import: './lib/scripts/codeMirrorLoader.js',
+      import: './lib/scripts/editor.js',
       dependOn: 'vendor',
     },
   },
@@ -71,6 +65,14 @@ export default {
           presets: ['@babel/preset-env'],
         },
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
+      },
     ],
   },
 
@@ -86,15 +88,6 @@ export default {
       patterns: [
         { from: 'public/images/*', to: 'img/[name][ext]' },
         { from: 'public/stylesheets/*', to: 'css/[name][ext]' },
-
-        { from: path.join(codemirrorPath, '/lib/codemirror.css'), to: 'css/[name][ext]' },
-        { from: path.join(codemirrorPath, '/theme'), to: 'css/theme/[name][ext]' },
-
-        { from: path.join(bootstrapPath, '/dist/fonts'), to: 'fonts/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap.min.css'), to: 'css/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap.min.css.map'), to: 'css/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap-theme.min.css'), to: 'css/[name][ext]' },
-        { from: path.join(bootstrapPath, '/dist/css/bootstrap-theme.min.css.map'), to: 'css/[name][ext]' },
       ],
     }),
 

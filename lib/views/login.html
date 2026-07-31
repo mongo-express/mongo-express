@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Auth</h3>
+                    <form method="POST">
+                        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Host</span>
+                            </div>
+                            <input type="text" id="hostname" name="hostname" class="form-control" placeholder="Host" value="{{hostname}}" aria-label="Host" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Port</span>
+                            </div>
+                            <input type="text" id="port" name="port" class="form-control" placeholder="Port" value="{{port}}" aria-label="Port" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Auth Source</span>
+                            </div>
+                            <input type="text" id="authSource" name="authSource" class="form-control" placeholder="admin" value="{{authSource}}" aria-label="Auth Source" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Username</span>
+                            </div>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Username" value="{{username}}" aria-label="Username" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Password</span>
+                            </div>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" value="{{password}}" aria-label="Password" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword"><i class="fa fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button id="authButton" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{ baseHref }}{{ assets.login.js }}"></script>
+{% endblock %}

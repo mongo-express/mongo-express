@@ -1,66 +1,78 @@
-mongo-express
-===
+# mongo-express
 
 [![npm version](https://badge.fury.io/js/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![npm](https://img.shields.io/npm/dm/mongo-express.svg)](https://www.npmjs.com/package/mongo-express) [![GitHub stars](https://img.shields.io/github/stars/mongo-express/mongo-express.svg)](https://github.com/mongo-express/mongo-express/stargazers) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/mongo-express)
 [![Build Status](https://github.com/mongo-express/mongo-express/actions/workflows/standard-ci.yml/badge.svg?branch=master)](https://github.com/mongo-express/mongo-express/actions/workflows/standard-ci.yml)
 
+A web-based admin interface for MongoDB or compatible services (FerretDB, Amazon DocumentDB). Built with Node.js, Express, and Bootstrap 5.
 
-Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3
+## Features
 
+- Connect to multiple databases
+- View/add/delete databases
+- View/add/rename/delete collections
+- View/add/update/delete documents
+- Preview audio/video/image assets inline in the collection view
+- Nested and/or large objects are collapsible for easy overview
+- Async on-demand loading of big document properties (>100KB default) to keep collection view fast
+- GridFS support - add/get/delete incredibly large files
+- Use BSON data types in documents
+- Mobile / Responsive - Bootstrap 5 works passably on small screens when you're in a bind
+- Connect and authenticate to individual databases
+- Authenticate as admin to view all databases
+- Database blacklist/whitelist
+- Custom CA/TLS/SSL and CA validation disabling
+- Supports replica sets
+- OpenIdConnect Authentication
 
-Features
---------
+## Screenshots
 
-* Connect to multiple databases
-* View/add/delete databases
-* View/add/rename/delete collections
-* View/add/update/delete documents
-* Preview audio/video/image assets inline in collection view
-* Nested and/or large objects are collapsible for easy overview
-* Async on-demand loading of big document properties (>100KB default) to keep collection view fast
-* GridFS support - add/get/delete incredibly large files
-* Use BSON data types in documents
-* Mobile / Responsive - Bootstrap 3 works passably on small screens when you're in a bind
-* Connect and authenticate to individual databases
-* Authenticate as admin to view all databases
-* Database blacklist/whitelist
-* Custom CA and CA validation disabling
-* Supports replica sets
-
-
-Screenshots
------------
-
-| Home Page                                                                      | Database View                                                                                    | Collection View                                                                       | Editing A Document                                                     |
-|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| <img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" /> |
+| Home Page | Database View | Collection View | Editing A Document
+| - | - | - | -
+| <img src="http://i.imgur.com/XiYhblA.png" title="Home Page showing databases"> | <img src="http://i.imgur.com/XWcIgY1.png" title="Viewing collections & buckets in a database" /> | <img src="https://imgur.com/UmGSr3x.png" title="Viewing documents in a collection" /> | <img src="https://imgur.com/lL38abn.png" title="Editing a document" />
 
 These screenshots are from version 0.30.40
-View album for more screenshots: (server status, database views etc..)
+View the album for more screenshots: (server status, database views, etc..)
 [https://imgur.com/a/9vHsF](https://imgur.com/a/9vHsF)
 
+## Development
 
-Development
------------------
+To test or develop with the latest version (_master_ branch) you can install using this git repository:
+
+    npm i mongo-express@github:mongo-express/mongo-express
+    OR
+    yarn add mongo-express@github:mongo-express/mongo-express
+    OR
+    pnpm add mongo-express@github:mongo-express/mongo-express
 
 Copy config.default.js to config.js and edit the default property to fit your local environment
 
 **Run the development build using:**
 
     npm run start-dev
+    OR
+    yarn start-dev
+    OR
+    pnpm run start-dev
 
-Usage (npm / CLI)
------------------
+## Usage (npm / yarn / pnpm / CLI)
 
-*mongo-express* requires Node.js v4 or higher.
+_mongo-express_ requires Node.js v22 or higher.
 
 **To install:**
 
-    npm install -g mongo-express
+    npm i -g mongo-express
+    OR
+    yarn add -g mongo-express
+    OR
+    pnpm add -g mongo-express
 
 Or if you want to install a non-global copy:
 
-    npm install mongo-express
+    npm i mongo-express
+    OR
+    yarn add mongo-express
+    OR
+    pnpm add mongo-express
 
 By default `config.default.js` is used where the basic access authentication is `admin`:`pass`. This is obviously not safe, and there are warnings in the console.
 
@@ -68,40 +80,54 @@ By default `config.default.js` is used where the basic access authentication is 
 
 Copy `YOUR_PATH/node_modules/mongo-express/config.default.js` into a new file called `YOUR_PATH/node_modules/mongo-express/config.js`.
 
-*Note:* YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
+_Note:_ YOUR_PATH will depend on your current OS user and system configuration. You can see it in the output text shown after executing npm install.
 
 Fill in your MongoDB connection details and any other options you want to change in `config.js`.
+
+**You will also need to create a .env file with the variables for your cookie and session secrets. Replace these values with randomly generated secrets:**
+
+    ME_CONFIG_SITE_COOKIESECRET: 'yourcookiesecret',
+    ME_CONFIG_SITE_SESSIONSECRET: 'yoursessionsecret',
 
 **To run:**
 
     cd YOUR_PATH/node_modules/mongo-express/ && node app.js
 
-If you installed it globally, you can immediately start mongo-express like this:
+or if you installed it globally, you can immediately start mongo-express like this:
 
-    mongo-express --url mongodb://127.0.0.1:27017
+    mongo-express
 
-Or if you want to use it as an administrator:
+You can add some configuration options. Example:
 
-    mongo-express --admin --url mongodb://127.0.0.1:27017
+    node app.js --url mongodb://127.0.0.1:27017
 
-For help on configuration options:
+or:
 
-    mongo-express --help
+    mongo-express --URL mongodb://127.0.0.1:27017
 
-Usage (Express 4 middleware)
-----------------------------
+Configuration options:
+Option | Short | Description
+| - | - | -
+`--version` | `-V` | output the version number
+`--url <url>` | `-U <url>` | connection string url (`<url>` example: `mongodb://127.0.0.1:27017`)
+`--admin` | `-a` | enable authentication as admin
+`--port <port>` | `-p <port>` | listen on specified port (default `<port>` is `8081`)
+`--help` | `-h` | display help for command options
 
-**To mount as Express 4 middleware (see `node_modules/mongo-express/app.js`):**
+## Usage (Express middleware)
+
+**To mount as Express middleware (see `node_modules/mongo-express/app.js`):**
 
     var mongo_express = require('mongo-express/lib/middleware')
     var mongo_express_config = require('./mongo_express_config')
 
     app.use('/mongo_express', mongo_express(mongo_express_config))
 
-Usage (Docker)
---------------
+## Usage (Docker)
 
-Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on a Docker network (`--network some-network` below) with `--name` or `--network-alias` set to `mongo`. Alternatively, set connection string `ME_CONFIG_MONGODB_URL` to the proper connection for your MongoDB container on your Docker network.
+Make sure you have a running [MongoDB container](https://hub.docker.com/_/mongo/) on the same Docker network (`--network some-network` below). The Docker image defaults to `mongodb://mongo:27017`, so the MongoDB container must be reachable from the mongo-express container as `mongo` — start it with `--name mongo` or `--network-alias mongo` — unless you set `ME_CONFIG_MONGODB_URL` to a different hostname.
+
+If MongoDB was initialized with `MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD`, include those credentials in `ME_CONFIG_MONGODB_URL` and authenticate against the `admin` database, for example `mongodb://root:password@mongo:27017/?authSource=admin`. `ME_CONFIG_BASICAUTH_USERNAME` and `ME_CONFIG_BASICAUTH_PASSWORD` only control the mongo-express web login; they are not used to authenticate to MongoDB.
 
 **Use [the Docker Hub image](https://hub.docker.com/_/mongo-express/):**
 
@@ -118,42 +144,68 @@ $ docker build -t mongo-express .
 $ docker run -it --rm -p 8081:8081 --network some-network mongo-express
 ```
 
+**Building with OIDC support:**
+
+To enable OIDC (OpenID Connect) authentication support in the Docker image, use the `ENABLE_OIDC` build argument:
+
+```console
+$ docker build -t mongo-express --build-arg ENABLE_OIDC=true .
+$ docker run -it --rm -p 8081:8081 --network some-network mongo-express
+```
+
+When `ENABLE_OIDC=true` is set, the `express-openid-connect` package will be installed during the build process, enabling OIDC authentication features.
+
 You can use the following [environment variables](https://docs.docker.com/reference/run/#env-environment-variables) to modify the container's configuration:
 
-    Name                              | Default         | Description
-    ----------------------------------|-----------------|------------
-    `ME_CONFIG_MONGODB_URL`           | `mongodb://admin:pass@localhost:27017/db?ssl=false`
-    `ME_CONFIG_MONGODB_ENABLE_ADMIN`  | `false`         | Enable administrator access. Send strings: `"true"` or `"false"`.
-    `ME_CONFIG_MONGODB_AUTH_DATABASE` | `db`            | Database name (only needed if `ENABLE_ADMIN` is `"false"`).
-    `ME_CONFIG_MONGODB_AUTH_USERNAME` | `admin`         | Database username (only needed if `ENABLE_ADMIN` is `"false"`).
-    `ME_CONFIG_MONGODB_AUTH_PASSWORD` | `pass`          | Database password (only needed if `ENABLE_ADMIN` is `"false"`).
-    `ME_CONFIG_SITE_BASEURL`          | `/`             | Set the express baseUrl to ease mounting at a subdirectory. Remember to include a leading and trailing slash.
-    `ME_CONFIG_SITE_COOKIESECRET`     | `cookiesecret`  | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
-    `ME_CONFIG_SITE_SESSIONSECRET`    | `sessionsecret` | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
-    `ME_CONFIG_BASICAUTH_USERNAME`    | ``              | mongo-express web login name. Sending an empty string will disable basic authentication.
-    `ME_CONFIG_BASICAUTH_PASSWORD`    | ``              | mongo-express web login password.
-    `ME_CONFIG_REQUEST_SIZE`          | `100kb`         | Used to configure maximum mongo update payload size. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
-    `ME_CONFIG_OPTIONS_EDITORTHEME`   | `rubyblue`      | Web editor color theme, [more here](http://codemirror.net/demo/theme.html).
-    `ME_CONFIG_OPTIONS_READONLY`      | `false`         | if readOnly is true, components of writing are not visible.
-    `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`    | `false`   | if set to true an alternative page layout is used utilizing full window width.
-    `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`   | `false`   | if set to true, remain on same page after clicked on Save button
-    `ME_CONFIG_OPTIONS_NO_DELETE`      | `false`        | if noDelete is true, components of deleting are not visible.
-    `ME_CONFIG_OPTIONS_NO_RAW_COMMAND`| `false`         | if noRawCommand is true, the Raw tab in collection view is not visible.
-    `ME_CONFIG_SITE_SSL_ENABLED`      | `false`         | Enable SSL.
-    `ME_CONFIG_MONGODB_SSLVALIDATE`   | `true`          | Validate mongod server certificate against CA
-    `ME_CONFIG_SITE_SSL_CRT_PATH`     | ` `             | SSL certificate file.
-    `ME_CONFIG_SITE_SSL_KEY_PATH`     | ` `             | SSL key file.
-    `ME_CONFIG_SITE_GRIDFS_ENABLED`   | `false`         | Enable gridFS to manage uploaded files.
-    `VCAP_APP_HOST`                   | `localhost`     | address that mongo-express will listen on for incoming connections.
-    `PORT`                            | `8081`          | port that mongo-express will run on.
-    `ME_CONFIG_MONGODB_CA_FILE`       | ``              | CA certificate File
-    `ME_CONFIG_BASICAUTH_USERNAME_FILE`     | ``        | File version of ME_CONFIG_BASICAUTH_USERNAME
-    `ME_CONFIG_BASICAUTH_PASSWORD_FILE`     | ``        | File version of ME_CONFIG_BASICAUTH_PASSWORD
-    `ME_CONFIG_MONGODB_ADMINUSERNAME_FILE`  | ``        | File version of ME_CONFIG_MONGODB_ADMINUSERNAME
-    `ME_CONFIG_MONGODB_ADMINPASSWORD_FILE`  | ``        | File version of ME_CONFIG_MONGODB_ADMINPASSWORD
-    `ME_CONFIG_MONGODB_AUTH_USERNAME_FILE`  | ``        | File version of ME_CONFIG_MONGODB_AUTH_USERNAME
-    `ME_CONFIG_MONGODB_AUTH_PASSWORD_FILE`  | ``        | File version of ME_CONFIG_MONGODB_AUTH_PASSWORD
-
+| Name                                           | Default                                             | Description
+| ---------------------------------------------- | --------------------------------------------------- | -
+| `ME_CONFIG_MONGODB_URL`                        | `mongodb://mongo:27017`                             | MongoDB connection string. Should include admin username and password if you want to enable admin access to all databases and see server statistics. When using the root user created by the official MongoDB image, add `authSource=admin`, for example `mongodb://root:password@mongo:27017/?authSource=admin`. If admin access is not enabled, it should also include database name ([/defaultauthdb](https://www.mongodb.com/docs/manual/reference/connection-string/#connection-string-components)) to connect to.
+| `ME_CONFIG_MONGODB_ENABLE_ADMIN`               | `true`                                              | Enable administrator access. Send strings: `"true"` or `"false"`.
+| `ME_CONFIG_MONGODB_ALLOW_DISK_USE`             | `false`                                             | Remove the limit of 100 MB of RAM on each aggregation pipeline stage.
+| `ME_CONFIG_MONGODB_TLS`                        | `false`                                             | Use TLS client certificate
+| `ME_CONFIG_MONGODB_TLS_ALLOW_CERTS`            | `true`                                              | Validate mongod server certificate against CA
+| `ME_CONFIG_MONGODB_TLS_CA_FILE`                | ``                                                  | CA certificate File (.pem)
+| `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE`          | ``                                                  | TLS client certificate+key file (.pem)
+| `ME_CONFIG_MONGODB_TLS_CERT_KEY_FILE_PASSWORD` | ``                                                  | TLS client certificate key file password (.pem)
+| `ME_CONFIG_MONGODB_TLS_CRL_FILE`               | ``                                                  | TLS certificate revocation list file (.pem)
+| `ME_CONFIG_MONGODB_URL_FILE`                   | ``                                                  | File version of ME_CONFIG_MONGODB_URL
+| `ME_CONFIG_MONGODB_AWS_DOCUMENTDB`             | `false`                                             | This allow AWS DocumentDB compatibility (experimental)
+| `ME_CONFIG_SITE_BASEURL`                       | `/`                                                 | Set the express baseUrl to ease mounting at a subdirectory. Remember to include leading and trailing slash.
+| `ME_CONFIG_HEALTH_CHECK_PATH`                  | `/status`                                           | Set the mongo express healthcheck path. Remember to add the forward slash at the start.
+| `ME_CONFIG_SITE_COOKIESECRET`                  | ``                                                  | String used by [cookie-parser middleware](https://www.npmjs.com/package/cookie-parser) to sign cookies.
+| `ME_CONFIG_SITE_SESSIONSECRET`                 | ``                                                  | String used to sign the session ID cookie by [express-session middleware](https://www.npmjs.com/package/express-session).
+| `ME_CONFIG_BASICAUTH`                          | `false`                                             | Deprecated, use `ME_CONFIG_BASICAUTH_ENABLED` instead.
+| `ME_CONFIG_BASICAUTH_ENABLED`                  | `false`                                             | Enable Basic Authentication. Send strings: `"true"` or `"false"`.
+| `ME_CONFIG_BASICAUTH_USERNAME`                 | `admin`                                             | mongo-express web login name.
+| `ME_CONFIG_BASICAUTH_USERNAME_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_USERNAME`
+| `ME_CONFIG_BASICAUTH_PASSWORD`                 | `pass`                                              | mongo-express web login password.
+| `ME_CONFIG_BASICAUTH_PASSWORD_FILE`            | ``                                                  | File version of `ME_CONFIG_BASICAUTH_PASSWORD`
+| `ME_CONFIG_OIDCAUTH_ENABLED`                   | `false`                                             | Enable OpenIdConnect Authentication. Send strings: `"true"` or `"false"`.
+| `ME_CONFIG_OIDCAUTH_ISSUER`                    | ``                                                  | OAuth2 [Issuer](https://datatracker.ietf.org/doc/html/rfc8414#section-2). Root URL to the openidconnect metadata eg. `"<issuer>/.well-known/openid-configuration"`
+| `ME_CONFIG_OIDCAUTH_ISSUER_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_ISSUER`
+| `ME_CONFIG_OIDCAUTH_CLIENTID`                  | ``                                                  | OAuth2 ClientId. The client must be private and allowed to perform the Authorization Code Flow grant.
+| `ME_CONFIG_OIDCAUTH_CLIENTID_FILE`             | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTID`
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET`              | ``                                                  | OAuth2 Client Secret.
+| `ME_CONFIG_OIDCAUTH_CLIENTSECRET_FILE`         | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_CLIENTSECRET`
+| `ME_CONFIG_OIDCAUTH_SECRET`                    | ``                                                  | A random secret used by the library to init the Authorization Code Flow (required)
+| `ME_CONFIG_OIDCAUTH_SECRET_FILE`               | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_SECRET_FILE`
+| `ME_CONFIG_OIDCAUTH_BASEURL`                   | ``                                                  | OAuth2 base url. It's used to build the redirect URL eg. `"<base-url>/callback"`. If not specified `ME_CONFIG_SITE_BASEURL` will be used.
+| `ME_CONFIG_OIDCAUTH_BASEURL_FILE`              | ``                                                  | File version of `ME_CONFIG_OIDCAUTH_BASEURL`
+| `ME_CONFIG_REQUEST_SIZE`                       | `50`                                                | Used to configure maximum Mongo update payload size in MB. CRUD operations above this size will fail due to restrictions in [body-parser](https://www.npmjs.com/package/body-parser).
+| `ME_CONFIG_OPTIONS_READONLY`                   | `false`                                             | if readOnly is true, components of writing are not visible.
+| `ME_CONFIG_OPTIONS_FULLWIDTH_LAYOUT`           | `false`                                             | If set to true an alternative page layout is used utilizing full window width.
+| `ME_CONFIG_OPTIONS_PERSIST_EDIT_MODE`          | `false`                                             | If set to true, remain on the same page after clicking on the Save button
+| `ME_CONFIG_OPTIONS_NO_DELETE`                  | `false`                                             | If noDelete is true, components of deleting are not visible.
+| `ME_CONFIG_OPTIONS_NO_EXPORT`                  | `false`                                             | If noExport is true, components of exporting are not visible.
+| `ME_CONFIG_OPTIONS_CONFIRM_DELETE`             | `false`                                             | If confirmDelete is set to 'true', a modal for confirming deletion is displayed
+| `ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON`           | `true`                                              | If set to true, jsons will be displayed collapsible
+| `ME_CONFIG_SITE_SSL_ENABLED`                   | `false`                                             | Enable SSL.
+| `ME_CONFIG_SITE_SSL_CRT_PATH`                  | ` `                                                 | SSL certificate file.
+| `ME_CONFIG_SITE_SSL_KEY_PATH`                  | ` `                                                 | SSL key file.
+| `ME_CONFIG_SITE_GRIDFS_ENABLED`                | `false`                                             | Enable gridFS to manage uploaded files.
+| `ME_CONFIG_DOCUMENTS_PER_PAGE`                 | `10`                                                | How many documents you want to see at once in collection view
+| `PORT`                                         | `8081`                                              | port that mongo-express will run on.
+| `VCAP_APP_HOST`                                | `localhost`                                         | address that mongo-express will listen on for incoming connections.
 
 **Example:**
 
@@ -161,76 +213,109 @@ You can use the following [environment variables](https://docs.docker.com/refere
         --name mongo-express \
         --network web_default \
         -p 8081:8081 \
-        -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
-        -e ME_CONFIG_BASICAUTH_USERNAME="" \
-        -e ME_CONFIG_MONGODB_URL="mongodb://mongo:27017" \
+        -e ME_CONFIG_BASICAUTH_ENABLED="true" \
+        -e ME_CONFIG_BASICAUTH_USERNAME="mongo-express-user" \
+        -e ME_CONFIG_BASICAUTH_PASSWORD="fairly-long-password" \
+        -e ME_CONFIG_MONGODB_URL="mongodb://root:password@some-mongo:27017/?authSource=admin" \
         mongo-express
 
-This example links to a container name typical of `docker-compose`, changes the editor's color theme, and disables basic authentication.
+This example connects to a MongoDB container reachable as `some-mongo` on the Docker network and enables basic authentication in the mongo-express UI.
 
 **To use:**
 
 The default port exposed from the container is 8081, so visit `http://localhost:8081` or whatever URL/port you entered into your config (if running standalone) or whatever `config.site.baseUrl` (if mounting as a middleware).
 
-Usage (Bluemix)
----------------
+### Using Docker Extensions:
 
-**Deploy to Bluemix**
+**Pre-requisite:**
+
+- Docker Desktop 4.15
+
+**Usage:**
+
+By using Mongo Express Docker Extension, it's easy to setup Mongo Express on Docker Desktop with [just one click](https://open.docker.com/extensions/marketplace?extensionId=saniewski/mongo-express-docker-extension).
+
+
+## Usage (IBM Cloud)
+
+**Deploy to IBM Cloud**
 
 Doing manually:
 
-* Git clone this repository
-* Create a new or use already created [MongoDB experimental service](https://www.ng.bluemix.net/docs/#services/MongoDB/index.html#MongoDB)
-* Change the file `manifest.yml` to fit your Bluemix app and service environment
-
+- Git clone this repository
+- Create a new or use already created [MongoDB service](https://www.ibm.com/products/databases-for-mongodb)
+- Change the file `examples/ibm-cloud/manifest.yml` to fit your IBM Cloud app and service environment
 
 Doing automatically:
 
-* Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix
+- Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on IBM Cloud
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/mongo-express/mongo-express.git)
-
+[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button_x2.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/mongo-express/mongo-express.git)
 
 Then, take the following action to customize to your environment:
 
-* Create your `config.js` file based on `config.default.js`
-  * Check if it is necessary to change the `dbLabel` according to the MongoDB service created
-  * Change the `basicAuth` properties, not to keep the default values
+- Create your `config.js` file based on `config.default.js`
+  - Check if it is necessary to change the `dbLabel` according to the MongoDB service created
+  - Change the `basicAuth` properties, do not to keep the default values
 
+## Usage (OpenIdConnect Authentication)
 
-Search
-------
-* *Simple* search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
-* *Advanced* search passes the `find` and `projection` fields/objects straight into MongoDB `db.collection.find(query, projection)`. The `find` object is where your query happens, while the `projection` object determines which columns are returned.
+**Usage with the `mongo-express` package**
 
-See [MongoDB db.collection.find()](https://docs.mongodb.org/manual/reference/method/db.collection.find/) documentation for examples and exact usage.
+If you install `mongo-express` as a *package*, install the `express-openid-connect` dependency:
 
-Planned features
-----------------
+```bash
+yarn add express-openid-connect
+```
 
-Pull Requests are always welcome! <3
+**Setup the OAuth2 application**
 
+The current implementation supports OAuth2 Authorization Code Flow Grant, to make it work you need to setup a client on your Identity Provider, and pass the parameters to the application:
 
-Limitations
------------
+```bash
+ME_CONFIG_OIDCAUTH_ENABLED=true
+ME_CONFIG_OIDCAUTH_BASEURL=https://<domain>/<base-url>
+ME_CONFIG_OIDCAUTH_ISSUER=<authority>
+ME_CONFIG_OIDCAUTH_CLIENTID=<client-id>
+ME_CONFIG_OIDCAUTH_CLIENTSECRET=<client-secret> # Optional
+ME_CONFIG_OIDCAUTH_SECRET=<random-generated-string>
+ME_CONFIG_SITE_COOKIESECRET=<client-secret>
+ME_CONFIG_SITE_BASEURL=/<base-url>
+```
 
-* Documents must have `document._id` property to be edited
-* Binary BSON data type not tested
+To register your client, you will need the application's redirect URI, which can be obtained by appending `/callback` to the application base URL: Eg. https://example.com/mongo-express/callback
 
-Not tested
-----------
+## Search
 
-* Binary/BinData
+- _Simple_ search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.
+- _Advanced_ search passes the `find` and `projection` fields/objects straight into MongoDB `db.collection.find(query, projection)`. The `find` object is where your query happens, while the `projection` object determines which columns are returned.
+
+See [MongoDB db.collection.find()](https://www.mongodb.com/docs/manual/reference/method/db.collection.find/) documentation for examples and exact usage.
+
+## Planned features
+
+Pull Requests are always welcome! 💖
+
+## Limitations
+
+- Documents must have the `document._id` property to be edited
+- Binary BSON data type not tested
+
+## E2E Testing
+
+    We are currently trying to use Cypress, to open cypress use the command `cypress open`
+    To instrument the code to allow the E2E coverage to run, please run this command: `yarn nyc instrument --compact=false lib instrumented`
+
+## Not Tested
+
+- Binary/BinData
 
 JSON documents are parsed through a javascript virtual machine, so **the web
 interface can be used for executing malicious javascript on a server**.
 
 **mongo-express should only be used privately for development purposes**.
 
-
-
-BSON Data Types
----------------
+## BSON Data Types
 
 The following BSON data types are supported in the mongo-express document editor/viewer.
 
@@ -254,13 +339,27 @@ Use Object ID with the given 24-digit hexadecimal string.
 
     ISODate()
 
-Creates a new ISODate object with current time.
+Creates a new ISODate object with the current time.
 
 `new Date()` can also be used (note the `new` keyword there).
 
     ISODate(timestamp)
 
 Uses ISODate object with the given timestamp.
+
+**UUID**
+
+    UUID()
+
+Creates a new UUID v4.
+
+Can also be used `new UUID()` (note the `new` keyword there).
+
+    UUID(uuid)
+
+Uses UUID v4 with the given 24-digit hexadecimal string.
+
+Example: `UUID("dee11d4e-63c6-4d90-983c-5c9f1e79e96c")` or `UUID("dee11d4e63c64d90983c5c9f1e79e96c")`
 
 **DBRef/Dbref**
 
@@ -282,7 +381,7 @@ Creates a new Timestamp object with a value of 0.
 
 Example: `Timestamp(ISODate(), 0)`.
 
-See [http://www.mongodb.org/display/DOCS/Timestamp+data+type](http://www.mongodb.org/display/DOCS/Timestamp+data+type) for more info about the Timestamp data type.
+See [https://www.mongodb.com/docs/mongodb-shell/reference/data-types/#timestamp](https://www.mongodb.com/docs/mongodb-shell/reference/data-types/#timestamp) for more info about the Timestamp data type.
 
 **Code**
 
@@ -304,8 +403,7 @@ Specifying a scope/context is not supported.
 
     Symbol(string)
 
-Example Document
-----------------
+## Example Document
 
 Here is an example of a document which can be read/edited in mongo-express (media truncated for legibility):
 
@@ -334,19 +432,3 @@ Here is an example of a document which can be read/edited in mongo-express (medi
       "func": Code(function() { alert('Hello World!') }),
       "symbol": Symbol("test")
     }
-
----
-
-License
--------
-MIT License
-
-Copyright (c) 2012 Chun-hao Hu
-Copyright (c) 2016-present Multiple Contributors
-
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

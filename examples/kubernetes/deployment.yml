@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+  labels:
+    app.kubernetes.io/name: mongo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mongo-express
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mongo-express
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - image: mongo-express:latest
+          name: mongo-express
+          ports:
+            - containerPort: 8081
+              name: http
+          startupProbe:
+            httpGet:
+              port: http
+              path: /status
+            periodSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /status
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /status
+          env:
+            - name: ME_CONFIG_BASICAUTH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-express-basicauth
+                  key: username
+            - name: ME_CONFIG_BASICAUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-express-basicauth
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: mongo-express-config
+            - secretRef:
+                name: mongo-express-url
+          securityContext:
+            allowPrivilegeEscalation: false

@@ -1,6 +1,6 @@
 import mongoConfig from './testMongoConfig.js';
 
-export default () => ({
+const bsonSpec = () => ({
   mongodb: {
     connectionString: mongoConfig.makeConnectionUrl(),
 
@@ -20,15 +20,17 @@ export default () => ({
     sslKey: '',
   },
 
+  healthCheck: {
+    path: '/status',
+  },
+
   useBasicAuth: false,
 
   options: {
     documentsPerPage: 10,
-    editorTheme: 'rubyblue',
-
     logger: { skip: () => true },
     readOnly: false,
   },
-
-  defaultKeyNames: {},
 });
+
+export default bsonSpec;

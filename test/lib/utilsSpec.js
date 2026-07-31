@@ -1,7 +1,17 @@
 import { expect } from 'chai';
-import { isValidDatabaseName } from '../../lib/utils.js';
+import { BSON } from 'mongodb';
+import { addHyphensToUUID, isValidDatabaseName } from '../../lib/utils.js';
+
+const { UUID } = BSON;
 
 describe('utils', function () {
+  describe('addHyphensToUUID', function () {
+    it('should be valid', () => {
+      const uuid = new UUID().toString();
+      const hex = uuid.split('-').join('');
+      expect(addHyphensToUUID(hex)).to.equal(uuid);
+    });
+  });
   describe('isValidDatabaseName', function () {
     it('should be valid', () => {
       const validNames = [
@@ -10,9 +20,9 @@ describe('utils', function () {
         'SOME_DB-1231',
         'SOMEDB&1231',
       ];
-      validNames.forEach((n) => {
-        expect(isValidDatabaseName(n)).to.equal(true, `Expected "${n}" to be a valid name`);
-      });
+      for (const validName of validNames) {
+        expect(isValidDatabaseName(validName)).to.equal(true, `Expected "${validName}" to be a valid name`);
+      }
     });
 
     it('should be invalid', () => {
@@ -25,9 +35,9 @@ describe('utils', function () {
         '1234567890123456789012345678901234567890123456789012345678901234',
         'SOMEDB"123',
       ];
-      invalidNames.forEach((n) => {
-        expect(isValidDatabaseName(n)).to.equal(false, `Expected "${n}" to be an invalid name`);
-      });
+      for (const invalidName of invalidNames) {
+        expect(isValidDatabaseName(invalidName)).to.equal(false, `Expected "${invalidName}" to be an invalid name`);
+      }
     });
   });
 });
