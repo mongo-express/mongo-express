@@ -45,6 +45,15 @@ describe('Router health check', () => {
     await request.get('/status').expect(404);
   }));
 
+  // Regression for #1671: reporting ok while unable to reach MongoDB made the check useless,
+  // since an orchestrator saw a healthy container and left a broken one running.
+  it('reports 503 when there is no MongoDB connection', () => withServer({
+    mongodb: { connectionString: 'mongodb://127.0.0.1:1/?serverSelectionTimeoutMS=250' },
+  }, async (request) => {
+    const res = await request.get('/status').expect(503);
+    expect(res.body.status).to.equal('error');
+  }));
+
   it('does not require basic auth, so probes work on a protected instance', () => withServer({
     useBasicAuth: true,
     basicAuth: { username: 'probe-user', password: 'probe-pass' },
