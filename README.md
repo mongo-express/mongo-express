@@ -287,6 +287,41 @@ ME_CONFIG_SITE_BASEURL=/<base-url>
 
 To register your client, you will need the application's redirect URI, which can be obtained by appending `/callback` to the application base URL: Eg. https://example.com/mongo-express/callback
 
+## Connecting to more than one database
+
+A single connection already exposes every database on that server, provided admin access is
+on — set `ME_CONFIG_MONGODB_ENABLE_ADMIN=true`, or `mongodb.admin` in `config.js`. Without
+it, only the database named in the connection string is listed.
+
+To reach databases on **separate MongoDB servers**, give `mongodb` a list of connections
+instead of a single one. This needs a `config.js`: the environment variables describe one
+connection only.
+
+```js
+// config.js
+export default {
+  mongodb: [
+    {
+      connectionString: 'mongodb://user:pass@mongo-a:27017/?authSource=admin',
+      connectionName: 'reporting',
+      admin: true,
+    },
+    {
+      connectionString: 'mongodb://user:pass@mongo-b:27017/orders',
+      connectionName: 'orders',
+    },
+  ],
+};
+```
+
+With more than one connection, databases are listed as `<connectionName>_<databaseName>` —
+`reporting_analytics`, `orders_orders` and so on — so that databases sharing a name across
+servers stay distinct. `connectionName` is optional and defaults to `connection0`,
+`connection1`, and so on, which is rarely what you want to read in the interface.
+
+Each entry takes the same keys as the single-connection form, so `admin`, `whitelist`,
+`blacklist` and `connectionOptions` can differ per server.
+
 ## Search
 
 - _Simple_ search takes the user provided fields (`key` & `value`) and prepares a MongoDB find() object, with projection set to `{}` so returns all columns.

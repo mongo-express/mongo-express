@@ -40,8 +40,15 @@ const loadConfig = async () => {
   }
 };
 
+// config.mongodb is either one connection or a list of them; lib/db.js accepts both.
+// Checking `.connectionString` on the list form finds undefined and wrongly reports that
+// nothing is configured, which kept multi-connection setups from starting at all.
+const hasConnectionString = (mongodb) => (Array.isArray(mongodb)
+  ? mongodb.some((connection) => connection?.connectionString)
+  : Boolean(mongodb?.connectionString));
+
 async function bootstrap(config) {
-  if (!config.mongodb.connectionString) {
+  if (!hasConnectionString(config.mongodb)) {
     // Only prompt when someone is there to answer. Under Docker, systemd or CI stdin is not
     // a TTY, and blocking on it would hang the process instead of reporting the problem.
     if (!process.stdin.isTTY) {
@@ -52,7 +59,8 @@ async function bootstrap(config) {
 
     console.log(pico.yellow('\nNo MongoDB connection string configured.'));
     try {
-      config.mongodb.connectionString = await promptForConnectionString();
+      // Only meaningful for the single-connection form; a list that reached here is empty.
+      config.mongodb = { ...config.mongodb, connectionString: await promptForConnectionString() };
     } catch (error) {
       console.error(pico.red(`\n${error.message}`));
       return process.exit(1);
