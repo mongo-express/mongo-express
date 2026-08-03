@@ -73,7 +73,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "assets-webpack-plugin": "^7.1.1",
     "babel-loader": "^10.1.1",
-    "chai": "^5.2.1",
+    "chai": "^6.2.2",
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^10.0.4",
     "copy-webpack-plugin": "^14.0.0",
