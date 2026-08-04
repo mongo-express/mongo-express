@@ -73,6 +73,22 @@ describe('Router read-only and no-delete enforcement', () => {
       .get(`/db/${dbName}/${urlColName}`).expect(200)));
   });
 
+  // Regression for #1712: the read-only Back button sits inside the POST form, and a button
+  // without an explicit type defaults to submit. history.back() returns undefined, which
+  // does not cancel the submission, so clicking Back also posted the form. The editable path
+  // was never affected: its handler returns false.
+  it('renders a Back button that cannot submit the form', () => withProbeDocument({ readOnly: true }, async (request, _id) => {
+    const res = await request
+      .get(`/db/${dbName}/${urlColName}/${JSON.stringify(_id.toString())}`).expect(200);
+
+    const backButtons = res.text.match(/<button[^>]*history\.back\(\)[^>]*>/g) || [];
+
+    expect(backButtons, 'no read-only Back button rendered').to.not.have.lengthOf(0);
+    for (const button of backButtons) {
+      expect(button, `Back button without type="button": ${button}`).to.contain('type="button"');
+    }
+  }));
+
   describe('noDelete', () => {
     it('refuses to delete a document', () => withProbeDocument({ noDelete: true }, async (request, _id) => {
       await deleteDocument(request, _id);

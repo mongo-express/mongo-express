@@ -83,7 +83,10 @@
           Save
         </button>
       {% else %}
-        <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+        {# type="button" matters: this sits inside the POST form, and a button without it
+   defaults to submit. history.back() returns undefined, which does not cancel the
+   submission, so the page both navigated back and posted the form. #}
+        <button type="button" onclick="history.back()" class="btn btn-warning btn-large btn-block">
           <i class="fa fa-arrow-left"></i>
           Back
         </button>
@@ -108,7 +111,10 @@
         Save
       </button>
     {% else %}
-      <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+      {# type="button" matters: this sits inside the POST form, and a button without it
+   defaults to submit. history.back() returns undefined, which does not cancel the
+   submission, so the page both navigated back and posted the form. #}
+        <button type="button" onclick="history.back()" class="btn btn-warning btn-large btn-block">
         <i class="fa fa-arrow-left"></i>
         Back
       </button>
