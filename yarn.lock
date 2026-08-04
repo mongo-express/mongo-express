@@ -3959,6 +3959,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"entities@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "entities@npm:8.0.0"
+  checksum: 10/d6e2ba75e444fb101ee2fbb07c839e687306c8a509426b75186619c19196f97c1db9932ca083f823c03e4a20e7407b654aa34de8cbb7770468e20fb2d4573a0e
+  languageName: node
+  linkType: hard
+
 "env-paths@npm:^2.2.0":
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
@@ -5255,7 +5262,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"he@npm:1.2.0, he@npm:^1.2.0":
+"he@npm:^1.2.0":
   version: 1.2.0
   resolution: "he@npm:1.2.0"
   bin:
@@ -6806,7 +6813,7 @@ __metadata:
     mongodb-memory-server: "npm:^11.2.0"
     mongodb-query-parser: "npm:^4.7.15"
     morgan: "npm:^1.11.0"
-    node-html-parser: "npm:^7.1.0"
+    node-html-parser: "npm:^9.0.1"
     nodemon: "npm:^3.1.11"
     picocolors: "npm:^1.1.1"
     qs: "npm:^6.15.3"
@@ -7051,13 +7058,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-html-parser@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "node-html-parser@npm:7.1.0"
+"node-html-parser@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "node-html-parser@npm:9.0.1"
   dependencies:
     css-select: "npm:^5.1.0"
-    he: "npm:1.2.0"
-  checksum: 10/370569dd329e56bc46883aa6f7123dd67c2f428325ec71788c167c1d216e1d45832fd75e068ce9f08be2750f692178e74391ea0921ad11fea6b990d58006bf6c
+    entities: "npm:^8.0.0"
+  checksum: 10/8d224c123077b4258a2c7a2c76b2797cd68db6aa3355739c403cf1546a5c9a1a1bdde80aa19af87b62012ef88ee1a71d9574978ab55d330afdc63f0210b49271
   languageName: node
   linkType: hard
 

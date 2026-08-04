@@ -18,6 +18,11 @@ Thumbs.db
 
 # Node and related ecosystem
 # ==========================
+# This project is built with yarn; the vendored release in .yarn/releases and the
+# packageManager field are the source of truth. An npm lockfile here is always accidental,
+# and several pull requests have carried one by mistake.
+package-lock.json
+npm-shrinkwrap.json
 .nodemonignore
 .sass-cache/
 node_modules/
