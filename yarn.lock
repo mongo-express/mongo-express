@@ -2803,7 +2803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^7, bson@npm:^7.2.0":
+"bson@npm:^7.2.0, bson@npm:^7.3.1":
   version: 7.3.1
   resolution: "bson@npm:7.3.1"
   checksum: 10/be4eb108d29a1ae9f7e4c53bddda2b8637bb7f54334a1c3ca71e45f78b11d8e8ff38b37a2e981125f31bdc2e6456070aa71c07ef3a4d4119ab48e8b49d7af584
@@ -6761,7 +6761,7 @@ __metadata:
     body-parser: "npm:^2.3.0"
     bootstrap: "npm:^5.3.8"
     bootstrap-paginator-2: "npm:^2.0.0"
-    bson: "npm:^7"
+    bson: "npm:^7.3.1"
     chai: "npm:^6.2.2"
     clean-webpack-plugin: "npm:^4.0.0"
     codemirror: "npm:^6.0.2"
