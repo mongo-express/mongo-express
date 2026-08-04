@@ -169,6 +169,36 @@ describe('Router collection', () => {
       expect(res.headers['content-type']).to.equal('text/csv');
     }));
 
+  // Regression for #1674: with the Aggregate box ticked, the exports passed the pipeline
+  // array to find() as a filter. MongoDB rejected it with "Query filter must be a plain
+  // object or ObjectId", thrown inside the cursor stream where the try/catch could not see it.
+  describe('exports with an aggregate query', () => {
+    const pipeline = '[{$match:{testItem:1}}]';
+
+    it('json export returns the matching document', () => request
+      .get(`/db/${dbName}/export/${urlColName}`).query({ runAggregate: 'on', query: pipeline })
+      .expect(200).responseType('blob')
+      .then((res) => {
+        expect(res.body.toString()).to.contain('"testItem":1');
+      }));
+
+    it('array export returns the matching document', () => request
+      .get(`/db/${dbName}/expArr/${urlColName}`).query({ runAggregate: 'on', query: pipeline })
+      .expect(200).responseType('blob')
+      .then((res) => {
+        const items = JSON.parse(res.body.toString());
+        expect(items).to.have.lengthOf(1);
+        expect(items[0].testItem).to.equal(1);
+      }));
+
+    it('csv export returns the matching document', () => request
+      .get(`/db/${dbName}/expCsv/${urlColName}`).query({ runAggregate: 'on', query: pipeline })
+      .expect(200).responseType('blob')
+      .then((res) => {
+        expect(res.body.toString()).to.contain('testItem');
+      }));
+  });
+
   it('GET /db/<dbName>/dropIndex/<collection> should drop index');
   it('GET /db/<dbName>/updateCollections/<collection> should updateCollections');
 
