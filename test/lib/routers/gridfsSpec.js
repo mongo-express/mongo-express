@@ -16,7 +16,8 @@ const fileUrl = (id) => `/db/${dbName}/gridFS/${bucketName}/${encodeURIComponent
 
 const uploadThroughDriver = (client, { name, body, type }) => new Promise((resolve, reject) => {
   const bucket = new GridFSBucket(client.db(), { bucketName });
-  const stream = bucket.openUploadStream(name, { contentType: type });
+  // Driver 7 stopped writing a top-level contentType, so the type has to go under metadata.
+  const stream = bucket.openUploadStream(name, { metadata: { contentType: type } });
   Readable.from([Buffer.from(body)]).pipe(stream)
     .on('finish', () => resolve(stream.id))
     .on('error', reject);
@@ -51,6 +52,12 @@ describe('Router gridfs', () => {
     .get(`/db/${dbName}/gridFS/${bucketName}`).expect(200)
     .then((res) => {
       expect(res.text).to.contain(seededFile.name);
+
+      // The type keeps its own column rather than appearing as a nested metadata object,
+      // which is where driver 7 now stores it.
+      expect(res.text).to.contain('<th>contentType</th>');
+      expect(res.text).to.contain(seededFile.type);
+      expect(res.text).to.not.contain('<th>metadata</th>');
     }));
 
   it('GET /db/<dbName>/gridFS/<bucket>/<file> downloads it with its name and type', () => request
@@ -68,7 +75,20 @@ describe('Router gridfs', () => {
 
     const [stored] = await bucketFiles(client).then((files) => files.filter((f) => f.filename === 'uploaded.txt'));
     expect(stored, 'uploaded file should be in the bucket').to.not.equal(undefined);
-    expect(stored.contentType).to.equal('text/plain');
+    expect(stored.metadata?.contentType).to.equal('text/plain');
+  });
+
+  // Buckets filled by an earlier mongo-express carry the type at the top level, where driver 6
+  // put it. The upgrade must not turn every one of those downloads into octet-stream, so the
+  // shape is written directly here — driver 7 has no way to produce it.
+  it('still reads the content type off files written before the driver 7 upgrade', async () => {
+    const legacyId = await uploadThroughDriver(client, { name: 'legacy.txt', body: 'older upload', type: undefined });
+    await client.db().collection(`${bucketName}.files`)
+      .updateOne({ _id: legacyId }, { $set: { contentType: 'text/plain' }, $unset: { metadata: '' } });
+
+    const res = await request.get(fileUrl(legacyId)).expect(200);
+
+    expect(res.headers['content-type']).to.contain('text/plain');
   });
 
   it('DELETE /db/<dbName>/gridFS/<bucket>/<file> removes the file and its chunks', async () => {

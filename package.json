@@ -39,7 +39,7 @@
     "body-parser": "^2.3.0",
     "bootstrap": "^5.3.8",
     "bootstrap-paginator-2": "^2.0.0",
-    "bson": "^6.10.4",
+    "bson": "^7.3.1",
     "codemirror": "^6.0.2",
     "commander": "^13.1.0",
     "cookie-parser": "1.4.7",
