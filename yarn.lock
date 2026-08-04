@@ -1607,7 +1607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mongodb-js/saslprep@npm:^1.3.0, @mongodb-js/saslprep@npm:^1.4.11":
+"@mongodb-js/saslprep@npm:^1.4.11":
   version: 1.4.13
   resolution: "@mongodb-js/saslprep@npm:1.4.13"
   dependencies:
@@ -1871,15 +1871,6 @@ __metadata:
   version: 7.0.3
   resolution: "@types/webidl-conversions@npm:7.0.3"
   checksum: 10/535ead9de4d3d6c8e4f4fa14e9db780d2a31e8020debc062f337e1420a41c3265e223e4f4b628f97a11ecf3b96390962cd88a9ffe34f44e159dec583ff49aa34
-  languageName: node
-  linkType: hard
-
-"@types/whatwg-url@npm:^11.0.2":
-  version: 11.0.5
-  resolution: "@types/whatwg-url@npm:11.0.5"
-  dependencies:
-    "@types/webidl-conversions": "npm:*"
-  checksum: 10/23a0c45aff51817807b473a6adb181d6e3bb0d27dde54e84883d5d5bc93358e95204d2188e7ff7fdc2cdaf157e97e1188ef0a22ec79228da300fc30d4a05b56a
   languageName: node
   linkType: hard
 
@@ -2812,14 +2803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^6.10.4":
-  version: 6.10.4
-  resolution: "bson@npm:6.10.4"
-  checksum: 10/8a79a452219a13898358a5abc93e32bc3805236334f962661da121ce15bd5cade27718ba3310ee2a143ff508489b08467eed172ecb2a658cb8d2e94fdb76b215
-  languageName: node
-  linkType: hard
-
-"bson@npm:^7.2.0":
+"bson@npm:^7.2.0, bson@npm:^7.3.1":
   version: 7.3.1
   resolution: "bson@npm:7.3.1"
   checksum: 10/be4eb108d29a1ae9f7e4c53bddda2b8637bb7f54334a1c3ca71e45f78b11d8e8ff38b37a2e981125f31bdc2e6456070aa71c07ef3a4d4119ab48e8b49d7af584
@@ -6777,7 +6761,7 @@ __metadata:
     body-parser: "npm:^2.3.0"
     bootstrap: "npm:^5.3.8"
     bootstrap-paginator-2: "npm:^2.0.0"
-    bson: "npm:^6.10.4"
+    bson: "npm:^7.3.1"
     chai: "npm:^6.2.2"
     clean-webpack-plugin: "npm:^4.0.0"
     codemirror: "npm:^6.0.2"
@@ -6809,7 +6793,7 @@ __metadata:
     memorystore: "npm:^1.6.8"
     method-override: "npm:^3.0.0"
     mocha: "npm:^11.7.6"
-    mongodb: "npm:^6.19.0"
+    mongodb: "npm:^7.5.0"
     mongodb-memory-server: "npm:^11.2.0"
     mongodb-query-parser: "npm:^4.7.15"
     morgan: "npm:^1.11.0"
@@ -6832,16 +6816,6 @@ __metadata:
     mongo-express: ./app.js
   languageName: unknown
   linkType: soft
-
-"mongodb-connection-string-url@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "mongodb-connection-string-url@npm:3.0.2"
-  dependencies:
-    "@types/whatwg-url": "npm:^11.0.2"
-    whatwg-url: "npm:^14.1.0 || ^13.0.0"
-  checksum: 10/99ac939a67cc963b90cfe70a8e45250a8386c531be7d22ffa5d1f3e5dd2406b149fb823b91ac161e4a4a29dfac754b49bca8f6dd786cfc66ae0ca80db5f5f23d
-  languageName: node
-  linkType: hard
 
 "mongodb-connection-string-url@npm:^7.0.1":
   version: 7.0.2
@@ -6897,41 +6871,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^6.19.0":
-  version: 6.21.0
-  resolution: "mongodb@npm:6.21.0"
-  dependencies:
-    "@mongodb-js/saslprep": "npm:^1.3.0"
-    bson: "npm:^6.10.4"
-    mongodb-connection-string-url: "npm:^3.0.2"
-  peerDependencies:
-    "@aws-sdk/credential-providers": ^3.188.0
-    "@mongodb-js/zstd": ^1.1.0 || ^2.0.0
-    gcp-metadata: ^5.2.0
-    kerberos: ^2.0.1
-    mongodb-client-encryption: ">=6.0.0 <7"
-    snappy: ^7.3.2
-    socks: ^2.7.1
-  peerDependenciesMeta:
-    "@aws-sdk/credential-providers":
-      optional: true
-    "@mongodb-js/zstd":
-      optional: true
-    gcp-metadata:
-      optional: true
-    kerberos:
-      optional: true
-    mongodb-client-encryption:
-      optional: true
-    snappy:
-      optional: true
-    socks:
-      optional: true
-  checksum: 10/28d2cab1c55c4cf58e410529ac6ae4c79a233adeb2147ba872d912819a0b496ee2dc5b9819ccbf0527618ced3b841e733b221fd1c627901e8e87ae60a8dc0553
-  languageName: node
-  linkType: hard
-
-"mongodb@npm:^7.2.0":
+"mongodb@npm:^7.2.0, mongodb@npm:^7.5.0":
   version: 7.5.0
   resolution: "mongodb@npm:7.5.0"
   dependencies:
@@ -9502,7 +9442,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whatwg-url@npm:^14.1.0, whatwg-url@npm:^14.1.0 || ^13.0.0":
+"whatwg-url@npm:^14.1.0":
   version: 14.2.0
   resolution: "whatwg-url@npm:14.2.0"
   dependencies:

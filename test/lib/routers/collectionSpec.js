@@ -153,6 +153,14 @@ describe('Router collection', () => {
     .then((res) => {
       expect(res.headers['content-disposition']).to.equal(`attachment; filename="${collectionName}.json"; filename*=UTF-8''${collectionName}.json`);
       expect(res.headers['content-type']).to.equal('application/json');
+
+      // The body is worth asserting, not just the headers. This route serialises through a
+      // stream transform, and when driver 7 quietly stopped honouring the cursor's transform
+      // option the documents went out unserialised — headers looked perfect either way.
+      const body = res.body.toString();
+      expect(body, 'export should not be empty').to.not.equal('');
+      expect(body).to.contain('"_id"');
+      expect(body).to.not.contain('[object Object]');
     }));
 
   it('GET /db/<dbName>/expArr/<collection> should export as array', () => request
