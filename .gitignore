@@ -100,7 +100,7 @@ mongod
 *.njsproj
 *.sln
 
-# E2E Testing 
+# E2E Testing
 # =========
 instrumented/
 cypress/videos
@@ -109,3 +109,7 @@ cypress/screenshots
 # nyc test coverage
 # =========
 .nyc_output/
+
+config.js
+.env
+mongo-express-*.tgz
