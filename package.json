@@ -103,6 +103,14 @@
       "optional": true
     }
   },
+  "dependenciesMeta": {
+    "cypress": {
+      "built": true
+    },
+    "mongodb-memory-server": {
+      "built": true
+    }
+  },
   "resolutions": {
     "csurf/cookie": "^0.7.2",
     "@cypress/request/qs": "^6.15.2",

@@ -6809,6 +6809,11 @@ __metadata:
     webpack-cli: "npm:^7.2.2"
   peerDependencies:
     express-openid-connect: "*"
+  dependenciesMeta:
+    cypress:
+      built: true
+    mongodb-memory-server:
+      built: true
   peerDependenciesMeta:
     express-openid-connect:
       optional: true
