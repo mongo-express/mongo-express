@@ -30,6 +30,19 @@ function getFileEnv(envVariable) {
   return origVar;
 }
 
+// DormHost: credentials arrive per session from the dashboard rather than from this
+// file, so one instance can serve many students at once. See lib/connections.js.
+const explorer = {
+  // Shared with whoever is allowed to hand over credentials. Without it /__connect
+  // refuses everything, which is the safe default for an instance on the internet.
+  secret: getFileEnv('ME_CONFIG_EXPLORER_SECRET'),
+  // With this on, the built-in connection form is off and a ticket is the only way in.
+  // A public instance that lets anyone type a host is a port scanner for its network.
+  ticketOnly: getBoolean(getFileEnv('ME_CONFIG_EXPLORER_TICKET_ONLY'), false),
+  idleMinutes: Number.parseInt(getFileEnv('ME_CONFIG_EXPLORER_IDLE_MINUTES') || '30', 10),
+  ticketSeconds: Number.parseInt(getFileEnv('ME_CONFIG_EXPLORER_TICKET_SECONDS') || '60', 10),
+};
+
 let mongo = {
   // Setting the connection string will only give access to that database
   // to see more databases you need to set mongodb.admin to true
@@ -62,6 +75,8 @@ const oidcAuthClientSecret = 'ME_CONFIG_OIDCAUTH_CLIENTSECRET';
 const oidcAuthSecret = 'ME_CONFIG_OIDCAUTH_SECRET';
 
 export default {
+  explorer,
+
   mongodb: {
     // set allowDiskUse to true to remove the limit of 100 MB of RAM on each aggregation pipeline stage
     // https://www.mongodb.com/docs/v5.0/core/aggregation-pipeline-limits/#memory-restrictions
