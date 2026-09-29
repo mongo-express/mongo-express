@@ -167,6 +167,12 @@ export default {
     // documentsPerPage: how many documents you want to see at once in collection view
     documentsPerPage: process.env.ME_CONFIG_DOCUMENTS_PER_PAGE || 10,
 
+    // documentsPerPageOptions: optional comma-separated list of page sizes, e.g. "10,20,50,100,500".
+    // When set, a "rows per page" selector is shown above the collection table and the user can
+    // switch the page size on the fly (the value is always clamped to this list). The default page
+    // size stays documentsPerPage. When empty, there is no selector and behavior is unchanged.
+    documentsPerPageOptions: process.env.ME_CONFIG_DOCUMENTS_PER_PAGE_OPTIONS || '',
+
     // Maximum size of a single property & single row
     // Reduces the risk of sending a huge amount of data when viewing collections
     maxPropSize: (100 * 1000), // default 100KB
