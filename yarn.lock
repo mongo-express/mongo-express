@@ -1386,10 +1386,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/busboy@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@fastify/busboy@npm:3.2.0"
-  checksum: 10/7d42b23eed18b1aaf2d2b1c77a5b76ec3606d59f5ddec31c04b144536be57478ed0c73e04768f11535b11a37b48aaaa0aed4904d5f18391ff90045c258e41acc
+"@fastify/busboy@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@fastify/busboy@npm:3.2.2"
+  checksum: 10/6fe2f94b8f9747e709fd167afcfced6cf595063f125d11208fe4e52b9a5a4be9fdb9de3279f24a690cb5db37732bacf6fd13df48483595df8b6a03fea18fd45c
   languageName: node
   linkType: hard
 
@@ -6750,7 +6750,7 @@ __metadata:
     "@codemirror/view": "npm:^6.43.7"
     "@cypress/code-coverage": "npm:^4.0.3"
     "@eslint/js": "npm:^10.0.1"
-    "@fastify/busboy": "npm:^3.2.0"
+    "@fastify/busboy": "npm:^3.2.2"
     "@json2csv/plainjs": "npm:^7.0.7"
     "@lezer/highlight": "npm:^1.2.3"
     "@popperjs/core": "npm:^2.11.8"
