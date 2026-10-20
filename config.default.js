@@ -142,8 +142,8 @@ export default {
   useBasicAuth: getBoolean(getFileEnv(basicAuthEnabled) || getFileEnv(basicAuth)),
 
   basicAuth: {
-    username: getFileEnv(basicAuthUsername) || 'admin',
-    password: getFileEnv(basicAuthPassword) || 'pass',
+    username: getFileEnv(basicAuthUsername),
+    password: getFileEnv(basicAuthPassword),
   },
 
   useOidcAuth: getBoolean(getFileEnv(oidcAuthEnabled)),
