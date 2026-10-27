@@ -5,6 +5,11 @@ function getBoolean(str, defaultValue = false) {
   return str ? str.toLowerCase() === 'true' : defaultValue;
 }
 
+function getNonNegativeInteger(str, defaultValue) {
+  const parsed = Number.parseInt(str ?? '', 10);
+  return Number.isSafeInteger(parsed) && parsed >= 0 ? parsed : defaultValue;
+}
+
 function getFile(filePath) {
   if (filePath !== undefined && filePath) {
     try {
@@ -171,6 +176,11 @@ export default {
     // Reduces the risk of sending a huge amount of data when viewing collections
     maxPropSize: (100 * 1000), // default 100KB
     maxRowSize: (1000 * 1000), // default 1MB
+
+    // Maximum length of a string shown in the collection and GridFS lists.
+    // Longer values are shortened with an ellipsis; document pages show them
+    // in full. Set to 0 to show full strings in the lists.
+    listStringLimit: getNonNegativeInteger(process.env.ME_CONFIG_OPTIONS_LIST_STRING_LIMIT, 50),
 
     // The options below aren't being used yet
 
