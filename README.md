@@ -201,6 +201,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_OPTIONS_NO_EXPORT`                  | `false`                                             | If noExport is true, components of exporting are not visible.
 | `ME_CONFIG_OPTIONS_CONFIRM_DELETE`             | `false`                                             | If confirmDelete is set to 'true', a modal for confirming deletion is displayed
 | `ME_CONFIG_OPTIONS_COLLAPSIBLE_JSON`           | `true`                                              | If set to true, jsons will be displayed collapsible
+| `ME_CONFIG_OPTIONS_LIST_STRING_LIMIT`          | `50`                                                | Longest string shown in the collection and GridFS lists before it is shortened with an ellipsis. Set to `0` to show full strings; document pages always show full values.
 | `ME_CONFIG_SITE_SSL_ENABLED`                   | `false`                                             | Enable SSL.
 | `ME_CONFIG_SITE_SSL_CRT_PATH`                  | ` `                                                 | SSL certificate file.
 | `ME_CONFIG_SITE_SSL_KEY_PATH`                  | ` `                                                 | SSL key file.
