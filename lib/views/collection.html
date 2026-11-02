@@ -65,6 +65,7 @@
       <input type="checkbox" name="sort[{{column}}]" class="d-none sort-{{column}}" {% if sort[column]
         %}value="{{sort[column]}}" checked="checked" {% endif %} />
       {% endfor %}
+      {% if pageSizeOptions.length %}<input type="hidden" name="limit" value="{{ limit }}">{% endif %}
       <div class="row">
         <div class="col-sm-6 col-md-4 py-1">
           <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key"
@@ -99,6 +100,7 @@
       <input type="checkbox" name="sort[{{column}}]" class="d-none sort-{{column}}" {% if sort[column]
         %}value="{{sort[column]}}" checked="checked" {% endif %} />
       {% endfor %}
+      {% if pageSizeOptions.length %}<input type="hidden" name="limit" value="{{ limit }}">{% endif %}
       <div class="row">
         <div class="col-sm-6 col-md-5 py-1">
           <textarea class="input-medium form-control" style="width: 100%; height: 150px" id="query" name="query"
@@ -220,10 +222,21 @@
 </p>
 {% else %}
 
-{% if pagination %}
+{% if pagination or pageSizeOptions.length %}
 <nav class="navbar" aria-label="Page navigation">
-  <div class="nav navbar-nav mx-auto">
-    <div id="paginator-top"></div>
+  <div class="container-fluid">
+    <div class="flex-fill"></div>
+    {% if pagination %}<div id="paginator-top"></div>{% endif %}
+    <div class="flex-fill d-flex justify-content-end align-items-center">
+      {% if pageSizeOptions.length %}
+      <label for="pageSizeSelectTop" class="me-2 mb-0 text-muted small">Rows per page</label>
+      <select id="pageSizeSelectTop" class="form-select page-size-select" style="width:auto;" title="Rows per page">
+        {% for opt in pageSizeOptions %}
+        <option value="{{ opt }}" {% if opt == limit %}selected{% endif %}>{{ opt }}</option>
+        {% endfor %}
+      </select>
+      {% endif %}
+    </div>
   </div>
 </nav>
 {% endif %}
@@ -267,7 +280,7 @@
             <i class="fa fa-link"></i>
           </button>
           <form class="deleteButtonDocument" method="POST" style="display:inline;"
-            action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">
+            action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{ skip }}&limit={{ limit }}&key={{ key }}&value={{ value }}&type={{ type }}&query={{ query }}&projection={{ projection }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}">
             <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <button type="submit" class="btn btn-danger">
@@ -289,10 +302,21 @@
 </div>
 </div>
 
-{% if pagination %}
+{% if pagination or pageSizeOptions.length %}
 <nav class="navbar" aria-label="Page navigation">
-  <div class="nav navbar-nav mx-auto">
-    <div id="paginator-bottom"></div>
+  <div class="container-fluid">
+    <div class="flex-fill"></div>
+    {% if pagination %}<div id="paginator-bottom"></div>{% endif %}
+    <div class="flex-fill d-flex justify-content-end align-items-center">
+      {% if pageSizeOptions.length %}
+      <label for="pageSizeSelectBottom" class="me-2 mb-0 text-muted small">Rows per page</label>
+      <select id="pageSizeSelectBottom" class="form-select page-size-select" style="width:auto;" title="Rows per page">
+        {% for opt in pageSizeOptions %}
+        <option value="{{ opt }}" {% if opt == limit %}selected{% endif %}>{{ opt }}</option>
+        {% endfor %}
+      </select>
+      {% endif %}
+    </div>
   </div>
 </nav>
 {% endif %}
