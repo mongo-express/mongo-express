@@ -49,7 +49,7 @@
     "errorhandler": "1.5.2",
     "express": "^5.3.0",
     "express-fileupload": "^1.5.2",
-    "express-rate-limit": "^8.7.1",
+    "express-rate-limit": "^8.7.2",
     "express-session": "^1.19.0",
     "flat": "^6.0.1",
     "free-swig": "^1.5.5",
@@ -61,14 +61,14 @@
     "mongodb-query-parser": "^4.7.15",
     "morgan": "^1.12.1",
     "picocolors": "^1.1.1",
-    "qs": "^6.16.1",
+    "qs": "^6.17.1",
     "renderjson-2": "^2.0.1",
     "serve-favicon": "^2.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.29.6",
     "@babel/preset-env": "^7.29.2",
-    "@cypress/code-coverage": "^4.0.3",
+    "@cypress/code-coverage": "^4.1.2",
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "assets-webpack-plugin": "^7.1.1",
@@ -79,7 +79,7 @@
     "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^7.1.5",
     "cypress": "^15.19.0",
-    "eslint": "^10.13.0",
+    "eslint": "^10.14.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unicorn": "^72.0.0",
     "express-openid-connect": "^2.20.2",
@@ -88,12 +88,12 @@
     "husky": "^9.1.7",
     "mocha": "^11.7.6",
     "mongodb-memory-server": "^11.3.0",
-    "node-html-parser": "^9.0.5",
+    "node-html-parser": "^9.0.6",
     "nodemon": "^3.1.11",
     "style-loader": "^4.0.0",
     "supertest": "^7.3.1",
     "webpack": "^5.112.2",
-    "webpack-cli": "^7.2.3"
+    "webpack-cli": "^7.3.0"
   },
   "peerDependencies": {
     "express-openid-connect": "*"
