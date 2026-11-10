@@ -260,6 +260,15 @@ Then, take the following action to customize to your environment:
   - Check if it is necessary to change the `dbLabel` according to the MongoDB service created
   - Change the `basicAuth` properties, do not to keep the default values
 
+## Usage (Easypanel)
+
+[Easypanel](https://easypanel.io) is a self-hosted Docker deployment platform, and mongo-express has a one-click deployment template there:
+
+[![Deploy on Easypanel][easypanel-btn]][easypanel-deploy]
+
+[easypanel-btn]: https://easypanel.io/img/deploy-on-easypanel-40.svg
+[easypanel-deploy]: https://easypanel.io/templates/mongo-express
+
 ## Usage (OpenIdConnect Authentication)
 
 **Usage with the `mongo-express` package**
