@@ -109,6 +109,7 @@
     "serialize-javascript": "^7.0.5",
     "uuid": "^11.1.1"
   },
+  "bundleDependencies": true,
   "engines": {
     "node": ">=22.0.0"
   },
@@ -133,6 +134,8 @@
     "config.default.js",
     "lib",
     "public",
-    "webpack.config.js"
+    "webpack.config.js",
+    "build-assets.json",
+    "build"
   ]
 }
