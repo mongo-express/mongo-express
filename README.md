@@ -206,6 +206,7 @@ You can use the following [environment variables](https://docs.docker.com/refere
 | `ME_CONFIG_SITE_SSL_KEY_PATH`                  | ` `                                                 | SSL key file.
 | `ME_CONFIG_SITE_GRIDFS_ENABLED`                | `false`                                             | Enable gridFS to manage uploaded files.
 | `ME_CONFIG_DOCUMENTS_PER_PAGE`                 | `10`                                                | How many documents you want to see at once in collection view
+| `ME_CONFIG_DOCUMENTS_PER_PAGE_OPTIONS`         | ``                                                  | Optional comma-separated list of page sizes (e.g. `10,20,50,100,500`). When set, a "rows per page" selector appears above the collection table and lets the user change the page size on the fly (clamped to this list). Empty = no selector, unchanged behavior.
 | `PORT`                                         | `8081`                                              | port that mongo-express will run on.
 | `VCAP_APP_HOST`                                | `localhost`                                         | address that mongo-express will listen on for incoming connections.
 
