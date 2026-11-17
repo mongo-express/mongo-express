@@ -2784,12 +2784,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:^5.3.8":
-  version: 5.3.8
-  resolution: "bootstrap@npm:5.3.8"
+"bootstrap@npm:^5.3.9":
+  version: 5.3.9
+  resolution: "bootstrap@npm:5.3.9"
   peerDependencies:
     "@popperjs/core": ^2.11.8
-  checksum: 10/ca36e1816940ee424b91f3a534e7a359c1f180da00e92c650b92a9c2621a1ca24ee71a0886666675718b58527f9193cd0ead934da7a92108224013fa07bec2d2
+  checksum: 10/bf77688eb50d56de7abd671e9eb0a852df2071c4edc58167c3399eca6d00d7e105d63c80f8064f636675c8ca21b47ac9c835defb0ea533444a119039273d273a
   languageName: node
   linkType: hard
 
@@ -3332,9 +3332,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:^10.0.6":
-  version: 10.0.6
-  resolution: "concurrently@npm:10.0.6"
+"concurrently@npm:^10.0.7":
+  version: 10.0.7
+  resolution: "concurrently@npm:10.0.7"
   dependencies:
     chalk: "npm:5.6.2"
     rxjs: "npm:7.8.2"
@@ -3345,7 +3345,7 @@ __metadata:
   bin:
     conc: dist/bin/index.js
     concurrently: dist/bin/index.js
-  checksum: 10/52b7817ff389036e963a2f1a2b0e1180e76a85a169e067c497c7cc3c6e3da93617c69ae44440c9e62ace07d87326e5b9edd304eba564f41fa8fa3843df0c4b74
+  checksum: 10/3dd515683b7f98afbeca28714911e8bbe43e3f89869ff80de50c4e22817efd32a92be5bdbe8399046efec1b35e3b09b4f1a08dee1478f6e8dcad5f83b9209e48
   languageName: node
   linkType: hard
 
@@ -4529,15 +4529,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-rate-limit@npm:^8.7.3":
-  version: 8.7.3
-  resolution: "express-rate-limit@npm:8.7.3"
+"express-rate-limit@npm:^8.7.4":
+  version: 8.7.4
+  resolution: "express-rate-limit@npm:8.7.4"
   dependencies:
     debug: "npm:^4.4.3"
     ip-address: "npm:^10.2.0"
   peerDependencies:
     express: ">= 4.11"
-  checksum: 10/a92c767dfa5fb86bb68cf789d0c789c429c8fc273d27218e9fff498049cdc7138b7d07fa29ac9185dc8f50fe320dfa51bbe461d9c5b8e9cf823e783b5787c3aa
+  checksum: 10/82b20bddaa5dd1860d44f75ce15209e56a44be7568f3f79fc059b5c35ff888ba79d278642f0f9de78fa09f10505163712e7072ee210363c8d656157728774ab7
   languageName: node
   linkType: hard
 
@@ -4832,7 +4832,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.5, form-data@npm:~4.0.4":
+"form-data@npm:^4.0.6, form-data@npm:~4.0.4":
   version: 4.0.6
   resolution: "form-data@npm:4.0.6"
   dependencies:
@@ -6826,14 +6826,14 @@ __metadata:
     babel-loader: "npm:^10.1.1"
     basic-auth-connect: "npm:^1.1.0"
     body-parser: "npm:^2.4.0"
-    bootstrap: "npm:^5.3.8"
+    bootstrap: "npm:^5.3.9"
     bootstrap-paginator-2: "npm:^2.0.0"
     bson: "npm:^7.3.4"
     chai: "npm:^6.3.0"
     clean-webpack-plugin: "npm:^4.0.0"
     codemirror: "npm:^6.0.2"
     commander: "npm:^13.1.0"
-    concurrently: "npm:^10.0.6"
+    concurrently: "npm:^10.0.7"
     cookie-parser: "npm:1.4.7"
     copy-webpack-plugin: "npm:^14.0.0"
     cross-env: "npm:^10.1.0"
@@ -6848,7 +6848,7 @@ __metadata:
     express: "npm:^5.3.0"
     express-fileupload: "npm:^1.6.0"
     express-openid-connect: "npm:^2.20.2"
-    express-rate-limit: "npm:^8.7.3"
+    express-rate-limit: "npm:^8.7.4"
     express-session: "npm:^1.19.0"
     file-loader: "npm:^6.2.0"
     flat: "npm:^6.0.1"
@@ -6860,7 +6860,7 @@ __metadata:
     memorystore: "npm:^1.6.8"
     method-override: "npm:^3.0.0"
     mocha: "npm:^11.7.6"
-    mongodb: "npm:^7.8.0"
+    mongodb: "npm:^7.9.0"
     mongodb-memory-server: "npm:^11.3.0"
     mongodb-query-parser: "npm:^4.7.15"
     morgan: "npm:^1.12.1"
@@ -6871,7 +6871,7 @@ __metadata:
     renderjson-2: "npm:^2.0.1"
     serve-favicon: "npm:^2.5.1"
     style-loader: "npm:^4.0.0"
-    supertest: "npm:^7.3.1"
+    supertest: "npm:^7.3.2"
     webpack: "npm:^5.112.2"
     webpack-cli: "npm:^7.3.1"
   peerDependencies:
@@ -6938,9 +6938,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:^7.8.0":
-  version: 7.8.0
-  resolution: "mongodb@npm:7.8.0"
+"mongodb@npm:^7.9.0":
+  version: 7.9.0
+  resolution: "mongodb@npm:7.9.0"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.5.0"
     bson: "npm:^7.3.2"
@@ -6968,7 +6968,7 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 10/adf0577d07a0dfc588a2103010ddbbdee840df5b2f6866890825005540f500224a4a7ea2f793879c66288997dceb64b2f2be68ee3c0ea664da29593711e47359
+  checksum: 10/cd29fb0608776b0ccda3213b07acb0ca97a8a29c6acd23ce3e9b07f8e45e8d9af9dd00c10e230853cdcaa8d9e1ec479fcad7e0f45e2e6d4d3de38f57a49b7271
   languageName: node
   linkType: hard
 
@@ -7848,7 +7848,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.14.1, qs@npm:^6.15.2, qs@npm:^6.16.0, qs@npm:^6.16.1, qs@npm:^6.17.1":
+"qs@npm:^6.15.2, qs@npm:^6.16.0, qs@npm:^6.16.1, qs@npm:^6.17.1":
   version: 6.17.1
   resolution: "qs@npm:6.17.1"
   dependencies:
@@ -8828,31 +8828,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"superagent@npm:^10.3.0":
-  version: 10.3.0
-  resolution: "superagent@npm:10.3.0"
+"superagent@npm:^10.4.1":
+  version: 10.4.2
+  resolution: "superagent@npm:10.4.2"
   dependencies:
     component-emitter: "npm:^1.3.1"
     cookiejar: "npm:^2.1.4"
     debug: "npm:^4.3.7"
     fast-safe-stringify: "npm:^2.1.1"
-    form-data: "npm:^4.0.5"
+    form-data: "npm:^4.0.6"
     formidable: "npm:^3.5.4"
     methods: "npm:^1.1.2"
     mime: "npm:2.6.0"
-    qs: "npm:^6.14.1"
-  checksum: 10/e62b13281403ef9a1f716465cf5d83c12dbb418afa8197d8ca3cc35c8dd1825a81bd5c627512ae289684f6b7c48fc9d76ce321c28de6142f69bbe905e866427f
+    qs: "npm:^6.17.1"
+  checksum: 10/8296a8500349696a78d79d8c0220700b3723b89f6fed127b3187e99af714ef5b9192875a334981699820d0b26863514b74d5ccc23ba29bfe990f0e96bdf48b51
   languageName: node
   linkType: hard
 
-"supertest@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "supertest@npm:7.3.1"
+"supertest@npm:^7.3.2":
+  version: 7.3.2
+  resolution: "supertest@npm:7.3.2"
   dependencies:
     cookie-signature: "npm:^1.2.2"
     methods: "npm:^1.1.2"
-    superagent: "npm:^10.3.0"
-  checksum: 10/ea8ea4ec198d97d776d718274e17ec4e7f2ca9b2378215204fcc2f084daf791731553a00eebec96aa579911911aa685a782f948d94c64a96bb28507fb52a54d6
+    superagent: "npm:^10.4.1"
+  checksum: 10/5ef2446e621ac57d45c534513ab3de29685d0b3eaa726f8325459a9fcc346607b871a4580fe9a4f28f28e2ffddbb22df2ce9c4d9d066e5d16e226469a2c754df
   languageName: node
   linkType: hard
 
