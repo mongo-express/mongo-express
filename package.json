@@ -130,6 +130,7 @@
   "browserslist": "defaults",
   "files": [
     "app.js",
+    "build-assets.json",
     "config.default.js",
     "lib",
     "public",
