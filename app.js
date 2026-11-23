@@ -8,7 +8,7 @@ import { program } from 'commander';
 import csrf from 'csurf';
 import express from 'express';
 import middleware from './lib/middleware.js';
-import { deepmerge } from './lib/utils.js';
+import { deepmerge, hasConnectionString } from './lib/utils.js';
 import configDefault from './config.default.js';
 import { promptForConnectionString } from './lib/prompt.js';
 
@@ -40,15 +40,10 @@ const loadConfig = async () => {
   }
 };
 
-// config.mongodb is either one connection or a list of them; lib/db.js accepts both.
-// Checking `.connectionString` on the list form finds undefined and wrongly reports that
-// nothing is configured, which kept multi-connection setups from starting at all.
-const hasConnectionString = (mongodb) => (Array.isArray(mongodb)
-  ? mongodb.some((connection) => connection?.connectionString)
-  : Boolean(mongodb?.connectionString));
-
 async function bootstrap(config) {
-  if (!hasConnectionString(config.mongodb)) {
+  // An explorer takes its credentials per session, so having none at startup is
+  // the normal state rather than a misconfiguration.
+  if (!config.explorer?.ticketOnly && !hasConnectionString(config.mongodb)) {
     // Only prompt when someone is there to answer. Under Docker, systemd or CI stdin is not
     // a TTY, and blocking on it would hang the process instead of reporting the problem.
     if (!process.stdin.isTTY) {
