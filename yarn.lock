@@ -2811,11 +2811,11 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^2.0.2":
-  version: 2.1.3
-  resolution: "brace-expansion@npm:2.1.3"
+  version: 2.1.8
+  resolution: "brace-expansion@npm:2.1.8"
   dependencies:
     balanced-match: "npm:^1.0.0"
-  checksum: 10/72a6d8c6be638a883dc3adfb88a41f2c34130512e0255bb845f6804f0f577b83d2f84247eec33c32b3adedd4849ccc53b84c54a8267594fabc1f8293ebc7ae02
+  checksum: 10/fdc4d9c7597395ecd670246098823cb3cb72736fbb3252a3103a7ec5928ab31e7de0623e334af0665018a9c57ad48c28e99897627547ba38f254e52c384a74ed
   languageName: node
   linkType: hard
 
